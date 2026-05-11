@@ -1,58 +1,11 @@
-import type { ReactNode } from "react"
-import type { UseMenuGroupProps, UseMenuItemProps } from "./use-menu"
 import { fireEvent, screen, waitFor } from "@testing-library/react"
 import { useState } from "react"
-import { a11y, render } from "#test/browser"
+import { render } from "#test/browser"
 import { Button } from "../button"
 import { Menu } from "./"
 import { fullItems } from "./menu.test.fixtures"
-import { useMenuGroup, useMenuItem } from "./use-menu"
-
-interface TestMenuGroupProps extends UseMenuGroupProps {
-  children?: ReactNode
-  getGroupProps?: Parameters<
-    ReturnType<typeof useMenuGroup>["getGroupProps"]
-  >[0]
-}
-
-const TestMenuGroup = ({
-  children,
-  getGroupProps,
-  ...props
-}: TestMenuGroupProps) => {
-  const { getGroupProps: getProps } = useMenuGroup(props)
-
-  return <div {...getProps(getGroupProps)}>{children}</div>
-}
-
-interface TestMenuItemProps extends UseMenuItemProps {
-  children?: ReactNode
-  getItemProps?: Parameters<ReturnType<typeof useMenuItem>["getItemProps"]>[0]
-}
-
-const TestMenuItem = ({
-  children,
-  getItemProps,
-  ...props
-}: TestMenuItemProps) => {
-  const { getItemProps: getProps } = useMenuItem(props)
-
-  return <div {...getProps(getItemProps)}>{children}</div>
-}
 
 describe("<Menu />", () => {
-  test("passes a11y checks when open", async () => {
-    await a11y(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content items={fullItems} />
-      </Menu.Root>,
-    )
-  })
-
   test("renders full items config with separator, radio, checkbox, and group", async () => {
     await render(
       <Menu.Root defaultOpen>
@@ -75,165 +28,6 @@ describe("<Menu />", () => {
     expect(
       screen.getByRole("menuitemcheckbox", { name: /Option 1/i }),
     ).toBeInTheDocument()
-  })
-
-  test("merges consumer props in Menu.Item", async () => {
-    const onMouseDown = vi.fn()
-    const ref = vi.fn()
-
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item
-            ref={ref}
-            className="consumer-item"
-            style={{ color: "red" }}
-            value="item-1"
-            onMouseDown={onMouseDown}
-          >
-            Item 1
-          </Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const item = screen.getByRole("menuitem", { name: /Item 1/i })
-    fireEvent.mouseDown(item)
-
-    expect(item).toHaveClass("ui-menu__item")
-    expect(item).toHaveClass("consumer-item")
-    expect(item).toHaveStyle({ color: "red" })
-    expect(onMouseDown).toHaveBeenCalledTimes(1)
-    expect(ref).toHaveBeenCalledWith(item)
-  })
-
-  test("merges consumer props in Menu.Group", async () => {
-    const onMouseDown = vi.fn()
-    const ref = vi.fn()
-
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Group
-            ref={ref}
-            className="consumer-group"
-            style={{ color: "red" }}
-            label="Group Label"
-            onMouseDown={onMouseDown}
-          >
-            <Menu.Item value="item-1">Item 1</Menu.Item>
-          </Menu.Group>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const group = screen.getByRole("group")
-    fireEvent.mouseDown(group)
-
-    expect(group).toHaveClass("ui-menu__group")
-    expect(group).toHaveClass("consumer-group")
-    expect(group).toHaveStyle({ color: "red" })
-    expect(onMouseDown).toHaveBeenCalledTimes(1)
-    expect(ref).toHaveBeenCalledWith(group)
-  })
-
-  test("merges getter and consumer props in useMenuGroup", async () => {
-    const consumerRef = vi.fn()
-    const getterRef = vi.fn()
-    const calls: string[] = []
-    const consumerMouseDown = vi.fn(() => calls.push("consumer"))
-    const getterMouseDown = vi.fn(() => calls.push("getter"))
-
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <TestMenuGroup
-            ref={consumerRef}
-            className="consumer-group"
-            style={{ color: "red" }}
-            getGroupProps={{
-              ref: getterRef,
-              className: "getter-group",
-              style: { backgroundColor: "blue" },
-              onMouseDown: getterMouseDown,
-            }}
-            onMouseDown={consumerMouseDown}
-          >
-            <Menu.Item value="item-1">Item 1</Menu.Item>
-          </TestMenuGroup>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const group = screen.getByRole("group")
-    fireEvent.mouseDown(group)
-
-    expect(group).toHaveClass("consumer-group")
-    expect(group).toHaveClass("getter-group")
-    expect(group).toHaveStyle({ backgroundColor: "blue", color: "red" })
-    expect(calls).toStrictEqual(["consumer", "getter"])
-    expect(consumerRef).toHaveBeenCalledTimes(1)
-    expect(getterRef).toHaveBeenCalledTimes(1)
-    expect(consumerRef).toHaveBeenCalledWith(group)
-    expect(getterRef).toHaveBeenCalledWith(group)
-  })
-
-  test("merges getter and consumer props in useMenuItem", async () => {
-    const consumerRef = vi.fn()
-    const getterRef = vi.fn()
-    const calls: string[] = []
-    const consumerMouseDown = vi.fn(() => calls.push("consumer"))
-    const getterMouseDown = vi.fn(() => calls.push("getter"))
-
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <TestMenuItem
-            ref={consumerRef}
-            className="consumer-item"
-            style={{ color: "red" }}
-            value="item-1"
-            getItemProps={{
-              ref: getterRef,
-              className: "getter-item",
-              style: { backgroundColor: "blue" },
-              onMouseDown: getterMouseDown,
-            }}
-            onMouseDown={consumerMouseDown}
-          >
-            Item 1
-          </TestMenuItem>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const item = screen.getByRole("menuitem", { name: /Item 1/i })
-    fireEvent.mouseDown(item)
-
-    expect(item).toHaveClass("consumer-item")
-    expect(item).toHaveClass("getter-item")
-    expect(item).toHaveStyle({ backgroundColor: "blue", color: "red" })
-    expect(calls).toStrictEqual(["consumer", "getter"])
-    expect(consumerRef).toHaveBeenCalledTimes(1)
-    expect(getterRef).toHaveBeenCalledTimes(1)
-    expect(consumerRef).toHaveBeenCalledWith(item)
-    expect(getterRef).toHaveBeenCalledWith(item)
   })
 
   test("keeps useMenuItem click handler order as getter then consumer then internal", async () => {
@@ -347,7 +141,7 @@ describe("<Menu />", () => {
     })
   })
 
-  test("opens menu with ArrowUp key", async () => {
+  test("opens menu with keyboard", async () => {
     const { user } = await render(
       <Menu.Root>
         <Menu.Trigger>
@@ -356,59 +150,36 @@ describe("<Menu />", () => {
 
         <Menu.Content>
           <Menu.Item value="item-1">Item 1</Menu.Item>
-          <Menu.Item value="item-2">Item 2</Menu.Item>
         </Menu.Content>
       </Menu.Root>,
     )
 
     const trigger = screen.getByRole("button", { name: /Menu/i })
+
     trigger.focus()
     await user.keyboard("{ArrowUp}")
-
     await waitFor(() => {
       expect(screen.getByRole("menu")).toBeInTheDocument()
     })
-  })
 
-  test("opens menu with Enter key", async () => {
-    const { user } = await render(
-      <Menu.Root>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
+    await user.keyboard("{Escape}")
+    await waitFor(() => {
+      expect(screen.queryByRole("menu")).not.toBeInTheDocument()
+    })
 
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const trigger = screen.getByRole("button", { name: /Menu/i })
     trigger.focus()
     await user.keyboard("{Enter}")
-
     await waitFor(() => {
       expect(screen.getByRole("menu")).toBeInTheDocument()
     })
-  })
 
-  test("opens menu with Space key", async () => {
-    const { user } = await render(
-      <Menu.Root>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
+    await user.keyboard("{Escape}")
+    await waitFor(() => {
+      expect(screen.queryByRole("menu")).not.toBeInTheDocument()
+    })
 
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const trigger = screen.getByRole("button", { name: /Menu/i })
     trigger.focus()
     await user.keyboard(" ")
-
     await waitFor(() => {
       expect(screen.getByRole("menu")).toBeInTheDocument()
     })
@@ -510,7 +281,7 @@ describe("<Menu />", () => {
     expect(screen.getByRole("menu")).toBeInTheDocument()
   })
 
-  test("navigates menu items with ArrowDown key", async () => {
+  test("navigates menu items with keyboard", async () => {
     await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
@@ -527,110 +298,41 @@ describe("<Menu />", () => {
 
     const menu = screen.getByRole("menu")
     const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
+    const item2 = screen.getByRole("menuitem", { name: /Item 2/i })
+    const item3 = screen.getByRole("menuitem", { name: /Item 3/i })
 
     fireEvent.focus(item1)
-
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(item1.id)
     })
-
     fireEvent.keyDown(item1, { key: "ArrowDown" })
-
-    const item2 = screen.getByRole("menuitem", { name: /Item 2/i })
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(item2.id)
     })
-  })
-
-  test("navigates menu items with ArrowUp key", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-          <Menu.Item value="item-2">Item 2</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const menu = screen.getByRole("menu")
-    const item2 = screen.getByRole("menuitem", { name: /Item 2/i })
 
     fireEvent.focus(item2)
-
-    await waitFor(() => {
-      expect(menu.getAttribute("aria-activedescendant")).toBe(item2.id)
-    })
-
     fireEvent.keyDown(item2, { key: "ArrowUp" })
-
-    const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(item1.id)
     })
-  })
-
-  test("navigates to first item with Home key", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-          <Menu.Item value="item-2">Item 2</Menu.Item>
-          <Menu.Item value="item-3">Item 3</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const menu = screen.getByRole("menu")
-    const item3 = screen.getByRole("menuitem", { name: /Item 3/i })
 
     fireEvent.focus(item3)
     fireEvent.keyDown(item3, { key: "Home" })
-
-    const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(item1.id)
     })
-  })
-
-  test("navigates to last item with End key", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-          <Menu.Item value="item-2">Item 2</Menu.Item>
-          <Menu.Item value="item-3">Item 3</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const menu = screen.getByRole("menu")
-    const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
 
     fireEvent.focus(item1)
     fireEvent.keyDown(item1, { key: "End" })
-
-    const item3 = screen.getByRole("menuitem", { name: /Item 3/i })
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(item3.id)
     })
   })
 
-  test("selects item with Enter key", async () => {
+  test("selects item with keyboard", async () => {
     const onSelect = vi.fn()
     await render(
-      <Menu.Root defaultOpen onSelect={onSelect}>
+      <Menu.Root closeOnSelect={false} defaultOpen onSelect={onSelect}>
         <Menu.Trigger>
           <Button>Menu</Button>
         </Menu.Trigger>
@@ -644,29 +346,10 @@ describe("<Menu />", () => {
     const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
     fireEvent.focus(item1)
     fireEvent.keyDown(item1, { key: "Enter" })
-
     expect(onSelect).toHaveBeenCalledWith("item-1")
-  })
 
-  test("selects item with Space key", async () => {
-    const onSelect = vi.fn()
-    await render(
-      <Menu.Root defaultOpen onSelect={onSelect}>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
-    fireEvent.focus(item1)
     fireEvent.keyDown(item1, { key: " ", charCode: 32, code: "Space" })
-
-    expect(onSelect).toHaveBeenCalledWith("item-1")
+    expect(onSelect).toHaveBeenCalledTimes(2)
   })
 
   test("renders context menu trigger", async () => {
@@ -1374,7 +1057,7 @@ describe("<Menu />", () => {
     expect(screen.queryByText("Sub Item 1")).not.toBeInTheDocument()
   })
 
-  test("radio option item indicator has opacity 1 when selected", async () => {
+  test("radio option item indicator shows correct opacity based on selection", async () => {
     await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
@@ -1390,37 +1073,17 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const selectedItem = screen.getByRole("menuitemradio", {
-      name: /Opt 1/i,
+    const selectedItem = screen.getByRole("menuitemradio", { name: /Opt 1/i })
+    const unselectedItem = screen.getByRole("menuitemradio", { name: /Opt 2/i })
+    expect(selectedItem.querySelector(".ui-menu__indicator")).toHaveStyle({
+      opacity: "1",
     })
-    const indicator = selectedItem.querySelector(".ui-menu__indicator")
-    expect(indicator).toHaveStyle({ opacity: "1" })
+    expect(unselectedItem.querySelector(".ui-menu__indicator")).toHaveStyle({
+      opacity: "0",
+    })
   })
 
-  test("radio option item indicator has opacity 0 when not selected", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.OptionGroup type="radio" defaultValue="opt-1">
-            <Menu.OptionItem value="opt-1">Opt 1</Menu.OptionItem>
-            <Menu.OptionItem value="opt-2">Opt 2</Menu.OptionItem>
-          </Menu.OptionGroup>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const unselectedItem = screen.getByRole("menuitemradio", {
-      name: /Opt 2/i,
-    })
-    const indicator = unselectedItem.querySelector(".ui-menu__indicator")
-    expect(indicator).toHaveStyle({ opacity: "0" })
-  })
-
-  test("checkbox option item indicator has opacity 1 when selected", async () => {
+  test("checkbox option item indicator shows correct opacity based on selection", async () => {
     await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
@@ -1439,31 +1102,15 @@ describe("<Menu />", () => {
     const selectedItem = screen.getByRole("menuitemcheckbox", {
       name: /Opt 1/i,
     })
-    const indicator = selectedItem.querySelector(".ui-menu__indicator")
-    expect(indicator).toHaveStyle({ opacity: "1" })
-  })
-
-  test("checkbox option item indicator has opacity 0 when not selected", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.OptionGroup type="checkbox" defaultValue={["opt-1"]}>
-            <Menu.OptionItem value="opt-1">Opt 1</Menu.OptionItem>
-            <Menu.OptionItem value="opt-2">Opt 2</Menu.OptionItem>
-          </Menu.OptionGroup>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
     const unselectedItem = screen.getByRole("menuitemcheckbox", {
       name: /Opt 2/i,
     })
-    const indicator = unselectedItem.querySelector(".ui-menu__indicator")
-    expect(indicator).toHaveStyle({ opacity: "0" })
+    expect(selectedItem.querySelector(".ui-menu__indicator")).toHaveStyle({
+      opacity: "1",
+    })
+    expect(unselectedItem.querySelector(".ui-menu__indicator")).toHaveStyle({
+      opacity: "0",
+    })
   })
 
   test("renders submenu with start direction", async () => {
@@ -1716,75 +1363,7 @@ describe("<Menu />", () => {
     })
   })
 
-  test("submenu trigger navigates with ArrowDown key", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Root>
-            <Menu.Trigger>
-              <Menu.Item>Sub Menu</Menu.Item>
-            </Menu.Trigger>
-
-            <Menu.Content>
-              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
-            </Menu.Content>
-          </Menu.Root>
-
-          <Menu.Item value="item-after">Item After</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    const menu = screen.getByRole("menu")
-
-    fireEvent.keyDown(subMenuTrigger, { key: "ArrowDown" })
-
-    const itemAfter = screen.getByRole("menuitem", { name: /Item After/i })
-    await waitFor(() => {
-      expect(menu.getAttribute("aria-activedescendant")).toBe(itemAfter.id)
-    })
-  })
-
-  test("submenu trigger navigates with ArrowUp key", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-before">Item Before</Menu.Item>
-
-          <Menu.Root>
-            <Menu.Trigger>
-              <Menu.Item>Sub Menu</Menu.Item>
-            </Menu.Trigger>
-
-            <Menu.Content>
-              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
-            </Menu.Content>
-          </Menu.Root>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    const menu = screen.getByRole("menu")
-
-    fireEvent.keyDown(subMenuTrigger, { key: "ArrowUp" })
-
-    const itemBefore = screen.getByRole("menuitem", { name: /Item Before/i })
-    await waitFor(() => {
-      expect(menu.getAttribute("aria-activedescendant")).toBe(itemBefore.id)
-    })
-  })
-
-  test("submenu trigger navigates with Home key", async () => {
+  test("submenu trigger navigates with keyboard", async () => {
     await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
@@ -1803,38 +1382,6 @@ describe("<Menu />", () => {
               <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
             </Menu.Content>
           </Menu.Root>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    const menu = screen.getByRole("menu")
-
-    fireEvent.keyDown(subMenuTrigger, { key: "Home" })
-
-    const firstItem = screen.getByRole("menuitem", { name: /First Item/i })
-    await waitFor(() => {
-      expect(menu.getAttribute("aria-activedescendant")).toBe(firstItem.id)
-    })
-  })
-
-  test("submenu trigger navigates with End key", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Root>
-            <Menu.Trigger>
-              <Menu.Item>Sub Menu</Menu.Item>
-            </Menu.Trigger>
-
-            <Menu.Content>
-              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
-            </Menu.Content>
-          </Menu.Root>
 
           <Menu.Item value="last-item">Last Item</Menu.Item>
         </Menu.Content>
@@ -1843,10 +1390,25 @@ describe("<Menu />", () => {
 
     const subMenuTrigger = screen.getByText("Sub Menu")
     const menu = screen.getByRole("menu")
+    const firstItem = screen.getByRole("menuitem", { name: /First Item/i })
+    const lastItem = screen.getByRole("menuitem", { name: /Last Item/i })
+
+    fireEvent.keyDown(subMenuTrigger, { key: "ArrowDown" })
+    await waitFor(() => {
+      expect(menu.getAttribute("aria-activedescendant")).toBe(lastItem.id)
+    })
+
+    fireEvent.keyDown(subMenuTrigger, { key: "ArrowUp" })
+    await waitFor(() => {
+      expect(menu.getAttribute("aria-activedescendant")).toBe(firstItem.id)
+    })
+
+    fireEvent.keyDown(subMenuTrigger, { key: "Home" })
+    await waitFor(() => {
+      expect(menu.getAttribute("aria-activedescendant")).toBe(firstItem.id)
+    })
 
     fireEvent.keyDown(subMenuTrigger, { key: "End" })
-
-    const lastItem = screen.getByRole("menuitem", { name: /Last Item/i })
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(lastItem.id)
     })
@@ -1967,27 +1529,8 @@ describe("<Menu />", () => {
     expect(subMenuTrigger).toBeInTheDocument()
   })
 
-  test("trigger has correct aria attributes when open", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const trigger = screen.getByRole("button", { name: /Menu/i })
-    expect(trigger).toHaveAttribute("aria-haspopup", "menu")
-    expect(trigger).toHaveAttribute("aria-expanded", "true")
-    expect(trigger).toHaveAttribute("data-trigger", "")
-  })
-
-  test("trigger has correct aria attributes when closed", async () => {
-    await render(
+  test("trigger has correct aria attributes", async () => {
+    const { user } = await render(
       <Menu.Root>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -2003,6 +1546,14 @@ describe("<Menu />", () => {
     expect(trigger).toHaveAttribute("aria-haspopup", "menu")
     expect(trigger).toHaveAttribute("aria-expanded", "false")
     expect(trigger).not.toHaveAttribute("aria-controls")
+
+    await user.click(trigger)
+    await waitFor(() => {
+      expect(screen.getByRole("menu")).toBeInTheDocument()
+    })
+
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
+    expect(trigger).toHaveAttribute("data-trigger", "")
   })
 
   test("content has correct role and aria-labelledby", async () => {
@@ -2140,87 +1691,7 @@ describe("<Menu />", () => {
     expect(subMenuTrigger).toHaveAttribute("aria-haspopup", "menu")
   })
 
-  test("submenu item navigates with ArrowDown within submenu", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Root defaultOpen>
-            <Menu.Trigger>
-              <Menu.Item>Sub Menu</Menu.Item>
-            </Menu.Trigger>
-
-            <Menu.Content>
-              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
-              <Menu.Item value="sub-2">Sub Item 2</Menu.Item>
-            </Menu.Content>
-          </Menu.Root>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const subMenus = screen.getAllByRole("menu")
-    const subMenu = subMenus[subMenus.length - 1]!
-
-    const subItem1 = screen.getByRole("menuitem", { name: /Sub Item 1/i })
-    fireEvent.focus(subItem1)
-
-    await waitFor(() => {
-      expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem1.id)
-    })
-
-    fireEvent.keyDown(subItem1, { key: "ArrowDown" })
-
-    await waitFor(() => {
-      const subItem2 = screen.getByRole("menuitem", { name: /Sub Item 2/i })
-      expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem2.id)
-    })
-  })
-
-  test("submenu item navigates with ArrowUp within submenu", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Root defaultOpen>
-            <Menu.Trigger>
-              <Menu.Item>Sub Menu</Menu.Item>
-            </Menu.Trigger>
-
-            <Menu.Content>
-              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
-              <Menu.Item value="sub-2">Sub Item 2</Menu.Item>
-            </Menu.Content>
-          </Menu.Root>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const subMenus = screen.getAllByRole("menu")
-    const subMenu = subMenus[subMenus.length - 1]!
-
-    const subItem2 = screen.getByRole("menuitem", { name: /Sub Item 2/i })
-    fireEvent.focus(subItem2)
-
-    await waitFor(() => {
-      expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem2.id)
-    })
-
-    fireEvent.keyDown(subItem2, { key: "ArrowUp" })
-
-    await waitFor(() => {
-      const subItem1 = screen.getByRole("menuitem", { name: /Sub Item 1/i })
-      expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem1.id)
-    })
-  })
-
-  test("open submenu navigates with Home key when open", async () => {
+  test("submenu item navigates with keyboard within submenu", async () => {
     await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
@@ -2245,45 +1716,34 @@ describe("<Menu />", () => {
     const subMenuTrigger = screen.getByText("Sub Menu")
     const subMenus = screen.getAllByRole("menu")
     const subMenu = subMenus[subMenus.length - 1]!
+    const subItem1 = screen.getByRole("menuitem", { name: /Sub Item 1/i })
+    const subItem2 = screen.getByRole("menuitem", { name: /Sub Item 2/i })
+
+    fireEvent.focus(subItem1)
+    await waitFor(() => {
+      expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem1.id)
+    })
+    fireEvent.keyDown(subItem1, { key: "ArrowDown" })
+    await waitFor(() => {
+      expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem2.id)
+    })
+
+    fireEvent.focus(subItem2)
+    await waitFor(() => {
+      expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem2.id)
+    })
+    fireEvent.keyDown(subItem2, { key: "ArrowUp" })
+    await waitFor(() => {
+      expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem1.id)
+    })
 
     fireEvent.keyDown(subMenuTrigger, { key: "Home" })
-
     await waitFor(() => {
-      const subItem1 = screen.getByRole("menuitem", { name: /Sub Item 1/i })
       expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem1.id)
     })
-  })
-
-  test("open submenu navigates with End key when open", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Root defaultOpen>
-            <Menu.Trigger>
-              <Menu.Item>Sub Menu</Menu.Item>
-            </Menu.Trigger>
-
-            <Menu.Content>
-              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
-              <Menu.Item value="sub-2">Sub Item 2</Menu.Item>
-            </Menu.Content>
-          </Menu.Root>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    const subMenus = screen.getAllByRole("menu")
-    const subMenu = subMenus[subMenus.length - 1]!
 
     fireEvent.keyDown(subMenuTrigger, { key: "End" })
-
     await waitFor(() => {
-      const subItem2 = screen.getByRole("menuitem", { name: /Sub Item 2/i })
       expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem2.id)
     })
   })

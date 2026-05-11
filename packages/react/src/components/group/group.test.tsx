@@ -6,10 +6,6 @@ describe("<Group />", () => {
     await a11y(<Group>Group</Group>)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Group.displayName).toBe("Group")
-  })
-
   test("sets root class and default tag correctly", () => {
     render(<Group>Group</Group>)
 

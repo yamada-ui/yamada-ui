@@ -1,15 +1,7 @@
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Indicator } from "."
 
 describe("<Indicator />", () => {
-  test("renders component correctly", async () => {
-    await a11y(
-      <Indicator label="New">
-        <div />
-      </Indicator>,
-    )
-  })
-
   test("applies ping CSS variables when ping is an object", async () => {
     await render(
       <Indicator

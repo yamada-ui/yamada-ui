@@ -1,10 +1,10 @@
-import { render, screen } from "#test"
+import { a11y, render, screen } from "#test"
 import { Text } from "../text"
 import { Show } from "./show"
 
 describe("<Show />", () => {
   test("renders component correctly", () => {
-    render(
+    a11y(
       <Show fallback="World" when>
         Hello
       </Show>,

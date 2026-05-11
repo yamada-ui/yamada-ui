@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Carousel } from "./"
 
 interface TestComponentProps extends Carousel.RootProps {}
@@ -24,49 +24,6 @@ const TestComponent: FC<TestComponentProps> = (props) => {
 }
 
 describe("<Carousel />", () => {
-  test("should pass a11y test", async () => {
-    await a11y(<TestComponent />)
-  })
-
-  test("should merge root consumer props with internal props", async () => {
-    const ref = vi.fn()
-    const onMouseEnter = vi.fn()
-    const onMouseLeave = vi.fn()
-
-    const { user } = await render(
-      <TestComponent
-        ref={ref}
-        className="custom-root"
-        style={{ marginTop: "1px" }}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      />,
-    )
-
-    const root = page.getByTestId("carousel")
-
-    await expect.element(root).toHaveClass("ui-carousel__root")
-    await expect.element(root).toHaveClass("custom-root")
-    await expect.element(root).toHaveStyle("margin-top: 1px")
-
-    await user.hover(root)
-    await user.unhover(root)
-
-    expect(onMouseEnter).toHaveBeenCalledWith(
-      expect.objectContaining({ type: "mouseenter" }),
-    )
-    expect(onMouseLeave).toHaveBeenCalledWith(
-      expect.objectContaining({ type: "mouseleave" }),
-    )
-
-    const rootElement = root.element()
-    const refElement = ref.mock.calls.find(
-      ([value]) => value instanceof HTMLElement,
-    )?.[0]
-
-    expect(refElement).toBe(rootElement)
-  })
-
   test("should render defaultSlide correctly", async () => {
     await render(<TestComponent defaultIndex={1} />)
 

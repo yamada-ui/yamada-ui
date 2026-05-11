@@ -459,9 +459,6 @@ importers:
       '@yamada-ui/workspace':
         specifier: workspace:*
         version: link:../workspace
-      axe-core:
-        specifier: ^4.11.2
-        version: 4.11.4
       axe-playwright:
         specifier: ^2.2.2
         version: 2.2.2(playwright@1.59.1)

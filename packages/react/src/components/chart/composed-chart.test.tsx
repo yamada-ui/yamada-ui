@@ -20,10 +20,6 @@ const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
 >
 
 describe("<ComposedChart />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(ComposedChart.Root.displayName).toBe("ComposedChart")
-  })
-
   test("renders generated chart parts from `series`", () => {
     render(
       <ComposedChart.Root

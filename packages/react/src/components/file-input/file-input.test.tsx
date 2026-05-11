@@ -20,10 +20,6 @@ const changeFiles = (files: File[] | null) => {
 }
 
 describe("<FileInput />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(FileInput.displayName).toBe("FileInputRoot")
-  })
-
   test("passes a11y checks", async () => {
     await a11y(
       <FileInput

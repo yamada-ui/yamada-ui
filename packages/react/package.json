@@ -138,7 +138,6 @@
     "@vitest/browser": "^4.1.5",
     "@vitest/browser-playwright": "^4.1.5",
     "@yamada-ui/workspace": "workspace:*",
-    "axe-core": "^4.11.2",
     "axe-playwright": "^2.2.2",
     "jsdom": "^29.1.1",
     "playwright": "^1.59.1",

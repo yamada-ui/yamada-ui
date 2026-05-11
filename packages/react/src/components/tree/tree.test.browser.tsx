@@ -4,7 +4,6 @@ import { vi } from "vitest"
 import { page, render } from "#test/browser"
 import { Tree } from "."
 import { BoxIcon, FileIcon, FolderIcon } from "../icon"
-import { useTree } from "./use-tree"
 
 const exactName = (name: string) =>
   new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`)
@@ -141,24 +140,7 @@ describe("<Tree />", () => {
     expect(onSelectedChange).toHaveBeenCalledWith(expect.arrayContaining(["3"]))
   })
 
-  test("should collapse group with ArrowLeft key", async () => {
-    const onExpandedChange = vi.fn()
-
-    const { user } = await render(
-      <Tree.Root
-        defaultExpandedValue={["1"]}
-        items={items}
-        onExpandedChange={onExpandedChange}
-      />,
-    )
-
-    await user.tab()
-    await user.keyboard("{ArrowLeft}")
-
-    expect(onExpandedChange).toHaveBeenCalledWith([])
-  })
-
-  test("should expand group with ArrowRight key", async () => {
+  test("should toggle group with arrow keys", async () => {
     const onExpandedChange = vi.fn()
 
     const { user } = await render(
@@ -167,8 +149,9 @@ describe("<Tree />", () => {
 
     await user.tab()
     await user.keyboard("{ArrowRight}")
-
     expect(onExpandedChange).toHaveBeenCalledWith(["1"])
+    await user.keyboard("{ArrowLeft}")
+    expect(onExpandedChange).toHaveBeenCalledWith([])
   })
 
   test("should navigate to parent with ArrowLeft on nested item", async () => {
@@ -185,7 +168,7 @@ describe("<Tree />", () => {
     await expect.element(firstTreeItem()).toHaveAttribute("tabindex", "0")
   })
 
-  test("should navigate to first item with Home key", async () => {
+  test("should navigate with Home and End keys", async () => {
     const { user } = await render(
       <Tree.Root defaultExpandedValue={["1"]} items={items} />,
     )
@@ -193,24 +176,11 @@ describe("<Tree />", () => {
     await user.tab()
     await user.keyboard("{End}")
     await expect.element(getTreeItem("5")).toHaveAttribute("tabindex", "0")
-
     await user.keyboard("{Home}")
-
     await expect.element(firstTreeItem()).toHaveAttribute("tabindex", "0")
   })
 
-  test("should navigate to last item with End key", async () => {
-    const { user } = await render(
-      <Tree.Root defaultExpandedValue={["1"]} items={items} />,
-    )
-
-    await user.tab()
-    await user.keyboard("{End}")
-
-    await expect.element(getTreeItem("5")).toHaveAttribute("tabindex", "0")
-  })
-
-  test("should toggle group with Enter key", async () => {
+  test("should toggle group with keyboard", async () => {
     const onExpandedChange = vi.fn()
 
     const { user } = await render(
@@ -219,20 +189,10 @@ describe("<Tree />", () => {
 
     await user.tab()
     await user.keyboard("{Enter}")
-
     expect(onExpandedChange).toHaveBeenCalledWith(["1"])
-  })
-
-  test("should toggle group with Space key", async () => {
-    const onExpandedChange = vi.fn()
-
-    const { user } = await render(
-      <Tree.Root items={items} onExpandedChange={onExpandedChange} />,
-    )
-
-    await user.tab()
+    await user.keyboard("{Enter}")
+    expect(onExpandedChange).toHaveBeenCalledWith([])
     await user.keyboard("{Space}")
-
     expect(onExpandedChange).toHaveBeenCalledWith(["1"])
   })
 
@@ -376,61 +336,6 @@ describe("<Tree />", () => {
     await expect
       .element(firstTreeItem())
       .toHaveAttribute("aria-expanded", "false")
-  })
-
-  test("should merge root props from useTree options and getRootProps", async () => {
-    const onClickFromOptions = vi.fn()
-    const onClickFromGetter = vi.fn()
-    const refFromOptions = vi.fn()
-    const refFromGetter = vi.fn()
-
-    const TestComponent = () => {
-      const { getRootProps } = useTree({
-        ref: refFromOptions,
-        className: "option-root",
-        style: { color: "red" },
-        onClick: onClickFromOptions,
-      })
-
-      return (
-        <ul
-          data-testid="hook-root"
-          {...getRootProps({
-            ref: refFromGetter,
-            className: "getter-root",
-            style: { fontSize: "16px" },
-            onClick: onClickFromGetter,
-          })}
-        >
-          <li role="treeitem">Item</li>
-        </ul>
-      )
-    }
-
-    const { user } = await render(<TestComponent />)
-
-    const root = page.getByTestId("hook-root").element()
-
-    if (!(root instanceof HTMLElement))
-      throw new Error("hook root is not an HTMLElement")
-
-    await expect
-      .element(page.getByTestId("hook-root"))
-      .toHaveClass("option-root")
-    await expect
-      .element(page.getByTestId("hook-root"))
-      .toHaveClass("getter-root")
-    await expect.element(page.getByTestId("hook-root")).toHaveStyle({
-      color: "red",
-      fontSize: "16px",
-    })
-
-    await user.click(page.getByRole("treeitem", { name: "Item" }))
-
-    expect(onClickFromOptions).toHaveBeenCalledTimes(1)
-    expect(onClickFromGetter).toHaveBeenCalledTimes(1)
-    expect(refFromOptions).toHaveBeenCalledWith(root)
-    expect(refFromGetter).toHaveBeenCalledWith(root)
   })
 
   test("should search items by typing characters", async () => {

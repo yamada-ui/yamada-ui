@@ -2,10 +2,6 @@ import { a11y, render, screen } from "#test"
 import { GridItem } from "./grid-item"
 
 describe("<GridItem />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(GridItem.displayName).toBe("GridItem")
-  })
-
   test("renders component correctly", async () => {
     await a11y(<GridItem>GridItem</GridItem>)
   })

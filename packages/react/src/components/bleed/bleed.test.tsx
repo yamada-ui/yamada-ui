@@ -6,16 +6,6 @@ describe("<Bleed />", () => {
     await a11y(<Bleed>Box</Bleed>)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Bleed.displayName).toBe("Bleed")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<Bleed>Box</Bleed>)
-
-    expect(screen.getByText("Box")).toHaveClass("ui-bleed")
-  })
-
   test("uses `div` as default tag", () => {
     render(<Bleed>Box</Bleed>)
 

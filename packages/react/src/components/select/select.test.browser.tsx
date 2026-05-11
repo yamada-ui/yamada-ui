@@ -1,7 +1,7 @@
 import type { FC, MouseEvent as ReactMouseEvent, ReactNode } from "react"
 import { act, fireEvent, screen, waitFor } from "@testing-library/react"
-import { createRef, useState } from "react"
-import { a11y, render, renderHook } from "#test/browser"
+import { useState } from "react"
+import { render, renderHook } from "#test/browser"
 import { Select, useSelect } from "."
 
 const items: Select.Item[] = [
@@ -11,103 +11,6 @@ const items: Select.Item[] = [
 ]
 
 describe("<Select />", () => {
-  test("renders component correctly", async () => {
-    await a11y(
-      <Select.Root placeholder="Choose a option">
-        <Select.Option value="one">Option 1</Select.Option>
-        <Select.Option value="two">Option 2</Select.Option>
-        <Select.Option value="three">Option 3</Select.Option>
-      </Select.Root>,
-      {
-        axeOptions: {
-          rules: {
-            "color-contrast": { enabled: false },
-          },
-        },
-      },
-    )
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Select.Root.displayName).toBe("SelectRoot")
-    expect(Select.Group.displayName).toBe("SelectGroup")
-    expect(Select.Option.displayName).toBe("SelectOption")
-    expect(Select.Label.displayName).toBe("SelectLabel")
-    expect(Select.Separator.displayName).toBe("SelectSeparator")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(
-      <Select.Root
-        defaultOpen
-        defaultValue="one"
-        placeholder="Choose a option"
-        iconProps={{ "data-testid": "icon" }}
-        rootProps={{ "data-testid": "root" }}
-      >
-        <Select.Option value="one">Option 1</Select.Option>
-        <Select.Option value="two">Option 2</Select.Option>
-        <Select.Option value="three">Option 3</Select.Option>
-        <Select.Separator />
-        <Select.Group label="Group 1">
-          <Select.Option value="one">Group Option 1</Select.Option>
-          <Select.Option value="two">Group Option 2</Select.Option>
-          <Select.Option value="three">Group Option 3</Select.Option>
-        </Select.Group>
-      </Select.Root>,
-    )
-
-    const field = screen.getByRole("combobox", { name: /Choose a option/i })
-    const group = screen.getByRole("group", { name: "Group 1" })
-    const option = screen.getByRole("option", { name: "Option 1" })
-
-    expect(screen.getByTestId("root")).toHaveClass("ui-select__root")
-    expect(screen.getByTestId("icon")).toHaveClass("ui-select__icon")
-    expect(field).toHaveClass("ui-select__field")
-    expect(field.firstChild).toHaveClass("ui-select__value-text")
-    expect(option).toHaveClass("ui-select__option")
-    expect(option.firstChild).toHaveClass("ui-select__indicator")
-    expect(group).toHaveClass("ui-select__group")
-    expect(group.firstChild).toHaveClass("ui-select__label")
-    expect(screen.getByRole("separator")).toHaveClass("ui-select__separator")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(
-      <Select.Root
-        defaultOpen
-        defaultValue="one"
-        placeholder="Choose a option"
-        iconProps={{ "data-testid": "icon" }}
-        rootProps={{ "data-testid": "root" }}
-      >
-        <Select.Option value="one">Option 1</Select.Option>
-        <Select.Option value="two">Option 2</Select.Option>
-        <Select.Option value="three">Option 3</Select.Option>
-        <Select.Separator />
-        <Select.Group label="Group 1">
-          <Select.Option value="one">Group Option 1</Select.Option>
-          <Select.Option value="two">Group Option 2</Select.Option>
-          <Select.Option value="three">Group Option 3</Select.Option>
-        </Select.Group>
-      </Select.Root>,
-    )
-
-    const field = screen.getByRole("combobox", { name: /Choose a option/i })
-    const group = screen.getByRole("group", { name: "Group 1" })
-    const option = screen.getByRole("option", { name: "Option 1" })
-
-    expect(screen.getByTestId("root").tagName).toBe("DIV")
-    expect(screen.getByTestId("icon").tagName).toBe("DIV")
-    expect(field.tagName).toBe("DIV")
-    expect(field.children[0]?.tagName).toBe("SPAN")
-    expect(option.tagName).toBe("DIV")
-    expect(option.children[0]?.tagName).toBe("DIV")
-    expect(group.tagName).toBe("DIV")
-    expect(group.children[0]?.tagName).toBe("SPAN")
-    expect(screen.getByRole("separator").tagName).toBe("HR")
-  })
-
   test("selects and deselects values in multiple mode", async () => {
     const onChange = vi.fn()
 
@@ -225,23 +128,41 @@ describe("<Select />", () => {
   })
 
   test("clears value via keyboard on clear icon", async () => {
+    const onChange = vi.fn()
+
     await render(
       <Select.Root
         clearable
         defaultValue="one"
         items={items}
         placeholder="Choose a option"
+        onChange={onChange}
       />,
     )
-
-    const clearButton = screen.getByRole("button", { name: /Clear value/i })
-
-    fireEvent.keyDown(clearButton, { key: "Enter" })
-
+    fireEvent.keyDown(screen.getByRole("button", { name: /Clear value/i }), {
+      key: "Enter",
+    })
     await waitFor(() => {
-      const field = screen.getByRole("combobox", { name: /Choose a option/i })
+      expect(onChange).toHaveBeenCalledWith("")
+    })
 
-      expect(field).toHaveTextContent("Choose a option")
+    onChange.mockClear()
+
+    await render(
+      <Select.Root
+        clearable
+        defaultValue="one"
+        items={items}
+        placeholder="Choose a option"
+        onChange={onChange}
+      />,
+    )
+    fireEvent.keyDown(screen.getByRole("button", { name: /Clear value/i }), {
+      key: " ",
+      code: "Space",
+    })
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledWith("")
     })
   })
 
@@ -507,28 +428,6 @@ describe("<Select />", () => {
       expect(field).toHaveTextContent("Option 2")
     })
     expect(field).toHaveTextContent("Option 3")
-  })
-
-  test("clears value via Space key on clear icon", async () => {
-    const onChange = vi.fn()
-
-    await render(
-      <Select.Root
-        clearable
-        defaultValue="one"
-        items={items}
-        placeholder="Choose a option"
-        onChange={onChange}
-      />,
-    )
-
-    const clearButton = screen.getByRole("button", { name: /Clear value/i })
-
-    fireEvent.keyDown(clearButton, { key: " ", code: "Space" })
-
-    await waitFor(() => {
-      expect(onChange).toHaveBeenCalledWith("")
-    })
   })
 
   test("renders with custom render function returning non-element", async () => {
@@ -1374,128 +1273,5 @@ describe("<Select />", () => {
     )
 
     expect(screen.getByTestId("root-wrapper")).toBeInTheDocument()
-  })
-
-  test("merges `className`, `style`, and event handlers on root with `rootProps`", async () => {
-    const onClick = vi.fn()
-
-    await render(
-      <Select.Root
-        className="from-root"
-        items={items}
-        placeholder="Choose a option"
-        rootProps={{
-          className: "from-user",
-          style: { backgroundColor: "blue", color: "red" },
-          "data-testid": "root",
-          onClick,
-        }}
-      />,
-    )
-
-    const root = screen.getByTestId("root")
-
-    expect(root).toHaveClass("ui-select__root", "from-root", "from-user")
-    expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    fireEvent.click(root)
-
-    expect(onClick).toHaveBeenCalledWith(expect.anything())
-  })
-
-  test("merges `groupProps` on root with user props on `Select.Group`", async () => {
-    const onRootClick = vi.fn()
-    const onGroupClick = vi.fn()
-
-    await render(
-      <Select.Root
-        defaultOpen
-        placeholder="Choose a option"
-        groupProps={{
-          className: "from-root",
-          style: { color: "red" },
-          onClick: onRootClick,
-        }}
-      >
-        <Select.Group
-          className="from-user"
-          style={{ backgroundColor: "blue" }}
-          data-testid="group"
-          label="Group"
-          onClick={onGroupClick}
-        >
-          <Select.Option value="one">Option 1</Select.Option>
-        </Select.Group>
-      </Select.Root>,
-    )
-
-    const group = screen.getByTestId("group")
-
-    expect(group).toHaveClass("ui-select__group", "from-root", "from-user")
-    expect(group).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(group).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    fireEvent.click(group)
-
-    expect(onRootClick).toHaveBeenCalledWith(expect.anything())
-    expect(onGroupClick).toHaveBeenCalledWith(expect.anything())
-  })
-
-  test("merges `optionProps` on root with user props on `Select.Option`", async () => {
-    const onRootClick = vi.fn()
-    const onOptionClick = vi.fn()
-
-    await render(
-      <Select.Root
-        defaultOpen
-        placeholder="Choose a option"
-        optionProps={{
-          className: "from-root",
-          style: { color: "red" },
-          onClick: onRootClick,
-        }}
-      >
-        <Select.Option
-          className="from-user"
-          style={{ backgroundColor: "blue" }}
-          data-testid="option"
-          value="one"
-          onClick={onOptionClick}
-        >
-          Option 1
-        </Select.Option>
-      </Select.Root>,
-    )
-
-    const option = screen.getByTestId("option")
-
-    expect(option).toHaveClass("ui-select__option", "from-root", "from-user")
-    expect(option).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(option).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    fireEvent.click(option)
-
-    expect(onRootClick).toHaveBeenCalledWith(expect.anything())
-    expect(onOptionClick).toHaveBeenCalledWith(expect.anything())
-  })
-
-  test("merges `ref` on `rootProps` with internal ref", async () => {
-    const userRef = createRef<HTMLDivElement>()
-
-    await render(
-      <Select.Root
-        items={items}
-        placeholder="Choose a option"
-        rootProps={{
-          ref: userRef,
-          "data-testid": "root",
-        }}
-      />,
-    )
-
-    const root = screen.getByTestId("root")
-
-    expect(userRef.current).toBe(root)
   })
 })

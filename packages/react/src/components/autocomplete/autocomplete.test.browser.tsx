@@ -427,7 +427,7 @@ describe("<Autocomplete />", () => {
 
   test("closes dropdown when `closeOnChange` is true or a function", async () => {
     for (const closeOnChange of [true, () => true] as const) {
-      const { user } = await render(
+      const { unmount, user } = await render(
         <Autocomplete.Root
           closeOnChange={closeOnChange}
           defaultOpen
@@ -450,12 +450,14 @@ describe("<Autocomplete />", () => {
       await expect
         .poll(() => page.getByRole("option", { name: "Option 1" }).query())
         .toBeNull()
+
+      await unmount()
     }
   })
 
   test("opens dropdown on input change when `openOnChange` is true or a function", async () => {
     for (const openOnChange of [true, () => true] as const) {
-      const { user } = await render(
+      const { unmount, user } = await render(
         <Autocomplete.Root
           items={[
             { label: "Option 1", value: "one" },
@@ -474,6 +476,8 @@ describe("<Autocomplete />", () => {
       await expect
         .element(page.getByRole("option", { name: "Option 1" }))
         .toBeVisible()
+
+      await unmount()
     }
   })
 

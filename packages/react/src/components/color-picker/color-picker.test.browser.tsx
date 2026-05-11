@@ -6,28 +6,11 @@ const getCombobox = () => page.getByRole("combobox")
 
 const getInput = () => page.getByRole("textbox")
 
-const getInputElement = () => {
-  const element = getInput().element()
-
-  if (!(element instanceof HTMLInputElement))
-    throw new Error("Expected an HTMLInputElement")
-
-  return element
-}
-
-const setInputValue = (input: HTMLInputElement, value: string) => {
-  Object.getOwnPropertyDescriptor(
-    window.HTMLInputElement.prototype,
-    "value",
-  )?.set?.call(input, value)
-
-  input.dispatchEvent(new Event("input", { bubbles: true }))
-}
-
 describe("<ColorPicker />", () => {
   const defaultEyeDropper = (window as any).EyeDropper
   const openEyeDropper = vi.fn()
 
+  // EyeDropper opens a native OS color picker; cannot be automated by Playwright.
   class EyeDropperMock {
     open = openEyeDropper
   }
@@ -45,28 +28,27 @@ describe("<ColorPicker />", () => {
     const { user } = await render(<ColorPicker placeholder="Choose a color" />)
 
     const combobox = getCombobox()
-    const input = getInputElement()
 
     await user.click(combobox)
 
     await expect.element(combobox).toHaveAttribute("aria-expanded", "true")
-    expect(document.activeElement).toBe(input)
+    await expect.element(getInput()).toHaveFocus()
   })
 
   test("opens picker on combobox focus when `allowInput` is disabled", async () => {
-    await render(
+    const { user } = await render(
       <ColorPicker allowInput={false} placeholder="Choose a color" />,
     )
 
-    getCombobox().element().focus()
+    await user.tab()
 
     await expect.element(getCombobox()).toHaveAttribute("aria-expanded", "true")
   })
 
   test("prevents default on input focus and opens when not focused by click", async () => {
-    await render(<ColorPicker placeholder="Choose a color" />)
+    const { user } = await render(<ColorPicker placeholder="Choose a color" />)
 
-    getInputElement().focus()
+    await user.tab()
 
     await expect.element(getCombobox()).toHaveAttribute("aria-expanded", "true")
   })
@@ -113,14 +95,12 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    const input = getInputElement()
-
-    setInputValue(input, "#123456")
+    await getInput().fill("#123456")
 
     expect(onInputChange).toHaveBeenCalledTimes(1)
     expect(closeOnChange).toHaveBeenCalledTimes(1)
     expect(openOnChange).toHaveBeenCalledTimes(1)
-    expect(input).toHaveValue("#123456")
+    await expect.element(getInput()).toHaveValue("#123456")
   })
 
   test("runs close branch callback before open callback on input change", async () => {
@@ -135,13 +115,11 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    const input = getInputElement()
-
-    setInputValue(input, "#654321")
+    await getInput().fill("#654321")
 
     expect(closeOnChange).toHaveBeenCalledTimes(1)
     expect(openOnChange).not.toHaveBeenCalled()
-    expect(input).toHaveValue("#654321")
+    await expect.element(getInput()).toHaveValue("#654321")
   })
 
   test("ignores input change when `allowInput` is disabled", async () => {
@@ -155,9 +133,7 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    const input = getInputElement()
-
-    setInputValue(input, "#ffffff")
+    await getInput().fill("#ffffff")
 
     expect(onInputChange).not.toHaveBeenCalled()
   })
@@ -171,61 +147,59 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    const input = getInputElement()
+    await getInput().fill("#a1b2c3")
 
-    setInputValue(input, "#a1b2c3")
-
-    expect(input).toHaveValue("#a1b2c3")
+    await expect.element(getInput()).toHaveValue("#a1b2c3")
   })
 
   test("keeps invalid value on blur when conversion fails", async () => {
     await render(<ColorPicker placeholder="Choose a color" />)
 
-    const input = getInputElement()
+    await getInput().fill("invalid-color")
+    getInput()
+      .element()
+      .dispatchEvent(
+        new FocusEvent("blur", {
+          bubbles: true,
+          cancelable: true,
+          relatedTarget: document.body,
+        }),
+      )
 
-    setInputValue(input, "invalid-color")
-    input.dispatchEvent(
-      new FocusEvent("blur", {
-        bubbles: true,
-        cancelable: true,
-        relatedTarget: document.body,
-      }),
-    )
-
-    expect(input).toHaveValue("invalid-color")
+    await expect.element(getInput()).toHaveValue("invalid-color")
   })
 
   test("keeps value when blur moves focus inside picker field", async () => {
     await render(<ColorPicker placeholder="Choose a color" />)
 
-    const input = getInputElement()
+    await getInput().fill("#123123")
+    getInput()
+      .element()
+      .dispatchEvent(
+        new FocusEvent("blur", {
+          bubbles: true,
+          cancelable: true,
+          relatedTarget: getCombobox().element(),
+        }),
+      )
 
-    setInputValue(input, "#123123")
-    input.dispatchEvent(
-      new FocusEvent("blur", {
-        bubbles: true,
-        cancelable: true,
-        relatedTarget: getCombobox().element(),
-      }),
-    )
-
-    expect(input).toHaveValue("#123123")
+    await expect.element(getInput()).toHaveValue("#123123")
   })
 
   test("keeps empty value on blur when there is no previous value", async () => {
     await render(<ColorPicker placeholder="Choose a color" />)
 
-    const input = getInputElement()
+    getInput()
+      .element()
+      .dispatchEvent(
+        new FocusEvent("blur", {
+          bubbles: true,
+          cancelable: true,
+          relatedTarget: document.body,
+        }),
+      )
 
-    input.dispatchEvent(
-      new FocusEvent("blur", {
-        bubbles: true,
-        cancelable: true,
-        relatedTarget: document.body,
-      }),
-    )
-
-    expect(input).toHaveValue("")
+    await expect.element(getInput()).toHaveValue("")
   })
 
   test("formats and filters value on blur using `formatInput` and `pattern`", async () => {
@@ -238,17 +212,17 @@ describe("<ColorPicker />", () => {
       />,
     )
 
-    const input = getInputElement()
+    getInput()
+      .element()
+      .dispatchEvent(
+        new FocusEvent("blur", {
+          bubbles: true,
+          cancelable: true,
+          relatedTarget: document.body,
+        }),
+      )
 
-    input.dispatchEvent(
-      new FocusEvent("blur", {
-        bubbles: true,
-        cancelable: true,
-        relatedTarget: document.body,
-      }),
-    )
-
-    expect(input).toHaveValue("#abcdef")
+    await expect.element(getInput()).toHaveValue("#abcdef")
   })
 
   test("supports keyboard eye dropper action and writes picked color", async () => {
@@ -272,7 +246,7 @@ describe("<ColorPicker />", () => {
 
     await vi.waitFor(() => {
       expect(openEyeDropper).toHaveBeenCalledTimes(1)
-      expect(getInputElement()).toHaveValue("#00ff00")
+      expect(getInput().element()).toHaveValue("#00ff00")
     })
   })
 

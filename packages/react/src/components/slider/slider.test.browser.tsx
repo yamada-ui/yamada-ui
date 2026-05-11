@@ -1,26 +1,30 @@
 import { vi } from "vitest"
 import { page, render } from "#test/browser"
 import { Slider } from "."
-import { noop } from "../../utils"
 
-const mockRect = (el: HTMLElement, rect: Partial<DOMRect>): (() => void) => {
-  const original = el.getBoundingClientRect
-  el.getBoundingClientRect = () =>
-    ({
-      bottom: 0,
-      height: 0,
-      left: 0,
-      right: 0,
-      toJSON: noop,
-      top: 0,
-      width: 0,
-      x: 0,
-      y: 0,
-      ...rect,
-    }) as DOMRect
-  return () => {
-    el.getBoundingClientRect = original
-  }
+const getTrackRect = (testId: string) => {
+  const track = page.getByTestId(testId).element()
+
+  if (!(track instanceof HTMLElement))
+    throw new Error("Expected an HTMLElement")
+
+  return { rect: track.getBoundingClientRect(), track }
+}
+
+const pointer = (
+  target: EventTarget,
+  type: "pointerdown" | "pointermove" | "pointerup",
+  x: number,
+  y: number,
+) => {
+  target.dispatchEvent(
+    new PointerEvent(type, {
+      bubbles: true,
+      clientX: x,
+      clientY: y,
+      isPrimary: true,
+    }),
+  )
 }
 
 describe("<Slider />", () => {
@@ -30,6 +34,7 @@ describe("<Slider />", () => {
 
     await render(
       <Slider.Root
+        style={{ width: 200 }}
         defaultValue={50}
         trackProps={{ "data-testid": "track" }}
         onChangeEnd={onChangeEnd}
@@ -37,30 +42,13 @@ describe("<Slider />", () => {
       />,
     )
 
-    const track = page.getByTestId("track").element() as HTMLElement
-    const cleanup = mockRect(track, { left: 0, width: 200 })
+    const { rect, track } = getTrackRect("track")
 
-    track.dispatchEvent(
-      new PointerEvent("pointerdown", {
-        bubbles: true,
-        clientX: 100,
-        clientY: 0,
-        isPrimary: true,
-      }),
-    )
+    pointer(track, "pointerdown", rect.left + rect.width / 2, rect.top)
     expect(onChangeStart).toHaveBeenCalledWith(50)
 
-    window.dispatchEvent(
-      new PointerEvent("pointerup", {
-        bubbles: true,
-        clientX: 120,
-        clientY: 0,
-        isPrimary: true,
-      }),
-    )
+    pointer(window, "pointerup", rect.left + (rect.width * 60) / 100, rect.top)
     expect(onChangeEnd).toHaveBeenCalledWith(60)
-
-    cleanup()
   })
 
   test("pointer interaction triggers onChange during move for single slider", async () => {
@@ -68,43 +56,25 @@ describe("<Slider />", () => {
 
     await render(
       <Slider.Root
+        style={{ width: 200 }}
         defaultValue={50}
         trackProps={{ "data-testid": "track" }}
         onChange={onChange}
       />,
     )
 
-    const track = page.getByTestId("track").element() as HTMLElement
-    const cleanup = mockRect(track, { left: 0, width: 200 })
+    const { rect, track } = getTrackRect("track")
 
-    track.dispatchEvent(
-      new PointerEvent("pointerdown", {
-        bubbles: true,
-        clientX: 100,
-        clientY: 0,
-        isPrimary: true,
-      }),
-    )
-    window.dispatchEvent(
-      new PointerEvent("pointermove", {
-        bubbles: true,
-        clientX: 120,
-        clientY: 0,
-        isPrimary: true,
-      }),
+    pointer(track, "pointerdown", rect.left + rect.width / 2, rect.top)
+    pointer(
+      window,
+      "pointermove",
+      rect.left + (rect.width * 60) / 100,
+      rect.top,
     )
     expect(onChange).toHaveBeenCalledWith(60)
 
-    window.dispatchEvent(
-      new PointerEvent("pointerup", {
-        bubbles: true,
-        clientX: 120,
-        clientY: 0,
-        isPrimary: true,
-      }),
-    )
-
-    cleanup()
+    pointer(window, "pointerup", rect.left + (rect.width * 60) / 100, rect.top)
   })
 
   test("pointer interaction triggers callbacks for range slider", async () => {
@@ -114,6 +84,7 @@ describe("<Slider />", () => {
 
     await render(
       <Slider.Root
+        style={{ width: 200 }}
         defaultValue={[25, 75]}
         trackProps={{ "data-testid": "track" }}
         onChange={onChange}
@@ -122,40 +93,21 @@ describe("<Slider />", () => {
       />,
     )
 
-    const track = page.getByTestId("track").element() as HTMLElement
-    const cleanup = mockRect(track, { left: 0, width: 200 })
+    const { rect, track } = getTrackRect("track")
 
-    track.dispatchEvent(
-      new PointerEvent("pointerdown", {
-        bubbles: true,
-        clientX: 40,
-        clientY: 0,
-        isPrimary: true,
-      }),
-    )
+    pointer(track, "pointerdown", rect.left + (rect.width * 20) / 100, rect.top)
     expect(onChangeStart).toHaveBeenCalledWith([20, 75])
 
-    window.dispatchEvent(
-      new PointerEvent("pointermove", {
-        bubbles: true,
-        clientX: 60,
-        clientY: 0,
-        isPrimary: true,
-      }),
+    pointer(
+      window,
+      "pointermove",
+      rect.left + (rect.width * 30) / 100,
+      rect.top,
     )
     expect(onChange).toHaveBeenCalledWith([20, 75])
 
-    window.dispatchEvent(
-      new PointerEvent("pointerup", {
-        bubbles: true,
-        clientX: 60,
-        clientY: 0,
-        isPrimary: true,
-      }),
-    )
+    pointer(window, "pointerup", rect.left + (rect.width * 30) / 100, rect.top)
     expect(onChangeEnd).toHaveBeenCalledWith([30, 75])
-
-    cleanup()
   })
 
   test("pointer interaction selects the closest thumb on the second-thumb side", async () => {
@@ -164,6 +116,7 @@ describe("<Slider />", () => {
 
     await render(
       <Slider.Root
+        style={{ width: 200 }}
         defaultValue={[25, 75]}
         trackProps={{ "data-testid": "track" }}
         onChangeEnd={onChangeEnd}
@@ -171,30 +124,13 @@ describe("<Slider />", () => {
       />,
     )
 
-    const track = page.getByTestId("track").element() as HTMLElement
-    const cleanup = mockRect(track, { left: 0, width: 200 })
+    const { rect, track } = getTrackRect("track")
 
-    track.dispatchEvent(
-      new PointerEvent("pointerdown", {
-        bubbles: true,
-        clientX: 160,
-        clientY: 0,
-        isPrimary: true,
-      }),
-    )
+    pointer(track, "pointerdown", rect.left + (rect.width * 80) / 100, rect.top)
     expect(onChangeStart).toHaveBeenCalledWith([25, 80])
 
-    window.dispatchEvent(
-      new PointerEvent("pointerup", {
-        bubbles: true,
-        clientX: 160,
-        clientY: 0,
-        isPrimary: true,
-      }),
-    )
+    pointer(window, "pointerup", rect.left + (rect.width * 80) / 100, rect.top)
     expect(onChangeEnd).toHaveBeenCalledWith([25, 80])
-
-    cleanup()
   })
 
   test("pointer interaction does not trigger callbacks when disabled", async () => {
@@ -204,6 +140,7 @@ describe("<Slider />", () => {
 
     await render(
       <Slider.Root
+        style={{ width: 200 }}
         defaultValue={50}
         disabled
         trackProps={{ "data-testid": "track" }}
@@ -213,39 +150,20 @@ describe("<Slider />", () => {
       />,
     )
 
-    const track = page.getByTestId("track").element() as HTMLElement
-    const cleanup = mockRect(track, { left: 0, width: 200 })
+    const { rect, track } = getTrackRect("track")
 
-    track.dispatchEvent(
-      new PointerEvent("pointerdown", {
-        bubbles: true,
-        clientX: 100,
-        clientY: 0,
-        isPrimary: true,
-      }),
+    pointer(track, "pointerdown", rect.left + rect.width / 2, rect.top)
+    pointer(
+      window,
+      "pointermove",
+      rect.left + (rect.width * 60) / 100,
+      rect.top,
     )
-    window.dispatchEvent(
-      new PointerEvent("pointermove", {
-        bubbles: true,
-        clientX: 120,
-        clientY: 0,
-        isPrimary: true,
-      }),
-    )
-    window.dispatchEvent(
-      new PointerEvent("pointerup", {
-        bubbles: true,
-        clientX: 120,
-        clientY: 0,
-        isPrimary: true,
-      }),
-    )
+    pointer(window, "pointerup", rect.left + (rect.width * 60) / 100, rect.top)
 
     expect(onChangeStart).not.toHaveBeenCalled()
     expect(onChange).not.toHaveBeenCalled()
     expect(onChangeEnd).not.toHaveBeenCalled()
-
-    cleanup()
   })
 
   test("vertical slider pointer interaction uses y-axis", async () => {
@@ -253,6 +171,7 @@ describe("<Slider />", () => {
 
     await render(
       <Slider.Root
+        style={{ height: 200 }}
         defaultValue={50}
         orientation="vertical"
         trackProps={{ "data-testid": "track" }}
@@ -260,28 +179,16 @@ describe("<Slider />", () => {
       />,
     )
 
-    const track = page.getByTestId("track").element() as HTMLElement
-    const cleanup = mockRect(track, { bottom: 200, height: 200, top: 0 })
+    const { rect, track } = getTrackRect("track")
 
-    track.dispatchEvent(
-      new PointerEvent("pointerdown", {
-        bubbles: true,
-        clientX: 0,
-        clientY: 60,
-        isPrimary: true,
-      }),
+    pointer(
+      track,
+      "pointerdown",
+      rect.left,
+      rect.top + (rect.height * 30) / 100,
     )
     expect(onChange).toHaveBeenCalledWith(70)
 
-    window.dispatchEvent(
-      new PointerEvent("pointerup", {
-        bubbles: true,
-        clientX: 0,
-        clientY: 60,
-        isPrimary: true,
-      }),
-    )
-
-    cleanup()
+    pointer(window, "pointerup", rect.left, rect.top + (rect.height * 30) / 100)
   })
 })

@@ -3,8 +3,8 @@ import { Text } from "../text"
 import { Show } from "./show"
 
 describe("<Show />", () => {
-  test("renders component correctly", () => {
-    a11y(
+  test("renders component correctly", async () => {
+    await a11y(
       <Show fallback="World" when>
         Hello
       </Show>,

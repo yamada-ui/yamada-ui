@@ -425,52 +425,56 @@ describe("<Autocomplete />", () => {
     expect(onChange).toHaveBeenCalledWith(["custom"])
   })
 
-  test("closes dropdown when `closeOnChange` is true", async () => {
-    const { user } = await render(
-      <Autocomplete.Root
-        closeOnChange
-        defaultOpen
-        items={[
-          { label: "Option 1", value: "one" },
-          { label: "Option 2", value: "two" },
-        ]}
-      />,
-    )
+  test("closes dropdown when `closeOnChange` is true or a function", async () => {
+    for (const closeOnChange of [true, () => true] as const) {
+      const { user } = await render(
+        <Autocomplete.Root
+          closeOnChange={closeOnChange}
+          defaultOpen
+          items={[
+            { label: "Option 1", value: "one" },
+            { label: "Option 2", value: "two" },
+          ]}
+        />,
+      )
 
-    await expect
-      .element(page.getByRole("option", { name: "Option 1" }))
-      .toBeVisible()
+      await expect
+        .element(page.getByRole("option", { name: "Option 1" }))
+        .toBeVisible()
 
-    const field = page.getByRole("combobox").element()
-    const input = field.querySelector("input")!
+      const field = page.getByRole("combobox").element()
+      const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "Option")
+      await setInputValue(user, input, "Option")
 
-    await expect
-      .poll(() => page.getByRole("option", { name: "Option 1" }).query())
-      .toBeNull()
+      await expect
+        .poll(() => page.getByRole("option", { name: "Option 1" }).query())
+        .toBeNull()
+    }
   })
 
-  test("opens dropdown on input change when `openOnChange` is true", async () => {
-    const { user } = await render(
-      <Autocomplete.Root
-        items={[
-          { label: "Option 1", value: "one" },
-          { label: "Option 2", value: "two" },
-        ]}
-        openOnChange
-        openOnFocus={false}
-      />,
-    )
+  test("opens dropdown on input change when `openOnChange` is true or a function", async () => {
+    for (const openOnChange of [true, () => true] as const) {
+      const { user } = await render(
+        <Autocomplete.Root
+          items={[
+            { label: "Option 1", value: "one" },
+            { label: "Option 2", value: "two" },
+          ]}
+          openOnChange={openOnChange}
+          openOnFocus={false}
+        />,
+      )
 
-    const field = page.getByRole("combobox").element()
-    const input = field.querySelector("input")!
+      const field = page.getByRole("combobox").element()
+      const input = field.querySelector("input")!
 
-    await setInputValue(user, input, "Option")
+      await setInputValue(user, input, "Option")
 
-    await expect
-      .element(page.getByRole("option", { name: "Option 1" }))
-      .toBeVisible()
+      await expect
+        .element(page.getByRole("option", { name: "Option 1" }))
+        .toBeVisible()
+    }
   })
 
   test("clears value when input is emptied in single mode", async () => {
@@ -835,53 +839,5 @@ describe("<Autocomplete />", () => {
     await user.click(page.getByTestId("outside"))
 
     expect(input).toHaveValue("")
-  })
-
-  test("handles `closeOnChange` as function", async () => {
-    const { user } = await render(
-      <Autocomplete.Root
-        closeOnChange={() => true}
-        defaultOpen
-        items={[
-          { label: "Option 1", value: "one" },
-          { label: "Option 2", value: "two" },
-        ]}
-      />,
-    )
-
-    await expect
-      .element(page.getByRole("option", { name: "Option 1" }))
-      .toBeVisible()
-
-    const field = page.getByRole("combobox").element()
-    const input = field.querySelector("input")!
-
-    await setInputValue(user, input, "Option")
-
-    await expect
-      .poll(() => page.getByRole("option", { name: "Option 1" }).query())
-      .toBeNull()
-  })
-
-  test("handles `openOnChange` as function", async () => {
-    const { user } = await render(
-      <Autocomplete.Root
-        items={[
-          { label: "Option 1", value: "one" },
-          { label: "Option 2", value: "two" },
-        ]}
-        openOnChange={() => true}
-        openOnFocus={false}
-      />,
-    )
-
-    const field = page.getByRole("combobox").element()
-    const input = field.querySelector("input")!
-
-    await setInputValue(user, input, "Option")
-
-    await expect
-      .element(page.getByRole("option", { name: "Option 1" }))
-      .toBeVisible()
   })
 })

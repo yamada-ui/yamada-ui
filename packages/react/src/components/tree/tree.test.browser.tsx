@@ -214,7 +214,7 @@ describe("<Tree />", () => {
     expect(onSelectedChange).toHaveBeenCalledWith(expect.arrayContaining(["1"]))
   })
 
-  test("should expand all with Ctrl+Shift+ArrowDown", async () => {
+  test("should expand and collapse all with Ctrl+Shift shortcuts", async () => {
     const onExpandedChange = vi.fn()
 
     const { user } = await render(
@@ -225,20 +225,10 @@ describe("<Tree />", () => {
     await user.keyboard("{Control>}{Shift>}{ArrowDown}{/Shift}{/Control}")
 
     expect(onExpandedChange).toHaveBeenCalledWith(expect.arrayContaining(["1"]))
-  })
 
-  test("should collapse all with Ctrl+Shift+ArrowUp", async () => {
-    const onExpandedChange = vi.fn()
+    onExpandedChange.mockClear()
 
-    const { user } = await render(
-      <Tree.Root
-        defaultExpandedValue={["1"]}
-        items={items}
-        onExpandedChange={onExpandedChange}
-      />,
-    )
-
-    await user.click(getTreeItemLabel("1-1"))
+    await user.keyboard("{ArrowDown}")
     await user.keyboard("{Control>}{Shift>}{ArrowUp}{/Shift}{/Control}")
 
     expect(onExpandedChange).toHaveBeenCalledWith([])
@@ -264,7 +254,7 @@ describe("<Tree />", () => {
     )
   })
 
-  test("should check item with checkbox", async () => {
+  test("should check and uncheck item with checkbox", async () => {
     const onCheckedChange = vi.fn()
 
     const { user } = await render(
@@ -280,6 +270,14 @@ describe("<Tree />", () => {
 
     expect(onCheckedChange).toHaveBeenCalledWith(
       expect.arrayContaining(["1/1-1"]),
+    )
+
+    onCheckedChange.mockClear()
+
+    await user.click(getTreeItemCheckboxIndicator("1-1"), { force: true })
+
+    expect(onCheckedChange).toHaveBeenCalledWith(
+      expect.not.arrayContaining(["1/1-1"]),
     )
   })
 
@@ -370,27 +368,7 @@ describe("<Tree />", () => {
     await expect.element(getTreeItem("1-1")).toHaveAttribute("tabindex", "0")
   })
 
-  test("should uncheck item when clicking checked checkbox", async () => {
-    const onCheckedChange = vi.fn()
-
-    const { user } = await render(
-      <Tree.Root
-        checkable
-        checkedValue={["1/1-1"]}
-        defaultExpandedValue={["1"]}
-        items={items}
-        onCheckedChange={onCheckedChange}
-      />,
-    )
-
-    await user.click(getTreeItemCheckboxIndicator("1-1"), { force: true })
-
-    expect(onCheckedChange).toHaveBeenCalledWith(
-      expect.not.arrayContaining(["1/1-1"]),
-    )
-  })
-
-  test("should select item with Enter key on leaf", async () => {
+  test("should select item with Enter or Space key on leaf", async () => {
     const onSelectedChange = vi.fn()
 
     const { user } = await render(
@@ -405,20 +383,9 @@ describe("<Tree />", () => {
     await user.keyboard("{Enter}")
 
     expect(onSelectedChange).toHaveBeenCalledWith("1/1-1")
-  })
 
-  test("should select item with Space key on leaf", async () => {
-    const onSelectedChange = vi.fn()
+    onSelectedChange.mockClear()
 
-    const { user } = await render(
-      <Tree.Root
-        defaultExpandedValue={["1"]}
-        items={items}
-        onSelectedChange={onSelectedChange}
-      />,
-    )
-
-    await user.click(getTreeItemLabel("1-1"))
     await user.keyboard("{Space}")
 
     expect(onSelectedChange).toHaveBeenCalledWith("1/1-1")

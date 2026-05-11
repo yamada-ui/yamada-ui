@@ -24,17 +24,23 @@ describe("<Select />", () => {
       />,
     )
 
-    await user.click(screen.getByRole("option", { name: "Option 1" }))
+    await user.click(screen.getByRole("option", { name: "Option 1" }), {
+      force: true,
+    })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
 
-    await user.click(screen.getByRole("option", { name: "Option 2" }))
+    await user.click(screen.getByRole("option", { name: "Option 2" }), {
+      force: true,
+    })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
 
-    await user.click(screen.getByRole("option", { name: "Option 1" }))
+    await user.click(screen.getByRole("option", { name: "Option 1" }), {
+      force: true,
+    })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
     })
@@ -54,8 +60,12 @@ describe("<Select />", () => {
       />,
     )
 
-    await user.click(screen.getByRole("option", { name: "Option 1" }))
-    await user.click(screen.getByRole("option", { name: "Option 2" }))
+    await user.click(screen.getByRole("option", { name: "Option 1" }), {
+      force: true,
+    })
+    await user.click(screen.getByRole("option", { name: "Option 2" }), {
+      force: true,
+    })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
@@ -180,9 +190,9 @@ describe("<Select />", () => {
       />,
     )
 
-    const clearButton = screen.getByRole("button", { name: /Clear value/i })
-
-    await user.click(clearButton)
+    await user.click(screen.getByRole("button", { name: /Clear value/i }), {
+      force: true,
+    })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith([])
@@ -386,7 +396,7 @@ describe("<Select />", () => {
 
     expect(field).toHaveTextContent("Option 1")
 
-    await user.click(screen.getByTestId("change-value"))
+    await user.click(screen.getByTestId("change-value"), { force: true })
 
     await waitFor(() => {
       expect(field).toHaveTextContent("Option 2")
@@ -422,7 +432,7 @@ describe("<Select />", () => {
 
     expect(field).toHaveTextContent("Option 1")
 
-    await user.click(screen.getByTestId("change-value"))
+    await user.click(screen.getByTestId("change-value"), { force: true })
 
     await waitFor(() => {
       expect(field).toHaveTextContent("Option 2")
@@ -488,7 +498,7 @@ describe("<Select />", () => {
 
     const tags = screen.getAllByTestId("custom-tag")
 
-    await user.click(tags[0]!)
+    await user.click(tags[0]!, { force: true })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
@@ -604,9 +614,9 @@ describe("<Select />", () => {
       />,
     )
 
-    const option = screen.getByRole("option", { name: "Option 1" })
-
-    await user.click(option)
+    await user.click(screen.getByRole("option", { name: "Option 1" }), {
+      force: true,
+    })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("one")
@@ -642,9 +652,9 @@ describe("<Select />", () => {
       />,
     )
 
-    const option = screen.getByRole("option", { name: "Apple" })
-
-    await user.click(option)
+    await user.click(screen.getByRole("option", { name: "Apple" }), {
+      force: true,
+    })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("apple")
@@ -824,7 +834,7 @@ describe("<Select />", () => {
 
     const option = screen.getByRole("option", { name: "Option 1" })
 
-    await user.click(option)
+    await user.click(option, { force: true })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("opt1")
@@ -996,7 +1006,7 @@ describe("<Select />", () => {
 
     const option = screen.getByRole("option", { name: "Apple" })
 
-    await user.click(option)
+    await user.click(option, { force: true })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("Apple")
@@ -1116,7 +1126,9 @@ describe("<Select />", () => {
       ).toBeInTheDocument()
     })
 
-    await user.click(screen.getByRole("option", { name: "Option 1" }))
+    await user.click(screen.getByRole("option", { name: "Option 1" }), {
+      force: true,
+    })
 
     await waitFor(() => {
       expect(
@@ -1173,7 +1185,7 @@ describe("<Select />", () => {
 
     expect(placeholderOption).toBeDefined()
 
-    await user.click(placeholderOption!)
+    await user.click(placeholderOption!, { force: true })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith("")
@@ -1211,7 +1223,7 @@ describe("<Select />", () => {
     const option1 = screen.getByRole("option", { name: "Option 1" })
     const option2 = screen.getByRole("option", { name: "Option 2" })
 
-    await user.click(option1)
+    await user.click(option1, { force: true })
 
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])

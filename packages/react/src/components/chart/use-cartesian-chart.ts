@@ -180,7 +180,7 @@ export const useChartXAxis = ({
   }, [labelProp])
 
   const getRootProps: PropGetter<"svg"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -371,7 +371,7 @@ export const useChartYAxis = ({
   }, [labelProp, orientation])
 
   const getRootProps: PropGetter<"svg"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -547,7 +547,7 @@ export const useChartLine = ({
   }, [activeDotProp])
 
   const getRootProps: PropGetter<"line"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -715,7 +715,7 @@ export const useChartArea = ({
   }, [activeDotProp])
 
   const getRootProps: PropGetter<"line"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -877,7 +877,7 @@ export const useChartBar = ({
   }, [labelProp])
 
   const getRootProps: PropGetter<"path"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -1002,7 +1002,7 @@ export const useChartReferenceLine = ({
   }, [labelProp])
 
   const getRootProps: PropGetter<"line"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -1093,7 +1093,7 @@ export const useChartGrid = ({
   ...rest
 }: UseChartGridProps = {}) => {
   const getRootProps: PropGetter<"line"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 

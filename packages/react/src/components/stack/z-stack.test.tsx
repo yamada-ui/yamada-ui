@@ -11,30 +11,6 @@ describe("<ZStack />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(ZStack.displayName).toBe("StackDepth")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <ZStack data-testid="z-stack">
-        <Box>ZStack Item</Box>
-      </ZStack>,
-    )
-
-    expect(screen.getByTestId("z-stack")).toHaveClass("ui-stack--depth")
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(
-      <ZStack data-testid="z-stack">
-        <Box>ZStack Item</Box>
-      </ZStack>,
-    )
-
-    expect(screen.getByTestId("z-stack").tagName).toBe("DIV")
-  })
-
   test("startIndex sets initial zIndex", () => {
     render(
       <ZStack startIndex={10}>

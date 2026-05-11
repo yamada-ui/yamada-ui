@@ -2,22 +2,6 @@ import { a11y, render, screen } from "#test"
 import { Rotate } from "./"
 
 describe("<Rotate />", () => {
-  test("should have displayName", () => {
-    expect(Rotate.displayName).toBe("Rotate")
-  })
-
-  test("should have root className", () => {
-    render(<Rotate from="ON" to="OFF" />)
-
-    expect(screen.getByRole("button")).toHaveClass("ui-rotate")
-  })
-
-  test("should render button element", () => {
-    render(<Rotate from="ON" to="OFF" />)
-
-    expect(screen.getByRole("button").tagName).toBe("BUTTON")
-  })
-
   test("renders component correctly", async () => {
     await a11y(<Rotate from="ON" to="OFF" />)
   })

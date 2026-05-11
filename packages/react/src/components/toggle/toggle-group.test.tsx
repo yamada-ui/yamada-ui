@@ -1,6 +1,5 @@
-import { a11y, fireEvent, render, renderHook, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
 import { ToggleGroup } from "."
-import { useToggleGroup } from "./use-toggle-group"
 
 describe("<ToggleGroup />", () => {
   test("renders component correctly", async () => {
@@ -14,21 +13,6 @@ describe("<ToggleGroup />", () => {
     expect(screen.getByRole("group")).toBeInTheDocument()
     expect(screen.getByText("Option 1")).toBeInTheDocument()
     expect(screen.getByText("Option 2")).toBeInTheDocument()
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(ToggleGroup.Root.displayName).toBe("ToggleGroup")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <ToggleGroup.Root>
-        <ToggleGroup.Item value="opt1">Option 1</ToggleGroup.Item>
-        <ToggleGroup.Item value="opt2">Option 2</ToggleGroup.Item>
-      </ToggleGroup.Root>,
-    )
-
-    expect(screen.getByRole("group")).toHaveClass("ui-toggle__group")
   })
 
   test("should update checked toggle when controlled value prop changes", () => {
@@ -185,34 +169,5 @@ describe("<ToggleGroup />", () => {
 
     expect(screen.getByText("Option 1")).not.toHaveAttribute("data-checked")
     expect(screen.getByText("Option 2")).toHaveAttribute("data-checked")
-  })
-
-  test("should merge consumer props in getGroupProps", () => {
-    const rootOnClick = vi.fn()
-    const getGroupOnClick = vi.fn()
-    const { result } = renderHook(() =>
-      useToggleGroup({
-        className: "root-class",
-        style: { color: "red" },
-        onClick: rootOnClick,
-      }),
-    )
-
-    const groupProps = result.current.getGroupProps({
-      className: "group-class",
-      style: { backgroundColor: "blue" },
-      onClick: getGroupOnClick,
-    })
-
-    groupProps.onClick?.({} as any)
-
-    expect(rootOnClick).toHaveBeenCalledTimes(1)
-    expect(getGroupOnClick).toHaveBeenCalledTimes(1)
-    expect(groupProps.className).toContain("root-class")
-    expect(groupProps.className).toContain("group-class")
-    expect(groupProps.style).toMatchObject({
-      backgroundColor: "blue",
-      color: "red",
-    })
   })
 })

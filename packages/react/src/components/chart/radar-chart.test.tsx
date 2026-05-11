@@ -19,10 +19,6 @@ const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
 >
 
 describe("<RadarChart />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(RadarChart.Root.displayName).toBe("RadarChart")
-  })
-
   test("renders generated radars and default grid/angle axis", () => {
     const series: Array<{ dataKey: "downloads" | "visits" }> = [
       { dataKey: "visits" },

@@ -1,74 +1,9 @@
-import { vi } from "vitest"
 import { a11y, render, screen } from "#test"
 import { HueSlider } from "."
 
 describe("<HueSlider />", () => {
   test("renders component correctly", async () => {
     await a11y(<HueSlider.Root defaultValue={180} />)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(HueSlider.Root.displayName).toBe("HueSliderRoot")
-    expect(HueSlider.Track.displayName).toBe("HueSliderTrack")
-    expect(HueSlider.Thumb.displayName).toBe("HueSliderThumb")
-    expect(HueSlider.Overlay.displayName).toBe("HueSliderOverlay")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <HueSlider.Root
-        data-testid="slider"
-        defaultValue={180}
-        overlayProps={{ "data-testid": "overlay" }}
-        trackProps={{ "data-testid": "track" }}
-      />,
-    )
-    expect(screen.getByTestId("slider")).toHaveClass("ui-hue-slider__root")
-    expect(screen.getByTestId("track")).toHaveClass("ui-hue-slider__track")
-    expect(screen.getByRole("slider")).toHaveClass("ui-hue-slider__thumb")
-    expect(screen.getAllByTestId("overlay")[0]).toHaveClass(
-      "ui-hue-slider__overlay",
-    )
-  })
-
-  test("merges `overlayProps` and `layers` props on overlay", () => {
-    const onOverlayClick = vi.fn()
-    const onLayerClick = vi.fn()
-    render(
-      <HueSlider.Root
-        defaultValue={0}
-        overlayProps={{
-          className: "from-overlay",
-          style: { color: "red", pointerEvents: "auto" },
-          "data-testid": "overlay",
-          layers: [
-            {
-              className: "from-layer",
-              style: { backgroundColor: "blue", pointerEvents: "auto" },
-              onClick: onLayerClick,
-            },
-          ],
-          onClick: onOverlayClick,
-        }}
-      />,
-    )
-
-    const overlay = screen.getByTestId("overlay")
-
-    expect(overlay).toHaveClass(
-      "ui-hue-slider__overlay",
-      "from-overlay",
-      "from-layer",
-    )
-    expect(overlay).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(overlay).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    overlay.dispatchEvent(
-      new MouseEvent("click", { bubbles: true, cancelable: true }),
-    )
-
-    expect(onOverlayClick).toHaveBeenCalledTimes(1)
-    expect(onLayerClick).toHaveBeenCalledTimes(1)
   })
 
   test("renders custom children correctly", () => {

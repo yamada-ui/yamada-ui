@@ -10,7 +10,7 @@
   "sources": [
     {
       "name": "index.test.browser.tsx",
-      "content": "import { page, renderHook } from \"#test/browser\"\nimport { useMediaQuery } from \".\"\n\ndescribe(\"useMediaQuery\", () => {\n  test(\"should return true when media query matches\", async () => {\n    await page.viewport(600, 800)\n\n    const { result } = await renderHook(() =>\n      useMediaQuery(\"(min-width: 500px)\"),\n    )\n\n    expect(result.current).toBeTruthy()\n  })\n\n  test(\"should update when media query match status changes\", async () => {\n    await page.viewport(400, 800)\n\n    const { result } = await renderHook(() =>\n      useMediaQuery(\"(min-width: 500px)\"),\n    )\n\n    expect(result.current).toBeFalsy()\n\n    await page.viewport(600, 800)\n\n    await vi.waitFor(() => {\n      expect(result.current).toBeTruthy()\n    })\n  })\n})\n"
+      "content": "import { page, renderHook } from \"#test/browser\"\nimport { useMediaQuery } from \".\"\n\ndescribe(\"useMediaQuery\", () => {\n  test(\"returns true immediately when query matches on initial mount\", async () => {\n    await page.viewport(600, 800)\n\n    const { result, unmount } = await renderHook(() =>\n      useMediaQuery(\"(min-width: 500px)\"),\n    )\n\n    expect(result.current).toBeTruthy()\n\n    unmount()\n  })\n\n  test(\"returns the current match state and updates on viewport change\", async () => {\n    await page.viewport(400, 800)\n\n    const { result, unmount } = await renderHook(() =>\n      useMediaQuery(\"(min-width: 500px)\"),\n    )\n\n    expect(result.current).toBeFalsy()\n\n    await page.viewport(600, 800)\n\n    await vi.waitFor(() => {\n      expect(result.current).toBeTruthy()\n    })\n\n    unmount()\n  })\n})\n"
     },
     {
       "name": "index.ts",

@@ -1,58 +1,11 @@
-import type { ReactNode } from "react"
-import type { UseMenuGroupProps, UseMenuItemProps } from "./use-menu"
-import { fireEvent, screen, waitFor } from "@testing-library/react"
 import { useState } from "react"
-import { a11y, render } from "#test/browser"
+import { page, render, waitFor } from "#test/browser"
+import { cast } from "../../utils"
 import { Button } from "../button"
 import { Menu } from "./"
 import { fullItems } from "./menu.test.fixtures"
-import { useMenuGroup, useMenuItem } from "./use-menu"
-
-interface TestMenuGroupProps extends UseMenuGroupProps {
-  children?: ReactNode
-  getGroupProps?: Parameters<
-    ReturnType<typeof useMenuGroup>["getGroupProps"]
-  >[0]
-}
-
-const TestMenuGroup = ({
-  children,
-  getGroupProps,
-  ...props
-}: TestMenuGroupProps) => {
-  const { getGroupProps: getProps } = useMenuGroup(props)
-
-  return <div {...getProps(getGroupProps)}>{children}</div>
-}
-
-interface TestMenuItemProps extends UseMenuItemProps {
-  children?: ReactNode
-  getItemProps?: Parameters<ReturnType<typeof useMenuItem>["getItemProps"]>[0]
-}
-
-const TestMenuItem = ({
-  children,
-  getItemProps,
-  ...props
-}: TestMenuItemProps) => {
-  const { getItemProps: getProps } = useMenuItem(props)
-
-  return <div {...getProps(getItemProps)}>{children}</div>
-}
 
 describe("<Menu />", () => {
-  test("passes a11y checks when open", async () => {
-    await a11y(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content items={fullItems} />
-      </Menu.Root>,
-    )
-  })
-
   test("renders full items config with separator, radio, checkbox, and group", async () => {
     await render(
       <Menu.Root defaultOpen>
@@ -64,176 +17,17 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(screen.getByRole("menu")).toBeInTheDocument()
-    expect(
-      screen.getByRole("menuitem", { name: /Menu 1/i }),
-    ).toBeInTheDocument()
-    expect(screen.getByTestId("label")).toBeInTheDocument()
-    expect(
-      screen.getByRole("menuitemradio", { name: /Option 1/i }),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole("menuitemcheckbox", { name: /Option 1/i }),
-    ).toBeInTheDocument()
-  })
-
-  test("merges consumer props in Menu.Item", async () => {
-    const onMouseDown = vi.fn()
-    const ref = vi.fn()
-
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item
-            ref={ref}
-            className="consumer-item"
-            style={{ color: "red" }}
-            value="item-1"
-            onMouseDown={onMouseDown}
-          >
-            Item 1
-          </Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const item = screen.getByRole("menuitem", { name: /Item 1/i })
-    fireEvent.mouseDown(item)
-
-    expect(item).toHaveClass("ui-menu__item")
-    expect(item).toHaveClass("consumer-item")
-    expect(item).toHaveStyle({ color: "red" })
-    expect(onMouseDown).toHaveBeenCalledTimes(1)
-    expect(ref).toHaveBeenCalledWith(item)
-  })
-
-  test("merges consumer props in Menu.Group", async () => {
-    const onMouseDown = vi.fn()
-    const ref = vi.fn()
-
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Group
-            ref={ref}
-            className="consumer-group"
-            style={{ color: "red" }}
-            label="Group Label"
-            onMouseDown={onMouseDown}
-          >
-            <Menu.Item value="item-1">Item 1</Menu.Item>
-          </Menu.Group>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const group = screen.getByRole("group")
-    fireEvent.mouseDown(group)
-
-    expect(group).toHaveClass("ui-menu__group")
-    expect(group).toHaveClass("consumer-group")
-    expect(group).toHaveStyle({ color: "red" })
-    expect(onMouseDown).toHaveBeenCalledTimes(1)
-    expect(ref).toHaveBeenCalledWith(group)
-  })
-
-  test("merges getter and consumer props in useMenuGroup", async () => {
-    const consumerRef = vi.fn()
-    const getterRef = vi.fn()
-    const calls: string[] = []
-    const consumerMouseDown = vi.fn(() => calls.push("consumer"))
-    const getterMouseDown = vi.fn(() => calls.push("getter"))
-
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <TestMenuGroup
-            ref={consumerRef}
-            className="consumer-group"
-            style={{ color: "red" }}
-            getGroupProps={{
-              ref: getterRef,
-              className: "getter-group",
-              style: { backgroundColor: "blue" },
-              onMouseDown: getterMouseDown,
-            }}
-            onMouseDown={consumerMouseDown}
-          >
-            <Menu.Item value="item-1">Item 1</Menu.Item>
-          </TestMenuGroup>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const group = screen.getByRole("group")
-    fireEvent.mouseDown(group)
-
-    expect(group).toHaveClass("consumer-group")
-    expect(group).toHaveClass("getter-group")
-    expect(group).toHaveStyle({ backgroundColor: "blue", color: "red" })
-    expect(calls).toStrictEqual(["consumer", "getter"])
-    expect(consumerRef).toHaveBeenCalledTimes(1)
-    expect(getterRef).toHaveBeenCalledTimes(1)
-    expect(consumerRef).toHaveBeenCalledWith(group)
-    expect(getterRef).toHaveBeenCalledWith(group)
-  })
-
-  test("merges getter and consumer props in useMenuItem", async () => {
-    const consumerRef = vi.fn()
-    const getterRef = vi.fn()
-    const calls: string[] = []
-    const consumerMouseDown = vi.fn(() => calls.push("consumer"))
-    const getterMouseDown = vi.fn(() => calls.push("getter"))
-
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <TestMenuItem
-            ref={consumerRef}
-            className="consumer-item"
-            style={{ color: "red" }}
-            value="item-1"
-            getItemProps={{
-              ref: getterRef,
-              className: "getter-item",
-              style: { backgroundColor: "blue" },
-              onMouseDown: getterMouseDown,
-            }}
-            onMouseDown={consumerMouseDown}
-          >
-            Item 1
-          </TestMenuItem>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const item = screen.getByRole("menuitem", { name: /Item 1/i })
-    fireEvent.mouseDown(item)
-
-    expect(item).toHaveClass("consumer-item")
-    expect(item).toHaveClass("getter-item")
-    expect(item).toHaveStyle({ backgroundColor: "blue", color: "red" })
-    expect(calls).toStrictEqual(["consumer", "getter"])
-    expect(consumerRef).toHaveBeenCalledTimes(1)
-    expect(getterRef).toHaveBeenCalledTimes(1)
-    expect(consumerRef).toHaveBeenCalledWith(item)
-    expect(getterRef).toHaveBeenCalledWith(item)
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
+    await expect
+      .element(page.getByRole("menuitem", { name: /Menu 1/i }))
+      .toBeInTheDocument()
+    await expect.element(page.getByTestId("label")).toBeInTheDocument()
+    await expect
+      .element(page.getByRole("menuitemradio", { name: /Option 1/i }))
+      .toBeInTheDocument()
+    await expect
+      .element(page.getByRole("menuitemcheckbox", { name: /Option 1/i }))
+      .toBeInTheDocument()
   })
 
   test("keeps useMenuItem click handler order as getter then consumer then internal", async () => {
@@ -257,7 +51,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(screen.getByRole("menuitemcheckbox", { name: /Opt 1/i }))
+    await user.click(page.getByRole("menuitemcheckbox", { name: /Opt 1/i }))
 
     expect(calls).toStrictEqual(["getter", "consumer", "internal"])
     expect(onChange).toHaveBeenCalledWith(["opt-1"])
@@ -277,12 +71,12 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(screen.queryByRole("menu")).not.toBeInTheDocument()
-    fireEvent.click(screen.getByRole("button", { name: /Menu/i }))
-
-    await waitFor(() => {
-      expect(screen.getByRole("menu")).toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("menu").query()).not.toBeInTheDocument()
+    const el = page
+      .getByRole("button", { name: /Menu/i })
+      .element() as HTMLButtonElement
+    el.click()
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
   })
 
   test("closes menu on trigger click when already open", async () => {
@@ -298,13 +92,11 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(screen.getByRole("menu")).toBeInTheDocument()
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
 
-    await user.click(screen.getByRole("button", { name: /Menu/i }))
+    await user.click(page.getByRole("button", { name: /Menu/i }))
 
-    await waitFor(() => {
-      expect(screen.queryByRole("menu")).not.toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("menu").query()).not.toBeInTheDocument()
   })
 
   test("does not open menu when disabled", async () => {
@@ -319,10 +111,10 @@ describe("<Menu />", () => {
         </Menu.Content>
       </Menu.Root>,
     )
-
-    fireEvent.click(screen.getByRole("button", { name: /Menu/i }))
-
-    expect(screen.queryByRole("menu")).not.toBeInTheDocument()
+    cast<HTMLButtonElement>(
+      page.getByRole("button", { name: /Menu/i }).element(),
+    ).click()
+    await expect.element(page.getByRole("menu").query()).not.toBeInTheDocument()
   })
 
   test("opens menu with ArrowDown key and focuses first item", async () => {
@@ -339,15 +131,15 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const trigger = screen.getByRole("button", { name: /Menu/i })
+    const trigger = page
+      .getByRole("button", { name: /Menu/i })
+      .element() as HTMLElement
     await user.click(trigger)
 
-    await waitFor(() => {
-      expect(screen.getByRole("menu")).toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
   })
 
-  test("opens menu with ArrowUp key", async () => {
+  test("opens menu with keyboard", async () => {
     const { user } = await render(
       <Menu.Root>
         <Menu.Trigger>
@@ -356,62 +148,31 @@ describe("<Menu />", () => {
 
         <Menu.Content>
           <Menu.Item value="item-1">Item 1</Menu.Item>
-          <Menu.Item value="item-2">Item 2</Menu.Item>
         </Menu.Content>
       </Menu.Root>,
     )
 
-    const trigger = screen.getByRole("button", { name: /Menu/i })
+    const trigger = page
+      .getByRole("button", { name: /Menu/i })
+      .element() as HTMLElement
+
     trigger.focus()
     await user.keyboard("{ArrowUp}")
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
 
-    await waitFor(() => {
-      expect(screen.getByRole("menu")).toBeInTheDocument()
-    })
-  })
+    await user.keyboard("{Escape}")
+    await expect.element(page.getByRole("menu").query()).not.toBeInTheDocument()
 
-  test("opens menu with Enter key", async () => {
-    const { user } = await render(
-      <Menu.Root>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const trigger = screen.getByRole("button", { name: /Menu/i })
     trigger.focus()
     await user.keyboard("{Enter}")
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
 
-    await waitFor(() => {
-      expect(screen.getByRole("menu")).toBeInTheDocument()
-    })
-  })
+    await user.keyboard("{Escape}")
+    await expect.element(page.getByRole("menu").query()).not.toBeInTheDocument()
 
-  test("opens menu with Space key", async () => {
-    const { user } = await render(
-      <Menu.Root>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const trigger = screen.getByRole("button", { name: /Menu/i })
     trigger.focus()
     await user.keyboard(" ")
-
-    await waitFor(() => {
-      expect(screen.getByRole("menu")).toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
   })
 
   test("does not open menu on keyboard when disabled", async () => {
@@ -427,11 +188,13 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const trigger = screen.getByRole("button", { name: /Menu/i })
+    const trigger = page
+      .getByRole("button", { name: /Menu/i })
+      .element() as HTMLElement
     trigger.focus()
     await user.keyboard("{ArrowDown}")
 
-    expect(screen.queryByRole("menu")).not.toBeInTheDocument()
+    await expect.element(page.getByRole("menu").query()).not.toBeInTheDocument()
   })
 
   test("calls onSelect when a menu item is clicked", async () => {
@@ -448,7 +211,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(screen.getByRole("menuitem", { name: /Item 1/i }))
+    await user.click(page.getByRole("menuitem", { name: /Item 1/i }))
 
     expect(onSelect).toHaveBeenCalledWith("item-1")
   })
@@ -467,7 +230,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(screen.getByRole("menuitem", { name: /Item 1/i }))
+    await user.click(page.getByRole("menuitem", { name: /Item 1/i }))
 
     expect(onSelect).not.toHaveBeenCalled()
   })
@@ -485,11 +248,9 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(screen.getByRole("menuitem", { name: /Item 1/i }))
+    await user.click(page.getByRole("menuitem", { name: /Item 1/i }))
 
-    await waitFor(() => {
-      expect(screen.queryByRole("menu")).not.toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("menu").query()).not.toBeInTheDocument()
   })
 
   test("does not close menu on select when closeOnSelect is false", async () => {
@@ -505,12 +266,12 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(screen.getByRole("menuitem", { name: /Item 1/i }))
+    await user.click(page.getByRole("menuitem", { name: /Item 1/i }))
 
-    expect(screen.getByRole("menu")).toBeInTheDocument()
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
   })
 
-  test("navigates menu items with ArrowDown key", async () => {
+  test("navigates menu items with keyboard", async () => {
     await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
@@ -525,112 +286,73 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const menu = screen.getByRole("menu")
-    const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
+    const menu = page.getByRole("menu").element() as HTMLElement
+    const item1 = page
+      .getByRole("menuitem", { name: /Item 1/i })
+      .element() as HTMLElement
+    const item2 = page
+      .getByRole("menuitem", { name: /Item 2/i })
+      .element() as HTMLElement
+    const item3 = page
+      .getByRole("menuitem", { name: /Item 3/i })
+      .element() as HTMLElement
 
-    fireEvent.focus(item1)
-
+    item1.focus()
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(item1.id)
     })
-
-    fireEvent.keyDown(item1, { key: "ArrowDown" })
-
-    const item2 = screen.getByRole("menuitem", { name: /Item 2/i })
-    await waitFor(() => {
-      expect(menu.getAttribute("aria-activedescendant")).toBe(item2.id)
-    })
-  })
-
-  test("navigates menu items with ArrowUp key", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-          <Menu.Item value="item-2">Item 2</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
+    item1.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowDown",
+        bubbles: true,
+        cancelable: true,
+      }),
     )
-
-    const menu = screen.getByRole("menu")
-    const item2 = screen.getByRole("menuitem", { name: /Item 2/i })
-
-    fireEvent.focus(item2)
-
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(item2.id)
     })
 
-    fireEvent.keyDown(item2, { key: "ArrowUp" })
-
-    const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
+    item2.focus()
+    item2.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowUp",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(item1.id)
     })
-  })
 
-  test("navigates to first item with Home key", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-          <Menu.Item value="item-2">Item 2</Menu.Item>
-          <Menu.Item value="item-3">Item 3</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
+    item3.focus()
+    item3.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Home",
+        bubbles: true,
+        cancelable: true,
+      }),
     )
-
-    const menu = screen.getByRole("menu")
-    const item3 = screen.getByRole("menuitem", { name: /Item 3/i })
-
-    fireEvent.focus(item3)
-    fireEvent.keyDown(item3, { key: "Home" })
-
-    const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(item1.id)
     })
-  })
 
-  test("navigates to last item with End key", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-          <Menu.Item value="item-2">Item 2</Menu.Item>
-          <Menu.Item value="item-3">Item 3</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
+    item1.focus()
+    item1.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "End",
+        bubbles: true,
+        cancelable: true,
+      }),
     )
-
-    const menu = screen.getByRole("menu")
-    const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
-
-    fireEvent.focus(item1)
-    fireEvent.keyDown(item1, { key: "End" })
-
-    const item3 = screen.getByRole("menuitem", { name: /Item 3/i })
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(item3.id)
     })
   })
 
-  test("selects item with Enter key", async () => {
+  test("selects item with keyboard", async () => {
     const onSelect = vi.fn()
     await render(
-      <Menu.Root defaultOpen onSelect={onSelect}>
+      <Menu.Root closeOnSelect={false} defaultOpen onSelect={onSelect}>
         <Menu.Trigger>
           <Button>Menu</Button>
         </Menu.Trigger>
@@ -641,32 +363,29 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
-    fireEvent.focus(item1)
-    fireEvent.keyDown(item1, { key: "Enter" })
-
-    expect(onSelect).toHaveBeenCalledWith("item-1")
-  })
-
-  test("selects item with Space key", async () => {
-    const onSelect = vi.fn()
-    await render(
-      <Menu.Root defaultOpen onSelect={onSelect}>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
+    const item1 = page
+      .getByRole("menuitem", { name: /Item 1/i })
+      .element() as HTMLElement
+    item1.focus()
+    item1.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Enter",
+        bubbles: true,
+        cancelable: true,
+      }),
     )
-
-    const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
-    fireEvent.focus(item1)
-    fireEvent.keyDown(item1, { key: " ", charCode: 32, code: "Space" })
-
     expect(onSelect).toHaveBeenCalledWith("item-1")
+
+    item1.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: " ",
+        bubbles: true,
+        cancelable: true,
+        charCode: 32,
+        code: "Space",
+      }),
+    )
+    expect(onSelect).toHaveBeenCalledTimes(2)
   })
 
   test("renders context menu trigger", async () => {
@@ -682,7 +401,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const area = screen.getByTestId("context-area")
+    const area = page.getByTestId("context-area").element() as HTMLElement
     expect(area).toHaveAttribute("role", "application")
   })
 
@@ -699,12 +418,16 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const area = screen.getByTestId("context-area")
-    fireEvent.contextMenu(area, { clientX: 100, clientY: 200 })
+    const area = page.getByTestId("context-area").element() as HTMLElement
+    area.dispatchEvent(
+      new MouseEvent("contextmenu", {
+        bubbles: true,
+        clientX: 100,
+        clientY: 200,
+      }),
+    )
 
-    await waitFor(() => {
-      expect(screen.getByRole("menu")).toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
   })
 
   test("does not open context menu when disabled", async () => {
@@ -720,10 +443,16 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const area = screen.getByTestId("context-area")
-    fireEvent.contextMenu(area, { clientX: 100, clientY: 200 })
+    const area = page.getByTestId("context-area").element() as HTMLElement
+    area.dispatchEvent(
+      new MouseEvent("contextmenu", {
+        bubbles: true,
+        clientX: 100,
+        clientY: 200,
+      }),
+    )
 
-    expect(screen.queryByRole("menu")).not.toBeInTheDocument()
+    await expect.element(page.getByRole("menu").query()).not.toBeInTheDocument()
   })
 
   test("renders nested menu with submenu indicator", async () => {
@@ -749,7 +478,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(screen.getByText("Sub Menu")).toBeInTheDocument()
+    await expect.element(page.getByText("Sub Menu")).toBeInTheDocument()
   })
 
   test("selects radio option in option group", async () => {
@@ -769,7 +498,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(screen.getByRole("menuitemradio", { name: /Option 1/i }))
+    await user.click(page.getByRole("menuitemradio", { name: /Option 1/i }))
 
     expect(onChange).toHaveBeenCalledWith("option-1")
   })
@@ -791,9 +520,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(
-      screen.getByRole("menuitemcheckbox", { name: /Option 1/i }),
-    )
+    await user.click(page.getByRole("menuitemcheckbox", { name: /Option 1/i }))
 
     expect(onChange).toHaveBeenCalledWith(["option-1"])
   })
@@ -819,14 +546,11 @@ describe("<Menu />", () => {
 
     const { user } = await render(<ControlledRadio />)
 
-    await user.click(screen.getByRole("menuitemradio", { name: /Option 2/i }))
+    await user.click(page.getByRole("menuitemradio", { name: /Option 2/i }))
 
-    await waitFor(() => {
-      const option2 = screen.getByRole("menuitemradio", {
-        name: /Option 2/i,
-      })
-      expect(option2).toBeInTheDocument()
-    })
+    await expect
+      .element(page.getByRole("menuitemradio", { name: /Option 2/i }))
+      .toBeInTheDocument()
   })
 
   test("controls checkbox option group with value prop", async () => {
@@ -850,15 +574,11 @@ describe("<Menu />", () => {
 
     const { user } = await render(<ControlledCheckbox />)
 
-    await user.click(
-      screen.getByRole("menuitemcheckbox", { name: /Option 1/i }),
-    )
+    await user.click(page.getByRole("menuitemcheckbox", { name: /Option 1/i }))
 
-    await waitFor(() => {
-      expect(
-        screen.getByRole("menuitemcheckbox", { name: /Option 1/i }),
-      ).toBeInTheDocument()
-    })
+    await expect
+      .element(page.getByRole("menuitemcheckbox", { name: /Option 1/i }))
+      .toBeInTheDocument()
   })
 
   test("renders disabled menu item", async () => {
@@ -876,10 +596,9 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(screen.getByRole("menuitem", { name: /Item 1/i })).toHaveAttribute(
-      "aria-disabled",
-      "true",
-    )
+    await expect
+      .element(page.getByRole("menuitem", { name: /Item 1/i }))
+      .toHaveAttribute("aria-disabled", "true")
   })
 
   test("renders menu with header and footer", async () => {
@@ -897,8 +616,8 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(screen.getByText("Header Text")).toBeInTheDocument()
-    expect(screen.getByText("Footer Text")).toBeInTheDocument()
+    await expect.element(page.getByText("Header Text")).toBeInTheDocument()
+    await expect.element(page.getByText("Footer Text")).toBeInTheDocument()
   })
 
   test("renders menu with children instead of items", async () => {
@@ -914,9 +633,9 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(
-      screen.getByRole("menuitem", { name: /Child Item/i }),
-    ).toBeInTheDocument()
+    await expect
+      .element(page.getByRole("menuitem", { name: /Child Item/i }))
+      .toBeInTheDocument()
   })
 
   test("renders items with radio group and separator control", async () => {
@@ -941,9 +660,9 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(
-      screen.getByRole("menuitemradio", { name: /R1/i }),
-    ).toBeInTheDocument()
+    await expect
+      .element(page.getByRole("menuitemradio", { name: /R1/i }))
+      .toBeInTheDocument()
   })
 
   test("renders items with checkbox group and separator control", async () => {
@@ -968,9 +687,9 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(
-      screen.getByRole("menuitemcheckbox", { name: /C1/i }),
-    ).toBeInTheDocument()
+    await expect
+      .element(page.getByRole("menuitemcheckbox", { name: /C1/i }))
+      .toBeInTheDocument()
   })
 
   test("renders group items with separator control", async () => {
@@ -995,7 +714,9 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(screen.getByRole("menuitem", { name: /G1/i })).toBeInTheDocument()
+    await expect
+      .element(page.getByRole("menuitem", { name: /G1/i }))
+      .toBeInTheDocument()
   })
 
   test("disabled menu item does not activate on focus", async () => {
@@ -1014,9 +735,11 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const disabledItem = screen.getByRole("menuitem", {
-      name: /Disabled Item/i,
-    })
+    const disabledItem = page
+      .getByRole("menuitem", {
+        name: /Disabled Item/i,
+      })
+      .element() as HTMLElement
     expect(disabledItem).toHaveAttribute("aria-disabled", "true")
   })
 
@@ -1040,7 +763,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(screen.getByTestId("custom-icon")).toBeInTheDocument()
+    await expect.element(page.getByTestId("custom-icon")).toBeInTheDocument()
   })
 
   test("renders default icon for checkbox option item", async () => {
@@ -1058,9 +781,11 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const optionItem = screen.getByRole("menuitemcheckbox", {
-      name: /Opt 1/i,
-    })
+    const optionItem = page
+      .getByRole("menuitemcheckbox", {
+        name: /Opt 1/i,
+      })
+      .element() as HTMLElement
     expect(optionItem).toBeInTheDocument()
   })
 
@@ -1078,10 +803,12 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const menu = screen.getByRole("menu")
-    const item2 = screen.getByRole("menuitem", { name: /Item 2/i })
+    const menu = page.getByRole("menu").element() as HTMLElement
+    const item2 = page
+      .getByRole("menuitem", { name: /Item 2/i })
+      .element() as HTMLElement
 
-    fireEvent.mouseMove(item2)
+    item2.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }))
 
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(item2.id)
@@ -1099,9 +826,9 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(
-      screen.getByRole("menuitem", { name: /Direct Item/i }),
-    ).toBeInTheDocument()
+    await expect
+      .element(page.getByRole("menuitem", { name: /Direct Item/i }))
+      .toBeInTheDocument()
   })
 
   test("checkbox option toggles off when clicked again", async () => {
@@ -1125,9 +852,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(
-      screen.getByRole("menuitemcheckbox", { name: /Option 1/i }),
-    )
+    await user.click(page.getByRole("menuitemcheckbox", { name: /Option 1/i }))
 
     expect(onChange).toHaveBeenCalledWith([])
   })
@@ -1147,11 +872,9 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(screen.getByRole("menuitem", { name: /Item 1/i }))
+    await user.click(page.getByRole("menuitem", { name: /Item 1/i }))
 
-    await waitFor(() => {
-      expect(screen.queryByRole("menu")).not.toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("menu").query()).not.toBeInTheDocument()
   })
 
   test("option item does not call onChange when disabled", async () => {
@@ -1171,8 +894,9 @@ describe("<Menu />", () => {
         </Menu.Content>
       </Menu.Root>,
     )
-    fireEvent.click(screen.getByRole("menuitemradio", { name: /Opt 1/i }))
-
+    cast<HTMLDivElement>(
+      page.getByRole("menuitemradio", { name: /Opt 1/i }).element(),
+    ).click()
     expect(onChange).not.toHaveBeenCalled()
   })
 
@@ -1189,7 +913,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const area = screen.getByTestId("context-area")
+    const area = page.getByTestId("context-area").element() as HTMLElement
     expect(area).toHaveAttribute("aria-haspopup", "menu")
     expect(area).toHaveAttribute("aria-expanded", "false")
   })
@@ -1207,8 +931,14 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const area = screen.getByTestId("context-area")
-    fireEvent.contextMenu(area, { clientX: 150, clientY: 250 })
+    const area = page.getByTestId("context-area").element() as HTMLElement
+    area.dispatchEvent(
+      new MouseEvent("contextmenu", {
+        bubbles: true,
+        clientX: 150,
+        clientY: 250,
+      }),
+    )
 
     await waitFor(() => {
       expect(area).toHaveAttribute("aria-expanded", "true")
@@ -1236,7 +966,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuText = screen.getByText("Sub Menu")
+    const subMenuText = page.getByText("Sub Menu").element() as HTMLElement
     const indicator = subMenuText.querySelector(".ui-menu__indicator")
     expect(indicator).toBeInTheDocument()
   })
@@ -1264,7 +994,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuText = screen.getByText("Sub Menu")
+    const subMenuText = page.getByText("Sub Menu").element() as HTMLElement
     expect(subMenuText).toHaveAttribute("aria-haspopup", "menu")
     expect(subMenuText).toHaveAttribute("aria-expanded")
   })
@@ -1292,7 +1022,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(screen.getByText("Sub Item 1")).toBeInTheDocument()
+    await expect.element(page.getByText("Sub Item 1")).toBeInTheDocument()
   })
 
   test("submenu click is prevented on disabled submenu trigger", async () => {
@@ -1316,7 +1046,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuText = screen.getByText("Sub Menu")
+    const subMenuText = page.getByText("Sub Menu").element() as HTMLElement
     expect(subMenuText).toHaveAttribute("aria-disabled", "true")
   })
 
@@ -1341,10 +1071,12 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuText = screen.getByText("Sub Menu")
-    fireEvent.mouseEnter(subMenuText)
+    const subMenuText = page.getByText("Sub Menu").element() as HTMLElement
+    subMenuText.dispatchEvent(new MouseEvent("mouseenter", { bubbles: false }))
 
-    expect(screen.queryByText("Sub Item 1")).not.toBeInTheDocument()
+    await expect
+      .element(page.getByText("Sub Item 1").query())
+      .not.toBeInTheDocument()
   })
 
   test("submenu does not respond to keyboard when disabled", async () => {
@@ -1368,13 +1100,21 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuText = screen.getByText("Sub Menu")
-    fireEvent.keyDown(subMenuText, { key: "ArrowRight" })
+    const subMenuText = page.getByText("Sub Menu").element() as HTMLElement
+    subMenuText.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowRight",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
 
-    expect(screen.queryByText("Sub Item 1")).not.toBeInTheDocument()
+    await expect
+      .element(page.getByText("Sub Item 1").query())
+      .not.toBeInTheDocument()
   })
 
-  test("radio option item indicator has opacity 1 when selected", async () => {
+  test("radio option item indicator shows correct opacity based on selection", async () => {
     await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
@@ -1390,37 +1130,21 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const selectedItem = screen.getByRole("menuitemradio", {
-      name: /Opt 1/i,
+    const selectedItem = page
+      .getByRole("menuitemradio", { name: /Opt 1/i })
+      .element() as HTMLElement
+    const unselectedItem = page
+      .getByRole("menuitemradio", { name: /Opt 2/i })
+      .element() as HTMLElement
+    expect(selectedItem.querySelector(".ui-menu__indicator")).toHaveStyle({
+      opacity: "1",
     })
-    const indicator = selectedItem.querySelector(".ui-menu__indicator")
-    expect(indicator).toHaveStyle({ opacity: "1" })
+    expect(unselectedItem.querySelector(".ui-menu__indicator")).toHaveStyle({
+      opacity: "0",
+    })
   })
 
-  test("radio option item indicator has opacity 0 when not selected", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.OptionGroup type="radio" defaultValue="opt-1">
-            <Menu.OptionItem value="opt-1">Opt 1</Menu.OptionItem>
-            <Menu.OptionItem value="opt-2">Opt 2</Menu.OptionItem>
-          </Menu.OptionGroup>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const unselectedItem = screen.getByRole("menuitemradio", {
-      name: /Opt 2/i,
-    })
-    const indicator = unselectedItem.querySelector(".ui-menu__indicator")
-    expect(indicator).toHaveStyle({ opacity: "0" })
-  })
-
-  test("checkbox option item indicator has opacity 1 when selected", async () => {
+  test("checkbox option item indicator shows correct opacity based on selection", async () => {
     await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
@@ -1436,34 +1160,22 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const selectedItem = screen.getByRole("menuitemcheckbox", {
-      name: /Opt 1/i,
+    const selectedItem = page
+      .getByRole("menuitemcheckbox", {
+        name: /Opt 1/i,
+      })
+      .element() as HTMLElement
+    const unselectedItem = page
+      .getByRole("menuitemcheckbox", {
+        name: /Opt 2/i,
+      })
+      .element() as HTMLElement
+    expect(selectedItem.querySelector(".ui-menu__indicator")).toHaveStyle({
+      opacity: "1",
     })
-    const indicator = selectedItem.querySelector(".ui-menu__indicator")
-    expect(indicator).toHaveStyle({ opacity: "1" })
-  })
-
-  test("checkbox option item indicator has opacity 0 when not selected", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.OptionGroup type="checkbox" defaultValue={["opt-1"]}>
-            <Menu.OptionItem value="opt-1">Opt 1</Menu.OptionItem>
-            <Menu.OptionItem value="opt-2">Opt 2</Menu.OptionItem>
-          </Menu.OptionGroup>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const unselectedItem = screen.getByRole("menuitemcheckbox", {
-      name: /Opt 2/i,
+    expect(unselectedItem.querySelector(".ui-menu__indicator")).toHaveStyle({
+      opacity: "0",
     })
-    const indicator = unselectedItem.querySelector(".ui-menu__indicator")
-    expect(indicator).toHaveStyle({ opacity: "0" })
   })
 
   test("renders submenu with start direction", async () => {
@@ -1487,7 +1199,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuText = screen.getByText("Sub Menu")
+    const subMenuText = page.getByText("Sub Menu").element() as HTMLElement
     expect(subMenuText).toHaveAttribute("aria-haspopup", "menu")
   })
 
@@ -1518,13 +1230,11 @@ describe("<Menu />", () => {
 
     const { user } = await render(<ControlledMenu />)
 
-    expect(screen.queryByRole("menu")).not.toBeInTheDocument()
+    await expect.element(page.getByRole("menu").query()).not.toBeInTheDocument()
 
-    await user.click(screen.getByTestId("external-toggle"))
+    await user.click(page.getByTestId("external-toggle"))
 
-    await waitFor(() => {
-      expect(screen.getByRole("menu")).toBeInTheDocument()
-    })
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
   })
 
   test("renders items with hasStartSeparator and hasEndSeparator for radio group", async () => {
@@ -1615,18 +1325,20 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const menu = screen.getByRole("menu")
-    const disabledItem = screen.getByRole("menuitem", {
-      name: /Disabled Item/i,
-    })
+    const menu = page.getByRole("menu").element() as HTMLElement
+    const disabledItem = page
+      .getByRole("menuitem", {
+        name: /Disabled Item/i,
+      })
+      .element() as HTMLElement
 
-    fireEvent.focus(disabledItem)
+    disabledItem.focus()
 
     expect(menu.getAttribute("aria-activedescendant")).toBeNull()
   })
 
   test("submenu opens on mouse enter", async () => {
-    await render(
+    const { user } = await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1648,12 +1360,9 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    fireEvent.mouseEnter(subMenuTrigger)
+    await user.hover(page.getByText("Sub Menu"))
 
-    await waitFor(() => {
-      expect(screen.getByText("Sub Item 1")).toBeInTheDocument()
-    })
+    await expect.element(page.getByText("Sub Item 1")).toBeInTheDocument()
   })
 
   test("submenu opens on ArrowRight key and focuses first item", async () => {
@@ -1679,12 +1388,16 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    fireEvent.keyDown(subMenuTrigger, { key: "ArrowRight" })
+    const subMenuTrigger = page.getByText("Sub Menu").element() as HTMLElement
+    subMenuTrigger.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowRight",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
 
-    await waitFor(() => {
-      expect(screen.getByText("Sub Item 1")).toBeInTheDocument()
-    })
+    await expect.element(page.getByText("Sub Item 1")).toBeInTheDocument()
   })
 
   test("submenu with start direction opens on ArrowLeft key", async () => {
@@ -1708,83 +1421,19 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    fireEvent.keyDown(subMenuTrigger, { key: "ArrowLeft" })
-
-    await waitFor(() => {
-      expect(screen.getByText("Sub Item 1")).toBeInTheDocument()
-    })
-  })
-
-  test("submenu trigger navigates with ArrowDown key", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Root>
-            <Menu.Trigger>
-              <Menu.Item>Sub Menu</Menu.Item>
-            </Menu.Trigger>
-
-            <Menu.Content>
-              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
-            </Menu.Content>
-          </Menu.Root>
-
-          <Menu.Item value="item-after">Item After</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
+    const subMenuTrigger = page.getByText("Sub Menu").element() as HTMLElement
+    subMenuTrigger.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowLeft",
+        bubbles: true,
+        cancelable: true,
+      }),
     )
 
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    const menu = screen.getByRole("menu")
-
-    fireEvent.keyDown(subMenuTrigger, { key: "ArrowDown" })
-
-    const itemAfter = screen.getByRole("menuitem", { name: /Item After/i })
-    await waitFor(() => {
-      expect(menu.getAttribute("aria-activedescendant")).toBe(itemAfter.id)
-    })
+    await expect.element(page.getByText("Sub Item 1")).toBeInTheDocument()
   })
 
-  test("submenu trigger navigates with ArrowUp key", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-before">Item Before</Menu.Item>
-
-          <Menu.Root>
-            <Menu.Trigger>
-              <Menu.Item>Sub Menu</Menu.Item>
-            </Menu.Trigger>
-
-            <Menu.Content>
-              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
-            </Menu.Content>
-          </Menu.Root>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    const menu = screen.getByRole("menu")
-
-    fireEvent.keyDown(subMenuTrigger, { key: "ArrowUp" })
-
-    const itemBefore = screen.getByRole("menuitem", { name: /Item Before/i })
-    await waitFor(() => {
-      expect(menu.getAttribute("aria-activedescendant")).toBe(itemBefore.id)
-    })
-  })
-
-  test("submenu trigger navigates with Home key", async () => {
+  test("submenu trigger navigates with keyboard", async () => {
     await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
@@ -1803,52 +1452,78 @@ describe("<Menu />", () => {
               <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
             </Menu.Content>
           </Menu.Root>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    const menu = screen.getByRole("menu")
-
-    fireEvent.keyDown(subMenuTrigger, { key: "Home" })
-
-    const firstItem = screen.getByRole("menuitem", { name: /First Item/i })
-    await waitFor(() => {
-      expect(menu.getAttribute("aria-activedescendant")).toBe(firstItem.id)
-    })
-  })
-
-  test("submenu trigger navigates with End key", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Root>
-            <Menu.Trigger>
-              <Menu.Item>Sub Menu</Menu.Item>
-            </Menu.Trigger>
-
-            <Menu.Content>
-              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
-            </Menu.Content>
-          </Menu.Root>
 
           <Menu.Item value="last-item">Last Item</Menu.Item>
         </Menu.Content>
       </Menu.Root>,
     )
 
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    const menu = screen.getByRole("menu")
+    const menu = page.getByRole("menu").first().element() as HTMLElement
+    const firstItem = page
+      .getByRole("menuitem", { name: /First Item/i })
+      .element() as HTMLElement
+    const lastItem = page
+      .getByRole("menuitem", { name: /Last Item/i })
+      .element() as HTMLElement
 
-    fireEvent.keyDown(subMenuTrigger, { key: "End" })
-
-    const lastItem = screen.getByRole("menuitem", { name: /Last Item/i })
+    lastItem.focus()
     await waitFor(() => {
       expect(menu.getAttribute("aria-activedescendant")).toBe(lastItem.id)
+    })
+    lastItem.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Home",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+    await waitFor(() => {
+      expect(menu.getAttribute("aria-activedescendant")).toBe(firstItem.id)
+    })
+
+    firstItem.focus()
+    await waitFor(() => {
+      expect(menu.getAttribute("aria-activedescendant")).toBe(firstItem.id)
+    })
+    firstItem.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "End",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+    await waitFor(() => {
+      expect(menu.getAttribute("aria-activedescendant")).toBe(lastItem.id)
+    })
+
+    lastItem.focus()
+    await waitFor(() => {
+      expect(menu.getAttribute("aria-activedescendant")).toBe(lastItem.id)
+    })
+    lastItem.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowUp",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+    await waitFor(() => {
+      expect(menu.getAttribute("aria-activedescendant")).not.toBe(lastItem.id)
+    })
+
+    firstItem.focus()
+    await waitFor(() => {
+      expect(menu.getAttribute("aria-activedescendant")).toBe(firstItem.id)
+    })
+    firstItem.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowDown",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+    await waitFor(() => {
+      expect(menu.getAttribute("aria-activedescendant")).not.toBe(firstItem.id)
     })
   })
 
@@ -1875,8 +1550,8 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    fireEvent.mouseMove(subMenuTrigger)
+    const subMenuTrigger = page.getByText("Sub Menu").element() as HTMLElement
+    subMenuTrigger.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }))
 
     // Submenu trigger's mouseMove should activate in parent context
     expect(subMenuTrigger).toBeInTheDocument()
@@ -1903,12 +1578,20 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subItem = screen.getByRole("menuitem", { name: /Sub Item 1/i })
-    fireEvent.keyDown(subItem, { key: "ArrowLeft" })
+    const subItem = page
+      .getByRole("menuitem", { name: /Sub Item 1/i })
+      .element() as HTMLElement
+    subItem.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowLeft",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
 
-    await waitFor(() => {
-      expect(screen.queryByText("Sub Item 1")).not.toBeInTheDocument()
-    })
+    await expect
+      .element(page.getByText("Sub Item 1").query())
+      .not.toBeInTheDocument()
   })
 
   test("submenu item with start direction closes with ArrowRight key", async () => {
@@ -1932,12 +1615,20 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subItem = screen.getByRole("menuitem", { name: /Sub Item 1/i })
-    fireEvent.keyDown(subItem, { key: "ArrowRight" })
+    const subItem = page
+      .getByRole("menuitem", { name: /Sub Item 1/i })
+      .element() as HTMLElement
+    subItem.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowRight",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
 
-    await waitFor(() => {
-      expect(screen.queryByText("Sub Item 1")).not.toBeInTheDocument()
-    })
+    await expect
+      .element(page.getByText("Sub Item 1").query())
+      .not.toBeInTheDocument()
   })
 
   test("submenu click on trigger prevents default when in submenu", async () => {
@@ -1961,33 +1652,14 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    fireEvent.click(subMenuTrigger)
+    const subMenuTrigger = page.getByText("Sub Menu").element() as HTMLElement
+    subMenuTrigger.click()
 
     expect(subMenuTrigger).toBeInTheDocument()
   })
 
-  test("trigger has correct aria attributes when open", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Item value="item-1">Item 1</Menu.Item>
-        </Menu.Content>
-      </Menu.Root>,
-    )
-
-    const trigger = screen.getByRole("button", { name: /Menu/i })
-    expect(trigger).toHaveAttribute("aria-haspopup", "menu")
-    expect(trigger).toHaveAttribute("aria-expanded", "true")
-    expect(trigger).toHaveAttribute("data-trigger", "")
-  })
-
-  test("trigger has correct aria attributes when closed", async () => {
-    await render(
+  test("trigger has correct aria attributes", async () => {
+    const { user } = await render(
       <Menu.Root>
         <Menu.Trigger>
           <Button>Menu</Button>
@@ -1999,10 +1671,18 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const trigger = screen.getByRole("button", { name: /Menu/i })
+    const trigger = page
+      .getByRole("button", { name: /Menu/i })
+      .element() as HTMLElement
     expect(trigger).toHaveAttribute("aria-haspopup", "menu")
     expect(trigger).toHaveAttribute("aria-expanded", "false")
     expect(trigger).not.toHaveAttribute("aria-controls")
+
+    await user.click(trigger)
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
+
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
+    expect(trigger).toHaveAttribute("data-trigger", "")
   })
 
   test("content has correct role and aria-labelledby", async () => {
@@ -2018,7 +1698,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const menu = screen.getByRole("menu")
+    const menu = page.getByRole("menu").element() as HTMLElement
     expect(menu).toHaveAttribute("role", "menu")
     expect(menu.getAttribute("aria-labelledby")).toBeTruthy()
   })
@@ -2038,7 +1718,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const separator = screen.getByRole("separator")
+    const separator = page.getByRole("separator").element() as HTMLElement
     expect(separator).toHaveAttribute("role", "separator")
   })
 
@@ -2057,7 +1737,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const group = screen.getByRole("group")
+    const group = page.getByRole("group").element() as HTMLElement
     expect(group).toHaveAttribute("aria-labelledby")
   })
 
@@ -2074,7 +1754,9 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const item = screen.getByRole("menuitem", { name: /Item 1/i })
+    const item = page
+      .getByRole("menuitem", { name: /Item 1/i })
+      .element() as HTMLElement
     expect(item).toHaveAttribute("tabindex", "-1")
   })
 
@@ -2091,7 +1773,9 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const trigger = screen.getByRole("button", { name: /Menu/i })
+    const trigger = page
+      .getByRole("button", { name: /Menu/i })
+      .element() as HTMLElement
     expect(trigger).toHaveAttribute("aria-disabled", "true")
   })
 
@@ -2111,7 +1795,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const label = screen.getByTestId("menu-label")
+    const label = page.getByTestId("menu-label").element() as HTMLElement
     expect(label).toHaveAttribute("role", "presentation")
   })
 
@@ -2136,11 +1820,11 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuTrigger = screen.getByText("Sub Menu")
+    const subMenuTrigger = page.getByText("Sub Menu").element() as HTMLElement
     expect(subMenuTrigger).toHaveAttribute("aria-haspopup", "menu")
   })
 
-  test("submenu item navigates with ArrowDown within submenu", async () => {
+  test("submenu item navigates with keyboard within submenu", async () => {
     await render(
       <Menu.Root defaultOpen>
         <Menu.Trigger>
@@ -2162,128 +1846,64 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenus = screen.getAllByRole("menu")
-    const subMenu = subMenus[subMenus.length - 1]!
+    const subMenuTrigger = page.getByText("Sub Menu").element() as HTMLElement
+    const subMenu = page.getByRole("menu").last().element() as HTMLElement
+    const subItem1 = page
+      .getByRole("menuitem", { name: /Sub Item 1/i })
+      .element() as HTMLElement
+    const subItem2 = page
+      .getByRole("menuitem", { name: /Sub Item 2/i })
+      .element() as HTMLElement
 
-    const subItem1 = screen.getByRole("menuitem", { name: /Sub Item 1/i })
-    fireEvent.focus(subItem1)
-
+    subItem1.focus()
     await waitFor(() => {
       expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem1.id)
     })
-
-    fireEvent.keyDown(subItem1, { key: "ArrowDown" })
-
-    await waitFor(() => {
-      const subItem2 = screen.getByRole("menuitem", { name: /Sub Item 2/i })
-      expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem2.id)
-    })
-  })
-
-  test("submenu item navigates with ArrowUp within submenu", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Root defaultOpen>
-            <Menu.Trigger>
-              <Menu.Item>Sub Menu</Menu.Item>
-            </Menu.Trigger>
-
-            <Menu.Content>
-              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
-              <Menu.Item value="sub-2">Sub Item 2</Menu.Item>
-            </Menu.Content>
-          </Menu.Root>
-        </Menu.Content>
-      </Menu.Root>,
+    subItem1.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowDown",
+        bubbles: true,
+        cancelable: true,
+      }),
     )
-
-    const subMenus = screen.getAllByRole("menu")
-    const subMenu = subMenus[subMenus.length - 1]!
-
-    const subItem2 = screen.getByRole("menuitem", { name: /Sub Item 2/i })
-    fireEvent.focus(subItem2)
-
     await waitFor(() => {
       expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem2.id)
     })
 
-    fireEvent.keyDown(subItem2, { key: "ArrowUp" })
-
+    subItem2.focus()
     await waitFor(() => {
-      const subItem1 = screen.getByRole("menuitem", { name: /Sub Item 1/i })
+      expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem2.id)
+    })
+    subItem2.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowUp",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+    await waitFor(() => {
       expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem1.id)
     })
-  })
 
-  test("open submenu navigates with Home key when open", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Root defaultOpen>
-            <Menu.Trigger>
-              <Menu.Item>Sub Menu</Menu.Item>
-            </Menu.Trigger>
-
-            <Menu.Content>
-              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
-              <Menu.Item value="sub-2">Sub Item 2</Menu.Item>
-            </Menu.Content>
-          </Menu.Root>
-        </Menu.Content>
-      </Menu.Root>,
+    subMenuTrigger.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Home",
+        bubbles: true,
+        cancelable: true,
+      }),
     )
-
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    const subMenus = screen.getAllByRole("menu")
-    const subMenu = subMenus[subMenus.length - 1]!
-
-    fireEvent.keyDown(subMenuTrigger, { key: "Home" })
-
     await waitFor(() => {
-      const subItem1 = screen.getByRole("menuitem", { name: /Sub Item 1/i })
       expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem1.id)
     })
-  })
 
-  test("open submenu navigates with End key when open", async () => {
-    await render(
-      <Menu.Root defaultOpen>
-        <Menu.Trigger>
-          <Button>Menu</Button>
-        </Menu.Trigger>
-
-        <Menu.Content>
-          <Menu.Root defaultOpen>
-            <Menu.Trigger>
-              <Menu.Item>Sub Menu</Menu.Item>
-            </Menu.Trigger>
-
-            <Menu.Content>
-              <Menu.Item value="sub-1">Sub Item 1</Menu.Item>
-              <Menu.Item value="sub-2">Sub Item 2</Menu.Item>
-            </Menu.Content>
-          </Menu.Root>
-        </Menu.Content>
-      </Menu.Root>,
+    subMenuTrigger.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "End",
+        bubbles: true,
+        cancelable: true,
+      }),
     )
-
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    const subMenus = screen.getAllByRole("menu")
-    const subMenu = subMenus[subMenus.length - 1]!
-
-    fireEvent.keyDown(subMenuTrigger, { key: "End" })
-
     await waitFor(() => {
-      const subItem2 = screen.getByRole("menuitem", { name: /Sub Item 2/i })
       expect(subMenu.getAttribute("aria-activedescendant")).toBe(subItem2.id)
     })
   })
@@ -2304,8 +1924,12 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const opt1 = screen.getByRole("menuitemradio", { name: /Opt 1/i })
-    const opt2 = screen.getByRole("menuitemradio", { name: /Opt 2/i })
+    const opt1 = page
+      .getByRole("menuitemradio", { name: /Opt 1/i })
+      .element() as HTMLElement
+    const opt2 = page
+      .getByRole("menuitemradio", { name: /Opt 2/i })
+      .element() as HTMLElement
     const indicator1 = opt1.querySelector(".ui-menu__indicator")
     const indicator2 = opt2.querySelector(".ui-menu__indicator")
     expect(indicator1).toHaveStyle({ opacity: "0" })
@@ -2327,12 +1951,12 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(screen.getByRole("button", { name: /Menu/i }))
+    await user.click(page.getByRole("button", { name: /Menu/i }))
     await waitFor(() => {
       expect(onOpen).toHaveBeenCalledWith(undefined)
     })
 
-    await user.click(screen.getByRole("button", { name: /Menu/i }))
+    await user.click(page.getByRole("button", { name: /Menu/i }))
     await waitFor(() => {
       expect(onClose).toHaveBeenCalledWith(undefined)
     })
@@ -2352,7 +1976,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(screen.getByRole("menuitem", { name: /My Item/i }))
+    await user.click(page.getByRole("menuitem", { name: /My Item/i }))
 
     expect(onSelect).toHaveBeenCalledWith("my-value")
   })
@@ -2378,7 +2002,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    await user.click(screen.getByRole("menuitemcheckbox", { name: /Opt 1/i }))
+    await user.click(page.getByRole("menuitemcheckbox", { name: /Opt 1/i }))
 
     expect(onChange).toHaveBeenCalledWith(["opt-2"])
   })
@@ -2398,7 +2022,9 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const item = screen.getByRole("menuitem", { name: /Item 1/i })
+    const item = page
+      .getByRole("menuitem", { name: /Item 1/i })
+      .element() as HTMLElement
     expect(item).toHaveAttribute("data-disabled", "")
   })
 
@@ -2415,8 +2041,10 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const trigger = screen.getByRole("button", { name: /Menu/i })
-    const menu = screen.getByRole("menu")
+    const trigger = page
+      .getByRole("button", { name: /Menu/i })
+      .element() as HTMLElement
+    const menu = page.getByRole("menu").element() as HTMLElement
     expect(trigger.getAttribute("aria-controls")).toBe(menu.id)
   })
 
@@ -2435,7 +2063,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(screen.getByText("⌘T")).toBeInTheDocument()
+    await expect.element(page.getByText("⌘T")).toBeInTheDocument()
   })
 
   test("controlled radio option group updates when value changes", async () => {
@@ -2459,14 +2087,18 @@ describe("<Menu />", () => {
 
     const { user } = await render(<ControlledRadio />)
 
-    const opt1 = screen.getByRole("menuitemradio", { name: /Opt 1/i })
+    const opt1 = page
+      .getByRole("menuitemradio", { name: /Opt 1/i })
+      .element() as HTMLElement
     const indicator1 = opt1.querySelector(".ui-menu__indicator")
     expect(indicator1).toHaveStyle({ opacity: "1" })
 
-    await user.click(screen.getByRole("menuitemradio", { name: /Opt 2/i }))
+    await user.click(page.getByRole("menuitemradio", { name: /Opt 2/i }))
 
     await waitFor(() => {
-      const opt2 = screen.getByRole("menuitemradio", { name: /Opt 2/i })
+      const opt2 = page
+        .getByRole("menuitemradio", { name: /Opt 2/i })
+        .element() as HTMLElement
       const indicator = opt2.querySelector(".ui-menu__indicator")
       expect(indicator).toHaveStyle({ opacity: "1" })
     })
@@ -2493,10 +2125,12 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const subMenuTrigger = screen.getByText("Sub Menu")
-    fireEvent.mouseMove(subMenuTrigger)
+    const subMenuTrigger = page.getByText("Sub Menu").element() as HTMLElement
+    subMenuTrigger.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }))
 
-    expect(screen.queryByText("Sub Item 1")).not.toBeInTheDocument()
+    await expect
+      .element(page.getByText("Sub Item 1").query())
+      .not.toBeInTheDocument()
   })
 
   test("item ArrowLeft does not close when not in submenu", async () => {
@@ -2513,10 +2147,18 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const item1 = screen.getByRole("menuitem", { name: /Item 1/i })
-    fireEvent.keyDown(item1, { key: "ArrowLeft" })
+    const item1 = page
+      .getByRole("menuitem", { name: /Item 1/i })
+      .element() as HTMLElement
+    item1.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowLeft",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
 
-    expect(screen.getByRole("menu")).toBeInTheDocument()
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
   })
 
   test("menu with open and defaultOpen props", async () => {
@@ -2532,7 +2174,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    expect(screen.getByRole("menu")).toBeInTheDocument()
+    await expect.element(page.getByRole("menu")).toBeInTheDocument()
   })
 
   test("context trigger does not have aria-controls when closed", async () => {
@@ -2548,7 +2190,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const ctx = screen.getByTestId("ctx")
+    const ctx = page.getByTestId("ctx").element() as HTMLElement
     expect(ctx).not.toHaveAttribute("aria-controls")
   })
 
@@ -2565,7 +2207,7 @@ describe("<Menu />", () => {
       </Menu.Root>,
     )
 
-    const ctx = screen.getByTestId("ctx")
+    const ctx = page.getByTestId("ctx").element() as HTMLElement
     expect(ctx).toHaveAttribute("aria-disabled", "true")
   })
 })

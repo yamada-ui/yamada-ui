@@ -1,11 +1,29 @@
+import type { PlaywrightProviderOptions } from "@vitest/browser-playwright"
+import type { BrowserInstanceOption } from "vitest/node"
 import react from "@vitejs/plugin-react"
 import { playwright } from "@vitest/browser-playwright"
 import { defineProject, mergeConfig } from "@yamada-ui/workspace/vitest"
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
-import { resolve } from "node:path"
 
-const browsers = ["chromium", "firefox", "webkit"] as const
-const alias = { "@": resolve(__dirname, "./src") }
+const browsers: {
+  browser: BrowserInstanceOption["browser"]
+  options?: PlaywrightProviderOptions
+}[] = [
+  { browser: "chromium" },
+  {
+    browser: "firefox",
+    options: {
+      launchOptions: {
+        firefoxUserPrefs: {
+          "signon.autofillForms": false,
+          "signon.generation.enabled": false,
+          "signon.rememberSignons": false,
+        },
+      },
+    },
+  },
+  { browser: "webkit" },
+]
 
 export default mergeConfig(sharedConfig, {
   plugins: [react()],
@@ -19,7 +37,6 @@ export default mergeConfig(sharedConfig, {
     },
     projects: [
       defineProject({
-        resolve: { alias },
         test: {
           name: "jsdom",
           environment: "jsdom",
@@ -29,17 +46,15 @@ export default mergeConfig(sharedConfig, {
           setupFiles: ["@yamada-ui/workspace/vitest/setup"],
         },
       }),
-      ...browsers.map((browser) =>
+      ...browsers.map(({ browser, options }) =>
         defineProject({
-          optimizeDeps: { include: ["axe-core"] },
-          resolve: { alias },
           test: {
             name: `browser:${browser}`,
             browser: {
               enabled: true,
               headless: true,
               instances: [{ browser }],
-              provider: playwright() as any,
+              provider: playwright(options),
             },
             globals: true,
             include: [

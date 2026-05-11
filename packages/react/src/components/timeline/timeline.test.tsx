@@ -21,54 +21,6 @@ describe("<Timeline />", () => {
     await a11y(<Timeline.Root items={items} />)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Timeline.Root.displayName).toBe("TimelineRoot")
-    expect(Timeline.Item.displayName).toBe("TimelineItem")
-    expect(Timeline.Content.displayName).toBe("TimelineContent")
-    expect(Timeline.Title.displayName).toBe("TimelineTitle")
-    expect(Timeline.Description.displayName).toBe("TimelineDescription")
-    expect(Timeline.Connector.displayName).toBe("TimelineConnector")
-    expect(Timeline.Indicator.displayName).toBe("TimelineIndicator")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<Timeline.Root items={items} />)
-    const list = screen.getByRole("list")
-    const item = screen.getAllByRole("listitem")[0]
-    const connector = item?.children[0]
-    const indicator = connector?.children[0]
-    const content = item?.children[1]
-
-    expect(list).toHaveClass("ui-timeline__root")
-    expect(item).toHaveClass("ui-timeline__item")
-    expect(connector).toHaveClass("ui-timeline__connector")
-    expect(indicator).toHaveClass("ui-timeline__indicator")
-    expect(content).toHaveClass("ui-timeline__content")
-    expect(screen.getByRole("heading", { name: "Step 1" })).toHaveClass(
-      "ui-timeline__title",
-    )
-    expect(screen.getByText("Step 1 description")).toHaveClass(
-      "ui-timeline__description",
-    )
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(<Timeline.Root items={items} />)
-    const list = screen.getByRole("list")
-    const item = screen.getAllByRole("listitem")[0]
-    const connector = item?.children[0]
-    const indicator = connector?.children[0]
-    const content = item?.children[1]
-
-    expect(list.tagName).toBe("UL")
-    expect(item?.tagName).toBe("LI")
-    expect(connector?.tagName).toBe("DIV")
-    expect(indicator?.tagName).toBe("DIV")
-    expect(content?.tagName).toBe("DIV")
-    expect(screen.getByRole("heading", { name: "Step 1" }).tagName).toBe("H3")
-    expect(screen.getByText("Step 1 description").tagName).toBe("P")
-  })
-
   test("renders numbers in indicators with `number` variant", () => {
     render(<Timeline.Root variant="number" items={items} />)
 

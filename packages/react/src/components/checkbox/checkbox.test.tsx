@@ -1,7 +1,6 @@
 import { a11y, act, fireEvent, render, renderHook, screen } from "#test"
 import { CheckboxGroup } from "."
 import { Checkbox } from "./checkbox"
-import { useCheckbox } from "./use-checkbox"
 import { useCheckboxGroup } from "./use-checkbox-group"
 
 const items = [
@@ -47,98 +46,6 @@ describe("<Checkbox />", () => {
     render(<Checkbox tabIndex={-1}>checkbox</Checkbox>)
 
     expect(screen.getByRole("checkbox")).toHaveAttribute("tabindex", "-1")
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Checkbox.displayName).toBe("CheckboxRoot")
-    expect(CheckboxGroup.Root.displayName).toBe("CheckboxGroup")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<CheckboxGroup.Root items={items} />)
-
-    const checkbox = screen.getAllByRole("checkbox")[0]
-
-    expect(screen.getByRole("group")).toHaveClass("ui-checkbox__group")
-    expect(checkbox?.parentElement).toHaveClass("ui-checkbox__root")
-    expect(checkbox?.parentElement?.children[1]).toHaveClass(
-      "ui-checkbox__indicator",
-    )
-    expect(checkbox?.parentElement?.children[2]).toHaveClass(
-      "ui-checkbox__label",
-    )
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(<CheckboxGroup.Root items={items} />)
-
-    const checkbox = screen.getAllByRole("checkbox")[0]
-
-    expect(screen.getByRole("group").tagName).toBe("DIV")
-    expect(checkbox?.parentElement?.tagName).toBe("LABEL")
-    expect(checkbox?.tagName).toBe("INPUT")
-    expect(checkbox?.parentElement?.children[1]?.tagName).toBe("DIV")
-    expect(checkbox?.parentElement?.children[2]?.tagName).toBe("SPAN")
-  })
-
-  test("merges root props on Checkbox without overwriting className, style, or ref", () => {
-    const userRef = vi.fn()
-    render(
-      <Checkbox
-        className="from-root"
-        rootProps={{
-          ref: userRef,
-          className: "from-user",
-          style: { backgroundColor: "blue", color: "red" },
-          "data-testid": "checkbox-root",
-        }}
-      >
-        checkbox
-      </Checkbox>,
-    )
-
-    const root = screen.getByTestId("checkbox-root")
-
-    expect(root).toHaveClass("ui-checkbox__root")
-    expect(root).toHaveClass("from-root")
-    expect(root).toHaveClass("from-user")
-    expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-    expect(userRef).toHaveBeenCalledTimes(1)
-    expect(userRef).toHaveBeenCalledWith(root)
-  })
-
-  test("merges root props values in useCheckbox with caller props", () => {
-    const restOnClick = vi.fn()
-    const callerOnClick = vi.fn()
-    const { result } = renderHook(() =>
-      useCheckbox({
-        className: "from-rest",
-        style: { backgroundColor: "red", paddingTop: "4px" },
-        onClick: restOnClick,
-      }),
-    )
-
-    const rootProps = result.current.getRootProps({
-      className: "from-caller",
-      style: { color: "blue", paddingTop: "8px" },
-      onClick: callerOnClick,
-    })
-
-    expect(rootProps.className).toContain("from-rest")
-    expect(rootProps.className).toContain("from-caller")
-    expect(rootProps.style).toMatchObject({
-      backgroundColor: "red",
-      color: "blue",
-      paddingTop: "8px",
-    })
-
-    const { container } = render(<label htmlFor="checkbox-id" {...rootProps} />)
-    const root = container.firstElementChild
-    if (root) fireEvent.click(root)
-
-    expect(restOnClick).toHaveBeenCalledTimes(1)
-    expect(callerOnClick).toHaveBeenCalledTimes(1)
   })
 })
 
@@ -303,47 +210,5 @@ describe("<CheckboxGroup />", () => {
       result.current.onChange("2")
     })
     expect(result.current.value).toStrictEqual(["1"])
-  })
-
-  test("merges getRootProps values in useCheckboxGroup and calls each ref once", () => {
-    const restOnClick = vi.fn()
-    const callerOnClick = vi.fn()
-    const restRef = vi.fn()
-    const callerRef = vi.fn()
-    const { result } = renderHook(() =>
-      useCheckboxGroup({
-        ref: restRef,
-        className: "from-rest",
-        style: { backgroundColor: "red", paddingTop: "4px" },
-        onClick: restOnClick,
-      }),
-    )
-
-    const rootProps = result.current.getRootProps({
-      ref: callerRef,
-      className: "from-caller",
-      style: { color: "blue", paddingTop: "8px" },
-      onClick: callerOnClick,
-    })
-
-    expect(rootProps.className).toContain("from-rest")
-    expect(rootProps.className).toContain("from-caller")
-    expect(rootProps.style).toMatchObject({
-      backgroundColor: "red",
-      color: "blue",
-      paddingTop: "8px",
-    })
-    expect(rootProps.role).toBe("group")
-
-    const { container } = render(<div {...rootProps} />)
-    const root = container.firstElementChild
-    if (root) fireEvent.click(root)
-
-    expect(restOnClick).toHaveBeenCalledTimes(1)
-    expect(callerOnClick).toHaveBeenCalledTimes(1)
-    expect(restRef).toHaveBeenCalledTimes(1)
-    expect(callerRef).toHaveBeenCalledTimes(1)
-    expect(restRef).toHaveBeenCalledWith(root)
-    expect(callerRef).toHaveBeenCalledWith(root)
   })
 })

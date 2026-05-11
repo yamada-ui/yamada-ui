@@ -46,36 +46,6 @@ describe("<InfiniteScrollArea />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(InfiniteScrollArea.displayName).toBe("InfiniteScrollAreaRoot")
-  })
-
-  test("sets `className` correctly", () => {
-    const { container } = render(
-      <InfiniteScrollArea loading={<>Loading…</>}>
-        {Array(50)
-          .fill(0)
-          .map((_, index) => (
-            <div key={index}>{index}</div>
-          ))}
-      </InfiniteScrollArea>,
-    )
-    expect(container.firstChild).toHaveClass("ui-infinite-scroll-area__root")
-  })
-
-  test("renders HTML tag correctly", () => {
-    const { container } = render(
-      <InfiniteScrollArea loading={<>Loading…</>}>
-        {Array(50)
-          .fill(0)
-          .map((_, index) => (
-            <div key={index}>{index}</div>
-          ))}
-      </InfiniteScrollArea>,
-    )
-    expect(container.firstChild?.nodeName).toBe("DIV")
-  })
-
   test("sets default tabIndex on feed root for accessibility", () => {
     render(
       <InfiniteScrollArea

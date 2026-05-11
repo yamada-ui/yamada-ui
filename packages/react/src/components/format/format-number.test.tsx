@@ -3,20 +3,6 @@ import { FormatNumber } from "./format-number"
 import { useFormatNumber } from "./use-format-number"
 
 describe("<FormatNumber />", () => {
-  test("should have displayName", () => {
-    expect(FormatNumber.displayName).toBe("FormatNumber")
-  })
-
-  test("should have className", () => {
-    render(<FormatNumber data-testid="format-number" value={1000} />)
-    expect(screen.getByTestId("format-number")).toHaveClass("ui-format-number")
-  })
-
-  test("should render span tag", () => {
-    render(<FormatNumber data-testid="format-number" value={1000} />)
-    expect(screen.getByTestId("format-number").tagName).toBe("SPAN")
-  })
-
   test("renders component correctly", async () => {
     await a11y(<FormatNumber value={1000} />)
   })

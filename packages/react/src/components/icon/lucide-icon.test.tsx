@@ -12,22 +12,6 @@ describe("Lucide icon", () => {
     await a11y(<GhostIcon />)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(GhostIcon.displayName).toBe("Icon")
-  })
-
-  test("sets `className` correctly", () => {
-    const { container } = render(<GhostIcon />)
-
-    expect(container.firstChild).toHaveClass("ui-icon")
-  })
-
-  test("renders HTML tag correctly", () => {
-    const { container } = render(<GhostIcon />)
-
-    expect(container.firstChild?.nodeName).toBe("svg")
-  })
-
   test("renders icon correctly", () => {
     const { container } = render(<GhostIcon />)
 

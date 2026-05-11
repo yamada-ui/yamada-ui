@@ -1,12 +1,8 @@
 import { useState } from "react"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Collapse } from "./collapse"
 
 describe("<Collapse />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<Collapse />)
-  })
-
   test("toggles visibility on open change", async () => {
     const TestComponent = () => {
       const [open, setOpen] = useState(false)

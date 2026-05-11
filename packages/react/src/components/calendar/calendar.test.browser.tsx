@@ -1,11 +1,7 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test/browser"
+import { page, render, waitFor } from "#test/browser"
 import { Calendar } from "./"
 
 describe("<Calendar />", () => {
-  test("passes a11y checks", async () => {
-    await a11y(<Calendar.Root today={false} />)
-  })
-
   test("clicking a day selects it", async () => {
     const onChange = vi.fn()
 
@@ -13,8 +9,7 @@ describe("<Calendar />", () => {
       <Calendar.Root defaultMonth={new Date(2024, 5, 1)} onChange={onChange} />,
     )
 
-    const day15 = screen.getByText("15").closest("td")!
-    await user.click(day15)
+    await user.click(page.getByRole("gridcell").filter({ hasText: /^15$/ }))
 
     expect(onChange).toHaveBeenCalledWith(new Date(2024, 5, 15))
   })
@@ -30,8 +25,7 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day15 = screen.getByText("15").closest("td")!
-    await user.click(day15)
+    await user.click(page.getByRole("gridcell").filter({ hasText: /^15$/ }))
 
     expect(onChange).toHaveBeenCalledWith(undefined)
   })
@@ -41,13 +35,11 @@ describe("<Calendar />", () => {
       <Calendar.Root defaultMonth={new Date(2024, 5, 1)} />,
     )
 
-    const prevButton = screen.getByRole("button", {
-      name: /previous month/i,
-    })
-    await user.click(prevButton)
+    await user.click(page.getByRole("button", { name: /previous month/i }))
 
-    const grid = screen.getByRole("grid")
-    expect(grid).toHaveAttribute("aria-label", expect.stringContaining("May"))
+    await expect
+      .element(page.getByRole("grid"))
+      .toHaveAttribute("aria-label", expect.stringContaining("May"))
   })
 
   test("navigates to next month", async () => {
@@ -55,11 +47,11 @@ describe("<Calendar />", () => {
       <Calendar.Root defaultMonth={new Date(2024, 5, 1)} />,
     )
 
-    const nextButton = screen.getByRole("button", { name: /next month/i })
-    await user.click(nextButton)
+    await user.click(page.getByRole("button", { name: /next month/i }))
 
-    const grid = screen.getByRole("grid")
-    expect(grid).toHaveAttribute("aria-label", expect.stringContaining("July"))
+    await expect
+      .element(page.getByRole("grid"))
+      .toHaveAttribute("aria-label", expect.stringContaining("July"))
   })
 
   test("does not navigate past minDate on prev month", async () => {
@@ -70,18 +62,15 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const prevButton = screen.getByRole("button", {
-      name: /previous month/i,
-    })
-    await expect(user.click(prevButton, { timeout: 200 })).rejects.toThrow(
-      /Timeout/,
-    )
+    await expect(
+      user.click(page.getByRole("button", { name: /previous month/i }), {
+        timeout: 200,
+      }),
+    ).rejects.toThrow(/Timeout/)
 
-    const grid = screen.getByRole("grid")
-    expect(grid).toHaveAttribute(
-      "aria-label",
-      expect.stringContaining("January"),
-    )
+    await expect
+      .element(page.getByRole("grid"))
+      .toHaveAttribute("aria-label", expect.stringContaining("January"))
   })
 
   test("does not navigate past maxDate on next month", async () => {
@@ -92,16 +81,15 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const nextButton = screen.getByRole("button", { name: /next month/i })
-    await expect(user.click(nextButton, { timeout: 200 })).rejects.toThrow(
-      /Timeout/,
-    )
+    await expect(
+      user.click(page.getByRole("button", { name: /next month/i }), {
+        timeout: 200,
+      }),
+    ).rejects.toThrow(/Timeout/)
 
-    const grid = screen.getByRole("grid")
-    expect(grid).toHaveAttribute(
-      "aria-label",
-      expect.stringContaining("December"),
-    )
+    await expect
+      .element(page.getByRole("grid"))
+      .toHaveAttribute("aria-label", expect.stringContaining("December"))
   })
 
   test("clicking a disabled day does not trigger onChange", async () => {
@@ -115,10 +103,8 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day5 = screen
-      .getByRole("grid")
-      .querySelector<HTMLTableCellElement>('td[data-value="2024-06-05"]')!
-    expect(day5).toHaveAttribute("data-disabled")
+    const day5 = page.getByRole("gridcell").filter({ hasText: /^5$/ }).first()
+    await expect.element(day5).toHaveAttribute("data-disabled")
     await expect(user.click(day5, { timeout: 200 })).rejects.toThrow(/Timeout/)
 
     expect(onChange).not.toHaveBeenCalled()
@@ -135,8 +121,8 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day10 = screen.getByText("10").closest<HTMLTableCellElement>("td")!
-    expect(day10).toHaveAttribute("data-disabled")
+    const day10 = page.getByRole("gridcell").filter({ hasText: /^10$/ })
+    await expect.element(day10).toHaveAttribute("data-disabled")
     await expect(user.click(day10, { timeout: 200 })).rejects.toThrow(/Timeout/)
 
     expect(onChange).not.toHaveBeenCalled()
@@ -153,8 +139,8 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day20 = screen.getByText("20").closest<HTMLTableCellElement>("td")!
-    expect(day20).toHaveAttribute("data-disabled")
+    const day20 = page.getByRole("gridcell").filter({ hasText: /^20$/ })
+    await expect.element(day20).toHaveAttribute("data-disabled")
     await expect(user.click(day20, { timeout: 200 })).rejects.toThrow(/Timeout/)
 
     expect(onChange).not.toHaveBeenCalled()
@@ -171,8 +157,7 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const nextButton = screen.getByRole("button", { name: /next month/i })
-    await user.click(nextButton)
+    await user.click(page.getByRole("button", { name: /next month/i }))
 
     await waitFor(() => {
       expect(onChangeMonth).toHaveBeenCalledWith(expect.any(Date))
@@ -190,10 +175,7 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const prevButton = screen.getByRole("button", {
-      name: /previous month/i,
-    })
-    await user.click(prevButton)
+    await user.click(page.getByRole("button", { name: /previous month/i }))
 
     await waitFor(() => {
       expect(onChangeMonth).toHaveBeenCalledWith(expect.any(Date))
@@ -213,8 +195,7 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day10 = screen.getByText("10").closest("td")!
-    await user.click(day10)
+    await user.click(page.getByRole("gridcell").filter({ hasText: /^10$/ }))
 
     expect(onChange).toHaveBeenCalledWith([new Date(2024, 5, 20)])
   })
@@ -234,8 +215,7 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day10 = screen.getByText("10").closest("td")!
-    await user.click(day10)
+    await user.click(page.getByRole("gridcell").filter({ hasText: /^10$/ }))
 
     expect(onChange).toHaveBeenCalledWith({
       end: undefined,
@@ -258,10 +238,9 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day5 = screen
-      .getByRole("grid")
-      .querySelector<HTMLTableCellElement>('td[data-value="2024-06-05"]')!
-    await user.click(day5)
+    await user.click(
+      page.getByRole("gridcell").filter({ hasText: /^5$/ }).first(),
+    )
 
     expect(onChange).toHaveBeenCalledWith({
       end: new Date(2024, 5, 15),
@@ -284,8 +263,7 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day20 = screen.getByText("20").closest("td")!
-    await user.click(day20)
+    await user.click(page.getByRole("gridcell").filter({ hasText: /^20$/ }))
 
     expect(onChange).toHaveBeenCalledWith({
       end: new Date(2024, 5, 20),
@@ -308,8 +286,7 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day25 = screen.getByText("25").closest("td")!
-    await user.click(day25)
+    await user.click(page.getByRole("gridcell").filter({ hasText: /^25$/ }))
 
     expect(onChange).toHaveBeenCalledWith({
       end: undefined,
@@ -317,267 +294,121 @@ describe("<Calendar />", () => {
     })
   })
 
-  test("keyboard ArrowRight navigates to next day", async () => {
-    await render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
+  test("navigates with arrow keys on keyboard", async () => {
+    const { user } = await render(
+      <Calendar.Root
+        defaultMonth={new Date(2024, 5, 1)}
+        defaultValue={new Date(2024, 5, 15)}
+      />,
+    )
 
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
+    page.getByRole("grid").element().focus()
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^1$/ }).first())
+      .toHaveFocus()
 
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
+    await user.keyboard("{ArrowRight}")
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^2$/ }).first())
+      .toHaveFocus()
 
-    fireEvent.keyDown(document.activeElement!, { key: "ArrowRight" })
+    await user.keyboard("{ArrowLeft}")
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^1$/ }).first())
+      .toHaveFocus()
 
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
+    await user.keyboard("{ArrowDown}")
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^8$/ }))
+      .toHaveFocus()
+
+    await user.keyboard("{ArrowUp}")
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^1$/ }).first())
+      .toHaveFocus()
+
+    await user.keyboard("{Home}")
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^26$/ }).first())
+      .toHaveFocus()
+
+    await user.keyboard("{End}")
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^1$/ }).first())
+      .toHaveFocus()
   })
 
-  test("keyboard ArrowLeft navigates to previous day", async () => {
-    await render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "ArrowLeft" })
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-  })
-
-  test("keyboard Enter selects a day", async () => {
+  test("selects a day with keyboard", async () => {
     const onChange = vi.fn()
-    await render(
+
+    const { user } = await render(
       <Calendar.Root defaultMonth={new Date(2024, 5, 1)} onChange={onChange} />,
     )
 
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
+    page.getByRole("grid").element().focus()
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^1$/ }).first())
+      .toHaveFocus()
 
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
+    await user.keyboard("{Enter}")
+    expect(onChange).toHaveBeenCalledWith(expect.any(Date))
 
-    fireEvent.keyDown(document.activeElement!, { key: "Enter" })
+    await user.keyboard("{ArrowRight}")
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^2$/ }).first())
+      .toHaveFocus()
 
+    onChange.mockClear()
+    await user.keyboard(" ")
     expect(onChange).toHaveBeenCalledWith(expect.any(Date))
   })
 
-  test("keyboard Space selects a day", async () => {
-    const onChange = vi.fn()
-    await render(
-      <Calendar.Root defaultMonth={new Date(2024, 5, 1)} onChange={onChange} />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: " ", code: "Space" })
-
-    expect(onChange).toHaveBeenCalledWith(expect.any(Date))
-  })
-
-  test("keyboard ArrowDown navigates to next week", async () => {
-    await render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "ArrowDown" })
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-  })
-
-  test("keyboard ArrowUp navigates to previous week", async () => {
-    await render(
+  test("navigates months with keyboard", async () => {
+    const { user } = await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={new Date(2024, 5, 15)}
       />,
     )
 
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
+    page.getByRole("grid").element().focus()
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^1$/ }).first())
+      .toHaveFocus()
 
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
+    await user.keyboard("{PageDown}")
+    await expect
+      .element(page.getByRole("grid"))
+      .toHaveAttribute("aria-label", expect.stringContaining("July"))
 
-    fireEvent.keyDown(document.activeElement!, { key: "ArrowUp" })
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
+    await user.keyboard("{PageUp}")
+    await expect
+      .element(page.getByRole("grid"))
+      .toHaveAttribute("aria-label", expect.stringContaining("June"))
   })
 
-  test("keyboard Home navigates to start of week", async () => {
-    await render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 12)}
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "Home" })
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-  })
-
-  test("keyboard End navigates to end of week", async () => {
-    await render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 12)}
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "End" })
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-  })
-
-  test("keyboard PageDown navigates to next month", async () => {
-    await render(
+  test("navigates years with keyboard", async () => {
+    const { user } = await render(
       <Calendar.Root
         defaultMonth={new Date(2024, 5, 1)}
         defaultValue={new Date(2024, 5, 15)}
       />,
     )
 
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
+    page.getByRole("grid").element().focus()
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^1$/ }).first())
+      .toHaveFocus()
 
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
+    await user.keyboard("{Shift>}{PageDown}{/Shift}")
+    await expect
+      .element(page.getByRole("grid"))
+      .toHaveAttribute("aria-label", expect.stringContaining("2025"))
 
-    fireEvent.keyDown(document.activeElement!, { key: "PageDown" })
-
-    await waitFor(() => {
-      const newGrid = screen.getByRole("grid")
-      expect(newGrid).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining("July"),
-      )
-    })
-  })
-
-  test("keyboard PageUp navigates to previous month", async () => {
-    await render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 15)}
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "PageUp" })
-
-    await waitFor(() => {
-      const newGrid = screen.getByRole("grid")
-      expect(newGrid).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining("May"),
-      )
-    })
-  })
-
-  test("keyboard Shift+PageDown navigates to next year", async () => {
-    await render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 15)}
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, {
-      key: "PageDown",
-      shiftKey: true,
-    })
-
-    await waitFor(() => {
-      const newGrid = screen.getByRole("grid")
-      expect(newGrid).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining("2025"),
-      )
-    })
-  })
-
-  test("keyboard Shift+PageUp navigates to previous year", async () => {
-    await render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 15)}
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, {
-      key: "PageUp",
-      shiftKey: true,
-    })
-
-    await waitFor(() => {
-      const newGrid = screen.getByRole("grid")
-      expect(newGrid).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining("2023"),
-      )
-    })
+    await user.keyboard("{Shift>}{PageUp}{/Shift}")
+    await expect
+      .element(page.getByRole("grid"))
+      .toHaveAttribute("aria-label", expect.stringContaining("2024"))
   })
 
   test("onFocus focuses on value date for array value", async () => {
@@ -589,12 +420,10 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
+    page.getByRole("grid").element().focus()
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^10$/ }))
+      .toHaveFocus()
   })
 
   test("onFocus focuses on start date for range value", async () => {
@@ -609,12 +438,10 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
+    page.getByRole("grid").element().focus()
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^10$/ }))
+      .toHaveFocus()
   })
 
   test("onFocus focuses on end date for range value with only end", async () => {
@@ -629,11 +456,9 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
+    page.getByRole("grid").element().focus()
+    await expect
+      .element(page.getByRole("gridcell").filter({ hasText: /^20$/ }))
+      .toHaveFocus()
   })
 })

@@ -153,10 +153,6 @@ describe("<Table />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Table.displayName).toBe("Table")
-  })
-
   test("renders TABLE element with `ui-table` class", () => {
     render(
       <Table

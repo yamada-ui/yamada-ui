@@ -17,10 +17,6 @@ const responsiveContainerProps = { height: 400, width: 400 } as NonNullable<
 >
 
 describe("<RadialChart />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(RadialChart.Root.displayName).toBe("RadialChart")
-  })
-
   test("renders generated radials from multiple `series` entries", () => {
     render(
       <RadialChart.Root

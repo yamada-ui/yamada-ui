@@ -1,4 +1,0 @@
-import{n as e}from"./chunk-jRWAZmH_.js";import{t}from"./jsx-runtime-D_578c1K.js";import{t as n}from"./text-b_IgAtWs.js";import{t as r}from"./text-BspHgeMQ.js";import{d as i,u as a}from"./iframe-hd5efBrY.js";var o,s,c,l;e((()=>{r(),a(),o=t(),s={title:`Hooks / useMediaQuery`},c=()=>(0,o.jsx)(n,{children:i(`(min-width: 1280px)`)?`larger than 1280px`:`smaller than 1280px`}),c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`() => {
-  const flg = useMediaQuery("(min-width: 1280px)");
-  return <Text>{flg ? "larger than 1280px" : "smaller than 1280px"}</Text>;
-}`,...c.parameters?.docs?.source}}},l=[`Basic`]}))();export{c as Basic,l as __namedExportsOrder,s as default};

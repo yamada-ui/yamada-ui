@@ -80,12 +80,9 @@ describe("useClickable", () => {
 
   test("does not call onMouseDown when disabled", async () => {
     const onMouseDown = vi.fn()
-    const { button } = await setup({ disabled: true, onMouseDown })
-    const element = button.element()
+    const { button, user } = await setup({ disabled: true, onMouseDown })
 
-    element.dispatchEvent(
-      new MouseEvent("mousedown", { bubbles: true, button: 0 }),
-    )
+    await user.click(button, { force: true })
 
     expect(onMouseDown).not.toHaveBeenCalled()
   })
@@ -158,20 +155,22 @@ describe("useClickable", () => {
 
   test("does not call onClick when disabled", async () => {
     const onClick = vi.fn()
-    const { button } = await setup({ disabled: true, onClick })
-    const element = button.element()
+    const { button, user } = await setup({ disabled: true, onClick })
 
-    element.dispatchEvent(new MouseEvent("click", { bubbles: true, button: 0 }))
+    await user.click(button, { force: true })
 
     expect(onClick).not.toHaveBeenCalled()
   })
 
   test("does not call onClick when disabled but isFocusable", async () => {
     const onClick = vi.fn()
-    const { button } = await setup({ disabled: true, focusable: true, onClick })
-    const element = button.element()
+    const { button, user } = await setup({
+      disabled: true,
+      focusable: true,
+      onClick,
+    })
 
-    element.dispatchEvent(new MouseEvent("click", { bubbles: true, button: 0 }))
+    await user.click(button, { force: true })
 
     expect(onClick).not.toHaveBeenCalled()
     await expect.element(button).toHaveAttribute("aria-disabled", "true")

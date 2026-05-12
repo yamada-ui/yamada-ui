@@ -56,4 +56,32 @@ describe("useOnline", () => {
 
     await expect.element(page.getByTestId("status")).toHaveTextContent("true")
   })
+
+  test("removes online and offline listeners with the same callback on unmount", async () => {
+    const addEventListenerSpy = vi.spyOn(window, "addEventListener")
+    const removeEventListenerSpy = vi.spyOn(window, "removeEventListener")
+
+    const { unmount } = await render(<Component />, { withProvider: false })
+    const onlineCallback = addEventListenerSpy.mock.calls.find(
+      ([event]) => event === "online",
+    )?.[1]
+    const offlineCallback = addEventListenerSpy.mock.calls.find(
+      ([event]) => event === "offline",
+    )?.[1]
+
+    expect(onlineCallback).toBeDefined()
+    expect(offlineCallback).toBeDefined()
+    expect(onlineCallback).toBe(offlineCallback)
+
+    unmount()
+
+    expect(removeEventListenerSpy).toHaveBeenCalledWith(
+      "online",
+      onlineCallback,
+    )
+    expect(removeEventListenerSpy).toHaveBeenCalledWith(
+      "offline",
+      offlineCallback,
+    )
+  })
 })

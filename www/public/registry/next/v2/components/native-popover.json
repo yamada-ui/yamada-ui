@@ -1,7 +1,7 @@
 {
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
-    "components": [],
+    "components": ["button"],
     "externals": [],
     "hooks": ["use-popper"],
     "providers": []
@@ -20,6 +20,10 @@
     {
       "name": "native-popover.style.ts",
       "content": "import { defineComponentSlotStyle } from \"@yamada-ui/react\"\n\nexport const nativePopoverStyle = defineComponentSlotStyle({\n  base: {\n    body: {\n      alignItems: \"flex-start\",\n      display: \"flex\",\n      flex: \"1\",\n      flexDirection: \"column\",\n      gap: \"{gap}\",\n    },\n    content: {\n      bg: \"bg.float\",\n      borderColor: \"border.muted\",\n      borderWidth: \"1px\",\n      boxShadow: \"sm\",\n      display: \"flex\",\n      flexDirection: \"column\",\n      focusVisibleRing: \"none\",\n      gap: \"{gap}\",\n      p: \"{padding}\",\n      rounded: \"l2\",\n    },\n    footer: {\n      alignItems: \"center\",\n      display: \"flex\",\n      gap: \"{gap}\",\n      justifyContent: \"flex-start\",\n    },\n    header: {\n      alignItems: \"center\",\n      display: \"flex\",\n      fontWeight: \"semibold\",\n      gap: \"{gap}\",\n      justifyContent: \"flex-start\",\n    },\n  },\n\n  sizes: {\n    xs: {\n      content: {\n        \"--gap\": \"spaces.1\",\n        \"--padding\": \"spaces.2\",\n        fontSize: \"xs\",\n      },\n    },\n    sm: {\n      content: {\n        \"--gap\": \"spaces.2\",\n        \"--padding\": \"spaces.3\",\n        fontSize: \"sm\",\n      },\n    },\n    md: {\n      content: {\n        \"--gap\": \"spaces.3\",\n        \"--padding\": \"spaces.4\",\n        fontSize: \"md\",\n      },\n    },\n    lg: {\n      content: {\n        \"--gap\": \"spaces.4\",\n        \"--padding\": \"spaces.5\",\n        fontSize: \"md\",\n      },\n    },\n  },\n\n  defaultProps: {\n    size: \"md\",\n  },\n})\n\nexport type NativePopoverStyle = typeof nativePopoverStyle\n"
+    },
+    {
+      "name": "native-popover.test.browser.tsx",
+      "content": "import { page, render } from \"#test/browser\"\nimport { NativePopover } from \".\"\nimport { Button } from \"../button\"\n\ndescribe(\"<NativePopover />\", () => {\n  const Component = (props: NativePopover.RootProps) => {\n    return (\n      <NativePopover.Root {...props}>\n        <NativePopover.Trigger data-testid=\"trigger\">\n          <Button>Open Popover</Button>\n        </NativePopover.Trigger>\n        <NativePopover.Content data-testid=\"content\">\n          <NativePopover.Body>Body content</NativePopover.Body>\n        </NativePopover.Content>\n      </NativePopover.Root>\n    )\n  }\n\n  test(\"should not open popover when disabled\", async () => {\n    const { user } = await render(<Component disabled />)\n\n    const trigger = page.getByTestId(\"trigger\")\n    const content = page.getByTestId(\"content\")\n\n    await expect.element(trigger).toHaveAttribute(\"aria-disabled\", \"true\")\n    await expect.element(content).not.toBeVisible()\n\n    await expect(user.click(trigger, { timeout: 200 })).rejects.toThrow(\n      /Timeout/,\n    )\n    await expect.element(content).not.toBeVisible()\n  })\n})\n"
     },
     {
       "name": "native-popover.tsx",

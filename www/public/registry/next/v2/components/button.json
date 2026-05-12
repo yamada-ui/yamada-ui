@@ -8,6 +8,7 @@
   },
   "dependents": {
     "components": [
+      "action-bar",
       "calendar",
       "carousel",
       "chart",
@@ -15,10 +16,13 @@
       "drawer",
       "file-button",
       "form",
+      "menu",
       "modal",
+      "native-popover",
       "number-input",
       "pagination",
       "password-input",
+      "popover",
       "tip",
       "toggle"
     ],
@@ -27,6 +31,10 @@
   },
   "section": "components",
   "sources": [
+    {
+      "name": "button-group.test.browser.tsx",
+      "content": "import { page, render } from \"#test/browser\"\nimport { ButtonGroup } from \"./\"\n\ndescribe(\"<ButtonGroup />\", () => {\n  test(\"`attached` column style is applied correctly\", async () => {\n    await render(\n      <ButtonGroup.Root variant=\"outline\" attached flexDirection=\"column\">\n        <ButtonGroup.Item>Button</ButtonGroup.Item>\n        <ButtonGroup.Item>Button</ButtonGroup.Item>\n        <ButtonGroup.Item>Button</ButtonGroup.Item>\n      </ButtonGroup.Root>,\n    )\n\n    const style = getComputedStyle(page.getByRole(\"group\").element())\n\n    expect(style.flexDirection).toBe(\"column\")\n  })\n})\n"
+    },
     {
       "name": "button-group.tsx",
       "content": "\"use client\"\n\nimport type { Component, ThemeProps, WithoutThemeProps } from \"@yamada-ui/react\"\nimport type { GroupProps } from \"../group\"\nimport type { ButtonProps } from \"./button\"\nimport type { ButtonStyle } from \"./button.style\"\nimport { useMemo } from \"react\"\nimport { Group } from \"../group\"\nimport { ButtonPropsContext } from \"./button\"\nimport { IconButtonPropsContext } from \"./icon-button\"\n\nexport interface ButtonGroupRootProps\n  extends WithoutThemeProps<GroupProps, ButtonStyle>, ThemeProps<ButtonStyle> {\n  /**\n   * If `true`, all wrapped button will be disabled.\n   *\n   * @default false\n   */\n  disabled?: boolean\n}\n\n/**\n * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.\n *\n * @see https://yamada-ui.com/docs/components/button\n */\nexport const ButtonGroupRoot = (({\n  size,\n  variant,\n  attached,\n  disabled,\n  ...rest\n}: ButtonGroupRootProps) => {\n  const context = useMemo<ButtonProps>(\n    () => ({\n      size,\n      variant,\n      disabled,\n      focusVisibleRing: attached ? \"inside\" : undefined,\n    }),\n    [size, variant, disabled, attached],\n  )\n\n  return (\n    <ButtonPropsContext value={context}>\n      <IconButtonPropsContext value={context}>\n        <Group attached={attached} {...rest} />\n      </IconButtonPropsContext>\n    </ButtonPropsContext>\n  )\n}) as Component<\"div\", ButtonGroupRootProps>\n"

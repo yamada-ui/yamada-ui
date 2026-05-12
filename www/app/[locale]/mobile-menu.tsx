@@ -30,7 +30,7 @@ import {
 } from "@/components"
 import { CONSTANTS } from "@/constants"
 import { getDocMap } from "@/data"
-import { getPathname, useLocale, usePathname } from "@/i18n"
+import { useLocale, usePathname } from "@/i18n"
 import { ColorModeButton } from "./color-mode-button"
 import { LangButton } from "./lang-button"
 import { NavMenu } from "./nav-menu"
@@ -279,7 +279,8 @@ function DocsMenuGroup({
   )
 }
 
-interface DocsMenuItemProps extends NextLinkButtonProps {
+interface DocsMenuItemProps extends Omit<NextLinkButtonProps, "href"> {
+  href: string
   segment: string
   onClose: () => void
 }
@@ -295,8 +296,7 @@ function DocsMenuItem({
   const overview = segment === "overview"
   const current = overview
     ? pathname === href
-    : pathname.length <= getPathname(href).length &&
-      pathname.startsWith(getPathname(href))
+    : pathname.length <= href.length && pathname.startsWith(href)
 
   return (
     <NextLinkButton

@@ -108,7 +108,7 @@ describe("mergeProps", () => {
 describe("chainProps", () => {
   test("returns identity function when no props", () => {
     const chain = chainProps()()
-    expect(chain({ a: 1 } as any)).toStrictEqual({ a: 1 })
+    expect(chain({ a: 1 })).toStrictEqual({ a: 1 })
   })
 
   test("merges single props object", () => {

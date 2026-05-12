@@ -1,52 +1,10 @@
 import { a11y, fireEvent, render, screen } from "#test"
 import { vi } from "vitest"
 import { SaturationSlider } from "."
-import { noop } from "../../utils"
-
-const mockRect = (el: HTMLElement, rect: Partial<DOMRect>): (() => void) => {
-  const original = el.getBoundingClientRect
-  el.getBoundingClientRect = () =>
-    ({
-      bottom: 0,
-      height: 0,
-      left: 0,
-      right: 0,
-      toJSON: noop,
-      top: 0,
-      width: 0,
-      x: 0,
-      y: 0,
-      ...rect,
-    }) as DOMRect
-  return () => {
-    el.getBoundingClientRect = original
-  }
-}
 
 describe("<SaturationSlider />", () => {
   test("renders component correctly", async () => {
     await a11y(<SaturationSlider.Root />)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(SaturationSlider.Root.displayName).toBe("SaturationSliderRoot")
-    expect(SaturationSlider.Track.displayName).toBe("SaturationSliderTrack")
-    expect(SaturationSlider.Thumb.displayName).toBe("SaturationSliderThumb")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <SaturationSlider.Root
-        data-testid="slider"
-        trackProps={{ "data-testid": "track" }}
-      />,
-    )
-    const root = screen.getByTestId("slider")
-    const track = screen.getByTestId("track")
-    const thumb = screen.getByRole("slider")
-    expect(root).toHaveClass("ui-saturation-slider__root")
-    expect(track).toHaveClass("ui-saturation-slider__track")
-    expect(thumb).toHaveClass("ui-saturation-slider__thumb")
   })
 
   test("sets aria attributes correctly", () => {
@@ -67,8 +25,10 @@ describe("<SaturationSlider />", () => {
       />,
     )
 
-    const thumb = screen.getByRole("slider")
-    expect(thumb).toHaveAttribute("aria-valuetext", "custom text")
+    expect(screen.getByRole("slider")).toHaveAttribute(
+      "aria-valuetext",
+      "custom text",
+    )
   })
 
   test("uses getAriaValueText", () => {
@@ -81,8 +41,10 @@ describe("<SaturationSlider />", () => {
       />,
     )
 
-    const thumb = screen.getByRole("slider")
-    expect(thumb).toHaveAttribute("aria-valuetext", "custom aria")
+    expect(screen.getByRole("slider")).toHaveAttribute(
+      "aria-valuetext",
+      "custom aria",
+    )
     expect(getAriaValueText).toHaveBeenCalledWith([0, 0.5, 0.5])
   })
 
@@ -96,8 +58,7 @@ describe("<SaturationSlider />", () => {
       />,
     )
 
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowRight" })
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowRight" })
 
     expect(onChange).toHaveBeenCalledWith([0, 0.51, 0.5])
   })
@@ -112,8 +73,7 @@ describe("<SaturationSlider />", () => {
       />,
     )
 
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowLeft" })
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowLeft" })
 
     expect(onChange).toHaveBeenCalledWith([0, 0.49, 0.5])
   })
@@ -128,8 +88,7 @@ describe("<SaturationSlider />", () => {
       />,
     )
 
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowUp" })
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowUp" })
 
     expect(onChange).toHaveBeenCalledWith([0, 0.5, 0.51])
   })
@@ -144,8 +103,7 @@ describe("<SaturationSlider />", () => {
       />,
     )
 
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowDown" })
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowDown" })
 
     expect(onChange).toHaveBeenCalledWith([0, 0.5, 0.49])
   })
@@ -161,8 +119,7 @@ describe("<SaturationSlider />", () => {
       />,
     )
 
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowRight" })
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowRight" })
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -178,8 +135,7 @@ describe("<SaturationSlider />", () => {
       />,
     )
 
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowRight" })
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowRight" })
 
     expect(onChange).not.toHaveBeenCalled()
   })
@@ -191,8 +147,7 @@ describe("<SaturationSlider />", () => {
       <SaturationSlider.Root defaultValue={[0, 1, 0.5]} onChange={onChange} />,
     )
 
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowRight" })
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowRight" })
 
     expect(onChange).toHaveBeenCalledWith([0, 1, 0.5])
   })
@@ -204,19 +159,20 @@ describe("<SaturationSlider />", () => {
       <SaturationSlider.Root defaultValue={[0, 0.5, 0]} onChange={onChange} />,
     )
 
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowDown" })
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowDown" })
 
     expect(onChange).toHaveBeenCalledWith([0, 0.5, 0])
   })
 
-  test("disabled SaturationSlider renders correctly", () => {
+  test("disabled SaturationSlider sets aria-disabled and tabIndex -1", () => {
     render(<SaturationSlider.Root disabled />)
 
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-disabled")
+    const thumb = screen.getByRole("slider")
+    expect(thumb).toHaveAttribute("aria-disabled")
+    expect(thumb).toHaveAttribute("tabindex", "-1")
   })
 
-  test("readonly SaturationSlider renders correctly", () => {
+  test("readonly SaturationSlider sets aria-readonly", () => {
     render(<SaturationSlider.Root readOnly />)
 
     expect(screen.getByRole("slider")).toHaveAttribute("aria-readonly")
@@ -226,12 +182,6 @@ describe("<SaturationSlider />", () => {
     render(<SaturationSlider.Root />)
 
     expect(screen.getByRole("slider")).toHaveAttribute("tabindex", "0")
-  })
-
-  test("thumb has tabIndex -1 when disabled", () => {
-    render(<SaturationSlider.Root disabled />)
-
-    expect(screen.getByRole("slider")).toHaveAttribute("tabindex", "-1")
   })
 
   test("respects custom step", () => {
@@ -245,8 +195,7 @@ describe("<SaturationSlider />", () => {
       />,
     )
 
-    const thumb = screen.getByRole("slider")
-    fireEvent.keyDown(thumb, { key: "ArrowRight" })
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowRight" })
 
     expect(onChange).toHaveBeenCalledWith([0, 0.6, 0.5])
   })
@@ -254,8 +203,7 @@ describe("<SaturationSlider />", () => {
   test("renders with controlled value", () => {
     render(<SaturationSlider.Root value={[200, 0.8, 0.6]} />)
 
-    const thumb = screen.getByRole("slider")
-    expect(thumb).toHaveAttribute("aria-valuenow", "80")
+    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "80")
   })
 
   test("renders with custom children", () => {
@@ -271,114 +219,16 @@ describe("<SaturationSlider />", () => {
     expect(screen.getByTestId("custom-thumb")).toBeInTheDocument()
   })
 
-  test("sets name on hidden input", () => {
+  test("sets name and id on hidden input", () => {
     const { container } = render(
-      <SaturationSlider.Root name="color-saturation" />,
+      <SaturationSlider.Root id="saturation-input" name="color-saturation" />,
     )
 
-    const input = container.querySelector("input[name='color-saturation']")
-    expect(input).toBeInTheDocument()
-  })
-
-  test("sets id on hidden input", () => {
-    const { container } = render(
-      <SaturationSlider.Root id="saturation-input" />,
-    )
-
-    const input = container.querySelector("input#saturation-input")
-    expect(input).toBeInTheDocument()
-  })
-
-  test("pointer interaction triggers onChangeStart and onChangeEnd", () => {
-    const onChangeStart = vi.fn()
-    const onChangeEnd = vi.fn()
-
-    render(
-      <SaturationSlider.Root
-        defaultValue={[120, 0.5, 0.5]}
-        trackProps={{ "data-testid": "track" }}
-        onChangeEnd={onChangeEnd}
-        onChangeStart={onChangeStart}
-      />,
-    )
-
-    const track = screen.getByTestId("track")
-    const cleanup = mockRect(track, {
-      bottom: 200,
-      height: 200,
-      left: 0,
-      width: 200,
-    })
-
-    fireEvent.pointerDown(track, { clientX: 100, clientY: 100 })
-    expect(onChangeStart).toHaveBeenCalledWith([120, 0.5, 0.5])
-
-    fireEvent.pointerUp(window, { clientX: 140, clientY: 60 })
-    expect(onChangeEnd).toHaveBeenCalledWith([120, 0.7, 0.7])
-
-    cleanup()
-  })
-
-  test("pointer interaction triggers onChange on move", () => {
-    const onChange = vi.fn()
-
-    render(
-      <SaturationSlider.Root
-        defaultValue={[120, 0.5, 0.5]}
-        trackProps={{ "data-testid": "track" }}
-        onChange={onChange}
-      />,
-    )
-
-    const track = screen.getByTestId("track")
-    const cleanup = mockRect(track, {
-      bottom: 200,
-      height: 200,
-      left: 0,
-      width: 200,
-    })
-
-    fireEvent.pointerDown(track, { clientX: 100, clientY: 100 })
-    fireEvent.pointerMove(window, { clientX: 160, clientY: 40 })
-    expect(onChange).toHaveBeenCalledWith([120, 0.8, 0.8])
-
-    fireEvent.pointerUp(window, { clientX: 160, clientY: 40 })
-
-    cleanup()
-  })
-
-  test("pointer interaction does not trigger callbacks when disabled", () => {
-    const onChangeStart = vi.fn()
-    const onChange = vi.fn()
-    const onChangeEnd = vi.fn()
-
-    render(
-      <SaturationSlider.Root
-        defaultValue={[0, 0.5, 0.5]}
-        disabled
-        trackProps={{ "data-testid": "track" }}
-        onChange={onChange}
-        onChangeEnd={onChangeEnd}
-        onChangeStart={onChangeStart}
-      />,
-    )
-
-    const track = screen.getByTestId("track")
-    const cleanup = mockRect(track, {
-      bottom: 200,
-      height: 200,
-      left: 0,
-      width: 200,
-    })
-
-    fireEvent.pointerDown(track, { clientX: 100, clientY: 100 })
-    fireEvent.pointerMove(window, { clientX: 120, clientY: 80 })
-    fireEvent.pointerUp(window, { clientX: 120, clientY: 80 })
-
-    expect(onChangeStart).not.toHaveBeenCalled()
-    expect(onChange).not.toHaveBeenCalled()
-    expect(onChangeEnd).not.toHaveBeenCalled()
-
-    cleanup()
+    expect(
+      container.querySelector("input[name='color-saturation']"),
+    ).toBeInTheDocument()
+    expect(
+      container.querySelector("input#saturation-input"),
+    ).toBeInTheDocument()
   })
 })

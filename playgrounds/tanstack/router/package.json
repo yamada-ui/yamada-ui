@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "rimraf node_modules .tanstack",
+    "clean": "rimraf node_modules .tanstack .turbo",
     "dev": "vite dev",
     "build": "vite build",
-    "typecheck": "tsc",
+    "typecheck": "tsgo",
     "lint": "oxlint . --max-warnings=0",
     "format": "pnpm -w format playgrounds/tanstack/router",
     "yamada-cli": "pnpm -C ../../../packages/cli dev"
@@ -19,7 +19,7 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@tanstack/router-plugin": "^1.167.12",
+    "@tanstack/router-plugin": "^1.167.28",
     "@vitejs/plugin-react": "catalog:",
     "@yamada-ui/workspace": "workspace:*",
     "vite": "catalog:"

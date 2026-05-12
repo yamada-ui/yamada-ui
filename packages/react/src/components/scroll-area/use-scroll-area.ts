@@ -2,15 +2,9 @@
 
 import type { UIEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
-import {
-  dataAttr,
-  handlerAll,
-  isMac,
-  mergeRefs,
-  useSafeLayoutEffect,
-  vendor,
-} from "../../utils"
+import { useCallback, useEffect, useId, useRef, useState } from "react"
+import { mergeProps } from "../../core"
+import { dataAttr, isMac, useSafeLayoutEffect, vendor } from "../../utils"
 
 export interface UseScrollAreaProps extends HTMLProps {
   /**
@@ -33,7 +27,6 @@ export interface UseScrollAreaProps extends HTMLProps {
 
 export const useScrollArea = ({
   id,
-  ref,
   type = "hover",
   scrollHideDelay = 1000,
   onScrollPositionChange,
@@ -109,47 +102,35 @@ export const useScrollArea = ({
     }
   }, [])
 
-  const safariProps = useMemo(
-    () => ({
-      key,
-      ref: mergeRefs(ref, scrollAreaRef),
-      "data-key": key,
-    }),
-    [key, ref, scrollAreaRef],
-  )
-
   const getRootProps: PropGetter = useCallback(
-    ({ style, ...props } = {}) => ({
-      ref,
-      style: { overflow: "auto", ...style },
-      ...rest,
-      ...(isSafari ? safariProps : {}),
-      ...props,
-      "data-hidden": dataAttr(isHidden),
-      "data-hover": dataAttr(isHovered),
-      "data-never": dataAttr(isNever),
-      "data-scroll": dataAttr(isScrolling),
-      tabIndex: 0,
-      onMouseEnter: handlerAll(
-        props.onMouseEnter,
-        rest.onMouseEnter,
-        onMouseEnter,
-      ),
-      onMouseLeave: handlerAll(
-        props.onMouseLeave,
-        rest.onMouseLeave,
-        onMouseLeave,
-      ),
-      onScroll: handlerAll(props.onScroll, rest.onScroll, onScroll),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          style: { overflow: "auto" },
+          "data-hidden": dataAttr(isHidden),
+          "data-hover": dataAttr(isHovered),
+          "data-never": dataAttr(isNever),
+          "data-scroll": dataAttr(isScrolling),
+          tabIndex: 0,
+        },
+        isSafari ? { key, ref: scrollAreaRef, "data-key": key } : {},
+        rest,
+        props,
+        {
+          onMouseEnter,
+          onMouseLeave,
+          onPointerEnter: onMouseEnter,
+          onPointerLeave: onMouseLeave,
+          onScroll,
+        },
+      )(),
     [
       isNever,
-      ref,
       isHidden,
       isHovered,
       isScrolling,
       isSafari,
-      safariProps,
+      key,
       rest,
       onMouseEnter,
       onMouseLeave,

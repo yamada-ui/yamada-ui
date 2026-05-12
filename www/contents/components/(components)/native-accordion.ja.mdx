@@ -314,9 +314,12 @@ return <NativeAccordion.Root items={items} />
 
 ### ARIAロールと属性
 
-| コンポーネント           | ロールと属性    | 使い方                                           |
-| ------------------------ | --------------- | ------------------------------------------------ |
-| `NativeAccordion.Button` | `aria-disabled` | 項目のパネルが無効な場合は`"true"`を設定します。 |
+| 要素                                  | ロールと属性          | 使い方                                           |
+| ------------------------------------- | --------------------- | ------------------------------------------------ |
+| `summary.ui-native-accordion__button` | `aria-disabled`       | 項目のパネルが無効な場合は`"true"`を設定します。 |
+| `svg.ui-native-accordion__icon`       | `aria-disabled`       | 項目のパネルが無効な場合は`"true"`を設定します。 |
+|                                       | `aria-hidden`         | 要素をアクセシビリティツリーから除外します。     |
+|                                       | `role="presentation"` | プレゼンテーションであることを示します。         |
 
 ## Props
 

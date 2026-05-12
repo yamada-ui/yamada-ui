@@ -47,7 +47,7 @@ export function LlmsButtonGroup({
     sm: "end-center",
   })
   const t = useTranslations("component.llmsButtonGroup")
-  const { copied, onCopy } = useClipboard(md, 4000)
+  const { copied, onCopy } = useClipboard(md)
   const { chatgptUrl, claudeUrl, markdownUrl } = useLlmsUrls(locale, pathname)
 
   return (

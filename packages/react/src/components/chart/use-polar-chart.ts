@@ -15,9 +15,9 @@ import type {
   TextProps,
 } from "recharts"
 import type { PolarChartProps } from "recharts/types/util/types"
-import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict, Merge } from "../../utils"
 import { isValidElement, useCallback, useMemo } from "react"
+import { type HTMLProps, mergeProps, type PropGetter } from "../../core"
 import { dataAttr, isFunction, isObject, isUndefined } from "../../utils"
 import { useChartContext } from "./use-chart"
 
@@ -72,7 +72,7 @@ export const usePolarChart = <Y extends Dict>({
   ...rest
 }: UsePolarChartProps<Y>) => {
   const getRootProps: PropGetter = useCallback(
-    (props) => ({ ...props, ...rest }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -216,7 +216,7 @@ export const useChartPie = ({
   ...rest
 }: UseChartPieProps = {}) => {
   const getRootProps: PropGetter<"svg"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -341,7 +341,7 @@ export const useChartSector = ({
   const { highlightedDataKey } = useChartContext()
 
   const getRootProps: PropGetter<"path"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -459,7 +459,7 @@ export const useChartPieLabel = ({
   const y = cy + (middleRadius + offset) * Math.sin(-midAngle * radian)
 
   const getRootProps: PropGetter<"text"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -581,7 +581,7 @@ export const useChartPieLabelLine = ({
   const { highlightedDataKey } = useChartContext()
 
   const getRootProps: PropGetter<"path"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -729,7 +729,7 @@ export const useChartRadar = ({
   }, [activeDotProp])
 
   const getRootProps: PropGetter<"path"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -920,7 +920,7 @@ export const useAngleAxis = ({
   }, [labelProp])
 
   const getRootProps: PropGetter<"text"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -1129,7 +1129,7 @@ export const useRadiusAxis = ({
   }, [labelProp])
 
   const getRootProps: PropGetter<"text"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -1245,7 +1245,7 @@ export const usePolarGrid = ({
   ...rest
 }: UsePolarGridProps) => {
   const getRootProps: PropGetter<"line"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -1389,7 +1389,7 @@ export const useChartRadial = <Y extends Dict>({
   }, [backgroundProp])
 
   const getRootProps: PropGetter<"svg"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 

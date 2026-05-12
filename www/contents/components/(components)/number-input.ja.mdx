@@ -312,20 +312,20 @@ return (
 
 ### ARIAロールと属性
 
-| コンポーネント               | ロールと属性        | 使い方                                                                                                                                                                                        |
-| ---------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `NumberInput`                | `role="spinbutton"` | スピンボタンであることを示します。                                                                                                                                                            |
-|                              | `aria-valuemin`     | `min`の値を設定します。                                                                                                                                                                       |
-|                              | `aria-valuemax`     | `max`の値を設定します。                                                                                                                                                                       |
-|                              | `aria-valuenow`     | 現在の値を設定します。                                                                                                                                                                        |
-|                              | `aria-valuetext`    | 現在の値を設定します。                                                                                                                                                                        |
-|                              | `aria-invalid`      | `invalid`が設定されている場合、または値が範囲外の場合は`"true"`を設定します。                                                                                                                 |
-|                              | `aria-describedby`  | `NumberInput`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
-|                              | `aria-disabled`     | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
-|                              | `aria-readonly`     | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
-|                              | `aria-required`     | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
-| `NumberInputIncrementButton` | `aria-label`        | `"増加"`を設定します。                                                                                                                                                                        |
-| `NumberInputDecrementButton` | `aria-label`        | `"減少"`を設定します。                                                                                                                                                                        |
+| 要素                                        | ロールと属性        | 使い方                                                                                                                                                                                        |
+| ------------------------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `input.ui-number-input__field`              | `role="spinbutton"` | スピンボタンであることを示します。                                                                                                                                                            |
+|                                             | `aria-valuemin`     | `min`の値を設定します。                                                                                                                                                                       |
+|                                             | `aria-valuemax`     | `max`の値を設定します。                                                                                                                                                                       |
+|                                             | `aria-valuenow`     | 現在の値を設定します。                                                                                                                                                                        |
+|                                             | `aria-valuetext`    | 現在の値を設定します。                                                                                                                                                                        |
+|                                             | `aria-invalid`      | `invalid`が設定されている場合、または値が範囲外の場合は`"true"`を設定します。                                                                                                                 |
+|                                             | `aria-describedby`  | `NumberInput`が`Field.Root`内にあり、`Field.Root`に`errorMessage`または`helperMessage`、もしくは`Field.ErrorMessage`または`Field.HelperMessage`が設定されている場合は、その`id`を設定します。 |
+|                                             | `aria-disabled`     | `disabled`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+|                                             | `aria-readonly`     | `readOnly`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+|                                             | `aria-required`     | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                        |
+| `button.ui-number-input__button--increment` | `aria-label`        | `"増加"`を設定します。                                                                                                                                                                        |
+| `button.ui-number-input__button--decrement` | `aria-label`        | `"減少"`を設定します。                                                                                                                                                                        |
 
 ## 類似のコンポーネント
 

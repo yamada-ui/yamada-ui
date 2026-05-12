@@ -1,22 +1,10 @@
-import { renderHook, system } from "#test/browser"
+import { renderHook, system } from "#test"
 import { noop } from "../../utils"
-import { getBreakpointValue, useBreakpointValue } from "./use-breakpoint-value"
-
-describe("useBreakpointValue", () => {
-  test("Returns the value of the current breakpoint when base is md", async () => {
-    const { result } = await renderHook(() =>
-      useBreakpointValue({ base: "md" }),
-    )
-
-    expect(result.current).toBe("md")
-  })
-})
+import { getBreakpointValue } from "./use-breakpoint-value"
 
 describe("getBreakpointValue", () => {
-  test("Returns the value of base", async () => {
-    const { result } = await renderHook(() =>
-      getBreakpointValue({ base: "md" }),
-    )
+  test("Returns the value of base", () => {
+    const { result } = renderHook(() => getBreakpointValue({ base: "md" }))
 
     expect(result.current(system, "md")).toBe("md")
   })

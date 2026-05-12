@@ -4,11 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "rimraf node_modules",
+    "clean": "rimraf node_modules .turbo",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsgo && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc",
+    "typecheck": "tsgo",
     "lint": "oxlint . --max-warnings=0",
     "format": "pnpm -w format playgrounds/vite",
     "yamada-cli": "pnpm -C ../../packages/cli dev"

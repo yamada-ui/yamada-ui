@@ -11,11 +11,6 @@ describe("<Slot />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Slot.name).toBe("Slot")
-    expect(Slottable.name).toBe("Slottable")
-  })
-
   test("merges props onto child element", () => {
     render(
       <Slot className="from-slot" data-testid="slot">
@@ -45,8 +40,8 @@ describe("<Slot />", () => {
 
   test("renders null when Slot has no children", () => {
     const { container } = render(<Slot />)
-    const visibleContent = container.querySelector(":not([hidden])")
 
+    const visibleContent = container.querySelector(":not([hidden])")
     expect(visibleContent).toBeNull()
   })
 

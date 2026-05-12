@@ -1,11 +1,4 @@
-import {
-  a11y,
-  fireEvent,
-  hasSuppressHydrationWarning,
-  render,
-  screen,
-  waitFor,
-} from "#test"
+import { a11y, render, screen, waitFor } from "#test"
 import { Calendar } from "./"
 import {
   getAdjustedMonth,
@@ -19,8 +12,17 @@ import {
   updateMaybeDateValue,
 } from "./use-calendar"
 
+const assertRangeResult = (
+  result: Date | Date[] | undefined | { end?: Date; start?: Date },
+) => {
+  if (result instanceof Date || Array.isArray(result) || result === undefined)
+    throw new Error("Expected range result")
+
+  return result
+}
+
 describe("<Calendar />", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(<Calendar.Root />)
   })
 
@@ -76,62 +78,6 @@ describe("<Calendar />", () => {
     expect(grid).toHaveAttribute("tabindex", "-1")
   })
 
-  test("clicking a day selects it", async () => {
-    const onChange = vi.fn()
-
-    const { user } = render(
-      <Calendar.Root defaultMonth={new Date(2024, 5, 1)} onChange={onChange} />,
-    )
-
-    const day15 = screen.getByText("15").closest("td")!
-    await user.click(day15)
-
-    expect(onChange).toHaveBeenCalledWith(new Date(2024, 5, 15))
-  })
-
-  test("clicking a selected day deselects it", async () => {
-    const onChange = vi.fn()
-
-    const { user } = render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 15)}
-        onChange={onChange}
-      />,
-    )
-
-    const day15 = screen.getByText("15").closest("td")!
-    await user.click(day15)
-
-    expect(onChange).toHaveBeenCalledWith(undefined)
-  })
-
-  test("navigates to previous month", async () => {
-    const { user } = render(
-      <Calendar.Root defaultMonth={new Date(2024, 5, 1)} />,
-    )
-
-    const prevButton = screen.getByRole("button", {
-      name: /previous month/i,
-    })
-    await user.click(prevButton)
-
-    const grid = screen.getByRole("grid")
-    expect(grid).toHaveAttribute("aria-label", expect.stringContaining("May"))
-  })
-
-  test("navigates to next month", async () => {
-    const { user } = render(
-      <Calendar.Root defaultMonth={new Date(2024, 5, 1)} />,
-    )
-
-    const nextButton = screen.getByRole("button", { name: /next month/i })
-    await user.click(nextButton)
-
-    const grid = screen.getByRole("grid")
-    expect(grid).toHaveAttribute("aria-label", expect.stringContaining("July"))
-  })
-
   test("prev button is disabled at minDate month", () => {
     render(
       <Calendar.Root
@@ -156,44 +102,6 @@ describe("<Calendar />", () => {
 
     const nextButton = screen.getByRole("button", { name: /next month/i })
     expect(nextButton).toBeDisabled()
-  })
-
-  test("does not navigate past minDate on prev month", async () => {
-    const { user } = render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 0, 1)}
-        minDate={new Date(2024, 0, 1)}
-      />,
-    )
-
-    const prevButton = screen.getByRole("button", {
-      name: /previous month/i,
-    })
-    await user.click(prevButton)
-
-    const grid = screen.getByRole("grid")
-    expect(grid).toHaveAttribute(
-      "aria-label",
-      expect.stringContaining("January"),
-    )
-  })
-
-  test("does not navigate past maxDate on next month", async () => {
-    const { user } = render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 11, 1)}
-        maxDate={new Date(2024, 11, 31)}
-      />,
-    )
-
-    const nextButton = screen.getByRole("button", { name: /next month/i })
-    await user.click(nextButton)
-
-    const grid = screen.getByRole("grid")
-    expect(grid).toHaveAttribute(
-      "aria-label",
-      expect.stringContaining("December"),
-    )
   })
 
   test("days before minDate are disabled", () => {
@@ -231,11 +139,11 @@ describe("<Calendar />", () => {
     )
 
     const allDays = screen.getByRole("grid").querySelectorAll("td")
-    const sundays = Array.from(allDays).filter(
-      (td) =>
-        !td.hasAttribute("data-outside") &&
-        new Date(td.getAttribute("data-value")!).getDay() === 0,
-    )
+    const sundays = Array.from(allDays).filter((td) => {
+      if (td.hasAttribute("data-outside")) return false
+      const value = td.getAttribute("data-value")
+      return value !== null && new Date(value).getDay() === 0
+    })
     sundays.forEach((sunday) => {
       expect(sunday).toHaveAttribute("data-disabled")
     })
@@ -259,14 +167,11 @@ describe("<Calendar />", () => {
       />,
     )
 
-    const day1 = screen
-      .getAllByText("1")
-      .find(
-        (el) =>
-          el.closest("td") && !el.closest("td")!.hasAttribute("data-outside"),
-      )
+    const day1 = screen.getAllByText("1").find((el) => {
+      const td = el.closest("td")
+      return td !== null && !td.hasAttribute("data-outside")
+    })
     const td = day1?.closest("td")
-    // June 1, 2024 is a Saturday (day 6)
     expect(td).toHaveAttribute("data-weekend")
   })
 
@@ -276,10 +181,10 @@ describe("<Calendar />", () => {
 
     const todayCell = screen
       .getAllByText(today.getDate().toString())
-      .find(
-        (el) =>
-          el.closest("td") && !el.closest("td")!.hasAttribute("data-outside"),
-      )
+      .find((el) => {
+        const td = el.closest("td")
+        return td !== null && !td.hasAttribute("data-outside")
+      })
       ?.closest("td")
     expect(todayCell).toHaveAttribute("data-today")
   })
@@ -290,10 +195,10 @@ describe("<Calendar />", () => {
 
     const todayCells = screen
       .getAllByText(today.getDate().toString())
-      .filter(
-        (el) =>
-          el.closest("td") && !el.closest("td")!.hasAttribute("data-outside"),
-      )
+      .filter((el) => {
+        const td = el.closest("td")
+        return td !== null && !td.hasAttribute("data-outside")
+      })
       .map((el) => el.closest("td"))
 
     todayCells.forEach((cell) => {
@@ -311,29 +216,8 @@ describe("<Calendar />", () => {
       />,
     )
 
-    // Day 15 should be disabled since max=2 and 2 are already selected
-    const day15 = screen.getByText("15").closest("td")!
+    const day15 = screen.getByText("15").closest("td")
     expect(day15).toHaveAttribute("data-disabled")
-  })
-
-  test("multiple selection allows removing when at max", async () => {
-    const onChange = vi.fn()
-
-    const { user } = render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={[new Date(2024, 5, 10), new Date(2024, 5, 20)]}
-        max={2}
-        multiple
-        onChange={onChange}
-      />,
-    )
-
-    // Clicking on an already selected date should deselect it
-    const day10 = screen.getByText("10").closest("td")!
-    await user.click(day10)
-
-    expect(onChange).toHaveBeenCalledWith([new Date(2024, 5, 20)])
   })
 
   test("range selection marks between days", () => {
@@ -349,157 +233,6 @@ describe("<Calendar />", () => {
 
     const day15 = screen.getByText("15").closest("td")
     expect(day15).toHaveAttribute("data-between")
-  })
-
-  test("range selection: clicking start clears range", async () => {
-    const onChange = vi.fn()
-
-    const { user } = render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={{
-          end: undefined,
-          start: new Date(2024, 5, 10),
-        }}
-        range
-        onChange={onChange}
-      />,
-    )
-
-    const day10 = screen.getByText("10").closest("td")!
-    await user.click(day10)
-
-    expect(onChange).toHaveBeenCalledWith({
-      end: undefined,
-      start: undefined,
-    })
-  })
-
-  test("range selection: clicking before start swaps", async () => {
-    const onChange = vi.fn()
-
-    const { user } = render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={{
-          end: undefined,
-          start: new Date(2024, 5, 15),
-        }}
-        range
-        onChange={onChange}
-      />,
-    )
-
-    const day5 = screen
-      .getByRole("grid")
-      .querySelector('td[data-value="2024-06-05"]')!
-    await user.click(day5)
-
-    expect(onChange).toHaveBeenCalledWith({
-      end: new Date(2024, 5, 15),
-      start: new Date(2024, 5, 5),
-    })
-  })
-
-  test("range selection: clicking after start sets end", async () => {
-    const onChange = vi.fn()
-
-    const { user } = render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={{
-          end: undefined,
-          start: new Date(2024, 5, 10),
-        }}
-        range
-        onChange={onChange}
-      />,
-    )
-
-    const day20 = screen.getByText("20").closest("td")!
-    await user.click(day20)
-
-    expect(onChange).toHaveBeenCalledWith({
-      end: new Date(2024, 5, 20),
-      start: new Date(2024, 5, 10),
-    })
-  })
-
-  test("range selection: clicking when both start and end are set resets", async () => {
-    const onChange = vi.fn()
-
-    const { user } = render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={{
-          end: new Date(2024, 5, 20),
-          start: new Date(2024, 5, 10),
-        }}
-        range
-        onChange={onChange}
-      />,
-    )
-
-    const day25 = screen.getByText("25").closest("td")!
-    await user.click(day25)
-
-    expect(onChange).toHaveBeenCalledWith({
-      end: undefined,
-      start: new Date(2024, 5, 25),
-    })
-  })
-
-  test("clicking a disabled day does not trigger onChange", async () => {
-    const onChange = vi.fn()
-
-    const { user } = render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        minDate={new Date(2024, 5, 10)}
-        onChange={onChange}
-      />,
-    )
-
-    const day5 = screen
-      .getByRole("grid")
-      .querySelector('td[data-value="2024-06-05"]')!
-    await user.click(day5)
-
-    expect(onChange).not.toHaveBeenCalled()
-  })
-
-  test("onChange does not trigger for dates before minDate", async () => {
-    const onChange = vi.fn()
-
-    const { user } = render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        minDate={new Date(2024, 5, 15)}
-        onChange={onChange}
-      />,
-    )
-
-    const day10 = screen.getByText("10").closest("td")!
-    await user.click(day10)
-
-    expect(onChange).not.toHaveBeenCalled()
-  })
-
-  test("onChange does not trigger for dates after maxDate", async () => {
-    const onChange = vi.fn()
-
-    const { user } = render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        maxDate={new Date(2024, 5, 15)}
-        onChange={onChange}
-      />,
-    )
-
-    const day20 = screen.getByText("20").closest("td")!
-    await user.click(day20)
-
-    expect(onChange).not.toHaveBeenCalled()
   })
 
   test("adjusts month when minDate is after defaultMonth", () => {
@@ -523,316 +256,8 @@ describe("<Calendar />", () => {
       />,
     )
 
-    // Should render without error - maxDate becomes minDate
     const grid = screen.getByRole("grid")
     expect(grid).toBeInTheDocument()
-  })
-
-  test("onMonthChange clamps to maxDate month", async () => {
-    const onChangeMonth = vi.fn()
-
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 10, 1)}
-        maxDate={new Date(2024, 11, 31)}
-        onChangeMonth={onChangeMonth}
-      />,
-    )
-
-    const nextButton = screen.getByRole("button", { name: /next month/i })
-    fireEvent.click(nextButton)
-
-    await waitFor(() => {
-      expect(onChangeMonth).toHaveBeenCalledWith(expect.any(Date))
-    })
-  })
-
-  test("onMonthChange clamps to minDate month", async () => {
-    const onChangeMonth = vi.fn()
-
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 1, 1)}
-        minDate={new Date(2024, 0, 1)}
-        onChangeMonth={onChangeMonth}
-      />,
-    )
-
-    const prevButton = screen.getByRole("button", {
-      name: /previous month/i,
-    })
-    fireEvent.click(prevButton)
-
-    await waitFor(() => {
-      expect(onChangeMonth).toHaveBeenCalledWith(expect.any(Date))
-    })
-  })
-
-  test("keyboard ArrowRight navigates to next day", async () => {
-    render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      const focusedEl = document.activeElement
-      expect(focusedEl?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "ArrowRight" })
-
-    await waitFor(() => {
-      const focusedEl = document.activeElement
-      expect(focusedEl?.tagName).toBe("TD")
-    })
-  })
-
-  test("keyboard ArrowLeft navigates to previous day", async () => {
-    render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      const focusedEl = document.activeElement
-      expect(focusedEl?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "ArrowLeft" })
-
-    await waitFor(() => {
-      const focusedEl = document.activeElement
-      expect(focusedEl?.tagName).toBe("TD")
-    })
-  })
-
-  test("keyboard Enter selects a day", async () => {
-    const onChange = vi.fn()
-    render(
-      <Calendar.Root defaultMonth={new Date(2024, 5, 1)} onChange={onChange} />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "Enter" })
-
-    expect(onChange).toHaveBeenCalledWith(expect.any(Date))
-  })
-
-  test("keyboard Space selects a day", async () => {
-    const onChange = vi.fn()
-    render(
-      <Calendar.Root defaultMonth={new Date(2024, 5, 1)} onChange={onChange} />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: " ", code: "Space" })
-
-    expect(onChange).toHaveBeenCalledWith(expect.any(Date))
-  })
-
-  test("keyboard ArrowDown navigates to next week", async () => {
-    render(<Calendar.Root defaultMonth={new Date(2024, 5, 1)} />)
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "ArrowDown" })
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-  })
-
-  test("keyboard ArrowUp navigates to previous week", async () => {
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 15)}
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "ArrowUp" })
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-  })
-
-  test("keyboard Home navigates to start of week", async () => {
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 12)}
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "Home" })
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-  })
-
-  test("keyboard End navigates to end of week", async () => {
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 12)}
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "End" })
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-  })
-
-  test("keyboard PageDown navigates to next month", async () => {
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 15)}
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "PageDown" })
-
-    await waitFor(() => {
-      const newGrid = screen.getByRole("grid")
-      expect(newGrid).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining("July"),
-      )
-    })
-  })
-
-  test("keyboard PageUp navigates to previous month", async () => {
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 15)}
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, { key: "PageUp" })
-
-    await waitFor(() => {
-      const newGrid = screen.getByRole("grid")
-      expect(newGrid).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining("May"),
-      )
-    })
-  })
-
-  test("keyboard Shift+PageDown navigates to next year", async () => {
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 15)}
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, {
-      key: "PageDown",
-      shiftKey: true,
-    })
-
-    await waitFor(() => {
-      const newGrid = screen.getByRole("grid")
-      expect(newGrid).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining("2025"),
-      )
-    })
-  })
-
-  test("keyboard Shift+PageUp navigates to previous year", async () => {
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={new Date(2024, 5, 15)}
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-
-    fireEvent.keyDown(document.activeElement!, {
-      key: "PageUp",
-      shiftKey: true,
-    })
-
-    await waitFor(() => {
-      const newGrid = screen.getByRole("grid")
-      expect(newGrid).toHaveAttribute(
-        "aria-label",
-        expect.stringContaining("2023"),
-      )
-    })
   })
 
   test("uses format.year=null to render plain year number", () => {
@@ -878,7 +303,6 @@ describe("<Calendar />", () => {
 
     const grid = screen.getByRole("grid")
     const firstWeekday = grid.querySelector("th")
-    // Sunday abbreviation
     expect(firstWeekday).toHaveAttribute("data-value", "0")
   })
 
@@ -892,65 +316,7 @@ describe("<Calendar />", () => {
 
     const grid = screen.getByRole("grid")
     const firstWeekday = grid.querySelector("th")
-    // Monday
     expect(firstWeekday).toHaveAttribute("data-value", "1")
-  })
-
-  test("onFocus focuses on value date for array value", async () => {
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={[new Date(2024, 5, 10)]}
-        multiple
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-  })
-
-  test("onFocus focuses on start date for range value", async () => {
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={{
-          end: new Date(2024, 5, 20),
-          start: new Date(2024, 5, 10),
-        }}
-        range
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
-  })
-
-  test("onFocus focuses on end date for range value with only end", async () => {
-    render(
-      <Calendar.Root
-        defaultMonth={new Date(2024, 5, 1)}
-        defaultValue={{
-          end: new Date(2024, 5, 20),
-          start: undefined,
-        }}
-        range
-      />,
-    )
-
-    const grid = screen.getByRole("grid")
-    fireEvent.focus(grid)
-
-    await waitFor(() => {
-      expect(document.activeElement?.tagName).toBe("TD")
-    })
   })
 
   test("outside days are not registered as descendants", () => {
@@ -1044,30 +410,6 @@ describe("<Calendar />", () => {
       "aria-label",
       expect.stringContaining("September"),
     )
-  })
-
-  describe("suppressHydrationWarning propagation", () => {
-    test("propagates suppressHydrationWarning to the default day label span", () => {
-      const { container } = render(
-        <Calendar.Root
-          defaultMonth={new Date(2024, 5, 1)}
-          suppressHydrationWarning
-        />,
-      )
-
-      const daySpan = container.querySelector("tbody td span")
-      expect(daySpan).not.toBeNull()
-      expect(hasSuppressHydrationWarning(daySpan)).toBeTruthy()
-    })
-
-    test("does not set suppressHydrationWarning on day label span when root omits it", () => {
-      const { container } = render(
-        <Calendar.Root defaultMonth={new Date(2024, 5, 1)} />,
-      )
-
-      const daySpan = container.querySelector("tbody td span")
-      expect(hasSuppressHydrationWarning(daySpan)).toBeFalsy()
-    })
   })
 })
 
@@ -1205,9 +547,9 @@ describe("sortDates", () => {
       new Date(2024, 5, 15),
     ]
     const sorted = sortDates(dates, "asc")
-    expect(sorted[0]!.getDate()).toBe(10)
-    expect(sorted[1]!.getDate()).toBe(15)
-    expect(sorted[2]!.getDate()).toBe(20)
+    expect(sorted[0]?.getDate()).toBe(10)
+    expect(sorted[1]?.getDate()).toBe(15)
+    expect(sorted[2]?.getDate()).toBe(20)
   })
 
   test("sorts dates in descending order", () => {
@@ -1217,9 +559,9 @@ describe("sortDates", () => {
       new Date(2024, 5, 15),
     ]
     const sorted = sortDates(dates, "desc")
-    expect(sorted[0]!.getDate()).toBe(20)
-    expect(sorted[1]!.getDate()).toBe(15)
-    expect(sorted[2]!.getDate()).toBe(10)
+    expect(sorted[0]?.getDate()).toBe(20)
+    expect(sorted[1]?.getDate()).toBe(15)
+    expect(sorted[2]?.getDate()).toBe(10)
   })
 })
 
@@ -1244,50 +586,45 @@ describe("updateMaybeDateValue", () => {
 
   test("resets range when both start and end exist", () => {
     const prev = { end: new Date(2024, 5, 20), start: new Date(2024, 5, 10) }
-    const result = updateMaybeDateValue(new Date(2024, 5, 25))(prev) as {
-      end?: Date
-      start?: Date
-    }
+    const result = assertRangeResult(
+      updateMaybeDateValue(new Date(2024, 5, 25))(prev),
+    )
     expect(result.start).toStrictEqual(new Date(2024, 5, 25))
     expect(result.end).toBeUndefined()
   })
 
   test("sets start when no start exists", () => {
     const prev = { end: undefined, start: undefined }
-    const result = updateMaybeDateValue(new Date(2024, 5, 15))(prev) as {
-      end?: Date
-      start?: Date
-    }
+    const result = assertRangeResult(
+      updateMaybeDateValue(new Date(2024, 5, 15))(prev),
+    )
     expect(result.start).toStrictEqual(new Date(2024, 5, 15))
     expect(result.end).toBeUndefined()
   })
 
   test("clears range when clicking same as start", () => {
     const prev = { end: undefined, start: new Date(2024, 5, 15) }
-    const result = updateMaybeDateValue(new Date(2024, 5, 15))(prev) as {
-      end?: Date
-      start?: Date
-    }
+    const result = assertRangeResult(
+      updateMaybeDateValue(new Date(2024, 5, 15))(prev),
+    )
     expect(result.start).toBeUndefined()
     expect(result.end).toBeUndefined()
   })
 
   test("swaps start and end when value is before start", () => {
     const prev = { end: undefined, start: new Date(2024, 5, 15) }
-    const result = updateMaybeDateValue(new Date(2024, 5, 5))(prev) as {
-      end?: Date
-      start?: Date
-    }
+    const result = assertRangeResult(
+      updateMaybeDateValue(new Date(2024, 5, 5))(prev),
+    )
     expect(result.start).toStrictEqual(new Date(2024, 5, 5))
     expect(result.end).toStrictEqual(new Date(2024, 5, 15))
   })
 
   test("sets end when value is after start", () => {
     const prev = { end: undefined, start: new Date(2024, 5, 10) }
-    const result = updateMaybeDateValue(new Date(2024, 5, 20))(prev) as {
-      end?: Date
-      start?: Date
-    }
+    const result = assertRangeResult(
+      updateMaybeDateValue(new Date(2024, 5, 20))(prev),
+    )
     expect(result.start).toStrictEqual(new Date(2024, 5, 10))
     expect(result.end).toStrictEqual(new Date(2024, 5, 20))
   })

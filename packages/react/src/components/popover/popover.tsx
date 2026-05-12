@@ -17,7 +17,7 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { createSlotComponent } from "../../core"
 import { useValue } from "../../hooks/use-value"
-import { cast, runIfFn } from "../../utils"
+import { cast, filterUndefined, runIfFn } from "../../utils"
 import { fadeScaleVariants } from "../fade-scale"
 import { motion } from "../motion"
 import { Portal } from "../portal"
@@ -123,13 +123,10 @@ export const usePopoverStyleProps = (props: UsePopoverStyleProps = {}) => {
   const strategy = useValue(props.strategy)
   const flip = useValue(props.flip)
 
-  return {
-    flip,
-    gutter,
-    matchWidth,
-    placement,
-    strategy,
-  }
+  return useMemo(
+    () => filterUndefined({ flip, gutter, matchWidth, placement, strategy }),
+    [flip, gutter, matchWidth, placement, strategy],
+  )
 }
 
 interface ComponentContext

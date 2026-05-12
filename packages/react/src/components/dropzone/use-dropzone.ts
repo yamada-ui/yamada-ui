@@ -7,6 +7,7 @@ import type { FieldProps } from "../field"
 import { fromEvent } from "file-selector"
 import { useCallback, useId } from "react"
 import { useDropzone as useOriginalDropzone } from "react-dropzone"
+import { mergeProps } from "../../core"
 import {
   ariaAttr,
   assignRef,
@@ -239,22 +240,27 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
 
   const getRootProps: PropGetter = useCallback(
     ({ ref, ...props } = {}) => {
-      const { ref: rootRef, ...rootProps } = getOriginalRootProps({
-        id: labelledbyId,
-        ...dataProps,
-        ...eventProps,
-        "aria-disabled": ariaAttr(!interactive),
-        "data-accept": dataAttr(dragAccept),
-        "data-idle": dataAttr(dragIdle),
-        "data-loading": dataAttr(loading),
-        "data-reject": dataAttr(dragReject),
-        ...rest,
-        ...props,
-      })
+      const { ref: restRef, ...restProps } = rest
+      const { ref: rootRef, ...rootProps } = getOriginalRootProps(
+        mergeProps(
+          {
+            id: labelledbyId,
+            ...dataProps,
+            ...eventProps,
+            "aria-disabled": ariaAttr(!interactive),
+            "data-accept": dataAttr(dragAccept),
+            "data-idle": dataAttr(dragIdle),
+            "data-loading": dataAttr(loading),
+            "data-reject": dataAttr(dragReject),
+          },
+          restProps,
+          props,
+        )(),
+      ) as HTMLProps
 
       return {
         ...rootProps,
-        ref: mergeRefs(ref, rest.ref, rootRef),
+        ref: mergeRefs(restRef, ref, rootRef),
       }
     },
     [

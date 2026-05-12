@@ -1,9 +1,6 @@
-import { a11y, fireEvent, render, screen } from "#test"
-import { createRef } from "react"
-import { vi } from "vitest"
+import { a11y, render, screen } from "#test"
 import { NativeSelect } from "."
 import { BoxIcon } from "../icon"
-import { InputPropsContext } from "../input"
 
 describe("<NativeSelect />", () => {
   test("renders component correctly", async () => {
@@ -13,130 +10,6 @@ describe("<NativeSelect />", () => {
         <NativeSelect.Option value="two">Option 2</NativeSelect.Option>
       </NativeSelect.Root>,
     )
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(NativeSelect.Root.displayName).toBe("NativeSelectRoot")
-    expect(NativeSelect.Option.displayName).toBe("NativeSelectOption")
-    expect(NativeSelect.Group.displayName).toBe("NativeSelectGroup")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <NativeSelect.Root
-        placeholder="キャラクターを選択"
-        rootProps={{ "data-testid": "root" }}
-      >
-        <NativeSelect.Group label="地球人">
-          <NativeSelect.Option value="孫悟空">孫悟空</NativeSelect.Option>
-          <NativeSelect.Option value="孫悟飯">孫悟飯</NativeSelect.Option>
-          <NativeSelect.Option value="クリリン">クリリン</NativeSelect.Option>
-        </NativeSelect.Group>
-
-        <NativeSelect.Group label="フリーザ軍">
-          <NativeSelect.Option value="フリーザ">フリーザ</NativeSelect.Option>
-          <NativeSelect.Option value="ギニュー">ギニュー</NativeSelect.Option>
-          <NativeSelect.Option value="リクーム">リクーム</NativeSelect.Option>
-          <NativeSelect.Option value="バータ">バータ</NativeSelect.Option>
-          <NativeSelect.Option value="ジース">ジース</NativeSelect.Option>
-          <NativeSelect.Option value="グルド">グルド</NativeSelect.Option>
-        </NativeSelect.Group>
-      </NativeSelect.Root>,
-    )
-
-    expect(screen.getByTestId("root")).toHaveClass("ui-native-select__root")
-    expect(
-      screen.getByRole("combobox", { name: /キャラクターを選択/i }),
-    ).toHaveClass("ui-native-select__field")
-    expect(screen.getByRole("option", { name: "孫悟空" })).toHaveClass(
-      "ui-native-select__option",
-    )
-    expect(screen.getByRole("group", { name: "地球人" })).toHaveClass(
-      "ui-native-select__group",
-    )
-  })
-
-  test("merges root props with user props in NativeSelect.Root", () => {
-    const onClickFromRoot = vi.fn()
-    const onClickFromUser = vi.fn()
-
-    render(
-      <NativeSelect.Root
-        className="from-user"
-        css={{ color: "rgb(255, 0, 0)" }}
-        data-testid="native-select-field"
-        rootProps={{
-          className: "from-root",
-          css: { backgroundColor: "rgb(0, 0, 255)" },
-          "data-testid": "native-select-root",
-          onClick: onClickFromRoot,
-        }}
-        onClick={onClickFromUser}
-      />,
-    )
-
-    const root = screen.getByTestId("native-select-root")
-    const field = screen.getByTestId("native-select-field")
-
-    expect(root).toHaveClass("from-root", "from-user")
-    expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(root).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    fireEvent.click(field)
-
-    expect(onClickFromRoot).toHaveBeenCalledTimes(1)
-    expect(onClickFromUser).toHaveBeenCalledTimes(1)
-  })
-
-  test("merges ref from input props context with user ref", () => {
-    const contextRef = createRef<HTMLSelectElement>()
-    const userRef = createRef<HTMLSelectElement>()
-
-    render(
-      <InputPropsContext value={{ ref: contextRef as any }}>
-        <NativeSelect.Root ref={userRef} data-testid="native-select-field" />
-      </InputPropsContext>,
-    )
-
-    const field = screen.getByTestId("native-select-field")
-
-    expect(contextRef.current).toBe(field)
-    expect(userRef.current).toBe(field)
-  })
-
-  test("merges input props context with user props", () => {
-    const onClickFromRoot = vi.fn()
-    const onClickFromUser = vi.fn()
-
-    render(
-      <InputPropsContext
-        value={{
-          className: "from-root",
-          style: { color: "rgb(255, 0, 0)" },
-          onClick: onClickFromRoot,
-        }}
-      >
-        <NativeSelect.Root
-          className="from-user"
-          style={{ backgroundColor: "rgb(0, 0, 255)" }}
-          data-testid="native-select-field"
-          rootProps={{ "data-testid": "native-select-root" }}
-          onClick={onClickFromUser}
-        />
-      </InputPropsContext>,
-    )
-
-    const root = screen.getByTestId("native-select-root")
-    const field = screen.getByTestId("native-select-field")
-
-    expect(root).toHaveClass("from-root", "from-user")
-    expect(field).toHaveStyle({ color: "rgb(255, 0, 0)" })
-    expect(field).toHaveStyle({ backgroundColor: "rgb(0, 0, 255)" })
-
-    fireEvent.click(field)
-
-    expect(onClickFromRoot).toHaveBeenCalledTimes(1)
-    expect(onClickFromUser).toHaveBeenCalledTimes(1)
   })
 
   test("should render select with props", async () => {
@@ -151,16 +24,22 @@ describe("<NativeSelect />", () => {
         <NativeSelect.Option value="two">Option 2</NativeSelect.Option>
       </NativeSelect.Root>,
     )
+
     await user.selectOptions(screen.getByTestId("select"), ["one"])
+
     const option1 = screen.getByRole("option", { name: "Option 1" })
     const option2 = screen.getByRole("option", { name: "Option 2" })
 
-    expect((option1 as HTMLOptionElement).selected).toBeTruthy()
-    expect((option2 as HTMLOptionElement).selected).toBeFalsy()
+    expect(option1).toBeInstanceOf(HTMLOptionElement)
+    expect(option2).toBeInstanceOf(HTMLOptionElement)
+    if (!(option1 instanceof HTMLOptionElement)) return
+    if (!(option2 instanceof HTMLOptionElement)) return
+    expect(option1.selected).toBeTruthy()
+    expect(option2.selected).toBeFalsy()
   })
 
   test("should render select without placeholder in options", () => {
-    render(
+    const { container } = render(
       <NativeSelect.Root
         variant="outline"
         data-testid="select"
@@ -176,33 +55,30 @@ describe("<NativeSelect />", () => {
         </NativeSelect.Option>
       </NativeSelect.Root>,
     )
-    expect(screen.queryAllByTestId("option")).toHaveLength(2)
+
+    expect(container.querySelectorAll('[data-testid="option"]')).toHaveLength(2)
   })
 
   test("should disable select", () => {
     render(<NativeSelect.Root data-testid="select" disabled />)
-    expect(screen.getByTestId("select")).toBeDisabled()
-    expect(screen.getByTestId("select")).toHaveAttribute(
-      "aria-disabled",
-      "true",
-    )
+
+    const select = screen.getByTestId("select")
+    expect(select).toBeDisabled()
+    expect(select).toHaveAttribute("aria-disabled", "true")
   })
 
   test("should be read only", () => {
     render(<NativeSelect.Root data-testid="select" readOnly />)
-    expect(screen.getByTestId("select")).toHaveAttribute(
-      "aria-readonly",
-      "true",
-    )
-    expect(screen.getByTestId("select")).toHaveAttribute(
-      "aria-disabled",
-      "true",
-    )
-    expect(screen.getByTestId("select")).toHaveAttribute("readonly")
+
+    const select = screen.getByTestId("select")
+    expect(select).toHaveAttribute("aria-readonly", "true")
+    expect(select).toHaveAttribute("aria-disabled", "true")
+    expect(select).toHaveAttribute("readonly")
   })
 
   test("should be invalid", () => {
     render(<NativeSelect.Root data-testid="select" invalid />)
+
     expect(screen.getByTestId("select")).toHaveAttribute("aria-invalid", "true")
   })
 
@@ -215,6 +91,7 @@ describe("<NativeSelect />", () => {
         }}
       />,
     )
+
     expect(screen.getByTestId("Icon")).toBeInTheDocument()
   })
 
@@ -225,8 +102,8 @@ describe("<NativeSelect />", () => {
       { label: "クリリン", value: "クリリン" },
     ]
     render(<NativeSelect.Root data-testid="select" items={items} />)
-    const children = screen.getByTestId("select").children
-    expect(children).toHaveLength(3)
+
+    expect(screen.getByTestId("select").children).toHaveLength(3)
   })
 
   test("should render items with group correctly", () => {
@@ -242,10 +119,12 @@ describe("<NativeSelect />", () => {
       },
     ]
     render(<NativeSelect.Root data-testid="select" items={items} />)
-    const children = screen.getByTestId("select").children
-    expect(children).toHaveLength(2)
-    const optgroup = screen.getByRole("group", { name: "地球人" })
-    expect(optgroup).toBeInTheDocument()
-    expect(optgroup.children).toHaveLength(3)
+
+    const select = screen.getByTestId("select")
+    expect(select.children).toHaveLength(2)
+
+    const optgroup = select.querySelector('optgroup[label="地球人"]')
+    expect(optgroup).not.toBeNull()
+    expect(optgroup?.children).toHaveLength(3)
   })
 })

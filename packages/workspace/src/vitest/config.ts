@@ -7,6 +7,7 @@ export default {
         "**/*.types.{ts,tsx}",
         "**/*.stories.{ts,tsx}",
         "**/*.test.{ts,tsx}",
+        "**/*.test.*.{ts,tsx}",
       ],
       include: ["src/**/*.{ts,tsx}"],
       provider: "v8",

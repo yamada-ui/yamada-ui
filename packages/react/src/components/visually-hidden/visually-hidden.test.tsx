@@ -1,9 +1,11 @@
-import { page, render } from "#test/browser"
+import { a11y, render, screen } from "#test"
 import { VisuallyHidden } from "./"
 
 describe("<VisuallyHidden />", () => {
   test("renders component correctly", async () => {
-    await render(<VisuallyHidden>Test</VisuallyHidden>)
-    expect(page.getByText("Test").element().textContent).toBe("Test")
+    render(<VisuallyHidden>Test</VisuallyHidden>)
+
+    expect(screen.getByText("Test")).toBeInTheDocument()
+    await a11y(<VisuallyHidden>Test</VisuallyHidden>)
   })
 })

@@ -1,22 +1,22 @@
 import type { FC, PropsWithChildren } from "react"
 import type { DescendantProps } from "."
-import { render, renderHook } from "#test"
+import { render, renderHook, waitFor } from "#test/browser"
 import { createDescendants } from "."
 
 describe("useDescendant", () => {
-  const initializeDescendants = () => {
-    const { result } = renderHook(() => createDescendants())
+  const initializeDescendants = async () => {
+    const { result } = await renderHook(() => createDescendants())
 
     const { DescendantsContext, useDescendant, useDescendants } = result.current
 
     return { DescendantsContext, useDescendant, useDescendants }
   }
 
-  const setup = () => {
+  const setup = async () => {
     const { DescendantsContext, useDescendant, useDescendants } =
-      initializeDescendants()
+      await initializeDescendants()
 
-    const { result } = renderHook(() => useDescendants())
+    const { result } = await renderHook(() => useDescendants())
     const descendants = result.current
 
     const Wrapper: FC<PropsWithChildren> = ({ children }) => {
@@ -33,8 +33,8 @@ describe("useDescendant", () => {
       .fill(0)
       .map((_, index) => <Component key={index} />)
 
-  test("Register and unregister", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("Register and unregister", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const count = 1
 
@@ -44,7 +44,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(count, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(count, Item)}</Wrapper>)
 
     expect(descendants.count()).toBe(count)
 
@@ -55,8 +55,8 @@ describe("useDescendant", () => {
     expect(descendants.count()).toBe(0)
   })
 
-  test("Index and value retrieval", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("Index and value retrieval", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -64,15 +64,15 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
 
     expect(descendants.count()).toBe(2)
     expect(descendants.indexOf(descendants.values()[0]?.node)).toBe(0)
     expect(descendants.indexOf(descendants.values()[1]?.node)).toBe(1)
   })
 
-  test("Retrieve of valid indexes and values", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("Retrieve of valid indexes and values", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -80,7 +80,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         {renderItems(2, Item)}
         <Item disabled />
@@ -94,8 +94,8 @@ describe("useDescendant", () => {
     expect(descendants.enabledIndexOf(descendants.values()[2]?.node)).toBe(-1)
   })
 
-  test("Retrieve of next and previous values", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("Retrieve of next and previous values", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -103,14 +103,14 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
 
     expect(descendants.nextValue(2)?.node).toBe(descendants.values()[0]?.node)
     expect(descendants.prevValue(0)?.node).toBe(descendants.values()[2]?.node)
   })
 
-  test("Retrieve of valid next and previous values", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("Retrieve of valid next and previous values", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -118,7 +118,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item />
         <Item disabled />
@@ -134,8 +134,8 @@ describe("useDescendant", () => {
     )
   })
 
-  test("Retrieve of first and last values", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("Retrieve of first and last values", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -143,14 +143,14 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
 
     expect(descendants.firstValue()?.node).toBe(descendants.values()[0]?.node)
     expect(descendants.lastValue()?.node).toBe(descendants.values()[2]?.node)
   })
 
-  test("Retrieve of valid first and last values", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("Retrieve of valid first and last values", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -158,7 +158,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item disabled />
         <Item />
@@ -175,8 +175,8 @@ describe("useDescendant", () => {
     )
   })
 
-  test("Return undefined for invalid indexes or elements", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("Return undefined for invalid indexes or elements", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -184,7 +184,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(0, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(0, Item)}</Wrapper>)
 
     expect(descendants.indexOf(null)).toBe(-1)
     expect(descendants.indexOf(document.createElement("div"))).toBe(-1)
@@ -194,8 +194,8 @@ describe("useDescendant", () => {
     expect(descendants.enabledNextValue(0)).toBeUndefined()
   })
 
-  test("indexOf with a Descendant object", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("indexOf with a Descendant object", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -203,15 +203,15 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
 
     const descendant = descendants.values()[1]!
 
     expect(descendants.indexOf(descendant)).toBe(1)
   })
 
-  test("enabledIndexOf with a Descendant object", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("enabledIndexOf with a Descendant object", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -219,7 +219,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item />
         <Item disabled />
@@ -232,8 +232,8 @@ describe("useDescendant", () => {
     expect(descendants.enabledIndexOf(descendant)).toBe(1)
   })
 
-  test("value with a node element", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("value with a node element", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -241,15 +241,15 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
 
     const node = descendants.values()[0]!.node
 
     expect(descendants.value(node)?.index).toBe(0)
   })
 
-  test("prevValue and nextValue with a Descendant object", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("prevValue and nextValue with a Descendant object", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -257,7 +257,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
 
     const descendant1 = descendants.values()[1]!
     const descendant2 = descendants.values()[2]!
@@ -273,8 +273,8 @@ describe("useDescendant", () => {
     )
   })
 
-  test("prevValue and nextValue with a node element", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("prevValue and nextValue with a node element", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -282,7 +282,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
 
     const node = descendants.values()[1]!.node
 
@@ -294,8 +294,8 @@ describe("useDescendant", () => {
     )
   })
 
-  test("active with a Descendant object", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("active with a Descendant object", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -303,7 +303,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
 
     const descendant = descendants.values()[1]!
 
@@ -312,28 +312,30 @@ describe("useDescendant", () => {
     expect(descendant.node.dataset.activedescendant).toBe("")
   })
 
-  test("active with focus options", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("active with focus options", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
 
-      return <div ref={register}>Item</div>
+      return (
+        <div ref={register} tabIndex={-1}>
+          Item
+        </div>
+      )
     }
 
-    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
-
+    await render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
     const node = descendants.values()[0]!.node
-    const focusSpy = vi.spyOn(node, "focus")
 
     descendants.active(node, { preventScroll: true })
 
     expect(node.dataset.activedescendant).toBe("")
-    expect(focusSpy).toHaveBeenCalledWith({ preventScroll: true })
+    expect(node).toHaveFocus()
   })
 
-  test("active skips if already active", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("active skips if already active", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -341,21 +343,21 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
-
+    await render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
     const node = descendants.values()[0]!.node
+    const outside = document.createElement("button")
 
+    document.body.append(outside)
+    outside.focus()
     node.dataset.activedescendant = ""
-
-    const focusSpy = vi.spyOn(node, "focus")
 
     descendants.active(node, { preventScroll: true })
 
-    expect(focusSpy).not.toHaveBeenCalled()
+    expect(outside).toHaveFocus()
   })
 
-  test("nextValue without loop returns undefined at the end", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("nextValue without loop returns undefined at the end", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -363,13 +365,13 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
 
     expect(descendants.nextValue(2, false)).toBeUndefined()
   })
 
-  test("prevValue without loop returns undefined at the start", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("prevValue without loop returns undefined at the start", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -377,13 +379,13 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
 
     expect(descendants.prevValue(0, false)).toBeUndefined()
   })
 
-  test("enabledNextValue with loop wraps around", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("enabledNextValue with loop wraps around", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -391,7 +393,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item />
         <Item disabled />
@@ -405,8 +407,8 @@ describe("useDescendant", () => {
     expect(result?.recurred).toBeTruthy()
   })
 
-  test("enabledPrevValue with loop wraps around", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("enabledPrevValue with loop wraps around", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -414,7 +416,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item />
         <Item disabled />
@@ -428,8 +430,8 @@ describe("useDescendant", () => {
     expect(result?.recurred).toBeTruthy()
   })
 
-  test("enabledNextValue without loop returns undefined at the end", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("enabledNextValue without loop returns undefined at the end", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -437,7 +439,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item />
         <Item />
@@ -448,8 +450,8 @@ describe("useDescendant", () => {
     expect(descendants.enabledNextValue(1, false)).toBeUndefined()
   })
 
-  test("enabledPrevValue without loop returns undefined at the start", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("enabledPrevValue without loop returns undefined at the start", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
@@ -457,7 +459,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item disabled />
         <Item />
@@ -468,8 +470,8 @@ describe("useDescendant", () => {
     expect(descendants.enabledPrevValue(1, false)).toBeUndefined()
   })
 
-  test("prevValue and nextValue return undefined for unknown node", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("prevValue and nextValue return undefined for unknown node", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -477,7 +479,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
 
     const unknownNode = document.createElement("div") as HTMLElement
 
@@ -485,8 +487,8 @@ describe("useDescendant", () => {
     expect(descendants.nextValue(unknownNode)).toBeUndefined()
   })
 
-  test("unregister with null does nothing", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("unregister with null does nothing", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -494,15 +496,15 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
 
     descendants.unregister(null)
 
     expect(descendants.count()).toBe(2)
   })
 
-  test("sortNodes returns -1 when node a precedes node b", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("sortNodes returns -1 when node a precedes node b", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -510,7 +512,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(3, Item)}</Wrapper>)
 
     const values = descendants.values()
 
@@ -519,8 +521,8 @@ describe("useDescendant", () => {
     expect(values[2]!.index).toBe(2)
   })
 
-  test("sortNodes returns 1 when node a follows node b", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("sortNodes returns 1 when node a follows node b", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -528,7 +530,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
 
     const nodeA = descendants.values()[1]!.node
     const nodeB = descendants.values()[0]!.node
@@ -541,15 +543,15 @@ describe("useDescendant", () => {
     ).toBeTruthy()
   })
 
-  test("prevValue with props filters by AND-search", () => {
+  test("prevValue with props filters by AND-search", async () => {
     interface Meta {
       group?: string
     }
-    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
-      () => createDescendants<HTMLElement, Meta>(),
+    const { DescendantsContext, useDescendant, useDescendants } = (
+      await renderHook(() => createDescendants<HTMLElement, Meta>())
     ).result.current
 
-    const { result } = renderHook(() => useDescendants())
+    const { result } = await renderHook(() => useDescendants())
     const descendants = result.current
 
     const Wrapper: FC<PropsWithChildren> = ({ children }) => (
@@ -562,7 +564,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item group="a" />
         <Item group="b" />
@@ -580,15 +582,15 @@ describe("useDescendant", () => {
     )
   })
 
-  test("nextValue with props filters by AND-search", () => {
+  test("nextValue with props filters by AND-search", async () => {
     interface Meta {
       group?: string
     }
-    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
-      () => createDescendants<HTMLElement, Meta>(),
+    const { DescendantsContext, useDescendant, useDescendants } = (
+      await renderHook(() => createDescendants<HTMLElement, Meta>())
     ).result.current
 
-    const { result } = renderHook(() => useDescendants())
+    const { result } = await renderHook(() => useDescendants())
     const descendants = result.current
 
     const Wrapper: FC<PropsWithChildren> = ({ children }) => (
@@ -601,7 +603,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item group="a" />
         <Item group="b" />
@@ -619,15 +621,15 @@ describe("useDescendant", () => {
     )
   })
 
-  test("enabledNextValue with props filters by AND-search", () => {
+  test("enabledNextValue with props filters by AND-search", async () => {
     interface Meta {
       group?: string
     }
-    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
-      () => createDescendants<HTMLElement, Meta>(),
+    const { DescendantsContext, useDescendant, useDescendants } = (
+      await renderHook(() => createDescendants<HTMLElement, Meta>())
     ).result.current
 
-    const { result } = renderHook(() => useDescendants())
+    const { result } = await renderHook(() => useDescendants())
     const descendants = result.current
 
     const Wrapper: FC<PropsWithChildren> = ({ children }) => (
@@ -640,7 +642,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item group="a" />
         <Item group="b" />
@@ -659,15 +661,15 @@ describe("useDescendant", () => {
     expect(looped?.recurred).toBeTruthy()
   })
 
-  test("enabledPrevValue with props filters by AND-search", () => {
+  test("enabledPrevValue with props filters by AND-search", async () => {
     interface Meta {
       group?: string
     }
-    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
-      () => createDescendants<HTMLElement, Meta>(),
+    const { DescendantsContext, useDescendant, useDescendants } = (
+      await renderHook(() => createDescendants<HTMLElement, Meta>())
     ).result.current
 
-    const { result } = renderHook(() => useDescendants())
+    const { result } = await renderHook(() => useDescendants())
     const descendants = result.current
 
     const Wrapper: FC<PropsWithChildren> = ({ children }) => (
@@ -680,7 +682,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item group="a" />
         <Item group="b" />
@@ -699,15 +701,15 @@ describe("useDescendant", () => {
     expect(looped?.recurred).toBeTruthy()
   })
 
-  test("enabledNextValue with props skips disabled items", () => {
+  test("enabledNextValue with props skips disabled items", async () => {
     interface Meta {
       group?: string
     }
-    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
-      () => createDescendants<HTMLElement, Meta>(),
+    const { DescendantsContext, useDescendant, useDescendants } = (
+      await renderHook(() => createDescendants<HTMLElement, Meta>())
     ).result.current
 
-    const { result } = renderHook(() => useDescendants())
+    const { result } = await renderHook(() => useDescendants())
     const descendants = result.current
 
     const Wrapper: FC<PropsWithChildren> = ({ children }) => (
@@ -720,7 +722,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item group="a" />
         <Item disabled group="a" />
@@ -735,15 +737,15 @@ describe("useDescendant", () => {
     )
   })
 
-  test("enabledNextValue with props returns undefined when no enabled match", () => {
+  test("enabledNextValue with props returns undefined when no enabled match", async () => {
     interface Meta {
       group?: string
     }
-    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
-      () => createDescendants<HTMLElement, Meta>(),
+    const { DescendantsContext, useDescendant, useDescendants } = (
+      await renderHook(() => createDescendants<HTMLElement, Meta>())
     ).result.current
 
-    const { result } = renderHook(() => useDescendants())
+    const { result } = await renderHook(() => useDescendants())
     const descendants = result.current
 
     const Wrapper: FC<PropsWithChildren> = ({ children }) => (
@@ -756,7 +758,7 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(
+    await render(
       <Wrapper>
         <Item group="a" />
         <Item disabled group="b" />
@@ -769,15 +771,15 @@ describe("useDescendant", () => {
     ).toBeUndefined()
   })
 
-  test("updates descendant props on re-render", () => {
+  test("updates descendant props on re-render", async () => {
     interface Meta {
       expanded?: boolean
     }
-    const { DescendantsContext, useDescendant, useDescendants } = renderHook(
-      () => createDescendants<HTMLElement, Meta>(),
+    const { DescendantsContext, useDescendant, useDescendants } = (
+      await renderHook(() => createDescendants<HTMLElement, Meta>())
     ).result.current
 
-    const { result } = renderHook(() => useDescendants())
+    const { result } = await renderHook(() => useDescendants())
     const descendants = result.current
 
     const Wrapper: FC<PropsWithChildren> = ({ children }) => (
@@ -790,12 +792,15 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <Wrapper>
         <Item expanded={false} />
         <Item expanded={false} />
       </Wrapper>,
     )
+    await waitFor(() => {
+      expect(descendants.values()).toHaveLength(2)
+    })
 
     expect(descendants.values()[0]!.expanded).toBeFalsy()
     expect(descendants.values()[1]!.expanded).toBeFalsy()
@@ -803,12 +808,16 @@ describe("useDescendant", () => {
     const nodeBefore = descendants.values()[0]!.node
     const indexBefore = descendants.values()[0]!.index
 
-    rerender(
+    await rerender(
       <Wrapper>
         <Item expanded />
         <Item expanded={false} />
       </Wrapper>,
     )
+
+    await waitFor(() => {
+      expect(descendants.values()).toHaveLength(2)
+    })
 
     expect(descendants.values()[0]!.expanded).toBeTruthy()
     expect(descendants.values()[1]!.expanded).toBeFalsy()
@@ -816,8 +825,8 @@ describe("useDescendant", () => {
     expect(descendants.values()[0]!.index).toBe(indexBefore)
   })
 
-  test("sortNodes warns and returns 0 for disconnected nodes", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
+  test("sortNodes handles cross-document node registration", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
 
     const Item: FC = () => {
       const { register } = useDescendant()
@@ -825,27 +834,20 @@ describe("useDescendant", () => {
       return <div ref={register}>Item</div>
     }
 
-    render(<Wrapper>{renderItems(1, Item)}</Wrapper>)
+    await render(<Wrapper>{renderItems(1, Item)}</Wrapper>)
 
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(vi.fn())
+    const frame = document.createElement("iframe")
 
-    const newNode = document.createElement("div")
-    const newNodeSpy = vi.spyOn(newNode, "compareDocumentPosition")
-    newNodeSpy.mockReturnValue(Node.DOCUMENT_POSITION_DISCONNECTED)
+    document.body.append(frame)
 
-    const registeredNode = descendants.values()[0]!.node
-    const registeredNodeSpy = vi.spyOn(
-      registeredNode,
-      "compareDocumentPosition",
-    )
-    registeredNodeSpy.mockReturnValue(Node.DOCUMENT_POSITION_DISCONNECTED)
+    const newNode = frame.contentDocument!.createElement("div")
 
     descendants.register()(newNode)
 
-    expect(warnSpy).toHaveBeenCalledWith("Cannot sort the given nodes.")
+    expect(warnSpy).not.toHaveBeenCalled()
+    expect(descendants.count()).toBe(2)
 
-    newNodeSpy.mockRestore()
-    registeredNodeSpy.mockRestore()
     warnSpy.mockRestore()
   })
 })

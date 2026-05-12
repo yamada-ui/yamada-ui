@@ -179,7 +179,7 @@ describe("useCombobox", () => {
       expect(trigger).toHaveAttribute("aria-expanded", "true")
     })
 
-    expect(page.getByTestId("content")).toBeInTheDocument()
+    await expect.element(page.getByTestId("content")).toBeInTheDocument()
   })
 
   test("trigger click keeps prop getter handler before rest handler", async () => {
@@ -330,9 +330,7 @@ describe("useCombobox", () => {
 
     await setup(<Component />)
 
-    await waitFor(() => {
-      expect(page.getByTestId("item-one")).toBeInTheDocument()
-    })
+    await expect.element(page.getByTestId("item-one")).toBeInTheDocument()
 
     await user.click(page.getByTestId("item-one"))
 
@@ -392,9 +390,7 @@ describe("useCombobox", () => {
 
     await setup(<Component />)
 
-    await waitFor(() => {
-      expect(page.getByTestId("item-one")).toBeInTheDocument()
-    })
+    await expect.element(page.getByTestId("item-one")).toBeInTheDocument()
 
     await user.hover(page.getByTestId("item-one"))
 
@@ -879,9 +875,7 @@ describe("useCombobox", () => {
       />,
     )
 
-    await waitFor(() => {
-      expect(page.getByTestId("item-one")).toBeInTheDocument()
-    })
+    await expect.element(page.getByTestId("item-one")).toBeInTheDocument()
 
     await user.click(page.getByTestId("item-one"))
 
@@ -898,9 +892,7 @@ describe("useCombobox", () => {
       />,
     )
 
-    await waitFor(() => {
-      expect(page.getByTestId("item-one")).toBeInTheDocument()
-    })
+    await expect.element(page.getByTestId("item-one")).toBeInTheDocument()
 
     const trigger = page.getByTestId("trigger").element() as HTMLElement
 
@@ -944,9 +936,9 @@ describe("useCombobox", () => {
 
     await setup(<DisabledItemComponent />)
 
-    await waitFor(() => {
-      expect(page.getByTestId("item-disabled-item")).toBeInTheDocument()
-    })
+    await expect
+      .element(page.getByTestId("item-disabled-item"))
+      .toBeInTheDocument()
 
     const trigger = page.getByTestId("trigger").element() as HTMLElement
 
@@ -986,9 +978,9 @@ describe("useCombobox", () => {
 
     await setup(<DisabledItemComponent />)
 
-    await waitFor(() => {
-      expect(page.getByTestId("item-disabled-item")).toBeInTheDocument()
-    })
+    await expect
+      .element(page.getByTestId("item-disabled-item"))
+      .toBeInTheDocument()
 
     await user.click(page.getByTestId("item-disabled-item"), { force: true })
 
@@ -1187,9 +1179,7 @@ describe("useCombobox", () => {
 
     const trigger = page.getByTestId("trigger").element() as HTMLElement
 
-    await waitFor(() => {
-      expect(page.getByTestId("item-one")).toBeInTheDocument()
-    })
+    await expect.element(page.getByTestId("item-one")).toBeInTheDocument()
 
     await pressTrigger("{ArrowDown}")
 
@@ -1208,9 +1198,7 @@ describe("useCombobox", () => {
 
     const trigger = page.getByTestId("trigger").element() as HTMLElement
 
-    await waitFor(() => {
-      expect(page.getByTestId("item-two")).toBeInTheDocument()
-    })
+    await expect.element(page.getByTestId("item-two")).toBeInTheDocument()
 
     await pressTrigger("{ArrowUp}")
 
@@ -1372,9 +1360,7 @@ describe("useCombobox", () => {
 
     const trigger = page.getByTestId("trigger").element() as HTMLElement
 
-    await waitFor(() => {
-      expect(page.getByTestId("item-three")).toBeInTheDocument()
-    })
+    await expect.element(page.getByTestId("item-three")).toBeInTheDocument()
 
     await pressTrigger("{End}")
 
@@ -1393,9 +1379,7 @@ describe("useCombobox", () => {
 
     const trigger = page.getByTestId("trigger").element() as HTMLElement
 
-    await waitFor(() => {
-      expect(page.getByTestId("item-one")).toBeInTheDocument()
-    })
+    await expect.element(page.getByTestId("item-one")).toBeInTheDocument()
 
     await pressTrigger("{Home}")
 
@@ -1417,9 +1401,7 @@ describe("useCombobox", () => {
 
     const trigger = page.getByTestId("trigger").element() as HTMLElement
 
-    await waitFor(() => {
-      expect(page.getByTestId("item-one")).toBeInTheDocument()
-    })
+    await expect.element(page.getByTestId("item-one")).toBeInTheDocument()
 
     await pressTrigger("{ArrowDown}")
 
@@ -1447,9 +1429,7 @@ describe("useCombobox", () => {
 
     const trigger = page.getByTestId("trigger").element() as HTMLElement
 
-    await waitFor(() => {
-      expect(page.getByTestId("item-one")).toBeInTheDocument()
-    })
+    await expect.element(page.getByTestId("item-one")).toBeInTheDocument()
 
     await pressTrigger("{ArrowDown}")
 

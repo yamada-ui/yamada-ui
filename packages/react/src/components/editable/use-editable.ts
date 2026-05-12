@@ -153,14 +153,16 @@ export const useEditable = (props: UseEditableProps = {}) => {
     (ev: KeyboardEvent) => {
       if (ev.key !== "Escape" && ev.key !== "Enter") return
 
-      ev.preventDefault()
-
       if (ev.key === "Escape") {
+        ev.preventDefault()
         onCancel()
       } else {
         const { metaKey, shiftKey } = ev
 
-        if (!shiftKey && !metaKey) onSubmit()
+        if (!shiftKey && !metaKey) {
+          ev.preventDefault()
+          onSubmit()
+        }
       }
     },
     [onCancel, onSubmit],

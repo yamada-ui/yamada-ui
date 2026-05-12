@@ -11,8 +11,9 @@ import type {
   ComboboxItem,
   UseComboboxGroupProps,
 } from "../../hooks/use-combobox"
+import type { Merge } from "../../utils"
 import type { UseInputBorderProps } from "../input"
-import type { PopupAnimationProps } from "../popover"
+import type { UsePopoverStyleProps, UsePopupAnimationProps } from "../popover"
 import type { SelectStyle } from "./select.style"
 import type {
   UseSelectOptionProps,
@@ -20,7 +21,7 @@ import type {
   UseSelectReturn,
 } from "./use-select"
 import { useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import {
   ComboboxContext,
   ComboboxDescendantsContext,
@@ -34,7 +35,7 @@ import { cast, isArray } from "../../utils"
 import { useGroupItemProps } from "../group"
 import { CheckIcon, ChevronDownIcon, XIcon } from "../icon"
 import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
-import { Popover } from "../popover"
+import { Popover, usePopoverStyleProps } from "../popover"
 import { selectStyle } from "./select.style"
 import { SelectContext, useSelect, useSelectOption } from "./use-select"
 
@@ -46,8 +47,8 @@ interface ComponentContext
 export interface SelectRootProps<Multiple extends boolean = false>
   extends
     Omit<HTMLStyledProps, "defaultValue" | "offset" | "onChange" | "value">,
-    UseSelectProps<Multiple>,
-    PopupAnimationProps,
+    Merge<UseSelectProps<Multiple>, UsePopoverStyleProps>,
+    UsePopupAnimationProps,
     ThemeProps<SelectStyle>,
     UseInputBorderProps {
   /**
@@ -140,6 +141,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
         ...rest
       },
     ] = useGroupItemProps(props)
+    const popoverStyleProps = usePopoverStyleProps(rest)
     const items = useMemo<ComboboxItem[]>(() => {
       if (itemsProp) return itemsProp
 
@@ -168,7 +170,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
       onChange,
       onClose,
       onSelect,
-    } = useSelect({ items, ...rest })
+    } = useSelect({ items, ...rest, ...popoverStyleProps })
     const mergedPopoverProps = useMemo<Popover.RootProps>(
       () => ({
         animationScheme,
@@ -227,13 +229,14 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
                 <styled.input {...getInputProps()} />
 
                 <InputGroup.Root
-                  className={className}
-                  css={css}
-                  colorScheme={colorScheme}
-                  {...getRootProps({ ...groupItemProps, ...rootProps })}
+                  {...mergeProps(
+                    { className, css, colorScheme },
+                    getRootProps(groupItemProps),
+                    rootProps,
+                  )()}
                 >
                   <Popover.Trigger>
-                    <SelectField {...getFieldProps(varProps)} />
+                    <SelectField {...getFieldProps({ ...varProps })} />
                   </Popover.Trigger>
 
                   <InputGroup.Element
@@ -268,7 +271,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
 )((props) => {
   const context = useInputPropsContext()
 
-  return { ...context, ...props }
+  return mergeProps(context, props)()
 }) as GenericsComponent<{
   <Multiple extends boolean = false>(
     props: SelectRootProps<Multiple>,
@@ -337,10 +340,9 @@ export interface SelectGroupProps
 export const SelectGroup = withContext<"div", SelectGroupProps>(
   ({ children, label, labelProps, ...rest }) => {
     const { groupProps } = useComponentContext()
-    const { getGroupProps, getLabelProps } = useComboboxGroup({
-      ...groupProps,
-      ...rest,
-    })
+    const { getGroupProps, getLabelProps } = useComboboxGroup(
+      mergeProps(groupProps, rest)(),
+    )
     const context = useMemo(() => ({ getLabelProps }), [getLabelProps])
 
     return (
@@ -366,10 +368,9 @@ export interface SelectOptionProps
 export const SelectOption = withContext<"div", SelectOptionProps>(
   ({ children, icon: iconProp, ...rest }) => {
     const { optionProps: { icon, ...optionProps } = {} } = useComponentContext()
-    const { getIndicatorProps, getOptionProps } = useSelectOption({
-      ...optionProps,
-      ...rest,
-    })
+    const { getIndicatorProps, getOptionProps } = useSelectOption(
+      mergeProps(optionProps, rest)(),
+    )
 
     return (
       <styled.div {...getOptionProps()}>

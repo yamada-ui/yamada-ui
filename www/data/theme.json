@@ -66,7 +66,7 @@
       },
       "solid": {
         "bg": "colorScheme.solid",
-        "border": "1px solid transparent",
+        "borderColor": "transparent",
         "color": "colorScheme.contrast"
       },
       "solid.hover": {
@@ -74,7 +74,7 @@
       },
       "subtle": {
         "bg": "colorScheme.subtle",
-        "border": "1px solid transparent",
+        "borderColor": "transparent",
         "color": "colorScheme.fg"
       },
       "subtle.hover": {
@@ -1106,7 +1106,7 @@
       },
       "black": {
         "base": "#0a0b0b",
-        "bg": "#f8f8f8",
+        "bg": "#fbfbfb",
         "contrast": "white",
         "emphasized": "black.200",
         "fg": "black.800",

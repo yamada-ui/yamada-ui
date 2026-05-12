@@ -244,11 +244,12 @@ To use an optional indicator, set a `ReactNode` to `optionalIndicator`.
 
 ### ARIA Roles and Attributes
 
-| Component                | Roles and Attributes  | Usage                                              |
-| ------------------------ | --------------------- | -------------------------------------------------- |
-| `FieldRequiredIndicator` | `role="presentation"` | Indicates that this is a presentation element.     |
-|                          | `aria-hidden`         | Excludes the element from the accessibility tree.  |
-| `Field.ErrorMessage`     | `aria-live="polite"`  | Indicates that it may be updated outside of focus. |
+| Element                             | Roles and Attributes  | Usage                                              |
+| ----------------------------------- | --------------------- | -------------------------------------------------- |
+| `div.ui-field__root`                | `role="group"`        | Indicates that this is a group element.            |
+| `span.ui-field__required-indicator` | `role="presentation"` | Indicates that this is a presentation element.     |
+|                                     | `aria-hidden`         | Excludes the element from the accessibility tree.  |
+| `span.ui-field__error-message`      | `aria-live="polite"`  | Indicates that it may be updated outside of focus. |
 
 ## Similar Components
 

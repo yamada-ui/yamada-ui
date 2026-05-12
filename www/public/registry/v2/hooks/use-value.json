@@ -8,18 +8,23 @@
   },
   "dependents": {
     "components": [
+      "action-bar",
       "alpha-slider",
       "drawer",
       "group",
       "hue-slider",
       "infinite-scroll-area",
+      "modal",
+      "popover",
       "reorder",
       "resizable",
       "segmented-control",
+      "sidebar",
       "slide",
       "slider",
       "steps",
-      "tabs"
+      "tabs",
+      "timeline"
     ],
     "hooks": [],
     "providers": []

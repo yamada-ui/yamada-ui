@@ -1,10 +1,11 @@
-import { render, screen } from "#test"
+import { a11y, render, screen } from "#test"
 import { VisuallyHidden } from "./"
 
 describe("<VisuallyHidden />", () => {
-  test("renders component correctly", () => {
+  test("renders component correctly", async () => {
     render(<VisuallyHidden>Test</VisuallyHidden>)
-    const el = screen.getByText("Test")
-    expect(el.textContent).toBe("Test")
+
+    expect(screen.getByText("Test")).toBeInTheDocument()
+    await a11y(<VisuallyHidden>Test</VisuallyHidden>)
   })
 })

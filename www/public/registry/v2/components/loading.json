@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["alert", "button", "dropzone"],
+    "components": ["alert", "button", "dropzone", "sidebar", "tree"],
     "hooks": ["use-async-callback"],
     "providers": ["ui-provider"]
   },

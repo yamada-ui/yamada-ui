@@ -111,12 +111,11 @@ If you set `aria-label`, it will be read by screen readers.
 
 ### ARIA Roles and Attributes
 
-| Component          | Roles and Attributes                  | Usage                            |
-| ------------------ | ------------------------------------- | -------------------------------- |
-| `ColorSwatch`      | `role="img"`                          | Indicates that this is an image. |
-|                    | `aria-roledescription="color swatch"` | Sets to `"color swatch"`.        |
-|                    | `aria-label`                          | Sets to the `color` value.       |
-| `ColorSwatchGroup` | `aria-label="color swatch group"`     | Sets to `"color swatch group"`.  |
+| Element                     | Roles and Attributes                  | Usage                                                                                                                                                  |
+| --------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `div.ui-color-swatch__root` | `role="img"`                          | Indicates that this is an image.                                                                                                                       |
+|                             | `aria-roledescription="color swatch"` | Sets to `"color swatch"`.                                                                                                                              |
+|                             | `aria-label`                          | Sets to the `color` value when `color` is a string; when used by `ColorSwatchGroup`, it uses the localized `colorSwatch` `"Color swatch group"` label. |
 
 ## Similar Components
 

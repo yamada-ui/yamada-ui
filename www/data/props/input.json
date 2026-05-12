@@ -295,12 +295,12 @@
         "required": false
       },
       "shrink": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
         "description": "The CSS `flex-shrink` property.",
         "required": false
       },
       "wrap": {
-        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" | AnyString ...",
         "description": "The CSS `flex-wrap` property.",
         "required": false
       }
@@ -394,12 +394,12 @@
       "required": false
     },
     "shrink": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The CSS `flex-shrink` property.",
       "required": false
     },
     "wrap": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" | AnyString ...",
       "description": "The CSS `flex-wrap` property.",
       "required": false
     }

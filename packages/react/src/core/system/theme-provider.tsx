@@ -49,7 +49,7 @@ export const getPreventTransition = (environment: Environment) => {
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        document.head.removeChild(css)
+        doc.head.removeChild(css)
       })
     })
   }

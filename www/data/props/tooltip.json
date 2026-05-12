@@ -1,7 +1,7 @@
 {
   "Tooltip": {
     "animationScheme": {
-      "type": "\"none\" | \"scale\" | SimplePlacement",
+      "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" | \"none\" | \"scale\" ...",
       "defaultValue": "\"scale\"",
       "description": "The animation of the element.",
       "required": false
@@ -58,13 +58,13 @@
       "required": false
     },
     "duration": {
-      "type": "PopupAnimationProps[\"duration\"]",
+      "type": "MotionLifecycleProps<number> | number",
       "defaultValue": "0.1",
       "description": "The animation duration.",
       "required": false
     },
     "elements": {
-      "type": "{\n  floating?: HTMLElement | null\n  reference?: null | Reference<Y>\n}",
+      "type": "{\n    floating?: HTMLElement | null\n    reference?: null | Reference<Y>\n  }",
       "description": "Object containing the reference and floating elements.",
       "required": false
     },
@@ -152,7 +152,7 @@
       "required": false
     },
     "whileElementsMounted": {
-      "type": "(reference: Reference<Y>, floating: HTMLElement, update: () => void) => () => void",
+      "type": "(\n    reference: Reference<Y>,\n    floating: HTMLElement,\n    update: () => void,\n  ) => () => void",
       "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
       "required": false
     }

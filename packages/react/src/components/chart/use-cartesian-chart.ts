@@ -10,9 +10,14 @@ import type {
   YAxisProps,
 } from "recharts"
 import type { CartesianChartProps } from "recharts/types/util/types"
-import type { HTMLProps, PropGetter, SimpleDirection } from "../../core"
 import type { Dict, Merge } from "../../utils"
 import { isValidElement, useCallback, useMemo } from "react"
+import {
+  type HTMLProps,
+  mergeProps,
+  type PropGetter,
+  type SimpleDirection,
+} from "../../core"
 import { dataAttr, isFunction, isObject, isUndefined } from "../../utils"
 import { useChartContext } from "./use-chart"
 
@@ -45,7 +50,7 @@ export const useCartesianChart = <Y extends Dict>({
   ...rest
 }: UseCartesianChartProps<Y>) => {
   const getRootProps: PropGetter = useCallback(
-    (props) => ({ ...props, ...rest }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -175,7 +180,7 @@ export const useChartXAxis = ({
   }, [labelProp])
 
   const getRootProps: PropGetter<"svg"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -366,7 +371,7 @@ export const useChartYAxis = ({
   }, [labelProp, orientation])
 
   const getRootProps: PropGetter<"svg"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -542,7 +547,7 @@ export const useChartLine = ({
   }, [activeDotProp])
 
   const getRootProps: PropGetter<"line"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -710,7 +715,7 @@ export const useChartArea = ({
   }, [activeDotProp])
 
   const getRootProps: PropGetter<"line"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -872,7 +877,7 @@ export const useChartBar = ({
   }, [labelProp])
 
   const getRootProps: PropGetter<"path"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -997,7 +1002,7 @@ export const useChartReferenceLine = ({
   }, [labelProp])
 
   const getRootProps: PropGetter<"line"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -1088,7 +1093,7 @@ export const useChartGrid = ({
   ...rest
 }: UseChartGridProps = {}) => {
   const getRootProps: PropGetter<"line"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 

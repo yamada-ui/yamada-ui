@@ -3,14 +3,35 @@ name: Release
 on:
   push:
     paths:
+      - ".github/workflows/release.yml"
+      - "package.json"
+      - "pnpm-workspace.yaml"
       - ".changeset/**"
-      - "packages/**"
-      - "!packages/**/storybook/**"
-      - "!packages/**/test/**"
+      - "packages/cli/package.json"
+      - "packages/cli/tsconfig.json"
+      - "packages/cli/tsdown.config.ts"
+      - "packages/cli/README.md"
+      - "packages/cli/src/**/*.ts"
+      - "packages/cli/src/**/*.tsx"
+      - "packages/react/package.json"
+      - "packages/react/tsconfig.json"
+      - "packages/react/tsdown.config.ts"
+      - "packages/react/README.md"
+      - "packages/react/src/**/*.ts"
+      - "packages/react/src/**/*.tsx"
+      - "packages/utils/package.json"
+      - "packages/utils/tsconfig.json"
+      - "packages/utils/tsdown.config.ts"
+      - "packages/utils/README.md"
+      - "packages/utils/src/**/*.ts"
+      - "packages/utils/src/**/*.tsx"
+      - "packages/workspace/src/typescript/**/*"
       - "!packages/**/*.stories.ts"
       - "!packages/**/*.stories.tsx"
       - "!packages/**/*.test.ts"
+      - "!packages/**/*.test.*.ts"
       - "!packages/**/*.test.tsx"
+      - "!packages/**/*.test.*.tsx"
     branches:
       - main
       - v*
@@ -33,7 +54,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
           token: ${{ secrets.PAT_TOKEN }}
@@ -74,6 +95,13 @@ jobs:
         env:
           NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update issue templates
+        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
+        run: |
+          pnpm forge issue:template
+          git add ./.github/ISSUE_TEMPLATE
+          git diff --staged --exit-code || git commit -m 'ci(changesets): update issue templates'
 
       - name: Generate registries
         if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
@@ -116,13 +144,6 @@ jobs:
           git diff --staged --exit-code || git commit -m 'ci(changesets): update www'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update issue templates
-        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
-        run: |
-          pnpm forge issue:template
-          git add ./.github/ISSUE_TEMPLATE
-          git diff --staged --exit-code || git commit -m 'ci(changesets): update issue templates'
 
       - name: Update branch
         run: git push

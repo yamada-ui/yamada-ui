@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "إغلاق شريط الإجراءات",
+    "Open action bar": "فتح شريط الإجراءات",
+  },
   autocomplete: {
     "Clear value": "مسح القيمة",
     "No results found": "لم يتم العثور على نتائج",
@@ -82,6 +86,10 @@ const data: IntlData = {
   },
   select: {
     "Clear value": "مسح القيمة",
+  },
+  sidebar: {
+    "Close sidebar": "إغلاق الشريط الجانبي",
+    "Open sidebar": "فتح الشريط الجانبي",
   },
   slider: {
     "Slider thumb": "إبهام المنزلق",

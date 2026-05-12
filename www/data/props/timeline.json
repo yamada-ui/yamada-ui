@@ -142,6 +142,11 @@
         "description": "The size of the component.",
         "required": false
       },
+      "variant": {
+        "type": "\"number\" | \"plain\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
       "index": {
         "type": "number",
         "description": "The index of the active timeline item.",
@@ -351,6 +356,11 @@
       "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
       "defaultValue": "\"md\"",
       "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"number\" | \"plain\"",
+      "description": "The variant of the component.",
       "required": false
     },
     "index": {

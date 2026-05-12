@@ -341,7 +341,7 @@ export function varAttr<Y = StyleValueWithCondition<number | string>>(
     return replaceObject(value, (value) => varAttr(value, token, fallbackValue))
   } else {
     return token
-      ? (`{${token}.${value}, ${fallbackValue ?? value}}` as Y)
+      ? (`{${token}.${value as number | string}, ${fallbackValue ?? (value as number | string)}}` as Y)
       : value
   }
 }
@@ -369,7 +369,9 @@ export function injectVars<Y extends Dict | Dict[] | undefined>(
           } else {
             result.push([
               `--${target}`,
-              token ? `{${token}.${value}, ${value}}` : value,
+              replaceObject(value, (value) =>
+                token ? `{${token}.${value}, ${value}}` : value,
+              ),
             ])
           }
         } else if (isObject(value)) {

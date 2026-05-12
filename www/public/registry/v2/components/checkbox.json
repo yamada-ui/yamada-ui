@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["checkbox-card", "table"],
+    "components": ["checkbox-card", "table", "tree"],
     "hooks": [],
     "providers": []
   },

@@ -12,10 +12,10 @@ import {
   toArray,
   toCamelCase,
 } from "@yamada-ui/utils"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { Command } from "commander"
 import { execFile } from "node:child_process"
-import { glob } from "node:fs/promises"
+import { glob, writeFile } from "node:fs/promises"
 import path from "node:path"
 import { promisify } from "node:util"
 import ora from "ora"
@@ -23,6 +23,7 @@ import c from "picocolors"
 import {
   createProgram,
   isInterfaceDeclaration,
+  isPropertySignature,
   isTypeAliasDeclaration,
 } from "typescript"
 import { features } from "web-features"
@@ -145,20 +146,34 @@ function getCSSCompatData(cssTypes: Awaited<ReturnType<typeof getCSSTypes>>) {
         }
       })
       .map(([name, data]) => {
-        const { type = "AnyString" } = cssTypes[name] ?? {}
+        const { type } = cssTypes[name] ?? {}
 
-        const computedData = { ...data, type }
+        const computedData = {
+          ...data,
+          type: type
+            ? !type.includes("AnyString")
+              ? `AnyString |${type}`
+              : type
+            : "AnyString",
+        }
 
-        return [name, computedData]
-      }),
+        return [name, computedData] as const
+      })
+      .sort((a, b) => a[0].localeCompare(b[0])),
   )
 
   return {
     atRuleCompatData,
     cssCompatData: excludedCSSCompatData,
-    deprecatedProperties,
-    excludedProperties,
-    notHasTypeProperties,
+    deprecatedProperties: deprecatedProperties.sort((a, b) =>
+      a.name.localeCompare(b.name),
+    ),
+    excludedProperties: excludedProperties.sort((a, b) =>
+      a.name.localeCompare(b.name),
+    ),
+    notHasTypeProperties: notHasTypeProperties.sort((a, b) =>
+      a.name.localeCompare(b.name),
+    ),
   }
 }
 
@@ -171,10 +186,10 @@ async function getCSSTypes() {
 
   if (!targetPath) return data
 
-  const { getSourceFile, getTypeChecker } = createProgram([targetPath], {})
+  const program = createProgram([targetPath], {})
 
-  const sourceFile = getSourceFile(targetPath)
-  const typeChecker = getTypeChecker()
+  const sourceFile = program.getSourceFile(targetPath)
+  const typeChecker = program.getTypeChecker()
 
   if (!sourceFile) return data
 
@@ -198,15 +213,31 @@ async function getCSSTypes() {
 
     for (const property of type.getProperties()) {
       const name = property.getName()
-      const type = typeChecker.getTypeOfSymbolAtLocation(property, sourceFile)
-      const nonNullableType = type.getNonNullableType()
-      const value = typeChecker.typeToString(nonNullableType)
-      const resolvedValue =
-        name === "all"
-          ? `CSS.Globals`
-          : `CSS.Property.${value.replace(/<.*?>$/, "")}`
+      const declaration =
+        property.valueDeclaration ?? property.declarations?.[0]
 
-      data[name] = { type: resolvedValue, deprecated }
+      let value: string
+
+      if (declaration && isPropertySignature(declaration) && declaration.type) {
+        value = declaration.type
+          .getText(sourceFile)
+          .replace(/\s*\|\s*undefined\s*$/, "")
+          .replace(/^Property\./, "")
+      } else {
+        const propType = typeChecker.getTypeOfSymbolAtLocation(
+          property,
+          sourceFile,
+        )
+        value = typeChecker.typeToString(propType.getNonNullableType())
+      }
+
+      data[name] = {
+        type:
+          name === "all"
+            ? `CSS.Globals`
+            : `CSS.Property.${value.replace(/<.*?>$/, "")}`,
+        deprecated,
+      }
     }
   }
 
@@ -413,10 +444,11 @@ function generateData(
 
         const config = generateConfig({ properties: [selector], transforms })()
 
-        return [selector, config]
+        return [selector, config] as const
       })
-      .filter((data) => !isUndefined(data)),
-  ) as { [key: string]: Config }
+      .filter((data) => !isUndefined(data))
+      .sort((a, b) => a[0].localeCompare(b[0])),
+  )
 
   const excludedCSSCompatData = Object.fromEntries(
     Object.entries(cssCompatData).filter(([name, data]) => {
@@ -438,34 +470,40 @@ function generateData(
   )
 
   const standard = Object.fromEntries(
-    Object.entries(excludedCSSCompatData).map(([name, data]) => {
-      const prop = name as CSSProperties | StyledProperties
-      const token = tokenMap[prop]
-      const shorthands = shorthandProps[prop]
-      const transforms = transformMap[prop]
-      const config = generateConfig({ properties: [prop], token, transforms })()
-      const docs = generateDocs(data)()
-      const type = generateType({
-        type: data.type,
-        prop,
-        token,
-        transforms,
-      })
-
-      if (token) {
-        tokenProps[token] ??= []
-        tokenProps[token].push(prop)
-      }
-
-      if (shorthands) {
-        shorthands.forEach((shorthandProp) => {
-          if (token) tokenProps[token]?.push(shorthandProp)
+    Object.entries(excludedCSSCompatData)
+      .map(([name, data]) => {
+        const prop = name as CSSProperties | StyledProperties
+        const token = tokenMap[prop]
+        const shorthands = shorthandProps[prop]
+        const transforms = transformMap[prop]
+        const config = generateConfig({
+          properties: [prop],
+          token,
+          transforms,
+        })()
+        const docs = generateDocs(data)()
+        const type = generateType({
+          type: data.type,
+          prop,
+          token,
+          transforms,
         })
-      }
 
-      return [name, { ...config, type, docs, shorthands }]
-    }),
-  ) as { [key: string]: Config }
+        if (token) {
+          tokenProps[token] ??= []
+          tokenProps[token].push(prop)
+        }
+
+        if (shorthands) {
+          shorthands.forEach((shorthandProp) => {
+            if (token) tokenProps[token]?.push(shorthandProp)
+          })
+        }
+
+        return [name, { ...config, type, docs, shorthands }] as const
+      })
+      .sort((a, b) => a[0].localeCompare(b[0])),
+  )
 
   function getRelatedCompatData(
     properties: string | string[] | undefined,
@@ -535,25 +573,35 @@ function generateData(
         })
       }
 
-      return [prop, { ...config, type, docs, shorthands }]
+      return [prop, { ...config, type, docs, shorthands }] as const
     }
   }
 
   const additional = Object.fromEntries(
-    Object.entries<StyleConfig>(additionalProps).map(generateDate()),
-  ) as { [key: string]: Config }
+    Object.entries<StyleConfig>(additionalProps)
+      .map(generateDate())
+      .sort((a, b) => a[0].localeCompare(b[0])),
+  )
   const styled = Object.fromEntries(
-    Object.entries<StyleConfig>(styledProps).map(generateDate()),
-  ) as { [key: string]: Config }
+    Object.entries<StyleConfig>(styledProps)
+      .map(generateDate())
+      .sort((a, b) => a[0].localeCompare(b[0])),
+  )
   const atRule = Object.fromEntries(
-    Object.entries<StyleConfig>(atRuleProps).map(generateDate(true)),
-  ) as { [key: string]: Config }
+    Object.entries<StyleConfig>(atRuleProps)
+      .map(generateDate(true))
+      .sort((a, b) => a[0].localeCompare(b[0])),
+  )
 
   return {
     data: { additional, atRule, pseudo, standard, styled },
-    duplicatedProps,
-    tokenProps,
-    variableLengthProps,
+    duplicatedProps: duplicatedProps.sort((a, b) =>
+      a.name.localeCompare(b.name),
+    ),
+    tokenProps: Object.fromEntries(
+      Object.entries(tokenProps).sort((a, b) => a[0].localeCompare(b[0])),
+    ),
+    variableLengthProps: variableLengthProps.sort((a, b) => a.localeCompare(b)),
   }
 }
 
@@ -619,16 +667,16 @@ function main() {
       }
 
       if (!publish) {
-        await writeFileWithFormat(STYLES_PATH, content)
+        await writeFile(STYLES_PATH, content)
 
         spinner.succeed(`Wrote file`)
 
-        spinner.start(`Fixing eslint and prettier`)
+        spinner.start(`Fixing lint and format`)
 
-        await execFileAsync("npx", ["eslint", STYLES_PATH, "--fix"])
-        await execFileAsync("npx", ["prettier", STYLES_PATH, "--write"])
+        await execFileAsync("pnpm", ["exec", "oxlint", STYLES_PATH, "--fix"])
+        await execFileAsync("pnpm", ["exec", "oxfmt", STYLES_PATH, "--write"])
 
-        spinner.succeed(`Fixed eslint and prettier`)
+        spinner.succeed(`Fixed lint and format`)
       } else {
         const omittedData = Object.fromEntries(
           Object.entries(data).map(([key, value]) => {
@@ -645,9 +693,7 @@ function main() {
           }),
         )
 
-        await writeFileWithFormat(STYLES_PUBLISH_PATH, omittedData, {
-          parser: "json",
-        })
+        await writeFileWithFormat(STYLES_PUBLISH_PATH, omittedData)
 
         spinner.succeed(`Wrote file`)
       }

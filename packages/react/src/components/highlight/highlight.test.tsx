@@ -1,41 +1,14 @@
 import { a11y, render, renderHook, screen } from "#test"
-import { Highlight, useHighlight } from "."
+import { Highlight, useHighlight } from "./"
 
 describe("<Highlight />", () => {
   test("renders component correctly", async () => {
     await a11y(<Highlight query="highlight">Highlight</Highlight>)
   })
 
-  test("sets `displayName` correctly", () => {
+  test("sets name correctly", () => {
     expect(Highlight.name).toBe("Highlight")
   })
-
-  test("renders HTML tag correctly", () => {
-    render(
-      <Highlight data-testid="highlight" query="highlight">
-        Highlight
-      </Highlight>,
-    )
-    expect(screen.getByTestId("highlight").tagName).toBe("P")
-  })
-
-  test.each([[], ""])(
-    "useHighlight returns no matches if queries is empty but returns original value",
-    (query) => {
-      const text = "this is an ordinary text which should not have any matches"
-
-      const { result } = renderHook(() =>
-        useHighlight({
-          query,
-          text,
-        }),
-      )
-
-      expect(result.current).toHaveLength(1)
-      expect(result.current[0]?.match).toBeFalsy()
-      expect(result.current[0]?.text).toBe(text)
-    },
-  )
 
   test("fragment prop works correctly", () => {
     const { container } = render(
@@ -52,9 +25,7 @@ describe("<Highlight />", () => {
         Highlight
       </Highlight>,
     )
-
-    const mark = screen.getByText("High")
-    expect(mark.tagName).toBe("MARK")
+    expect(screen.getByText("High").tagName).toBe("MARK")
     expect(container.querySelector("p")).toBeNull()
   })
 
@@ -64,29 +35,41 @@ describe("<Highlight />", () => {
         Hello world
       </Highlight>,
     )
-
     const container = screen.getByTestId("highlight")
-    const mark = screen.getByText("world")
-    expect(mark.tagName).toBe("MARK")
+    expect(screen.getByText("world").tagName).toBe("MARK")
     expect(container.tagName).toBe("P")
     expect(container).toHaveTextContent("Hello world")
   })
 
   test("markProps prop works correctly", () => {
-    const { getByText } = render(
+    render(
       <Highlight query="Highlight" markProps={{ borderRadius: "12px" }}>
         Highlight
       </Highlight>,
     )
-    expect(getByText("Highlight")).toHaveStyle("border-radius: 12px")
+    expect(screen.getByText("Highlight")).toHaveStyle({
+      borderRadius: "12px",
+    })
   })
+})
 
-  test("useHighlight matches correctly", () => {
-    const query = ["", "text"]
+describe("useHighlight", () => {
+  test.each([[], ""])(
+    "returns no matches when query is empty but returns the original text",
+    (query) => {
+      const text = "this is an ordinary text which should not have any matches"
+      const { result } = renderHook(() => useHighlight({ query, text }))
 
+      expect(result.current).toHaveLength(1)
+      expect(result.current[0]?.match).toBeFalsy()
+      expect(result.current[0]?.text).toBe(text)
+    },
+  )
+
+  test("matches each query and returns the chunks correctly", () => {
     const { result } = renderHook(() =>
       useHighlight({
-        query: query,
+        query: ["", "text"],
         text: "this is an ordinary text which should have one match ",
       }),
     )

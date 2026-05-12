@@ -3,6 +3,7 @@
 import type { KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useEffect, useId, useState } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import {
@@ -114,11 +115,7 @@ export const useAccordion = ({
   })
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ...props,
-      ...rest,
-      ref: mergeRefs(ref, rest.ref),
-    }),
+    (props = {}) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -204,7 +201,8 @@ export const useAccordionItem = ({
   const onClick = useCallback(() => {
     onChange(!open)
     setFocusedIndex(index)
-  }, [index, setFocusedIndex, open, onChange])
+    descendants.value(index)?.node.focus()
+  }, [index, setFocusedIndex, open, onChange, descendants])
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLButtonElement>) => {
@@ -235,12 +233,8 @@ export const useAccordionItem = ({
   )
 
   const getItemProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      "data-expanded": dataAttr(open),
-      ...props,
-      ...rest,
-      ref: mergeRefs(ref, rest.ref),
-    }),
+    (props = {}) =>
+      mergeProps({ "data-expanded": dataAttr(open) }, rest, props)(),
     [open, rest],
   )
 
@@ -251,6 +245,7 @@ export const useAccordionItem = ({
       "aria-controls": panelId,
       "aria-disabled": ariaAttr((!multiple && !toggle && open) || disabled),
       "aria-expanded": open,
+      tabIndex: 0,
       ...props,
       ref: mergeRefs(register, ref),
       disabled,

@@ -32,7 +32,6 @@ export const timelineStyle = defineComponentSlotStyle({
       boxSize: "{indicator-size}",
       color: "{indicator-stroke}",
       display: "flex",
-      fontWeight: "medium",
       justifyContent: "center",
       lineHeight: "{indicator-size}",
       overflow: "hidden",
@@ -125,6 +124,11 @@ export const timelineStyle = defineComponentSlotStyle({
     },
   },
 
+  variants: {
+    number: { indicator: { layerStyle: "solid" } },
+    plain: {},
+  },
+
   sizes: {
     base: {
       item: {
@@ -136,6 +140,7 @@ export const timelineStyle = defineComponentSlotStyle({
     sm: {
       content: { gap: "1", pb: "8" },
       description: { fontSize: "xs" },
+      indicator: { fontSize: "xs" },
       item: { gap: "3" },
       root: {
         "--indicator-size": "sizes.3",
@@ -147,6 +152,7 @@ export const timelineStyle = defineComponentSlotStyle({
     md: {
       content: { gap: "2", pb: "10" },
       description: { fontSize: "sm" },
+      indicator: { fontSize: "sm" },
       item: { gap: "4" },
       root: {
         "--indicator-size": "sizes.5",
@@ -158,6 +164,7 @@ export const timelineStyle = defineComponentSlotStyle({
     lg: {
       content: { gap: "2", pb: "10" },
       description: { fontSize: "sm" },
+      indicator: { fontSize: "md" },
       item: { gap: "4" },
       root: {
         "--indicator-size": "sizes.7",
@@ -169,6 +176,7 @@ export const timelineStyle = defineComponentSlotStyle({
     xl: {
       content: { gap: "2", pb: "12" },
       description: { fontSize: "md" },
+      indicator: { fontSize: "md" },
       item: { gap: "5" },
       root: {
         "--indicator-size": "sizes.8",

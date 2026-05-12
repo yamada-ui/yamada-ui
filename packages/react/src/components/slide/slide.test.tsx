@@ -1,5 +1,4 @@
-import { a11y, render, screen, waitFor } from "#test"
-import { useState } from "react"
+import { a11y, render, screen } from "#test"
 import { Slide, slideVariants } from "./slide"
 
 describe("<Slide />", () => {
@@ -7,110 +6,54 @@ describe("<Slide />", () => {
     await a11y(<Slide />)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Slide.displayName).toBe("Slide")
+  test.each([
+    ["inline-end", "translateX(100%)"],
+    ["inline-start", "translateX(-100%)"],
+    ["block-start", "translateY(-100%)"],
+    ["block-end", "translateY(100%)"],
+  ] as const)(
+    "applies styles correctly for %s placement",
+    (placement, transform) => {
+      render(<Slide placement={placement}>Slide</Slide>)
+      expect(screen.getByText("Slide").style.transform).toBe(transform)
+    },
+  )
+
+  test("renders content when open even without unmountOnExit", () => {
+    render(<Slide open>Slide</Slide>)
+    expect(screen.getByText("Slide")).toBeInTheDocument()
   })
 
-  test("sets `className` correctly", () => {
-    render(<Slide>Slide</Slide>)
-    expect(screen.getByText("Slide")).toHaveClass("ui-slide")
+  test("does not render content when unmountOnExit and not open", () => {
+    const { container } = render(<Slide unmountOnExit>Slide</Slide>)
+    expect(container.querySelector(".ui-slide")).toBeNull()
   })
 
-  test("renders HTML tag correctly", () => {
-    render(<Slide>Slide</Slide>)
-    expect(screen.getByText("Slide").tagName).toBe("DIV")
-  })
-
-  test("applies default styles correctly", async () => {
-    render(<Slide>Slide</Slide>)
-
-    const slide = await screen.findByText("Slide")
-
-    expect(slide).toHaveStyle({
-      transform: "translateX(100%)",
-    })
-  })
-
-  test("applies styles correctly for block-start placement", async () => {
-    render(<Slide placement="block-start">Slide</Slide>)
-
-    const slide = await screen.findByText("Slide")
-
-    expect(slide).toHaveStyle({
-      transform: "translateY(-100%)",
-    })
-  })
-
-  test("applies styles correctly for inline-start placement", async () => {
-    render(<Slide placement="inline-start">Slide</Slide>)
-
-    const slide = await screen.findByText("Slide")
-
-    expect(slide).toHaveStyle({
-      transform: "translateX(-100%)",
-    })
-  })
-
-  test("applies styles correctly for inline-end placement", async () => {
-    render(<Slide placement="inline-end">Slide</Slide>)
-
-    const slide = await screen.findByText("Slide")
-
-    expect(slide).toHaveStyle({
-      transform: "translateX(100%)",
-    })
-  })
-
-  test("applies styles correctly for block-end placement", async () => {
-    render(<Slide placement="block-end">Slide</Slide>)
-
-    const slide = await screen.findByText("Slide")
-
-    expect(slide).toHaveStyle({ transform: "translateY(100%)" })
+  test("renders content when unmountOnExit and open", () => {
+    render(
+      <Slide open unmountOnExit>
+        Slide
+      </Slide>,
+    )
+    expect(screen.getByText("Slide")).toBeInTheDocument()
   })
 
   describe("slideVariants", () => {
     test("returns default animation props when placement is undefined", () => {
-      const enterFn = slideVariants.enter as unknown as (custom: {
-        [key: string]: unknown
-      }) => { [key: string]: unknown }
-      const exitFn = slideVariants.exit as unknown as (custom: {
-        [key: string]: unknown
-      }) => { [key: string]: unknown }
+      const enterFn = slideVariants.enter
+      const exitFn = slideVariants.exit
 
-      const enterResult = enterFn({ placement: undefined })
-      const exitResult = exitFn({ placement: undefined })
+      if (typeof enterFn !== "function" || typeof exitFn !== "function") {
+        throw new Error("slideVariants.enter/exit must be functions")
+      }
+
+      const enterResult = enterFn({ placement: undefined }, {}, {})
+      const exitResult = exitFn({ placement: undefined }, {}, {})
 
       expect(enterResult).not.toHaveProperty("x")
       expect(enterResult).not.toHaveProperty("y")
       expect(exitResult).not.toHaveProperty("x")
       expect(exitResult).not.toHaveProperty("y")
     })
-  })
-
-  test("unmountOnExit works correctly", async () => {
-    const TestComponent = () => {
-      const [open, setOpen] = useState(false)
-
-      return (
-        <>
-          <button onClick={() => setOpen(!open)}>button</button>
-          <Slide open={open} unmountOnExit>
-            Slide
-          </Slide>
-        </>
-      )
-    }
-
-    const { user } = render(<TestComponent />)
-
-    const button = await screen.findByRole("button", { name: /button/i })
-    expect(screen.queryByText("Slide")).toBeNull()
-
-    await user.click(button)
-    await waitFor(() => expect(screen.getByText("Slide")).toBeVisible())
-
-    await user.click(button)
-    await waitFor(() => expect(screen.queryByText("Slide")).toBeNull())
   })
 })

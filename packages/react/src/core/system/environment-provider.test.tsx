@@ -1,7 +1,16 @@
-import { renderHook } from "#test"
+import { a11y, renderHook } from "#test"
 import { EnvironmentProvider, useEnvironment } from "./environment-provider"
 
 describe("EnvironmentProvider", () => {
+  test("passes a11y", async () => {
+    await a11y(
+      <EnvironmentProvider>
+        <div>content</div>
+      </EnvironmentProvider>,
+      { withProvider: false },
+    )
+  })
+
   test("provides default environment with document access", () => {
     const { result } = renderHook(() => useEnvironment(), {
       withProvider: false,

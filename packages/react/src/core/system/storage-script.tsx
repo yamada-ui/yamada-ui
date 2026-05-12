@@ -2,6 +2,7 @@
 
 import type { ColorModeWithSystem, ThemeScheme } from "./index.types"
 import type { Storage } from "./storage-manager"
+import { createdDom } from "../../utils"
 import { COLOR_MODE_STORAGE_KEY, THEME_SCHEME_STORAGE_KEY } from "../constant"
 
 export interface StorageScriptProps<Y extends string> {
@@ -45,6 +46,8 @@ export function ColorModeScript({
     COLOR_MODE_STORAGE_KEY,
   )({ defaultValue: "light", ...rest })
 
+  if (createdDom()) return null
+
   return <script dangerouslySetInnerHTML={{ __html: html }} nonce={nonce} />
 }
 
@@ -59,6 +62,8 @@ export function ThemeSchemeScript({
     defaultValue: "base",
     ...rest,
   })
+
+  if (createdDom()) return null
 
   return <script dangerouslySetInnerHTML={{ __html: html }} nonce={nonce} />
 }

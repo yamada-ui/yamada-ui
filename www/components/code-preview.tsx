@@ -59,23 +59,31 @@ export function CodePreview({
               bg: "transparent",
               border: "none",
               color: "inherit",
-              display: "inline",
+              display: "grid",
               fontSize: "inherit",
               lineHeight: "inherit",
               minH: "inherit",
+              minW: "full",
               p: "0",
               rounded: "inherit",
+              w: "max-content",
             },
             "& code .diff, & code .highlighted": {
               "--space": { base: "{spaces.lg}", md: "{spaces.md}" },
-              display: "inline-block",
-              mx: "calc({space} * -1)",
               position: "relative",
-              px: "{space}",
-              w: "calc(full + ({space} * 4))",
+              zIndex: 0,
+              _after: {
+                content: "''",
+                insetBlock: "0",
+                insetInline: "calc({space} * -1)",
+                position: "absolute",
+                zIndex: -1,
+              },
             },
             "& code .diff.add": {
-              bg: ["green.400/15", "green.500/15"],
+              _after: {
+                bg: ["green.400/15", "green.500/15"],
+              },
               _before: {
                 color: "green",
                 content: "'+'",
@@ -84,7 +92,9 @@ export function CodePreview({
               },
             },
             "& code .diff.remove": {
-              bg: ["red.400/15", "red.500/15"],
+              _after: {
+                bg: ["red.400/15", "red.500/15"],
+              },
               _before: {
                 color: "red",
                 content: "'-'",
@@ -92,8 +102,13 @@ export function CodePreview({
                 position: "absolute",
               },
             },
+            "& code .diff > span, & code .highlighted > span": {
+              position: "relative",
+            },
             "& code .highlighted": {
-              bg: ["black.400/15", "white.500/15"],
+              _after: {
+                bg: ["black.400/15", "white.500/15"],
+              },
             },
             "& code .highlighted-word": {
               bg: ["black.muted", "white.subtle"],
@@ -102,6 +117,14 @@ export function CodePreview({
               m: "-1px -2px",
               p: "1px 2px",
               rounded: "l1",
+            },
+            "& code > .line": {
+              "&:last-of-type:empty": {
+                display: "none",
+              },
+              display: "block",
+              minH: "1lh",
+              minW: "full",
             },
             "& span": {
               _dark: {
@@ -117,7 +140,7 @@ export function CodePreview({
           fontSize="sm"
           lineHeight="1.1"
           overflowX="auto"
-          pe={{ base: "16", sm: "12", md: "14" }}
+          pe="{space}"
           ps="{space}"
           py="{space}"
           rounded="l2"

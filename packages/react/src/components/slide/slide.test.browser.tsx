@@ -1,6 +1,6 @@
-import { page, render } from "#test/browser"
 import { useState } from "react"
 import { vi } from "vitest"
+import { page, render } from "#test/browser"
 import { Slide } from "./slide"
 
 describe("<Slide />", () => {

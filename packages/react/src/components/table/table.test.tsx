@@ -1,6 +1,6 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { a11y, render, screen } from "#test"
 import { vi } from "vitest"
+import { a11y, render, screen } from "#test"
 import { createColumnHelper, Table } from "./"
 
 interface Data {

@@ -1,5 +1,5 @@
-import { page, render } from "#test/browser"
 import { useState } from "react"
+import { page, render } from "#test/browser"
 import { createColumnHelper, Table } from "./"
 
 interface Data {

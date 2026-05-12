@@ -2,8 +2,8 @@ import type {
   MouseEvent as ReactMouseEvent,
   TouchEvent as ReactTouchEvent,
 } from "react"
-import { page, render, renderHook } from "#test/browser"
 import { act } from "react"
+import { page, render, renderHook } from "#test/browser"
 import { Reorder, useReorder } from "./"
 
 const mouseUpEvent = {

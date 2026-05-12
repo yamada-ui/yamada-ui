@@ -1,5 +1,5 @@
-import { a11y, fireEvent, render, screen } from "#test"
 import { vi } from "vitest"
+import { a11y, fireEvent, render, screen } from "#test"
 import { Slider } from "."
 
 describe("<Slider />", () => {

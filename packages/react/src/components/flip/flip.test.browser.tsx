@@ -1,6 +1,6 @@
 import type { KeyframeIdent } from "../../core"
-import { page, render } from "#test/browser"
 import { useState } from "react"
+import { page, render } from "#test/browser"
 import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Flip } from "./"

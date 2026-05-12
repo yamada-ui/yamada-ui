@@ -1,6 +1,6 @@
-import { page, render } from "#test/browser"
 import { useRef, useState } from "react"
 import { type Locator, locators } from "vitest/browser"
+import { page, render } from "#test/browser"
 import { FileButton } from "./file-button"
 
 declare module "vitest/browser" {

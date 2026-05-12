@@ -4,8 +4,8 @@ import type {
   MouseEvent as ReactMouseEvent,
 } from "react"
 import type { ComboboxItem, UseComboboxProps } from "./"
-import { act, fireEvent, render, screen, waitFor } from "#test"
 import { vi } from "vitest"
+import { act, fireEvent, render, screen, waitFor } from "#test"
 import {
   ComboboxContext,
   ComboboxDescendantsContext,

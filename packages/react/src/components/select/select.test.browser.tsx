@@ -1,6 +1,6 @@
 import type { FC, MouseEvent as ReactMouseEvent, ReactNode } from "react"
-import { act, page, render, renderHook, waitFor } from "#test/browser"
 import { useState } from "react"
+import { act, page, render, renderHook, waitFor } from "#test/browser"
 import { Select, useSelect } from "."
 
 const items: Select.Item[] = [

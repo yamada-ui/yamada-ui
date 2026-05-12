@@ -1,7 +1,7 @@
 import type { TreeControl } from "./use-tree"
-import { page, render } from "#test/browser"
 import { useRef, useState } from "react"
 import { vi } from "vitest"
+import { page, render } from "#test/browser"
 import { Tree } from "."
 import { BoxIcon, FileIcon, FolderIcon } from "../icon"
 

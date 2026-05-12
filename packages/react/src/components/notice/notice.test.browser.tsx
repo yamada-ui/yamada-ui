@@ -1,5 +1,5 @@
-import { page, renderHook } from "#test/browser"
 import { userEvent } from "vitest/browser"
+import { page, renderHook } from "#test/browser"
 import { useNotice } from "./use-notice"
 
 async function expectNoticeVisible(text: string) {

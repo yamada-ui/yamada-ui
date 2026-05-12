@@ -1,5 +1,5 @@
-import { a11y, fireEvent, render, screen } from "#test"
 import { useEffect, useState } from "react"
+import { a11y, fireEvent, render, screen } from "#test"
 import { Box } from "../box"
 import { Separator } from "../separator"
 import { Stack } from "./stack"

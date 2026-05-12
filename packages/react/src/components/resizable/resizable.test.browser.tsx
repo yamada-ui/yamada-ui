@@ -1,6 +1,6 @@
 import type { ResizableRootControl } from "./"
-import { page, render } from "#test/browser"
 import { useRef } from "react"
+import { page, render } from "#test/browser"
 import { Resizable } from "./"
 
 describe("<ResizableTrigger />", () => {

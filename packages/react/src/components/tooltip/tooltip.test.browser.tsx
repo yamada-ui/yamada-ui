@@ -1,5 +1,5 @@
-import { page, render } from "#test/browser"
 import { vi } from "vitest"
+import { page, render } from "#test/browser"
 import { Tooltip } from "."
 import { Text } from "../text"
 

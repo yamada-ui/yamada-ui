@@ -1,5 +1,5 @@
-import { page, render, waitFor } from "#test/browser"
 import { useState } from "react"
+import { page, render, waitFor } from "#test/browser"
 import { cast } from "../../utils"
 import { Button } from "../button"
 import { Menu } from "./"

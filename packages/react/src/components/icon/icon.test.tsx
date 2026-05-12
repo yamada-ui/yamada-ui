@@ -1,5 +1,5 @@
-import { a11y } from "#test"
 import { FaMarkdown } from "react-icons/fa"
+import { a11y } from "#test"
 import { Icon } from "./icon"
 
 describe("<Icon />", () => {

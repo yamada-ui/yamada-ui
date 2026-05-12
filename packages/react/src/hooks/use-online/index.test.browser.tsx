@@ -56,12 +56,35 @@ describe("useOnline", () => {
 
   test("stops reacting to events after unmount", async () => {
     onLineSpy.mockReturnValue(true)
+    const addEventListenerSpy = vi.spyOn(window, "addEventListener")
+    const removeEventListenerSpy = vi.spyOn(window, "removeEventListener")
 
     const { act, result, unmount } = await renderHook(() => useOnline())
 
     expect(result.current).toBeTruthy()
 
+    const onlineAddCall = addEventListenerSpy.mock.calls.find(
+      (call) => call[0] === "online",
+    )
+    const offlineAddCall = addEventListenerSpy.mock.calls.find(
+      (call) => call[0] === "offline",
+    )
+
+    expect(onlineAddCall).toBeDefined()
+    expect(offlineAddCall).toBeDefined()
+
     unmount()
+
+    expect(
+      removeEventListenerSpy.mock.calls.some(
+        (call) => call[0] === "online" && call[1] === onlineAddCall?.[1],
+      ),
+    ).toBeTruthy()
+    expect(
+      removeEventListenerSpy.mock.calls.some(
+        (call) => call[0] === "offline" && call[1] === offlineAddCall?.[1],
+      ),
+    ).toBeTruthy()
 
     await act(() => {
       onLineSpy.mockReturnValue(false)

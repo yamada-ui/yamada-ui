@@ -1,8 +1,8 @@
 "use client"
 
-import type { Doc } from "#velite"
 import type { TextProps } from "@yamada-ui/react"
 import type { RefObject } from "react"
+import type { Doc } from "#velite"
 import {
   Link,
   Separator,

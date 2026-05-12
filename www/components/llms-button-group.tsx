@@ -1,7 +1,7 @@
 "use client"
 
-import type { Doc } from "#velite"
 import type { Direction } from "@yamada-ui/react"
+import type { Doc } from "#velite"
 import {
   ButtonGroup,
   CheckIcon,

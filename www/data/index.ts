@@ -1,5 +1,5 @@
-import type { Doc } from "#velite"
 import type { ThemeToken } from "@yamada-ui/react"
+import type { Doc } from "#velite"
 import { docs } from "#velite"
 import { getPathname } from "@/utils/route"
 import en from "./doc-map.en.json"

@@ -6,12 +6,15 @@ describe("useWindowEvent", () => {
     const eventType = "resize"
     const handler = vi.fn()
 
-    const { unmount } = await renderHook(() =>
+    const { act, unmount } = await renderHook(() =>
       useWindowEvent(eventType, handler),
     )
 
-    await waitFor(() => {
+    await act(() => {
       window.dispatchEvent(new Event(eventType))
+    })
+
+    await waitFor(() => {
       expect(handler).toHaveBeenCalledTimes(1)
     })
 

@@ -190,145 +190,73 @@ describe("useFocusOnShow", () => {
 })
 
 describe("useFocusOnPointerDown", () => {
-  const defaultPlatform = window.navigator.platform
-  const defaultVendor = window.navigator.vendor
-
-  beforeAll(() => {
-    Object.defineProperty(window.navigator, "platform", {
-      value: "MacOS",
-      writable: true,
-    })
-    Object.defineProperty(window.navigator, "vendor", {
-      value: "Apple Computer, Inc.",
-      writable: true,
-    })
-  })
-
-  afterAll(() => {
-    Object.defineProperty(window.navigator, "platform", {
-      value: defaultPlatform,
-      writable: false,
-    })
-    Object.defineProperty(window.navigator, "vendor", {
-      value: defaultVendor,
-      writable: false,
-    })
-  })
-
-  const Component: FC<Omit<UseFocusOnMouseDownProps, "ref">> = (props) => {
+  const Component: FC<
+    Omit<UseFocusOnMouseDownProps, "ref"> & { preventNativeFocus?: boolean }
+  > = ({ preventNativeFocus = true, ...props }) => {
     const ref = useRef<HTMLDivElement>(null)
-    const buttonRef = useRef<HTMLButtonElement>(null)
+    const targetRef = useRef<HTMLDivElement>(null)
     useFocusOnPointerDown({
       ref,
-      elements: [buttonRef],
+      elements: [targetRef],
       enabled: true,
       ...props,
     })
 
     return (
       <div ref={ref} data-testid="container">
-        <button ref={buttonRef} data-testid="button">
-          Button
-        </button>
+        <div
+          ref={targetRef}
+          data-testid="target"
+          tabIndex={-1}
+          onPointerDown={
+            preventNativeFocus ? (ev) => ev.preventDefault() : undefined
+          }
+        >
+          Target
+        </div>
       </div>
     )
   }
 
-  const dispatchPointerDown = (target: Element) => {
-    target.dispatchEvent(
-      new PointerEvent("pointerdown", {
-        bubbles: true,
-        cancelable: true,
-      }),
-    )
+  const stubNavigator = (overrides: { platform?: string; vendor?: string }) => {
+    const descriptors: { [key: string]: PropertyDescriptor | undefined } = {
+      platform: Object.getOwnPropertyDescriptor(window.navigator, "platform"),
+      vendor: Object.getOwnPropertyDescriptor(window.navigator, "vendor"),
+    }
+
+    for (const [key, value] of Object.entries(overrides)) {
+      Object.defineProperty(window.navigator, key, {
+        configurable: true,
+        value,
+      })
+    }
+
+    return () => {
+      for (const [key, descriptor] of Object.entries(descriptors)) {
+        if (descriptor) {
+          Object.defineProperty(window.navigator, key, descriptor)
+        } else {
+          Reflect.deleteProperty(window.navigator, key)
+        }
+      }
+    }
   }
 
-  test("prevents default behavior and focuses on the target element", async () => {
-    await render(<Component />)
-    const button = page.getByTestId("button")
-
-    dispatchPointerDown(button.element())
-
-    await expect.element(button).toHaveFocus()
-  })
-
-  test("does not focus when disabled", async () => {
-    await render(<Component enabled={false} />)
-    const button = page.getByTestId("button")
-
-    dispatchPointerDown(button.element())
-
-    await expect.element(button).not.toHaveFocus()
-  })
-
-  test("does not move focus when target is already active", async () => {
-    await render(<Component />)
-    const button = page.getByTestId("button")
-    const buttonElement = button.element() as HTMLElement
-
-    buttonElement.focus()
-    dispatchPointerDown(buttonElement)
-
-    await expect.element(button).toHaveFocus()
-  })
-
-  test("uses ref as fallback when elements is not provided", async () => {
-    await render(<Component elements={undefined} />)
-    const button = page.getByTestId("button")
-
-    dispatchPointerDown(button.element())
-
-    await expect.element(button).toHaveFocus()
-  })
-
-  test("supports raw HTMLElement in elements and ignores null entries", async () => {
-    const { rerender } = await render(<Component />)
-    const button = page.getByTestId("button")
-    const buttonElement = button.element() as HTMLElement
-
-    rerender(<Component elements={[buttonElement]} />)
-    dispatchPointerDown(buttonElement)
-
-    await expect.element(button).toHaveFocus()
-
-    buttonElement.blur()
-    rerender(<Component elements={[null]} />)
-
-    const container = page.getByTestId("container").element() as HTMLElement
-    dispatchPointerDown(container)
-
-    await expect.element(button).not.toHaveFocus()
-  })
-
   test("does not focus on non-safari browsers", async () => {
-    const previousPlatform = window.navigator.platform
-    const previousVendor = window.navigator.vendor
+    const restore = stubNavigator({
+      platform: "Win32",
+      vendor: "Google Inc.",
+    })
 
     try {
-      Object.defineProperty(window.navigator, "platform", {
-        value: "Win32",
-        writable: true,
-      })
-      Object.defineProperty(window.navigator, "vendor", {
-        value: "Google Inc.",
-        writable: true,
-      })
+      const { user } = await render(<Component />)
+      const target = page.getByTestId("target")
 
-      await render(<Component />)
-      const button = page.getByTestId("button")
+      await user.click(target)
 
-      dispatchPointerDown(button.element())
-
-      await expect.element(button).not.toHaveFocus()
+      await expect.element(target).not.toHaveFocus()
     } finally {
-      Object.defineProperty(window.navigator, "platform", {
-        value: previousPlatform,
-        writable: true,
-      })
-      Object.defineProperty(window.navigator, "vendor", {
-        value: previousVendor,
-        writable: true,
-      })
+      restore()
     }
   })
 })

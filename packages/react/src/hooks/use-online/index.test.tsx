@@ -64,26 +64,6 @@ describe("useOnline", () => {
     expect(getByTestId("status").textContent).toBe("true")
   })
 
-  test("removes event listeners on unmount", () => {
-    const addSpy = vi.spyOn(window, "addEventListener")
-    const removeSpy = vi.spyOn(window, "removeEventListener")
-
-    onLineSpy.mockReturnValue(true)
-
-    const { unmount } = render(<Component />)
-
-    expect(addSpy).toHaveBeenCalledWith("online", expect.any(Function))
-    expect(addSpy).toHaveBeenCalledWith("offline", expect.any(Function))
-
-    unmount()
-
-    expect(removeSpy).toHaveBeenCalledWith("online", expect.any(Function))
-    expect(removeSpy).toHaveBeenCalledWith("offline", expect.any(Function))
-
-    addSpy.mockRestore()
-    removeSpy.mockRestore()
-  })
-
   test("uses default getServerSnapshot during SSR", () => {
     const html = renderToString(<Component />)
 

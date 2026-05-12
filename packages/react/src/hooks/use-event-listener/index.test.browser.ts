@@ -1,5 +1,5 @@
 import { renderHook } from "#test/browser"
-import { useEventListener, useEventListeners } from "./index"
+import { useEventListener, useEventListeners } from "./"
 
 describe("useEventListener", () => {
   test("Adds event listener to target element", async () => {

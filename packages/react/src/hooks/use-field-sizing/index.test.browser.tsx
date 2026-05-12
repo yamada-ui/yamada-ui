@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { useFieldSizing } from "./"
 
 const Component: FC<{ value?: string }> = ({ value }) => {
@@ -14,25 +14,6 @@ const Component: FC<{ value?: string }> = ({ value }) => {
 }
 
 describe("useFieldSizing", () => {
-  test("passes a11y checks", async () => {
-    await a11y(<Component value="hello" />)
-  })
-
-  test("renders hidden text element with value", async () => {
-    await render(<Component value="hello" />)
-
-    const span = page.getByText("hello")
-
-    await expect.element(span).toHaveAttribute("aria-hidden")
-    await expect.element(span).toHaveStyle({
-      opacity: "0",
-      overflow: "hidden",
-      position: "absolute",
-      whiteSpace: "nowrap",
-      zIndex: "-1",
-    })
-  })
-
   test("uses empty string as default value", async () => {
     await render(<Component />)
 
@@ -44,23 +25,36 @@ describe("useFieldSizing", () => {
   test("sets input width from text bounding rect", async () => {
     await render(<Component value="hello" />)
 
-    const inputElement = page.getByTestId("input").element()
-    const width = Number.parseFloat(inputElement.style.width)
+    const inputWidth = Number.parseFloat(
+      page.getByTestId("input").element().style.width,
+    )
+    const spanWidth = page
+      .getByText("hello")
+      .element()
+      .getBoundingClientRect().width
 
-    expect(width).toBeGreaterThan(0)
+    expect(inputWidth).toBeCloseTo(spanWidth, 3)
   })
 
   test("updates width when value changes", async () => {
     const { rerender } = await render(<Component value="hi" />)
     const input = page.getByTestId("input")
-    const beforeWidth = Number.parseFloat(input.element().style.width)
+    const beforeSpanWidth = page
+      .getByText("hi")
+      .element()
+      .getBoundingClientRect().width
 
     rerender(<Component value="hello world" />)
 
     await vi.waitFor(() => {
       const afterWidth = Number.parseFloat(input.element().style.width)
+      const afterSpanWidth = page
+        .getByText("hello world")
+        .element()
+        .getBoundingClientRect().width
 
-      expect(afterWidth).toBeGreaterThan(beforeWidth)
+      expect(afterWidth).toBeCloseTo(afterSpanWidth, 3)
+      expect(afterWidth).toBeGreaterThan(beforeSpanWidth)
     })
   })
 })

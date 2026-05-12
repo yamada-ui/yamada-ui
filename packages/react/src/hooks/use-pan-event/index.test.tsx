@@ -1,6 +1,5 @@
 import type { FC } from "react"
 import type { PanEventProps } from "./"
-import { vi } from "vitest"
 import { act, fireEvent, render } from "#test"
 import { usePanEvent } from "./"
 

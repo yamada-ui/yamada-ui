@@ -1,7 +1,6 @@
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import path from "node:path"
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 
 vi.mock("node-fetch", () => ({
   default: vi.fn().mockImplementation((url: string) => {

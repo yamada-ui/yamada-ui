@@ -1,6 +1,5 @@
 import type { ChangeEvent, FC } from "react"
 import { useState } from "react"
-import { vi } from "vitest"
 import { act, fireEvent, render, screen } from "#test"
 import { useControllableEventState, useControllableState } from "./"
 

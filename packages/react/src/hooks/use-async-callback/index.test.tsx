@@ -1,5 +1,4 @@
 import type { FC } from "react"
-import { vi } from "vitest"
 import { render, renderHook, screen, waitFor } from "#test"
 import { useAsyncCallback } from "."
 import { wait } from "../../utils"

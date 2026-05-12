@@ -2,7 +2,6 @@ import type { FC } from "react"
 import { vi } from "vitest"
 import { page, render, renderHook } from "#test/browser"
 import { useAsyncCallback } from "."
-import { wait } from "../../utils"
 
 describe("useAsyncCallback", () => {
   test("should handle callback correctly", async () => {
@@ -20,9 +19,13 @@ describe("useAsyncCallback", () => {
   })
 
   test("should handle callback with processing", async () => {
-    const mockCallback = vi.fn(async () => {
-      await wait(100)
-    })
+    let resolveCallback: (() => void) | undefined
+    const mockCallback = vi.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          resolveCallback = resolve
+        }),
+    )
     const { result } = await renderHook(() =>
       useAsyncCallback(mockCallback, []),
     )
@@ -48,18 +51,22 @@ describe("useAsyncCallback", () => {
     await vi.waitFor(() => expect(result.current[0]).toBeTruthy())
     await expect.element(button).toBeDisabled()
 
-    await wait(100)
+    resolveCallback?.()
+    await vi.waitFor(() => expect(result.current[0]).toBeFalsy())
     rerender(<Component />)
 
-    await vi.waitFor(() => expect(result.current[0]).toBeFalsy())
     await expect.element(button).not.toBeDisabled()
     expect(mockCallback).toHaveBeenLastCalledWith()
   })
 
   test("should handle callback without processing", async () => {
-    const mockCallback = vi.fn(async () => {
-      await wait(100)
-    })
+    let resolveCallback: (() => void) | undefined
+    const mockCallback = vi.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          resolveCallback = resolve
+        }),
+    )
     const { result } = await renderHook(() =>
       useAsyncCallback(mockCallback, [], { processing: false }),
     )
@@ -85,7 +92,7 @@ describe("useAsyncCallback", () => {
     expect(result.current[0]).toBeFalsy()
     await expect.element(button).not.toBeDisabled()
 
-    await wait(100)
+    resolveCallback?.()
     rerender(<Component />)
 
     expect(result.current[0]).toBeFalsy()
@@ -133,9 +140,13 @@ describe("useAsyncCallback", () => {
   })
 
   test.todo("should handle callback with loading", async () => {
-    const mockCallback = vi.fn(async () => {
-      await wait(100)
-    })
+    let resolveCallback: (() => void) | undefined
+    const mockCallback = vi.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          resolveCallback = resolve
+        }),
+    )
     const { result } = await renderHook(() =>
       useAsyncCallback(mockCallback, [], { loading: "page" }),
     )
@@ -165,10 +176,10 @@ describe("useAsyncCallback", () => {
     await expect.element(page.getByTestId("loading")).toBeInTheDocument()
     await expect.element(button).toBeDisabled()
 
-    await wait(500)
+    resolveCallback?.()
+    await vi.waitFor(() => expect(result.current[0]).toBeFalsy())
     rerender(<Component />)
 
-    expect(result.current[0]).toBeFalsy()
     await vi.waitFor(async () => {
       await expect
         .element(page.getByTestId("loading").query())

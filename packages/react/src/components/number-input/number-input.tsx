@@ -100,7 +100,7 @@ export const NumberInput = withProvider<"input", NumberInputProps>(
 )((props) => {
   const context = useInputPropsContext()
 
-  return { ...context, ...props }
+  return mergeProps(context, props)()
 })
 
 interface NumberInputFieldProps extends InputProps {}

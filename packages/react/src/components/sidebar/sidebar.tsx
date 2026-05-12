@@ -1024,8 +1024,7 @@ export const SidebarItem = withContext<"li", SidebarItemProps>(
       onGroupToggle,
       onSelectedChange,
     } = useSidebarItem({
-      ...componentContext.itemProps,
-      ...rest,
+      ...mergeProps(componentContext.itemProps, rest)(),
       asyncChildren: asyncChildrenProp ? asyncChildren : undefined,
       children: computedChildren,
     })
@@ -1359,7 +1358,7 @@ interface SidebarItemTooltipProps extends TooltipProps {}
 
 const SidebarItemTooltip: FC<SidebarItemTooltipProps> = (props) => {
   const { tooltipProps } = useItemComponentContext()
-  const { children, disabled, ...rest } = { ...tooltipProps, ...props }
+  const { children, disabled, ...rest } = mergeProps(tooltipProps, props)()
   const { mode, placement } = useComponentContext()
   const offcanvas = mode === "offcanvas"
 
@@ -1412,7 +1411,7 @@ export interface SidebarItemContentProps
 
 export const SidebarItemContent = withContext<"ul", SidebarItemContentProps>(
   (props) => {
-    const { contentProps = {} } = useItemComponentContext()
+    const { contentProps } = useItemComponentContext()
 
     return (
       <Collapse

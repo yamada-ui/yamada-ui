@@ -279,7 +279,8 @@ function DocsMenuGroup({
   )
 }
 
-interface DocsMenuItemProps extends NextLinkButtonProps {
+interface DocsMenuItemProps extends Omit<NextLinkButtonProps, "href"> {
+  href: string
   segment: string
   onClose: () => void
 }
@@ -295,8 +296,7 @@ function DocsMenuItem({
   const overview = segment === "overview"
   const current = overview
     ? pathname === href
-    : pathname.length <= href.toString().length &&
-      pathname.startsWith(href.toString())
+    : pathname.length <= href.length && pathname.startsWith(href)
 
   return (
     <NextLinkButton

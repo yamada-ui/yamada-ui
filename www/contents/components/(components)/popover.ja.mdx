@@ -449,21 +449,21 @@ return (
 
 ### ARIAロールと属性
 
-| コンポーネント    | ロールと属性             | 使い方                                                                                                             |
-| :---------------- | :----------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| `Popover.Content` | `role="dialog"`          | ダイアログであることを示します。                                                                                   |
-|                   | `id`                     | `Popover.Trigger`と関連付けるために使用する`id`。                                                                  |
-|                   | `aria-labelledby`        | 関連した`Popover.Header`の`id`を設定します。                                                                       |
-|                   | `aria-describedby`       | 関連した`Popover.Body`の`id`を設定します。                                                                         |
-|                   | `aria-hidden`            | ポップオーバーが開いている場合は`"false"`を設定し、閉じている場合は`"true"`を設定します。                          |
-|                   | `aria-modal`             | `modal={true}`の場合は`"true"`を設定します。                                                                       |
-| `Popover.Trigger` | `role="button"`          | ボタンであることを示します。                                                                                       |
-|                   | `aria-disabled`          | `disabled`が設定されている場合は`"true"`を設定します。                                                             |
-|                   | `aria-expanded`          | ポップオーバーが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                          |
-|                   | `aria-controls`          | ポップオーバーが開いている場合は関連した`Popover.Content`の`id`を設定し、閉じている場合は`undefined`を設定します。 |
-|                   | `aria-haspopup="dialog"` | ダイアログをトリガーすることを示します。                                                                           |
-| `Popover.Header`  | `id`                     | `Popover.Content`と関連付けるために使用する`id`。                                                                  |
-| `Popover.Body`    | `id`                     | `Popover.Content`と関連付けるために使用する`id`。                                                                  |
+| 要素                         | ロールと属性             | 使い方                                                                                                                     |
+| :--------------------------- | :----------------------- | :------------------------------------------------------------------------------------------------------------------------- |
+| `div.ui-popover__content`    | `role="dialog"`          | ダイアログであることを示します。                                                                                           |
+|                              | `id`                     | `button.ui-popover__trigger`と関連付けるために使用する`id`。                                                               |
+|                              | `aria-labelledby`        | 関連した`div.ui-popover__header`の`id`を設定します。                                                                       |
+|                              | `aria-describedby`       | 関連した`div.ui-popover__body`の`id`を設定します。                                                                         |
+|                              | `aria-hidden`            | ポップオーバーが開いている場合は`"false"`を設定し、閉じている場合は`"true"`を設定します。                                  |
+|                              | `aria-modal`             | `modal={true}`の場合は`"true"`を設定します。                                                                               |
+| `button.ui-popover__trigger` | `role="button"`          | ボタンであることを示します。                                                                                               |
+|                              | `aria-disabled`          | `disabled`が設定されている場合は`"true"`を設定します。                                                                     |
+|                              | `aria-expanded`          | ポップオーバーが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                                  |
+|                              | `aria-controls`          | ポップオーバーが開いている場合は関連した`div.ui-popover__content`の`id`を設定し、閉じている場合は`undefined`を設定します。 |
+|                              | `aria-haspopup="dialog"` | ダイアログをトリガーすることを示します。                                                                                   |
+| `div.ui-popover__header`     | `id`                     | `div.ui-popover__content`と関連付けるために使用する`id`。                                                                  |
+| `div.ui-popover__body`       | `id`                     | `div.ui-popover__content`と関連付けるために使用する`id`。                                                                  |
 
 ## 類似のコンポーネント
 

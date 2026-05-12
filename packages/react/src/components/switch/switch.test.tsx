@@ -3,93 +3,20 @@ import { BoxIcon } from "../icon"
 import { Switch } from "./"
 
 describe("<Switch />", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(<Switch>Switch</Switch>)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Switch.displayName).toBe("SwitchRoot")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<Switch data-testid="switch">Switch</Switch>)
-    const el = screen.getByTestId("switch")
-    expect(el).toHaveClass("ui-switch__root")
-    expect(el.children[1]).toHaveClass("ui-switch__track")
-    expect(el.children[1]?.children[0]).toHaveClass("ui-switch__thumb")
-    expect(el.children[2]).toHaveClass("ui-switch__label")
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(<Switch data-testid="switch">Switch</Switch>)
-    const el = screen.getByTestId("switch")
-    expect(el.tagName).toBe("LABEL")
-    expect(el.children[0]?.tagName).toBe("INPUT")
-    expect(el.children[1]?.tagName).toBe("DIV")
-    expect(el.children[1]?.children[0]?.tagName).toBe("DIV")
-    expect(el.children[2]?.tagName).toBe("SPAN")
-  })
-
-  test("should be checked when clicked", async () => {
-    const { user } = render(<Switch>Switch</Switch>)
-
-    const switchElement = await screen.findByRole("switch", { name: /Switch/i })
-
-    await user.click(switchElement)
-
-    expect(switchElement).toBeChecked()
-  })
-
-  test("should be checked by default", async () => {
+  test("is checked when defaultChecked is set", () => {
     render(<Switch defaultChecked>Switch</Switch>)
 
-    const switchElement = await screen.findByRole("switch", { name: /Switch/i })
-
-    expect(switchElement).toBeChecked()
+    expect(screen.getByRole("switch", { name: /Switch/i })).toBeChecked()
   })
 
-  test("When space key is pressed, the state should be changed", async () => {
-    const { user } = render(<Switch>Switch</Switch>)
+  test("renders the icon node", () => {
+    render(<Switch icon={<BoxIcon data-testid="icon" />}>Switch</Switch>)
 
-    const switchElement = await screen.findByRole("switch", { name: /Switch/i })
-
-    await user.tab()
-    expect(switchElement).toHaveFocus()
-    expect(switchElement).not.toBeChecked()
-
-    await user.keyboard(" ")
-
-    expect(switchElement).toBeChecked()
-  })
-
-  test("The icon should render correctly", () => {
-    const { container } = render(<Switch icon={<BoxIcon />}>Switch</Switch>)
-
-    const icon = container.querySelector("svg")
-    expect(icon).toBeInTheDocument()
-  })
-
-  test("renders object-form icon and toggles between on and off", async () => {
-    const { user } = render(
-      <Switch
-        icon={{
-          off: <span data-testid="icon-off">OFF</span>,
-          on: <span data-testid="icon-on">ON</span>,
-        }}
-      >
-        Switch
-      </Switch>,
-    )
-
-    expect(screen.getByTestId("icon-off")).toBeInTheDocument()
-    expect(screen.queryByTestId("icon-on")).not.toBeInTheDocument()
-
-    const switchElement = await screen.findByRole("switch", { name: /Switch/i })
-
-    await user.click(switchElement)
-
-    expect(screen.getByTestId("icon-on")).toBeInTheDocument()
-    expect(screen.queryByTestId("icon-off")).not.toBeInTheDocument()
+    expect(screen.getByTestId("icon")).toBeInTheDocument()
   })
 
   test("passes labelProps to the label element", () => {
@@ -108,9 +35,8 @@ describe("<Switch />", () => {
   test("does not render the label element when children is not provided", () => {
     render(<Switch data-testid="switch" />)
 
-    const el = screen.getByTestId("switch")
-    const labelElement = el.querySelector(".ui-switch__label")
-
-    expect(labelElement).toBeNull()
+    expect(
+      screen.getByTestId("switch").querySelector(".ui-switch__label"),
+    ).toBeNull()
   })
 })

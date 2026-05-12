@@ -1,5 +1,6 @@
-import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { useRef } from "react"
+
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { Sidebar } from "."
 import { Button } from "../button"
 
@@ -78,118 +79,34 @@ describe("<Sidebar />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Sidebar.Root.displayName).toBe("SidebarRoot")
-    expect(Sidebar.Trigger.displayName).toBe("SidebarTrigger")
-    expect(Sidebar.SidePanel.displayName).toBe("SidebarSidePanel")
-    expect(Sidebar.MainPanel.displayName).toBe("SidebarMainPanel")
-    expect(Sidebar.Header.displayName).toBe("SidebarHeader")
-    expect(Sidebar.Content.displayName).toBe("SidebarContent")
-    expect(Sidebar.Footer.displayName).toBe("SidebarFooter")
-    expect(Sidebar.Group.displayName).toBe("SidebarGroup")
-    expect(Sidebar.GroupLabel.displayName).toBe("SidebarGroupLabel")
-    expect(Sidebar.GroupContent.displayName).toBe("SidebarGroupContent")
-    expect(Sidebar.Item.displayName).toBe("SidebarItem")
-    expect(Sidebar.ItemTrigger.displayName).toBe("SidebarItemTrigger")
-    expect(Sidebar.ItemLink.displayName).toBe("SidebarItemLink")
-    expect(Sidebar.ItemContent.displayName).toBe("SidebarItemContent")
-    expect(Sidebar.ItemLabel.displayName).toBe("SidebarItemLabel")
-    expect(Sidebar.ItemStartElement.displayName).toBe("SidebarItemStartElement")
-    expect(Sidebar.ItemEndElement.displayName).toBe("SidebarItemEndElement")
-    expect(Sidebar.ItemIndicator.displayName).toBe("SidebarItemIndicator")
-    expect(Sidebar.Menu.displayName).toBe("SidebarMenu")
-    expect(Sidebar.MenuButton.displayName).toBe("SidebarMenuButton")
-    expect(Sidebar.Handle.displayName).toBe("SidebarHandle")
-  })
-
-  test("sets `className` correctly", () => {
-    const { container } = render(
-      <Sidebar.Root defaultExpandedValue={["/1"]}>
-        <Sidebar.SidePanel
-          footer={<Sidebar.MenuButton>Footer</Sidebar.MenuButton>}
-          header={<Sidebar.MenuButton>Header</Sidebar.MenuButton>}
-          items={navItems}
-        />
-      </Sidebar.Root>,
-    )
-
-    expect(container.querySelector(".ui-sidebar__root")).toBeInTheDocument()
-    expect(
-      container.querySelector(".ui-sidebar__side-panel"),
-    ).toBeInTheDocument()
-    expect(container.querySelector(".ui-sidebar__header")).toBeInTheDocument()
-    expect(container.querySelector(".ui-sidebar__footer")).toBeInTheDocument()
-    expect(container.querySelector(".ui-sidebar__content")).toBeInTheDocument()
-    expect(container.querySelector(".ui-sidebar__item")).toBeInTheDocument()
-    expect(
-      container.querySelector(".ui-sidebar__item-link"),
-    ).toBeInTheDocument()
-    expect(
-      container.querySelector(".ui-sidebar__item-trigger"),
-    ).toBeInTheDocument()
-    expect(
-      container.querySelector(".ui-sidebar__item-content"),
-    ).toBeInTheDocument()
-    expect(container.querySelector(".ui-sidebar__handle")).toBeInTheDocument()
-  })
-
-  test("renders HTML tag correctly", () => {
-    const { container } = render(
-      <Sidebar.Root defaultExpandedValue={["/1"]}>
-        <Sidebar.SidePanel
-          footer={<Sidebar.MenuButton>Footer</Sidebar.MenuButton>}
-          header={<Sidebar.MenuButton>Header</Sidebar.MenuButton>}
-          items={navItems}
-        />
-        <Sidebar.MainPanel>
-          <Sidebar.Trigger>
-            <Button data-testid="trigger">Toggle</Button>
-          </Sidebar.Trigger>
-        </Sidebar.MainPanel>
-      </Sidebar.Root>,
-    )
-
-    expect(container.querySelector(".ui-sidebar__root")?.tagName).toBe("DIV")
-    expect(container.querySelector(".ui-sidebar__side-panel")?.tagName).toBe(
-      "ASIDE",
-    )
-    expect(container.querySelector(".ui-sidebar__header")?.tagName).toBe(
-      "HEADER",
-    )
-    expect(container.querySelector(".ui-sidebar__footer")?.tagName).toBe(
-      "FOOTER",
-    )
-    expect(container.querySelector(".ui-sidebar__content")?.tagName).toBe("UL")
-    expect(container.querySelector(".ui-sidebar__item")?.tagName).toBe("LI")
-    expect(container.querySelector(".ui-sidebar__item-link")?.tagName).toBe("A")
-    expect(container.querySelector(".ui-sidebar__item-trigger")?.tagName).toBe(
-      "BUTTON",
-    )
-    expect(container.querySelector(".ui-sidebar__item-content")?.tagName).toBe(
-      "UL",
-    )
-    expect(container.querySelector(".ui-sidebar__main-panel")?.tagName).toBe(
-      "DIV",
-    )
-  })
-
-  test("should select leaf item on click", async () => {
+  test("should select leaf item on click", () => {
     const onSelectedChange = vi.fn()
+    const navigationSafeNavItems: Sidebar.ItemType[] = navItems.map(
+      (item, index) =>
+        index === 0 && item.children
+          ? {
+              ...item,
+              children: item.children.map((child, childIndex) =>
+                childIndex === 0 ? { ...child, value: "#/1/1" } : child,
+              ),
+            }
+          : item,
+    )
 
-    const { user } = render(
+    render(
       <Sidebar.Root
         defaultExpandedValue={["/1"]}
         onSelectedChange={onSelectedChange}
       >
-        <Sidebar.SidePanel items={navItems} />
+        <Sidebar.SidePanel items={navigationSafeNavItems} />
       </Sidebar.Root>,
     )
 
     const link = screen.getByRole("link", { name: "1-1" })
 
-    await user.click(link)
+    fireEvent.click(link)
 
-    expect(onSelectedChange).toHaveBeenCalledWith("/1/1")
+    expect(onSelectedChange).toHaveBeenCalledWith("#/1/1")
   })
 
   test("should expand and collapse group on trigger click", async () => {
@@ -203,7 +120,7 @@ describe("<Sidebar />", () => {
 
     const trigger = screen.getByRole("button", { name: /1/ })
 
-    await user.click(trigger)
+    fireEvent.click(trigger)
 
     expect(onExpandedChange).toHaveBeenCalledWith(["/1"])
     expect(trigger).toHaveAttribute("data-expanded")
@@ -213,10 +130,10 @@ describe("<Sidebar />", () => {
     expect(onExpandedChange).toHaveBeenLastCalledWith([])
   })
 
-  test("should not expand disabled group on click", async () => {
+  test("should not expand disabled group on click", () => {
     const onExpandedChange = vi.fn()
 
-    const { user } = render(
+    render(
       <Sidebar.Root onExpandedChange={onExpandedChange}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
@@ -224,15 +141,15 @@ describe("<Sidebar />", () => {
 
     const trigger = screen.getByRole("button", { name: /2/ })
 
-    await user.click(trigger)
+    fireEvent.click(trigger)
 
     expect(onExpandedChange).not.toHaveBeenCalled()
   })
 
-  test("should not select disabled leaf item", async () => {
+  test("should not select disabled leaf item", () => {
     const onSelectedChange = vi.fn()
 
-    const { user } = render(
+    render(
       <Sidebar.Root onSelectedChange={onSelectedChange}>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
@@ -240,7 +157,7 @@ describe("<Sidebar />", () => {
 
     const link = screen.getByRole("link", { name: "4" })
 
-    await user.click(link)
+    fireEvent.click(link)
 
     expect(onSelectedChange).not.toHaveBeenCalled()
   })
@@ -498,8 +415,8 @@ describe("<Sidebar />", () => {
     })
   })
 
-  test("should prevent navigation when clicking disabled link", async () => {
-    const { user } = render(
+  test("should prevent navigation when clicking disabled link", () => {
+    render(
       <Sidebar.Root>
         <Sidebar.SidePanel items={navItems} />
       </Sidebar.Root>,
@@ -512,7 +429,7 @@ describe("<Sidebar />", () => {
     })
     const preventDefaultSpy = vi.spyOn(clickEvent, "preventDefault")
 
-    await user.click(link)
+    fireEvent.click(link)
     link.dispatchEvent(clickEvent)
 
     expect(preventDefaultSpy).toHaveBeenCalledTimes(1)

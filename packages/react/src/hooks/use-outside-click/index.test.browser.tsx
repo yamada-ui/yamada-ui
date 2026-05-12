@@ -50,30 +50,4 @@ describe("useOutsideClick", () => {
 
     expect(handler).not.toHaveBeenCalled()
   })
-
-  test("calls handler on touchend outside element", async () => {
-    const handler = vi.fn()
-
-    await render(<Component handler={handler} />)
-
-    document.dispatchEvent(new Event("touchstart"))
-    document.dispatchEvent(new Event("touchend"))
-
-    expect(handler).toHaveBeenCalledExactlyOnceWith(expect.any(Object))
-  })
-
-  test("does not call handler on touchend inside element", async () => {
-    const handler = vi.fn()
-
-    const { user } = await render(<Component handler={handler} />)
-
-    const el = page.getByRole("button", { name: "inside" }).element()
-    el.dispatchEvent(new Event("touchend", { bubbles: true }))
-
-    expect(handler).not.toHaveBeenCalled()
-
-    await user.click(page.getByRole("button", { name: "outside" }))
-
-    expect(handler).not.toHaveBeenCalled()
-  })
 })

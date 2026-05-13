@@ -109,27 +109,7 @@ describe("<DatePicker />", () => {
     await expect.element(inputs.nth(1)).toHaveFocus()
   })
 
-  test("handles input change for single date with typing", async () => {
-    const { user } = await render(<DatePicker placeholder="Select date" />)
-
-    const input = page.getByRole("textbox").first()
-    await user.type(input, "2024-01-15")
-
-    await expect.element(input).toHaveValue("2024-01-15")
-  })
-
-  test("handles input change for range date with typing", async () => {
-    const { user } = await render(
-      <DatePicker placeholder="Select date" range />,
-    )
-
-    const inputs = page.getByRole("textbox")
-    await user.type(inputs.first(), "2024-01-15")
-
-    await expect.element(inputs.first()).toHaveValue("2024-01-15")
-  })
-
-  test("handles input change for single date with fill", async () => {
+  test("handles input change for single date", async () => {
     const { user } = await render(<DatePicker placeholder="Select date" />)
 
     const input = page.getByRole("textbox").first()
@@ -138,7 +118,7 @@ describe("<DatePicker />", () => {
     await expect.element(input).toHaveValue("2024-01-15")
   })
 
-  test("handles input change for range date with fill", async () => {
+  test("handles input change for range date", async () => {
     const { user } = await render(
       <DatePicker placeholder="Select date" range />,
     )

@@ -76,7 +76,7 @@ export function mergeProps<Y extends (Dict | undefined)[]>(
 ): (options?: MergePropsOptions) => MergeAll<Y>
 export function mergeProps(...args: (Dict | undefined)[]) {
   return function ({
-    mergeAria = false,
+    mergeAria = true,
     mergeClassName = true,
     mergeCSS = true,
     mergeEvent = true,

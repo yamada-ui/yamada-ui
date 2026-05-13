@@ -116,42 +116,34 @@ describe("mergeProps", () => {
     expect(result["aria-describedby"]).toBe("b")
   })
 
-  test("mergeAria: defaults to last-wins for ARIA list attributes", () => {
+  test("merges space-separated ARIA lists", () => {
     const result = mergeProps(
       { "aria-describedby": "error-id" },
       { "aria-describedby": "helper-id" },
     )()
-    expect(result["aria-describedby"]).toBe("helper-id")
-  })
-
-  test("mergeAria: merges space-separated ARIA lists when enabled", () => {
-    const result = mergeProps(
-      { "aria-describedby": "error-id" },
-      { "aria-describedby": "helper-id" },
-    )({ mergeAria: true })
     expect(result["aria-describedby"]).toBe("error-id helper-id")
   })
 
-  test("mergeAria: one side undefined passes through when enabled", () => {
+  test("mergeAria: one side undefined passes through", () => {
     expect(
       mergeProps(
         { "aria-labelledby": "a" },
         { "aria-labelledby": undefined },
-      )({ mergeAria: true })["aria-labelledby"],
+      )()["aria-labelledby"],
     ).toBe("a")
     expect(
       mergeProps(
         { "aria-labelledby": undefined },
         { "aria-labelledby": "b" },
-      )({ mergeAria: true })["aria-labelledby"],
+      )()["aria-labelledby"],
     ).toBe("b")
   })
 
-  test("mergeAria: non-list ARIA attributes keep last wins when enabled", () => {
+  test("non-list ARIA attributes keep last wins", () => {
     const result = mergeProps(
       { "aria-activedescendant": "x" },
       { "aria-activedescendant": "y" },
-    )({ mergeAria: true })
+    )()
     expect(result["aria-activedescendant"]).toBe("y")
   })
 })

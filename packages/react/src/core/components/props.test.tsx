@@ -91,9 +91,20 @@ describe("mergeProps", () => {
     const fn1 = vi.fn()
     const fn2 = vi.fn()
     const result = mergeProps(
-      { className: "a", style: { color: "red" }, onClick: fn1 },
-      { className: "b", style: { color: "blue" }, onClick: fn2 },
+      {
+        className: "a",
+        style: { color: "red" },
+        "aria-describedby": "a",
+        onClick: fn1,
+      },
+      {
+        className: "b",
+        style: { color: "blue" },
+        "aria-describedby": "b",
+        onClick: fn2,
+      },
     )({
+      mergeAria: false,
       mergeClassName: false,
       mergeCSS: false,
       mergeEvent: false,
@@ -102,6 +113,46 @@ describe("mergeProps", () => {
     })
     expect(result.className).toBe("b")
     expect(result.onClick).toBe(fn2)
+    expect(result["aria-describedby"]).toBe("b")
+  })
+
+  test("mergeAria: defaults to last-wins for ARIA list attributes", () => {
+    const result = mergeProps(
+      { "aria-describedby": "error-id" },
+      { "aria-describedby": "helper-id" },
+    )()
+    expect(result["aria-describedby"]).toBe("helper-id")
+  })
+
+  test("mergeAria: merges space-separated ARIA lists when enabled", () => {
+    const result = mergeProps(
+      { "aria-describedby": "error-id" },
+      { "aria-describedby": "helper-id" },
+    )({ mergeAria: true })
+    expect(result["aria-describedby"]).toBe("error-id helper-id")
+  })
+
+  test("mergeAria: one side undefined passes through when enabled", () => {
+    expect(
+      mergeProps(
+        { "aria-labelledby": "a" },
+        { "aria-labelledby": undefined },
+      )({ mergeAria: true })["aria-labelledby"],
+    ).toBe("a")
+    expect(
+      mergeProps(
+        { "aria-labelledby": undefined },
+        { "aria-labelledby": "b" },
+      )({ mergeAria: true })["aria-labelledby"],
+    ).toBe("b")
+  })
+
+  test("mergeAria: non-list ARIA attributes keep last wins when enabled", () => {
+    const result = mergeProps(
+      { "aria-activedescendant": "x" },
+      { "aria-activedescendant": "y" },
+    )({ mergeAria: true })
+    expect(result["aria-activedescendant"]).toBe("y")
   })
 })
 

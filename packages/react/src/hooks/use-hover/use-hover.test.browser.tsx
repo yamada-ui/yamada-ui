@@ -12,7 +12,17 @@ describe("useHover", () => {
       return <span ref={ref}>{hovered ? "Hovered" : "Not hovered"}</span>
     }
 
-    const { unmount, user } = await render(<Text />)
+    const { unmount, user } = await render(
+      <>
+        <div
+          style={{ height: 12, left: 8, position: "fixed", top: 8, width: 12 }}
+          data-testid="pointer-reset"
+        />
+        <Text />
+      </>,
+    )
+
+    await user.hover(page.getByTestId("pointer-reset"))
 
     const initialText = page.getByText(notHoveredText)
     await expect.element(initialText).toBeInTheDocument()

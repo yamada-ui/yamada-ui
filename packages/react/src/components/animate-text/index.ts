@@ -1,0 +1,5 @@
+export type { AnimateTextProps } from "./animate-text"
+export { splitText } from "./animate-text"
+export * as AnimateText from "./namespace"
+export { useAnimateText } from "./use-animate-text"
+export type { UseAnimateTextProps } from "./use-animate-text"

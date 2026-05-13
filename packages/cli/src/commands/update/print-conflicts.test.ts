@@ -1,5 +1,4 @@
 import type { Config, Section } from "../../index.type"
-import { describe, expect, test } from "vitest"
 import { printConflicts } from "./print-conflicts"
 
 function createMockConfig(): Config {

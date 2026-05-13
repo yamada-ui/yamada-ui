@@ -1,4 +1,3 @@
-import { describe, expect, test, vi } from "vitest"
 import { isRtl } from "./i18n"
 
 describe("isRtl", () => {

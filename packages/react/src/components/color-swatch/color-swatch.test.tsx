@@ -1,4 +1,3 @@
-import { vi } from "vitest"
 import { a11y, render, screen } from "#test"
 import { ColorSwatch, ColorSwatchGroup } from "./"
 

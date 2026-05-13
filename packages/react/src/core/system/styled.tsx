@@ -193,7 +193,7 @@ export function createStyled<
     }, [rest])
 
     styleProps.colorScheme ??= colorScheme
-      forwardProps.suppressHydrationWarning ??= suppressHydrationWarning
+    forwardProps.suppressHydrationWarning ??= suppressHydrationWarning
 
     if (forwardProps.className)
       className = getRegisteredStyles(

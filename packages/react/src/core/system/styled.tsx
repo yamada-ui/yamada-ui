@@ -3,7 +3,12 @@
 import type { EmotionCache, SerializedStyles } from "@emotion/utils"
 import type { FC } from "react"
 import type { Dict } from "../../utils"
-import type { As, ShouldForwardProp, StyledComponent } from "../components"
+import type {
+  As,
+  HTMLProps,
+  ShouldForwardProp,
+  StyledComponent,
+} from "../components"
 import type { CSSModifierObject, CSSPropObject } from "../css"
 import type {
   ColorScheme,
@@ -100,6 +105,11 @@ export const [ColorSchemeContext, useColorSchemeContext] =
     strict: false,
   })
 
+export const [HydrationContext, useHydrationContext] = createContext<boolean>({
+  name: "HydrationContext",
+  strict: false,
+})
+
 export interface StyledOptions<
   Y extends CSSPropObject = CSSPropObject,
   M extends CSSModifierObject = CSSModifierObject,
@@ -175,6 +185,7 @@ export function createStyled<
       omittedProps,
       componentStyleOptions,
     )
+    const suppressHydrationWarning = useHydrationContext()
     const [cssArray, colorScheme, forwardProps] = useMemo(() => {
       const { css, colorScheme, ...forwardProps } = rest
 
@@ -182,6 +193,7 @@ export function createStyled<
     }, [rest])
 
     styleProps.colorScheme ??= colorScheme
+      forwardProps.suppressHydrationWarning ??= suppressHydrationWarning
 
     if (forwardProps.className)
       className = getRegisteredStyles(
@@ -211,17 +223,19 @@ export function createStyled<
 
     if (!className) className = undefined
 
-    const mergedProps = { ...forwardProps, className, children }
+    const mergedProps: HTMLProps = { ...forwardProps, className, children }
 
     return (
       <ColorSchemeContext value={styleProps.colorScheme}>
-        <Insertion cache={cache} htmlTag={htmlTag} serialized={serialized} />
+        <HydrationContext value={mergedProps.suppressHydrationWarning}>
+          <Insertion cache={cache} htmlTag={htmlTag} serialized={serialized} />
 
-        {asChild && !forwardAsChild ? (
-          <Slot ref={ref} {...mergedProps} />
-        ) : (
-          <Component ref={ref} {...mergedProps} />
-        )}
+          {asChild && !forwardAsChild ? (
+            <Slot ref={ref} {...mergedProps} />
+          ) : (
+            <Component ref={ref} {...mergedProps} />
+          )}
+        </HydrationContext>
       </ColorSchemeContext>
     )
   }) as StyledComponent<Y, M>

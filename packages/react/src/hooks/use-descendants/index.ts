@@ -87,16 +87,27 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
   }
 
   const set = (node: null | Y, props?: DescendantProps<Y, M>) => {
-    if (!node || descendants.has(node)) return
+    if (!node) return
 
-    const keys = Array.from(descendants.keys()).concat(node)
-    const sorted = sortNodes(keys)
+    if (descendants.has(node)) {
+      const descendant = descendants.get(node)!
 
-    const descendant = { ...props, index: -1, node } as Descendant<Y, M>
+      descendants.set(node, {
+        ...descendant,
+        ...props,
+        index: descendant.index,
+        node: descendant.node,
+      })
+    } else {
+      const keys = Array.from(descendants.keys()).concat(node)
+      const sorted = sortNodes(keys)
 
-    descendants.set(node, descendant)
+      const descendant = { ...props, index: -1, node } as Descendant<Y, M>
 
-    setIndexes(sorted)
+      descendants.set(node, descendant)
+
+      setIndexes(sorted)
+    }
   }
 
   const destroy = () => descendants.clear()

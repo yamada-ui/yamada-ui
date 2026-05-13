@@ -354,17 +354,17 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Rad
 
 ### ARIA Roles and Attributes
 
-| Component                  | Roles and Attributes | Usage                                                                                                                                                                              |
-| -------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `RadioGroup.Root`          | `role="radiogroup"`  | Indicates that this is a radio group.                                                                                                                                              |
-|                            | `aria-labelledby`    | If `RadioGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                                      |
-|                            | `aria-describedby`   | If `RadioGroup.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`.            |
-| `Radio`, `RadioGroup.Item` | `aria-checked`       | Sets to `"true"` if the radio button is checked, and `"false"` if it is not checked.                                                                                               |
-|                            | `aria-describedby`   | If `Radio` or `RadioGroup.Item` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
-|                            | `aria-disabled`      | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                                               |
-|                            | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                                              |
-|                            | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                                             |
-| `RadioIndicator`           | `aria-hidden`        | Excludes the element from the accessibility tree.                                                                                                                                  |
+| Element                        | Roles and Attributes | Usage                                                                                                                                                                              |
+| ------------------------------ | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `div.ui-radio__group`          | `role="radiogroup"`  | Indicates that this is a radio group.                                                                                                                                              |
+|                                | `aria-labelledby`    | If `RadioGroup.Root` is within a `Field.Root` and `Field.Root` has a `label` or `Field.Label`, sets its `id`.                                                                      |
+|                                | `aria-describedby`   | If `RadioGroup.Root` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`.            |
+| `label.ui-radio__root > input` | `aria-checked`       | Sets to `"true"` if the radio button is checked, and `"false"` if it is not checked.                                                                                               |
+|                                | `aria-describedby`   | If `Radio` or `RadioGroup.Item` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, or a `Field.ErrorMessage`, `Field.HelperMessage`, sets its `id`. |
+|                                | `aria-disabled`      | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                                               |
+|                                | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                                              |
+|                                | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                                             |
+| `div.ui-radio__indicator`      | `aria-hidden`        | Excludes the element from the accessibility tree.                                                                                                                                  |
 
 ## Similar Components
 

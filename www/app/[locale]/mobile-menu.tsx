@@ -9,7 +9,6 @@ import {
   CloseButton,
   Collapse,
   Drawer,
-  GithubIcon,
   handlerAll,
   IconButton,
   MenuIcon,
@@ -24,6 +23,7 @@ import { useTranslations } from "next-intl"
 import { useMemo, useState } from "react"
 import {
   DiscordIcon,
+  GithubIcon,
   NextLinkButton,
   NextLinkIconButton,
   Status,
@@ -279,7 +279,8 @@ function DocsMenuGroup({
   )
 }
 
-interface DocsMenuItemProps extends NextLinkButtonProps {
+interface DocsMenuItemProps extends Omit<NextLinkButtonProps, "href"> {
+  href: string
   segment: string
   onClose: () => void
 }
@@ -295,8 +296,7 @@ function DocsMenuItem({
   const overview = segment === "overview"
   const current = overview
     ? pathname === href
-    : pathname.length <= href.toString().length &&
-      pathname.startsWith(href.toString())
+    : pathname.length <= href.length && pathname.startsWith(href)
 
   return (
     <NextLinkButton
@@ -310,9 +310,11 @@ function DocsMenuItem({
       justifyContent="flex-start"
       mb="xs"
       onClick={handlerAll(onClick, () => {
-        if (pathname === href) onClose()
+        if (pathname !== href) return
 
-        window.scrollTo({ behavior: "instant", top: 0 })
+        onClose()
+
+        window.scrollTo({ behavior: "smooth", top: 0 })
       })}
       {...rest}
     />

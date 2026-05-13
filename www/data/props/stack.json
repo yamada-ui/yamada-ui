@@ -41,7 +41,7 @@
       "required": false
     },
     "wrap": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" | AnyString ...",
       "description": "The CSS `flex-wrap` property.",
       "required": false
     }
@@ -88,7 +88,7 @@
       "required": false
     },
     "wrap": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" | AnyString ...",
       "description": "The CSS `flex-wrap` property.",
       "required": false
     }
@@ -135,7 +135,7 @@
       "required": false
     },
     "wrap": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" | AnyString ...",
       "description": "The CSS `flex-wrap` property.",
       "required": false
     }

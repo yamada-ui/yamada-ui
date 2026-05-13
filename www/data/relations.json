@@ -1,7 +1,7 @@
 {
   "accordion": {
     "dependencies": {
-      "components": ["native-accordion", "collapse", "motion", "icon"],
+      "components": ["native-accordion", "icon", "collapse", "motion"],
       "hooks": ["use-descendants"]
     },
     "resembles": [
@@ -12,7 +12,21 @@
       "slide",
       "slide-fade",
       "carousel",
-      "drawer"
+      "tree"
+    ]
+  },
+  "action-bar": {
+    "dependencies": {
+      "components": ["button", "close-button", "motion", "popover", "portal"],
+      "hooks": ["use-value", "use-disclosure"]
+    },
+    "resembles": [
+      "native-popover",
+      "popover",
+      "tooltip",
+      "drawer",
+      "menu",
+      "modal"
     ]
   },
   "airy": {
@@ -149,12 +163,12 @@
     "resembles": [
       "steps",
       "tabs",
+      "sidebar",
       "data-list",
       "infinite-scroll-area",
       "link",
       "link-box",
-      "list",
-      "native-accordion"
+      "list"
     ]
   },
   "button": {
@@ -164,16 +178,20 @@
     },
     "dependents": {
       "components": [
+        "action-bar",
         "calendar",
         "carousel",
         "close-button",
         "drawer",
         "file-button",
         "form",
+        "menu",
         "modal",
+        "native-popover",
         "number-input",
         "pagination",
         "password-input",
+        "popover",
         "tip",
         "toggle"
       ],
@@ -256,7 +274,10 @@
       "components": ["group", "input", "icon", "field"],
       "hooks": []
     },
-    "dependents": { "components": ["checkbox-card", "table"], "hooks": [] },
+    "dependents": {
+      "components": ["checkbox-card", "table", "tree"],
+      "hooks": []
+    },
     "resembles": [
       "native-select",
       "radio",
@@ -286,7 +307,10 @@
   },
   "close-button": {
     "dependencies": { "components": ["button", "icon"], "hooks": [] },
-    "dependents": { "components": ["drawer", "modal", "snacks"], "hooks": [] },
+    "dependents": {
+      "components": ["action-bar", "drawer", "modal", "snacks"],
+      "hooks": []
+    },
     "resembles": ["button", "icon-button", "file-button", "toggle"]
   },
   "code": {
@@ -304,7 +328,10 @@
   },
   "collapse": {
     "dependencies": { "components": ["motion"], "hooks": [] },
-    "dependents": { "components": ["accordion"], "hooks": [] },
+    "dependents": {
+      "components": ["accordion", "sidebar", "tree"],
+      "hooks": []
+    },
     "resembles": [
       "fade",
       "fade-scale",
@@ -391,12 +418,12 @@
     "resembles": [
       "list",
       "timeline",
+      "tree",
       "native-table",
       "stat",
       "table",
       "area-chart",
-      "badge",
-      "bar-chart"
+      "badge"
     ]
   },
   "date-picker": {
@@ -431,6 +458,7 @@
       ],
       "hooks": ["use-value"]
     },
+    "dependents": { "components": ["sidebar"], "hooks": [] },
     "resembles": [
       "modal",
       "popover",
@@ -444,7 +472,7 @@
   },
   "dropzone": {
     "dependencies": {
-      "components": ["fade", "input", "loading", "portal", "field"],
+      "components": ["text", "fade", "input", "loading", "portal", "field"],
       "hooks": []
     },
     "resembles": [
@@ -619,7 +647,7 @@
     ]
   },
   "flip": {
-    "dependencies": { "components": ["motion"], "hooks": [] },
+    "dependencies": { "components": ["icon", "motion"], "hooks": [] },
     "resembles": [
       "airy",
       "motion",
@@ -781,6 +809,7 @@
         "color-picker",
         "color-selector",
         "date-picker",
+        "flip",
         "loading",
         "menu",
         "native-accordion",
@@ -790,12 +819,15 @@
         "password-input",
         "rating",
         "reorder",
+        "rotate",
         "select",
+        "sidebar",
         "stat",
         "steps",
         "table",
         "tag",
-        "tip"
+        "tip",
+        "tree"
       ],
       "hooks": []
     },
@@ -909,12 +941,12 @@
     "resembles": [
       "data-list",
       "timeline",
+      "tree",
       "native-table",
       "stat",
       "table",
       "area-chart",
-      "badge",
-      "bar-chart"
+      "badge"
     ]
   },
   "loading": {
@@ -923,7 +955,7 @@
       "hooks": ["use-timeout"]
     },
     "dependents": {
-      "components": ["alert", "button", "dropzone"],
+      "components": ["alert", "button", "dropzone", "sidebar", "tree"],
       "hooks": ["use-async-callback"]
     },
     "resembles": ["circle-progress", "progress", "skeleton", "tip"]
@@ -944,7 +976,7 @@
   },
   "menu": {
     "dependencies": {
-      "components": ["popover", "icon"],
+      "components": ["popover", "button", "icon"],
       "hooks": ["use-descendants", "use-disclosure"]
     },
     "dependents": { "components": ["select"], "hooks": [] },
@@ -952,11 +984,11 @@
       "select",
       "autocomplete",
       "native-popover",
+      "action-bar",
       "popover",
       "tooltip",
       "drawer",
-      "modal",
-      "tabs"
+      "modal"
     ]
   },
   "modal": {
@@ -970,7 +1002,7 @@
         "portal",
         "fade"
       ],
-      "hooks": ["use-disclosure"]
+      "hooks": ["use-value", "use-disclosure"]
     },
     "dependents": { "components": ["drawer"], "hooks": [] },
     "resembles": [
@@ -989,6 +1021,7 @@
     "dependents": {
       "components": [
         "accordion",
+        "action-bar",
         "airy",
         "collapse",
         "drawer",
@@ -1002,10 +1035,12 @@
         "ripple",
         "rotate",
         "segmented-control",
+        "sidebar",
         "slide",
         "slide-fade",
         "snacks",
-        "tooltip"
+        "tooltip",
+        "tree"
       ],
       "hooks": []
     },
@@ -1025,19 +1060,27 @@
     "dependents": { "components": ["accordion"], "hooks": [] },
     "resembles": [
       "accordion",
+      "tree",
       "tabs",
+      "sidebar",
       "breadcrumb",
       "collapse",
       "data-list",
-      "fade",
-      "fade-scale",
-      "infinite-scroll-area"
+      "fade"
     ]
   },
   "native-popover": {
-    "dependencies": { "components": [], "hooks": [] },
+    "dependencies": { "components": ["button"], "hooks": [] },
     "dependents": { "components": ["popover"], "hooks": [] },
-    "resembles": ["popover", "tooltip", "drawer", "menu", "modal", "indicator"]
+    "resembles": [
+      "action-bar",
+      "popover",
+      "tooltip",
+      "drawer",
+      "menu",
+      "modal",
+      "indicator"
+    ]
   },
   "native-select": {
     "dependencies": {
@@ -1100,18 +1143,18 @@
     "dependencies": { "components": ["button", "icon"], "hooks": [] },
     "resembles": [
       "tabs",
+      "sidebar",
       "breadcrumb",
       "checkbox",
       "link",
       "link-box",
       "native-select",
-      "radio",
-      "rating"
+      "radio"
     ]
   },
   "password-input": {
     "dependencies": {
-      "components": ["button", "input", "group", "icon", "field"],
+      "components": ["button", "input", "icon", "group", "field"],
       "hooks": []
     },
     "resembles": [
@@ -1149,15 +1192,17 @@
     "dependencies": {
       "components": [
         "native-popover",
+        "button",
         "motion",
         "portal",
         "fade-scale",
         "slide-fade"
       ],
-      "hooks": ["use-disclosure", "use-outside-click"]
+      "hooks": ["use-value", "use-disclosure", "use-outside-click"]
     },
     "dependents": {
       "components": [
+        "action-bar",
         "autocomplete",
         "color-picker",
         "date-picker",
@@ -1168,12 +1213,20 @@
       ],
       "hooks": []
     },
-    "resembles": ["tooltip", "drawer", "modal", "native-popover", "menu"]
+    "resembles": [
+      "tooltip",
+      "drawer",
+      "modal",
+      "native-popover",
+      "action-bar",
+      "menu"
+    ]
   },
   "portal": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": {
       "components": [
+        "action-bar",
         "drawer",
         "dropzone",
         "file-button",
@@ -1296,7 +1349,7 @@
     ]
   },
   "rotate": {
-    "dependencies": { "components": ["motion"], "hooks": [] },
+    "dependencies": { "components": ["icon", "motion"], "hooks": [] },
     "resembles": [
       "airy",
       "flip",
@@ -1384,6 +1437,36 @@
     "dependencies": { "components": [], "hooks": [] },
     "dependents": { "components": ["client-only"], "hooks": [] },
     "resembles": ["client-only", "for", "format", "portal", "slot"]
+  },
+  "sidebar": {
+    "dependencies": {
+      "components": [
+        "collapse",
+        "loading",
+        "motion",
+        "drawer",
+        "icon",
+        "tooltip"
+      ],
+      "hooks": [
+        "use-breakpoint",
+        "use-value",
+        "use-async-callback",
+        "use-descendants",
+        "use-disclosure",
+        "use-window-event"
+      ]
+    },
+    "resembles": [
+      "tabs",
+      "breadcrumb",
+      "link-box",
+      "native-accordion",
+      "pagination",
+      "accordion",
+      "steps",
+      "tree"
+    ]
   },
   "simple-grid": {
     "dependencies": { "components": ["grid"], "hooks": [] },
@@ -1520,7 +1603,7 @@
       "components": ["icon"],
       "hooks": ["use-value", "use-descendants"]
     },
-    "resembles": ["breadcrumb", "timeline", "tabs"]
+    "resembles": ["breadcrumb", "timeline", "tabs", "sidebar"]
   },
   "switch": {
     "dependencies": { "components": ["field"], "hooks": [] },
@@ -1557,13 +1640,14 @@
       "hooks": ["use-value", "use-descendants"]
     },
     "resembles": [
+      "sidebar",
       "breadcrumb",
       "native-accordion",
       "pagination",
       "accordion",
       "steps",
-      "menu",
-      "select"
+      "tree",
+      "menu"
     ]
   },
   "tag": {
@@ -1581,7 +1665,10 @@
   },
   "text": {
     "dependencies": { "components": [], "hooks": [] },
-    "dependents": { "components": ["highlight", "loading"], "hooks": [] },
+    "dependents": {
+      "components": ["dropzone", "highlight", "loading", "tooltip"],
+      "hooks": []
+    },
     "resembles": [
       "blockquote",
       "code",
@@ -1607,8 +1694,16 @@
     ]
   },
   "timeline": {
-    "dependencies": { "components": [], "hooks": [] },
-    "resembles": ["data-list", "list", "steps", "native-table", "stat", "table"]
+    "dependencies": { "components": [], "hooks": ["use-value"] },
+    "resembles": [
+      "data-list",
+      "list",
+      "steps",
+      "tree",
+      "native-table",
+      "stat",
+      "table"
+    ]
   },
   "tip": {
     "dependencies": {
@@ -1635,11 +1730,34 @@
   },
   "tooltip": {
     "dependencies": {
-      "components": ["motion", "popover", "portal"],
+      "components": ["text", "motion", "popover", "portal"],
       "hooks": ["use-disclosure", "use-outside-click"]
     },
-    "dependents": { "components": ["tip"], "hooks": [] },
-    "resembles": ["popover", "drawer", "modal", "native-popover", "menu"]
+    "dependents": { "components": ["sidebar", "tip"], "hooks": [] },
+    "resembles": [
+      "popover",
+      "drawer",
+      "modal",
+      "native-popover",
+      "action-bar",
+      "menu"
+    ]
+  },
+  "tree": {
+    "dependencies": {
+      "components": ["checkbox", "icon", "collapse", "loading", "motion"],
+      "hooks": ["use-descendants", "use-disclosure", "use-async-callback"]
+    },
+    "resembles": [
+      "data-list",
+      "list",
+      "native-accordion",
+      "accordion",
+      "timeline",
+      "tabs",
+      "native-table",
+      "sidebar"
+    ]
   },
   "visually-hidden": {
     "dependencies": { "components": [], "hooks": [] },
@@ -1660,7 +1778,8 @@
   },
   "use-animation": { "dependencies": { "components": [], "hooks": [] } },
   "use-async-callback": {
-    "dependencies": { "components": ["loading"], "hooks": ["use-processing"] }
+    "dependencies": { "components": ["loading"], "hooks": ["use-processing"] },
+    "dependents": { "components": ["sidebar", "tree"], "hooks": [] }
   },
   "use-async": { "dependencies": { "components": [], "hooks": [] } },
   "use-boolean": {
@@ -1669,7 +1788,7 @@
   },
   "use-breakpoint": {
     "dependencies": { "components": [], "hooks": [] },
-    "dependents": { "components": [], "hooks": ["use-value"] }
+    "dependents": { "components": ["sidebar"], "hooks": ["use-value"] }
   },
   "use-clickable": {
     "dependencies": { "components": [], "hooks": [] },
@@ -1712,12 +1831,14 @@
         "saturation-slider",
         "segmented-control",
         "select",
+        "sidebar",
         "slider",
         "steps",
         "switch",
         "table",
         "tabs",
-        "toggle"
+        "toggle",
+        "tree"
       ],
       "hooks": []
     }
@@ -1735,8 +1856,10 @@
         "menu",
         "pin-input",
         "segmented-control",
+        "sidebar",
         "steps",
-        "tabs"
+        "tabs",
+        "tree"
       ],
       "hooks": []
     }
@@ -1744,14 +1867,22 @@
   "use-disclosure": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": {
-      "components": ["menu", "modal", "popover", "tooltip"],
+      "components": [
+        "action-bar",
+        "menu",
+        "modal",
+        "popover",
+        "sidebar",
+        "tooltip",
+        "tree"
+      ],
       "hooks": []
     }
   },
   "use-event-listener": {
     "dependencies": { "components": [], "hooks": [] },
     "dependents": {
-      "components": ["number-input", "popover", "tooltip"],
+      "components": ["action-bar", "number-input", "popover", "tooltip"],
       "hooks": []
     }
   },
@@ -1819,24 +1950,29 @@
     "dependencies": { "components": [], "hooks": ["use-breakpoint"] },
     "dependents": {
       "components": [
+        "action-bar",
         "alpha-slider",
         "drawer",
         "group",
         "hue-slider",
         "infinite-scroll-area",
+        "modal",
+        "popover",
         "reorder",
         "resizable",
         "segmented-control",
+        "sidebar",
         "slide",
         "slider",
         "steps",
-        "tabs"
+        "tabs",
+        "timeline"
       ],
       "hooks": []
     }
   },
   "use-window-event": {
     "dependencies": { "components": [], "hooks": [] },
-    "dependents": { "components": [], "hooks": ["use-local-storage"] }
+    "dependents": { "components": ["sidebar"], "hooks": ["use-local-storage"] }
   }
 }

@@ -21,7 +21,7 @@
       "required": false
     },
     "area": {
-      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The CSS `grid-area` property.",
       "required": false
     },
@@ -31,7 +31,7 @@
       "required": false
     },
     "autoFlow": {
-      "type": "\"-moz-initial\" | \"column\" | \"dense\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"row\" | \"unset\" ...",
+      "type": "\"-moz-initial\" | \"column\" | \"dense\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"row\" | \"unset\" | AnyString ...",
       "description": "The CSS `grid-auto-flow` property.",
       "required": false
     },
@@ -41,17 +41,17 @@
       "required": false
     },
     "column": {
-      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The CSS `grid-column` property.",
       "required": false
     },
     "row": {
-      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The CSS `grid-row` property.",
       "required": false
     },
     "templateAreas": {
-      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"none\" | \"revert-layer\" | \"revert\" | \"unset\" ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"none\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString ...",
       "description": "The CSS `grid-template-areas` property.",
       "required": false
     },
@@ -88,12 +88,12 @@
       "required": false
     },
     "area": {
-      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The CSS `grid-area` property.",
       "required": false
     },
     "colEnd": {
-      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The CSS `grid-column-end` property.",
       "required": false
     },
@@ -103,12 +103,12 @@
       "required": false
     },
     "colStart": {
-      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The CSS `grid-column-start` property.",
       "required": false
     },
     "rowEnd": {
-      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The CSS `grid-row-end` property.",
       "required": false
     },
@@ -118,7 +118,7 @@
       "required": false
     },
     "rowStart": {
-      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | AnyString | number & {} ...",
       "description": "The CSS `grid-row-start` property.",
       "required": false
     }

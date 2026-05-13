@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "סגור סרגל פעולות",
+    "Open action bar": "פתח סרגל פעולות",
+  },
   autocomplete: {
     "Clear value": "נקה ערך",
     "No results found": "לא נמצאו תוצאות",
@@ -82,6 +86,10 @@ const data: IntlData = {
   },
   select: {
     "Clear value": "נקה ערך",
+  },
+  sidebar: {
+    "Close sidebar": "סגור סרגל צד",
+    "Open sidebar": "פתח סרגל צד",
   },
   slider: {
     "Slider thumb": "אגודל מחוון",

@@ -201,7 +201,11 @@ function CopyButton({ value }: CopyButtonProps) {
   const { copied, onCopy } = useClipboard(value)
 
   return (
-    <Tooltip content={copied ? t("copied") : t("copy")} placement="start">
+    <Tooltip
+      closeOnClick={false}
+      content={copied ? t("copied") : t("copy")}
+      placement="start"
+    >
       <IconButton
         size="sm"
         variant="ghost"
@@ -219,7 +223,11 @@ function CopyUrlButton() {
   const { copied, onCopy } = useClipboard()
 
   return (
-    <Tooltip content={copied ? t("copied") : t("copy")} placement="start">
+    <Tooltip
+      closeOnClick={false}
+      content={copied ? t("copied") : t("copy")}
+      placement="start"
+    >
       <IconButton
         size="sm"
         variant="ghost"

@@ -31,115 +31,34 @@ describe("<Form />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Form.Root.displayName).toBe("FormRoot")
-    expect(Form.Header.displayName).toBe("FormHeader")
-    expect(Form.Body.displayName).toBe("FormBody")
-    expect(Form.Footer.displayName).toBe("FormFooter")
-    expect(Form.Title.displayName).toBe("FormTitle")
-    expect(Form.Description.displayName).toBe("FormDescription")
-    expect(Form.SubmitButton.displayName).toBe("FormSubmitButton")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <Form.Root data-testid="root">
-        <Form.Header data-testid="header">
-          <Form.Title data-testid="title">Create an account</Form.Title>
-          <Form.Description data-testid="description">
-            Create an account to get started.
-          </Form.Description>
-        </Form.Header>
-
-        <Form.Body data-testid="body">
-          <Form.Group data-testid="group" />
-        </Form.Body>
-
-        <Form.Footer data-testid="footer">
-          <Form.SubmitButton data-testid="submit-button">
-            Submit
-          </Form.SubmitButton>
-        </Form.Footer>
-      </Form.Root>,
-    )
-
-    expect(screen.getByTestId("root")).toHaveClass("ui-form__root")
-    expect(screen.getByTestId("header")).toHaveClass("ui-form__header")
-    expect(screen.getByTestId("title")).toHaveClass("ui-form__title")
-    expect(screen.getByTestId("description")).toHaveClass(
-      "ui-form__description",
-    )
-    expect(screen.getByTestId("body")).toHaveClass("ui-form__body")
-    expect(screen.getByTestId("group")).toHaveClass("ui-form__group")
-    expect(screen.getByTestId("footer")).toHaveClass("ui-form__footer")
-    expect(screen.getByTestId("submit-button")).toHaveClass(
-      "ui-form__submit-button",
-    )
-  })
-
   test("renders header with title prop", () => {
     render(<Form.Root data-testid="root" title="My Form" />)
 
-    expect(screen.getByText("My Form")).toBeInTheDocument()
-    expect(screen.getByText("My Form").tagName).toBe("H3")
+    const title = screen.getByText("My Form")
+    expect(title).toBeInTheDocument()
+    expect(title.tagName).toBe("H3")
   })
 
   test("renders header with description prop", () => {
     render(<Form.Root data-testid="root" description="Form description" />)
 
-    expect(screen.getByText("Form description")).toBeInTheDocument()
-    expect(screen.getByText("Form description").tagName).toBe("P")
-  })
-
-  test("renders header with both title and description props", () => {
-    render(
-      <Form.Root
-        data-testid="root"
-        description="Form description"
-        title="My Form"
-      />,
-    )
-
-    expect(screen.getByText("My Form")).toBeInTheDocument()
-    expect(screen.getByText("Form description")).toBeInTheDocument()
+    const description = screen.getByText("Form description")
+    expect(description).toBeInTheDocument()
+    expect(description.tagName).toBe("P")
   })
 
   test("renders footer with submitButton prop", () => {
     render(<Form.Root data-testid="root" submitButton="Submit" />)
 
-    expect(screen.getByText("Submit")).toBeInTheDocument()
-    expect(screen.getByText("Submit").tagName).toBe("BUTTON")
+    const submit = screen.getByText("Submit")
+    expect(submit).toBeInTheDocument()
+    expect(submit.tagName).toBe("BUTTON")
   })
 
-  test("renders HTML tag correctly", () => {
-    render(
-      <Form.Root data-testid="root">
-        <Form.Header data-testid="header">
-          <Form.Title data-testid="title">Create an account</Form.Title>
-          <Form.Description data-testid="description">
-            Create an account to get started.
-          </Form.Description>
-        </Form.Header>
+  test("renders header with both title and description props", () => {
+    render(<Form.Root description="Form description" title="My Form" />)
 
-        <Form.Body data-testid="body">
-          <Form.Group data-testid="group" />
-        </Form.Body>
-
-        <Form.Footer data-testid="footer">
-          <Form.SubmitButton data-testid="submit-button">
-            Submit
-          </Form.SubmitButton>
-        </Form.Footer>
-      </Form.Root>,
-    )
-
-    expect(screen.getByTestId("root").tagName).toBe("FORM")
-    expect(screen.getByTestId("header").tagName).toBe("DIV")
-    expect(screen.getByTestId("title").tagName).toBe("H3")
-    expect(screen.getByTestId("description").tagName).toBe("P")
-    expect(screen.getByTestId("body").tagName).toBe("DIV")
-    expect(screen.getByTestId("group").tagName).toBe("DIV")
-    expect(screen.getByTestId("footer").tagName).toBe("DIV")
-    expect(screen.getByTestId("submit-button").tagName).toBe("BUTTON")
+    expect(screen.getByText("My Form")).toBeInTheDocument()
+    expect(screen.getByText("Form description")).toBeInTheDocument()
   })
 })

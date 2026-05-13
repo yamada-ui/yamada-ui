@@ -5,7 +5,7 @@ import type { Direction, PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import type { UsePopperProps } from "../../hooks/use-popper"
 import type { Dict } from "../../utils"
-import type { PopupAnimationProps } from "./popover"
+import type { UsePopupAnimationProps } from "./popover"
 import { useCallback, useEffect, useId, useRef } from "react"
 import { useEnvironment, useSplitProps } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
@@ -169,6 +169,13 @@ export const usePopover = ({
 
   assignRef(updateRef, update)
 
+  const onRestoreFocus = useCallback(() => {
+    clearTimeout(closeTimeout.current)
+    closeTimeout.current = setTimeout(() => {
+      triggerRef.current?.focus()
+    })
+  }, [])
+
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLElement>) => {
       runKeyAction(ev, {
@@ -176,12 +183,11 @@ export const usePopover = ({
           if (!closeOnEsc) return
 
           onClose()
-
-          triggerRef.current?.focus()
+          onRestoreFocus()
         },
       })
     },
-    [closeOnEsc, onClose],
+    [closeOnEsc, onClose, onRestoreFocus],
   )
 
   const onBlur = useCallback(
@@ -329,11 +335,10 @@ export const usePopover = ({
       ...props,
       onClick: handlerAll(props.onClick, () => {
         onClose()
-
-        triggerRef.current?.focus()
+        onRestoreFocus()
       }),
     }),
-    [onClose],
+    [onClose, onRestoreFocus],
   )
 
   return {
@@ -354,8 +359,8 @@ export const usePopover = ({
 export type UsePopoverReturn = ReturnType<typeof usePopover>
 
 export const popoverProps: (
-  | keyof PopupAnimationProps
   | keyof UsePopoverProps
+  | keyof UsePopupAnimationProps
 )[] = [
   ...popperProps,
   "autoFocus",
@@ -378,9 +383,9 @@ export const popoverProps: (
 
 export const usePopoverProps = <
   Y extends Dict = Dict,
-  M extends keyof PopupAnimationProps | keyof UsePopoverProps =
-    | keyof PopupAnimationProps
-    | keyof UsePopoverProps,
+  M extends keyof UsePopoverProps | keyof UsePopupAnimationProps =
+    | keyof UsePopoverProps
+    | keyof UsePopupAnimationProps,
 >(
   props: Y,
   omitKeys?: M[],
@@ -389,14 +394,14 @@ export const usePopoverProps = <
     props,
     popoverProps.filter((key) => !omitKeys?.includes(key as M)),
   ) as unknown as [
-    keyof PopupAnimationProps | keyof UsePopoverProps extends M
-      ? PopupAnimationProps & UsePopoverProps
-      : Omit<PopupAnimationProps & UsePopoverProps, M>,
+    keyof UsePopoverProps | keyof UsePopupAnimationProps extends M
+      ? UsePopoverProps & UsePopupAnimationProps
+      : Omit<UsePopoverProps & UsePopupAnimationProps, M>,
     Omit<
       Y,
-      keyof PopupAnimationProps | keyof UsePopoverProps extends M
-        ? keyof PopupAnimationProps | keyof UsePopoverProps
-        : Exclude<keyof PopupAnimationProps | keyof UsePopoverProps, M>
+      keyof UsePopoverProps | keyof UsePopupAnimationProps extends M
+        ? keyof UsePopoverProps | keyof UsePopupAnimationProps
+        : Exclude<keyof UsePopoverProps | keyof UsePopupAnimationProps, M>
     >,
   ]
 }

@@ -5,6 +5,7 @@
   "_blank": "&:is(:blank, [data-blank])",
   "_checked": "&:is(:checked, [data-checked], [aria-checked=true])",
   "_child": "& > *",
+  "_content": "& > [data-content]",
   "_default": "&:default",
   "_empty": "&:empty",
   "_enabled": "&:is(:enabled, [data-enabled])",

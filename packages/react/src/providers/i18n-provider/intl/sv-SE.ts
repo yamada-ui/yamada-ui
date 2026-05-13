@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Stäng åtgärdsfält",
+    "Open action bar": "Öppna åtgärdsfält",
+  },
   autocomplete: {
     "Clear value": "Rensa värde",
     "No results found": "Inga resultat hittades",
@@ -82,6 +86,10 @@ const data: IntlData = {
   },
   select: {
     "Clear value": "Rensa värde",
+  },
+  sidebar: {
+    "Close sidebar": "Stäng sidofält",
+    "Open sidebar": "Öppna sidofält",
   },
   slider: {
     "Slider thumb": "Skjutreglage tumme",

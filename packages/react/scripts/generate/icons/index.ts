@@ -1,7 +1,7 @@
 import { parse } from "@babel/parser"
 import traverse from "@babel/traverse"
 import { interopDefault, toKebabCase } from "@yamada-ui/utils"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { execFile } from "node:child_process"
 import { readdir, readFile, unlink } from "node:fs/promises"
 import path from "node:path"
@@ -15,7 +15,7 @@ const resolvedTraverse = interopDefault(traverse)
 
 const ENTRY_PATH = path.join(
   process.cwd(),
-  "node_modules/lucide-react/dist/esm/icons/index.js",
+  "node_modules/lucide-react/dist/esm/icons/index.mjs",
 )
 const DIST_PATH = path.join(process.cwd(), "src/components/icon/icons")
 
@@ -47,7 +47,7 @@ async function getIconNames() {
     },
   })
 
-  return iconNames
+  return iconNames.sort((a, b) => a.localeCompare(b))
 }
 
 async function createIcons(iconNames: string[]) {
@@ -107,16 +107,19 @@ async function main() {
 
   spinner.succeed(`Created icons`)
 
-  spinner.start(`Fixing eslint`)
+  spinner.start(`Fixing lint`)
 
-  await execFileAsync("npx", [
-    "eslint",
-    "src/components/icon/icons/index.ts",
-    "src/components/icon/icons/index.types.ts",
-    "--fix",
-  ])
+  try {
+    await execFileAsync("pnpm", [
+      "exec",
+      "oxlint",
+      "src/components/icon/icons/index.ts",
+      "src/components/icon/icons/index.types.ts",
+      "--fix",
+    ])
+  } catch {}
 
-  spinner.succeed(`Fixed eslint`)
+  spinner.succeed(`Fixed lint`)
 
   const end = process.hrtime.bigint()
   const duration = (Number(end - start) / 1e9).toFixed(2)

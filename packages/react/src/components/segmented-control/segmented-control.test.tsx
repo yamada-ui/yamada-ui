@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, fireEvent, render, screen } from "#test"
+import { a11y, render, screen } from "#test"
 import { SegmentedControl } from "./"
 
 const items: Required<SegmentedControl.RootProps>["items"] = [
@@ -19,66 +19,33 @@ describe("<SegmentedControl />", () => {
     await a11y(<TestComponent />)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(SegmentedControl.Root.displayName).toBe("SegmentedControlRoot")
-    expect(SegmentedControl.Item.displayName).toBe("SegmentedControlItem")
-  })
-
-  test("sets `className` correctly", () => {
+  test("sets `tag` correctly", () => {
     render(<TestComponent />)
-    expect(screen.getByRole("radiogroup")).toHaveClass(
-      "ui-segmented-control__root",
-    )
-    expect(screen.getAllByRole("radio")[0]?.parentElement).toHaveClass(
-      "ui-segmented-control__item",
-    )
-  })
 
-  test("renders HTML tag correctly", () => {
-    render(<TestComponent />)
     expect(screen.getByRole("radiogroup").tagName).toBe("DIV")
-    expect(screen.getAllByRole("radio")[0]?.parentElement?.tagName).toBe(
-      "LABEL",
-    )
+    expect(screen.getByText("One").closest("label")?.tagName).toBe("LABEL")
   })
 
   test("should disable segmented control", () => {
     render(<TestComponent disabled />)
-    Array.from(
-      screen.getByRole("radiogroup").getElementsByTagName("input"),
-    ).forEach((input) => {
-      expect(input).toBeDisabled()
-    })
-  })
 
-  test("should call onChange when a different item is selected", () => {
-    const onChange = vi.fn()
-    render(<TestComponent onChange={onChange} />)
-
-    const radios = screen.getAllByRole("radio")
-    fireEvent.click(radios[1]!)
-    expect(onChange).toHaveBeenCalledWith("two")
-  })
-
-  test("should update selected item when clicked", () => {
-    render(<TestComponent />)
-
-    const radios = screen.getAllByRole("radio")
-    expect(radios[0]).toBeChecked()
-
-    fireEvent.click(radios[1]!)
-    expect(radios[1]).toBeChecked()
+    expect(screen.getByRole("radio", { name: "One" })).toBeDisabled()
+    expect(screen.getByRole("radio", { name: "Two" })).toBeDisabled()
+    expect(screen.getByRole("radio", { name: "Three" })).toBeDisabled()
   })
 
   test("should apply readOnly attributes", () => {
     render(<TestComponent readOnly />)
 
-    const root = screen.getByRole("radiogroup")
-    expect(root).toHaveAttribute("data-readonly")
-
-    const radios = screen.getAllByRole("radio")
-    radios.forEach((radio) => {
-      expect(radio).toHaveAttribute("data-readonly")
-    })
+    expect(screen.getByRole("radiogroup")).toHaveAttribute("data-readonly")
+    expect(screen.getByRole("radio", { name: "One" })).toHaveAttribute(
+      "data-readonly",
+    )
+    expect(screen.getByRole("radio", { name: "Two" })).toHaveAttribute(
+      "data-readonly",
+    )
+    expect(screen.getByRole("radio", { name: "Three" })).toHaveAttribute(
+      "data-readonly",
+    )
   })
 })

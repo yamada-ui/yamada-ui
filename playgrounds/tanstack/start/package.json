@@ -4,17 +4,18 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "clean": "rimraf node_modules .tanstack .turbo",
     "dev": "vite dev",
     "build": "vite build",
     "start": "node dist/server/server.js",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../../.prettierignore --check --cache",
+    "typecheck": "tsgo",
+    "lint": "oxlint . --max-warnings=0",
+    "format": "pnpm -w format playgrounds/tanstack/start",
     "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {
     "@tanstack/react-router": "catalog:",
-    "@tanstack/react-start": "^1.167.16",
+    "@tanstack/react-start": "^1.167.50",
     "@yamada-ui/react": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:"
@@ -22,7 +23,6 @@
   "devDependencies": {
     "@vitejs/plugin-react": "catalog:",
     "@yamada-ui/workspace": "workspace:*",
-    "vite": "catalog:",
-    "vite-tsconfig-paths": "catalog:"
+    "vite": "catalog:"
   }
 }

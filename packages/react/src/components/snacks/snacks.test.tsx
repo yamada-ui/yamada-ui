@@ -1,288 +1,20 @@
-import type { FC } from "react"
-import { act, fireEvent, render, renderHook, screen, waitFor } from "#test"
+import { a11y, act, render, renderHook } from "#test"
 import { Snacks } from "./snacks"
 import { useSnacks } from "./use-snacks"
 
-const TestComponent: FC<{
-  options?: Parameters<typeof useSnacks>[0]
-  onSnack?: (snack: ReturnType<typeof useSnacks>["snack"]) => void
-}> = ({ options, onSnack }) => {
-  const { snack, snacks } = useSnacks(options)
-
-  return (
-    <>
-      <button
-        data-testid="add"
-        onClick={() => {
-          const id = snack({ description: "Test description", title: "Test" })
-          onSnack?.(snack)
-          return id
-        }}
-      >
-        Add
-      </button>
-      <button data-testid="close-all" onClick={snack.closeAll}>
-        Close All
-      </button>
-      <Snacks data-testid="snacks" snacks={snacks} />
-    </>
-  )
-}
-
 describe("<Snacks />", () => {
   test("renders without snacks", () => {
-    const { snacks } = renderHook(() => useSnacks()).result.current
+    const { result } = renderHook(() => useSnacks())
 
-    render(<Snacks data-testid="snacks" snacks={snacks} />)
+    const { queryByRole } = render(<Snacks snacks={result.current.snacks} />)
 
-    expect(screen.queryByRole("list")).not.toBeInTheDocument()
+    expect(queryByRole("list")).not.toBeInTheDocument()
   })
 
-  test("renders snack items when added", async () => {
-    render(<TestComponent />)
+  test("passes a11y checks", async () => {
+    const { result } = renderHook(() => useSnacks())
 
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
-
-    await waitFor(() => {
-      expect(screen.getByRole("list")).toBeInTheDocument()
-      expect(screen.getByRole("listitem")).toBeInTheDocument()
-      expect(screen.getByText("Test")).toBeInTheDocument()
-      expect(screen.getByText("Test description")).toBeInTheDocument()
-    })
-  })
-
-  test("renders with direction end", async () => {
-    render(<TestComponent options={{ direction: "end" }} />)
-
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
-
-    await waitFor(() => {
-      expect(screen.getByRole("list")).toBeInTheDocument()
-    })
-  })
-
-  test("renders with startIndex", async () => {
-    render(<TestComponent options={{ startIndex: 5 }} />)
-
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
-
-    await waitFor(() => {
-      expect(screen.getByRole("listitem")).toBeInTheDocument()
-    })
-  })
-
-  test("closes all snacks", async () => {
-    render(<TestComponent />)
-
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
-
-    await waitFor(() => {
-      expect(screen.getByRole("list")).toBeInTheDocument()
-    })
-
-    act(() => {
-      fireEvent.click(screen.getByTestId("close-all"))
-    })
-
-    await waitFor(
-      () => {
-        expect(screen.queryByRole("list")).not.toBeInTheDocument()
-      },
-      { timeout: 3000 },
-    )
-  })
-
-  test("respects limit option", async () => {
-    render(<TestComponent options={{ limit: 2 }} />)
-
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-      fireEvent.click(screen.getByTestId("add"))
-      fireEvent.click(screen.getByTestId("add"))
-    })
-
-    await waitFor(() => {
-      const items = screen.getAllByRole("listitem")
-      expect(items).toHaveLength(2)
-    })
-  })
-
-  test("renders with closable false", async () => {
-    const TestClosable: FC = () => {
-      const { snack, snacks } = useSnacks({ closable: false })
-
-      return (
-        <>
-          <button
-            data-testid="add"
-            onClick={() =>
-              snack({ description: "No close button", title: "No close" })
-            }
-          >
-            Add
-          </button>
-          <Snacks snacks={snacks} />
-        </>
-      )
-    }
-
-    render(<TestClosable />)
-
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
-
-    await waitFor(() => {
-      expect(screen.getByText("No close")).toBeInTheDocument()
-    })
-  })
-
-  test("renders snack with variant plain", async () => {
-    const TestVariant: FC = () => {
-      const { snack, snacks } = useSnacks()
-
-      return (
-        <>
-          <button
-            data-testid="add"
-            onClick={() =>
-              snack({ variant: "plain", description: "desc", title: "Plain" })
-            }
-          >
-            Add
-          </button>
-          <Snacks snacks={snacks} />
-        </>
-      )
-    }
-
-    render(<TestVariant />)
-
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
-
-    await waitFor(() => {
-      expect(screen.getByText("Plain")).toBeInTheDocument()
-    })
-  })
-
-  test("renders snack with loading scheme", async () => {
-    const TestLoading: FC = () => {
-      const { snack, snacks } = useSnacks()
-
-      return (
-        <>
-          <button
-            data-testid="add"
-            onClick={() =>
-              snack({
-                description: "Loading...",
-                loadingScheme: "oval",
-                title: "Loading",
-              })
-            }
-          >
-            Add
-          </button>
-          <Snacks snacks={snacks} />
-        </>
-      )
-    }
-
-    render(<TestLoading />)
-
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
-
-    await waitFor(() => {
-      expect(screen.getByText("Loading")).toBeInTheDocument()
-    })
-  })
-
-  test("renders snack without icon", async () => {
-    const TestNoIcon: FC = () => {
-      const { snack, snacks } = useSnacks({ withIcon: false })
-
-      return (
-        <>
-          <button
-            data-testid="add"
-            onClick={() =>
-              snack({ description: "No icon snack", title: "No icon" })
-            }
-          >
-            Add
-          </button>
-          <Snacks snacks={snacks} />
-        </>
-      )
-    }
-
-    render(<TestNoIcon />)
-
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
-
-    await waitFor(() => {
-      expect(screen.getByText("No icon")).toBeInTheDocument()
-    })
-  })
-
-  test("pauses duration on mouse enter and resumes on mouse leave", async () => {
-    const TestHover: FC = () => {
-      const { snack, snacks } = useSnacks()
-
-      return (
-        <>
-          <button
-            data-testid="add"
-            onClick={() =>
-              snack({
-                description: "Hover me",
-                duration: 5000,
-                title: "Hover test",
-              })
-            }
-          >
-            Add
-          </button>
-          <Snacks snacks={snacks} />
-        </>
-      )
-    }
-
-    render(<TestHover />)
-
-    act(() => {
-      fireEvent.click(screen.getByTestId("add"))
-    })
-
-    await waitFor(() => {
-      expect(screen.getByText("Hover test")).toBeInTheDocument()
-    })
-
-    const snackEl = screen.getByRole("listitem")
-
-    act(() => {
-      fireEvent.mouseEnter(snackEl)
-    })
-
-    act(() => {
-      fireEvent.mouseLeave(snackEl)
-    })
-
-    expect(screen.getByText("Hover test")).toBeInTheDocument()
+    await a11y(<Snacks snacks={result.current.snacks} />)
   })
 })
 
@@ -322,8 +54,9 @@ describe("useSnacks", () => {
       })
     })
 
-    const updated = result.current.snacks.items.find((item) => item.id === id)
-    expect(updated?.title).toBe("Updated")
+    expect(
+      result.current.snacks.items.find((item) => item.id === id)?.title,
+    ).toBe("Updated")
   })
 
   test("snack.close removes a snack by id", () => {

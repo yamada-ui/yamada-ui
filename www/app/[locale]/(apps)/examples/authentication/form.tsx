@@ -3,13 +3,13 @@ import {
   Box,
   Button,
   Center,
-  GithubIcon,
   Heading,
   Input,
   Link,
   Text,
   VStack,
 } from "@yamada-ui/react"
+import { GithubIcon } from "@/components"
 
 export interface FormProps extends CenterProps {}
 

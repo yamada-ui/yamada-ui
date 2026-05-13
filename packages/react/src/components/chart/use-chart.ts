@@ -14,6 +14,7 @@ import type {
 } from "../../core"
 import type { Merge } from "../../utils"
 import { useCallback, useState } from "react"
+import { mergeProps } from "../../core"
 import { createContext, dataAttr, handlerAll, isUndefined } from "../../utils"
 
 const PLACEMENT_MAP: {
@@ -23,7 +24,11 @@ const PLACEMENT_MAP: {
   }
 } = {
   "center-end": { align: "right", verticalAlign: "middle" },
+  "center-end-end": { align: "right", verticalAlign: "bottom" },
+  "center-end-start": { align: "right", verticalAlign: "top" },
   "center-start": { align: "left", verticalAlign: "middle" },
+  "center-start-end": { align: "left", verticalAlign: "bottom" },
+  "center-start-start": { align: "left", verticalAlign: "top" },
   end: { align: "center", verticalAlign: "bottom" },
   "end-center": { align: "center", verticalAlign: "bottom" },
   "end-end": { align: "right", verticalAlign: "bottom" },
@@ -101,7 +106,7 @@ export const useChartLegend = ({
   const { highlightedDataKey, onHighlight } = useChartContext()
 
   const getRootProps: PropGetter = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -273,10 +278,7 @@ export const useChartTooltip = <
   )
 
   const getContentProps: PropGetter = useCallback(
-    (props) => ({
-      ...rest,
-      ...props,
-    }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -319,7 +321,7 @@ export const useChartLabelList = ({
   ...rest
 }: UseChartLabelListProps = {}) => {
   const getRootProps: PropGetter<"text"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -390,7 +392,7 @@ export const useChartLabel = ({
   ...rest
 }: UseChartLabelProps = {}) => {
   const getRootProps: PropGetter<"text"> = useCallback(
-    (props) => ({ ...rest, ...props }),
+    (props) => mergeProps(rest, props)(),
     [rest],
   )
 

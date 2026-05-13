@@ -54,15 +54,6 @@ To improve our development process, we have set up tools and systems. Yamada UI 
 - **`pnpm typecheck`**: run typecheck for all packages.
 - **`pnpm test`**: run test for all packages.
 
-### Visual Studio Code
-
-```json
-{
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.workingDirectories": [{ "mode": "auto" }]
-}
-```
-
 ## AI Usage Policy
 
 Yamada UI welcomes contributions from everyone, including those created with the assistance of Artificial Intelligence (AI) tools. If you contribute using AI, please follow the [AI Usage Policy](./AI_POLICY.md).
@@ -115,10 +106,6 @@ the following types:
 4. Run `pnpm changeset` to create a detailed description of your changes. This
    will be used to generate a changelog when we publish an update.
    [Learn more about Changeset](https://github.com/atlassian/changesets/tree/master/packages/cli).
-
-> If you made minor changes like CI config, prettier, etc, you can run
-> `pnpm changeset add --empty` to generate an empty changeset file to document
-> your changes.
 
 5. Next, commit your changes following the [commit convention](#commit-convention).
 

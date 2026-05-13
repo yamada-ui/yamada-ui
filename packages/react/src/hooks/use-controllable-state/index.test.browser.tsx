@@ -17,19 +17,12 @@ describe("useControllableEventState", () => {
         onChange,
       })
 
-      return (
-        <input
-          type="text"
-          data-testid="input"
-          value={value}
-          onChange={setValue}
-        />
-      )
+      return <input type="text" value={value} onChange={setValue} />
     }
 
     const { user } = await render(<Component />)
 
-    await user.fill(page.getByTestId("input"), "hello")
+    await user.fill(page.getByRole("textbox"), "hello")
 
     expect(onChange).toHaveBeenCalledTimes(1)
     const ev = onChange.mock.calls[0]![0] as ChangeEvent<HTMLInputElement>
@@ -45,21 +38,14 @@ describe("useControllableEventState", () => {
         defaultValue: "initial",
       })
 
-      return (
-        <input
-          type="text"
-          data-testid="input"
-          value={value}
-          onChange={setValue}
-        />
-      )
+      return <input type="text" value={value} onChange={setValue} />
     }
 
     const { user } = await render(<Component />)
 
-    await user.fill(page.getByTestId("input"), "updated")
+    await user.fill(page.getByRole("textbox"), "updated")
 
-    await expect.element(page.getByTestId("input")).toHaveValue("updated")
+    await expect.element(page.getByRole("textbox")).toHaveValue("updated")
   })
 })
 
@@ -70,20 +56,16 @@ describe("useControllableState", () => {
         defaultValue: "initial",
       })
 
-      return (
-        <button data-testid="btn" onClick={() => setValue("updated")}>
-          {value}
-        </button>
-      )
+      return <button onClick={() => setValue("updated")}>{value}</button>
     }
 
     const { user } = await render(<Component />)
 
-    await expect.element(page.getByTestId("btn")).toHaveTextContent("initial")
+    await expect.element(page.getByRole("button")).toHaveTextContent("initial")
 
-    await user.click(page.getByTestId("btn"))
+    await user.click(page.getByRole("button"))
 
-    await expect.element(page.getByTestId("btn")).toHaveTextContent("updated")
+    await expect.element(page.getByRole("button")).toHaveTextContent("updated")
   })
 
   test("works in controlled mode", async () => {
@@ -99,22 +81,18 @@ describe("useControllableState", () => {
         },
       })
 
-      return (
-        <button data-testid="btn" onClick={() => setState("new")}>
-          {state}
-        </button>
-      )
+      return <button onClick={() => setState("new")}>{state}</button>
     }
 
     const { user } = await render(<Component />)
 
     await expect
-      .element(page.getByTestId("btn"))
+      .element(page.getByRole("button"))
       .toHaveTextContent("controlled")
 
-    await user.click(page.getByTestId("btn"))
+    await user.click(page.getByRole("button"))
 
     expect(onChange).toHaveBeenCalledWith("new")
-    await expect.element(page.getByTestId("btn")).toHaveTextContent("new")
+    await expect.element(page.getByRole("button")).toHaveTextContent("new")
   })
 })

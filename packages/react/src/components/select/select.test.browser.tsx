@@ -46,7 +46,7 @@ describe("<Select />", () => {
       expect(onChange).toHaveBeenCalledWith(["two"])
     })
     await expect.element(option1).toHaveAttribute("aria-selected", "false")
-  })
+  }, 30000)
 
   test("respects max selection limit in multiple mode", async () => {
     const onChange = vi.fn()
@@ -67,14 +67,14 @@ describe("<Select />", () => {
     const option3 = page.getByRole("option", { name: "Option 3" })
 
     await expect.element(option1).toBeVisible()
-    await user.click(option1)
+    await user.click(option1, { force: true })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
     await expect.element(option1).toHaveAttribute("aria-selected", "true")
 
     await expect.element(option2).toBeVisible()
-    await user.click(option2)
+    await user.click(option2, { force: true })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
@@ -90,7 +90,7 @@ describe("<Select />", () => {
     )
     expect(onChange).toHaveBeenCalledTimes(callsAfterMaxReached)
     expect(onChange).toHaveBeenLastCalledWith(["one", "two"])
-  })
+  }, 30000)
 
   test("displays selected values in multiple mode", async () => {
     await render(

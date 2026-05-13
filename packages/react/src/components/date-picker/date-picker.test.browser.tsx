@@ -113,9 +113,7 @@ describe("<DatePicker />", () => {
     const { user } = await render(<DatePicker placeholder="Select date" />)
 
     const input = page.getByRole("textbox").first()
-    await user.click(input)
-    await user.clear(input)
-    await user.type(input, "2024-01-15")
+    await user.fill(input, "2024-01-15")
 
     await expect.element(input).toHaveValue("2024-01-15")
   })
@@ -126,9 +124,7 @@ describe("<DatePicker />", () => {
     )
 
     const inputs = page.getByRole("textbox")
-    await user.click(inputs.first())
-    await user.clear(inputs.first())
-    await user.type(inputs.first(), "2024-01-15")
+    await user.fill(inputs.first(), "2024-01-15")
 
     await expect.element(inputs.first()).toHaveValue("2024-01-15")
   })
@@ -140,8 +136,7 @@ describe("<DatePicker />", () => {
 
     const input = page.getByRole("textbox").first()
     await user.click(input)
-    await user.clear(input)
-    await user.type(input, "2024-01-15")
+    await user.fill(input, "2024-01-15")
     await expect.element(input).toHaveValue("2024-01-15")
     await expect.element(input).toHaveFocus()
     await user.keyboard("{Enter}")
@@ -156,8 +151,7 @@ describe("<DatePicker />", () => {
 
     const inputs = page.getByRole("textbox")
     await user.click(inputs.first())
-    await user.clear(inputs.first())
-    await user.type(inputs.first(), "2024-01-15")
+    await user.fill(inputs.first(), "2024-01-15")
     await user.keyboard("{Enter}")
 
     await vi.waitFor(async () => {
@@ -180,8 +174,7 @@ describe("<DatePicker />", () => {
 
     const inputs = page.getByRole("textbox")
     await user.click(inputs.nth(1))
-    await user.clear(inputs.nth(1))
-    await user.type(inputs.nth(1), "2024-01-20")
+    await user.fill(inputs.nth(1), "2024-01-20")
     await user.keyboard("{Enter}")
 
     await vi.waitFor(async () => {

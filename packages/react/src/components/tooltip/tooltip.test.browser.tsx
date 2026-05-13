@@ -171,11 +171,16 @@ describe("<Tooltip />", () => {
   })
 
   test("does not open on touch pointer events", async () => {
-    await render(
-      <Tooltip content="Tooltip Hovered">
-        <Text as="span">Trigger</Text>
-      </Tooltip>,
+    const { user } = await render(
+      <>
+        <button type="button">Anchor</button>
+        <Tooltip content="Tooltip Hovered">
+          <Text as="span">Trigger</Text>
+        </Tooltip>
+      </>,
     )
+
+    await user.hover(page.getByRole("button", { name: "Anchor" }))
 
     const trigger = page.getByText("Trigger")
 

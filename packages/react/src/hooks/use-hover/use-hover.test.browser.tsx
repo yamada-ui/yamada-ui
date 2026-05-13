@@ -12,7 +12,14 @@ describe("useHover", () => {
       return <span ref={ref}>{hovered ? "Hovered" : "Not hovered"}</span>
     }
 
-    const { unmount, user } = await render(<Text />)
+    const { unmount, user } = await render(
+      <>
+        <button type="button">anchor</button>
+        <Text />
+      </>,
+    )
+
+    await user.hover(page.getByRole("button", { name: "anchor" }))
 
     const initialText = page.getByText(notHoveredText)
     await expect.element(initialText).toBeInTheDocument()

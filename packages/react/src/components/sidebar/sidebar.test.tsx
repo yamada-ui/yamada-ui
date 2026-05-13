@@ -1,5 +1,4 @@
 import { useRef } from "react"
-
 import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { Sidebar } from "."
 import { Button } from "../button"

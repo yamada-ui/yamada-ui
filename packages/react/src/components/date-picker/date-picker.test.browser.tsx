@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { vi } from "vitest"
 import { page, render } from "#test/browser"
 import { DatePicker } from "."
 

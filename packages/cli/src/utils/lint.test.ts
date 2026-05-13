@@ -1,4 +1,3 @@
-import { beforeEach, describe, expect, test, vi } from "vitest"
 import { lintFiles, lintText } from "./lint"
 
 const { mockLintFiles, mockLintText, mockOutputFixes } = vi.hoisted(() => ({

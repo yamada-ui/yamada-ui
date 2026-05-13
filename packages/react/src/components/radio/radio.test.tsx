@@ -1,5 +1,4 @@
 import { createRef } from "react"
-import { vi } from "vitest"
 import { a11y, render, renderHook, screen } from "#test"
 import { RadioGroup } from "."
 import { Radio } from "./radio"

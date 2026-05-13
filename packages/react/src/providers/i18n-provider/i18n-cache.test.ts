@@ -1,4 +1,3 @@
-import { describe, expect, test } from "vitest"
 import { i18nCache } from "./i18n-cache"
 
 describe("i18nCache", () => {

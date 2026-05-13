@@ -1,4 +1,3 @@
-import { vi } from "vitest"
 import { a11y, fireEvent, render, screen } from "#test"
 import { SaturationSlider } from "."
 

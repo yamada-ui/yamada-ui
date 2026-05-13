@@ -1,4 +1,3 @@
-import { vi } from "vitest"
 import { page, render } from "#test/browser"
 import { SaturationSlider } from "."
 import { noop } from "../../utils"

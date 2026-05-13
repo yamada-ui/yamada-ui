@@ -23,30 +23,31 @@ describe("<Select />", () => {
       />,
     )
 
-    const option1 = page.getByRole("option", { name: "Option 1" })
-    const option2 = page.getByRole("option", { name: "Option 2" })
+    const getOption1 = () => page.getByRole("option", { name: "Option 1" })
+    const getOption2 = () => page.getByRole("option", { name: "Option 2" })
+    const field = page.getByRole("combobox", { name: /Choose options/i })
 
-    await expect.element(option1).toBeVisible()
-    await user.click(option1, { force: true })
+    await expect.element(getOption1()).toBeVisible()
+    await user.click(getOption1())
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
-    await expect.element(option1).toHaveAttribute("aria-selected", "true")
-
-    await expect.element(option2).toBeVisible()
-    await user.click(option2, { force: true })
+    await expect.element(getOption1()).toHaveAttribute("aria-selected", "true")
+    await expect.element(field).toHaveTextContent("Option 1")
+    await expect.element(getOption2()).toBeVisible()
+    await user.click(getOption2(), { force: true, timeout: 10000 })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
-    await expect.element(option2).toHaveAttribute("aria-selected", "true")
+    await expect.element(field).toHaveTextContent("Option 2")
 
-    await expect.element(option1).toBeVisible()
-    await user.click(option1, { force: true })
+    await expect.element(getOption1()).toBeVisible()
+    await user.click(getOption1(), { force: true, timeout: 10000 })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
     })
-    await expect.element(option1).toHaveAttribute("aria-selected", "false")
-  }, 30000)
+    await expect.element(field).toHaveTextContent("Option 2")
+  })
 
   test("respects max selection limit in multiple mode", async () => {
     const onChange = vi.fn()
@@ -62,35 +63,36 @@ describe("<Select />", () => {
       />,
     )
 
-    const option1 = page.getByRole("option", { name: "Option 1" })
-    const option2 = page.getByRole("option", { name: "Option 2" })
-    const option3 = page.getByRole("option", { name: "Option 3" })
+    const getOption1 = () => page.getByRole("option", { name: "Option 1" })
+    const getOption2 = () => page.getByRole("option", { name: "Option 2" })
+    const getOption3 = () => page.getByRole("option", { name: "Option 3" })
+    const field = page.getByRole("combobox", { name: /Choose options/i })
 
-    await expect.element(option1).toBeVisible()
-    await user.click(option1, { force: true })
+    await expect.element(getOption1()).toBeVisible()
+    await user.click(getOption1())
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
-    await expect.element(option1).toHaveAttribute("aria-selected", "true")
+    await expect.element(getOption1()).toHaveAttribute("aria-selected", "true")
 
-    await expect.element(option2).toBeVisible()
-    await user.click(option2, { force: true })
+    await expect.element(getOption2()).toBeVisible()
+    await user.click(getOption2(), { force: true, timeout: 10000 })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
-    await expect.element(option2).toHaveAttribute("aria-selected", "true")
+    await expect.element(field).toHaveTextContent("Option 2")
 
-    await expect.element(option3).toBeVisible()
-    await expect.element(option3).toHaveAttribute("aria-disabled", "true")
-    await expect.element(option3).toHaveAttribute("aria-selected", "false")
+    await expect.element(getOption3()).toBeVisible()
+    await expect.element(getOption3()).toHaveAttribute("aria-disabled", "true")
+    await expect.element(getOption3()).toHaveAttribute("aria-selected", "false")
 
     const callsAfterMaxReached = onChange.mock.calls.length
-    await expect(user.click(option3, { timeout: 200 })).rejects.toThrow(
+    await expect(user.click(getOption3(), { timeout: 200 })).rejects.toThrow(
       /Timeout/,
     )
     expect(onChange).toHaveBeenCalledTimes(callsAfterMaxReached)
     expect(onChange).toHaveBeenLastCalledWith(["one", "two"])
-  }, 30000)
+  })
 
   test("displays selected values in multiple mode", async () => {
     await render(

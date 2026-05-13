@@ -12,14 +12,7 @@ describe("useHover", () => {
       return <span ref={ref}>{hovered ? "Hovered" : "Not hovered"}</span>
     }
 
-    const { unmount, user } = await render(
-      <>
-        <button type="button">anchor</button>
-        <Text />
-      </>,
-    )
-
-    await user.hover(page.getByRole("button", { name: "anchor" }))
+    const { unmount } = await render(<Text />)
 
     const initialText = page.getByText(notHoveredText)
     await expect.element(initialText).toBeInTheDocument()
@@ -27,14 +20,22 @@ describe("useHover", () => {
       .element(page.getByText(hoveredText).query())
       .not.toBeInTheDocument()
 
-    await user.hover(initialText)
+    initialText.element().dispatchEvent(
+      new MouseEvent("mouseenter", {
+        bubbles: true,
+      }),
+    )
     const hovered = page.getByText(hoveredText)
     await expect.element(hovered).toBeInTheDocument()
     await expect
       .element(page.getByText(notHoveredText).query())
       .not.toBeInTheDocument()
 
-    await user.unhover(hovered)
+    hovered.element().dispatchEvent(
+      new MouseEvent("mouseleave", {
+        bubbles: true,
+      }),
+    )
     await expect.element(page.getByText(notHoveredText)).toBeInTheDocument()
     await expect
       .element(page.getByText(hoveredText).query())

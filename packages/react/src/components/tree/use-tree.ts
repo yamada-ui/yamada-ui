@@ -22,15 +22,12 @@ import {
   ariaAttr,
   assignRef,
   createContext,
-  cx,
   dataAttr,
   filterEmpty,
-  handlerAll,
   isArray,
   isInputElement,
   isUndefined,
   match,
-  mergeRefs,
   runKeyAction,
   setAttribute,
   useIds,
@@ -819,20 +816,22 @@ export const useTreeItem = ({
   }, [checkable, descendants])
 
   const getItemProps: PropGetter<"li"> = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id: itemId,
-      ref: mergeRefs(ref, register),
-      "aria-disabled": ariaAttr(disabled),
-      "aria-labelledby": cx(ariaLabelledby, labelId),
-      "aria-level": level,
-      "aria-selected": ariaAttr(selected),
-      "data-disabled": dataAttr(disabled),
-      role: "treeitem",
-      tabIndex: -1,
-      ...props,
-      onClick: handlerAll(props.onClick, onItemClick),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          id: itemId,
+          ref: register,
+          "aria-disabled": ariaAttr(disabled),
+          "aria-labelledby": labelId,
+          "aria-level": level,
+          "aria-selected": ariaAttr(selected),
+          "data-disabled": dataAttr(disabled),
+          role: "treeitem",
+          tabIndex: -1,
+        },
+        props,
+        { onClick: onItemClick, onKeyDown },
+      )(),
     [
       itemId,
       register,
@@ -865,17 +864,20 @@ export const useTreeItem = ({
   )
 
   const getCheckboxProps: PropGetter<UseCheckboxProps> = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id: checkboxId,
-      "aria-labelledby": cx(ariaLabelledby, labelId),
-      "data-selected": dataAttr(selected),
-      checked,
-      disabled,
-      indeterminate,
-      tabIndex: -1,
-      ...props,
-      onChange: handlerAll(props.onChange, onCheckboxChange),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          id: checkboxId,
+          "aria-labelledby": labelId,
+          "data-selected": dataAttr(selected),
+          checked,
+          disabled,
+          indeterminate,
+          tabIndex: -1,
+        },
+        props,
+        { onChange: onCheckboxChange },
+      )(),
     [
       checkboxId,
       labelId,
@@ -888,13 +890,16 @@ export const useTreeItem = ({
   )
 
   const getGroupProps: PropGetter<"ul"> = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      "aria-busy": ariaAttr(groupLoading),
-      "aria-labelledby": cx(ariaLabelledby, labelId),
-      "data-disabled": dataAttr(disabled),
-      role: "group",
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          "aria-busy": ariaAttr(groupLoading),
+          "aria-labelledby": labelId,
+          "data-disabled": dataAttr(disabled),
+          role: "group",
+        },
+        props,
+      )(),
     [labelId, disabled, groupLoading],
   )
 

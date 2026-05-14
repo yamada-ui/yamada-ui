@@ -13,7 +13,6 @@ import {
   ariaAttr,
   assignRef,
   createContext,
-  cx,
   dataAttr,
   handlerAll,
   isArray,
@@ -294,13 +293,17 @@ export const useMenu = ({
   )
 
   const getContentProps: PropGetter = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id: contentId,
-      "aria-labelledby": cx(ariaLabelledby, triggerId),
-      role: "menu",
-      ...props,
-      ref: mergeRefs(ref, contentRef),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          id: contentId,
+          ref: contentRef,
+          "aria-labelledby": triggerId,
+          role: "menu",
+          ...props,
+        },
+        props,
+      )(),
     [contentId, triggerId],
   )
 
@@ -524,23 +527,20 @@ export type UseSubMenuReturn = ReturnType<typeof useSubMenu>
 
 export interface UseMenuGroupProps extends HTMLProps {}
 
-export const useMenuGroup = ({
-  "aria-labelledby": ariaLabelledbyProp,
-  ...rest
-}: UseMenuGroupProps) => {
+export const useMenuGroup = ({ ...rest }: UseMenuGroupProps) => {
   const labelId = useId()
 
   const getGroupProps: PropGetter = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) =>
+    (props = {}) =>
       mergeProps(
         {
-          "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby, labelId),
+          "aria-labelledby": labelId,
           role: "group",
         },
         rest,
         props,
       )(),
-    [ariaLabelledbyProp, labelId, rest],
+    [labelId, rest],
   )
 
   const getLabelProps: PropGetter<"span"> = useCallback(

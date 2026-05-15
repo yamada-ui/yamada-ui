@@ -11,7 +11,7 @@ export interface PuffProps extends LoadingProps {}
 /**
  * `Loading` is a component displayed during waiting times, such as when data is being loaded.
  *
- * @see https://yamada-ui.com/docs/components/feedback/loading
+ * @see https://yamada-ui.com/docs/components/loading
  */
 export const Puff = withContext<"svg", PuffProps>(
   ({ dur = "1.8s", ...rest }) => {

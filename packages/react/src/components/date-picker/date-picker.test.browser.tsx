@@ -137,6 +137,7 @@ describe("<DatePicker />", () => {
     const input = page.getByRole("textbox").first()
     await user.click(input)
     await user.fill(input, "2024-01-15")
+    await expect.element(input).toHaveValue("2024-01-15")
     await user.keyboard("{Enter}")
 
     await vi.waitFor(async () => {

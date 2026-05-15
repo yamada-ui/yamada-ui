@@ -171,11 +171,19 @@ describe("<Tooltip />", () => {
   })
 
   test("does not open on touch pointer events", async () => {
-    await render(
-      <Tooltip content="Tooltip Hovered">
-        <Text as="span">Trigger</Text>
-      </Tooltip>,
+    const { user } = await render(
+      <>
+        <div
+          style={{ height: 12, left: 8, position: "fixed", top: 8, width: 12 }}
+          data-testid="pointer-reset"
+        />
+        <Tooltip content="Tooltip Hovered">
+          <Text as="span">Trigger</Text>
+        </Tooltip>
+      </>,
     )
+
+    await user.hover(page.getByTestId("pointer-reset"))
 
     const trigger = page.getByText("Trigger")
 
@@ -256,10 +264,18 @@ describe("<Tooltip />", () => {
 
   test("handles openDelay and closeDelay", async () => {
     const { user } = await render(
-      <Tooltip closeDelay={500} content="Tooltip Hovered" openDelay={500}>
-        <Text as="span">Trigger</Text>
-      </Tooltip>,
+      <>
+        <div
+          style={{ height: 12, left: 8, position: "fixed", top: 8, width: 12 }}
+          data-testid="pointer-reset"
+        />
+        <Tooltip closeDelay={500} content="Tooltip Hovered" openDelay={500}>
+          <Text as="span">Trigger</Text>
+        </Tooltip>
+      </>,
     )
+
+    await user.hover(page.getByTestId("pointer-reset"))
 
     const trigger = page.getByText("Trigger")
 

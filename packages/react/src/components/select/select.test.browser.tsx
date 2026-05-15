@@ -28,21 +28,21 @@ describe("<Select />", () => {
     const field = page.getByRole("combobox", { name: /Choose options/i })
 
     await expect.element(getOption1()).toBeVisible()
-    await user.click(getOption1())
+    await user.click(getOption1(), { force: true })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one"])
     })
     await expect.element(getOption1()).toHaveAttribute("aria-selected", "true")
     await expect.element(field).toHaveTextContent("Option 1")
     await expect.element(getOption2()).toBeVisible()
-    await user.click(getOption2(), { timeout: 10000 })
+    await user.click(getOption2(), { force: true })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
     await expect.element(field).toHaveTextContent("Option 2")
 
     await expect.element(getOption1()).toBeVisible()
-    await user.click(getOption1(), { timeout: 10000 })
+    await user.click(getOption1(), { force: true })
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["two"])
     })

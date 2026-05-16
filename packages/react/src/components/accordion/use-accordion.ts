@@ -9,7 +9,6 @@ import { createDescendants } from "../../hooks/use-descendants"
 import {
   ariaAttr,
   createContext,
-  cx,
   dataAttr,
   handlerAll,
   isArray,
@@ -268,12 +267,11 @@ export const useAccordionItem = ({
   )
 
   const getPanelProps: PropGetter = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id: panelId,
-      "aria-labelledby": cx(ariaLabelledby, itemId),
-      role: "region",
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        { id: panelId, "aria-labelledby": itemId, role: "region" },
+        props,
+      )(),
     [itemId, panelId],
   )
 

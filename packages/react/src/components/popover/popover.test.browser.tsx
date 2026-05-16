@@ -102,9 +102,12 @@ describe("<Popover />", () => {
     await expect
       .element(page.getByTestId("popoverContent").query())
       .not.toBeInTheDocument()
-    await expect
-      .poll(() => document.activeElement)
-      .toBe(triggerButton.element())
+    await vi.waitFor(
+      () => {
+        expect(document.activeElement).toBe(triggerButton.element())
+      },
+      { timeout: 3000 },
+    )
   })
 
   test("can close on blur", async () => {

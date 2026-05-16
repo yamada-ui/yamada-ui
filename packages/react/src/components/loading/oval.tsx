@@ -11,7 +11,7 @@ export interface OvalProps extends LoadingProps {}
 /**
  * `Loading` is a component displayed during waiting times, such as when data is being loaded.
  *
- * @see https://yamada-ui.com/docs/components/feedback/loading
+ * @see https://yamada-ui.com/docs/components/loading
  */
 export const Oval = withContext<"svg", OvalProps>(
   ({ dur = "1s", secondaryColor, ...rest }) => {

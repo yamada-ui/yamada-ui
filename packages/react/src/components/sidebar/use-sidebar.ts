@@ -474,7 +474,7 @@ export const useSidebarItem = ({
         },
         rest,
         props,
-        { onclick: !group ? () => onSelectedChange(value) : undefined },
+        { onClick: !group ? () => onSelectedChange(value) : undefined },
       )(),
     [
       itemId,

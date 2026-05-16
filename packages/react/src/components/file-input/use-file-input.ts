@@ -1,10 +1,10 @@
 "use client"
 
 import type { ChangeEvent, RefObject } from "react"
-import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict } from "../../utils"
 import type { FieldProps } from "../field"
 import { useCallback, useRef } from "react"
+import { type HTMLProps, mergeProps, type PropGetter } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
@@ -151,13 +151,16 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
   )
 
   const getFieldProps: PropGetter = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      "data-placeholder": dataAttr(!count),
-      ...clickableProps,
-      "aria-labelledby": cx(ariaLabelledby, clickableProps["aria-labelledby"]),
-      tabIndex: interactive ? 0 : clickableProps.tabIndex,
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          "data-placeholder": dataAttr(!count),
+          ...clickableProps,
+          "aria-labelledby": clickableProps["aria-labelledby"],
+          tabIndex: interactive ? 0 : clickableProps.tabIndex,
+        },
+        props,
+      )(),
     [clickableProps, count, interactive],
   )
 

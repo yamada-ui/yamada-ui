@@ -1,4 +1,4 @@
-# PR Merge Guide
+# PR Merge Guidelines
 
 ## Branch Protection Rules
 

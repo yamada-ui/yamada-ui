@@ -114,7 +114,6 @@ export const useRadioGroup = <Y extends string = string>(
           disabled,
           readOnly,
           required,
-          ...props,
         },
         props,
         { onChange, ...eventProps },

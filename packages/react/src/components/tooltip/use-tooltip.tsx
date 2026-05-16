@@ -76,7 +76,7 @@ export const useTooltip = (props: UseTooltipProps = {}) => {
     },
   ] = usePopperProps(props, ["open"])
   const describedbyId = useId()
-  const triggerRef = useRef<HTMLElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
   const openTimeout = useRef<NodeJS.Timeout>(undefined)
   const closeTimeout = useRef<NodeJS.Timeout>(undefined)
   const { open, onClose, onOpen } = useDisclosure({

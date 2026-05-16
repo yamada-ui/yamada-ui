@@ -155,11 +155,11 @@ export const useTooltip = (props: UseTooltipProps = {}) => {
     (props = {}) => {
       return getReferenceProps(
         mergeProps(
+          props,
           {
             ref: triggerRef,
             "aria-describedby": open ? describedbyId : undefined,
           },
-          props,
           {
             onBlur: onDelayClose,
             onClick: closeOnClick ? onDelayClose : undefined,

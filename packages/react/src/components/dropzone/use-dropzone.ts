@@ -8,14 +8,7 @@ import { fromEvent } from "file-selector"
 import { useCallback, useId } from "react"
 import { useDropzone as useOriginalDropzone } from "react-dropzone"
 import { mergeProps } from "../../core"
-import {
-  ariaAttr,
-  assignRef,
-  cx,
-  dataAttr,
-  isArray,
-  mergeRefs,
-} from "../../utils"
+import { ariaAttr, assignRef, dataAttr, isArray, mergeRefs } from "../../utils"
 import { useFieldProps } from "../field"
 
 export interface UseDropzoneProps
@@ -278,17 +271,21 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) =>
-      getOriginalInputProps({
-        id,
-        name,
-        disabled,
-        readOnly,
-        ...ariaProps,
-        ...dataProps,
-        ...props,
-        "aria-labelledby": cx(ariaLabelledby, labelledbyId),
-      }),
+    (props = {}) =>
+      getOriginalInputProps(
+        mergeProps(
+          {
+            id,
+            name,
+            disabled,
+            readOnly,
+            ...ariaProps,
+            ...dataProps,
+            "aria-labelledby": labelledbyId,
+          },
+          props,
+        )(),
+      ),
     [
       getOriginalInputProps,
       id,

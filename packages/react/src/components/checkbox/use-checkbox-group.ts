@@ -9,7 +9,6 @@ import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   ariaAttr,
   createContext,
-  cx,
   dataAttr,
   handlerAll,
   isNumber,
@@ -70,7 +69,7 @@ export const useCheckboxGroup = <Y extends string = string>(
       onChange: onChangeProp,
       ...rest
     },
-    ariaProps: { "aria-describedby": ariaDescribedbyProp, ...ariaProps },
+    ariaProps: { "aria-describedby": ariaDescribedby, ...ariaProps },
     dataProps,
     eventProps,
   } = useFieldProps(props)
@@ -101,26 +100,18 @@ export const useCheckboxGroup = <Y extends string = string>(
   )
 
   const getRootProps: PropGetter = useCallback(
-    ({
-      ref,
-      "aria-describedby": ariaDescribedby,
-      "aria-labelledby": ariaLabelledby,
-      ...props
-    } = {}) =>
+    (props = {}) =>
       mergeProps(
         dataProps,
         {
-          "aria-describedby": cx(ariaDescribedbyProp, ariaDescribedby),
-          "aria-labelledby": cx(labelId, ariaLabelledby),
+          "aria-describedby": ariaDescribedby,
+          "aria-labelledby": labelId,
           role: "group",
         },
         rest,
         props,
-        {
-          ref,
-        },
       )(),
-    [ariaDescribedbyProp, dataProps, labelId, rest],
+    [ariaDescribedby, dataProps, labelId, rest],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(

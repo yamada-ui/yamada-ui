@@ -69,11 +69,12 @@ Use tools to interact with the user throughout the process.
    - **Type is required** — every issue must have a Type assigned; never skip this step
    - Run the commands below to get available options, then decide based on the collected information
    - Only ask the user for clarification when genuinely uncertain
+   - In this repo, do **not** rely on `gh issue create --type`; create the issue first, then assign the chosen type with GraphQL
 
    **Fetch available Types:**
 
    ```bash
-   gh api graphql -f query='{ repository(owner: "yamada-ui", name: "yamada-ui") { issueTypes(first: 20) { nodes { name description } } } }'
+   gh api graphql -f query='{ repository(owner: "yamada-ui", name: "yamada-ui") { issueTypes(first: 20) { nodes { id name description } } } }'
    ```
 
    **Fetch available Labels:**
@@ -102,27 +103,34 @@ Use tools to interact with the user throughout the process.
      - Title, Type, and Labels for each issue (with reasoning)
      - Relationships with existing issues (`sub-issue`, `Related`, `Depends on`)
      - Target repository: `yamada-ui/yamada-ui`
-     - **Complete `gh issue create` command for each issue** (all flags filled in — required)
+     - **Concrete create-and-type-assignment commands for each issue** (all placeholders filled in — required)
 
-   Use this template for each command:
+   Use this template for each issue:
 
    ```bash
-   gh issue create \
+   issue_url=$(gh issue create \
      --repo yamada-ui/yamada-ui \
      --title "<title>" \
-     --body "<body>" \
-     --type "<Type>" \
-     --label "<label1>,<label2>" \
-     [--assignee @me]  # Only if PR intent is Yes
+     --body-file "<body-file>" \
+     [--label "<label1>,<label2>"] \
+     [--assignee @me])  # Only if PR intent is Yes
+
+   issue_number=${issue_url##*/}
+   issue_node_id=$(gh api "repos/yamada-ui/yamada-ui/issues/$issue_number" --jq '.node_id')
+
+   gh api graphql \
+     -f query='mutation($issueId:ID!, $issueTypeId:ID!){ updateIssue(input:{id:$issueId, issueTypeId:$issueTypeId}) { issue { number title issueType { name } } } }' \
+     -F issueId="$issue_node_id" \
+     -F issueTypeId="<issue-type-id>"
    ```
 
-   **For the `ai-used` checkboxes field in the template:** because this skill is AI-driven by definition, copy the options exactly as written in the template into `--body`, with the "checked the generated content" option set to `[x]` and the "did not use AI" option set to `[ ]`.
+   **For the `ai-used` checkboxes field in the template:** because this skill is AI-driven by definition, copy the options exactly as written in the issue body passed to `--body-file`, with the "checked the generated content" option set to `[x]` and the "did not use AI" option set to `[ ]`.
    - Wait for user approval
    - Apply any requested changes and re-present before proceeding
 
 9. **Create and link issues after approval**
    - Exit planning mode and proceed with execution after receiving approval
-   - Execute the exact `gh issue create` commands specified in the plan — do NOT reconstruct them
+   - Execute the exact create command and follow-up type-assignment mutation specified in the plan — do NOT reconstruct a different flow
    - For multiple issues, create the parent first, then create and link child issues
 
    **Sub-issue linking (for both new and existing issues):**

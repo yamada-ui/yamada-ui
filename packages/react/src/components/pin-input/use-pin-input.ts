@@ -314,11 +314,10 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
                 : placeholder,
             readOnly,
             value: values[index] || "",
-            ...filterUndefined(props),
-            id: `${id}${index ? `-${index}` : ""}`,
           },
-          props,
+          filterUndefined(props),
           {
+            id: `${id}${index ? `-${index}` : ""}`,
             onBlur,
             onChange: onChange(index),
             onFocus: onFocus(index),

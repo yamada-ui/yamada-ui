@@ -1,0 +1,38 @@
+{
+  "name": "Yamada UI",
+  "build": {
+    "context": "..",
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "remoteUser": "node",
+  "containerEnv": {
+    "NODE_OPTIONS": "--max-old-space-size=8192"
+  },
+  "runArgs": ["--init", "--memory=8g"],
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "8gb"
+  },
+  "postCreateCommand": "CI=true pnpm install && pnpm react exec playwright install",
+  "appPort": [3000, 6006],
+  "forwardPorts": [3000, 6006],
+  "portsAttributes": {
+    "3000": {
+      "label": "www (docs)"
+    },
+    "6006": {
+      "label": "Storybook"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"],
+      "settings": {
+        "eslint.workingDirectories": [{ "mode": "auto" }],
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
+  }
+}

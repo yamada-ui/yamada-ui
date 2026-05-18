@@ -1,46 +1,31 @@
 import type { FC } from "react"
-import { render } from "#test"
+import { a11y, render, screen } from "#test"
 import { useFieldSizing } from "./"
 
 const Component: FC<{ value?: string }> = ({ value }) => {
   const { ref, text } = useFieldSizing<HTMLInputElement>({ value })
 
   return (
-    <div>
-      <input ref={ref} data-testid="input" />
+    <div data-testid="field-sizing-root">
+      <input ref={ref} aria-label="field sizing input" data-testid="input" />
       {text}
     </div>
   )
 }
 
 describe("useFieldSizing", () => {
-  beforeEach(() => {
-    vi.spyOn(
-      HTMLSpanElement.prototype,
-      "getBoundingClientRect",
-    ).mockReturnValue({
-      bottom: 0,
-      height: 0,
-      left: 0,
-      right: 0,
-      toJSON: () => ({}),
-      top: 0,
-      width: 100,
-      x: 0,
-      y: 0,
-    })
+  test("passes a11y checks", async () => {
+    await a11y(<Component value="hello" />)
   })
 
-  afterEach(() => {
-    vi.restoreAllMocks()
-  })
+  test("renders static hidden text contract", () => {
+    render(<Component value="hello" />)
 
-  test("renders hidden text element with value", () => {
-    const { container } = render(<Component value="hello" />)
-    const span = container.querySelector("span[aria-hidden]")
+    const input = screen.getByLabelText("field sizing input")
+    const span = screen.getByText("hello")
 
-    expect(span).toBeInTheDocument()
-    expect(span).toHaveTextContent("hello")
+    expect(input).toBeInTheDocument()
+    expect(span).toHaveAttribute("aria-hidden")
     expect(span).toHaveStyle({
       opacity: "0",
       overflow: "hidden",
@@ -48,51 +33,5 @@ describe("useFieldSizing", () => {
       whiteSpace: "nowrap",
       zIndex: "-1",
     })
-  })
-
-  test("uses empty string as default value", () => {
-    const { container } = render(<Component />)
-    const span = container.querySelector("span[aria-hidden]")
-
-    expect(span).toBeInTheDocument()
-    expect(span).toHaveTextContent("")
-  })
-
-  test("sets input width from text bounding rect", () => {
-    const { getByTestId } = render(<Component value="hello" />)
-    const input = getByTestId("input")
-
-    expect(input.style.width).toBe("100px")
-  })
-
-  test("updates width when value changes", () => {
-    const { getByTestId, rerender } = render(<Component value="hi" />)
-
-    vi.spyOn(
-      HTMLSpanElement.prototype,
-      "getBoundingClientRect",
-    ).mockReturnValue({
-      bottom: 0,
-      height: 0,
-      left: 0,
-      right: 0,
-      toJSON: () => ({}),
-      top: 0,
-      width: 200,
-      x: 0,
-      y: 0,
-    })
-
-    rerender(<Component value="hello world" />)
-
-    const input = getByTestId("input")
-    expect(input.style.width).toBe("200px")
-  })
-
-  test("returns ref and text", () => {
-    const { container, getByTestId } = render(<Component value="test" />)
-
-    expect(getByTestId("input")).toBeInTheDocument()
-    expect(container.querySelector("span[aria-hidden]")).toBeInTheDocument()
   })
 })

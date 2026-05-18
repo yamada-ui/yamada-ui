@@ -1,12 +1,18 @@
-import { render, renderHook, screen } from "#test"
+import { a11y, render, renderHook, screen } from "#test"
 import { createStyled, useColorSchemeContext } from "./styled"
 
 describe("createStyled", () => {
+  test("passes a11y", async () => {
+    const StyledDiv = createStyled("div", { displayName: "StyledDiv" })
+    await a11y(<StyledDiv>content</StyledDiv>)
+  })
+
   test("creates a styled component with a simple HTML element", () => {
     const StyledDiv = createStyled("div", { displayName: "StyledDiv" })
     render(<StyledDiv data-testid="el">Hello</StyledDiv>)
-    expect(screen.getByTestId("el")).toBeInTheDocument()
-    expect(screen.getByTestId("el").textContent).toBe("Hello")
+    const el = screen.getByTestId("el")
+    expect(el).toBeInTheDocument()
+    expect(el.textContent).toBe("Hello")
   })
 
   test("creates a styled component with a name", () => {
@@ -37,8 +43,7 @@ describe("createStyled", () => {
         test
       </StyledDiv>,
     )
-    const el = screen.getByTestId("el")
-    expect(el).toBeInTheDocument()
+    expect(screen.getByTestId("el")).toBeInTheDocument()
   })
 })
 

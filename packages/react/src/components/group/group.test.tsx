@@ -6,17 +6,12 @@ describe("<Group />", () => {
     await a11y(<Group>Group</Group>)
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Group.displayName).toBe("Group")
-  })
+  test("sets root class and default tag correctly", () => {
+    render(<Group>Group</Group>)
 
-  test("sets `className` correctly", () => {
-    render(<Group data-testid="group">Group</Group>)
-    expect(screen.getByTestId("group")).toHaveClass("ui-group")
-  })
+    const group = screen.getByRole("group")
 
-  test("renders HTML tag correctly", () => {
-    render(<Group data-testid="group">Group</Group>)
-    expect(screen.getByTestId("group").tagName).toBe("DIV")
+    expect(group).toHaveClass("ui-group")
+    expect(group.tagName).toBe("DIV")
   })
 })

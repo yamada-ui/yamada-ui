@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 2.1.3
+
+### Patch Changes
+
+- [#6898](https://github.com/yamada-ui/yamada-ui/pull/6898) [`94e99c9`](https://github.com/yamada-ui/yamada-ui/commit/94e99c9a24b47a34359dd93db6b3050e49ccbcd1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Formatted code.
+
 ## 2.1.2
 
 ### Patch Changes

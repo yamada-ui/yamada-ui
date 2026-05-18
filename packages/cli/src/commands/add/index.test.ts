@@ -8,7 +8,6 @@ import {
 } from "node:fs"
 import { tmpdir } from "node:os"
 import path from "node:path"
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 
 vi.mock("../../utils", async (importOriginal) => {
   const actual: any = await importOriginal()

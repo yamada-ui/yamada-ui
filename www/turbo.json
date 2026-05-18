@@ -4,30 +4,43 @@
   "tasks": {
     "build:content": {
       "inputs": [
-        "velite.config.ts",
-        "contents/**",
-        "constants/**/*.ts",
-        "utils/**/*.ts",
-        "scripts/generate/docs/**/*.ts",
-        "data/**/*.json",
+        "{velite.config.ts,package.json}",
+        "{contents,constants,utils,data,messages,scripts/generate/docs}/**",
         "!data/doc-map.*.json",
-        "data/index.ts",
-        "messages/**/*.json",
-        "package.json",
-        "tsconfig.json",
-        "../pnpm-lock.yaml",
-        "../pnpm-workspace.yaml",
-        "../packages/workspace/src/prettier/**"
+        "../{pnpm-lock,pnpm-workspace}.yaml",
+        "../packages/workspace/src/oxfmt/**",
+        "../packages/workspace/package.json"
       ]
     },
-    "format": {
-      "dependsOn": ["build:content"]
+    "build:next": {
+      "dependsOn": ["^build", "build:content"],
+      "inputs": [
+        "**/*.{ts,tsx,mts,mdx,json}",
+        ".velite/**",
+        "public/**",
+        "!.next/**",
+        "!.turbo/**",
+        "!node_modules/**",
+        "!tsconfig.tsbuildinfo"
+      ],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "dev:content": {
+      "cache": false,
+      "persistent": true
+    },
+    "dev:next": {
+      "cache": false,
+      "persistent": true,
+      "with": ["www#dev:content"]
     },
     "lint": {
-      "dependsOn": ["build:content"]
+      "dependsOn": ["build:content"],
+      "inputs": ["**/*.{ts,tsx,mts,mdx}", "package.json", "tsconfig.json"]
     },
     "typecheck": {
-      "dependsOn": ["build:content"]
+      "dependsOn": ["build:content"],
+      "inputs": ["**/*.{ts,tsx,mts}", "package.json", "tsconfig.json"]
     }
   }
 }

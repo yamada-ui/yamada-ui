@@ -15,7 +15,6 @@ import {
 import { userEvent } from "@testing-library/user-event"
 import { isValidElement } from "react"
 import { UIProvider } from "../src"
-import "@testing-library/jest-dom/vitest"
 
 export interface RenderOptions extends OriginalRenderOptions {
   withProvider?: boolean

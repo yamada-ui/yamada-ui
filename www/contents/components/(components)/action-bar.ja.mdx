@@ -201,14 +201,15 @@ return (
 
 ### ARIAロールと属性
 
-| コンポーネント           | ロールと属性             | 使い方                                                                                    |
-| ------------------------ | ------------------------ | ----------------------------------------------------------------------------------------- |
-| `ActionBar.Content`      | `role="dialog"`          | ダイアログであることを示します。                                                          |
-| `ActionBar.OpenTrigger`  | `aria-haspopup="dialog"` | ダイアログが存在することを示します。                                                      |
-|                          | `aria-expanded`          | アクションバーが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。 |
-|                          | `aria-controls`          | アクションバーが開いている場合は、`ActionBar.Content`の`id`を設定します。                 |
-|                          | `aria-label`             | `"アクションバーを開く"`を設定します。                                                    |
-| `ActionBar.CloseTrigger` | `aria-label`             | `"アクションバーを閉じる"`を設定します。                                                  |
+| 要素                                   | ロールと属性             | 使い方                                                                                    |
+| -------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------------- |
+| `section.ui-action-bar__content`       | `role="dialog"`          | ダイアログであることを示します。                                                          |
+|                                        | `id`                     | `button.ui-action-bar__trigger--open`と関連付けるために使用する`id`。                     |
+| `button.ui-action-bar__trigger--open`  | `aria-haspopup="dialog"` | ダイアログが存在することを示します。                                                      |
+|                                        | `aria-expanded`          | アクションバーが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。 |
+|                                        | `aria-controls`          | アクションバーが開いている場合は、`section.ui-action-bar__content`の`id`を設定します。    |
+|                                        | `aria-label`             | `"アクションバーを開く"`を設定します。                                                    |
+| `button.ui-action-bar__trigger--close` | `aria-label`             | `"アクションバーを閉じる"`を設定します。                                                  |
 
 ## 類似のコンポーネント
 

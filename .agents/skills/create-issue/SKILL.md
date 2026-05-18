@@ -1,6 +1,8 @@
 ---
 name: create-issue
 description: "Create a GitHub Issue for yamada-ui. Use when the user says they want to create an issue, report a bug, request a feature, report a documentation problem, or file an issue against yamada-ui."
+metadata:
+  internal: true
 ---
 
 Create a GitHub Issue for yamada-ui.
@@ -9,8 +11,8 @@ Create a GitHub Issue for yamada-ui.
 
 Use tools to interact with the user throughout the process.
 
-1. **Enter Plan Mode (required)**
-   - Call `EnterPlanMode` immediately — before any other action
+1. **Enter planning mode (required)**
+   - Enter planning mode immediately — present and confirm a plan with the user before executing any side effects
 
 2. **Discover available templates**
    - Autonomously locate the `.github/ISSUE_TEMPLATE/` directory in the repository and list English templates (excluding `.ja.yml` files)
@@ -75,7 +77,7 @@ Use tools to interact with the user throughout the process.
 6. **Autonomously determine Type and Labels**
    - **Type is required** — every issue must have a Type assigned; never skip this step
    - Run the commands below to get available options, then decide based on the collected information
-   - Only use `AskUserQuestion` when genuinely uncertain
+   - Only ask the user for clarification when genuinely uncertain
 
    **Fetch available Types:**
 
@@ -101,6 +103,9 @@ Use tools to interact with the user throughout the process.
    - Include the full structure (parent/child, related, depends-on) in the plan presentation
 
 8. **Present plan for user review**
+   - **Title format** — use natural, descriptive English. Do not use commit message format (e.g., `feat(x): ...`). Wrap component names and code identifiers in backticks, and escape those backticks when presenting shell commands.
+     - Good: "Add \`Marquee\` component", "\`Accordion\` throws error when all items are disabled"
+     - Bad: "feat(marquee): add Marquee component", "fix(accordion): throw error when all items are disabled"
    - Present the following for user review:
      - List of issues to create (with parent/child relationships if applicable)
      - Title, Type, and Labels for each issue (with reasoning)
@@ -125,7 +130,7 @@ Use tools to interact with the user throughout the process.
    - Apply any requested changes and re-present before proceeding
 
 9. **Create and link issues after approval**
-   - Call `ExitPlanMode` after receiving approval
+   - Exit planning mode and proceed with execution after receiving approval
    - Execute the exact `gh issue create` commands specified in the plan — do NOT reconstruct them
    - For multiple issues, create the parent first, then create and link child issues
 

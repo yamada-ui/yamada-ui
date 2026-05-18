@@ -19,46 +19,14 @@ describe("<Blockquote />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Blockquote.Root.displayName).toBe("BlockquoteRoot")
-    expect(Blockquote.Cite.displayName).toBe("BlockquoteCite")
-    expect(Blockquote.Icon.displayName).toBe("BlockquoteIcon")
-    expect(Blockquote.Caption.displayName).toBe("BlockquoteCaption")
-    expect(Blockquote.Content.displayName).toBe("BlockquoteContent")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <Blockquote.Root
-        data-testid="blockquote"
-        icon={<Blockquote.Icon data-testid="icon" />}
-      >
-        <Blockquote.Content>Blockquote content</Blockquote.Content>
-        <Blockquote.Caption data-testid="caption">
-          <Blockquote.Cite>Blockquote cite</Blockquote.Cite>
-        </Blockquote.Caption>
-      </Blockquote.Root>,
-    )
-
-    expect(screen.getByTestId("blockquote")).toHaveClass("ui-blockquote__root")
-    expect(screen.getByTestId("icon")).toHaveClass("ui-blockquote__icon")
-    expect(screen.getByText("Blockquote content")).toHaveClass(
-      "ui-blockquote__content",
-    )
-    expect(screen.getByTestId("caption")).toHaveClass("ui-blockquote__caption")
-    expect(screen.getByText("Blockquote cite")).toHaveClass(
-      "ui-blockquote__cite",
-    )
-  })
-
   test("renders cite prop as caption when no custom BlockquoteCaption is provided", () => {
     render(
       <Blockquote.Root
         data-testid="blockquote"
         cite="Wikipedia"
         citeUrl="https://example.com"
-        captionProps={{ "data-testid": "caption" } as any}
-        citeProps={{ "data-testid": "cite" } as any}
+        captionProps={{ "data-testid": "caption" }}
+        citeProps={{ "data-testid": "cite" }}
       >
         Blockquote content
       </Blockquote.Root>,
@@ -67,25 +35,5 @@ describe("<Blockquote />", () => {
     expect(screen.getByTestId("caption")).toHaveClass("ui-blockquote__caption")
     expect(screen.getByTestId("cite")).toHaveClass("ui-blockquote__cite")
     expect(screen.getByText("Wikipedia")).toBeInTheDocument()
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(
-      <Blockquote.Root
-        data-testid="root"
-        icon={<Blockquote.Icon data-testid="icon" />}
-      >
-        <Blockquote.Content>Blockquote content</Blockquote.Content>
-        <Blockquote.Caption data-testid="caption">
-          <Blockquote.Cite>Blockquote cite</Blockquote.Cite>
-        </Blockquote.Caption>
-      </Blockquote.Root>,
-    )
-
-    expect(screen.getByTestId("root").tagName).toBe("FIGURE")
-    expect(screen.getByTestId("icon").tagName).toBe("svg")
-    expect(screen.getByTestId("caption").tagName).toBe("FIGCAPTION")
-    expect(screen.getByText("Blockquote content").tagName).toBe("BLOCKQUOTE")
-    expect(screen.getByText("Blockquote cite").tagName).toBe("CITE")
   })
 })

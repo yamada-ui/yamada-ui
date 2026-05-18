@@ -56,6 +56,7 @@ interface Options {
 
 export const theme = new Command("theme")
   .description("generate theme to your project.")
+  .helpOption("-h, --help", "display help for command.")
   .argument("[path]", "path to the theme directory.")
   .option("--cwd <path>", "current working directory.", cwd)
   .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)

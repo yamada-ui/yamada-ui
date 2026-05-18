@@ -59,6 +59,7 @@ interface Options {
 
 export const init = new Command("init")
   .description("initialize your project and install dependencies.")
+  .helpOption("-h, --help", "display help for command.")
   .option("--cwd <path>", "current working directory.", cwd)
   .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing files.", false)

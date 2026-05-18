@@ -45,6 +45,7 @@ interface Options {
 
 export const add = new Command("add")
   .description("add a component to your project.")
+  .helpOption("-h, --help", "display help for command.")
   .argument("[components...]", "components to add.")
   .option("--cwd <path>", "current working directory.", cwd)
   .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)

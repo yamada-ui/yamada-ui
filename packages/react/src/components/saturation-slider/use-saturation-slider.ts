@@ -256,7 +256,6 @@ export const useSaturationSlider = (props: UseSaturationSliderProps = {}) => {
             }),
           role: "slider",
           tabIndex: interactive ? 0 : -1,
-          ...props,
         },
         props,
         { onKeyDown },

@@ -154,7 +154,6 @@ export const useNativePopover = ({
           popover: popover === true ? "" : popover,
           role: "dialog",
           tabIndex: -1,
-          ...props,
         },
         props,
       )()

@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-jRWAZmH_.js";import{j as t,t as n}from"./core-D0ebHbTd.js";var r,i=e((()=>{n(),r=t.spaces({xs:`1`,sm:`2`,md:`4`,lg:`6`,xl:`8`,"2xl":`12`,"3xl":`16`,"4xl":`24`,"5xl":`32`})}));export{r as n,i as t};

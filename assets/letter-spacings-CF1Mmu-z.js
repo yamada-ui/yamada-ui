@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-jRWAZmH_.js";import{P as t,t as n}from"./core-D0ebHbTd.js";var r,i=e((()=>{n(),r=t.letterSpacings({tighter:`-0.05em`,tight:`-0.025em`,wide:`0.025em`,wider:`0.05em`,widest:`0.1em`})}));export{r as n,i as t};

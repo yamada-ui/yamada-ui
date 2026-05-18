@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-jRWAZmH_.js";import{P as t,t as n}from"./core-D0ebHbTd.js";var r,i=e((()=>{n(),r=t.aspectRatios({wide:`16 / 9`,bronze:`3.302 / 1`,golden:`1.618 / 1`,landscape:`4 / 3`,portrait:`3 / 4`,silver:`1.414 / 1`,square:`1 / 1`,ultrawide:`18 / 5`})}));export{i as n,r as t};

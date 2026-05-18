@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-jRWAZmH_.js";import{P as t,t as n}from"./core-D0ebHbTd.js";var r,i=e((()=>{n(),r=t.fontWeights({hairline:100,thin:200,light:300,normal:400,medium:500,semibold:600,bold:700,extrabold:800,black:900})}));export{i as n,r as t};

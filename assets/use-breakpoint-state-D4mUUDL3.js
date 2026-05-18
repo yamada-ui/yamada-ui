@@ -1,0 +1,1 @@
+import{n as e,o as t}from"./chunk-jRWAZmH_.js";import{t as n}from"./react-CMXXrKHu.js";import{n as r,r as i}from"./use-breakpoint-value-BLaLegNG.js";var a,o,s=e((()=>{a=t(n(),1),r(),o=e=>(0,a.useState)(i(e))}));export{o as n,s as t};

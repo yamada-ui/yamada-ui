@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-jRWAZmH_.js";import{P as t,t as n}from"./core-D0ebHbTd.js";var r,i=e((()=>{n(),r=t.lineHeights({shorter:1.25,short:1.375,moderate:1.5,tall:1.625,taller:2})}));export{r as n,i as t};

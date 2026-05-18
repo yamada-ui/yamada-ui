@@ -117,7 +117,6 @@ export const useModal = ({
           "aria-labelledby": titleId,
           "aria-modal": "true",
           role: "dialog",
-          ...props,
         },
         props,
         { onKeyDown },

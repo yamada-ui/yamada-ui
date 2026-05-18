@@ -58,12 +58,15 @@ export const propsShorthand: RuleModule<MessageIds, Options> = createRule<
     // {{ }} 内のキーは context.report({ data: { ... } }) の data で埋められる
     // @docs: https://eslint.org/docs/latest/extend/custom-rules#messageids
     messages: {
-      // 同じタグに shorthand と longhand の両方（または同じ longhand を持つ shorthand 兄弟同士）が
-      // 書かれている場合に出す指摘
-      // 例: <Box m={2} margin={4} /> → "Both 'm' and 'margin' are specified; ..."
+      // 同じ longhand を共有する 2 つの属性が 1 つのタグに同居しているときの指摘
+      // - shorthand + longhand: <Box m={1} margin={2} /> → a="m", b="margin", longhand="margin"
+      // - 兄弟 shorthand 同居: <Box bgGradient="x" bgImage="y" /> → a="bgGradient", b="bgImage", longhand="backgroundImage"
+      // メッセージ内に出る名前は実際の JSX に書かれた属性名のみで構成し、
+      // 利用者が「書いてない属性名」を提示されて混乱しないようにする
+      // 1 タグに対して 1 回しか報告しない（属性ごとに重複報告しない）
       // 自動修正は行わない（どちらを残すべきかは人間の判断）
       duplicateProps:
-        "Both '{{shorthand}}' and '{{longhand}}' are specified; keep only the preferred one.",
+        "Both '{{a}}' and '{{b}}' are specified for the same style property '{{longhand}}'; keep only one.",
       // preferred: "longhand" 設定で shorthand を見つけたときに出す指摘
       // 例: <Box m={2} /> → "Use longhand prop 'margin' instead of 'm'."
       // --fix で属性名のみ longhand に置換される
@@ -124,67 +127,63 @@ export const propsShorthand: RuleModule<MessageIds, Options> = createRule<
           (a): a is TSESTree.JSXAttribute => a.type === "JSXAttribute",
         )
 
-        // 同じタグ内に書かれている属性名の集合を先にまとめて作る
-        // 後段で「shorthand と longhand が両方書かれていないか」を O(1) で判定するため
-        const presentNames = new Set<string>()
-        for (const a of attributes) {
-          const name = getAttrName(a)
-          if (name) presentNames.add(name)
+        // longhand → 同居する属性たち、というグルーピングを作る
+        // shorthand 属性は対応する longhand キーへ、longhand 属性自身は自分の名前キーへ集約する
+        // 後段ではこのグループ単位で duplicate を判定するため、1 タグ・1 longhand につき
+        // 最大 1 回しか duplicate を報告しないようにする
+        const byLonghand = new Map<
+          string,
+          { attr: TSESTree.JSXAttribute; name: string }[]
+        >()
+        for (const attr of attributes) {
+          const name = getAttrName(attr)
+          if (!name) continue
+
+          // 属性名が shorthand なら対応 longhand を、longhand なら自分自身をキーにする
+          // どちらでもないスタイル外の属性（onClick など）は undefined になり、グルーピング対象外
+          const longhand =
+            shorthandToLonghand.get(name) ??
+            (longhandToShorthands.has(name) ? name : undefined)
+          if (!longhand) continue
+
+          const entries = byLonghand.get(longhand) ?? []
+          entries.push({ attr, name })
+          byLonghand.set(longhand, entries)
+        }
+
+        // duplicate に該当する属性名の集合
+        // 後段の preferShorthand / preferLonghand 判定で、duplicate になっている属性は
+        // 二重に報告しないようにここでスキップ対象として記録する
+        const duplicateNames = new Set<string>()
+        for (const [longhand, entries] of byLonghand) {
+          if (entries.length < 2) continue
+          const [first, second] = entries
+          if (!first || !second) continue
+          for (const e of entries) duplicateNames.add(e.name)
+          // 1 タグ・1 longhand あたり 1 回だけ報告する
+          // node は登場順で先頭の属性に紐づける（メッセージのアンカーが安定する）
+          context.report({
+            node: first.attr.name,
+            messageId: "duplicateProps",
+            data: { a: first.name, b: second.name, longhand },
+          })
         }
 
         for (const attr of attributes) {
           const name = getAttrName(attr)
           if (!name) continue
+          // duplicate として既に報告した属性は、prefer 系の指摘を重ねて出さない
+          if (duplicateNames.has(name)) continue
 
           if (preferred === "shorthand") {
             // ─── preferred: shorthand（longhand を見つけたら shorthand に変えたい） ───
 
-            // 属性が shorthand 自身の場合のチェック
-            // 例: <Box bgGradient="x" bgImage="y" /> → どちらも backgroundImage を指す
-            // 例: <Box marginEnd="2" me="4" />     → どちらも marginInlineEnd を指す
-            // 同じ longhand を共有する別 shorthand 兄弟が居れば duplicate として指摘する
-            // （preferred: "longhand" 側と対になる検出ロジック）
-            // 自分自身は除外するため `s !== name` でフィルタする
-            //
-            // longhand と shorthand が並ぶケース（<Box m={1} margin={2} />）は、
-            // 後段の longhand 分岐側で margin を起点に検出されるのでここでは扱わない
-            const long = shorthandToLonghand.get(name)
-            if (long) {
-              const siblings = longhandToShorthands.get(long) ?? []
-              const conflicting = siblings.find(
-                (s) => s !== name && presentNames.has(s),
-              )
-              if (conflicting) {
-                context.report({
-                  node: attr.name,
-                  messageId: "duplicateProps",
-                  data: { longhand: long, shorthand: name },
-                })
-              }
-              // shorthand 自身は preferred 通りに使われているので、衝突がなければ何もしない
-              continue
-            }
+            // 属性が shorthand 自身なら preferred 通りに使われているので何もしない
+            if (shorthandToLonghand.has(name)) continue
 
             // 属性名が longhand でなければ対象外
             const shorts = longhandToShorthands.get(name)
             if (!shorts || shorts.length === 0) continue
-
-            // 同じタグに対応する shorthand 兄弟（margin に対する m など）も書かれていれば
-            // 両方を残すと props が重複するので duplicate として指摘する
-            // 自動修正はしない（どちらを残すべきかは人が決める）
-            //
-            // ここでは現在見ているのが longhand なので、shorts には自分は含まれない
-            // → `s !== name` のような除外は不要で、has() 一発で兄弟チェックになる
-            // @docs(context.report): https://eslint.org/docs/latest/extend/custom-rules#report-problems
-            const duplicate = shorts.find((s) => presentNames.has(s))
-            if (duplicate) {
-              context.report({
-                node: attr.name,
-                messageId: "duplicateProps",
-                data: { longhand: name, shorthand: duplicate },
-              })
-              continue
-            }
 
             // 候補が複数ある場合は先頭を採用（shorthand-map で配列の並びを固定済み）
             const short = shorts[0]
@@ -201,43 +200,15 @@ export const propsShorthand: RuleModule<MessageIds, Options> = createRule<
             // ─── preferred: longhand（shorthand を見つけたら longhand に変えたい） ───
 
             // 属性名が shorthand でなければ対象外
-            const long = shorthandToLonghand.get(name)
-            if (!long) continue
-
-            // 同じタグに対応する longhand 本体も書かれていれば duplicate として指摘
-            if (presentNames.has(long)) {
-              context.report({
-                node: attr.name,
-                messageId: "duplicateProps",
-                data: { longhand: long, shorthand: name },
-              })
-              continue
-            }
-
-            // 同じ longhand に紐づく別の shorthand 兄弟（例: bg と bgGradient は両方 backgroundImage 系）
-            // が同居している場合も duplicate 扱い
-            //
-            // 現在見ているのが shorthand なので、siblings には自分も含まれる
-            // → `s !== name` で自分自身を除外してから presentNames を引く必要がある
-            const siblings = longhandToShorthands.get(long) ?? []
-            const conflicting = siblings.find(
-              (s) => s !== name && presentNames.has(s),
-            )
-            if (conflicting) {
-              context.report({
-                node: attr.name,
-                messageId: "duplicateProps",
-                data: { longhand: long, shorthand: name },
-              })
-              continue
-            }
+            const longhand = shorthandToLonghand.get(name)
+            if (!longhand) continue
 
             // 属性名だけを longhand に置換
             context.report({
               node: attr.name,
               messageId: "preferLonghand",
-              data: { longhand: long, shorthand: name },
-              fix: (fixer) => fixer.replaceText(attr.name, long),
+              data: { longhand, shorthand: name },
+              fix: (fixer) => fixer.replaceText(attr.name, longhand),
             })
           }
         }

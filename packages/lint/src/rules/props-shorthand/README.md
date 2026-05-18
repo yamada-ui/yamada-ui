@@ -73,15 +73,14 @@ The rule reports duplicate style props but **does not auto-fix** them (silently 
 
   ```tsx
   <Box m={1} margin={2} />
-  // Error: Both 'm' and 'margin' are specified; keep only the preferred one.
+  // Error: Both 'm' and 'margin' are specified for the same style property 'margin'; keep only one.
   ```
 
 - Multiple shorthands that map to the same longhand (e.g., `bgGradient` and `bgImage` both write `backgroundImage`; `marginEnd` and `me` both write `marginInlineEnd`):
 
   ```tsx
   <Box bgGradient="x" bgImage="y" />
-  // Error: Both 'bgGradient' and 'backgroundImage' are specified; keep only the preferred one.
-  // Error: Both 'bgImage' and 'backgroundImage' are specified; keep only the preferred one.
+  // Error: Both 'bgGradient' and 'bgImage' are specified for the same style property 'backgroundImage'; keep only one.
   ```
 
 ## Scope
@@ -95,6 +94,6 @@ Components imported from other packages, re-exports through other barrels, and s
 
 ## Known Limitations
 
-- **Shorthand priority** — when multiple shorthand props map to the same longhand, the rule provisionally picks the first one encountered in `@yamada-ui/react/core`'s `shorthandStyles` object. This order is stable today but is not a contract. A follow-up change will replace this with an explicit priority list.
-- **Runtime dependency on `@yamada-ui/react/core`** — the shorthand map is derived at rule-load time from `@yamada-ui/react/core`. A follow-up change will materialize it into static data so the plugin does not need `@yamada-ui/react` as a peer.
+- **Shorthand priority** — when multiple shorthand props map to the same longhand, the rule picks the first one encountered in `@yamada-ui/react/core`'s `shorthandStyles` object.
+- **Runtime dependency on `@yamada-ui/react/core`** — the shorthand map is derived at rule-load time from `@yamada-ui/react/core`, so the plugin requires `@yamada-ui/react` as a peer.
 - **Named-import over-matching** — any named identifier imported from `@yamada-ui/react` other than `ui` is treated as a component. Non-component utilities (hooks, helpers) used as JSX elements are not valid React anyway, so the practical impact is nil.

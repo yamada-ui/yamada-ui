@@ -192,6 +192,8 @@ ruleTester.run("props-shorthand", propsShorthand, {
     },
     // preferred: shorthand 設定で shorthand と longhand が両方ある場合
     // → どちらを残すべきかは人間判断なので output: null（自動修正なし）
+    // data には実際に JSX に書かれた属性名 2 つと、共通する longhand 名を渡す
+    // 1 タグ・1 longhand あたり 1 回だけ報告する
     {
       name: "shorthand preferred: duplicate shorthand + longhand: no auto-fix",
       code: `
@@ -200,7 +202,12 @@ ruleTester.run("props-shorthand", propsShorthand, {
       `,
       output: null,
       options: [{ preferred: "shorthand" }],
-      errors: [{ messageId: "duplicateProps" }],
+      errors: [
+        {
+          messageId: "duplicateProps",
+          data: { a: "m", b: "margin", longhand: "margin" },
+        },
+      ],
     },
     // preferred: longhand 設定でも同様（両方ある場合は自動修正しない）
     {
@@ -211,11 +218,16 @@ ruleTester.run("props-shorthand", propsShorthand, {
       `,
       output: null,
       options: [{ preferred: "longhand" }],
-      errors: [{ messageId: "duplicateProps" }],
+      errors: [
+        {
+          messageId: "duplicateProps",
+          data: { a: "m", b: "margin", longhand: "margin" },
+        },
+      ],
     },
     // preferred: longhand で、同じ longhand（backgroundImage）に紐づく shorthand 兄弟
-    // （bgGradient と bgImage）が同居 → 両方とも duplicate として指摘、自動修正なし
-    // errors が 2 個あるのは、各兄弟が独立に duplicate を報告するため
+    // （bgGradient と bgImage）が同居 → duplicate として指摘、自動修正なし
+    // メッセージには実際に書かれた属性名 2 つを並べ、書かれていない名前は出さない
     {
       name: "longhand preferred: sibling shorthands sharing a longhand: no auto-fix",
       code: `
@@ -225,8 +237,10 @@ ruleTester.run("props-shorthand", propsShorthand, {
       output: null,
       options: [{ preferred: "longhand" }],
       errors: [
-        { messageId: "duplicateProps" },
-        { messageId: "duplicateProps" },
+        {
+          messageId: "duplicateProps",
+          data: { a: "bgGradient", b: "bgImage", longhand: "backgroundImage" },
+        },
       ],
     },
     // preferred: shorthand 設定でも、同じ longhand を共有する shorthand 兄弟が
@@ -241,8 +255,10 @@ ruleTester.run("props-shorthand", propsShorthand, {
       output: null,
       options: [{ preferred: "shorthand" }],
       errors: [
-        { messageId: "duplicateProps" },
-        { messageId: "duplicateProps" },
+        {
+          messageId: "duplicateProps",
+          data: { a: "bgGradient", b: "bgImage", longhand: "backgroundImage" },
+        },
       ],
     },
   ],

@@ -593,12 +593,23 @@ export const standardStyles = {
   },
   columnHeight: true,
   columnRule: { properties: ["columnRule"], transform: transforms.px },
+  columnRuleBreak: true,
   columnRuleColor: {
     properties: ["columnRuleColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
+  columnRuleInset: true,
+  columnRuleInsetCap: true,
+  columnRuleInsetCapEnd: true,
+  columnRuleInsetCapStart: true,
+  columnRuleInsetEnd: true,
+  columnRuleInsetJunction: true,
+  columnRuleInsetJunctionEnd: true,
+  columnRuleInsetJunctionStart: true,
+  columnRuleInsetStart: true,
   columnRuleStyle: true,
+  columnRuleVisibilityItems: true,
   columnRuleWidth: {
     properties: ["columnRuleWidth"],
     transform: transforms.px,
@@ -1474,9 +1485,36 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  rowRule: true,
+  rowRuleBreak: true,
+  rowRuleColor: true,
+  rowRuleInset: true,
+  rowRuleInsetCap: true,
+  rowRuleInsetCapEnd: true,
+  rowRuleInsetCapStart: true,
+  rowRuleInsetEnd: true,
+  rowRuleInsetJunction: true,
+  rowRuleInsetJunctionEnd: true,
+  rowRuleInsetJunctionStart: true,
+  rowRuleInsetStart: true,
+  rowRuleStyle: true,
+  rowRuleVisibilityItems: true,
+  rowRuleWidth: true,
   rubyAlign: true,
   rubyOverhang: true,
   rubyPosition: true,
+  rule: true,
+  ruleBreak: true,
+  ruleColor: true,
+  ruleInset: true,
+  ruleInsetCap: true,
+  ruleInsetEnd: true,
+  ruleInsetJunction: true,
+  ruleInsetStart: true,
+  ruleOverlap: true,
+  ruleStyle: true,
+  ruleVisibilityItems: true,
+  ruleWidth: true,
   rx: true,
   ry: true,
   saturate: {
@@ -5145,6 +5183,16 @@ export interface StyleProps {
     AnyString | CSS.Property.ColumnRule | number
   >
   /**
+   * ### column-rule-break
+   *
+   * The CSS `column-rule-break` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-break
+   *
+   * @experimental
+   */
+  columnRuleBreak?: StyleValueWithCondition<AnyString>
+  /**
    * ### column-rule-color
    *
    * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
@@ -5160,6 +5208,96 @@ export interface StyleProps {
     "colors"
   >
   /**
+   * ### column-rule-inset
+   *
+   * The CSS `column-rule-inset` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset
+   *
+   * @experimental
+   */
+  columnRuleInset?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-cap
+   *
+   * The CSS `column-rule-inset-cap` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap
+   *
+   * @experimental
+   */
+  columnRuleInsetCap?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-cap-end
+   *
+   * The CSS `column-rule-inset-cap-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-end
+   *
+   * @experimental
+   */
+  columnRuleInsetCapEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-cap-start
+   *
+   * The CSS `column-rule-inset-cap-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-start
+   *
+   * @experimental
+   */
+  columnRuleInsetCapStart?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-end
+   *
+   * The CSS `column-rule-inset-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-end
+   *
+   * @experimental
+   */
+  columnRuleInsetEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-junction
+   *
+   * The CSS `column-rule-inset-junction` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction
+   *
+   * @experimental
+   */
+  columnRuleInsetJunction?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-junction-end
+   *
+   * The CSS `column-rule-inset-junction-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction-end
+   *
+   * @experimental
+   */
+  columnRuleInsetJunctionEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-junction-start
+   *
+   * The CSS `column-rule-inset-junction-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction-start
+   *
+   * @experimental
+   */
+  columnRuleInsetJunctionStart?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-start
+   *
+   * The CSS `column-rule-inset-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-start
+   *
+   * @experimental
+   */
+  columnRuleInsetStart?: StyleValueWithCondition<AnyString>
+  /**
    * ### column-rule-style
    *
    * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
@@ -5173,6 +5311,16 @@ export interface StyleProps {
   columnRuleStyle?: StyleValueWithCondition<
     AnyString | CSS.Property.ColumnRuleStyle
   >
+  /**
+   * ### column-rule-visibility-items
+   *
+   * The CSS `column-rule-visibility-items` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-visibility-items
+   *
+   * @experimental
+   */
+  columnRuleVisibilityItems?: StyleValueWithCondition<AnyString>
   /**
    * ### column-rule-width
    *
@@ -9731,6 +9879,156 @@ export interface StyleProps {
     "spaces"
   >
   /**
+   * ### row-rule
+   *
+   * The CSS `row-rule` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule
+   *
+   * @experimental
+   */
+  rowRule?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-break
+   *
+   * The CSS `row-rule-break` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-break
+   *
+   * @experimental
+   */
+  rowRuleBreak?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-color
+   *
+   * The CSS `row-rule-color` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-color
+   *
+   * @experimental
+   */
+  rowRuleColor?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset
+   *
+   * The CSS `row-rule-inset` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset
+   *
+   * @experimental
+   */
+  rowRuleInset?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-cap
+   *
+   * The CSS `row-rule-inset-cap` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-cap
+   *
+   * @experimental
+   */
+  rowRuleInsetCap?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-cap-end
+   *
+   * The CSS `row-rule-inset-cap-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-cap-end
+   *
+   * @experimental
+   */
+  rowRuleInsetCapEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-cap-start
+   *
+   * The CSS `row-rule-inset-cap-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-start
+   *
+   * @experimental
+   */
+  rowRuleInsetCapStart?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-end
+   *
+   * The CSS `row-rule-inset-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-end
+   *
+   * @experimental
+   */
+  rowRuleInsetEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-junction
+   *
+   * The CSS `row-rule-inset-junction` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction
+   *
+   * @experimental
+   */
+  rowRuleInsetJunction?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-junction-end
+   *
+   * The CSS `row-rule-inset-junction-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction-end
+   *
+   * @experimental
+   */
+  rowRuleInsetJunctionEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-junction-start
+   *
+   * The CSS `row-rule-inset-junction-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction-start
+   *
+   * @experimental
+   */
+  rowRuleInsetJunctionStart?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-start
+   *
+   * The CSS `row-rule-inset-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-start
+   *
+   * @experimental
+   */
+  rowRuleInsetStart?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-style
+   *
+   * The CSS `row-rule-style` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-style
+   *
+   * @experimental
+   */
+  rowRuleStyle?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-visibility-items
+   *
+   * The CSS `row-rule-visibility-items` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-visibility-items
+   *
+   * @experimental
+   */
+  rowRuleVisibilityItems?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-width
+   *
+   * The CSS `row-rule-width` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-width
+   *
+   * @experimental
+   */
+  rowRuleWidth?: StyleValueWithCondition<AnyString>
+  /**
    * ### ruby-align
    *
    * The <code>ruby-align</code> CSS property sets the spacing and alignment of ruby annotation text when it does not fill its available space.
@@ -9762,6 +10060,126 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-position
    */
   rubyPosition?: StyleValueWithCondition<AnyString | CSS.Property.RubyPosition>
+  /**
+   * ### rule
+   *
+   * The CSS `rule` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule
+   *
+   * @experimental
+   */
+  rule?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-break
+   *
+   * The CSS `rule-break` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-break
+   *
+   * @experimental
+   */
+  ruleBreak?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-color
+   *
+   * The CSS `rule-color` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-color
+   *
+   * @experimental
+   */
+  ruleColor?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-inset
+   *
+   * The CSS `rule-inset` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset
+   *
+   * @experimental
+   */
+  ruleInset?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-inset-cap
+   *
+   * The CSS `rule-inset-cap` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-cap
+   *
+   * @experimental
+   */
+  ruleInsetCap?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-inset-end
+   *
+   * The CSS `rule-inset-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-end
+   *
+   * @experimental
+   */
+  ruleInsetEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-inset-junction
+   *
+   * The CSS `rule-inset-junction` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-junction
+   *
+   * @experimental
+   */
+  ruleInsetJunction?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-inset-start
+   *
+   * The CSS `rule-inset-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-start
+   *
+   * @experimental
+   */
+  ruleInsetStart?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-overlap
+   *
+   * The CSS `rule-overlap` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-overlap
+   *
+   * @experimental
+   */
+  ruleOverlap?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-style
+   *
+   * The CSS `rule-style` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-style
+   *
+   * @experimental
+   */
+  ruleStyle?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-visibility-items
+   *
+   * The CSS `rule-visibility-items` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-visibility-items
+   *
+   * @experimental
+   */
+  ruleVisibilityItems?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-width
+   *
+   * The CSS `rule-width` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-width
+   *
+   * @experimental
+   */
+  ruleWidth?: StyleValueWithCondition<AnyString>
   /**
    * ### rx
    *
@@ -11644,7 +12062,9 @@ export interface StyleProps {
   /**
    * ### view-transition-scope
    *
-   * The CSS `view-transition-scope` property.
+   * The <code>startViewTransition()</code> method of an <code>Element</code> object starts a view transition that affects only that element's DOM tree. You can use this to run separate elements' transitions concurrently.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-view-transitions-2/#view-transition-scope-prop
    *

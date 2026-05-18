@@ -1,5 +1,13 @@
 # @yamada-ui/react
 
+## 2.2.2
+
+### Patch Changes
+
+- [#7605](https://github.com/yamada-ui/yamada-ui/pull/7605) [`f0db50e`](https://github.com/yamada-ui/yamada-ui/commit/f0db50e0c7b8be304d4cec778697bf2a6c30936f) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7554](https://github.com/yamada-ui/yamada-ui/pull/7554) [`1bda1b3`](https://github.com/yamada-ui/yamada-ui/commit/1bda1b3a44cce23bba58cce688c5f7b04df7d2ee) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed incorrect `@see` URL in JSDoc of `loading` components.
+
 ## 2.2.1
 
 ### Patch Changes

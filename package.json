@@ -20,6 +20,7 @@
     "utils": "pnpm -C packages/utils",
     "workspace": "pnpm -C packages/workspace",
     "forge": "pnpm -C packages/forge",
+    "eslint-plugin": "pnpm -C packages/eslint-plugin",
     "www": "pnpm -C www",
     "next:pages": "pnpm -C playgrounds/next/pages",
     "next:app": "pnpm -C playgrounds/next/app",

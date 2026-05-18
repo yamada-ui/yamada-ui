@@ -42,6 +42,7 @@ next-env.d.ts
 .vitest-attachments
 .react-router
 .tanstack
+.eslintcache
 
 # dotenv environment variables file
 .env

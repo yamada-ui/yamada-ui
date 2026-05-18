@@ -1,0 +1,64 @@
+{
+  "name": "@yamada-ui/eslint-plugin",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "The official ESLint plugin for Yamada UI projects",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "yamada ui",
+    "yamada",
+    "ui"
+  ],
+  "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://yamada-ui.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yamada-ui/yamada-ui",
+    "directory": "packages/eslint-plugin"
+  },
+  "bugs": {
+    "url": "https://github.com/yamada-ui/yamada-ui/issues"
+  },
+  "scripts": {
+    "clean": "rimraf node_modules dist trace coverage .turbo .eslintcache",
+    "build": "tsdown",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:dev": "vitest --watch --ui",
+    "typecheck": "tsgo",
+    "typetrace": "tsgo --generateTrace ./trace --incremental false",
+    "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
+    "lint": "eslint . --max-warnings=0 --cache",
+    "format": "pnpm -w format packages/eslint-plugin",
+    "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "@typescript-eslint/utils": "^8.59.3"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.59.3",
+    "@typescript-eslint/rule-tester": "^8.59.3",
+    "@yamada-ui/react": "workspace:*",
+    "@yamada-ui/workspace": "workspace:*",
+    "eslint": "catalog:",
+    "typescript-eslint": "^8.59.3"
+  },
+  "peerDependencies": {
+    "@yamada-ui/react": "workspace:*",
+    "eslint": ">=9"
+  },
+  "clean-package": "./clean-package.config.json"
+}

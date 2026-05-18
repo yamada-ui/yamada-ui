@@ -8,9 +8,7 @@ import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   createContext,
-  cx,
   dataAttr,
-  handlerAll,
   isObject,
   isUndefined,
   visuallyHiddenAttributes,
@@ -59,7 +57,7 @@ export const useRadioGroup = <Y extends string = string>(
       onChange: onChangeProp,
       ...rest
     },
-    ariaProps: { "aria-describedby": ariaDescribedbyProp, ...ariaProps },
+    ariaProps: { "aria-describedby": ariaDescribedby, ...ariaProps },
     dataProps,
     eventProps,
   } = useFieldProps(props)
@@ -84,48 +82,42 @@ export const useRadioGroup = <Y extends string = string>(
   )
 
   const getRootProps: PropGetter = useCallback(
-    ({
-      ref,
-      "aria-describedby": ariaDescribedby,
-      "aria-labelledby": ariaLabelledby,
-      ...props
-    } = {}) =>
+    (props = {}) =>
       mergeProps(
         dataProps,
         {
           id,
-          "aria-describedby": cx(ariaDescribedbyProp, ariaDescribedby),
-          "aria-labelledby": cx(labelId, ariaLabelledby),
+          "aria-describedby": ariaDescribedby,
+          "aria-labelledby": labelId,
           role: "radiogroup",
         },
-        { ref },
         rest,
         props,
       )(),
-    [ariaDescribedbyProp, dataProps, id, labelId, rest],
+    [ariaDescribedby, dataProps, id, labelId, rest],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}) => {
       const checked = !isUndefined(value) && value === props.value
 
-      return {
-        ...dataProps,
-        ...ariaProps,
-        type: "radio",
-        name: id,
-        style: visuallyHiddenAttributes.style,
-        "aria-checked": checked,
-        "data-checked": dataAttr(checked),
-        checked,
-        disabled,
-        readOnly,
-        required,
-        ...props,
-        onBlur: handlerAll(props.onBlur, eventProps.onBlur),
-        onChange: handlerAll(props.onChange, onChange),
-        onFocus: handlerAll(props.onFocus, eventProps.onFocus),
-      }
+      return mergeProps(
+        {
+          ...dataProps,
+          ...ariaProps,
+          type: "radio",
+          name: id,
+          style: visuallyHiddenAttributes.style,
+          "aria-checked": checked,
+          "data-checked": dataAttr(checked),
+          checked,
+          disabled,
+          readOnly,
+          required,
+        },
+        props,
+        { onChange, ...eventProps },
+      )()
     },
     [
       ariaProps,

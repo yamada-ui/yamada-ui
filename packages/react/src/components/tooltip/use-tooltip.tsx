@@ -1,22 +1,21 @@
 "use client"
 
+import type { PointerEvent } from "react"
 import type { PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import type { UsePopperProps } from "../../hooks/use-popper"
 import type { Dict } from "../../utils"
 import { useCallback, useId, useRef } from "react"
-import { useSplitProps } from "../../core"
+import { mergeProps, useSplitProps } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { useEventListener } from "../../hooks/use-event-listener"
 import { useOutsideClick } from "../../hooks/use-outside-click"
 import { popperProps, usePopper, usePopperProps } from "../../hooks/use-popper"
 import {
-  cx,
   dataAttr,
   getDocument,
   getWindow,
   handlerAll,
-  mergeRefs,
   useUnmountEffect,
 } from "../../utils"
 
@@ -77,7 +76,7 @@ export const useTooltip = (props: UseTooltipProps = {}) => {
     },
   ] = usePopperProps(props, ["open"])
   const describedbyId = useId()
-  const triggerRef = useRef<HTMLElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
   const openTimeout = useRef<NodeJS.Timeout>(undefined)
   const closeTimeout = useRef<NodeJS.Timeout>(undefined)
   const { open, onClose, onOpen } = useDisclosure({
@@ -153,27 +152,27 @@ export const useTooltip = (props: UseTooltipProps = {}) => {
   })
 
   const getTriggerProps: PropGetter<"button"> = useCallback(
-    ({ "aria-describedby": ariaDescribedby, ...props } = {}) => {
-      return getReferenceProps({
-        ...props,
-        ref: mergeRefs(props.ref, triggerRef),
-        "aria-describedby": cx(
-          ariaDescribedby,
-          open ? describedbyId : undefined,
-        ),
-        onBlur: handlerAll(props.onBlur, onDelayClose),
-        onClick: handlerAll(
-          props.onClick,
-          closeOnClick ? onDelayClose : undefined,
-        ),
-        onFocus: handlerAll(props.onFocus, onDelayOpen),
-        onPointerEnter: handlerAll(props.onPointerEnter, (ev) => {
-          if (ev.pointerType !== "touch") onDelayOpen()
-        }),
-        onPointerLeave: handlerAll(props.onPointerLeave, (ev) => {
-          if (ev.pointerType !== "touch") onDelayClose()
-        }),
-      })
+    (props = {}) => {
+      return getReferenceProps(
+        mergeProps(
+          props,
+          {
+            ref: triggerRef,
+            "aria-describedby": open ? describedbyId : undefined,
+          },
+          {
+            onBlur: onDelayClose,
+            onClick: closeOnClick ? onDelayClose : undefined,
+            onFocus: onDelayOpen,
+            onPointerEnter: (ev: PointerEvent<HTMLButtonElement>) => {
+              if (ev.pointerType !== "touch") onDelayOpen()
+            },
+            onPointerLeave: (ev: PointerEvent<HTMLButtonElement>) => {
+              if (ev.pointerType !== "touch") onDelayClose()
+            },
+          },
+        )(),
+      )
     },
     [
       getReferenceProps,

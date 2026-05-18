@@ -11,7 +11,6 @@ import { usePanEvent } from "../../hooks/use-pan-event"
 import { useI18n } from "../../providers/i18n-provider"
 import {
   clampNumber,
-  cx,
   handlerAll,
   mergeRefs,
   roundNumberToStep,
@@ -237,27 +236,30 @@ export const useSaturationSlider = (props: UseSaturationSliderProps = {}) => {
   )
 
   const getThumbProps: PropGetter = useCallback(
-    (props = {}) => ({
-      ...dataProps,
-      ...ariaProps,
-      "aria-label": t("Saturation and brightness thumb"),
-      "aria-roledescription": "2D slider",
-      "aria-valuemax": 100,
-      "aria-valuemin": 0,
-      "aria-valuenow": s * 100,
-      "aria-valuetext":
-        ariaValueText ??
-        getAriaValueText?.(value) ??
-        t("Saturation {saturation}%, Brightness {brightness}%", {
-          brightness: v * 100,
-          saturation: s * 100,
-        }),
-      role: "slider",
-      tabIndex: interactive ? 0 : -1,
-      ...props,
-      "aria-labelledby": cx(props["aria-labelledby"], ariaLabelledBy),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          ...dataProps,
+          ...ariaProps,
+          "aria-label": t("Saturation and brightness thumb"),
+          "aria-labelledby": ariaLabelledBy,
+          "aria-roledescription": "2D slider",
+          "aria-valuemax": 100,
+          "aria-valuemin": 0,
+          "aria-valuenow": s * 100,
+          "aria-valuetext":
+            ariaValueText ??
+            getAriaValueText?.(value) ??
+            t("Saturation {saturation}%, Brightness {brightness}%", {
+              brightness: v * 100,
+              saturation: s * 100,
+            }),
+          role: "slider",
+          tabIndex: interactive ? 0 : -1,
+        },
+        props,
+        { onKeyDown },
+      )(),
     [
       ariaLabelledBy,
       ariaProps,

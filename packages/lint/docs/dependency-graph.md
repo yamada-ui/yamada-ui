@@ -24,9 +24,20 @@ ui-component-tracker.ts        shorthand-map.ts
                                @yamada-ui/react/core (peer)
 ```
 
-## ファイルごとの依存（テーブル）
+## ファイルごとの役割と依存
 
 ### `src/index.ts` （plugin entry）
+
+**役割**: パッケージのエントリーポイント。ESLint プラグインの公開形を組み立てて default export する。
+
+**やっていること**:
+
+- `package.json` から `name` (`@yamada-ui/lint`) と `version` を読み取り `meta` に埋める
+- `rules` 辞書に `propsShorthand` を `"props-shorthand"` キーで登録
+- `recommended` config を組み立て、`[`${name}/props-shorthand`]: "error"` でルールを有効化
+- `basePlugin` + `configs: { recommended }` を default export
+
+利用者は `import yamadaUi from "@yamada-ui/lint"` で取り込み、`yamadaUi.configs.recommended` を Flat Config 配列に展開する。
 
 | Import 先                  | 種類              | 用途                                             |
 | -------------------------- | ----------------- | ------------------------------------------------ |
@@ -35,6 +46,21 @@ ui-component-tracker.ts        shorthand-map.ts
 | `./rules/props-shorthand`  | internal          | ルール本体を辞書に登録するため                   |
 
 ### `src/rules/props-shorthand/index.ts` （rule body）
+
+**役割**: `props-shorthand` ルール本体。`ESLintUtils.RuleCreator` 経由でルールオブジェクトを返す。
+
+**やっていること**:
+
+- メッセージ ID 3 種（`duplicateProps` / `preferLonghand` / `preferShorthand`）と JSON Schema（`preferred: "shorthand" | "longhand"`、既定 `"shorthand"`）を定義
+- `ImportDeclaration` ビジターで `createUIComponentTracker` に import を流し込む
+- `JSXOpeningElement` ビジターで以下を順に実施:
+  1. tracker による Yamada UI 由来判定（非該当ならスキップ）
+  2. `{...spread}` を除外して属性集合を作る
+  3. 属性ループで `preferred` 方向に応じた分岐:
+     - `preferred: "shorthand"` → attr が shorthand なら同じ longhand を指す兄弟との衝突を検出、longhand なら shorthand への自動修正提案
+     - `preferred: "longhand"` → 逆方向
+  4. shorthand と longhand が同居 / 兄弟 shorthand が同居 → `duplicateProps` 指摘・**自動修正なし**
+- `fixer.replaceText(attr.name, ...)` で属性名のみを置換（値・空白・フォーマットを保つ）
 
 | Import 先                            | 種類              | 用途                                                |
 | ------------------------------------ | ----------------- | --------------------------------------------------- |
@@ -45,34 +71,43 @@ ui-component-tracker.ts        shorthand-map.ts
 
 ### `src/rules/props-shorthand/ui-component-tracker.ts`
 
+**役割**: JSX タグが Yamada UI 由来かどうかを追跡するヘルパー（型 checker 非依存・AST のみ）。
+
+**やっていること**:
+
+- `createUIComponentTracker(sourcePackages)` でファイルごとにインスタンス化
+- `visitImport(node)` で `sourcePackages` に含まれる import を以下に分類:
+  - 名前付き import (`{ Box }`, `{ Box as B }`) → `components` Set に **local 名** で登録
+  - `ui` factory の名前付き import (`{ ui }`, `{ ui as u }`) → `namespaces` Set に登録（`<ui.div />` 形式で使われるため）
+  - default / namespace import (`import Y from`, `import * as Y`) → `namespaces` Set に登録
+- `matchesJSXName(node)` で:
+  - `JSXIdentifier`（例: `<Box />`） → `components.has(name)`
+  - `JSXMemberExpression`（例: `<Y.Box />`、`<A.B.C />`） → 左端まで辿って `namespaces.has(base.name)`
+- 副作用のみ import、別パッケージ import、ネイティブ HTML (`<div />`) は自然に false
+
 | Import 先                  | 種類              | 用途                       |
 | -------------------------- | ----------------- | -------------------------- |
 | `@typescript-eslint/utils` | external (型のみ) | `TSESTree`（AST ノード型） |
 
 ### `src/rules/props-shorthand/shorthand-map.ts`
 
+**役割**: shorthand ⇄ longhand の対応マップを `@yamada-ui/react/core` から実行時派生する。
+
+**やっていること**:
+
+- 初回呼び出し時に `standardStyles` の各定義オブジェクトを `WeakMap<object, string>` で逆引き登録（GC 阻害なし）
+- `shorthandStyles` の各 entry に 2 段階のマッチング:
+  - **戦略 1**: 値が `standardStyles` のいずれかと **同一オブジェクト参照** → `standardByRef.get(def)` で longhand 名を取得（例: `shorthandStyles.m === standardStyles.margin`）
+  - **戦略 2**: `{ properties: ["marginX"], transform: ... }` のように `properties` が単一要素文字列 → それを longhand 名とする（複数要素の合成 shorthand はスキップ）
+- 結果を 2 種のマップに格納:
+  - `shorthandToLonghand: Map<string, string>` — 1 対 1（`"m" → "margin"`）
+  - `longhandToShorthands: Map<string, string[]>` — 1 対多（`"backgroundImage" → ["bgGradient", "bgImage", "bgImg"]`）
+- モジュールレベルキャッシュで 2 回目以降は再計算なし
+- 複数 shorthand 兄弟の配列順は `Object.entries(shorthandStyles)` の登場順を継承（ルール側が「先頭を採用」する）
+
 | Import 先               | 種類            | 用途                                            |
 | ----------------------- | --------------- | ----------------------------------------------- |
 | `@yamada-ui/react/core` | external (peer) | `shorthandStyles` / `standardStyles` の元データ |
-
-## テストの依存
-
-```
-src/rules/props-shorthand/index.test.ts
-    ├── ./index                        (propsShorthand 本体)
-    ├── @typescript-eslint/rule-tester (RuleTester)
-    └── vitest                         (afterAll, describe, it)
-
-src/rules/props-shorthand/shorthand-map.test.ts
-    ├── ./shorthand-map (getShorthandMap)
-    └── vitest          (describe, expect, test)
-
-src/rules/props-shorthand/ui-component-tracker.test.ts
-    ├── ./ui-component-tracker      (createUIComponentTracker)
-    ├── @typescript-eslint/utils    (型 TSESTree)
-    ├── @typescript-eslint/parser   (parse)
-    └── vitest                      (describe, expect, test)
-```
 
 ## 凡例
 
@@ -97,62 +132,3 @@ src/rules/props-shorthand/ui-component-tracker.test.ts
 
 5. **テストは全部 sibling テスト**
    各 `.ts` の隣に `.test.ts` を置く配置。クロスファイルテストはないので、テスト追加時の影響範囲も小さい。
-
----
-
-## 補足: Mermaid 版（レンダリングできるビューア用）
-
-GitHub 上で開いた場合や、VS Code に Mermaid 拡張を入れている場合は、以下のブロックが図として表示されます。
-
-```mermaid
-graph TD
-  IDX["src/index.ts<br/>(plugin entry)"]
-  RULE["src/rules/props-shorthand/index.ts<br/>(rule body)"]
-  TRACKER["src/rules/props-shorthand/ui-component-tracker.ts"]
-  MAP["src/rules/props-shorthand/shorthand-map.ts"]
-
-  RULE_TEST["index.test.ts"]
-  MAP_TEST["shorthand-map.test.ts"]
-  TRACKER_TEST["ui-component-tracker.test.ts"]
-
-  PKG["../package.json"]
-  TSE["@typescript-eslint/utils"]
-  TSE_RULE["@typescript-eslint/utils/ts-eslint"]
-  TSE_PARSER["@typescript-eslint/parser"]
-  TSE_TESTER["@typescript-eslint/rule-tester"]
-  YREACT["@yamada-ui/react/core"]
-  VITEST["vitest"]
-
-  IDX --> RULE
-  IDX -.types.-> TSE
-  IDX --> PKG
-
-  RULE --> TRACKER
-  RULE --> MAP
-  RULE --> TSE
-  RULE -.types.-> TSE_RULE
-
-  TRACKER -.types.-> TSE
-  MAP --> YREACT
-
-  RULE_TEST --> RULE
-  RULE_TEST --> TSE_TESTER
-  RULE_TEST --> VITEST
-
-  MAP_TEST --> MAP
-  MAP_TEST --> VITEST
-
-  TRACKER_TEST --> TRACKER
-  TRACKER_TEST --> TSE_PARSER
-  TRACKER_TEST -.types.-> TSE
-  TRACKER_TEST --> VITEST
-
-  classDef internal fill:#e6f3ff,stroke:#3b82f6
-  classDef external fill:#f5f5f5,stroke:#999
-  classDef test fill:#fef3c7,stroke:#d97706
-  class IDX,RULE,TRACKER,MAP internal
-  class RULE_TEST,MAP_TEST,TRACKER_TEST test
-  class PKG,TSE,TSE_RULE,TSE_PARSER,TSE_TESTER,YREACT,VITEST external
-```
-
-レンダリングできない環境の場合は、上の「プロダクションコードの依存ツリー」とテーブルを参照してください。

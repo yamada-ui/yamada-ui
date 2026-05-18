@@ -1,17 +1,17 @@
-# @yamada-ui/lint
+# @yamada-ui/eslint-plugin
 
 The official ESLint plugin for Yamada UI projects.
 
 ## Installation
 
 ```sh
-pnpm add -D @yamada-ui/lint
+pnpm add -D @yamada-ui/eslint-plugin
 # or
-yarn add -D @yamada-ui/lint
+yarn add -D @yamada-ui/eslint-plugin
 # or
-npm install -D @yamada-ui/lint
+npm install -D @yamada-ui/eslint-plugin
 # or
-bun add -D @yamada-ui/lint
+bun add -D @yamada-ui/eslint-plugin
 ```
 
 ## Usage
@@ -19,7 +19,7 @@ bun add -D @yamada-ui/lint
 Add the plugin to your ESLint flat config:
 
 ```ts
-import yamadaUi from "@yamada-ui/lint"
+import yamadaUi from "@yamada-ui/eslint-plugin"
 
 export default [
   yamadaUi.configs.recommended,

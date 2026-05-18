@@ -10,7 +10,7 @@ type Options = [{ preferred?: "longhand" | "shorthand" }?]
 
 const createRule = ESLintUtils.RuleCreator(
   (name) =>
-    `https://github.com/yamada-ui/yamada-ui/blob/main/packages/lint/src/rules/${name}/README.md`,
+    `https://github.com/yamada-ui/yamada-ui/blob/main/packages/eslint-plugin/src/rules/${name}/README.md`,
 )
 
 function getAttrName(attr: TSESTree.JSXAttribute): null | string {

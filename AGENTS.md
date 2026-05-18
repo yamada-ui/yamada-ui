@@ -79,7 +79,7 @@ pnpm react ...                  # Forwards to packages/react
 pnpm utils ...                  # Forwards to packages/utils
 pnpm cli ...                    # Forwards to packages/cli
 pnpm forge ...                  # Forwards to packages/forge
-pnpm linter ...                 # Forwards to packages/lint
+pnpm eslint-plugin ...          # Forwards to packages/eslint-plugin
 pnpm workspace ...              # Forwards to packages/workspace
 pnpm www ...                    # Forwards to www
 pnpm next:app ...               # Forwards to playgrounds/next/app

@@ -54,4 +54,4 @@ Is the scope appropriately narrowed? Are multiple changes being bundled into one
 
 ## Anti-Patterns
 
-From the list of [PR Review Anti-Patterns](./pr-review-anti-patterns/index.md), carefully read any entries that apply to the current diff so that you **do not repeat the same mistakes**.
+From the list of [PR Review Anti-Patterns](/.agents/references/pr-review-anti-patterns/index.md), carefully read any entries that apply to the current diff so that you **do not repeat the same mistakes**.

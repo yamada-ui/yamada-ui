@@ -120,7 +120,7 @@ pnpm forge format        # Format forge/
 pnpm workspace format    # Format workspace/
 pnpm www format          # Format www/
 
-pnpm                 # Lint packages/
+pnpm lint                # Lint packages/
 pnpm cli lint            # Lint cli/
 pnpm react lint          # Lint react/
 pnpm utils lint          # Lint utils/

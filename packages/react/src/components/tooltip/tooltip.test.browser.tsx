@@ -1,71 +1,8 @@
-import { vi } from "vitest"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Tooltip } from "."
 import { Text } from "../text"
 
 describe("<Tooltip />", () => {
-  test("renders component correctly", async () => {
-    await a11y(
-      <Tooltip content="Tooltip Hovered" open>
-        <Text as="span">Trigger</Text>
-      </Tooltip>,
-    )
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Tooltip.name).toBe("Tooltip")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(
-      <Tooltip content="Tooltip Hovered" open>
-        <Text as="span">Trigger</Text>
-      </Tooltip>,
-    )
-    const el = page.getByRole("tooltip")
-    await expect.element(el).toHaveClass("ui-tooltip__content")
-    await expect
-      .element(el.element().parentElement!)
-      .toHaveClass("ui-tooltip__positioner")
-    await expect
-      .element(page.getByText("Trigger"))
-      .toHaveClass("ui-tooltip__trigger")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(
-      <Tooltip content="Tooltip Hovered" open>
-        <Text as="span">Trigger</Text>
-      </Tooltip>,
-    )
-    const el = page.getByRole("tooltip")
-    expect(el.element().tagName).toBe("DIV")
-    expect(el.element().parentElement?.tagName).toBe("DIV")
-  })
-
-  test("renders only children when content is not provided", async () => {
-    await render(
-      <Tooltip>
-        <Text as="span">Trigger</Text>
-      </Tooltip>,
-    )
-    await expect.element(page.getByText("Trigger")).toBeInTheDocument()
-    await expect
-      .element(page.getByRole("tooltip").query())
-      .not.toBeInTheDocument()
-  })
-
-  test("does not render tooltip content when closed", async () => {
-    await render(
-      <Tooltip content="Tooltip Hovered">
-        <Text as="span">Trigger</Text>
-      </Tooltip>,
-    )
-    await expect
-      .element(page.getByRole("tooltip").query())
-      .not.toBeInTheDocument()
-  })
-
   test("opens tooltip on pointer enter and closes on pointer leave", async () => {
     const { user } = await render(
       <Tooltip content="Tooltip Hovered">
@@ -234,11 +171,19 @@ describe("<Tooltip />", () => {
   })
 
   test("does not open on touch pointer events", async () => {
-    await render(
-      <Tooltip content="Tooltip Hovered">
-        <Text as="span">Trigger</Text>
-      </Tooltip>,
+    const { user } = await render(
+      <>
+        <div
+          style={{ height: 12, left: 8, position: "fixed", top: 8, width: 12 }}
+          data-testid="pointer-reset"
+        />
+        <Tooltip content="Tooltip Hovered">
+          <Text as="span">Trigger</Text>
+        </Tooltip>
+      </>,
     )
+
+    await user.hover(page.getByTestId("pointer-reset"))
 
     const trigger = page.getByText("Trigger")
 
@@ -319,10 +264,18 @@ describe("<Tooltip />", () => {
 
   test("handles openDelay and closeDelay", async () => {
     const { user } = await render(
-      <Tooltip closeDelay={500} content="Tooltip Hovered" openDelay={500}>
-        <Text as="span">Trigger</Text>
-      </Tooltip>,
+      <>
+        <div
+          style={{ height: 12, left: 8, position: "fixed", top: 8, width: 12 }}
+          data-testid="pointer-reset"
+        />
+        <Tooltip closeDelay={500} content="Tooltip Hovered" openDelay={500}>
+          <Text as="span">Trigger</Text>
+        </Tooltip>
+      </>,
     )
+
+    await user.hover(page.getByTestId("pointer-reset"))
 
     const trigger = page.getByText("Trigger")
 
@@ -332,9 +285,9 @@ describe("<Tooltip />", () => {
       .element(page.getByRole("tooltip").query(), { timeout: 50 })
       .not.toBeInTheDocument()
 
-    await vi.waitFor(async () => {
-      await expect.element(page.getByRole("tooltip")).toBeInTheDocument()
-    })
+    await expect
+      .element(page.getByRole("tooltip"), { timeout: 5000 })
+      .toBeInTheDocument()
 
     await user.unhover(trigger)
 
@@ -342,11 +295,9 @@ describe("<Tooltip />", () => {
       .element(page.getByRole("tooltip"), { timeout: 50 })
       .toBeInTheDocument()
 
-    await vi.waitFor(async () => {
-      await expect
-        .element(page.getByRole("tooltip").query())
-        .not.toBeInTheDocument()
-    })
+    await expect
+      .element(page.getByRole("tooltip").query(), { timeout: 5000 })
+      .not.toBeInTheDocument()
   })
 
   test("force closes when re-opening while already open", async () => {

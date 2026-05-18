@@ -1,5 +1,3 @@
-import { afterEach, beforeEach, vi } from "vitest"
-
 vi.mock("prompts", () => ({
   default: vi.fn().mockResolvedValue({}),
 }))

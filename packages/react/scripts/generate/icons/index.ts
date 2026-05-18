@@ -15,7 +15,7 @@ const resolvedTraverse = interopDefault(traverse)
 
 const ENTRY_PATH = path.join(
   process.cwd(),
-  "node_modules/lucide-react/dist/esm/icons/index.js",
+  "node_modules/lucide-react/dist/esm/icons/index.mjs",
 )
 const DIST_PATH = path.join(process.cwd(), "src/components/icon/icons")
 

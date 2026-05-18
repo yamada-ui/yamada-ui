@@ -7,15 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": [
-      "container",
-      "dropzone",
-      "highlight",
-      "link-box",
-      "loading",
-      "show",
-      "tooltip"
-    ],
+    "components": ["dropzone", "highlight", "loading", "tooltip"],
     "hooks": [],
     "providers": []
   },
@@ -28,10 +20,6 @@
     {
       "name": "text.style.ts",
       "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const textStyle = defineComponentStyle({})\n\nexport type TextStyle = typeof textStyle\n"
-    },
-    {
-      "name": "text.test.browser.tsx",
-      "content": "import { a11y, page, render } from \"#test/browser\"\nimport { Text } from \"./text\"\n\ndescribe(\"<Text />\", () => {\n  test(\"renders component correctly\", async () => {\n    await a11y(<Text>Text</Text>)\n  })\n\n  test(\"sets `displayName` correctly\", () => {\n    expect(Text.displayName).toBe(\"Text\")\n  })\n\n  test(\"sets `className` correctly\", async () => {\n    await render(<Text data-testid=\"text\">Text</Text>)\n    const text = page.getByTestId(\"text\")\n    await expect.element(text).toHaveClass(\"ui-text\")\n  })\n\n  test(\"renders HTML tag correctly\", async () => {\n    await render(<Text data-testid=\"text\">Text</Text>)\n    const text = page.getByTestId(\"text\")\n    expect(text.element().tagName).toBe(\"P\")\n  })\n})\n"
     },
     {
       "name": "text.tsx",

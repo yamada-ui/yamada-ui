@@ -55,6 +55,11 @@ export interface Config extends UserConfig {
   isSection: (section: string) => section is Section
 }
 
+export interface RequiredDependencies {
+  theme: string[]
+  ui: string[]
+}
+
 export type RegistrySection =
   | "components"
   | "hooks"

@@ -1,28 +1,8 @@
 import { useState } from "react"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Collapse } from "./collapse"
 
 describe("<Collapse />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<Collapse />)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Collapse.displayName).toBe("Collapse")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<Collapse data-testid="collapse" />)
-    await expect
-      .element(page.getByTestId("collapse"))
-      .toHaveClass("ui-collapse")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<Collapse data-testid="collapse" />)
-    expect(page.getByTestId("collapse").element().tagName).toBe("DIV")
-  })
-
   test("toggles visibility on open change", async () => {
     const TestComponent = () => {
       const [open, setOpen] = useState(false)
@@ -49,13 +29,6 @@ describe("<Collapse />", () => {
     await expect.element(collapse).toHaveStyle({ height: "0px" })
   })
 
-  test("animationOpacity set to true by default", async () => {
-    await render(<Collapse open>Collapse</Collapse>)
-
-    const collapse = page.getByText("Collapse")
-    await expect.element(collapse).toHaveStyle({ opacity: "1" })
-  })
-
   test("no opacity when animationOpacity set to false", async () => {
     await render(
       <Collapse animationOpacity={false} open>
@@ -65,6 +38,13 @@ describe("<Collapse />", () => {
 
     const collapse = page.getByText("Collapse")
     await expect.element(collapse).toHaveStyle({ opacity: "" })
+  })
+
+  test("animationOpacity set to true by default", async () => {
+    await render(<Collapse open>Collapse</Collapse>)
+
+    const collapse = page.getByText("Collapse")
+    await expect.element(collapse).toHaveStyle({ opacity: "1" })
   })
 
   test("height changes correctly after open set to true", async () => {

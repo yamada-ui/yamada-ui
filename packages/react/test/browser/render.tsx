@@ -1,3 +1,4 @@
+import type { RunOptions } from "axe-core"
 import type { PropsWithChildren, ReactNode } from "react"
 import type {
   ComponentRenderOptions as OriginalComponentRenderOptions,
@@ -26,7 +27,7 @@ export interface BrowserRenderHookOptions<
 }
 
 export interface A11yOptions extends ComponentRenderOptions {
-  axeOptions?: axe.RunOptions
+  axeOptions?: RunOptions
 }
 
 export async function a11y(

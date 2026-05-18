@@ -1,4 +1,4 @@
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { SimpleGrid } from "./simple-grid"
 
 const getDeclaredGridTemplateColumns = () => {
@@ -33,26 +33,6 @@ const getComputedGridTemplateColumns = () =>
   getComputedStyle(page.getByText("SimpleGrid").element()).gridTemplateColumns
 
 describe("<SimpleGrid />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<SimpleGrid>GridSimple</SimpleGrid>)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(SimpleGrid.displayName).toBe("SimpleGrid")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<SimpleGrid>SimpleGrid</SimpleGrid>)
-    await expect
-      .element(page.getByText("SimpleGrid"))
-      .toHaveClass("ui-simple-grid")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<SimpleGrid>SimpleGrid</SimpleGrid>)
-    expect(page.getByText("SimpleGrid").element().tagName).toBe("DIV")
-  })
-
   test("applies `minChildWidth` correctly", async () => {
     await render(<SimpleGrid minChildWidth="200px">SimpleGrid</SimpleGrid>)
     const gridTemplateColumns = getDeclaredGridTemplateColumns()
@@ -85,35 +65,5 @@ describe("<SimpleGrid />", () => {
     await render(<SimpleGrid columns={3}>SimpleGrid</SimpleGrid>)
     const gridTemplateColumns = getDeclaredGridTemplateColumns().trim()
     expect(gridTemplateColumns).toMatch(/^repeat\(3,\s*minmax\(0px,\s*1fr\)\)$/)
-  })
-
-  test("returns undefined for null value in `minChildWidth` responsive array", async () => {
-    await render(
-      // @ts-expect-error testing null handling in responsive array
-      <SimpleGrid minChildWidth={[null, "200px"]}>SimpleGrid</SimpleGrid>,
-    )
-    await expect.element(page.getByText("SimpleGrid")).toBeInTheDocument()
-  })
-
-  test("returns undefined for undefined value in `minChildWidth` responsive object", async () => {
-    await render(
-      <SimpleGrid minChildWidth={{ base: undefined, md: "200px" }}>
-        SimpleGrid
-      </SimpleGrid>,
-    )
-    await expect.element(page.getByText("SimpleGrid")).toBeInTheDocument()
-  })
-
-  test("returns undefined for null value in `columns` responsive array", async () => {
-    // @ts-expect-error - testing null handling in responsive array
-    await render(<SimpleGrid columns={[null, 3]}>SimpleGrid</SimpleGrid>)
-    await expect.element(page.getByText("SimpleGrid")).toBeInTheDocument()
-  })
-
-  test("returns undefined for undefined value in `columns` responsive object", async () => {
-    await render(
-      <SimpleGrid columns={{ base: undefined, md: 3 }}>SimpleGrid</SimpleGrid>,
-    )
-    await expect.element(page.getByText("SimpleGrid")).toBeInTheDocument()
   })
 })

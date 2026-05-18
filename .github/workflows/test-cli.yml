@@ -1,0 +1,70 @@
+name: Test
+
+on:
+  workflow_call:
+    inputs:
+      TURBO_SCM_BASE:
+        required: false
+        type: string
+    secrets:
+      TURBO_TOKEN:
+        required: false
+      CODECOV_TOKEN:
+        required: false
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_SCM_BASE: ${{ inputs.TURBO_SCM_BASE }}
+
+jobs:
+  test_cli:
+    name: CLI - Node
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Check modified files
+        id: changed-files
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
+        with:
+          files_yaml: |
+            full:
+              - packages/cli/{package.json,vitest.config.ts}
+              - packages/cli/test/**
+              - .github/workflows/quality.yml
+              - .github/workflows/unit-test.yml
+              - turbo.json
+              - package.json
+              - packages/workspace/package.json
+              - packages/workspace/src/vitest/**
+            diff:
+              - packages/cli/src/**/*.{ts,tsx,mts}
+
+      - name: Install
+        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''
+        uses: ./.github/composite-actions/install
+
+      - name: Run test (full)
+        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.full_any_changed == 'true'
+        run: pnpm turbo run test:coverage --filter=./packages/cli -- --retry=3
+
+      - name: Run test (diff)
+        if: inputs.TURBO_SCM_BASE != '' && steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
+        run: pnpm turbo run test:coverage --filter=./packages/cli -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }}
+
+      - name: Upload coverage
+        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''
+        uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5.5.4
+        with:
+          disable_search: true
+          fail_ci_if_error: false
+          files: ./packages/cli/coverage/coverage-final.json
+          flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
+          codecov_yml_path: ./codecov.yml

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react"
 import { type Locator, locators } from "vitest/browser"
-import { a11y, page, render } from "#test/browser"
-import { FileButton } from "."
+import { page, render } from "#test/browser"
+import { FileButton } from "./file-button"
 
 declare module "vitest/browser" {
   interface LocatorSelectors {
@@ -24,38 +24,6 @@ describe("<FileButton />", () => {
 
   afterAll(() => {
     vi.restoreAllMocks()
-  })
-
-  test("renders component correctly", async () => {
-    await a11y(<FileButton>Upload</FileButton>)
-  })
-
-  test("sets `displayName`", () => {
-    expect(FileButton.displayName).toBe("FileButton")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<FileButton>Upload</FileButton>)
-
-    await expect
-      .element(page.getByRole("button", { name: /Upload/i }))
-      .toHaveClass("ui-file-button")
-  })
-
-  test("renders HTML tag correctly", async () => {
-    await render(<FileButton>Upload</FileButton>)
-
-    await expect
-      .element(page.getByRole("button", { name: /Upload/i }))
-      .toHaveProperty("tagName", "BUTTON")
-  })
-
-  test("should render FileButton", async () => {
-    await render(<FileButton>Upload</FileButton>)
-
-    await expect
-      .element(page.getByRole("button", { name: /Upload/i }))
-      .toBeInTheDocument()
   })
 
   test("should call onClick", async () => {

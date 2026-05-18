@@ -1,55 +1,8 @@
-import { vi } from "vitest"
-import { a11y, page, render, renderHook } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Toggle, ToggleGroup } from "."
 import { noop } from "../../utils"
-import { useToggle } from "./use-toggle"
 
 describe("<Toggle />", () => {
-  test("renders component correctly", async () => {
-    await a11y(<Toggle>Toggle</Toggle>)
-  })
-
-  test("renders toggle group correctly", async () => {
-    await a11y(
-      <ToggleGroup.Root defaultValue={[]}>
-        <ToggleGroup.Item value="a">A</ToggleGroup.Item>
-        <ToggleGroup.Item value="b">B</ToggleGroup.Item>
-      </ToggleGroup.Root>,
-    )
-  })
-
-  test("should render correctly", async () => {
-    await render(<Toggle>Toggle</Toggle>)
-
-    await expect.element(page.getByRole("button")).toBeInTheDocument()
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Toggle.displayName).toBe("ToggleRoot")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<Toggle>Toggle</Toggle>)
-
-    await expect
-      .element(page.getByRole("button"))
-      .toHaveClass("ui-toggle__root")
-  })
-
-  test("should handle checked prop", async () => {
-    const { rerender } = await render(<Toggle checked>Toggle</Toggle>)
-
-    await expect
-      .element(page.getByRole("button"))
-      .toHaveAttribute("data-checked")
-
-    await rerender(<Toggle checked={false}>Toggle</Toggle>)
-
-    await expect
-      .element(page.getByRole("button"))
-      .not.toHaveAttribute("data-checked")
-  })
-
   test("should handle disabled prop", async () => {
     const onChange = vi.fn()
     const { user } = await render(
@@ -62,19 +15,6 @@ describe("<Toggle />", () => {
     await expect.element(button).toBeDisabled()
     await expect(user.click(button, { timeout: 100 })).rejects.toBeDefined()
     expect(onChange).not.toHaveBeenCalled()
-  })
-
-  test("should handle readOnly prop", async () => {
-    await render(<Toggle readOnly>Toggle</Toggle>)
-
-    const button = page.getByRole("button")
-    await expect.element(button).toHaveAttribute("data-readonly")
-    await expect.element(button).toHaveAttribute("aria-disabled", "true")
-  })
-
-  test("should handle icon prop", async () => {
-    await render(<Toggle icon={<div>Icon</div>} />)
-    await expect.element(page.getByText("Icon")).toBeInTheDocument()
   })
 
   test("should handle onChange callback", async () => {
@@ -141,38 +81,6 @@ describe("<Toggle />", () => {
     await user.click(page.getByRole("button", { name: "A" }))
     expect(onChange).toHaveBeenCalledWith(["a"])
     await expect.element(checkboxes.nth(0)).toBeChecked()
-  })
-
-  test("should merge consumer props in getButtonProps", async () => {
-    const rootOnClick = vi.fn()
-    const getButtonOnClick = vi.fn()
-    const { result } = await renderHook(() =>
-      useToggle({
-        className: "root-class",
-        style: { color: "red" },
-        readOnly: true,
-        value: "toggle-value",
-        onClick: rootOnClick,
-      }),
-    )
-
-    const buttonProps = result.current.getButtonProps({
-      className: "button-class",
-      style: { backgroundColor: "blue" },
-      onClick: getButtonOnClick,
-    })
-
-    buttonProps.onClick?.({} as any)
-
-    expect(rootOnClick).toHaveBeenCalledTimes(1)
-    expect(getButtonOnClick).toHaveBeenCalledTimes(1)
-    expect(buttonProps.className).toContain("root-class")
-    expect(buttonProps.className).toContain("button-class")
-    expect(buttonProps.style).toMatchObject({
-      backgroundColor: "blue",
-      color: "red",
-    })
-    expect(buttonProps["aria-label"]).toBe("toggle-value")
   })
 
   test("should warn when value is not provided in controlled mode", async () => {

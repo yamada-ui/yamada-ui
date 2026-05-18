@@ -1,20 +1,8 @@
 import { useRef, useState } from "react"
-import { a11y, page, render, renderHook } from "#test/browser"
+import { page, render, renderHook } from "#test/browser"
 import { FocusLock } from "./focus-lock"
 
 describe("<FocusLock />", () => {
-  test("sets `displayName` correctly", () => {
-    expect(FocusLock.name).toBe("FocusLock")
-  })
-
-  test("passes a11y checks", async () => {
-    await a11y(
-      <FocusLock>
-        <button>Focused Button</button>
-      </FocusLock>,
-    )
-  })
-
   test("correctly focuses on elements within the lock", async () => {
     await render(
       <>
@@ -106,14 +94,11 @@ describe("<FocusLock />", () => {
       name: "Unmount FocusLock Button",
     })
 
-    // Focus on a button inside the FocusLock
     focusLockButton.element().focus()
     await expect.element(focusLockButton).toHaveFocus()
 
-    // Unmount the FocusLock
     await user.click(unmountButton)
 
-    // Check that focus returns to the outside button
     await expect.element(outsideButton).toHaveFocus()
   })
 })

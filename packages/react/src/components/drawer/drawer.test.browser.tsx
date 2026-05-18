@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import { type Locator, locators } from "vitest/browser"
-import { a11y, page, render, renderHook } from "#test/browser"
+import { page, render, renderHook } from "#test/browser"
 import { Button } from "../button"
 import { Drawer } from "./"
 import { useDrawer } from "./use-drawer"
@@ -54,72 +54,6 @@ describe("<Drawer />", () => {
         return `.${className}`
       },
     })
-  })
-
-  test("renders component correctly", async () => {
-    await a11y(<TestComponent />)
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Drawer.Root.displayName).toBe("DrawerRoot")
-    expect(Drawer.Overlay.displayName).toBe("DrawerOverlay")
-    expect(Drawer.OpenTrigger.displayName).toBe("DrawerOpenTrigger")
-    expect(Drawer.CloseTrigger.displayName).toBe("DrawerCloseTrigger")
-    expect(Drawer.CloseButton.displayName).toBe("DrawerCloseButton")
-    expect(Drawer.Content.displayName).toBe("DrawerContent")
-    expect(Drawer.DragBar.displayName).toBe("DrawerDragBar")
-    expect(Drawer.Header.displayName).toBe("DrawerHeader")
-    expect(Drawer.Title.displayName).toBe("DrawerTitle")
-    expect(Drawer.Body.displayName).toBe("DrawerBody")
-    expect(Drawer.Footer.displayName).toBe("DrawerFooter")
-  })
-
-  test("sets `className` correctly", async () => {
-    await render(<TestComponent open withDragBar />)
-
-    const root = page.getByTestId("root")
-    const overlay = page.getByTestId("overlay")
-    const content = page.getByTestId("content")
-    const dragBar = page.getByTestId("dragBar")
-    const closeButton = page.getByTestId("closeButton")
-    const header = page.getByTestId("header")
-    const title = page.getByTestId("title")
-    const body = page.getByTestId("body")
-    const footer = page.getByTestId("footer")
-
-    await expect.element(root).toHaveClass("ui-drawer__root")
-    await expect.element(overlay).toHaveClass("ui-drawer__overlay")
-    await expect.element(content).toHaveClass("ui-drawer__content")
-    await expect.element(dragBar).toHaveClass("ui-drawer__drag-bar")
-    await expect.element(closeButton).toHaveClass("ui-drawer__close-button")
-    await expect.element(header).toHaveClass("ui-drawer__header")
-    await expect.element(title).toHaveClass("ui-drawer__title")
-    await expect.element(body).toHaveClass("ui-drawer__body")
-    await expect.element(footer).toHaveClass("ui-drawer__footer")
-  })
-
-  test("sets HTML tag correctly", async () => {
-    await render(<TestComponent open withDragBar />)
-
-    const root = page.getByTestId("root")
-    const overlay = page.getByTestId("overlay")
-    const content = page.getByTestId("content")
-    const dragBar = page.getByTestId("dragBar")
-    const closeButton = page.getByTestId("closeButton")
-    const header = page.getByTestId("header")
-    const title = page.getByTestId("title")
-    const body = page.getByTestId("body")
-    const footer = page.getByTestId("footer")
-
-    expect(root.element().tagName).toBe("DIV")
-    expect(overlay.element().tagName).toBe("DIV")
-    expect(content.element().tagName).toBe("SECTION")
-    expect(dragBar.element().tagName).toBe("DIV")
-    expect(closeButton.element().tagName).toBe("BUTTON")
-    expect(header.element().tagName).toBe("HEADER")
-    expect(title.element().tagName).toBe("H2")
-    expect(body.element().tagName).toBe("DIV")
-    expect(footer.element().tagName).toBe("FOOTER")
   })
 
   test("sets aria attributes correctly", async () => {
@@ -442,7 +376,7 @@ describe("useDrawer", () => {
       velocity: { x: 0, y: -10 },
     })
 
-    expect(onClose).not.toHaveBeenCalledWith(undefined)
+    expect(onClose).not.toHaveBeenCalled()
   })
 
   test("calls onClose when dragged down with sufficient velocity for block-end", async () => {

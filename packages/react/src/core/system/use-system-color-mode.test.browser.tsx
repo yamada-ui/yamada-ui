@@ -46,8 +46,9 @@ describe("useSystemColorMode", () => {
     expect(result.current.getSystemColorMode()).toBe("dark")
   })
 
-  test("invokes callback when provided without error", async () => {
+  test("accepts callback option without error", async () => {
     const callback = vi.fn()
+
     await renderHook(() =>
       useSystemColorMode({ callback, defaultColorMode: "light" }),
     )

@@ -53,7 +53,7 @@ describe("<Menu />", () => {
 
     await user.click(page.getByRole("menuitemcheckbox", { name: /Opt 1/i }))
 
-    expect(calls).toStrictEqual(["getter", "consumer", "internal"])
+    expect(calls).toStrictEqual(["consumer", "getter", "internal"])
     expect(onChange).toHaveBeenCalledWith(["opt-1"])
     expect(onSelect).toHaveBeenCalledWith("opt-1")
   })

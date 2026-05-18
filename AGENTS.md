@@ -78,6 +78,7 @@ pnpm react ...                  # Forwards to packages/react
 pnpm utils ...                  # Forwards to packages/utils
 pnpm cli ...                    # Forwards to packages/cli
 pnpm forge ...                  # Forwards to packages/forge
+pnpm linter ...                 # Forwards to packages/lint
 pnpm workspace ...              # Forwards to packages/workspace
 pnpm www ...                    # Forwards to www
 pnpm next:app ...               # Forwards to playgrounds/next/app
@@ -119,7 +120,7 @@ pnpm forge format        # Format forge/
 pnpm workspace format    # Format workspace/
 pnpm www format          # Format www/
 
-pnpm lint                # Lint packages/
+pnpm                 # Lint packages/
 pnpm cli lint            # Lint cli/
 pnpm react lint          # Lint react/
 pnpm utils lint          # Lint utils/

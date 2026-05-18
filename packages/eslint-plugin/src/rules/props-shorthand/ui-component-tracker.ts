@@ -5,7 +5,7 @@ export interface UIComponentTracker {
   visitImport: (node: TSESTree.ImportDeclaration) => void
 }
 
-const UI_FACTORY_NAME = "ui"
+const STYLED_FACTORY_NAME = "styled"
 
 export function createUIComponentTracker(
   sourcePackages: readonly string[],
@@ -26,7 +26,7 @@ export function createUIComponentTracker(
             ? spec.imported.name
             : spec.imported.value
 
-        if (imported === UI_FACTORY_NAME) {
+        if (imported === STYLED_FACTORY_NAME) {
           namespaces.add(spec.local.name)
         } else {
           components.add(spec.local.name)

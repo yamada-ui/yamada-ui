@@ -26,7 +26,7 @@ To disable the rule entirely for a project, set it to `"off"` in your ESLint con
 ```ts
 {
   rules: {
-    "@yamada-ui/lint/props-shorthand": "off",
+    "@yamada-ui/eslint-plugin/props-shorthand": "off",
   },
 }
 ```
@@ -40,7 +40,7 @@ Incorrect:
 ```tsx
 <Box margin={4} />
 <HStack flexDirection="row" />
-<ui.div padding="2" />
+<styled.div padding="2" />
 ```
 
 Correct:
@@ -48,7 +48,7 @@ Correct:
 ```tsx
 <Box m={4} />
 <HStack flexDir="row" />
-<ui.div p="2" />
+<styled.div p="2" />
 ```
 
 ### `preferred: "longhand"`
@@ -88,7 +88,7 @@ The rule reports duplicate style props but **does not auto-fix** them (silently 
 The rule only runs on components imported from `@yamada-ui/react`:
 
 - Named imports: `<Box />`, `<HStack />`, aliased `import { Box as B } from "@yamada-ui/react"`
-- The `ui` factory: `<ui.div />`, including `import * as YUI from "@yamada-ui/react"; <YUI.div />` and `import { ui as u } from "@yamada-ui/react"; <u.div />`
+- The `styled` factory: `<styled.div />`, including `import * as YUI from "@yamada-ui/react"; <YUI.div />` and `import { styled as s } from "@yamada-ui/react"; <s.div />`
 
 Components imported from other packages, re-exports through other barrels, and styled wrappers (e.g., `styled(Box)`) are not tracked.
 
@@ -96,4 +96,4 @@ Components imported from other packages, re-exports through other barrels, and s
 
 - **Shorthand priority** — when multiple shorthand props map to the same longhand, the rule picks the first one encountered in `@yamada-ui/react/core`'s `shorthandStyles` object.
 - **Runtime dependency on `@yamada-ui/react/core`** — the shorthand map is derived at rule-load time from `@yamada-ui/react/core`, so the plugin requires `@yamada-ui/react` as a peer.
-- **Named-import over-matching** — any named identifier imported from `@yamada-ui/react` other than `ui` is treated as a component. Non-component utilities (hooks, helpers) used as JSX elements are not valid React anyway, so the practical impact is nil.
+- **Named-import over-matching** — any named identifier imported from `@yamada-ui/react` other than `styled` is treated as a component. Non-component utilities (hooks, helpers) used as JSX elements are not valid React anyway, so the practical impact is nil.

@@ -75,21 +75,21 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[1]!)).toBe(false)
   })
 
-  test("named imports: treats the `ui` factory as a namespace base", () => {
+  test("named imports: treats the `styled` factory as a namespace base", () => {
     const { jsxNames, tracker } = setupTracker(`
-      import { ui } from "@yamada-ui/react"
-      const App = () => <ui.div />
+      import { styled } from "@yamada-ui/react"
+      const App = () => <styled.div />
     `)
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
   })
 
-  test("named imports: classifies the `ui` factory by its original exported name, not the alias", () => {
+  test("named imports: classifies the `styled` factory by its original exported name, not the alias", () => {
     const { jsxNames, tracker } = setupTracker(`
-      import { ui as u } from "@yamada-ui/react"
+      import { styled as s } from "@yamada-ui/react"
       const App = () => (
         <>
-          <u.div />
-          <ui.div />
+          <s.div />
+          <styled.div />
         </>
       )
     `)
@@ -99,12 +99,12 @@ describe("createUIComponentTracker", () => {
 
   test("named imports: registers multiple specifiers from a single import", () => {
     const { jsxNames, tracker } = setupTracker(`
-      import { Box, HStack, ui } from "@yamada-ui/react"
+      import { Box, HStack, styled } from "@yamada-ui/react"
       const App = () => (
         <>
           <Box />
           <HStack />
-          <ui.div />
+          <styled.div />
         </>
       )
     `)

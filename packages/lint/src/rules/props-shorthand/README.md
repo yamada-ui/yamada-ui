@@ -67,12 +67,22 @@ Correct:
 
 ### Duplicate props
 
-When both shorthand and longhand are specified on the same element, the rule reports an error but **does not auto-fix** (silently dropping one would change behavior):
+The rule reports duplicate style props but **does not auto-fix** them (silently dropping one would change behavior). Two patterns are detected, regardless of the `preferred` setting:
 
-```tsx
-<Box m={1} margin={2} />
-// Error: Both 'm' and 'margin' are specified; keep only the preferred one.
-```
+- Shorthand and longhand of the same prop:
+
+  ```tsx
+  <Box m={1} margin={2} />
+  // Error: Both 'm' and 'margin' are specified; keep only the preferred one.
+  ```
+
+- Multiple shorthands that map to the same longhand (e.g., `bgGradient` and `bgImage` both write `backgroundImage`; `marginEnd` and `me` both write `marginInlineEnd`):
+
+  ```tsx
+  <Box bgGradient="x" bgImage="y" />
+  // Error: Both 'bgGradient' and 'backgroundImage' are specified; keep only the preferred one.
+  // Error: Both 'bgImage' and 'backgroundImage' are specified; keep only the preferred one.
+  ```
 
 ## Scope
 

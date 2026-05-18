@@ -229,5 +229,21 @@ ruleTester.run("props-shorthand", propsShorthand, {
         { messageId: "duplicateProps" },
       ],
     },
+    // preferred: shorthand 設定でも、同じ longhand を共有する shorthand 兄弟が
+    // 同居していれば duplicate として指摘する（preferred: longhand 側と対になる挙動）
+    // どちらを残すかは人間の判断に委ねるので自動修正なし
+    {
+      name: "shorthand preferred: sibling shorthands sharing a longhand: no auto-fix",
+      code: `
+        import { Box } from "@yamada-ui/react"
+        const App = () => <Box bgGradient="x" bgImage="y" />
+      `,
+      output: null,
+      options: [{ preferred: "shorthand" }],
+      errors: [
+        { messageId: "duplicateProps" },
+        { messageId: "duplicateProps" },
+      ],
+    },
   ],
 })

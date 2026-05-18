@@ -139,6 +139,32 @@ export const propsShorthand: RuleModule<MessageIds, Options> = createRule<
           if (preferred === "shorthand") {
             // ─── preferred: shorthand（longhand を見つけたら shorthand に変えたい） ───
 
+            // 属性が shorthand 自身の場合のチェック
+            // 例: <Box bgGradient="x" bgImage="y" /> → どちらも backgroundImage を指す
+            // 例: <Box marginEnd="2" me="4" />     → どちらも marginInlineEnd を指す
+            // 同じ longhand を共有する別 shorthand 兄弟が居れば duplicate として指摘する
+            // （preferred: "longhand" 側と対になる検出ロジック）
+            // 自分自身は除外するため `s !== name` でフィルタする
+            //
+            // longhand と shorthand が並ぶケース（<Box m={1} margin={2} />）は、
+            // 後段の longhand 分岐側で margin を起点に検出されるのでここでは扱わない
+            const long = shorthandToLonghand.get(name)
+            if (long) {
+              const siblings = longhandToShorthands.get(long) ?? []
+              const conflicting = siblings.find(
+                (s) => s !== name && presentNames.has(s),
+              )
+              if (conflicting) {
+                context.report({
+                  node: attr.name,
+                  messageId: "duplicateProps",
+                  data: { longhand: long, shorthand: name },
+                })
+              }
+              // shorthand 自身は preferred 通りに使われているので、衝突がなければ何もしない
+              continue
+            }
+
             // 属性名が longhand でなければ対象外
             const shorts = longhandToShorthands.get(name)
             if (!shorts || shorts.length === 0) continue

@@ -3,7 +3,7 @@ import sharedConfig from "@yamada-ui/workspace/vitest/config"
 
 export default mergeConfig(sharedConfig, {
   test: {
-    name: "lint",
+    name: "eslint-plugin",
     environment: "node",
     globals: true,
     include: ["src/**/*.test.{ts,tsx}"],

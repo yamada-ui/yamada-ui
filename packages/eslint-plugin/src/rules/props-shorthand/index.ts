@@ -19,7 +19,7 @@ type Options = [{ preferred?: "longhand" | "shorthand" }?]
 // @docs: https://typescript-eslint.io/developers/custom-rules#rulecreator
 const createRule = ESLintUtils.RuleCreator(
   (name) =>
-    `https://github.com/yamada-ui/yamada-ui/blob/main/packages/lint/src/rules/${name}/README.md`,
+    `https://github.com/yamada-ui/yamada-ui/blob/main/packages/eslint-plugin/src/rules/${name}/README.md`,
 )
 
 // JSX 属性から属性名（文字列）を抜き出すヘルパー

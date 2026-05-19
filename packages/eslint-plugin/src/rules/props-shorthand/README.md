@@ -26,7 +26,7 @@ To disable the rule entirely for a project, set it to `"off"` in your ESLint con
 ```ts
 {
   rules: {
-    "@yamada-ui/lint/props-shorthand": "off",
+    "@yamada-ui/eslint-plugin/props-shorthand": "off",
   },
 }
 ```

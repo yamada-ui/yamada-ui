@@ -1,4 +1,4 @@
-// @yamada-ui/lint 自身を lint するための ESLint Flat Config
+// @yamada-ui/eslint-plugin 自身を lint するための ESLint Flat Config
 //
 // このパッケージは yamada-ui モノレポ内で唯一 ESLint を使う（他は oxlint）。
 // 本パッケージは ESLint プラグインそのもので、`@typescript-eslint/rule-tester`

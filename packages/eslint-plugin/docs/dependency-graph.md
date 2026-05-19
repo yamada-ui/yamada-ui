@@ -1,6 +1,6 @@
-# `@yamada-ui/lint` Dependency Graph
+# `@yamada-ui/eslint-plugin` Dependency Graph
 
-`packages/lint/src/` 配下のファイル間依存関係と、各ファイルが利用している外部パッケージをまとめたドキュメントです。
+`packages/eslint-plugin/src/` 配下のファイル間依存関係と、各ファイルが利用している外部パッケージをまとめたドキュメントです。
 
 ## プロダクションコードの依存ツリー
 
@@ -32,12 +32,12 @@ ui-component-tracker.ts        shorthand-map.ts
 
 **やっていること**:
 
-- `package.json` から `name` (`@yamada-ui/lint`) と `version` を読み取り `meta` に埋める
+- `package.json` から `name` (`@yamada-ui/eslint-plugin`) と `version` を読み取り `meta` に埋める
 - `rules` 辞書に `propsShorthand` を `"props-shorthand"` キーで登録
 - `recommended` config を組み立て、`[`${name}/props-shorthand`]: "error"` でルールを有効化
 - `basePlugin` + `configs: { recommended }` を default export
 
-利用者は `import yamadaUi from "@yamada-ui/lint"` で取り込み、`yamadaUi.configs.recommended` を Flat Config 配列に展開する。
+利用者は `import yamadaUi from "@yamada-ui/eslint-plugin"` で取り込み、`yamadaUi.configs.recommended` を Flat Config 配列に展開する。
 
 | Import 先                  | 種類              | 用途                                             |
 | -------------------------- | ----------------- | ------------------------------------------------ |
@@ -111,7 +111,7 @@ ui-component-tracker.ts        shorthand-map.ts
 
 ## 凡例
 
-- **internal**: `packages/lint/src/` 内部のファイル
+- **internal**: `packages/eslint-plugin/src/` 内部のファイル
 - **external**: 別パッケージ（`peerDependencies` / `dependencies` / `devDependencies` のいずれか）
 - **型のみ**: `import type { ... }` で型情報だけ取り込み、ランタイムには残らない
 - **peer**: `peerDependencies` で宣言され、ユーザー側にインストールが委ねられる依存

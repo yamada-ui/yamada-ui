@@ -318,29 +318,17 @@ importers:
         specifier: ^7.3.1
         version: 7.3.1
 
-  packages/forge:
-    dependencies:
-      '@yamada-ui/utils':
-        specifier: workspace:*
-        version: link:../utils
-      '@yamada-ui/workspace':
-        specifier: workspace:*
-        version: link:../workspace
-      strip-ansi:
-        specifier: ^7.2.0
-        version: 7.2.0
-
-  packages/lint:
+  packages/eslint-plugin:
     dependencies:
       '@typescript-eslint/utils':
-        specifier: ^8.58.0
+        specifier: ^8.59.3
         version: 8.59.3(eslint@10.3.0(jiti@2.7.0))(typescript@6.0.3)
     devDependencies:
       '@typescript-eslint/parser':
-        specifier: ^8.58.0
+        specifier: ^8.59.3
         version: 8.59.3(eslint@10.3.0(jiti@2.7.0))(typescript@6.0.3)
       '@typescript-eslint/rule-tester':
-        specifier: ^8.58.0
+        specifier: ^8.59.3
         version: 8.59.3(eslint@10.3.0(jiti@2.7.0))(typescript@6.0.3)
       '@yamada-ui/react':
         specifier: workspace:*
@@ -352,8 +340,20 @@ importers:
         specifier: 'catalog:'
         version: 10.3.0(jiti@2.7.0)
       typescript-eslint:
-        specifier: ^8.58.0
+        specifier: ^8.59.3
         version: 8.59.3(eslint@10.3.0(jiti@2.7.0))(typescript@6.0.3)
+
+  packages/forge:
+    dependencies:
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../utils
+      '@yamada-ui/workspace':
+        specifier: workspace:*
+        version: link:../workspace
+      strip-ansi:
+        specifier: ^7.2.0
+        version: 7.2.0
 
   packages/react:
     dependencies:

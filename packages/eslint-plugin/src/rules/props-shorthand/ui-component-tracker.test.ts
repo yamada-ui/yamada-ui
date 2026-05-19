@@ -98,23 +98,23 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[1]!)).toBe(false)
   })
 
-  // 名前付き import: `ui` factory は namespace の基底として扱う
-  test("named imports: treats the `ui` factory as a namespace base", () => {
+  // 名前付き import: `styled` factory は namespace の基底として扱う
+  test("named imports: treats the `styled` factory as a namespace base", () => {
     const { jsxNames, tracker } = setupTracker(`
-      import { ui } from "@yamada-ui/react"
-      const App = () => <ui.div />
+      import { styled } from "@yamada-ui/react"
+      const App = () => <styled.div />
     `)
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
   })
 
-  // 名前付き import: `ui` factory は元の export 名で判定し、エイリアスで判定しない
-  test("named imports: classifies the `ui` factory by its original exported name, not the alias", () => {
+  // 名前付き import: `styled` factory は元の export 名で判定し、エイリアスで判定しない
+  test("named imports: classifies the `styled` factory by its original exported name, not the alias", () => {
     const { jsxNames, tracker } = setupTracker(`
-      import { ui as u } from "@yamada-ui/react"
+      import { styled as s } from "@yamada-ui/react"
       const App = () => (
         <>
-          <u.div />
-          <ui.div />
+          <s.div />
+          <styled.div />
         </>
       )
     `)
@@ -125,12 +125,12 @@ describe("createUIComponentTracker", () => {
   // 名前付き import: 1 つの import 文に並んだ複数の specifier をまとめて登録する
   test("named imports: registers multiple specifiers from a single import", () => {
     const { jsxNames, tracker } = setupTracker(`
-      import { Box, HStack, ui } from "@yamada-ui/react"
+      import { Box, HStack, styled } from "@yamada-ui/react"
       const App = () => (
         <>
           <Box />
           <HStack />
-          <ui.div />
+          <styled.div />
         </>
       )
     `)

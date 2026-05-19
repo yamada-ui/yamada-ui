@@ -134,30 +134,30 @@ ruleTester.run("props-shorthand", propsShorthand, {
       options: [{ preferred: "shorthand" }],
       errors: [{ messageId: "preferShorthand" }],
     },
-    // ui factory 経由（<ui.div />）でも検出と自動修正が効く
+    // styled factory 経由（<styled.div />）でも検出と自動修正が効く
     {
-      name: "ui factory: padding -> p",
+      name: "styled factory: padding -> p",
       code: `
-        import { ui } from "@yamada-ui/react"
-        const App = () => <ui.div padding="2" />
+        import { styled } from "@yamada-ui/react"
+        const App = () => <styled.div padding="2" />
       `,
       output: `
-        import { ui } from "@yamada-ui/react"
-        const App = () => <ui.div p="2" />
+        import { styled } from "@yamada-ui/react"
+        const App = () => <styled.div p="2" />
       `,
       options: [{ preferred: "shorthand" }],
       errors: [{ messageId: "preferShorthand" }],
     },
-    // ui factory をエイリアス（ui as u）で取り込んでも、元の名前で判定できている
+    // styled factory をエイリアス（styled as s）で取り込んでも、元の名前で判定できている
     {
-      name: "ui factory alias: import { ui as u }",
+      name: "styled factory alias: import { styled as s }",
       code: `
-        import { ui as u } from "@yamada-ui/react"
-        const App = () => <u.div padding="2" />
+        import { styled as s } from "@yamada-ui/react"
+        const App = () => <s.div padding="2" />
       `,
       output: `
-        import { ui as u } from "@yamada-ui/react"
-        const App = () => <u.div p="2" />
+        import { styled as s } from "@yamada-ui/react"
+        const App = () => <s.div p="2" />
       `,
       options: [{ preferred: "shorthand" }],
       errors: [{ messageId: "preferShorthand" }],

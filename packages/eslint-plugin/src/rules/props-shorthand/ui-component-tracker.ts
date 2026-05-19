@@ -8,7 +8,7 @@ export interface UIComponentTracker {
   visitImport: (node: TSESTree.ImportDeclaration) => void
 }
 
-const UI_FACTORY_NAME = "ui"
+const STYLED_FACTORY_NAME = "styled"
 
 export function createUIComponentTracker(
   sourcePackages: readonly string[],
@@ -22,9 +22,9 @@ export function createUIComponentTracker(
   // 「Foo.X の左端の基底名として使われる」識別子を入れる
   // matchesJSXName で <Foo.X />（= JSXMemberExpression）の左端 JSXIdentifier と照合します。
   // namespaces に入る条件は 2 パターン:
-  // 1. ui factory の import（named import 限定の特別扱い）
-  // import { ui } → "ui"
-  // import { ui as u } → "u"
+  // 1. styled factory の import（named import 限定の特別扱い）
+  // import { styled } → "styled"
+  // import { styled as s } → "s"
   // 2. default / namespace import（パッケージ全体を 1 つの名前に束ねる形）
   // import * as Y from "@yamada-ui/react" → "Y"
   // import YamadaUI from "@yamada-ui/react" → "YamadaUI"
@@ -66,9 +66,9 @@ export function createUIComponentTracker(
             ? spec.imported.name
             : spec.imported.value
 
-        if (imported === UI_FACTORY_NAME) {
-          // import { ui } / import { ui as u }
-          // ui factory は <ui.div /> のように namespace 形式で使われるので namespaces 側へ
+        if (imported === STYLED_FACTORY_NAME) {
+          // import { styled } / import { styled as s }
+          // styled factory は <styled.div /> のように namespace 形式で使われるので namespaces 側へ
           namespaces.add(spec.local.name)
         } else {
           // import { Box } / import { Box as B } / import { HStack, VStack }
@@ -88,7 +88,7 @@ export function createUIComponentTracker(
     }
   }
 
-  // JSX タグの名前部分（例: <Box /> の "Box"、<ui.div /> の "ui.div"）を表す AST ノード
+  // JSX タグの名前部分（例: <Box /> の "Box"、<styled.div /> の "styled.div"）を表す AST ノード
   // Yamada UI 由来のコンポーネントかどうかを判定して返す
   function matchesJSXName(node: TSESTree.JSXTagNameExpression): boolean {
     // JSXIdentifier — 単一の識別子で書かれているケース
@@ -98,7 +98,7 @@ export function createUIComponentTracker(
     }
 
     // JSXMemberExpression — ドットで繋がれているケース
-    // 例: <ui.div />、<Y.Box />、<A.B.C />
+    // 例: <styled.div />、<Y.Box />、<A.B.C />
     // 入れ子になることがあり、<A.B.C /> は左に伸びるツリーになる:
     //   JSXMemberExpression {
     //     object: JSXMemberExpression {
@@ -117,7 +117,7 @@ export function createUIComponentTracker(
       }
 
       // 左端が識別子なら、それが namespaces に登録された名前かを判定
-      // 例: <ui.div /> の "ui"、<Y.Box /> の "Y"
+      // 例: <styled.div /> の "styled"、<Y.Box /> の "Y"
       if (object.type === "JSXIdentifier") {
         return namespaces.has(object.name)
       }

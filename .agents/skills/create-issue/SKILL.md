@@ -108,10 +108,15 @@ Use tools to interact with the user throughout the process.
    Use this template for each issue:
 
    ```bash
+   body_file=$(mktemp)
+   cat > "$body_file" << 'EOF'
+   <issue body>
+   EOF
+
    issue_url=$(gh issue create \
      --repo yamada-ui/yamada-ui \
      --title "<title>" \
-     --body-file "<body-file>" \
+     --body-file "$body_file" \
      [--label "<label1>,<label2>"] \
      [--assignee @me])  # Only if PR intent is Yes
 

@@ -40,6 +40,22 @@ import { VisuallyHidden } from "@workspaces/ui"
 
 It is used to visually hide elements, but it is accessible in screen readers. By default, it renders a `span` element.
 
+:::tip
+Use `VisuallyHidden` when the visual UI is already clear, but assistive technology needs additional text. Common cases include icon-only controls, short status badges, or abbreviated labels that need a fuller accessible name.
+:::
+
+:::tip
+If a control only needs a short accessible name, prefer setting `aria-label` or `aria-labelledby` on that control. If the control needs help text, error text, or another description, prefer `aria-describedby` through components such as `Field.HelperMessage` or `Field.ErrorMessage`.
+:::
+
+:::tip
+Do not use `VisuallyHidden` for content that should be hidden from everyone. For icon-only buttons, use [IconButton](/docs/components/icon-button); for form guidance, use [Field](/docs/components/field); and for additional contextual help, consider [Tooltip](/docs/components/tooltip) or [Popover](/docs/components/popover).
+:::
+
+:::note
+`VisuallyHidden` keeps its children in the accessibility tree. When reviewing examples, make sure the hidden text is concise, relevant to the surrounding element, and does not duplicate an already visible label.
+:::
+
 ## Props
 
 <PropsTable name="visually-hidden" />

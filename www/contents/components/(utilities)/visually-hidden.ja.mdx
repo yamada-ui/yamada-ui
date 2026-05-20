@@ -38,6 +38,22 @@ import { VisuallyHidden } from "@workspaces/ui"
 
 視覚的に要素を隠すために使用されますが、スクリーンリーダーではアクセス可能にします。デフォルトでは、`span`要素をレンダリングします。
 
+:::tip
+`VisuallyHidden`は、視覚的なUIだけで意味が伝わる一方で、支援技術には追加のテキストが必要な場合に使用します。たとえば、アイコンのみの操作、短い状態表示、省略されたラベルに、より具体的なアクセシブルネームを追加する場合です。
+:::
+
+:::tip
+コントロールに短いアクセシブルネームだけを設定したい場合は、そのコントロールに`aria-label`または`aria-labelledby`を設定することを優先します。ヘルプテキスト、エラーテキスト、その他の説明と関連付ける場合は、`Field.HelperMessage`や`Field.ErrorMessage`などを通じて`aria-describedby`を使用します。
+:::
+
+:::tip
+すべてのユーザーから隠したいコンテンツには`VisuallyHidden`を使用しないでください。アイコンのみのボタンには[IconButton](/docs/components/icon-button)、フォームの補足には[Field](/docs/components/field)、追加の文脈的なヘルプには[Tooltip](/docs/components/tooltip)や[Popover](/docs/components/popover)を検討してください。
+:::
+
+:::note
+`VisuallyHidden`の子要素はアクセシビリティツリーに残ります。例を確認するときは、隠しテキストが短く、周囲の要素に関連しており、すでに表示されているラベルと重複していないことを確認してください。
+:::
+
 ## Props
 
 <PropsTable name="visually-hidden" />

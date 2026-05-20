@@ -79,6 +79,18 @@ import { Timeline } from "@workspaces/ui"
 </Timeline.Root>
 ```
 
+:::tip
+Use `Timeline` when you need to show events, updates, or milestones in chronological order. It works well for activity feeds, release history, and audit trails where the order of events is the main information.
+:::
+
+:::tip
+If you need to guide users through a task and show the current step, use [Steps](/docs/components/steps) instead. `Timeline` is better for reviewing what happened, not for controlling a process.
+:::
+
+:::tip
+If each item does not need a timestamp, milestone, or connector, a list or another data display component may be easier to scan. Keep each `Timeline.Item` focused on one event with a concise title and optional supporting description.
+:::
+
 ### Use Items
 
 ```tsx preview functional

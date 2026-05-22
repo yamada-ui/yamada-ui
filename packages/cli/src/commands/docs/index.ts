@@ -3,6 +3,7 @@ import ora from "ora"
 import c from "picocolors"
 import {
   buildUrl,
+  extractSections,
   fetchDoc,
   findHeadingIndex,
   trimToSection,
@@ -11,6 +12,7 @@ import {
 
 interface Options {
   lang: string
+  sections: boolean
 }
 
 async function readStdin(): Promise<string> {
@@ -57,13 +59,20 @@ function parsePath(input: string): { hash: string | undefined; path: string } {
 
 export const docs = new Command("docs")
   .description("fetch documentation from yamada-ui.com.")
-  .argument("[path]", "documentation path (e.g. /docs/components/button).")
+  .argument(
+    "[path]",
+    "documentation path (e.g. /docs/components/button#disable).",
+  )
   .addOption(
     new Option("--lang <lang>", "language.")
       .choices(["en", "ja"])
       .default("en"),
   )
-  .action(async function (pathArg: string | undefined, { lang }: Options) {
+  .option("--sections", "list section headings instead of full content.")
+  .action(async function (
+    pathArg: string | undefined,
+    { lang, sections }: Options,
+  ) {
     const spinner = ora()
 
     try {
@@ -110,7 +119,7 @@ export const docs = new Command("docs")
         }
       }
 
-      process.stdout.write(content)
+      process.stdout.write(sections ? extractSections(content) : content)
     } catch (e) {
       if (e instanceof Error) {
         spinner.fail(e.message)

@@ -23,15 +23,20 @@ function mockNotFound() {
 
 describe("docs", () => {
   let stdoutSpy: ReturnType<typeof vi.spyOn>
+  let exitSpy: ReturnType<typeof vi.spyOn>
   let isTTY: boolean | undefined
 
   beforeEach(() => {
     stdoutSpy = vi.spyOn(process.stdout, "write").mockImplementation(() => true)
+    exitSpy = vi
+      .spyOn(process, "exit")
+      .mockImplementation(() => undefined as never)
     isTTY = process.stdin.isTTY
   })
 
   afterEach(() => {
     stdoutSpy.mockRestore()
+    exitSpy.mockRestore()
     setTTY(isTTY ?? true)
   })
 
@@ -137,15 +142,28 @@ describe("docs", () => {
     )
   })
 
-  test("should show error when both stdin and argument provided", async () => {
+  test("should use path argument even in non-TTY environment", async () => {
+    mockResponse("# Button\n")
     setTTY(false)
-
-    const spinner = ora()
 
     await docs.parseAsync(["/docs/components/button"], { from: "user" })
 
-    expect(spinner.fail).toHaveBeenCalledWith(
-      "Cannot specify both a path argument and stdin input.",
+    expect(mockFetch).toHaveBeenCalledWith(
+      "https://yamada-ui.com/docs/components/button.md",
+      expect.anything(),
     )
+  })
+
+  test("should output section headings when --sections flag is given", async () => {
+    mockResponse(
+      "# Button\n\nIntro.\n\n## Usage\n\nUsage text.\n\n### Variants\n\nVariants text.\n",
+    )
+    setTTY(true)
+
+    await docs.parseAsync(["/docs/components/button", "--sections"], {
+      from: "user",
+    })
+
+    expect(stdoutSpy).toHaveBeenCalledWith("# Button\n## Usage\n### Variants")
   })
 })

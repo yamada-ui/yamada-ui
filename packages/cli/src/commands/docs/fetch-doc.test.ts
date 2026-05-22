@@ -72,7 +72,7 @@ describe("trimToSection", () => {
 
     expect(result).toMatch(/^## Usage/)
     expect(result).not.toContain("Introduction text.")
-    expect(result).toContain("Props content here.")
+    expect(result).not.toContain("Props content here.")
   })
 
   test("should match case-insensitively", () => {

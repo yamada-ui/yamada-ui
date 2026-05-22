@@ -33,6 +33,27 @@ function headingToSlug(text: string): string {
     .replace(/\s+/g, "-")
 }
 
+function extractSection(lines: string[], startIndex: number): string {
+  const headingRegex = /^#{1,6}\s+(.+)$/
+  const level = (lines[startIndex]!.match(/^(#{1,6})/)?.[1] ?? "").length
+  let end = lines.length
+
+  for (let j = startIndex + 1; j < lines.length; j++) {
+    const nextMatch = lines[j]!.match(headingRegex)
+
+    if (nextMatch) {
+      const nextLevel = (lines[j]!.match(/^(#{1,6})/)?.[1] ?? "").length
+
+      if (nextLevel <= level) {
+        end = j
+        break
+      }
+    }
+  }
+
+  return lines.slice(startIndex, end).join("\n")
+}
+
 export function trimToSection(content: string, hash: string): string {
   const slug = hash.startsWith("#") ? hash.slice(1) : hash
   const lines = content.split("\n")
@@ -42,7 +63,7 @@ export function trimToSection(content: string, hash: string): string {
     const match = lines[i]!.match(headingRegex)
 
     if (match && headingToSlug(match[1]!) === headingToSlug(slug)) {
-      return lines.slice(i).join("\n")
+      return extractSection(lines, i)
     }
   }
 

@@ -90,6 +90,13 @@ export function trimToSection(content: string, hash: string): string {
   throw new Error(`Section not found: ${c.yellow(`#${slug}`)}`)
 }
 
+export function extractSections(content: string): string {
+  return content
+    .split("\n")
+    .filter((line) => /^#{1,6}\s+/.test(line))
+    .join("\n")
+}
+
 export function trimToSectionByIndex(
   content: string,
   headingIndex: number,

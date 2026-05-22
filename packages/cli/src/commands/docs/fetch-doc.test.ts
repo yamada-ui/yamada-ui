@@ -1,6 +1,7 @@
 import fetch from "node-fetch"
 import {
   buildUrl,
+  extractSections,
   fetchDoc,
   findHeadingIndex,
   trimToSection,
@@ -55,6 +56,30 @@ describe("fetchDoc", () => {
     await expect(
       fetchDoc("https://yamada-ui.com/docs/components/nonexistent.md"),
     ).rejects.toThrow("Documentation not found:")
+  })
+})
+
+describe("extractSections", () => {
+  test("should return only heading lines joined by newlines", () => {
+    const content = [
+      "# Button",
+      "",
+      "Introduction text.",
+      "",
+      "## Usage",
+      "",
+      "Usage content.",
+      "",
+      "### Variants",
+      "",
+      "Variants content.",
+    ].join("\n")
+
+    expect(extractSections(content)).toBe("# Button\n## Usage\n### Variants")
+  })
+
+  test("should return empty string when no headings exist", () => {
+    expect(extractSections("No headings here.\nJust plain text.")).toBe("")
   })
 })
 

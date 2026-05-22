@@ -20,7 +20,14 @@ async function readStdin(): Promise<string> {
     chunks.push(chunk as Buffer)
   }
 
-  return Buffer.concat(chunks).toString().trim()
+  const text = Buffer.concat(chunks).toString()
+
+  return (
+    text
+      .split("\n")
+      .map((l) => l.trim())
+      .find((l) => l.length > 0) ?? ""
+  )
 }
 
 function parsePath(input: string): { hash: string | undefined; path: string } {

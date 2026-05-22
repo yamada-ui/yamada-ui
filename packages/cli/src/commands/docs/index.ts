@@ -117,5 +117,7 @@ export const docs = new Command("docs")
       } else {
         spinner.fail("An unknown error occurred")
       }
+
+      process.exit(1)
     }
   })

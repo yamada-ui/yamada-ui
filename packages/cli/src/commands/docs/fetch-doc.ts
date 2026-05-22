@@ -9,8 +9,9 @@ export function buildUrl(path: string | undefined, lang: string): string {
   if (!path) return "https://yamada-ui.com/llms.txt"
 
   const prefix = lang === "ja" ? "/ja" : ""
+  const normalized = path.startsWith("/") ? path : `/${path}`
 
-  return `https://yamada-ui.com${prefix}${path.replace(/\.md$/, "")}.md`
+  return `https://yamada-ui.com${prefix}${normalized.replace(/\.md$/, "")}.md`
 }
 
 export async function fetchDoc(url: string): Promise<string> {

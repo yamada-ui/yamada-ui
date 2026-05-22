@@ -34,6 +34,12 @@ describe("buildUrl", () => {
       "https://yamada-ui.com/docs/components/button.md",
     )
   })
+
+  test("should add leading slash when path does not start with /", () => {
+    expect(buildUrl("docs/components/button", "en")).toBe(
+      "https://yamada-ui.com/docs/components/button.md",
+    )
+  })
 })
 
 describe("fetchDoc", () => {
@@ -56,6 +62,30 @@ describe("fetchDoc", () => {
     await expect(
       fetchDoc("https://yamada-ui.com/docs/components/nonexistent.md"),
     ).rejects.toThrow("Documentation not found:")
+  })
+
+  test("should use proxy agent when https_proxy env variable is set", async () => {
+    vi.stubEnv("https_proxy", "http://proxy.example.com:8080")
+    vi.resetModules()
+
+    const mockFetchFn = vi.fn().mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve("content"),
+    })
+
+    vi.doMock("node-fetch", () => ({ default: mockFetchFn }))
+
+    const { fetchDoc: freshFetchDoc } = await import("./fetch-doc")
+    const result = await freshFetchDoc("https://yamada-ui.com/llms.txt")
+
+    expect(result).toBe("content")
+    expect(mockFetchFn).toHaveBeenCalledWith(
+      "https://yamada-ui.com/llms.txt",
+      expect.objectContaining({ agent: expect.anything() }),
+    )
+
+    vi.unstubAllEnvs()
+    vi.resetModules()
   })
 })
 

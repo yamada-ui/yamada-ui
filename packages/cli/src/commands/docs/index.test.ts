@@ -1,9 +1,26 @@
 import fetch from "node-fetch"
+import { Readable } from "node:stream"
 import ora from "ora"
 import { docs } from "."
 
 function setTTY(value: boolean) {
   Object.defineProperty(process.stdin, "isTTY", { configurable: true, value })
+}
+
+function mockStdinStream(text: string): () => void {
+  const descriptor = Object.getOwnPropertyDescriptor(process, "stdin")
+  const readable = Readable.from([Buffer.from(text)])
+
+  Object.defineProperty(process, "stdin", {
+    configurable: true,
+    value: readable,
+  })
+
+  return () => {
+    if (descriptor) {
+      Object.defineProperty(process, "stdin", descriptor)
+    }
+  }
 }
 
 vi.mock("node-fetch", () => ({ default: vi.fn() }))
@@ -167,6 +184,18 @@ describe("docs", () => {
     )
   })
 
+  test("should extract hash fragment from full URL", async () => {
+    mockResponse("# Button\n\n## Usage\n\nUsage text.\n")
+    setTTY(true)
+
+    await docs.parseAsync(
+      ["https://yamada-ui.com/docs/components/button#usage"],
+      { from: "user" },
+    )
+
+    expect(stdoutSpy).toHaveBeenCalledWith(expect.stringMatching(/^## Usage/))
+  })
+
   test("should show error when full URL is not from yamada-ui.com", async () => {
     setTTY(true)
 
@@ -204,5 +233,102 @@ describe("docs", () => {
     })
 
     expect(stdoutSpy).toHaveBeenCalledWith("# Button\n## Usage\n### Variants")
+  })
+
+  test("should read path from stdin when no argument given in non-TTY environment", async () => {
+    const restore = mockStdinStream("/docs/components/button\n")
+
+    mockResponse("# Button\n")
+
+    try {
+      await docs.parseAsync([], { from: "user" })
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://yamada-ui.com/docs/components/button.md",
+        expect.anything(),
+      )
+    } finally {
+      restore()
+    }
+  })
+
+  test("should fetch llms.txt when stdin provides only whitespace", async () => {
+    const restore = mockStdinStream("   \n")
+
+    mockResponse("# Index\n")
+
+    try {
+      await docs.parseAsync([], { from: "user" })
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://yamada-ui.com/llms.txt",
+        expect.anything(),
+      )
+    } finally {
+      restore()
+    }
+  })
+
+  test("should trim ja section by en heading index when lang is ja and hash given", async () => {
+    mockFetch
+      .mockResolvedValueOnce({
+        ok: true,
+        text: () =>
+          Promise.resolve(
+            "# ボタン\n\n## 使い方\n\n使い方テキスト。\n\n## Props\n\nPropsテキスト。\n",
+          ),
+      } as any)
+      .mockResolvedValueOnce({
+        ok: true,
+        text: () =>
+          Promise.resolve(
+            "# Button\n\n## Usage\n\nUsage text.\n\n## Props\n\nProps text.\n",
+          ),
+      } as any)
+
+    setTTY(true)
+
+    await docs.parseAsync(["/docs/components/button#usage", "--lang", "ja"], {
+      from: "user",
+    })
+
+    expect(stdoutSpy).toHaveBeenCalledWith(expect.stringMatching(/^## 使い方/))
+  })
+
+  test("should show error when section hash is not found in en content for ja lang lookup", async () => {
+    mockFetch
+      .mockResolvedValueOnce({
+        ok: true,
+        text: () =>
+          Promise.resolve("# ボタン\n\n## 使い方\n\n使い方テキスト。\n"),
+      } as any)
+      .mockResolvedValueOnce({
+        ok: true,
+        text: () => Promise.resolve("# Button\n\n## Usage\n\nUsage text.\n"),
+      } as any)
+
+    setTTY(true)
+
+    const spinner = ora()
+
+    await docs.parseAsync(
+      ["/docs/components/button#nonexistent", "--lang", "ja"],
+      { from: "user" },
+    )
+
+    expect(spinner.fail).toHaveBeenCalledWith(
+      expect.stringContaining("Section not found:"),
+    )
+  })
+
+  test("should show generic error message when a non-Error value is thrown", async () => {
+    mockFetch.mockRejectedValue("unexpected string error")
+    setTTY(true)
+
+    const spinner = ora()
+
+    await docs.parseAsync(["/docs/components/button"], { from: "user" })
+
+    expect(spinner.fail).toHaveBeenCalledWith("An unknown error occurred")
   })
 })

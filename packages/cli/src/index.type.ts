@@ -1,4 +1,5 @@
 import type { Dict } from "@yamada-ui/utils"
+import type { Formatter, Linter } from "./utils/toolchain"
 
 export interface SectionConfig {
   dependencies?: boolean
@@ -48,6 +49,8 @@ export interface Paths {
 
 export interface Config extends UserConfig {
   cwd: string
+  formatter: Formatter
+  linter: Linter
   paths: { theme: Paths; ui: Paths }
   getSection: (value?: string) => SectionConfigWithPaths | undefined
   getSectionPath: (section: Section) => string

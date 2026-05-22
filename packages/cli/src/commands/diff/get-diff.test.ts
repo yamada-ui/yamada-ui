@@ -8,6 +8,12 @@ function createConfig(): Config {
     $schema: "",
     cwd: "/tmp",
     format: { enabled: false },
+    formatter: {
+      name: "noop",
+      detect: () => Promise.resolve(false),
+      formatFiles: () => Promise.resolve(),
+      formatText: (content: string) => Promise.resolve(content),
+    },
     getSection: () => undefined,
     getSectionPath: (section: string) => `./${section}`,
     getSectionResolvedPath: (section: string) =>
@@ -16,6 +22,12 @@ function createConfig(): Config {
       ["components", "hooks", "providers"].includes(section),
     jsx: false,
     lint: { enabled: false },
+    linter: {
+      name: "noop",
+      detect: () => Promise.resolve(false),
+      lintFiles: () => Promise.resolve(),
+      lintText: (content: string) => Promise.resolve(content),
+    },
     monorepo: true,
     paths: {
       theme: {

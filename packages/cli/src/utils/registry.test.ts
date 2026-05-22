@@ -36,6 +36,12 @@ function createMockConfig(overrides: Partial<Config> = {}): Config {
   return {
     cwd: "/tmp",
     format: { enabled: false },
+    formatter: {
+      name: "noop",
+      detect: () => Promise.resolve(false),
+      formatFiles: () => Promise.resolve(),
+      formatText: (content) => Promise.resolve(content),
+    },
     getSection: (value?: string) => {
       if (value && ["components", "hooks", "providers"].includes(value)) {
         return {
@@ -53,6 +59,12 @@ function createMockConfig(overrides: Partial<Config> = {}): Config {
       ["components", "hooks", "providers"].includes(s),
     jsx: false,
     lint: { enabled: false },
+    linter: {
+      name: "noop",
+      detect: () => Promise.resolve(false),
+      lintFiles: () => Promise.resolve(),
+      lintText: (content) => Promise.resolve(content),
+    },
     monorepo: true,
     path: "./workspaces/ui",
     paths: {

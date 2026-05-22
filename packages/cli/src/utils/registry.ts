@@ -21,8 +21,6 @@ import {
   SECTION_NAMES,
 } from "../constant"
 import { writeFileSafe } from "./fs"
-import { lintText } from "./lint"
-import { formatText } from "./prettier"
 import {
   isJsx,
   transformExtension,
@@ -310,7 +308,7 @@ export async function transformContentWithFormatAndLint(
   config: Config,
   generatedNames: string[],
 ) {
-  const { cwd, format, jsx, lint } = config
+  const { cwd, format, formatter, jsx, lint, linter } = config
 
   content = transformContent(section, content, config, generatedNames)
 
@@ -319,12 +317,12 @@ export async function transformContentWithFormatAndLint(
       ? transformTsxToJsx(content)
       : transformTsToJs(content)
 
-  content = await lintText(content, {
+  content = await linter.lintText(content, {
     ...lint,
     cwd,
     filePath,
   })
-  content = await formatText(content, format)
+  content = await formatter.formatText(content, { ...format, cwd })
 
   return content
 }
@@ -391,12 +389,15 @@ export async function transformIndexWithFormatAndLint(
 
   if (config.jsx) content = transformTsToJs(content)
 
-  content = await lintText(content, {
+  content = await config.linter.lintText(content, {
     ...config.lint,
     cwd: config.cwd,
     filePath: config.paths.ui.index,
   })
-  content = await formatText(content, config.format)
+  content = await config.formatter.formatText(content, {
+    ...config.format,
+    cwd: config.cwd,
+  })
 
   return content
 }

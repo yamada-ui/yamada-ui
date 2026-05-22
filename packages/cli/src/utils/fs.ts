@@ -1,6 +1,10 @@
 import type { ObjectEncodingOptions } from "node:fs"
-import type { LintFilesOptions } from "./lint"
-import type { FormatOptions } from "./prettier"
+import type {
+  FormatOptions,
+  Formatter,
+  Linter,
+  LintFilesOptions,
+} from "./toolchain"
 import { execFile } from "node:child_process"
 import fs, { existsSync, statSync } from "node:fs"
 import {
@@ -14,8 +18,6 @@ import path from "node:path"
 import { promisify } from "node:util"
 import c from "picocolors"
 import { REGISTRY_FILE_NAME } from "../constant"
-import { lintFiles } from "./lint"
-import { formatFiles } from "./prettier"
 
 export const cwd = process.env.INIT_CWD ?? process.cwd()
 
@@ -37,7 +39,9 @@ export async function isWriteable(directory: string) {
 export interface WriteFileOptions extends ObjectEncodingOptions {
   cwd?: string
   format?: FormatOptions
+  formatter?: Formatter
   lint?: LintFilesOptions
+  linter?: Linter
 }
 
 export async function writeFile(
@@ -46,8 +50,16 @@ export async function writeFile(
   options: WriteFileOptions = {},
 ) {
   await originalWriteFile(path, content, options.encoding ?? "utf-8")
-  await lintFiles(path, { cwd: options.cwd ?? cwd, ...options.lint })
-  await formatFiles(path, options.format)
+  if (options.linter)
+    await options.linter.lintFiles(path, {
+      cwd: options.cwd ?? cwd,
+      ...options.lint,
+    })
+  if (options.formatter)
+    await options.formatter.formatFiles(path, {
+      cwd: options.cwd ?? cwd,
+      ...options.format,
+    })
 }
 
 export async function writeFileSafe(

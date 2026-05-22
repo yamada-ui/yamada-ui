@@ -7,6 +7,7 @@ import c from "picocolors"
 import packageJson from "../../package.json"
 import { DEFAULT_PATH, REGISTRY_FILE_NAME, SECTION_NAMES } from "../constant"
 import { getPackageManager, packageExecuteCommands } from "./package"
+import { resolveFormatter, resolveLinter } from "./toolchain"
 import { transformExtension } from "./typescript"
 
 function getPaths(rootPath: string, jsx?: boolean) {
@@ -131,13 +132,20 @@ export async function getConfig(
       }
     }
 
+    const [formatter, linter] = await Promise.all([
+      resolveFormatter(cwd),
+      resolveLinter(cwd),
+    ])
+
     return {
       ...userConfig,
       cwd,
+      formatter,
       getSection,
       getSectionPath,
       getSectionResolvedPath,
       isSection,
+      linter,
       paths,
     }
   } catch {

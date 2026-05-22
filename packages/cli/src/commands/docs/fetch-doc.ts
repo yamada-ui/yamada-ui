@@ -1,5 +1,6 @@
 import { HttpsProxyAgent } from "https-proxy-agent"
 import fetch from "node-fetch"
+import c from "picocolors"
 
 const proxyUrl = process.env.https_proxy ?? process.env.HTTPS_PROXY
 const agent = proxyUrl ? new HttpsProxyAgent(proxyUrl) : undefined
@@ -18,7 +19,7 @@ export async function fetchDoc(url: string): Promise<string> {
   if (!res.ok) {
     const docPath = new URL(url).pathname.replace(/\.md$/, "")
 
-    throw new Error(`Documentation not found: ${docPath}`)
+    throw new Error(`Documentation not found: ${c.yellow(docPath)}`)
   }
 
   return res.text()
@@ -45,5 +46,5 @@ export function trimToSection(content: string, hash: string): string {
     }
   }
 
-  throw new Error(`Section not found: #${slug}`)
+  throw new Error(`Section not found: ${c.yellow(`#${slug}`)}`)
 }

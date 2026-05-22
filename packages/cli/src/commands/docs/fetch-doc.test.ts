@@ -48,7 +48,7 @@ describe("fetchDoc", () => {
 
     await expect(
       fetchDoc("https://yamada-ui.com/docs/components/nonexistent.md"),
-    ).rejects.toThrow("Documentation not found: /docs/components/nonexistent")
+    ).rejects.toThrow("Documentation not found:")
   })
 })
 
@@ -85,7 +85,7 @@ describe("trimToSection", () => {
 
   test("should throw when section is not found", () => {
     expect(() => trimToSection(content, "nonexistent")).toThrow(
-      "Section not found: #nonexistent",
+      "Section not found:",
     )
   })
 })

@@ -1,5 +1,6 @@
 import { Command, Option } from "commander"
 import ora from "ora"
+import c from "picocolors"
 import { buildUrl, fetchDoc, trimToSection } from "./fetch-doc"
 
 interface Options {
@@ -22,7 +23,7 @@ function parsePath(input: string): { hash: string | undefined; path: string } {
 
     if (url.hostname !== "yamada-ui.com") {
       throw new Error(
-        `Invalid URL: only yamada-ui.com URLs are supported, got ${url.hostname}`,
+        `Invalid URL: only ${c.cyan("yamada-ui.com")} URLs are supported, got ${c.yellow(url.hostname)}`,
       )
     }
 
@@ -42,10 +43,10 @@ function parsePath(input: string): { hash: string | undefined; path: string } {
 }
 
 export const docs = new Command("docs")
-  .description("fetch documentation from the Yamada UI documentation site.")
-  .argument("[path]", "documentation path (e.g. /docs/components/button)")
+  .description("fetch documentation from yamada-ui.com.")
+  .argument("[path]", "documentation path (e.g. /docs/components/button).")
   .addOption(
-    new Option("--lang <lang>", "language: en | ja")
+    new Option("--lang <lang>", "language.")
       .choices(["en", "ja"])
       .default("en"),
   )

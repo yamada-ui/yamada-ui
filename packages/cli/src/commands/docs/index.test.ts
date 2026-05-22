@@ -92,7 +92,7 @@ describe("docs", () => {
     await docs.parseAsync(["/docs/components/nonexistent"], { from: "user" })
 
     expect(spinner.fail).toHaveBeenCalledWith(
-      "Documentation not found: /docs/components/nonexistent",
+      expect.stringContaining("Documentation not found:"),
     )
   })
 
@@ -106,7 +106,9 @@ describe("docs", () => {
       from: "user",
     })
 
-    expect(spinner.fail).toHaveBeenCalledWith("Section not found: #nonexistent")
+    expect(spinner.fail).toHaveBeenCalledWith(
+      expect.stringContaining("Section not found:"),
+    )
   })
 
   test("should show spinner while fetching documentation", async () => {

@@ -78,7 +78,7 @@ export const docs = new Command("docs")
     try {
       const isStdin = !process.stdin.isTTY && pathArg === undefined
 
-      let rawInput: string | undefined = pathArg
+      let rawInput: string | undefined = pathArg?.trim() || undefined
 
       if (isStdin) {
         const stdinText = await readStdin()
@@ -92,8 +92,14 @@ export const docs = new Command("docs")
       if (rawInput) {
         const parsed = parsePath(rawInput)
 
-        docPath = parsed.path
+        docPath = parsed.path || undefined
         hash = parsed.hash
+      }
+
+      if (hash && !docPath) {
+        throw new Error(
+          `A documentation path is required when specifying a section hash: ${c.yellow(`#${hash}`)}`,
+        )
       }
 
       const url = buildUrl(docPath, lang)

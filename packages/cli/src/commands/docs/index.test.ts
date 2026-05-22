@@ -88,6 +88,30 @@ describe("docs", () => {
     expect(stdoutSpy).toHaveBeenCalledWith(expect.stringMatching(/^## Usage/))
   })
 
+  test("should treat whitespace-only argument as no argument and fetch llms.txt", async () => {
+    mockResponse("# Index\n")
+    setTTY(true)
+
+    await docs.parseAsync(["   "], { from: "user" })
+
+    expect(mockFetch).toHaveBeenCalledWith(
+      "https://yamada-ui.com/llms.txt",
+      expect.anything(),
+    )
+  })
+
+  test("should show error when hash given without a path", async () => {
+    setTTY(true)
+
+    const spinner = ora()
+
+    await docs.parseAsync(["#usage"], { from: "user" })
+
+    expect(spinner.fail).toHaveBeenCalledWith(
+      expect.stringContaining("A documentation path is required"),
+    )
+  })
+
   test("should show error when path not found", async () => {
     mockNotFound()
     setTTY(true)

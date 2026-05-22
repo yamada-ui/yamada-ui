@@ -1,7 +1,13 @@
 import { Command, Option } from "commander"
 import ora from "ora"
 import c from "picocolors"
-import { buildUrl, fetchDoc, trimToSection } from "./fetch-doc"
+import {
+  buildUrl,
+  fetchDoc,
+  findHeadingIndex,
+  trimToSection,
+  trimToSectionByIndex,
+} from "./fetch-doc"
 
 interface Options {
   lang: string
@@ -87,7 +93,18 @@ export const docs = new Command("docs")
       spinner.succeed("Fetched documentation")
 
       if (hash) {
-        content = trimToSection(content, hash)
+        if (lang === "en") {
+          content = trimToSection(content, hash)
+        } else {
+          const enContent = await fetchDoc(buildUrl(docPath, "en"))
+          const idx = findHeadingIndex(enContent, hash)
+
+          if (idx === -1) {
+            throw new Error(`Section not found: ${c.yellow(`#${hash}`)}`)
+          }
+
+          content = trimToSectionByIndex(content, idx, hash)
+        }
       }
 
       process.stdout.write(content)

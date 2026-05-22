@@ -54,6 +54,25 @@ function extractSection(lines: string[], startIndex: number): string {
   return lines.slice(startIndex, end).join("\n")
 }
 
+export function findHeadingIndex(content: string, hash: string): number {
+  const slug = hash.startsWith("#") ? hash.slice(1) : hash
+  const lines = content.split("\n")
+  const headingRegex = /^#{1,6}\s+(.+)$/
+  let headingIndex = 0
+
+  for (let i = 0; i < lines.length; i++) {
+    const match = lines[i]!.match(headingRegex)
+
+    if (match) {
+      if (headingToSlug(match[1]!) === headingToSlug(slug)) return headingIndex
+
+      headingIndex++
+    }
+  }
+
+  return -1
+}
+
 export function trimToSection(content: string, hash: string): string {
   const slug = hash.startsWith("#") ? hash.slice(1) : hash
   const lines = content.split("\n")
@@ -68,4 +87,26 @@ export function trimToSection(content: string, hash: string): string {
   }
 
   throw new Error(`Section not found: ${c.yellow(`#${slug}`)}`)
+}
+
+export function trimToSectionByIndex(
+  content: string,
+  headingIndex: number,
+  hash: string,
+): string {
+  const lines = content.split("\n")
+  const headingRegex = /^#{1,6}\s+(.+)$/
+  let currentIndex = 0
+
+  for (let i = 0; i < lines.length; i++) {
+    const match = lines[i]!.match(headingRegex)
+
+    if (match) {
+      if (currentIndex === headingIndex) return extractSection(lines, i)
+
+      currentIndex++
+    }
+  }
+
+  throw new Error(`Section not found: ${c.yellow(`#${hash}`)}`)
 }

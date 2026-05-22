@@ -67,11 +67,7 @@ export const docs = new Command("docs")
     const spinner = ora()
 
     try {
-      const isStdin = !process.stdin.isTTY
-
-      if (isStdin && pathArg !== undefined) {
-        throw new Error("Cannot specify both a path argument and stdin input.")
-      }
+      const isStdin = !process.stdin.isTTY && pathArg === undefined
 
       let rawInput: string | undefined = pathArg
 

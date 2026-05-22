@@ -128,6 +128,21 @@ describe("docs", () => {
     expect(spinner.succeed).toHaveBeenCalledWith("Fetched documentation")
   })
 
+  test("should strip language prefix from full URL pathname", async () => {
+    mockResponse("# Button\n")
+    setTTY(true)
+
+    await docs.parseAsync(
+      ["https://yamada-ui.com/ja/docs/components/button", "--lang", "ja"],
+      { from: "user" },
+    )
+
+    expect(mockFetch).toHaveBeenCalledWith(
+      "https://yamada-ui.com/ja/docs/components/button.md",
+      expect.anything(),
+    )
+  })
+
   test("should show error when full URL is not from yamada-ui.com", async () => {
     setTTY(true)
 

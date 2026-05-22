@@ -44,7 +44,7 @@ function parsePath(input: string): { hash: string | undefined; path: string } {
 
     return {
       hash: url.hash ? url.hash.slice(1) : undefined,
-      path: url.pathname,
+      path: url.pathname.replace(/^\/(ja|en)(?=\/)/, ""),
     }
   }
 

@@ -9,7 +9,7 @@ export function buildUrl(path: string | undefined, lang: string): string {
 
   const prefix = lang === "ja" ? "/ja" : ""
 
-  return `https://yamada-ui.com${prefix}${path}.md`
+  return `https://yamada-ui.com${prefix}${path.replace(/\.md$/, "")}.md`
 }
 
 export async function fetchDoc(url: string): Promise<string> {

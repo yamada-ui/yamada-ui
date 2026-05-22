@@ -21,6 +21,12 @@ describe("buildUrl", () => {
       "https://yamada-ui.com/ja/docs/components/button.md",
     )
   })
+
+  test("should not double-append .md when path already ends with .md", () => {
+    expect(buildUrl("/docs/components/button.md", "en")).toBe(
+      "https://yamada-ui.com/docs/components/button.md",
+    )
+  })
 })
 
 describe("fetchDoc", () => {

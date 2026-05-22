@@ -1,4 +1,4 @@
-import { Command } from "commander"
+import { Command, Option } from "commander"
 import ora from "ora"
 import { buildUrl, fetchDoc, trimToSection } from "./fetch-doc"
 
@@ -20,6 +20,12 @@ function parsePath(input: string): { hash: string | undefined; path: string } {
   if (input.startsWith("http://") || input.startsWith("https://")) {
     const url = new URL(input)
 
+    if (url.hostname !== "yamada-ui.com") {
+      throw new Error(
+        `Invalid URL: only yamada-ui.com URLs are supported, got ${url.hostname}`,
+      )
+    }
+
     return {
       hash: url.hash ? url.hash.slice(1) : undefined,
       path: url.pathname,
@@ -38,7 +44,11 @@ function parsePath(input: string): { hash: string | undefined; path: string } {
 export const docs = new Command("docs")
   .description("fetch documentation from the Yamada UI documentation site.")
   .argument("[path]", "documentation path (e.g. /docs/components/button)")
-  .option("--lang <lang>", "language: en | ja", "en")
+  .addOption(
+    new Option("--lang <lang>", "language: en | ja")
+      .choices(["en", "ja"])
+      .default("en"),
+  )
   .action(async function (pathArg: string | undefined, { lang }: Options) {
     const spinner = ora()
 
@@ -68,7 +78,12 @@ export const docs = new Command("docs")
       }
 
       const url = buildUrl(docPath, lang)
+
+      spinner.start("Fetching documentation")
+
       let content = await fetchDoc(url)
+
+      spinner.succeed("Fetched documentation")
 
       if (hash) {
         content = trimToSection(content, hash)

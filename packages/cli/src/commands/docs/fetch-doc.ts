@@ -1,9 +1,8 @@
 import { HttpsProxyAgent } from "https-proxy-agent"
 import fetch from "node-fetch"
 
-const agent = process.env.https_proxy
-  ? new HttpsProxyAgent(process.env.https_proxy)
-  : undefined
+const proxyUrl = process.env.https_proxy ?? process.env.HTTPS_PROXY
+const agent = proxyUrl ? new HttpsProxyAgent(proxyUrl) : undefined
 
 export function buildUrl(path: string | undefined, lang: string): string {
   if (!path) return "https://yamada-ui.com/llms.txt"

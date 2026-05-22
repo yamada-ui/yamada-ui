@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
 import type { DatePickerFormat } from "./"
-import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
+import { PropsTable } from "#storybook"
 import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { Box } from "../box"
 import { Button } from "../button"
@@ -28,12 +28,7 @@ const meta: Meta<typeof DatePicker> = {
 export default meta
 
 export const Basic: Story = () => {
-  return (
-    <>
-      <DatePicker />
-      <DatePicker />
-    </>
-  )
+  return <DatePicker />
 }
 
 export const Variant: Story = () => {

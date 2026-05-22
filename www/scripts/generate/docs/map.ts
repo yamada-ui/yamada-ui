@@ -1,14 +1,14 @@
 /* eslint-disable perfectionist/sort-objects */
 
-import type { Doc } from "#velite"
 import type { Dict } from "@yamada-ui/react"
+import type { Doc } from "#velite"
 import type { DocMap } from "@/data"
 import type { Lang } from "@/utils/i18n"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { readFile } from "fs/promises"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import { createTranslator } from "next-intl"
-import path from "path"
-import { pathToFileURL } from "url"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
+import { pathToFileURL } from "node:url"
 import { getLang, langs } from "@/utils/i18n"
 import { getPathname } from "@/utils/route"
 
@@ -32,7 +32,7 @@ async function getDocMap(): Promise<{ [key in Lang]: DocMap }> {
           items: [],
         }
 
-        await writeFileWithFormat(filePath, data, { parser: "json" })
+        await writeFileWithFormat(filePath, data)
 
         return [lang, data]
       }
@@ -47,7 +47,7 @@ async function setDocMap(docMap: { [key in Lang]: DocMap }) {
     Object.entries(docMap).map(async ([lang, data]) => {
       const filePath = path.join(DATA_PATH, `doc-map.${lang}.json`)
 
-      await writeFileWithFormat(filePath, data, { parser: "json" })
+      await writeFileWithFormat(filePath, data)
     }),
   )
 }
@@ -85,7 +85,7 @@ export async function generateDocMap(docs: Doc[]) {
       omittedPath.endsWith("/index")
         ? omittedPath.replace(/\/index$/, "")
         : omittedPath
-    )!.split("/")
+    ).split("/")
     const items = docMap[lang].items!
 
     slug.reduce((prev, segment, index) => {

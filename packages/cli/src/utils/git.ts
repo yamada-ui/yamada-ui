@@ -1,5 +1,5 @@
-import { rmSync } from "fs"
-import path from "path"
+import { rmSync } from "node:fs"
+import path from "node:path"
 import { execFileAsync } from "./fs"
 
 export async function isInGitRepo(): Promise<boolean> {

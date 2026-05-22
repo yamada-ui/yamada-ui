@@ -8,10 +8,10 @@ import type {
   Source,
 } from "../index.type"
 import { merge } from "@yamada-ui/utils"
-import { readdir, readFile } from "fs/promises"
 import { HttpsProxyAgent } from "https-proxy-agent"
 import fetch from "node-fetch"
-import path from "path"
+import { readdir, readFile } from "node:fs/promises"
+import path from "node:path"
 import c from "picocolors"
 import {
   PACKAGE_NAME,

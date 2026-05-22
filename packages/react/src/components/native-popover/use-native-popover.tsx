@@ -1,15 +1,14 @@
 "use client"
 
 import type { MouseEvent, RefObject } from "react"
-import type { Direction, PropGetter } from "../../core"
+import type { PropGetter } from "../../core"
 import type { UsePopperProps } from "../../hooks/use-popper"
 import { useCallback, useId, useRef } from "react"
-import { useEnvironment } from "../../core"
+import { mergeProps, useEnvironment } from "../../core"
 import { usePopper } from "../../hooks/use-popper"
 import {
   ariaAttr,
   assignRef,
-  cx,
   dataAttr,
   handlerAll,
   mergeRefs,
@@ -27,7 +26,7 @@ export interface UseNativePopoverProps extends UsePopperProps<"button"> {
    *
    * @default 'end'
    */
-  placement?: Direction
+  placement?: UsePopperProps["placement"]
   /**
    * The mode of the popover.
    *
@@ -141,26 +140,23 @@ export const useNativePopover = ({
   )
 
   const getContentProps: PropGetter = useCallback(
-    ({
-      ref,
-      "aria-describedby": ariaDescribedby,
-      "aria-labelledby": ariaLabelledby,
-      ...props
-    } = {}) => {
+    (props = {}) => {
       const hasHeader = !!getDocument()?.getElementById(headerId)
       const hasBody = !!getDocument()?.getElementById(bodyId)
 
-      return {
-        id: contentId,
-        "aria-describedby": cx(ariaDescribedby, hasBody ? bodyId : undefined),
-        "aria-labelledby": cx(ariaLabelledby, hasHeader ? headerId : undefined),
-        "data-popup": dataAttr(true),
-        popover: popover === true ? "" : popover,
-        role: "dialog",
-        tabIndex: -1,
-        ...props,
-        ref: mergeRefs(ref, contentRef),
-      }
+      return mergeProps(
+        {
+          id: contentId,
+          ref: contentRef,
+          "aria-describedby": hasBody ? bodyId : undefined,
+          "aria-labelledby": hasHeader ? headerId : undefined,
+          "data-popup": dataAttr(true),
+          popover: popover === true ? "" : popover,
+          role: "dialog",
+          tabIndex: -1,
+        },
+        props,
+      )()
     },
     [getDocument, headerId, bodyId, contentId, popover],
   )

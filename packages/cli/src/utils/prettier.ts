@@ -1,7 +1,7 @@
 import type { BuiltInParserName } from "prettier"
 import type { FormatConfig } from "../index.type"
 import { toArray } from "@yamada-ui/utils"
-import { readFile, writeFile } from "fs/promises"
+import { readFile, writeFile } from "node:fs/promises"
 import { format as prettier, resolveConfig, resolveConfigFile } from "prettier"
 
 export interface FormatOptions extends FormatConfig {

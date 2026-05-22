@@ -66,7 +66,7 @@
       },
       "solid": {
         "bg": "colorScheme.solid",
-        "border": "1px solid transparent",
+        "borderColor": "transparent",
         "color": "colorScheme.contrast"
       },
       "solid.hover": {
@@ -74,7 +74,7 @@
       },
       "subtle": {
         "bg": "colorScheme.subtle",
-        "border": "1px solid transparent",
+        "borderColor": "transparent",
         "color": "colorScheme.fg"
       },
       "subtle.hover": {
@@ -1078,7 +1078,7 @@
         "muted": ["black.100", "white.200"],
         "overlay": "blackAlpha.600",
         "panel": ["black.bg", "white.bg"],
-        "subtle": ["black.50", "white.100"],
+        "subtle": ["black.50", "white.200/50"],
         "success": ["success.50", "success.950"],
         "warning": ["warning.50", "warning.950"]
       },
@@ -1106,7 +1106,7 @@
       },
       "black": {
         "base": "#0a0b0b",
-        "bg": "#f8f8f8",
+        "bg": "#fbfbfb",
         "contrast": "white",
         "emphasized": "black.200",
         "fg": "black.800",

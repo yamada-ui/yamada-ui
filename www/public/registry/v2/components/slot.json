@@ -10,7 +10,7 @@
   "sources": [
     {
       "name": "index.ts",
-      "content": "export { Slot as Root, Slot, Slottable } from \"./slot\"\nexport type { SlotProps } from \"./slot\"\n"
+      "content": "export { Slot, Slottable } from \"./slot\"\nexport type { SlotProps } from \"./slot\"\n"
     },
     {
       "name": "slot.tsx",

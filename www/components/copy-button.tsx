@@ -17,10 +17,14 @@ export interface CopyButtonProps extends ButtonProps {
 
 export function CopyButton({ value, onClick, ...rest }: CopyButtonProps) {
   const t = useTranslations("component.copyButton")
-  const { copied, onCopy } = useClipboard(value, 4000)
+  const { copied, onCopy } = useClipboard(value)
 
   return (
-    <Tooltip content={copied ? t("copied") : t("copy")} placement="start">
+    <Tooltip
+      closeOnClick={false}
+      content={copied ? t("copied") : t("copy")}
+      placement="start"
+    >
       <IconButton
         size={{ base: "sm", md: "xs" }}
         variant="ghost"

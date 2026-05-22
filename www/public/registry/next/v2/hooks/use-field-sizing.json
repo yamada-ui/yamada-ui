@@ -1,0 +1,22 @@
+{
+  "$schema": "https://yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": { "components": ["date-picker"], "hooks": [], "providers": [] },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.test.browser.tsx",
+      "content": "import type { FC } from \"react\"\nimport { page, render } from \"#test/browser\"\nimport { useFieldSizing } from \"./\"\n\nconst Component: FC<{ value?: string }> = ({ value }) => {\n  const { ref, text } = useFieldSizing<HTMLInputElement>({ value })\n\n  return (\n    <div data-testid=\"field-sizing-root\">\n      <input ref={ref} aria-label=\"field sizing input\" data-testid=\"input\" />\n      {text}\n    </div>\n  )\n}\n\ndescribe(\"useFieldSizing\", () => {\n  test(\"uses empty string as default value\", async () => {\n    await render(<Component />)\n\n    const input = page.getByTestId(\"input\")\n\n    await expect.element(input).toHaveStyle({ width: \"0px\" })\n  })\n\n  test(\"sets input width from text bounding rect\", async () => {\n    await render(<Component value=\"hello\" />)\n\n    const inputWidth = Number.parseFloat(\n      page.getByTestId(\"input\").element().style.width,\n    )\n    const spanWidth = page\n      .getByText(\"hello\")\n      .element()\n      .getBoundingClientRect().width\n\n    expect(inputWidth).toBeCloseTo(spanWidth, 3)\n  })\n\n  test(\"updates width when value changes\", async () => {\n    const { rerender } = await render(<Component value=\"hi\" />)\n    const input = page.getByTestId(\"input\")\n    const beforeSpanWidth = page\n      .getByText(\"hi\")\n      .element()\n      .getBoundingClientRect().width\n\n    rerender(<Component value=\"hello world\" />)\n\n    await vi.waitFor(() => {\n      const afterWidth = Number.parseFloat(input.element().style.width)\n      const afterSpanWidth = page\n        .getByText(\"hello world\")\n        .element()\n        .getBoundingClientRect().width\n\n      expect(afterWidth).toBeCloseTo(afterSpanWidth, 3)\n      expect(afterWidth).toBeGreaterThan(beforeSpanWidth)\n    })\n  })\n})\n"
+    },
+    {
+      "name": "index.tsx",
+      "content": "\"use client\"\n\nimport { useEffect, useMemo, useRef } from \"react\"\n\nexport interface UseFieldSizingProps {\n  value?: string\n}\n\nexport const useFieldSizing = <Y extends HTMLElement>({\n  value = \"\",\n}: UseFieldSizingProps) => {\n  const ref = useRef<Y>(null)\n  const textRef = useRef<HTMLSpanElement>(null)\n  const text = useMemo(\n    () => (\n      <span\n        ref={textRef}\n        style={{\n          opacity: 0,\n          overflow: \"hidden\",\n          position: \"absolute\",\n          whiteSpace: \"nowrap\",\n          zIndex: -1,\n        }}\n        aria-hidden\n      >\n        {value}\n      </span>\n    ),\n    [value],\n  )\n\n  useEffect(() => {\n    if (!textRef.current) return\n\n    const { width } = textRef.current.getBoundingClientRect()\n\n    if (ref.current) ref.current.style.width = `${width}px`\n  }, [value])\n\n  return { ref, text }\n}\n\nexport type UseFieldSizingReturn = ReturnType<typeof useFieldSizing>\n"
+    }
+  ],
+  "tag": "next"
+}

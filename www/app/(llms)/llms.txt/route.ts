@@ -16,7 +16,7 @@ const descriptions = Object.fromEntries(
     .filter(({ locale }) => locale === CONSTANTS.I18N.DEFAULT_LOCALE)
     .map(({ description, pathname }) => [pathname, description]),
 )
-const excludedItems = docMap.items!.filter(
+const excludedItems = docMap.items.filter(
   ({ segment }) => !CONSTANTS.LLMS.EXCLUDE.includes(segment),
 )
 const content = [

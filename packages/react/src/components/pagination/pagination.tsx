@@ -11,7 +11,7 @@ import type { ReactNodeOrFunction } from "../../utils"
 import type { PaginationStyle } from "./pagination.style"
 import type { Page, UsePaginationProps } from "./use-pagination"
 import { cloneElement, isValidElement, useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { useI18n } from "../../providers/i18n-provider"
 import { isNumber, runIfFn } from "../../utils"
 import { ButtonGroup } from "../button"
@@ -194,8 +194,7 @@ export const PaginationRoot = withProvider<
             <PaginationStartTrigger>
               <PaginationItem
                 icon={<ChevronsLeftIcon />}
-                {...edgeProps}
-                {...edgeStartProps}
+                {...mergeProps(edgeProps, edgeStartProps)()}
               />
             </PaginationStartTrigger>,
           )
@@ -204,8 +203,7 @@ export const PaginationRoot = withProvider<
             <PaginationPrevTrigger>
               <PaginationItem
                 icon={<ChevronLeftIcon />}
-                {...controlProps}
-                {...controlPrevProps}
+                {...mergeProps(controlProps, controlPrevProps)()}
               />
             </PaginationPrevTrigger>,
           )
@@ -233,8 +231,7 @@ export const PaginationRoot = withProvider<
             <PaginationNextTrigger>
               <PaginationItem
                 icon={<ChevronRightIcon />}
-                {...controlProps}
-                {...controlNextProps}
+                {...mergeProps(controlProps, controlNextProps)()}
               />
             </PaginationNextTrigger>,
           )
@@ -243,8 +240,7 @@ export const PaginationRoot = withProvider<
             <PaginationEndTrigger>
               <PaginationItem
                 icon={<ChevronsRightIcon />}
-                {...edgeProps}
-                {...edgeEndProps}
+                {...mergeProps(edgeProps, edgeEndProps)()}
               />
             </PaginationEndTrigger>,
           )
@@ -375,7 +371,7 @@ export interface PaginationStartTriggerProps extends HTMLStyledProps<"button"> {
 export const PaginationStartTrigger = withContext<
   "button",
   PaginationStartTriggerProps
->("button", { name: "startTrigger", slot: ["trigger", "start"] })(
+>("button", { name: "StartTrigger", slot: ["trigger", "start"] })(
   undefined,
   (props) => {
     const { getStartTriggerProps } = usePaginationContext()
@@ -389,7 +385,7 @@ export interface PaginationEndTriggerProps extends HTMLStyledProps<"button"> {}
 export const PaginationEndTrigger = withContext<
   "button",
   PaginationEndTriggerProps
->("button", { name: "endTrigger", slot: ["trigger", "end"] })(
+>("button", { name: "EndTrigger", slot: ["trigger", "end"] })(
   undefined,
   (props) => {
     const { getEndTriggerProps } = usePaginationContext()
@@ -403,7 +399,7 @@ export interface PaginationPrevTriggerProps extends HTMLStyledProps<"button"> {}
 export const PaginationPrevTrigger = withContext<
   "button",
   PaginationPrevTriggerProps
->("button", { name: "prevTrigger", slot: ["trigger", "prev"] })(
+>("button", { name: "PrevTrigger", slot: ["trigger", "prev"] })(
   undefined,
   (props) => {
     const { getPrevTriggerProps } = usePaginationContext()
@@ -417,7 +413,7 @@ export interface PaginationNextTriggerProps extends HTMLStyledProps<"button"> {}
 export const PaginationNextTrigger = withContext<
   "button",
   PaginationNextTriggerProps
->("button", { name: "nextTrigger", slot: ["trigger", "next"] })(
+>("button", { name: "NextTrigger", slot: ["trigger", "next"] })(
   undefined,
   (props) => {
     const { getNextTriggerProps } = usePaginationContext()

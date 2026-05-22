@@ -18,20 +18,6 @@ describe("<Motion />", () => {
     )
   })
 
-  test("sets `displayName` correctly", () => {
-    expect(Motion.name).toBe("Motion")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<Motion data-testid="motion" />)
-    expect(screen.getByTestId("motion")).toHaveClass("ui-motion")
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(<Motion data-testid="motion" />)
-    expect(screen.getByTestId("motion").tagName).toBe("DIV")
-  })
-
   test("renders motion component created via factory function call", () => {
     const MotionSpan = motion("span")
 

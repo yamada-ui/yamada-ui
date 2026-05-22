@@ -1,8 +1,8 @@
 import type { Config, Section, UserConfig } from "../index.type"
 import { isUndefined } from "@yamada-ui/utils"
-import { existsSync } from "fs"
-import { readFile } from "fs/promises"
-import path from "path"
+import { existsSync } from "node:fs"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
 import c from "picocolors"
 import packageJson from "../../package.json"
 import { DEFAULT_PATH, REGISTRY_FILE_NAME, SECTION_NAMES } from "../constant"
@@ -93,7 +93,7 @@ export async function getConfig(
     function getSectionPath(section: Section) {
       let path = userConfig[section]?.path ?? DEFAULT_PATH[section]
 
-      if (path.startsWith("/")) path = `./${path}`
+      if (path.startsWith("/")) path = `.${path}`
       if (!path.startsWith("./")) path = `./${path}`
 
       return path

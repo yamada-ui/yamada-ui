@@ -1,6 +1,6 @@
 import { isUndefined } from "@yamada-ui/utils"
 import { Command } from "commander"
-import { existsSync } from "fs"
+import { existsSync } from "node:fs"
 import ora from "ora"
 import c from "picocolors"
 import prompts from "prompts"

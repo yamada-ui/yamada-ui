@@ -39,7 +39,7 @@ describe("usePromiseDisclosure", () => {
     let promise: Promise<void>
 
     act(() => {
-      promise = result.current.onOpen() as Promise<void>
+      promise = result.current.onOpen()
     })
 
     expect(result.current.open).toBeTruthy()

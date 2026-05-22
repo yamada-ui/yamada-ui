@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { PropsTable } from "#storybook"
 import { useMemo } from "react"
+import { PropsTable } from "#storybook"
 import { RadarChart } from "."
 import { COLOR_SCHEMES, isString, toTitleCase } from "../../utils"
 
@@ -186,7 +186,11 @@ export const Legend: Story = () => {
         "start-center",
         "start-end",
         "center-start",
+        "center-start-start",
+        "center-start-end",
         "center-end",
+        "center-end-start",
+        "center-end-end",
         "end-start",
         "end-center",
         "end-end",

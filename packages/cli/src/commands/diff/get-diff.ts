@@ -9,7 +9,7 @@ import type { RegistryMap } from "./get-registries-and-files"
 import { isUndefined } from "@yamada-ui/utils"
 import { diffLines } from "diff"
 import { Listr } from "listr2"
-import path from "path"
+import path from "node:path"
 import c from "picocolors"
 import {
   getPackageName,

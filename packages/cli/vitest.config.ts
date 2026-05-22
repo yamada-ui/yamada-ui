@@ -1,5 +1,5 @@
+import { mergeConfig } from "@yamada-ui/workspace/vitest"
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
-import { mergeConfig } from "vitest/config"
 
 export default mergeConfig(sharedConfig, {
   test: {

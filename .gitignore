@@ -1,6 +1,8 @@
+# worktree
+.worktrees
+
 # pnpm
 .pnpm-store
-node-jiti
 
 # dependencies
 node_modules
@@ -9,7 +11,6 @@ node_modules
 storybook-static
 coverage
 __screenshots__
-!scripts/issue/coverage
 report.json
 trace
 dist
@@ -36,7 +37,6 @@ yarn-error.log*
 next-env.d.ts
 
 # cache
-.eslintcache
 .turbo
 .next
 .vitest-attachments

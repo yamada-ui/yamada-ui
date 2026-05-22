@@ -4,18 +4,17 @@ import type { ChangeEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   ariaAttr,
   createContext,
-  cx,
   dataAttr,
   handlerAll,
   isNumber,
   isObject,
   isString,
   isUndefined,
-  mergeRefs,
   visuallyHiddenAttributes,
 } from "../../utils"
 import { useFieldProps } from "../field"
@@ -70,7 +69,7 @@ export const useCheckboxGroup = <Y extends string = string>(
       onChange: onChangeProp,
       ...rest
     },
-    ariaProps: { "aria-describedby": ariaDescribedbyProp, ...ariaProps },
+    ariaProps: { "aria-describedby": ariaDescribedby, ...ariaProps },
     dataProps,
     eventProps,
   } = useFieldProps(props)
@@ -101,21 +100,18 @@ export const useCheckboxGroup = <Y extends string = string>(
   )
 
   const getRootProps: PropGetter = useCallback(
-    ({
-      ref,
-      "aria-describedby": ariaDescribedby,
-      "aria-labelledby": ariaLabelledby,
-      ...props
-    } = {}) => ({
-      ...dataProps,
-      "aria-describedby": cx(ariaDescribedbyProp, ariaDescribedby),
-      "aria-labelledby": cx(labelId, ariaLabelledby),
-      role: "group",
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref),
-    }),
-    [ariaDescribedbyProp, dataProps, labelId, rest],
+    (props = {}) =>
+      mergeProps(
+        dataProps,
+        {
+          "aria-describedby": ariaDescribedby,
+          "aria-labelledby": labelId,
+          role: "group",
+        },
+        rest,
+        props,
+      )(),
+    [ariaDescribedby, dataProps, labelId, rest],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
@@ -136,10 +132,10 @@ export const useCheckboxGroup = <Y extends string = string>(
         "data-checked": dataAttr(checked),
         "data-disabled": dataAttr(trulyDisabled),
         checked,
-        disabled: trulyDisabled,
         readOnly,
         required,
         ...props,
+        disabled: Boolean(props.disabled || trulyDisabled),
         onBlur: handlerAll(props.onBlur, eventProps.onBlur),
         onChange: handlerAll(props.onChange, onChange),
         onFocus: handlerAll(props.onFocus, eventProps.onFocus),

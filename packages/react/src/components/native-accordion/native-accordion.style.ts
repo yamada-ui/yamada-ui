@@ -48,7 +48,10 @@ export const nativeAccordionStyle = defineComponentSlotStyle({
           gridTemplateRows: "0fr",
           transitionDuration: "slow",
           transitionProperty: "grid-template-rows",
-          _groupOpen: { gridTemplateRows: "1fr" },
+          _groupOpen: {
+            gridTemplateRows: "1fr",
+            _startingStyle: { gridTemplateRows: "0fr" },
+          },
         },
       },
     },

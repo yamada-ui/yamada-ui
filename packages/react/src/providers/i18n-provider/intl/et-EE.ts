@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Sulge tegevusriba",
+    "Open action bar": "Ava tegevusriba",
+  },
   autocomplete: {
     "Clear value": "Tühjenda väärtus",
     "No results found": "Tulemusi ei leitud",
@@ -82,6 +86,10 @@ const data: IntlData = {
   },
   select: {
     "Clear value": "Tühjenda väärtus",
+  },
+  sidebar: {
+    "Close sidebar": "Sulge külgriba",
+    "Open sidebar": "Ava külgriba",
   },
   slider: {
     "Slider thumb": "Liuguri pöial",

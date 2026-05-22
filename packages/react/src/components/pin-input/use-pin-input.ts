@@ -4,9 +4,10 @@ import type { ChangeEvent, KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback, useEffect, useId, useState } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
-import { cx, filterUndefined, handlerAll, runKeyAction } from "../../utils"
+import { filterUndefined, runKeyAction } from "../../utils"
 import { useFieldProps } from "../field"
 
 const {
@@ -290,37 +291,39 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
   }, [autoFocus, descendants])
 
   const getRootProps: PropGetter = useCallback(
-    (props) => ({
-      role: "group",
-      ...rest,
-      ...props,
-    }),
+    (props) => mergeProps({ role: "group" }, rest, props)(),
     [rest],
   )
 
   const getInputProps: RequiredPropGetter<"input", { index: number }> =
     useCallback(
-      ({ "aria-labelledby": ariaLabelledby, index, ...props }) => ({
-        ...ariaProps,
-        ...dataProps,
-        type: mask ? "password" : type === "number" ? "tel" : "text",
-        "aria-labelledby": cx(ariaLabelledby, labelId),
-        autoComplete: otp ? "one-time-code" : "off",
-        disabled,
-        inputMode: type === "number" ? "numeric" : "text",
-        placeholder:
-          focusedIndex === index && !readOnly && !props.readOnly
-            ? ""
-            : placeholder,
-        readOnly,
-        value: values[index] || "",
-        ...filterUndefined(props),
-        id: `${id}${index ? `-${index}` : ""}`,
-        onBlur: handlerAll(eventProps.onBlur, props.onBlur, onBlur),
-        onChange: handlerAll(props.onChange, onChange(index)),
-        onFocus: handlerAll(eventProps.onFocus, props.onFocus, onFocus(index)),
-        onKeyDown: handlerAll(props.onKeyDown, onKeyDown(index)),
-      }),
+      ({ index, ...props }) =>
+        mergeProps(
+          {
+            ...ariaProps,
+            ...dataProps,
+            ...eventProps,
+            type: mask ? "password" : type === "number" ? "tel" : "text",
+            "aria-labelledby": labelId,
+            autoComplete: otp ? "one-time-code" : "off",
+            disabled,
+            inputMode: type === "number" ? "numeric" : "text",
+            placeholder:
+              focusedIndex === index && !readOnly && !props.readOnly
+                ? ""
+                : placeholder,
+            readOnly,
+            value: values[index] || "",
+          },
+          filterUndefined(props),
+          {
+            id: `${id}${index ? `-${index}` : ""}`,
+            onBlur,
+            onChange: onChange(index),
+            onFocus: onFocus(index),
+            onKeyDown: onKeyDown(index),
+          },
+        )(),
       [
         ariaProps,
         dataProps,

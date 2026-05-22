@@ -1,0 +1,26 @@
+{
+  "$schema": "https://yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": {
+    "components": ["sidebar"],
+    "hooks": ["use-local-storage"],
+    "providers": []
+  },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.test.browser.tsx",
+      "content": "import { renderHook, waitFor } from \"#test/browser\"\nimport { useWindowEvent } from \"./\"\n\ndescribe(\"useWindowEvent\", () => {\n  test(\"adds and removes an event listener to the window\", async () => {\n    const eventType = \"resize\"\n    const handler = vi.fn()\n\n    const { act, unmount } = await renderHook(() =>\n      useWindowEvent(eventType, handler),\n    )\n\n    await act(() => {\n      window.dispatchEvent(new Event(eventType))\n    })\n\n    await waitFor(() => {\n      expect(handler).toHaveBeenCalledTimes(1)\n    })\n\n    unmount()\n    window.dispatchEvent(new Event(eventType))\n    expect(handler).toHaveBeenCalledTimes(1)\n  })\n})\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport { useEffect } from \"react\"\nimport { useEnvironment, useCallbackRef } from \"@yamada-ui/react\"\n\ntype Handler<E extends string> = E extends keyof WindowEventMap\n  ? (ev: WindowEventMap[E]) => void\n  : (ev: CustomEvent) => void\ntype Options = AddEventListenerOptions | boolean\n\n/**\n * `useWindowEvent` is a custom hook that assigns an event listener to `window`.\n *\n * @see https://yamada-ui.com/docs/hooks/use-window-event\n */\nexport const useWindowEvent = <E extends string>(\n  ev: E,\n  handler: Handler<E>,\n  options?: Options,\n) => {\n  const { getWindow } = useEnvironment()\n  const listener = useCallbackRef(\n    handler,\n  ) as unknown as EventListenerOrEventListenerObject\n\n  useEffect(() => {\n    getWindow()?.addEventListener(ev, listener, options)\n\n    return () => {\n      getWindow()?.removeEventListener(ev, listener, options)\n    }\n  }, [ev, listener, options, getWindow])\n}\n"
+    }
+  ],
+  "tag": "next"
+}

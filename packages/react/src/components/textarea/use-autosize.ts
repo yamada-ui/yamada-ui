@@ -73,14 +73,14 @@ const getSizingStyle = (el: HTMLElement): null | SizingStyle => {
   if (computedStyle.boxSizing === "") return null
 
   const padding =
-    parseFloat(computedStyle.paddingBottom!) +
-    parseFloat(computedStyle.paddingTop!)
+    parseFloat(computedStyle.paddingBottom) +
+    parseFloat(computedStyle.paddingTop)
 
   const border =
-    parseFloat(computedStyle.borderBottomWidth!) +
-    parseFloat(computedStyle.borderTopWidth!)
+    parseFloat(computedStyle.borderBottomWidth) +
+    parseFloat(computedStyle.borderTopWidth)
 
-  const rowHeight = parseFloat(computedStyle.lineHeight!)
+  const rowHeight = parseFloat(computedStyle.lineHeight)
 
   return {
     style: computedStyle,

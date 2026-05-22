@@ -5,6 +5,7 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { Descendant, Descendants } from "../../hooks/use-descendants"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback, useId, useRef } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import { useDisclosure } from "../../hooks/use-disclosure"
@@ -12,7 +13,6 @@ import {
   ariaAttr,
   assignRef,
   createContext,
-  cx,
   dataAttr,
   handlerAll,
   isArray,
@@ -293,13 +293,16 @@ export const useMenu = ({
   )
 
   const getContentProps: PropGetter = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id: contentId,
-      "aria-labelledby": cx(ariaLabelledby, triggerId),
-      role: "menu",
-      ...props,
-      ref: mergeRefs(ref, contentRef),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          id: contentId,
+          ref: contentRef,
+          "aria-labelledby": triggerId,
+          role: "menu",
+        },
+        props,
+      )(),
     [contentId, triggerId],
   )
 
@@ -487,21 +490,22 @@ export const useSubMenu = ({
   assignRef(onCloseRef, onClose)
 
   const getSubMenuProps: PropGetter = useCallback(
-    ({ id = uuid, ref, ...props } = {}) => {
-      const getDisabled = (node: HTMLDivElement) =>
-        disabled || dataDisabled(node) || ariaDisabled(node)
-      const register = createRegister({ id, disabled: getDisabled })
-
-      return {
-        role: subMenu ? "menuitem" : "button",
-        ...props,
-        ref: mergeRefs(ref, triggerRef, register),
-        onClick: handlerAll(onClick, props.onClick),
-        onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
-        onMouseEnter: handlerAll(onMouseEnter, props.onMouseEnter),
-        onMouseMove: handlerAll(onMouseMove, props.onMouseMove),
-      }
-    },
+    ({ id = uuid, ...props } = {}) =>
+      mergeProps(
+        {
+          ref: mergeRefs(
+            triggerRef,
+            createRegister({
+              id,
+              disabled: (node) =>
+                disabled || dataDisabled(node) || ariaDisabled(node),
+            }),
+          ),
+          role: subMenu ? "menuitem" : "button",
+        },
+        props,
+        { onClick, onKeyDown, onMouseEnter, onMouseMove },
+      )(),
     [
       uuid,
       subMenu,
@@ -523,20 +527,20 @@ export type UseSubMenuReturn = ReturnType<typeof useSubMenu>
 
 export interface UseMenuGroupProps extends HTMLProps {}
 
-export const useMenuGroup = ({
-  "aria-labelledby": ariaLabelledbyProp,
-  ...rest
-}: UseMenuGroupProps) => {
+export const useMenuGroup = ({ ...rest }: UseMenuGroupProps) => {
   const labelId = useId()
 
   const getGroupProps: PropGetter = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby, labelId),
-      role: "group",
-      ...rest,
-      ...props,
-    }),
-    [ariaLabelledbyProp, labelId, rest],
+    (props = {}) =>
+      mergeProps(
+        {
+          "aria-labelledby": labelId,
+          role: "group",
+        },
+        rest,
+        props,
+      )(),
+    [labelId, rest],
   )
 
   const getLabelProps: PropGetter<"span"> = useCallback(
@@ -653,25 +657,28 @@ export const useMenuItem = ({
   )
 
   const getItemProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      id,
-      "aria-disabled": ariaDisabled ?? ariaAttr(disabled),
-      "data-disabled": dataDisabled ?? dataAttr(disabled),
-      role: "menuitem",
-      tabIndex: -1,
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref, itemRef, register),
-      onClick: handlerAll(props.onClick, rest.onClick, () =>
-        onSelect(value, closeOnSelect),
-      ),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onActive),
-      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
-      onMouseMove: handlerAll(props.onMouseMove, rest.onMouseMove, () => {
-        onCloseSubMenu()
-        onActive()
-      }),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          id,
+          ref: mergeRefs(itemRef, register),
+          "aria-disabled": ariaDisabled ?? ariaAttr(disabled),
+          "data-disabled": dataDisabled ?? dataAttr(disabled),
+          role: "menuitem",
+          tabIndex: -1,
+        },
+        rest,
+        props,
+        {
+          onClick: () => onSelect(value, closeOnSelect),
+          onFocus: onActive,
+          onKeyDown: onKeyDown,
+          onMouseMove: () => {
+            onCloseSubMenu()
+            onActive()
+          },
+        },
+      )(),
     [
       id,
       ariaDisabled,

@@ -11,14 +11,13 @@ import type {
 import type { Point } from "../../utils"
 import type { FieldProps } from "../field"
 import { useCallback, useRef } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { usePanEvent } from "../../hooks/use-pan-event"
 import { useI18n } from "../../providers/i18n-provider"
 import {
   clampNumber,
-  cx,
   dataAttr,
-  handlerAll,
   isArray,
   isNumber,
   mergeRefs,
@@ -151,7 +150,7 @@ export const useSlider = <Y extends [number, number] | number = number>(
       if (range) {
         const start = currentIndex.current === 0
         const oppositeIndex = currentIndex.current === 0 ? 1 : 0
-        const oppositeValue = value[oppositeIndex]!
+        const oppositeValue = value[oppositeIndex]
 
         onChangeEnd?.(
           (start ? [panValue, oppositeValue] : [oppositeValue, panValue]) as Y,
@@ -181,7 +180,7 @@ export const useSlider = <Y extends [number, number] | number = number>(
 
         const start = index === 0
         const oppositeIndex = index === 0 ? 1 : 0
-        const oppositeValue = value[oppositeIndex]!
+        const oppositeValue = value[oppositeIndex]
 
         onChangeStart?.(
           (start ? [panValue, oppositeValue] : [oppositeValue, panValue]) as Y,
@@ -210,7 +209,7 @@ export const useSlider = <Y extends [number, number] | number = number>(
     (index: number) => {
       const start = index === 0
       const oppositeIndex = index === 0 ? 1 : 0
-      const oppositeValue = range ? value[oppositeIndex]! : value
+      const oppositeValue = range ? value[oppositeIndex] : value
 
       return {
         max: range ? (start ? oppositeValue - betweenThumbs : max) : max,
@@ -296,14 +295,13 @@ export const useSlider = <Y extends [number, number] | number = number>(
 
   const getRootProps: PropGetter = useCallback(
     (props = {}) => {
-      const computedProps: HTMLProps = {
-        ...dataProps,
-        "data-orientation": orientation,
-        ...rest,
-        ...props,
-        onBlur: handlerAll(props.onBlur, eventProps.onBlur),
-        onFocus: handlerAll(props.onFocus, eventProps.onFocus),
-      }
+      const computedProps: HTMLProps = mergeProps(
+        dataProps,
+        { "data-orientation": orientation },
+        rest,
+        props,
+        { onBlur: eventProps.onBlur, onFocus: eventProps.onFocus },
+      )()
 
       computedProps.style ??= {}
 
@@ -373,7 +371,7 @@ export const useSlider = <Y extends [number, number] | number = number>(
     useCallback(
       ({ style, value: valueProp, ...props }) => {
         const between = range
-          ? value[0]! < valueProp && valueProp < value[1]!
+          ? value[0] < valueProp && valueProp < value[1]
           : valueProp < value
         const percent = valueToPercent(valueProp, min, max)
 
@@ -394,38 +392,39 @@ export const useSlider = <Y extends [number, number] | number = number>(
     ({ index = 0, ...rest } = {}) => {
       const { max, min } = getMinMax(index)
 
-      const props: HTMLProps = {
-        ...dataProps,
-        ...ariaProps,
-        "aria-label": t("Slider thumb"),
-        "aria-orientation": orientation,
-        "aria-valuemax": max,
-        "aria-valuemin": min,
-        role: "slider",
-        tabIndex: interactive ? 0 : -1,
-        ...rest,
-        "aria-labelledby": cx(rest["aria-labelledby"], ariaLabelledBy),
-        onKeyDown: handlerAll(rest.onKeyDown, onKeyDown(index)),
-      }
-
-      if (range) {
-        const currentValue = value[index]!
-
-        props["data-start"] = dataAttr(index === 0)
-        props["data-end"] = dataAttr(index === 1)
-        props["aria-valuenow"] = currentValue
-        props["aria-valuetext"] =
-          ariaValueText ??
-          getAriaValueText?.(currentValue, index) ??
-          currentValue.toString()
-      } else {
-        props["data-end"] = dataAttr(index === 0)
-        props["aria-valuenow"] = value
-        props["aria-valuetext"] =
-          ariaValueText ?? getAriaValueText?.(value, index) ?? value.toString()
-      }
-
-      return props
+      return mergeProps(
+        {
+          ...dataProps,
+          ...ariaProps,
+          "aria-label": t("Slider thumb"),
+          "aria-labelledby": ariaLabelledBy,
+          "aria-orientation": orientation,
+          "aria-valuemax": max,
+          "aria-valuemin": min,
+          role: "slider",
+          tabIndex: interactive ? 0 : -1,
+        },
+        range
+          ? {
+              "aria-valuenow": value[index]!,
+              "aria-valuetext":
+                ariaValueText ??
+                getAriaValueText?.(value[index]!, index) ??
+                value[index]!.toString(),
+              "data-end": dataAttr(index === 1),
+              "data-start": dataAttr(index === 0),
+            }
+          : {
+              "aria-valuenow": value,
+              "aria-valuetext":
+                ariaValueText ??
+                getAriaValueText?.(value, index) ??
+                value.toString(),
+              "data-end": dataAttr(index === 0),
+            },
+        rest,
+        { onKeyDown: onKeyDown(index) },
+      )()
     },
     [
       t,

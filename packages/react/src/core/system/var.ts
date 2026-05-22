@@ -31,7 +31,9 @@ import {
   gradient,
   injectKeyframes,
   isCSSFunction,
+  isCSSVar,
 } from "../css"
+import { isInterpolation } from "../css/utils"
 import { defaultSystem } from "../system"
 
 type ParsedValue = number | string | undefined
@@ -339,7 +341,7 @@ export function varAttr<Y = StyleValueWithCondition<number | string>>(
     return replaceObject(value, (value) => varAttr(value, token, fallbackValue))
   } else {
     return token
-      ? (`{${token}.${value}, ${fallbackValue ?? value}}` as Y)
+      ? (`{${token}.${value as number | string}, ${fallbackValue ?? (value as number | string)}}` as Y)
       : value
   }
 }
@@ -362,10 +364,16 @@ export function injectVars<Y extends Dict | Dict[] | undefined>(
         if (target) {
           const { token } = getStyle(prop) ?? {}
 
-          result.push([
-            `--${target}`,
-            token ? `{${token}.${value}, ${value}}` : value,
-          ])
+          if (isCSSVar(value) || isInterpolation(value)) {
+            result.push([`--${target}`, value])
+          } else {
+            result.push([
+              `--${target}`,
+              replaceObject(value, (value) =>
+                token ? `{${token}.${value}, ${value}}` : value,
+              ),
+            ])
+          }
         } else if (isObject(value)) {
           result.push([prop, injectVars(value, targets)])
         } else {

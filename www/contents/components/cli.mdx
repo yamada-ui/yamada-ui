@@ -62,19 +62,24 @@ bun yamada-cli add
 ```bash
 Usage: pnpm yamada-cli add [options] [components...]
 
-add a component to your project
+add a component to your project.
 
 Arguments:
-  components           components to add
+  components           components to add.
 
 Options:
-  --cwd <path>         current working directory
-  -c, --config <path>  path to the config file (default: "ui.json")
+  --cwd <path>         current working directory.
+  -c, --config <path>  path to the config file. (default: "ui.json")
   -o, --overwrite      overwrite existing files. (default: false)
-  -i, --install        install dependencies (default: false)
   -s, --sequential     run tasks sequentially. (default: false)
+  -y, --yes            skip all confirmation prompts. (default: false)
+  -i, --install        install dependencies.
+  --no-install         do not install dependencies.
   -f, --format         format the output files.
+  --no-format          do not format the output files.
   -l, --lint           lint the output files.
+  --no-lint            do not lint the output files.
+  -t, --tag <name>     tag for the registries (e.g. dev, next).
   -h, --help           display help for command
 ```
 
@@ -127,16 +132,22 @@ bun yamada-cli diff
 ```bash
 Usage: pnpm yamada-cli diff [options] [component]
 
-check for updates against the registry
+check for updates against the registry.
 
 Arguments:
-  component            component to check
+  component            component to check.
 
 Options:
-  --cwd <path>         current working directory
-  -c, --config <path>  path to the config file (default: "ui.json")
+  --cwd <path>         current working directory.
+  -c, --config <path>  path to the config file. (default: "ui.json")
   -s, --sequential     run tasks sequentially. (default: false)
-  -d, --detail         show detailed changes (default: false)
+  -d, --detail         show detailed changes. (default: false)
+  -y, --yes            skip all confirmation prompts. (default: false)
+  -u, --update         update files when there are file diff.
+  --no-update          do not update files when there are file diff.
+  -i, --install        install dependencies when updating files.
+  --no-install         do not install dependencies when updating files.
+  -t, --tag <name>     tag for the registries (e.g. dev, next).
   -h, --help           display help for command
 ```
 
@@ -189,17 +200,23 @@ bun yamada-cli update
 ```bash
 Usage: pnpm yamada-cli update [options] [components...]
 
-update components in your project
+update components in your project.
 
 Arguments:
-  components           components to update
+  components           components to update.
 
 Options:
-  --cwd <path>         current working directory
-  -c, --config <path>  path to the config file (default: "ui.json")
-  -i, --install        install dependencies (default: false)
+  --cwd <path>         current working directory.
+  -c, --config <path>  path to the config file. (default: "ui.json")
   -s, --sequential     run tasks sequentially. (default: false)
+  -F, --force          force update, overwriting local changes. (default: false)
+  -y, --yes            skip all confirmation prompts. (default: false)
+  -i, --install        install dependencies.
+  --no-install         do not install dependencies.
   -f, --format         format the output files.
+  --no-format          do not format the output files.
   -l, --lint           lint the output files.
+  --no-lint            do not lint the output files.
+  -t, --tag <name>     tag for the registries (e.g. dev, next).
   -h, --help           display help for command
 ```

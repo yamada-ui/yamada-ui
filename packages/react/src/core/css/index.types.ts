@@ -1,11 +1,12 @@
 import type * as CSS from "csstype"
-import type { AnyString } from "../../utils"
+import type { AnyString, Dict } from "../../utils"
 import type {
   Breakpoint,
   KeyframeIdent,
   System,
   ThemePath,
   ThemeTokens,
+  UsageTheme,
 } from "../system"
 import type {
   AnySelector,
@@ -60,6 +61,8 @@ export type StyleValue<Y, M = unknown> =
   | ColorModeValue<Y, M>
   | ResponsiveValue<Y, M>
 
+export type ExtractStyleValue<Y> = Y extends StyleValue<infer M> ? M : never
+
 export type StyleImportantValue<Y extends string> =
   | `${Y}!`
   | `${Y} !important`
@@ -76,8 +79,11 @@ export type StyleValueWithCondition<
       | Y
   : ColorModeArray<Y> | ResponsiveWithConditionObject<Y> | Y
 
+export type ExtractStyleValueWithCondition<Y> =
+  Y extends StyleValueWithCondition<infer M> ? M : never
+
 export type CSSVariable = `--${string}`
-interface CSSVariableProps {
+export interface CSSVariableProps {
   [key: CSSVariable]: StyleValueWithCondition<number | ThemePath> | undefined
 }
 
@@ -96,14 +102,14 @@ export type CSSObject = CSSFlatObject & {
 }
 export type CSSProperties = AnyString | keyof CSSFlatObject
 
+export type CSSSlotObject<Y extends string = string> = {
+  [M in Y]?: CSSObject
+}
+
 export interface CSSPropObject<
   Y extends CSSObject | CSSSlotObject = CSSObject,
 > {
   [key: string]: { [key: string]: Y }
-}
-
-export type CSSSlotObject<Y extends string = string> = {
-  [M in Y]?: CSSObject
 }
 
 export type CSSModifierObject<Y extends CSSObject | CSSSlotObject = CSSObject> =
@@ -226,3 +232,8 @@ export interface FunctionCSSInterpolation {
 }
 
 export type CSSObjectOrFunction = CSSObject | FunctionCSSInterpolation
+
+export type CSSFunction = (
+  system: System,
+  theme?: UsageTheme,
+) => (cssOrFn: CSSObjectOrFunction) => Dict

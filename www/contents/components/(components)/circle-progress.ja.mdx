@@ -133,12 +133,12 @@ import { CircleProgress } from "@workspaces/ui"
 
 ## アクセシビリティ
 
-`CircleProgress.Root`に`aria-label`または`aria-labelledby`を設定すると、スクリーンリーダーによって読み上げられます。
+`CircleProgress.Root`の`circleProps`に`aria-label`または`aria-labelledby`を設定すると、スクリーンリーダーによって読み上げられます。
 
 ```tsx
 <CircleProgress.Root
   value={88}
-  aria-label="Central Processing Unit (CPU) Usage"
+  circleProps={{ "aria-label": "Central Processing Unit (CPU) Usage" }}
 />
 ```
 
@@ -148,19 +148,22 @@ import { CircleProgress } from "@workspaces/ui"
     Central Processing Unit (CPU) Usage
   </Text>
 
-  <CircleProgress.Root value={88} aria-labelledby="label" />
+  <CircleProgress.Root
+    value={88}
+    circleProps={{ "aria-labelledby": "label" }}
+  />
 </VStack>
 ```
 
 ### ARIAロールと属性
 
-| コンポーネント         | ロールと属性         | 使い方                                                           |
-| ---------------------- | -------------------- | ---------------------------------------------------------------- |
-| `CircleProgressCircle` | `role="progressbar"` | プログレスバーであることを示します。                             |
-|                        | `aria-label`         | `"18パーセント"`のように現在の進行状況を示すラベルを設定します。 |
-|                        | `aria-valuemin`      | `min`の値を設定します。デフォルトは`0`です。                     |
-|                        | `aria-valuemax`      | `max`の値を設定します。デフォルトは`100`です。                   |
-|                        | `aria-valuenow`      | 現在の値を設定します。                                           |
+| 要素                             | ロールと属性         | 使い方                                                                                                                         |
+| -------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `svg.ui-circle-progress__circle` | `role="progressbar"` | プログレスバーであることを示します。                                                                                           |
+|                                  | `aria-label`         | `value`が`null`の場合（未定）は`"読み込み中..."`を、それ以外は`"18パーセント"`のように進行状況を設定します。                   |
+|                                  | `aria-valuemin`      | `min`の値を設定します。デフォルトは`0`です。                                                                                   |
+|                                  | `aria-valuemax`      | `max`の値を設定します。デフォルトは`100`です。                                                                                 |
+|                                  | `aria-valuenow`      | 進行状況が確定している場合（`value`が`null`ではない場合）のみ現在の値を設定し、`value`が`null`の場合（未定）は設定されません。 |
 
 ## 類似のコンポーネント
 

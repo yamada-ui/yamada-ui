@@ -5,12 +5,12 @@ import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { Point } from "../../utils"
 import type { FieldProps } from "../field"
 import { useCallback } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { usePanEvent } from "../../hooks/use-pan-event"
 import { useI18n } from "../../providers/i18n-provider"
 import {
   clampNumber,
-  cx,
   handlerAll,
   mergeRefs,
   roundNumberToStep,
@@ -179,22 +179,24 @@ export const useSaturationSlider = (props: UseSaturationSliderProps = {}) => {
   )
 
   const getRootProps: PropGetter = useCallback(
-    (props = {}) => ({
-      ...dataProps,
-      ...rest,
-      ...props,
-      style: {
-        ...rest.style,
-        ...props.style,
-        "--x": `${Math.abs(s * 100)}%`,
-        "--y": `${Math.abs(100 - v * 100)}%`,
-        backgroundColor: `hsl(${h}, 100%, 50%)`,
-        backgroundImage:
-          "linear-gradient(0deg, #000, transparent), linear-gradient(90deg, #fff, transparent)",
-      },
-      onBlur: handlerAll(props.onBlur, eventProps.onBlur),
-      onFocus: handlerAll(props.onFocus, eventProps.onFocus),
-    }),
+    (props = {}) => {
+      const merged = mergeProps(dataProps, rest, props)()
+
+      return {
+        ...merged,
+        style: {
+          ...rest.style,
+          ...props.style,
+          "--x": `${Math.abs(s * 100)}%`,
+          "--y": `${Math.abs(100 - v * 100)}%`,
+          backgroundColor: `hsl(${h}, 100%, 50%)`,
+          backgroundImage:
+            "linear-gradient(0deg, #000, transparent), linear-gradient(90deg, #fff, transparent)",
+        },
+        onBlur: handlerAll(props.onBlur, eventProps.onBlur),
+        onFocus: handlerAll(props.onFocus, eventProps.onFocus),
+      }
+    },
     [dataProps, eventProps, h, rest, s, v],
   )
 
@@ -234,27 +236,30 @@ export const useSaturationSlider = (props: UseSaturationSliderProps = {}) => {
   )
 
   const getThumbProps: PropGetter = useCallback(
-    (props = {}) => ({
-      ...dataProps,
-      ...ariaProps,
-      "aria-label": t("Saturation and brightness thumb"),
-      "aria-roledescription": "2D slider",
-      "aria-valuemax": 100,
-      "aria-valuemin": 0,
-      "aria-valuenow": s * 100,
-      "aria-valuetext":
-        ariaValueText ??
-        getAriaValueText?.(value) ??
-        t("Saturation {saturation}%, Brightness {brightness}%", {
-          brightness: v * 100,
-          saturation: s * 100,
-        }),
-      role: "slider",
-      tabIndex: interactive ? 0 : -1,
-      ...props,
-      "aria-labelledby": cx(props["aria-labelledby"], ariaLabelledBy),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          ...dataProps,
+          ...ariaProps,
+          "aria-label": t("Saturation and brightness thumb"),
+          "aria-labelledby": ariaLabelledBy,
+          "aria-roledescription": "2D slider",
+          "aria-valuemax": 100,
+          "aria-valuemin": 0,
+          "aria-valuenow": s * 100,
+          "aria-valuetext":
+            ariaValueText ??
+            getAriaValueText?.(value) ??
+            t("Saturation {saturation}%, Brightness {brightness}%", {
+              brightness: v * 100,
+              saturation: s * 100,
+            }),
+          role: "slider",
+          tabIndex: interactive ? 0 : -1,
+        },
+        props,
+        { onKeyDown },
+      )(),
     [
       ariaLabelledBy,
       ariaProps,

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.test.browser.tsx",
+      "content": "import type { FC } from \"react\"\nimport { page, render } from \"#test/browser\"\nimport { useOnline } from \"./\"\n\nconst Component: FC<{ getServerSnapshot?: () => boolean }> = ({\n  getServerSnapshot,\n}) => {\n  const online = useOnline(getServerSnapshot)\n\n  return <p data-testid=\"status\">{String(online)}</p>\n}\n\ndescribe(\"useOnline\", () => {\n  const onLineSpy = vi.spyOn(window.navigator, \"onLine\", \"get\")\n\n  afterEach(() => {\n    onLineSpy.mockReset()\n  })\n\n  test(\"returns true when the browser is online\", async () => {\n    onLineSpy.mockReturnValue(true)\n\n    await render(<Component />, { withProvider: false })\n\n    await expect.element(page.getByTestId(\"status\")).toHaveTextContent(\"true\")\n  })\n\n  test(\"returns false when the browser is offline\", async () => {\n    onLineSpy.mockReturnValue(false)\n\n    await render(<Component />, { withProvider: false })\n\n    await expect.element(page.getByTestId(\"status\")).toHaveTextContent(\"false\")\n  })\n\n  test(\"updates when the browser goes offline\", async () => {\n    onLineSpy.mockReturnValue(true)\n\n    await render(<Component />, { withProvider: false })\n    await expect.element(page.getByTestId(\"status\")).toHaveTextContent(\"true\")\n\n    onLineSpy.mockReturnValue(false)\n    window.dispatchEvent(new Event(\"offline\"))\n\n    await expect.element(page.getByTestId(\"status\")).toHaveTextContent(\"false\")\n  })\n\n  test(\"updates when the browser goes online\", async () => {\n    onLineSpy.mockReturnValue(false)\n\n    await render(<Component />, { withProvider: false })\n    await expect.element(page.getByTestId(\"status\")).toHaveTextContent(\"false\")\n\n    onLineSpy.mockReturnValue(true)\n    window.dispatchEvent(new Event(\"online\"))\n\n    await expect.element(page.getByTestId(\"status\")).toHaveTextContent(\"true\")\n  })\n\n  test(\"removes online and offline listeners with the same callback on unmount\", async () => {\n    const addEventListenerSpy = vi.spyOn(window, \"addEventListener\")\n    const removeEventListenerSpy = vi.spyOn(window, \"removeEventListener\")\n\n    const { unmount } = await render(<Component />, { withProvider: false })\n    const onlineCallback = addEventListenerSpy.mock.calls.find(\n      ([event]) => event === \"online\",\n    )?.[1]\n    const offlineCallback = addEventListenerSpy.mock.calls.find(\n      ([event]) => event === \"offline\",\n    )?.[1]\n\n    expect(onlineCallback).toBeDefined()\n    expect(offlineCallback).toBeDefined()\n    expect(onlineCallback).toBe(offlineCallback)\n\n    unmount()\n\n    expect(removeEventListenerSpy).toHaveBeenCalledWith(\n      \"online\",\n      onlineCallback,\n    )\n    expect(removeEventListenerSpy).toHaveBeenCalledWith(\n      \"offline\",\n      offlineCallback,\n    )\n  })\n})\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport { useSyncExternalStore } from \"react\"\n\nfunction subscribe(callback: () => void) {\n  window.addEventListener(\"online\", callback)\n  window.addEventListener(\"offline\", callback)\n\n  return () => {\n    window.removeEventListener(\"online\", callback)\n    window.removeEventListener(\"offline\", callback)\n  }\n}\n\nfunction getSnapshot() {\n  return window.navigator.onLine\n}\n\nexport interface UseOnlineProps {}\n\nexport function useOnline(\n  getServerSnapshot: () => boolean = () => true,\n): boolean {\n  const online = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)\n\n  return online\n}\n\nexport type UseOnlineReturn = ReturnType<typeof useOnline>\n"
+    }
+  ],
+  "tag": "next"
+}

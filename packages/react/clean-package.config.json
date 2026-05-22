@@ -1,4 +1,5 @@
 {
+  "remove": ["imports"],
   "replace": {
     "main": "dist/esm/index.js",
     "types": "dist/types/index.d.ts",

@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
-import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
+import { PropsTable } from "#storybook"
 import { Autocomplete } from "."
 import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { Box } from "../box"
@@ -196,7 +196,7 @@ export const ItemsWithQuery: Story = () => {
             <HeartIcon fontSize="lg" />
           </>
         ),
-        query: "アグモン",
+        query: "agumon アグモン",
         value: "アグモン",
       },
       { label: "ガブモン", value: "ガブモン" },

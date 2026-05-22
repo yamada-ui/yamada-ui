@@ -2,15 +2,13 @@
 
 import type { HTMLProps, Orientation, PropGetter } from "../../core"
 import { useCallback, useId } from "react"
-import { useEnvironment } from "../../core"
+import { mergeProps, useEnvironment } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import {
   createContext,
-  cx,
   dataAttr,
   handlerAll,
-  mergeRefs,
   setAttribute,
   useSafeLayoutEffect,
 } from "../../utils"
@@ -112,11 +110,7 @@ export const useSteps = ({
   }, [count, setIndex])
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref),
-    }),
+    (props = {}) => mergeProps(rest, props)(),
     [rest],
   )
 
@@ -187,11 +181,7 @@ export interface UseStepsItemProps extends HTMLProps<"li"> {
   index: number
 }
 
-export const useStepsItem = ({
-  "aria-labelledby": ariaLabelledbyProp,
-  index,
-  ...rest
-}: UseStepsItemProps) => {
+export const useStepsItem = ({ index, ...rest }: UseStepsItemProps) => {
   const { descendants, register } = useStepsDescendant()
   const { id, getStatus, orientation } = useStepsContext()
   const status = getStatus(index)
@@ -209,18 +199,18 @@ export const useStepsItem = ({
   }, [descendants, getDocument, id, index])
 
   const getRootProps: PropGetter<"li"> = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => {
-      return {
-        "aria-current": current ? "step" : undefined,
-        "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby),
-        "data-orientation": orientation,
-        [statusDataAttr]: dataAttr(true),
-        ...rest,
-        ...props,
-        ref: mergeRefs(ref, register),
-      }
-    },
-    [ariaLabelledbyProp, current, orientation, statusDataAttr, rest, register],
+    (props = {}) =>
+      mergeProps(
+        {
+          ref: register,
+          "aria-current": current ? "step" : undefined,
+          "data-orientation": orientation,
+          [statusDataAttr]: dataAttr(true),
+        },
+        rest,
+        props,
+      )(),
+    [current, orientation, statusDataAttr, rest, register],
   )
 
   const getTitleProps: PropGetter<"h3"> = useCallback(

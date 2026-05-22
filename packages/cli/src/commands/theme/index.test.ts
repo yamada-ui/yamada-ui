@@ -4,10 +4,9 @@ import {
   readFileSync,
   rmSync,
   writeFileSync,
-} from "fs"
-import { tmpdir } from "os"
-import path from "path"
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
+} from "node:fs"
+import { tmpdir } from "node:os"
+import path from "node:path"
 
 vi.mock("../../utils", async (importOriginal) => {
   const actual: any = await importOriginal()
@@ -127,7 +126,7 @@ describe("theme", () => {
 
   test("should error when dir exists with --yes and no --overwrite", async () => {
     setupProject(tempDir)
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     mkdirSync(path.join(tempDir, "workspaces", "theme"), { recursive: true })
 
     const ora = await import("ora")
@@ -192,7 +191,7 @@ describe("theme", () => {
 
   test("should overwrite existing directory with --overwrite", async () => {
     setupProject(tempDir)
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     mkdirSync(path.join(tempDir, "workspaces", "theme"), { recursive: true })
 
     await theme.parseAsync(
@@ -282,9 +281,7 @@ describe("theme", () => {
 
     const constant = await import("../../constant")
     const original = constant.REQUIRED_DEV_DEPENDENCIES.theme
-    // Temporarily add a dev dependency so the .map callback body executes
-    ;(constant.REQUIRED_DEV_DEPENDENCIES as any).theme = ["typescript@^5"]
-
+    constant.REQUIRED_DEV_DEPENDENCIES.theme = ["typescript@^5"]
     await theme.parseAsync(
       [
         "./workspaces/theme",
@@ -297,20 +294,17 @@ describe("theme", () => {
       ],
       { from: "user" },
     )
-
     const themeDir = path.join(tempDir, "workspaces", "theme")
     const pkgJson = JSON.parse(
       readFileSync(path.join(themeDir, "package.json"), "utf-8"),
     )
     expect(pkgJson.devDependencies).toHaveProperty("typescript")
-
-    // Restore
-    ;(constant.REQUIRED_DEV_DEPENDENCIES as any).theme = original
+    constant.REQUIRED_DEV_DEPENDENCIES.theme = original
   })
 
   test("should overwrite existing directory when prompted (without --yes)", async () => {
     setupProject(tempDir)
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     const themeDir = path.join(tempDir, "workspaces", "theme")
     mkdirSync(themeDir, { recursive: true })
     writeFileSync(path.join(themeDir, "old-file.txt"), "old content")

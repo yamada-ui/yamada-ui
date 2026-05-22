@@ -1,8 +1,7 @@
 import type { Dict } from "../../utils"
 import type { ColorMode, System, ThemeToken, UsageTheme } from "../system"
 import type { StyleConfig } from "./config"
-import type { CSSFunction } from "./css"
-import type { CSSProperties } from "./index.types"
+import type { CSSFunction, CSSProperties } from "./index.types"
 import { isObject, isString, isUndefined } from "../../utils"
 import { getColorSchemeVar, isColorScheme } from "../system"
 
@@ -78,6 +77,10 @@ export function splitValues(
 
 export function isCSSVar(value: string) {
   return /^var\(--.+\)$/.test(value)
+}
+
+export function isInterpolation(value: string) {
+  return /\{.+\}/.test(value)
 }
 
 export function isCSSToken({ cssMap }: System) {

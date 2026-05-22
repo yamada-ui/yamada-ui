@@ -25,7 +25,7 @@ function getValue(value: string | undefined, fallbackValue = ""): Transform {
       const resolvedToken = `${token}.${value}`
 
       if (isCSSToken(system)(resolvedToken)) {
-        return system.cssMap![resolvedToken]!.ref
+        return system.cssMap[resolvedToken]!.ref
       } else {
         return value
       }

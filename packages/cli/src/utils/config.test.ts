@@ -1,7 +1,6 @@
-import { mkdtempSync, rmSync, writeFileSync } from "fs"
-import { tmpdir } from "os"
-import path from "path"
-import { afterEach, beforeEach, describe, expect, test } from "vitest"
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs"
+import { tmpdir } from "node:os"
+import path from "node:path"
 import { getConfig } from "./config"
 
 describe("getConfig", () => {
@@ -128,9 +127,8 @@ describe("getConfig", () => {
 
     const config = await getConfig(tempDir, "ui.json")
     const section = config.getSection("components")
-    // NOTE: source code bug - path starting with "/" produces ".//path"
-    // getSectionPath prepends "./" to "/path" resulting in ".//path"
-    expect(section?.path).toBe(".//custom-components")
+    expect(section?.path).toBe("./custom-components")
+    expect(config.getSectionPath("components")).toBe("./custom-components")
   })
 
   test("getSection should resolve via sectionMap path lookup", async () => {

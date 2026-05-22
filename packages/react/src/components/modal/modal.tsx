@@ -6,7 +6,7 @@ import type { ButtonProps } from "../button"
 import type { CloseButtonProps } from "../close-button"
 import type { FocusLockProps } from "../focus-lock"
 import type { HTMLMotionProps, HTMLMotionPropsWithoutAs } from "../motion"
-import type { PopupAnimationProps } from "../popover"
+import type { UsePopupAnimationProps } from "../popover"
 import type { PortalProps } from "../portal"
 import type { ModalStyle } from "./modal.style"
 import type { UseModalProps, UseModalReturn } from "./use-modal"
@@ -14,13 +14,14 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, styled } from "../../core"
+import { useValue } from "../../hooks/use-value"
 import { cast, isArray, useSplitChildren, wrapOrPassProps } from "../../utils"
 import { Button } from "../button"
 import { CloseButton } from "../close-button"
 import { fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
 import { motion } from "../motion"
-import { getPopupAnimationProps } from "../popover"
+import { usePopupAnimationProps } from "../popover"
 import { Portal } from "../portal"
 import { modalStyle } from "./modal.style"
 import { useModal } from "./use-modal"
@@ -28,7 +29,7 @@ import { useModal } from "./use-modal"
 interface ComponentContext
   extends
     Omit<UseModalReturn, "getRootProps">,
-    PopupAnimationProps,
+    UsePopupAnimationProps,
     Pick<ModalRootProps, "withCloseButton"> {}
 
 export interface ModalRootProps
@@ -43,7 +44,7 @@ export interface ModalRootProps
       | "lockFocusAcrossFrames"
       | "restoreFocus"
     >,
-    PopupAnimationProps,
+    UsePopupAnimationProps,
     ShorthandModalContentProps {
   /**
    * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
@@ -100,7 +101,7 @@ export { ModalPropsContext, useModalPropsContext }
 /**
  * `Modal` is a component that is displayed over the main content to focus the user's attention solely on the information.
  *
- * @see https://yamada-ui.com/docs/components/overlay/modal
+ * @see https://yamada-ui.com/docs/components/modal
  */
 export const ModalRoot = withProvider<"div", ModalRootProps>(
   ({
@@ -141,7 +142,6 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
     const customOpenTrigger = trigger ? (
       <ModalOpenTrigger>{trigger}</ModalOpenTrigger>
     ) : null
-
     const context = useMemo(
       () => ({
         animationScheme,
@@ -239,7 +239,12 @@ export const ModalCloseButton = withContext<"button", ModalCloseButtonProps>(
 export interface ModalOverlayProps extends HTMLMotionProps {}
 
 export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
-  const { animationScheme, duration, getOverlayProps } = useComponentContext()
+  const {
+    animationScheme,
+    duration: durationProp,
+    getOverlayProps,
+  } = useComponentContext()
+  const duration = useValue(durationProp)
 
   return (
     <motion.div
@@ -268,10 +273,14 @@ export const ModalContent = withContext<"section", ModalContentProps>(
       children,
       ModalCloseButton,
     )
+    const popupAnimationProps = usePopupAnimationProps({
+      animationScheme,
+      duration,
+    })
 
     return (
       <motion.section
-        {...getPopupAnimationProps(animationScheme, duration)}
+        {...popupAnimationProps}
         {...cast<HTMLMotionPropsWithoutAs<"section">>(
           getContentProps(cast<HTMLProps<"section">>(rest)),
         )}

@@ -11,7 +11,7 @@ export function createLocalStorage<Y>(key: string, defaultValue: Y) {
     try {
       return JSON.parse(value) as Y
     } catch {
-      return defaultValue as Y
+      return defaultValue
     }
   }
 

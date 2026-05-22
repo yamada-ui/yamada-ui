@@ -4,10 +4,9 @@ import {
   readFileSync,
   rmSync,
   writeFileSync,
-} from "fs"
-import { tmpdir } from "os"
-import path from "path"
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
+} from "node:fs"
+import { tmpdir } from "node:os"
+import path from "node:path"
 
 const { mockGetModule } = vi.hoisted(() => ({
   mockGetModule: vi.fn(),
@@ -73,7 +72,7 @@ describe("tokens", () => {
       "src",
       "index.ts",
     )
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     mkdirSync(path.dirname(themeFile), { recursive: true })
     writeFileSync(themeFile, "export default {}")
 
@@ -217,7 +216,7 @@ describe("tokens", () => {
     mockGetModule.mockResolvedValue(createBasicTheme())
 
     const themeDir = path.join(tempDir, "workspaces", "theme", "src")
-    const { mkdirSync } = await import("fs")
+    const { mkdirSync } = await import("node:fs")
     mkdirSync(themeDir, { recursive: true })
     writeFileSync(path.join(themeDir, "index.ts"), "export default {}")
 

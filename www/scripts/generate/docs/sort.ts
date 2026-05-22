@@ -1,8 +1,8 @@
 import type { DocMap } from "@/data"
-import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { readFile } from "fs/promises"
+import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
+import { readFile } from "node:fs/promises"
+import path from "node:path"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 import { langs } from "@/utils/i18n"
 

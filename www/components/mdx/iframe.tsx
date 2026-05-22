@@ -21,10 +21,7 @@ export function Iframe({ children, ...rest }: IframeProps) {
   const { colorMode } = useColorMode()
   const { themeScheme } = useTheme()
   const iframeRef = useRef<HTMLIFrameElement>(null)
-  const headRef = useRef<HTMLHeadElement | null>(null)
-  const bodyRef = useRef<HTMLElement | null>(null)
-  const head = headRef.current
-  const body = bodyRef.current
+  const documentRef = useRef<Document | null>(null)
   const [, forceUpdate] = useState({})
 
   useLayoutEffect(() => {
@@ -32,8 +29,7 @@ export function Iframe({ children, ...rest }: IframeProps) {
 
     const iframe = iframeRef.current
 
-    headRef.current = iframe.contentDocument?.head ?? null
-    bodyRef.current = iframe.contentDocument?.body ?? null
+    documentRef.current = iframe.contentDocument ?? null
 
     forceUpdate({})
   }, [])
@@ -57,12 +53,14 @@ export function Iframe({ children, ...rest }: IframeProps) {
       title="preview-iframe"
       {...rest}
     >
-      {head && body
+      {documentRef.current
         ? createPortal(
-            <CacheProvider value={createCache(head)}>
-              <UIProvider>{children}</UIProvider>
+            <CacheProvider value={createCache(documentRef.current.head)}>
+              <UIProvider rootNode={() => documentRef.current!}>
+                {children}
+              </UIProvider>
             </CacheProvider>,
-            body,
+            documentRef.current.body,
           )
         : null}
     </styled.iframe>

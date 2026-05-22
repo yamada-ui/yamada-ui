@@ -16,12 +16,16 @@ import {
 } from "../../utils"
 import { conditionProperties, styleProperties } from "../css"
 
-type MergeAll<Y extends Dict[]> = Y extends [infer M]
-  ? M
+type Optionalize<Y> = [Extract<Y, undefined>] extends [never]
+  ? Y
+  : Partial<Exclude<Y, undefined>>
+
+type MergeAll<Y extends (Dict | undefined)[]> = Y extends [infer M]
+  ? Optionalize<M>
   : Y extends [infer D, ...infer H]
-    ? H extends any[]
-      ? Merge<D, MergeAll<H>>
-      : D
+    ? H extends (Dict | undefined)[]
+      ? Merge<Optionalize<D>, MergeAll<H>>
+      : Optionalize<D>
     : never
 
 function isEvent(key: string) {
@@ -31,6 +35,14 @@ function isEvent(key: string) {
 export const cssProps = new Set<string>([
   ...conditionProperties,
   ...styleProperties,
+])
+
+const ariaSpaceSeparatedProps = new Set<string>([
+  "aria-controls",
+  "aria-describedby",
+  "aria-flowto",
+  "aria-labelledby",
+  "aria-owns",
 ])
 
 export type ShouldForwardProp = (prop: string) => boolean
@@ -47,7 +59,8 @@ export function createShouldForwardProp(
   }
 }
 
-interface MergePropsOptions {
+export interface MergePropsOptions {
+  mergeAria?: boolean
   mergeClassName?: boolean
   mergeCSS?: boolean
   mergeEvent?: boolean
@@ -55,17 +68,26 @@ interface MergePropsOptions {
   mergeStyle?: boolean
 }
 
-export function mergeProps<Y extends Dict[]>(...args: Y) {
+export function mergeProps<Y extends Dict>(
+  ...args: Y[]
+): (options?: MergePropsOptions) => Y
+export function mergeProps<Y extends (Dict | undefined)[]>(
+  ...args: Y
+): (options?: MergePropsOptions) => MergeAll<Y>
+export function mergeProps(...args: (Dict | undefined)[]) {
   return function ({
+    mergeAria = true,
     mergeClassName = true,
     mergeCSS = true,
     mergeEvent = true,
     mergeRef = true,
     mergeStyle = true,
-  }: MergePropsOptions = {}): MergeAll<Y> {
+  }: MergePropsOptions = {}) {
     let result: Dict = {}
 
     for (const props of args) {
+      if (isUndefined(props)) continue
+
       for (const key in result) {
         if (mergeRef && key === "ref") {
           result[key] = mergeRefs(result[key], props[key])
@@ -85,6 +107,12 @@ export function mergeProps<Y extends Dict[]>(...args: Y) {
         }
 
         if (mergeClassName && (key === "className" || key === "class")) {
+          result[key] = cx(result[key], props[key])
+
+          continue
+        }
+
+        if (mergeAria && ariaSpaceSeparatedProps.has(key)) {
           result[key] = cx(result[key], props[key])
 
           continue

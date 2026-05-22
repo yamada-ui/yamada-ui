@@ -4,30 +4,27 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "clean": "rimraf node_modules .react-router .turbo",
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc",
-    "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../../.prettierignore --check --cache",
+    "typecheck": "react-router typegen && tsgo",
+    "lint": "react-router typegen && oxlint . --max-warnings=0",
+    "format": "pnpm -w format playgrounds/react-router/framework",
     "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {
-    "@react-router/node": "^7.13.1",
-    "@react-router/serve": "^7.13.1",
+    "@react-router/node": "^7.14.2",
+    "@react-router/serve": "^7.14.2",
     "@yamada-ui/react": "workspace:*",
-    "isbot": "^5.1.36",
+    "isbot": "^5.1.37",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-router": "^7.13.1"
+    "react-router": "^7.14.2"
   },
   "devDependencies": {
-    "@react-router/dev": "^7.13.1",
-    "@types/node": "catalog:",
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "typescript": "catalog:",
-    "vite": "catalog:",
-    "vite-tsconfig-paths": "^6.1.1"
+    "@react-router/dev": "^7.14.2",
+    "@yamada-ui/workspace": "workspace:*",
+    "vite": "catalog:"
   }
 }

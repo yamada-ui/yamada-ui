@@ -136,7 +136,7 @@ export const useCounter = ({
         next = parse(value) + step
       }
 
-      next = clamp(next as number)
+      next = clamp(next)
 
       update(next)
     },
@@ -153,7 +153,7 @@ export const useCounter = ({
         next = parse(value) - step
       }
 
-      next = clamp(next as number)
+      next = clamp(next)
 
       update(next)
     },

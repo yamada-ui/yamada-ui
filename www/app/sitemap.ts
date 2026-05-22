@@ -1,115 +1,138 @@
 import type { MetadataRoute } from "next"
-import { docs } from "#velite"
-import { execFileSync } from "child_process"
-import { readdirSync } from "fs"
-import { join } from "path"
+import type { Locale } from "@/utils/i18n"
+import { execFile } from "node:child_process"
+import { glob } from "node:fs/promises"
+import path from "node:path"
+import { promisify } from "node:util"
 import { CONSTANTS } from "@/constants"
+import { getDocs } from "@/data"
 import { getLang } from "@/utils/i18n"
+
+const execFileAsync = promisify(execFile)
+
+interface Data {
+  filaPath: string
+  url: string
+}
+
+type DataMap = {
+  [key in Locale]: { [key: string]: Data }
+}
 
 export const dynamic = "force-static"
 export const revalidate = false
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://yamada-ui.com"
-  const cwd = process.cwd()
-  const staticRoutes = findStaticRoutes()
-
-  const staticPaths = staticRoutes.map((r) =>
-    r.filePath.startsWith(cwd) ? r.filePath.slice(cwd.length + 1) : r.filePath,
+async function getAppDataMap(): Promise<DataMap> {
+  const rootPath = path.resolve("app", "[[]locale[]]", "(apps)")
+  const targetPaths = await Array.fromAsync(
+    glob(path.join(rootPath, "**", "page.{ts,tsx}")),
   )
-  const docPaths = docs.map((doc) => `contents/${doc.path}`)
-  const timestamps = getGitTimestamps([...staticPaths, ...docPaths])
 
-  const staticUrls = CONSTANTS.I18N.LOCALES.flatMap((locale) => {
-    const lang = getLang(locale)
-    const prefix = locale === CONSTANTS.I18N.DEFAULT_LOCALE ? "" : `/${lang}`
+  return Object.fromEntries(
+    CONSTANTS.I18N.LOCALES.map((locale) => [
+      locale,
+      Object.fromEntries(
+        targetPaths.map((targetPath) => {
+          const filaPath = targetPath.replace(path.resolve() + "/", "")
+          const lang = getLang(locale)
+          const defaultLocale = locale === CONSTANTS.I18N.DEFAULT_LOCALE
+          const pathname = targetPath
+            .replace(rootPath.replaceAll("[]", ""), "")
+            .replace(/\/page\.(tsx|ts)$/, "")
+          const url = `${CONSTANTS.SNS.HOMEPAGE}${defaultLocale ? "" : `/${lang}`}${pathname}`
 
-    return staticRoutes.map(({ route }, index) => ({
-      lastModified: timestamps.get(staticPaths[index] || "") || new Date(),
-      priority: route === "/" ? 1.0 : 0.7,
-      url: `${baseUrl}${prefix}${route}`,
-    }))
-  })
-
-  const docUrls = docs.map((doc) => {
-    const lang = getLang(doc.locale)
-    const url =
-      doc.locale === CONSTANTS.I18N.DEFAULT_LOCALE
-        ? `${baseUrl}${doc.pathname}`
-        : `${baseUrl}/${lang}${doc.pathname}`
-
-    return {
-      lastModified: timestamps.get(`contents/${doc.path}`) || new Date(),
-      priority: 0.8,
-      url,
-    }
-  })
-
-  return [...staticUrls, ...docUrls]
+          return [pathname, { filaPath, url }]
+        }),
+      ),
+    ]),
+  ) as DataMap
 }
 
-interface RouteInfo {
-  filePath: string
-  route: string
+function getDocDataMap(): DataMap {
+  return Object.fromEntries(
+    CONSTANTS.I18N.LOCALES.map((locale) => [
+      locale,
+      Object.fromEntries(
+        getDocs(locale).map(({ locale, path, pathname }) => {
+          const filaPath = `contents/${path}`
+          const lang = getLang(locale)
+          const defaultLocale = locale === CONSTANTS.I18N.DEFAULT_LOCALE
+          const url = `${CONSTANTS.SNS.HOMEPAGE}${defaultLocale ? "" : `/${lang}`}${pathname}`
+
+          return [pathname, { filaPath, url }]
+        }),
+      ),
+    ]),
+  ) as DataMap
 }
 
-function findStaticRoutes(): RouteInfo[] {
-  const routes: RouteInfo[] = []
-  const appsDir = join(process.cwd(), "app", "[locale]", "(apps)")
+function createAlternates(data: DataMap, pathname: string) {
+  return {
+    languages: {
+      ...Object.fromEntries(
+        CONSTANTS.I18N.LOCALES.map((locale) => {
+          const lang = getLang(locale)
 
-  function scan(dir: string, currentPath = "") {
-    try {
-      const entries = readdirSync(dir, { withFileTypes: true })
-
-      for (const entry of entries) {
-        if (entry.isDirectory()) {
-          scan(join(dir, entry.name), `${currentPath}/${entry.name}`)
-        } else if (entry.name === "page.tsx" || entry.name === "page.ts") {
-          routes.push({
-            filePath: join(dir, entry.name),
-            route: currentPath || "/",
-          })
-        }
-      }
-    } catch {}
+          return [lang, data[locale][pathname]!.url]
+        }),
+      ),
+      "x-default": data[CONSTANTS.I18N.DEFAULT_LOCALE][pathname]!.url,
+    },
   }
-
-  scan(appsDir)
-  return routes
 }
 
-function getGitTimestamps(filePaths: string[]): Map<string, Date> {
-  const result = new Map<string, Date>()
+async function createSitemap(appData: DataMap, docData: DataMap) {
+  const lastModifiedMap = new Map<string, Date>()
+  const targetPaths = CONSTANTS.I18N.LOCALES.flatMap((locale) => [
+    ...Object.values(appData[locale]).map(({ filaPath }) => filaPath),
+    ...Object.values(docData[locale]).map(({ filaPath }) => filaPath),
+  ])
 
   try {
-    const output = execFileSync(
+    const { stdout } = await execFileAsync(
       "git",
-      ["log", "--name-only", "--format=COMMIT:%aI", "--", ...filePaths],
-      {
-        encoding: "utf-8",
-        maxBuffer: 50 * 1024 * 1024,
-      },
-    ).trim()
+      ["log", "--name-only", "--format=COMMIT:%aI", "--", ...targetPaths],
+      { encoding: "utf-8", maxBuffer: 50 * 1024 * 1024 },
+    )
+    const lines = stdout.trim().split("\n")
 
-    let currentTimestamp = ""
+    let timestamp = ""
 
-    for (const line of output.split("\n")) {
+    for (const line of lines) {
       if (line.startsWith("COMMIT:")) {
-        currentTimestamp = line.slice(7)
-      } else if (line && currentTimestamp) {
+        timestamp = line.slice(7)
+      } else if (line && timestamp) {
         const path = line.startsWith("www/") ? line.slice(4) : line
-        if (!result.has(path)) {
-          result.set(path, new Date(currentTimestamp))
-        }
+
+        if (lastModifiedMap.has(path)) continue
+
+        lastModifiedMap.set(path, new Date(timestamp))
       }
     }
   } catch {}
 
-  for (const path of filePaths) {
-    if (!result.has(path)) {
-      result.set(path, new Date())
-    }
-  }
+  return [
+    ...CONSTANTS.I18N.LOCALES.flatMap((locale) =>
+      Object.entries(appData[locale]).map(([pathname, { filaPath, url }]) => ({
+        alternates: createAlternates(appData, pathname),
+        lastModified: lastModifiedMap.get(filaPath),
+        url,
+      })),
+    ),
+    ...CONSTANTS.I18N.LOCALES.flatMap((locale) =>
+      Object.entries(docData[locale]).map(([pathname, { filaPath, url }]) => ({
+        alternates: createAlternates(docData, pathname),
+        lastModified: lastModifiedMap.get(filaPath),
+        url,
+      })),
+    ),
+  ]
+}
 
-  return result
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const appData = await getAppDataMap()
+  const docData = getDocDataMap()
+  const sitemap = await createSitemap(appData, docData)
+
+  return sitemap
 }

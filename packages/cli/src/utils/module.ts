@@ -1,8 +1,8 @@
 import { isObject } from "@yamada-ui/utils"
 import { build } from "esbuild"
-import { realpathSync } from "fs"
 import nodeEval from "node-eval"
-import { Script } from "vm"
+import { realpathSync } from "node:fs"
+import { Script } from "node:vm"
 
 export async function getModule(file: string, cwd: string) {
   const result = await build({

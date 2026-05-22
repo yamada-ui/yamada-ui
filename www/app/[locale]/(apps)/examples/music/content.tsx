@@ -22,6 +22,7 @@ import {
 } from "@yamada-ui/react"
 import { useState } from "react"
 import { NextImage } from "@/components"
+import { CONSTANTS } from "@/constants"
 
 interface CarouselItem extends Omit<NextImageProps, "alt"> {
   description: string
@@ -265,7 +266,7 @@ function ContentPodcasts({ ...rest }: ContentPodcastsProps) {
                 Copy and paste the podcast feed URL to import.
               </Text>
 
-              <Input placeholder="https://yamada-ui.com/feed.xml" />
+              <Input placeholder={`${CONSTANTS.SNS.HOMEPAGE}/feed.xml`} />
             </>
           }
           cancel="Cancel"

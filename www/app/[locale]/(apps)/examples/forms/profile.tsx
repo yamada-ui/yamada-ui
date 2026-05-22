@@ -12,6 +12,7 @@ import {
 } from "@yamada-ui/react"
 import { Fragment } from "react"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
+import { CONSTANTS } from "@/constants"
 import { Form } from "./form"
 
 const EMAIL_ITEMS = [
@@ -38,8 +39,8 @@ export function Profile({ ...rest }: ProfileProps) {
   } = useForm<Data>({
     defaultValues: {
       urls: [
-        { url: "https://yamada-ui.com/" },
-        { url: "https://x.com/hirotomoyamada" },
+        { url: CONSTANTS.SNS.HOMEPAGE },
+        { url: CONSTANTS.SNS.X.HIROTOMO_YAMADA },
       ],
     },
   })

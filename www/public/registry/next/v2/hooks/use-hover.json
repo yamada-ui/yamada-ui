@@ -1,0 +1,21 @@
+{
+  "$schema": "https://yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport { useCallback, useEffect, useRef, useState } from \"react\"\n\n/**\n * `useHover` is a custom hook that detects whether the pointer has moved over or away from an element.\n *\n * @see https://yamada-ui.com/docs/hooks/use-hover\n */\nexport const useHover = <Y extends HTMLElement = HTMLDivElement>() => {\n  const [hovered, setHovered] = useState(false)\n  const ref = useRef<Y>(null)\n\n  const onMouseEnter = useCallback(() => setHovered(true), [])\n  const onMouseLeave = useCallback(() => setHovered(false), [])\n\n  useEffect(() => {\n    const el = ref.current\n\n    if (el) {\n      el.addEventListener(\"mouseenter\", onMouseEnter)\n      el.addEventListener(\"mouseleave\", onMouseLeave)\n\n      return () => {\n        el.removeEventListener(\"mouseenter\", onMouseEnter)\n        el.removeEventListener(\"mouseleave\", onMouseLeave)\n      }\n    }\n  }, [onMouseEnter, onMouseLeave])\n\n  return { ref, hovered }\n}\n"
+    },
+    {
+      "name": "use-hover.test.browser.tsx",
+      "content": "import { page, render } from \"#test/browser\"\nimport { useHover } from \"./\"\n\ndescribe(\"useHover\", () => {\n  test(\"should work correctly (not-hovered => hovered => not-hovered))\", async () => {\n    const hoveredText = /^Hovered$/\n    const notHoveredText = /^Not hovered$/\n\n    const Text = () => {\n      const { ref, hovered } = useHover()\n\n      return <span ref={ref}>{hovered ? \"Hovered\" : \"Not hovered\"}</span>\n    }\n\n    const { unmount, user } = await render(\n      <>\n        <div\n          style={{ height: 12, left: 8, position: \"fixed\", top: 8, width: 12 }}\n          data-testid=\"pointer-reset\"\n        />\n        <Text />\n      </>,\n    )\n\n    await user.hover(page.getByTestId(\"pointer-reset\"))\n\n    const initialText = page.getByText(notHoveredText)\n    await expect.element(initialText).toBeInTheDocument()\n    await expect\n      .element(page.getByText(hoveredText).query())\n      .not.toBeInTheDocument()\n\n    await user.hover(initialText)\n    const hovered = page.getByText(hoveredText)\n    await expect.element(hovered).toBeInTheDocument()\n    await expect\n      .element(page.getByText(notHoveredText).query())\n      .not.toBeInTheDocument()\n\n    await user.unhover(hovered)\n    await expect.element(page.getByText(notHoveredText)).toBeInTheDocument()\n    await expect\n      .element(page.getByText(hoveredText).query())\n      .not.toBeInTheDocument()\n\n    unmount()\n  })\n})\n"
+    }
+  ],
+  "tag": "next"
+}

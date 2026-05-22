@@ -1,4 +1,4 @@
-import { renderHook } from "#test/browser"
+import { renderHook } from "#test"
 import { useTimeout } from "."
 
 describe("useTimeout", () => {
@@ -10,10 +10,10 @@ describe("useTimeout", () => {
     vi.useRealTimers()
   })
 
-  test("should call the callback after the specified delay", async () => {
+  test("should call the callback after the specified delay", () => {
     const callback = vi.fn()
 
-    await renderHook(() => useTimeout(callback, 50))
+    renderHook(() => useTimeout(callback, 50))
 
     expect(callback).not.toHaveBeenCalled()
 
@@ -22,20 +22,20 @@ describe("useTimeout", () => {
     expect(callback).toHaveBeenCalledTimes(1)
   })
 
-  test("should not call the callback when delay is null", async () => {
+  test("should not call the callback when delay is null", () => {
     const callback = vi.fn()
 
-    await renderHook(() => useTimeout(callback, null))
+    renderHook(() => useTimeout(callback, null))
 
     vi.advanceTimersByTime(50)
 
     expect(callback).not.toHaveBeenCalled()
   })
 
-  test("should clear timeout on unmount", async () => {
+  test("should clear timeout on unmount", () => {
     const callback = vi.fn()
 
-    const { unmount } = await renderHook(() => useTimeout(callback, 50))
+    const { unmount } = renderHook(() => useTimeout(callback, 50))
 
     unmount()
 
@@ -44,17 +44,17 @@ describe("useTimeout", () => {
     expect(callback).not.toHaveBeenCalled()
   })
 
-  test("should restart timeout when delay changes", async () => {
+  test("should restart timeout when delay changes", () => {
     const callback = vi.fn()
 
-    const { rerender } = await renderHook(
-      (props) => useTimeout(callback, props?.delay ?? null),
+    const { rerender } = renderHook(
+      ({ delay }: { delay: null | number }) => useTimeout(callback, delay),
       { initialProps: { delay: 5000 } },
     )
 
     expect(callback).not.toHaveBeenCalled()
 
-    await rerender({ delay: 50 })
+    rerender({ delay: 50 })
 
     vi.advanceTimersByTime(50)
 

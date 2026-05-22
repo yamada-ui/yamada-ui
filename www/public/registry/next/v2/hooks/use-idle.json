@@ -1,0 +1,21 @@
+{
+  "$schema": "https://yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.test.browser.ts",
+      "content": "import { renderHook } from \"#test/browser\"\nimport { useIdle } from \"./\"\n\ndescribe(\"useIdle\", () => {\n  beforeEach(() => {\n    vi.useFakeTimers()\n  })\n\n  afterEach(() => {\n    vi.useRealTimers()\n  })\n\n  test(\"initial state is true\", async () => {\n    const { result } = await renderHook(() => useIdle(50))\n    expect(result.current).toBeTruthy()\n  })\n\n  test(\"becomes true after specified time has elapsed following an event\", async () => {\n    const { act, result } = await renderHook(() => useIdle(100))\n\n    await act(() => {\n      document.dispatchEvent(new Event(\"mousemove\"))\n    })\n    expect(result.current).toBeFalsy()\n\n    await act(() => vi.advanceTimersByTime(100))\n\n    expect(result.current).toBeTruthy()\n  })\n\n  test(\"is false while events are occurring\", async () => {\n    const { act, result } = await renderHook(() => useIdle(100))\n\n    await act(() => {\n      document.dispatchEvent(new Event(\"mousemove\"))\n    })\n    expect(result.current).toBeFalsy()\n\n    await act(() => {\n      document.dispatchEvent(new Event(\"keypress\"))\n    })\n    expect(result.current).toBeFalsy()\n  })\n\n  test(\"can detect idle state with custom events\", async () => {\n    const customEvents: (keyof DocumentEventMap)[] = [\"mousedown\", \"wheel\"]\n    const { act, result } = await renderHook(() =>\n      useIdle(50, { events: customEvents }),\n    )\n\n    await act(() => {\n      document.dispatchEvent(new Event(\"mousedown\"))\n    })\n\n    await act(() => vi.advanceTimersByTime(50))\n\n    expect(result.current).toBeTruthy()\n\n    await act(() => {\n      document.dispatchEvent(new Event(\"wheel\"))\n    })\n\n    await act(() => vi.advanceTimersByTime(50))\n\n    expect(result.current).toBeTruthy()\n  })\n})\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport { useEffect, useRef, useState } from \"react\"\n\nconst DEFAULT_EVENTS: (keyof DocumentEventMap)[] = [\n  \"keypress\",\n  \"mousemove\",\n  \"touchmove\",\n  \"click\",\n  \"scroll\",\n]\n\nconst DEFAULT_OPTIONS = {\n  events: DEFAULT_EVENTS,\n  initialState: true,\n}\n\nexport interface IdleOptions {\n  events?: (keyof DocumentEventMap)[]\n  initialState?: boolean\n}\n\n/**\n * `useIdle` is a custom hook that detects whether the user has been idle for a certain amount of time in milliseconds.\n *\n * @see https://yamada-ui.com/docs/hooks/use-idle\n */\nexport const useIdle = (timeout: number, options?: IdleOptions) => {\n  const { events, initialState } = { ...DEFAULT_OPTIONS, ...options }\n  const [idle, setIdle] = useState<boolean>(initialState)\n  const timeoutId = useRef<NodeJS.Timeout>(undefined)\n\n  useEffect(() => {\n    const handleEvent = () => {\n      setIdle(false)\n\n      if (timeoutId.current) clearTimeout(timeoutId.current)\n\n      timeoutId.current = setTimeout(() => setIdle(true), timeout)\n    }\n\n    events.forEach((event) => document.addEventListener(event, handleEvent))\n\n    return () => {\n      events.forEach((event) =>\n        document.removeEventListener(event, handleEvent),\n      )\n    }\n  }, [events, timeout])\n\n  return idle\n}\n"
+    }
+  ],
+  "tag": "next"
+}

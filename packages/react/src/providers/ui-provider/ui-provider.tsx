@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import type {
   ColorModeProviderProps,
+  EnvironmentProviderProps,
   ThemeConfig,
   ThemeProviderProps,
   UsageTheme,
@@ -30,6 +31,10 @@ export interface UIProviderProps
    */
   colorModeStorageKey?: string
   /**
+   * The root node to use.
+   */
+  rootNode?: EnvironmentProviderProps["value"]
+  /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.
    */
@@ -48,12 +53,13 @@ export const UIProvider: FC<UIProviderProps> = ({
   dir,
   intl,
   locale,
+  rootNode,
   storage,
   theme = defaultTheme,
   themeSchemeStorageKey,
 }) => {
   return (
-    <EnvironmentProvider>
+    <EnvironmentProvider value={rootNode}>
       <I18nProvider dir={dir} intl={intl} locale={locale}>
         <SystemProvider config={config} theme={theme}>
           <ThemeProvider

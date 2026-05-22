@@ -1,7 +1,17 @@
-import { act, renderHook } from "#test"
+import { a11y, act, render, renderHook, screen } from "#test"
 import { ColorModeProvider, useColorMode } from "./color-mode-provider"
+import { useColorModeValue } from "./use-color-mode-value"
 
 describe("ColorModeProvider", () => {
+  test("passes a11y", async () => {
+    await a11y(
+      <ColorModeProvider>
+        <div>content</div>
+      </ColorModeProvider>,
+      { withProvider: false },
+    )
+  })
+
   test("provides a color mode to child components", () => {
     const { result } = renderHook(() => useColorMode(), {
       wrapper: ({ children }) => (
@@ -68,5 +78,44 @@ describe("ColorModeProvider", () => {
     })
 
     expect(result.current.colorMode).toBe("dark")
+  })
+
+  test("renders children", () => {
+    render(
+      <ColorModeProvider>
+        <div data-testid="child">child</div>
+      </ColorModeProvider>,
+      { withProvider: false },
+    )
+
+    expect(screen.getByTestId("child")).toBeInTheDocument()
+  })
+})
+
+describe("useColorModeValue", () => {
+  test("returns light value in light mode", () => {
+    const { result } = renderHook(
+      () => useColorModeValue("lightValue", "darkValue"),
+      {
+        wrapper: ({ children }) => (
+          <ColorModeProvider colorMode="light">{children}</ColorModeProvider>
+        ),
+      },
+    )
+
+    expect(result.current).toBe("lightValue")
+  })
+
+  test("returns dark value in dark mode", () => {
+    const { result } = renderHook(
+      () => useColorModeValue("lightValue", "darkValue"),
+      {
+        wrapper: ({ children }) => (
+          <ColorModeProvider colorMode="dark">{children}</ColorModeProvider>
+        ),
+      },
+    )
+
+    expect(result.current).toBe("darkValue")
   })
 })

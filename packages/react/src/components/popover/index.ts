@@ -9,10 +9,10 @@ export type {
   PopoverHeaderProps,
   PopoverRootProps,
   PopoverTriggerProps,
-  PopupAnimationProps,
+  UsePopoverStyleProps,
+  UsePopupAnimationProps,
 } from "./popover"
 export {
-  getPopupAnimationProps,
   PopoverAnchor,
   PopoverBody,
   PopoverCloseTrigger,
@@ -23,5 +23,7 @@ export {
   PopoverRoot,
   PopoverTrigger,
   usePopoverPropsContext,
+  usePopoverStyleProps,
+  usePopupAnimationProps,
 } from "./popover"
 export * from "./use-popover"

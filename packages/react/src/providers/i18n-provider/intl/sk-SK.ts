@@ -1,6 +1,10 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
+  actionBar: {
+    "Close action bar": "Zatvoriť panel akcií",
+    "Open action bar": "Otvoriť panel akcií",
+  },
   autocomplete: {
     "Clear value": "Vymazať hodnotu",
     "No results found": "Nenašli sa žiadne výsledky",
@@ -82,6 +86,10 @@ const data: IntlData = {
   },
   select: {
     "Clear value": "Vymazať hodnotu",
+  },
+  sidebar: {
+    "Close sidebar": "Zatvoriť bočný panel",
+    "Open sidebar": "Otvoriť bočný panel",
   },
   slider: {
     "Slider thumb": "Palec posuvníka",

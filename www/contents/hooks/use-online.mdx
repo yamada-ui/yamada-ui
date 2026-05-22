@@ -1,0 +1,38 @@
+---
+title: useOnline
+description: "`useOnline` is a custom hook that detects whether the browser is online."
+storybook: hooks-useonline--basic
+source: hooks/use-online
+---
+
+```tsx preview functional client
+const online = useOnline()
+
+return (
+  <Badge colorScheme={online ? "green" : "red"}>
+    {online ? "Online" : "Offline"}
+  </Badge>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useOnline } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useOnline } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useOnline } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const online = useOnline()
+```

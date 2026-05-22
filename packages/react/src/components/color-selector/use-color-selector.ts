@@ -5,6 +5,7 @@ import type { ColorFormat } from "../../utils"
 import type { UseSaturationSliderProps } from "../saturation-slider"
 import type { UseSliderProps } from "../slider"
 import { useCallback, useId, useRef, useState } from "react"
+import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useEyeDropper } from "../../hooks/use-eye-dropper"
 import { useI18n } from "../../providers/i18n-provider"
@@ -12,7 +13,6 @@ import {
   ariaAttr,
   calcFormat,
   convertColor,
-  cx,
   dataAttr,
   handlerAll,
   hsvTo,
@@ -160,12 +160,15 @@ export const useColorSelector = ({
   }, [valueProp])
 
   const getRootProps: PropGetter = useCallback(
-    (props = {}) => ({
-      "data-disabled": dataAttr(disabled),
-      "data-readonly": dataAttr(readOnly),
-      ...rest,
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          "data-disabled": dataAttr(disabled),
+          "data-readonly": dataAttr(readOnly),
+        },
+        rest,
+        props,
+      )(),
     [disabled, readOnly, rest],
   )
 
@@ -280,13 +283,16 @@ export const useColorSelector = ({
   )
 
   const getColorSwatchGroupProps: PropGetter = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      "aria-labelledby": cx(ariaLabelledby, swatchGroupLabelId),
-      "data-disabled": dataAttr(disabled),
-      "data-readonly": dataAttr(readOnly),
-      role: "listbox",
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          "aria-labelledby": swatchGroupLabelId,
+          "data-disabled": dataAttr(disabled),
+          "data-readonly": dataAttr(readOnly),
+          role: "listbox",
+        },
+        props,
+      )(),
     [swatchGroupLabelId, disabled, readOnly],
   )
 

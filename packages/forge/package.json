@@ -1,0 +1,26 @@
+{
+  "name": "@yamada-ui/forge",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "The forge for Yamada UI projects",
+  "scripts": {
+    "clean": "rimraf node_modules trace",
+    "typecheck": "tsgo",
+    "typetrace": "tsgo --generateTrace ./trace --incremental false",
+    "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
+    "lint": "oxlint . --max-warnings=0",
+    "format": "pnpm -w format packages/forge",
+    "quality": "pnpm format && pnpm lint && pnpm typecheck",
+    "pr:dependabot": "tsx src/pr/dependabot",
+    "issue:create": "tsx src/issue/create",
+    "issue:codecov": "tsx src/issue/codecov",
+    "issue:a11y": "tsx src/issue/a11y",
+    "issue:template": "tsx src/issue/template"
+  },
+  "dependencies": {
+    "@yamada-ui/utils": "workspace:*",
+    "@yamada-ui/workspace": "workspace:*",
+    "strip-ansi": "^7.2.0"
+  }
+}

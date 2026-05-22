@@ -59,7 +59,7 @@ export function gradient(value: any, { system }: TransformOptions) {
 
     const token = `colors.${color}`
 
-    color = isCSSToken(system)(token) ? system.cssMap![token]!.ref : color
+    color = isCSSToken(system)(token) ? system.cssMap[token]!.ref : color
 
     if (ratio) {
       return [color, ...(isArray(ratio) ? ratio : [ratio])].join(" ")

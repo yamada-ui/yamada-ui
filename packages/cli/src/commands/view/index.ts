@@ -28,9 +28,11 @@ export const view = new Command("view")
         )
       }
 
-      if (file) {
-        const targetSource = sources.find((source) => source.name === file)
+      const targetSource = file
+        ? sources.find((source) => source.name === file)
+        : undefined
 
+      if (file) {
         if (!targetSource) {
           throw new Error(
             `File '${file}' not found in registry item '${item}'. Available files are: ${sources.map((source) => source.name).join(", ")}`,
@@ -40,11 +42,13 @@ export const view = new Command("view")
         if (!targetSource.content) {
           throw new Error(`No readable content found for file '${file}'.`)
         }
+      }
 
-        spinner.succeed(`Fetched registry item '${item}'`)
-        printSource(file, targetSource.content)
+      spinner.succeed(`Fetched registry item '${item}'`)
+
+      if (file) {
+        printSource(file, targetSource!.content!)
       } else {
-        spinner.succeed(`Fetched registry item '${item}'`)
         printTree(item, sources)
       }
     } catch (e) {

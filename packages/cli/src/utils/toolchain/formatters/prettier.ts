@@ -8,7 +8,7 @@ import { format as prettier, resolveConfig, resolveConfigFile } from "prettier"
 
 async function detect(cwd: string): Promise<Detection> {
   try {
-    const configFile = await resolveConfigFile(cwd)
+    const configFile = await resolveConfigFile(path.join(cwd, ".prettierrc"))
 
     if (configFile) return "config"
   } catch {}
@@ -42,7 +42,9 @@ async function formatText(
   if (!enabled) return content
 
   try {
-    configPath ??= await resolveConfigFile(cwd)
+    if (!configPath && cwd) {
+      configPath = await resolveConfigFile(path.join(cwd, ".prettierrc"))
+    }
 
     const config = configPath ? await resolveConfig(configPath) : {}
 

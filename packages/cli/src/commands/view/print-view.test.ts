@@ -52,6 +52,37 @@ describe("printTree", () => {
       expect.stringContaining("badge.tsx"),
     )
   })
+
+  test("should skip empty path segments from leading slash in source name", () => {
+    printTree("button", [
+      {
+        name: "/button.tsx",
+        content: "export const Button = () => <button />",
+      },
+    ])
+
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("button.tsx"),
+    )
+  })
+
+  test("should use pipe connector when a directory is not the last item", () => {
+    printTree("ui", [
+      {
+        name: "accordion/accordion.tsx",
+        content: "export const Accordion = () => null",
+      },
+      { name: "button.tsx", content: "export const Button = () => null" },
+    ])
+
+    expect(console.log).toHaveBeenCalledWith(expect.stringContaining("├─"))
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("accordion"),
+    )
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("button.tsx"),
+    )
+  })
 })
 
 describe("printSource", () => {

@@ -36,11 +36,11 @@ function printTreeNode(node: Tree, prefix = "") {
     const isDir = node[key] !== null
 
     console.log(
-      `${prefix}${c.dim(connector)} ${isDir ? c.bold(key) : c.green(key)}`,
+      `${c.dim(prefix + connector)} ${isDir ? c.bold(key) : c.green(key)}`,
     )
 
     if (isDir) {
-      const newPrefix = prefix + (isLast ? "   " : c.dim("│  "))
+      const newPrefix = prefix + (isLast ? "   " : "│  ")
       printTreeNode(node[key] as Tree, newPrefix)
     }
   }

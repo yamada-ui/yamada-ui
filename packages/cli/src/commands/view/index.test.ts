@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, test, vi } from "vitest"
+import { describe, expect, test, vi } from "vitest"
 
 vi.mock("./print-view", () => ({
   printSource: vi.fn(),
@@ -55,10 +55,6 @@ import { view } from "."
 import { printSource, printTree } from "./print-view"
 
 describe("view", () => {
-  afterEach(() => {
-    vi.clearAllMocks()
-  })
-
   test("should call printTree when no file is specified", async () => {
     await view.parseAsync(["node", "test", "button"])
 

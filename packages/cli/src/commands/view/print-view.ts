@@ -8,23 +8,21 @@ interface Tree {
 function buildTree(sources: Source[]): Tree {
   const tree: Tree = {}
 
-  sources.forEach((source) => {
+  for (const source of sources) {
     const parts = source.name.split("/")
     let current = tree
 
-    for (let i = 0; i < parts.length; i++) {
-      const part = parts[i]
-
+    for (const [i, part] of parts.entries()) {
       if (!part) continue
 
       if (i === parts.length - 1) {
         current[part] = null
       } else {
         current[part] = current[part] || {}
-        current = current[part] as Tree
+        current = current[part]
       }
     }
-  })
+  }
 
   return tree
 }
@@ -32,7 +30,7 @@ function buildTree(sources: Source[]): Tree {
 function printTreeNode(node: Tree, prefix = "") {
   const keys = Object.keys(node)
 
-  keys.forEach((key, index) => {
+  for (const [index, key] of keys.entries()) {
     const isLast = index === keys.length - 1
     const connector = isLast ? "└─" : "├─"
     const isDir = node[key] !== null
@@ -45,7 +43,7 @@ function printTreeNode(node: Tree, prefix = "") {
       const newPrefix = prefix + (isLast ? "   " : c.dim("│  "))
       printTreeNode(node[key] as Tree, newPrefix)
     }
-  })
+  }
 }
 
 export function printTree(component: string, sources: Source[]) {

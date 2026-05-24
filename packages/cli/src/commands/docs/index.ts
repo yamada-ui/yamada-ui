@@ -1,6 +1,7 @@
 import { Command, Option } from "commander"
 import ora from "ora"
 import c from "picocolors"
+import { DOCS_BASE_URL } from "../../constant"
 import {
   buildUrl,
   extractSections,
@@ -36,9 +37,11 @@ function parsePath(input: string): { hash: string | undefined; path: string } {
   if (input.startsWith("http://") || input.startsWith("https://")) {
     const url = new URL(input)
 
-    if (url.hostname !== "yamada-ui.com") {
+    const docsHostname = new URL(DOCS_BASE_URL).hostname
+
+    if (url.hostname !== docsHostname) {
       throw new Error(
-        `Invalid URL: only ${c.cyan("yamada-ui.com")} URLs are supported, got ${c.yellow(url.hostname)}`,
+        `Invalid URL: only ${c.cyan(docsHostname)} URLs are supported, got ${c.yellow(url.hostname)}`,
       )
     }
 

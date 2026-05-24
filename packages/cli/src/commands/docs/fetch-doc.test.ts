@@ -17,46 +17,44 @@ describe("buildUrl", () => {
     expect(buildUrl(undefined, "en")).toBe("https://yamada-ui.com/llms.txt")
   })
 
-  test("should return english doc url", () => {
-    expect(buildUrl("/docs/components/button", "en")).toBe(
+  test.each([
+    [
+      "/docs/components/button",
+      "en",
       "https://yamada-ui.com/docs/components/button.md",
-    )
-  })
-
-  test("should return japanese doc url", () => {
-    expect(buildUrl("/docs/components/button", "ja")).toBe(
+    ],
+    [
+      "/docs/components/button",
+      "ja",
       "https://yamada-ui.com/ja/docs/components/button.md",
-    )
-  })
-
-  test("should not double-append .md when path already ends with .md", () => {
-    expect(buildUrl("/docs/components/button.md", "en")).toBe(
+    ],
+    [
+      "/docs/components/button.md",
+      "en",
       "https://yamada-ui.com/docs/components/button.md",
-    )
-  })
-
-  test("should add leading slash when path does not start with /", () => {
-    expect(buildUrl("docs/components/button", "en")).toBe(
+    ],
+    [
+      "docs/components/button",
+      "en",
       "https://yamada-ui.com/docs/components/button.md",
-    )
-  })
-
-  test("should prepend /docs when path starts with / but not /docs", () => {
-    expect(buildUrl("/components/button", "en")).toBe(
+    ],
+    [
+      "/components/button",
+      "en",
       "https://yamada-ui.com/docs/components/button.md",
-    )
-  })
-
-  test("should prepend /docs when path has no leading slash and no docs prefix", () => {
-    expect(buildUrl("components/button", "en")).toBe(
+    ],
+    [
+      "components/button",
+      "en",
       "https://yamada-ui.com/docs/components/button.md",
-    )
-  })
-
-  test("should prepend /docs for japanese doc when path omits /docs", () => {
-    expect(buildUrl("/components/button", "ja")).toBe(
+    ],
+    [
+      "/components/button",
+      "ja",
       "https://yamada-ui.com/ja/docs/components/button.md",
-    )
+    ],
+  ])("buildUrl(%s, %s) → %s", (path, lang, expected) => {
+    expect(buildUrl(path, lang)).toBe(expected)
   })
 })
 

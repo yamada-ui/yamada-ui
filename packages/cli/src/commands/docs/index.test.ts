@@ -70,35 +70,15 @@ describe("docs", () => {
     expect(stdoutSpy).toHaveBeenCalledWith("# Index\n")
   })
 
-  test("should fetch english doc by path", async () => {
+  test.each([
+    ["/docs/components/button"],
+    ["/components/button"],
+    ["components/button"],
+  ])("should fetch english doc for path %s", async (path) => {
     mockResponse("# Button\n")
     setTTY(true)
 
-    await docs.parseAsync(["/docs/components/button"], { from: "user" })
-
-    expect(mockFetch).toHaveBeenCalledWith(
-      "https://yamada-ui.com/docs/components/button.md",
-      expect.anything(),
-    )
-  })
-
-  test("should fetch doc when path omits /docs prefix", async () => {
-    mockResponse("# Button\n")
-    setTTY(true)
-
-    await docs.parseAsync(["/components/button"], { from: "user" })
-
-    expect(mockFetch).toHaveBeenCalledWith(
-      "https://yamada-ui.com/docs/components/button.md",
-      expect.anything(),
-    )
-  })
-
-  test("should fetch doc when path has no leading slash or /docs prefix", async () => {
-    mockResponse("# Button\n")
-    setTTY(true)
-
-    await docs.parseAsync(["components/button"], { from: "user" })
+    await docs.parseAsync([path], { from: "user" })
 
     expect(mockFetch).toHaveBeenCalledWith(
       "https://yamada-ui.com/docs/components/button.md",

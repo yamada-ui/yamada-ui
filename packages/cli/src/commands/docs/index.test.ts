@@ -82,6 +82,30 @@ describe("docs", () => {
     )
   })
 
+  test("should fetch doc when path omits /docs prefix", async () => {
+    mockResponse("# Button\n")
+    setTTY(true)
+
+    await docs.parseAsync(["/components/button"], { from: "user" })
+
+    expect(mockFetch).toHaveBeenCalledWith(
+      "https://yamada-ui.com/docs/components/button.md",
+      expect.anything(),
+    )
+  })
+
+  test("should fetch doc when path has no leading slash or /docs prefix", async () => {
+    mockResponse("# Button\n")
+    setTTY(true)
+
+    await docs.parseAsync(["components/button"], { from: "user" })
+
+    expect(mockFetch).toHaveBeenCalledWith(
+      "https://yamada-ui.com/docs/components/button.md",
+      expect.anything(),
+    )
+  })
+
   test("should fetch japanese doc with --lang ja", async () => {
     mockResponse("# Button\n")
     setTTY(true)

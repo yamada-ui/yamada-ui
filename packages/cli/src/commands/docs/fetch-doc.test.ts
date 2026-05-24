@@ -40,6 +40,24 @@ describe("buildUrl", () => {
       "https://yamada-ui.com/docs/components/button.md",
     )
   })
+
+  test("should prepend /docs when path starts with / but not /docs", () => {
+    expect(buildUrl("/components/button", "en")).toBe(
+      "https://yamada-ui.com/docs/components/button.md",
+    )
+  })
+
+  test("should prepend /docs when path has no leading slash and no docs prefix", () => {
+    expect(buildUrl("components/button", "en")).toBe(
+      "https://yamada-ui.com/docs/components/button.md",
+    )
+  })
+
+  test("should prepend /docs for japanese doc when path omits /docs", () => {
+    expect(buildUrl("/components/button", "ja")).toBe(
+      "https://yamada-ui.com/ja/docs/components/button.md",
+    )
+  })
 })
 
 describe("fetchDoc", () => {

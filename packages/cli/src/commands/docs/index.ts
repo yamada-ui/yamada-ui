@@ -62,10 +62,7 @@ function parsePath(input: string): { hash: string | undefined; path: string } {
 
 export const docs = new Command("docs")
   .description("fetch documentation from yamada-ui.com.")
-  .argument(
-    "[path]",
-    "documentation path (e.g. /docs/components/button#disable).",
-  )
+  .argument("[path]", "documentation path (e.g. /components/button#disable).")
   .addOption(
     new Option("--lang <lang>", "language.")
       .choices(["en", "ja"])

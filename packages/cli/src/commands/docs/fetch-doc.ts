@@ -10,7 +10,11 @@ export function buildUrl(path: string | undefined, lang: string): string {
   if (!path) return `${DOCS_BASE_URL}/llms.txt`
 
   const prefix = lang === "ja" ? "/ja" : ""
-  const normalized = path.startsWith("/") ? path : `/${path}`
+  let normalized = path.startsWith("/") ? path : `/${path}`
+
+  if (!normalized.startsWith("/docs")) {
+    normalized = `/docs${normalized}`
+  }
 
   return `${DOCS_BASE_URL}${prefix}${normalized.replace(/\.md$/, "")}.md`
 }

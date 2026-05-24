@@ -102,30 +102,36 @@ export const docs = new Command("docs")
         )
       }
 
-      const url = buildUrl(docPath, lang)
+      const needsEnFallback = lang !== "en" && !!hash
 
       spinner.start("Fetching documentation")
 
-      let content = await fetchDoc(url)
+      const [content, enContent] = await Promise.all([
+        fetchDoc(buildUrl(docPath, lang)),
+        needsEnFallback
+          ? fetchDoc(buildUrl(docPath, "en"))
+          : Promise.resolve(undefined),
+      ])
 
       spinner.succeed("Fetched documentation")
 
+      let result = content
+
       if (hash) {
-        if (lang === "en") {
-          content = trimToSection(content, hash)
+        if (!needsEnFallback) {
+          result = trimToSection(content, hash)
         } else {
-          const enContent = await fetchDoc(buildUrl(docPath, "en"))
-          const idx = findHeadingIndex(enContent, hash)
+          const idx = findHeadingIndex(enContent!, hash)
 
           if (idx === -1) {
             throw new Error(`Section not found: ${c.yellow(`#${hash}`)}`)
           }
 
-          content = trimToSectionByIndex(content, idx, hash)
+          result = trimToSectionByIndex(content, idx, hash)
         }
       }
 
-      process.stdout.write(sections ? extractSections(content) : content)
+      process.stdout.write(sections ? extractSections(result) : result)
     } catch (e) {
       if (e instanceof Error) {
         spinner.fail(e.message)

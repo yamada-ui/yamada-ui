@@ -47,8 +47,8 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  publish:
-    name: Publish
+  release:
+    name: Release
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -103,7 +103,7 @@ jobs:
 
   post_release:
     name: Post release
-    needs: publish
+    needs: release
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -118,21 +118,21 @@ jobs:
         uses: ./.github/composite-actions/install
 
       - name: Update issue templates
-        if: github.ref_name == 'main' && needs.publish.outputs.published == 'true'
+        if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
           pnpm forge issue:template
           git add ./.github/ISSUE_TEMPLATE
           git diff --staged --exit-code || git commit -m 'ci(changesets): update issue templates'
 
       - name: Generate registries
-        if: github.ref_name == 'main' && needs.publish.outputs.published == 'true'
+        if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
           pnpm react gen:registries
           git add ./www/public/registry
           git diff --staged --exit-code || git commit -m 'ci(changesets): update registries'
 
       - name: Generate @dev registries
-        if: github.ref_name == 'main' && needs.publish.outputs.published != 'true'
+        if: github.ref_name == 'main' && needs.release.outputs.published != 'true'
         run: |
           pnpm react gen:registries --tag dev
           git add ./www/public/registry
@@ -146,7 +146,7 @@ jobs:
           git diff --staged --exit-code || git commit -m 'ci(changesets): update next registries'
 
       - name: Update www
-        if: github.ref_name == 'main' && needs.publish.outputs.published == 'true'
+        if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
           pnpm react gen:styles -p
           git add ./www/data
@@ -170,9 +170,9 @@ jobs:
         run: git push
 
       - name: Update next branch
-        if: github.ref_name == 'main' && needs.publish.outputs.published == 'true'
+        if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
-          PUBLISHED_VERSION=$(echo '${{ needs.publish.outputs.published_packages }}' | jq -r '.[] | select(.name == "@yamada-ui/react") | .version')
+          PUBLISHED_VERSION=$(echo '${{ needs.release.outputs.published_packages }}' | jq -r '.[] | select(.name == "@yamada-ui/react") | .version')
 
           if [ -z "$PUBLISHED_VERSION" ]; then
             exit 0
@@ -210,7 +210,7 @@ jobs:
           done
 
       - name: Notification release
-        if: github.ref_name == 'main' && needs.publish.outputs.published == 'true'
+        if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
           pnpm react notification:release
         env:

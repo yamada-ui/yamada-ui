@@ -11,7 +11,11 @@ describe("<PinInput />", () => {
   test('allows alphanumeric input when type is "alphanumeric"', async () => {
     const { user } = await render(
       <>
-        <input type="search" data-testid="clipboard-source" />
+        <input
+          type="search"
+          aria-label="Clipboard source"
+          data-testid="clipboard-source"
+        />
         <PinInput.Root type="alphanumeric" />
       </>,
     )
@@ -145,7 +149,11 @@ describe("<PinInput />", () => {
   test("correct input behavior when pasting a value of 2 characters", async () => {
     const { user } = await render(
       <>
-        <input type="search" data-testid="clipboard-source" />
+        <input
+          type="search"
+          aria-label="Clipboard source"
+          data-testid="clipboard-source"
+        />
         <PinInput.Root />
       </>,
     )
@@ -166,7 +174,11 @@ describe("<PinInput />", () => {
     const testValue = "1234"
     const { user } = await render(
       <>
-        <input type="search" data-testid="clipboard-source" />
+        <input
+          type="search"
+          aria-label="Clipboard source"
+          data-testid="clipboard-source"
+        />
         <PinInput.Root />
       </>,
     )

@@ -1,1 +1,0 @@
-import{n as e}from"./chunk-jRWAZmH_.js";import{P as t,t as n}from"./core-D0ebHbTd.js";var r,i=e((()=>{n(),r=t.easings({ease:`cubic-bezier(0.25, 0, 0.25, 1)`,"ease-in":`cubic-bezier(0.42, 0, 1, 1)`,"ease-in-out":`cubic-bezier(0.42, 0, 0.58, 1)`,"ease-in-smooth":`cubic-bezier(0.32, 0.72, 0, 1)`,"ease-out":`cubic-bezier(0, 0, 0.58, 1)`})}));export{i as n,r as t};

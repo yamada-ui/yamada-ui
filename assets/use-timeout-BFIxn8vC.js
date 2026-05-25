@@ -1,1 +1,0 @@
-import{n as e,o as t}from"./chunk-jRWAZmH_.js";import{t as n}from"./react-CMXXrKHu.js";import{Z as r,rt as i}from"./core-D0ebHbTd.js";var a,o,s=e((()=>{a=t(n(),1),r(),o=(e,t)=>{let n=i(e);(0,a.useEffect)(()=>{if(t==null)return;let e=null;return e=setTimeout(n,t),()=>{clearTimeout(e)}},[t,n])}}));export{o as n,s as t};

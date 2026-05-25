@@ -37,9 +37,7 @@ on:
       - v*
 
 permissions:
-  contents: write
-  pull-requests: write
-  id-token: write
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -52,6 +50,13 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    outputs:
+      published: ${{ steps.changesets.outputs.published }}
+      published_packages: ${{ steps.changesets.outputs.publishedPackages }}
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -96,22 +101,38 @@ jobs:
           NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  post_release:
+    name: Post release
+    needs: release
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
       - name: Update issue templates
-        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
+        if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
           pnpm forge issue:template
           git add ./.github/ISSUE_TEMPLATE
           git diff --staged --exit-code || git commit -m 'ci(changesets): update issue templates'
 
       - name: Generate registries
-        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
+        if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
           pnpm react gen:registries
           git add ./www/public/registry
           git diff --staged --exit-code || git commit -m 'ci(changesets): update registries'
 
       - name: Generate @dev registries
-        if: github.ref_name == 'main' && steps.changesets.outputs.published != 'true'
+        if: github.ref_name == 'main' && needs.release.outputs.published != 'true'
         run: |
           pnpm react gen:registries --tag dev
           git add ./www/public/registry
@@ -125,7 +146,7 @@ jobs:
           git diff --staged --exit-code || git commit -m 'ci(changesets): update next registries'
 
       - name: Update www
-        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
+        if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
           pnpm react gen:styles -p
           git add ./www/data
@@ -149,9 +170,9 @@ jobs:
         run: git push
 
       - name: Update next branch
-        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
+        if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
-          PUBLISHED_VERSION=$(echo '${{ steps.changesets.outputs.publishedPackages }}' | jq -r '.[] | select(.name == "@yamada-ui/react") | .version')
+          PUBLISHED_VERSION=$(echo '${{ needs.release.outputs.published_packages }}' | jq -r '.[] | select(.name == "@yamada-ui/react") | .version')
 
           if [ -z "$PUBLISHED_VERSION" ]; then
             exit 0
@@ -189,7 +210,7 @@ jobs:
           done
 
       - name: Notification release
-        if: github.ref_name == 'main' && steps.changesets.outputs.published == 'true'
+        if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
           pnpm react notification:release
         env:

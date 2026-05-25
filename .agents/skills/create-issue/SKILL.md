@@ -18,11 +18,20 @@ Use tools to interact with the user throughout the process.
    - Autonomously locate the `.github/ISSUE_TEMPLATE/` directory in the repository and list English templates (excluding `.ja.yml` files)
    - Read each template file to understand its `name` and required fields
 
-3. **Confirm issue type**
-   - Present the available templates to the user and ask which type fits their need
-   - Suggest the appropriate type if unclear
+3. **Assess available context**
+   - Evaluate whether the current conversation (arguments, prior messages) already contains enough information to draft the issue without asking the user:
+     - Issue type can be determined (e.g., bug, feature, docs)
+     - A clear title and description can be constructed
+     - PR intent can be inferred (e.g., the user said "I'll fix it" → `Yes`; no mention → default to `No`)
+   - **If sufficient context exists:** skip steps 4 and 5, proceed directly to step 6 using the inferred values. Do not ask the user for information that is already present.
+   - **If context is insufficient:** follow steps 4 and 5 to collect the missing information interactively.
 
-4. **Collect information**
+4. **Confirm issue type** _(skip if context is sufficient)_
+
+- Present the available templates to the user and ask which type fits their need
+- Suggest the appropriate type if unclear
+
+5. **Collect information** _(skip fields already known from context)_
    - Ask for all required fields from the selected template
    - Ask follow-up questions to gather concrete details, code snippets, and URLs
    - **For the "PR intent" field, offer three options (separate from the template's Yes/No):**
@@ -39,7 +48,7 @@ Use tools to interact with the user throughout the process.
    This issue is open to community contribution.
    ```
 
-5. **Search for existing issues (duplicates, related, parent/child candidates)**
+6. **Search for existing issues (duplicates, related, parent/child candidates)**
 
    Search by keyword to find duplicates, related issues, and parent/child candidates:
 
@@ -65,7 +74,7 @@ Use tools to interact with the user throughout the process.
    gh api repos/yamada-ui/yamada-ui/issues/{issue_number} --jq '{node_id: .node_id, title: .title}'
    ```
 
-6. **Autonomously determine Type and Labels**
+7. **Autonomously determine Type and Labels**
    - **Type is required** — every issue must have a Type assigned; never skip this step
    - Run the commands below to get available options, then decide based on the collected information
    - Only ask the user for clarification when genuinely uncertain
@@ -82,18 +91,18 @@ Use tools to interact with the user throughout the process.
    gh api repos/yamada-ui/yamada-ui/labels --paginate --jq '.[] | {name: .name, description: .description}'
    ```
 
-   Apply labels based on the PR intent answer from step 4:
+   Apply labels based on the PR intent answer from step 5:
    - `Yes` → no additional label; **automatically assign the issue to the current user** (use `--assignee @me` in `gh issue create`)
    - `No` → add `triage`
    - `Open to contributors` → add `good first issue`
 
-7. **Design parent/child structure for multiple issues**
+8. **Design parent/child structure for multiple issues**
    - When creating multiple issues, always designate one as the parent (tracking issue)
    - Break individual tasks into child issues under the parent
-   - Factor in any parent/child relationships found with existing issues in step 5
+   - Factor in any parent/child relationships found with existing issues in step 6
    - Include the full structure (parent/child, related, depends-on) in the plan presentation
 
-8. **Present plan for user review**
+9. **Present plan for user review**
    - **Title format** — use natural, descriptive English. Do not use commit message format (e.g., `feat(x): ...`). Wrap component names and code identifiers in backticks, and escape those backticks when presenting shell commands.
      - Good: "Add \`Marquee\` component", "\`Accordion\` throws error when all items are disabled"
      - Bad: "feat(marquee): add Marquee component", "fix(accordion): throw error when all items are disabled"
@@ -120,35 +129,36 @@ Use tools to interact with the user throughout the process.
    - Wait for user approval
    - Apply any requested changes and re-present before proceeding
 
-9. **Create and link issues after approval**
-   - Exit planning mode and proceed with execution after receiving approval
-   - Execute the exact `gh issue create` commands specified in the plan — do NOT reconstruct them
-   - For multiple issues, create the parent first, then create and link child issues
+10. **Create and link issues after approval**
 
-   **Sub-issue linking (for both new and existing issues):**
+- Exit planning mode and proceed with execution after receiving approval
+- Execute the exact `gh issue create` commands specified in the plan — do NOT reconstruct them
+- For multiple issues, create the parent first, then create and link child issues
 
-   ```bash
-   # Get parent issue Node ID
-   gh api repos/yamada-ui/yamada-ui/issues/{parent_issue_number} --jq '.node_id'
+**Sub-issue linking (for both new and existing issues):**
 
-   # Write and execute the GraphQL mutation
-   cat > /tmp/add_sub_issue.graphql << 'EOF'
-   mutation AddSubIssue($issueId: ID!, $subIssueUrl: String!) {
-     addSubIssue(input: { issueId: $issueId, subIssueUrl: $subIssueUrl }) {
-       issue { number title }
-       subIssue { number title }
-     }
-   }
-   EOF
+```bash
+# Get parent issue Node ID
+gh api repos/yamada-ui/yamada-ui/issues/{parent_issue_number} --jq '.node_id'
 
-   gh api graphql \
-     -F query=@/tmp/add_sub_issue.graphql \
-     -F issueId="<parent Node ID>" \
-     -F subIssueUrl="https://github.com/yamada-ui/yamada-ui/issues/<child_issue_number>"
-   ```
+# Write and execute the GraphQL mutation
+cat > /tmp/add_sub_issue.graphql << 'EOF'
+mutation AddSubIssue($issueId: ID!, $subIssueUrl: String!) {
+  addSubIssue(input: { issueId: $issueId, subIssueUrl: $subIssueUrl }) {
+    issue { number title }
+    subIssue { number title }
+  }
+}
+EOF
 
-   - Repeat for each child issue
-   - Display the parent issue URL once all issues are created and linked
+gh api graphql \
+  -F query=@/tmp/add_sub_issue.graphql \
+  -F issueId="<parent Node ID>" \
+  -F subIssueUrl="https://github.com/yamada-ui/yamada-ui/issues/<child_issue_number>"
+```
+
+- Repeat for each child issue
+- Display the parent issue URL once all issues are created and linked
 
 ## Notes
 

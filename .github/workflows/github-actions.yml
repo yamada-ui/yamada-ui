@@ -63,7 +63,9 @@ jobs:
 
       - name: Run actionlint
         if: steps.changed-files.outputs.any_changed == 'true'
-        run: ./actionlint $WORKFLOW_FILES
+        run: |
+          read -r -a workflow_files <<< "$WORKFLOW_FILES"
+          ./actionlint "${workflow_files[@]}"
         env:
           WORKFLOW_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
 

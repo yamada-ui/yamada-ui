@@ -1,5 +1,5 @@
 import type { Detection } from "../resolve"
-import type { FormatOptions, Formatter } from "./interfaces"
+import type { FormatOptions, FormatterAdapter } from "./interfaces"
 import { toArray } from "@yamada-ui/utils"
 import { existsSync } from "node:fs"
 import { readFile, writeFile } from "node:fs/promises"
@@ -32,12 +32,7 @@ async function detect(cwd: string): Promise<Detection> {
 
 async function formatText(
   content: string,
-  {
-    configPath,
-    cwd,
-    enabled = true,
-    parser = "typescript",
-  }: FormatOptions = {},
+  { configPath, cwd, enabled = true }: FormatOptions = {},
 ) {
   if (!enabled) return content
 
@@ -48,7 +43,7 @@ async function formatText(
 
     const config = configPath ? await resolveConfig(configPath) : {}
 
-    return await prettier(content, { ...config, parser })
+    return await prettier(content, { ...config, parser: "typescript" })
   } catch {
     return content
   }
@@ -73,9 +68,9 @@ async function formatFiles(
   )
 }
 
-export const prettierFormatter: Formatter = {
+export const prettierFormatter = {
   name: "prettier",
   detect,
   formatFiles,
   formatText,
-}
+} as const satisfies FormatterAdapter

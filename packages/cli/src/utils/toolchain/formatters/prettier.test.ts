@@ -34,26 +34,6 @@ describe("prettierFormatter", () => {
       expect(result).toBe("const x = 1;\n")
     })
 
-    test("should format JSON content when parser is json", async () => {
-      const result = await formatText('{"a":1,"b":2}', {
-        cwd: tempDir,
-        parser: "json",
-      })
-      expect(result).toBe('{ "a": 1, "b": 2 }\n')
-    })
-
-    test("should format JSON registry content when parser is json", async () => {
-      const registry =
-        '{"$schema":"https://example.com/schema.json","sources":[]}'
-      const result = await formatText(registry, {
-        cwd: tempDir,
-        parser: "json",
-      })
-      expect(result).toBe(
-        '{ "$schema": "https://example.com/schema.json", "sources": [] }\n',
-      )
-    })
-
     test("should apply config from .prettierrc in cwd", async () => {
       writeFileSync(
         path.join(tempDir, ".prettierrc"),

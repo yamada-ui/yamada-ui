@@ -1,5 +1,5 @@
 import type { LintConfig } from "../../../index.type"
-import type { Detection } from "../resolve"
+import type { ToolchainAdapter } from "../resolve"
 
 export interface LintTextOptions extends LintConfig {
   cwd?: string
@@ -8,9 +8,7 @@ export interface LintTextOptions extends LintConfig {
 
 export interface LintFilesOptions extends Omit<LintTextOptions, "filePath"> {}
 
-export interface Linter {
-  name: string
-  detect(cwd: string): Promise<Detection>
+export interface LinterAdapter extends ToolchainAdapter {
   lintFiles(
     patterns: string | string[],
     options?: LintFilesOptions,

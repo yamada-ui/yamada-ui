@@ -7,7 +7,6 @@ import type {
   Section,
   Source,
 } from "../index.type"
-import { merge } from "@yamada-ui/utils"
 import { HttpsProxyAgent } from "https-proxy-agent"
 import fetch from "node-fetch"
 import { readdir, readFile } from "node:fs/promises"
@@ -454,8 +453,8 @@ export async function generateSources(
     ),
     writeFileSafe(
       path.resolve(dirPath, REGISTRY_FILE_NAME),
-      JSON.stringify(registry),
-      merge(config, { format: { parser: "json" } }),
+      JSON.stringify(registry, null, 2),
+      config,
     ),
   ])
 }

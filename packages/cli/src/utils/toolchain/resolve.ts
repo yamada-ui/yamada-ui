@@ -1,22 +1,42 @@
 export type Detection = "config" | "dependency" | false
 
-export async function resolveAdapter<
-  Y extends { name: string; detect(cwd: string): Promise<Detection> },
->(adapters: Y[], fallback: Y, cwd: string, tool?: string): Promise<Y> {
+export interface ToolchainAdapter {
+  name: string
+  detect(cwd: string): Promise<Detection>
+}
+
+export async function resolveAdapter<Y extends ToolchainAdapter>(
+  adapters: Y[],
+  fallback: Y["name"],
+  cwd: string,
+  tool?: string,
+): Promise<Y> {
   if (tool && tool !== "auto") {
     const named = adapters.find((adapter) => adapter.name === tool)
 
-    if (named) return named
+    if (!named) throw new Error(`Tool "${tool}" is not registered.`)
+
+    return named
   }
 
-  let dependencyMatch: undefined | Y
+  const detections = await Promise.all(
+    adapters.map((adapter) => adapter.detect(cwd)),
+  )
 
-  for (const adapter of adapters) {
-    const detection = await adapter.detect(cwd)
+  const configMatch = adapters.find((_, i) => detections[i] === "config")
 
-    if (detection === "config") return adapter
-    if (detection === "dependency") dependencyMatch ??= adapter
-  }
+  if (configMatch) return configMatch
 
-  return dependencyMatch ?? fallback
+  const dependencyMatch = adapters.find(
+    (_, i) => detections[i] === "dependency",
+  )
+
+  if (dependencyMatch) return dependencyMatch
+
+  const fallbackAdapter = adapters.find((adapter) => adapter.name === fallback)
+
+  if (!fallbackAdapter)
+    throw new Error(`Fallback adapter "${fallback}" not found in adapters.`)
+
+  return fallbackAdapter
 }

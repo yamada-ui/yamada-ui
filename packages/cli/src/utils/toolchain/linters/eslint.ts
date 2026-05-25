@@ -1,5 +1,9 @@
 import type { Detection } from "../resolve"
-import type { Linter, LintFilesOptions, LintTextOptions } from "./interfaces"
+import type {
+  LinterAdapter,
+  LintFilesOptions,
+  LintTextOptions,
+} from "./interfaces"
 import { ESLint } from "eslint"
 import { existsSync } from "node:fs"
 import { readFile } from "node:fs/promises"
@@ -76,9 +80,9 @@ async function lintFiles(
   } catch {}
 }
 
-export const eslintLinter: Linter = {
+export const eslintLinter = {
   name: "eslint",
   detect,
   lintFiles,
   lintText,
-}
+} as const satisfies LinterAdapter

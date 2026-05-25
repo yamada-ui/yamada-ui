@@ -1,15 +1,11 @@
-import type { BuiltInParserName } from "prettier"
 import type { FormatConfig } from "../../../index.type"
-import type { Detection } from "../resolve"
+import type { ToolchainAdapter } from "../resolve"
 
 export interface FormatOptions extends FormatConfig {
   cwd?: string
-  parser?: BuiltInParserName
 }
 
-export interface Formatter {
-  name: string
-  detect(cwd: string): Promise<Detection>
+export interface FormatterAdapter extends ToolchainAdapter {
   formatFiles(
     patterns: string | string[],
     options?: FormatOptions,

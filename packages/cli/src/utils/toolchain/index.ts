@@ -1,16 +1,26 @@
-import type { Formatter } from "./formatters/interfaces"
-import type { Linter } from "./linters/interfaces"
 import { prettierFormatter } from "./formatters/prettier"
 import { eslintLinter } from "./linters/eslint"
+import { resolveAdapter } from "./resolve"
 
-export type { FormatOptions, Formatter } from "./formatters/interfaces"
 export type {
-  Linter,
+  FormatOptions,
+  FormatterAdapter as Formatter,
+} from "./formatters/interfaces"
+export type {
+  LinterAdapter as Linter,
   LintFilesOptions,
   LintTextOptions,
 } from "./linters/interfaces"
+export type { ToolchainAdapter as Adapter } from "./resolve"
 
-export const formatterAdapters: [Formatter, ...Formatter[]] = [
-  prettierFormatter,
-]
-export const linterAdapters: [Linter, ...Linter[]] = [eslintLinter]
+const formatters = [prettierFormatter]
+const linters = [eslintLinter]
+
+export async function resolveToolchain(cwd: string) {
+  const [formatter, linter] = await Promise.all([
+    resolveAdapter(formatters, prettierFormatter.name, cwd),
+    resolveAdapter(linters, eslintLinter.name, cwd),
+  ])
+
+  return { formatter, linter }
+}

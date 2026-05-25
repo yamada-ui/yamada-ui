@@ -1,4 +1,4 @@
-import type { TSESLint } from "@typescript-eslint/utils"
+import type { ESLint, Linter } from "eslint"
 import packageJson from "../package.json"
 import { propsShorthand } from "./rules/props-shorthand"
 
@@ -9,9 +9,9 @@ const basePlugin = {
   rules: {
     "props-shorthand": propsShorthand,
   },
-} satisfies TSESLint.FlatConfig.Plugin
+} satisfies ESLint.Plugin
 
-const recommended: TSESLint.FlatConfig.Config = {
+const recommended: Linter.Config = {
   name: `${name}/recommended`,
   plugins: {
     [name]: basePlugin,
@@ -21,7 +21,7 @@ const recommended: TSESLint.FlatConfig.Config = {
   },
 }
 
-const plugin: TSESLint.FlatConfig.Plugin = {
+const plugin: ESLint.Plugin = {
   ...basePlugin,
   configs: { recommended },
 }

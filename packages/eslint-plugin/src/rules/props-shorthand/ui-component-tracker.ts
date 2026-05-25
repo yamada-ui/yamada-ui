@@ -1,8 +1,18 @@
-import type { TSESTree } from "@typescript-eslint/utils"
+import type {
+  ImportDeclaration,
+  JSXIdentifier,
+  JSXMemberExpression,
+  JSXNamespacedName,
+} from "estree-jsx"
+
+type JSXTagNameExpression =
+  | JSXIdentifier
+  | JSXMemberExpression
+  | JSXNamespacedName
 
 export interface UIComponentTracker {
-  matchesJSXName: (node: TSESTree.JSXTagNameExpression) => boolean
-  visitImport: (node: TSESTree.ImportDeclaration) => void
+  matchesJSXName: (node: JSXTagNameExpression) => boolean
+  visitImport: (node: ImportDeclaration) => void
 }
 
 const STYLED_FACTORY_NAME = "styled"
@@ -14,7 +24,7 @@ export function createUIComponentTracker(
 
   const namespaces = new Set<string>()
 
-  function visitImport(node: TSESTree.ImportDeclaration): void {
+  function visitImport(node: ImportDeclaration): void {
     const source =
       typeof node.source.value === "string" ? node.source.value : ""
     if (!sourcePackages.includes(source)) return
@@ -40,13 +50,13 @@ export function createUIComponentTracker(
     }
   }
 
-  function matchesJSXName(node: TSESTree.JSXTagNameExpression): boolean {
+  function matchesJSXName(node: JSXTagNameExpression): boolean {
     if (node.type === "JSXIdentifier") {
       return components.has(node.name)
     }
 
     if (node.type === "JSXMemberExpression") {
-      let object: TSESTree.JSXMemberExpression["object"] = node.object
+      let object: JSXMemberExpression["object"] = node.object
 
       while (object.type === "JSXMemberExpression") {
         object = object.object

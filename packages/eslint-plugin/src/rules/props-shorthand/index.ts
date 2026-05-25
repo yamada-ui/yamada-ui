@@ -1,32 +1,23 @@
-import type { TSESTree } from "@typescript-eslint/utils"
-import type { RuleModule } from "@typescript-eslint/utils/ts-eslint"
-import { ESLintUtils } from "@typescript-eslint/utils"
+import type { Rule } from "eslint"
+import type { JSXAttribute } from "estree-jsx"
 import { getShorthandMap } from "./shorthand-map"
 import { createUIComponentTracker } from "./ui-component-tracker"
 
-type MessageIds = "duplicateProps" | "preferLonghand" | "preferShorthand"
+interface Options {
+  preferred?: "longhand" | "shorthand"
+}
 
-type Options = [{ preferred?: "longhand" | "shorthand" }?]
-
-const createRule = ESLintUtils.RuleCreator(
-  (name) =>
-    `https://github.com/yamada-ui/yamada-ui/blob/main/packages/eslint-plugin/src/rules/${name}/README.md`,
-)
-
-function getAttrName(attr: TSESTree.JSXAttribute): null | string {
+function getAttrName(attr: JSXAttribute): null | string {
   return attr.name.type === "JSXIdentifier" ? attr.name.name : null
 }
 
-export const propsShorthand: RuleModule<MessageIds, Options> = createRule<
-  Options,
-  MessageIds
->({
-  name: "props-shorthand",
+export const propsShorthand: Rule.RuleModule = {
   meta: {
     type: "suggestion",
     docs: {
       description:
         "Enforce consistent use of shorthand or longhand style props on Yamada UI components",
+      url: "https://github.com/yamada-ui/yamada-ui/blob/main/packages/eslint-plugin/src/rules/props-shorthand/README.md",
     },
     fixable: "code",
     hasSuggestions: false,
@@ -48,10 +39,10 @@ export const propsShorthand: RuleModule<MessageIds, Options> = createRule<
       },
     ],
   },
-  defaultOptions: [{ preferred: "shorthand" }],
 
-  create(context, [options]) {
-    const preferred = options?.preferred ?? "shorthand"
+  create(context) {
+    const options = (context.options[0] ?? {}) as Options
+    const preferred = options.preferred ?? "shorthand"
 
     const { longhandToShorthands, shorthandToLonghand } = getShorthandMap()
 
@@ -66,12 +57,12 @@ export const propsShorthand: RuleModule<MessageIds, Options> = createRule<
         if (!tracker.matchesJSXName(node.name)) return
 
         const attributes = node.attributes.filter(
-          (a): a is TSESTree.JSXAttribute => a.type === "JSXAttribute",
+          (a): a is JSXAttribute => a.type === "JSXAttribute",
         )
 
         const byLonghand = new Map<
           string,
-          { attr: TSESTree.JSXAttribute; name: string }[]
+          { attr: JSXAttribute; name: string }[]
         >()
         for (const attr of attributes) {
           const name = getAttrName(attr)
@@ -134,4 +125,4 @@ export const propsShorthand: RuleModule<MessageIds, Options> = createRule<
       },
     }
   },
-})
+}

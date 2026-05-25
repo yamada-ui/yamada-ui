@@ -1,8 +1,7 @@
-import { RuleTester } from "@typescript-eslint/rule-tester"
-import { afterAll, describe, it } from "vitest"
+import { RuleTester } from "eslint"
+import { describe, it } from "vitest"
 import { propsShorthand } from "./index"
 
-RuleTester.afterAll = afterAll
 RuleTester.describe = describe
 RuleTester.it = it
 

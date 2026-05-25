@@ -1,11 +1,22 @@
-import type { TSESTree } from "@typescript-eslint/utils"
+import type {
+  ImportDeclaration,
+  JSXIdentifier,
+  JSXMemberExpression,
+  JSXNamespacedName,
+  JSXOpeningElement,
+} from "estree-jsx"
 import { parse } from "@typescript-eslint/parser"
 import { describe, expect, test } from "vitest"
 import { createUIComponentTracker } from "./ui-component-tracker"
 
+type JSXTagNameExpression =
+  | JSXIdentifier
+  | JSXMemberExpression
+  | JSXNamespacedName
+
 interface ParsedCode {
-  imports: TSESTree.ImportDeclaration[]
-  jsxNames: TSESTree.JSXTagNameExpression[]
+  imports: ImportDeclaration[]
+  jsxNames: JSXTagNameExpression[]
 }
 
 const parseCode = (code: string): ParsedCode => {
@@ -15,8 +26,8 @@ const parseCode = (code: string): ParsedCode => {
     sourceType: "module",
   })
 
-  const imports: TSESTree.ImportDeclaration[] = []
-  const jsxNames: TSESTree.JSXTagNameExpression[] = []
+  const imports: ImportDeclaration[] = []
+  const jsxNames: JSXTagNameExpression[] = []
 
   const visit = (node: unknown): void => {
     if (!node || typeof node !== "object") return
@@ -28,9 +39,9 @@ const parseCode = (code: string): ParsedCode => {
 
     const typed = node as { type?: string }
     if (typed.type === "ImportDeclaration") {
-      imports.push(node as TSESTree.ImportDeclaration)
+      imports.push(node as unknown as ImportDeclaration)
     } else if (typed.type === "JSXOpeningElement") {
-      jsxNames.push((node as TSESTree.JSXOpeningElement).name)
+      jsxNames.push((node as unknown as JSXOpeningElement).name)
     }
 
     for (const key in node) {

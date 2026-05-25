@@ -45,12 +45,9 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
-  "dependencies": {
-    "@typescript-eslint/utils": "^8.59.3"
-  },
   "devDependencies": {
+    "@types/estree-jsx": "^1.0.5",
     "@typescript-eslint/parser": "^8.59.3",
-    "@typescript-eslint/rule-tester": "^8.59.3",
     "@yamada-ui/react": "workspace:*",
     "@yamada-ui/workspace": "workspace:*",
     "eslint": "catalog:",

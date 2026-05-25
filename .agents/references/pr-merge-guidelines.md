@@ -12,7 +12,7 @@ The following branch protection rules are enabled on the `main` and `v*` branche
 
 ### Review
 
-- **Require review from specific teams**: At least 1 approval from each of the `Prime`, `Standard`, and `Growth` teams is required. `hirotomoyamada` belongs to all 3 teams, so a single approval satisfies every team requirement. `codex-for-yamada-ui` belongs to `Prime`, `claude-for-yamada-ui` belongs to `Standard`, and `composer-for-yamada-ui` belongs to `Growth`.
+- **Require review from specific teams**: At least 1 approval from each of the `Melchior`, `Balthasar`, and `Caspar` teams is required. `hirotomoyamada` belongs to all 3 teams, so a single approval satisfies every team requirement. `melchior-magi` belongs to `Melchior`, `balthasar-magi` belongs to `Balthasar`, and `caspar-magi` belongs to `Caspar`.
 - **Require review from Code Owners**: Approval from a Code Owner listed in [CODEOWNERS](/.github/CODEOWNERS) is required.
 - **Require conversation resolution before merging**: All review comments and conversations must be resolved before merging.
 

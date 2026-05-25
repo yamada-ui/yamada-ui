@@ -56,7 +56,9 @@ describe("I18nProvider", () => {
       return (
         <div>
           <span data-testid="locale">{locale}</span>
-          <button data-testid="change" onClick={() => changeLanguage("ja")} />
+          <button data-testid="change" onClick={() => changeLanguage("ja")}>
+            Change
+          </button>
         </div>
       )
     }

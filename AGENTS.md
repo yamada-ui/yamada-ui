@@ -35,6 +35,8 @@ When editing or reviewing files that match a pattern below, read the linked rule
   - `.claude/skills/**/*.md`
 - [Changesets](.agents/rules/changesets.md):
   - `packages/{cli,react,utils}/src/**/*.{ts,tsx}`
+  - `!packages/{cli,react,utils}/src/**/*.test.{ts,tsx}`
+  - `!packages/{cli,react,utils}/src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}`
   - `.changeset/*.md`
 - [Test Categorization](.agents/rules/test-categorization.md):
   - `packages/react/src/**/*.test.{ts,tsx}`

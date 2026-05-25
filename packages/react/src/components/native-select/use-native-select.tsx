@@ -76,7 +76,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
           return cloneElement(<optgroup />, {
             key: index,
             children: items.map(({ label, ...rest }, index) =>
-              cloneElement(<option />, {
+              cloneElement(<option aria-label={label} />, {
                 key: index,
                 children: label,
                 ...rest,
@@ -88,7 +88,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
         } else {
           const { label, ...rest } = item
 
-          return cloneElement(<option />, {
+          return cloneElement(<option aria-label={label} />, {
             key: index,
             children: label,
             ...rest,

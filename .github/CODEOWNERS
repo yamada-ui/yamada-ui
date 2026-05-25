@@ -1,7 +1,7 @@
-* @yamada-ui/prime @yamada-ui/standard @yamada-ui/growth
+* @yamada-ui/melchior @yamada-ui/balthasar @yamada-ui/caspar
 
 *.md @hirotomoyamada
-.changeset/*.md @yamada-ui/prime @yamada-ui/standard @yamada-ui/growth
+.changeset/*.md @yamada-ui/melchior @yamada-ui/balthasar @yamada-ui/caspar
 package.json @hirotomoyamada
 LICENSE @hirotomoyamada
 .github/ @hirotomoyamada

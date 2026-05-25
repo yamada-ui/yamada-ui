@@ -3,6 +3,14 @@ import { Readable } from "node:stream"
 import ora from "ora"
 import { docs } from "."
 
+vi.mock("node:fs", () => ({
+  mkdirSync: vi.fn(),
+  readFileSync: vi.fn().mockImplementation(() => {
+    throw Object.assign(new Error("ENOENT"), { code: "ENOENT" })
+  }),
+  writeFileSync: vi.fn(),
+}))
+
 function setTTY(value: boolean) {
   Object.defineProperty(process.stdin, "isTTY", { configurable: true, value })
 }

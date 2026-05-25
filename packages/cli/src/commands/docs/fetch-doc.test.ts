@@ -10,7 +10,19 @@ import {
 
 vi.mock("node-fetch", () => ({ default: vi.fn() }))
 
+const mockReadFileSync = vi.fn()
+
+vi.mock("node:fs", () => ({
+  mkdirSync: vi.fn(),
+  readFileSync: (...args: unknown[]) => mockReadFileSync(...args),
+  writeFileSync: vi.fn(),
+}))
+
 const mockFetch = vi.mocked(fetch)
+
+function makeCacheEntry(content: string, timestamp: number): string {
+  return JSON.stringify({ content, timestamp })
+}
 
 describe("buildUrl", () => {
   test("should return llms.txt url when no path given", () => {
@@ -59,6 +71,14 @@ describe("buildUrl", () => {
 })
 
 describe("fetchDoc", () => {
+  beforeEach(() => {
+    mockFetch.mockReset()
+    mockReadFileSync.mockReset()
+    mockReadFileSync.mockImplementation(() => {
+      throw Object.assign(new Error("ENOENT"), { code: "ENOENT" })
+    })
+  })
+
   test("should return text content on success", async () => {
     mockFetch.mockResolvedValue({
       ok: true,
@@ -78,6 +98,57 @@ describe("fetchDoc", () => {
     await expect(
       fetchDoc("https://yamada-ui.com/docs/components/nonexistent.md"),
     ).rejects.toThrow("Documentation not found:")
+  })
+
+  test("should return cached content without fetching when cache is fresh", async () => {
+    mockReadFileSync.mockReturnValue(
+      makeCacheEntry("# Cached Content\n", Date.now()),
+    )
+
+    const result = await fetchDoc(
+      "https://yamada-ui.com/docs/components/cached.md",
+    )
+
+    expect(result).toBe("# Cached Content\n")
+    expect(mockFetch).not.toHaveBeenCalled()
+  })
+
+  test("should fetch and update cache when cache is expired", async () => {
+    const expired = Date.now() - 11 * 60 * 1000
+
+    mockReadFileSync.mockReturnValue(makeCacheEntry("# Old Content\n", expired))
+
+    mockFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve("# Fresh Content\n"),
+    } as any)
+
+    const result = await fetchDoc(
+      "https://yamada-ui.com/docs/components/expired.md",
+    )
+
+    expect(result).toBe("# Fresh Content\n")
+    expect(mockFetch).toHaveBeenCalledWith(
+      "https://yamada-ui.com/docs/components/expired.md",
+      expect.anything(),
+    )
+  })
+
+  test("should fetch normally when no cache file exists", async () => {
+    mockFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve("# New Page\n"),
+    } as any)
+
+    const result = await fetchDoc(
+      "https://yamada-ui.com/docs/components/new-page.md",
+    )
+
+    expect(result).toBe("# New Page\n")
+    expect(mockFetch).toHaveBeenCalledWith(
+      "https://yamada-ui.com/docs/components/new-page.md",
+      expect.anything(),
+    )
   })
 
   test("should use proxy agent when https_proxy env variable is set", async () => {

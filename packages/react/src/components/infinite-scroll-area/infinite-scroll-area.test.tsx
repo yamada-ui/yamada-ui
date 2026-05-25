@@ -32,7 +32,9 @@ describe("<InfiniteScrollArea />", () => {
         {Array(50)
           .fill(0)
           .map((_, index) => (
-            <div key={index}>{index}</div>
+            <div key={index} role="article">
+              {index}
+            </div>
           ))}
       </InfiniteScrollArea>,
     )

@@ -32,6 +32,36 @@ describe("useFocusOnPointerDown", () => {
       </div>
     )
   }
+  const platformDescriptor = Object.getOwnPropertyDescriptor(
+    navigator,
+    "platform",
+  )
+  const vendorDescriptor = Object.getOwnPropertyDescriptor(navigator, "vendor")
+
+  beforeEach(() => {
+    Object.defineProperty(navigator, "platform", {
+      configurable: true,
+      value: "MacIntel",
+    })
+    Object.defineProperty(navigator, "vendor", {
+      configurable: true,
+      value: "Apple Computer, Inc.",
+    })
+  })
+
+  afterEach(() => {
+    if (platformDescriptor) {
+      Object.defineProperty(navigator, "platform", platformDescriptor)
+    } else {
+      delete (navigator as any).platform
+    }
+
+    if (vendorDescriptor) {
+      Object.defineProperty(navigator, "vendor", vendorDescriptor)
+    } else {
+      delete (navigator as any).vendor
+    }
+  })
 
   test("prevents default behavior and focuses on the target element", async () => {
     const { user } = await render(<Component />)

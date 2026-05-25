@@ -27,6 +27,7 @@ export const reactConfig = defineConfig({
         "react-hooks/exhaustive-deps": "error",
 
         "jsx-a11y/no-autofocus": "off",
+        "jsx-a11y/prefer-tag-over-role": "off",
 
         "custom-react/use-client-newline": "error",
       },

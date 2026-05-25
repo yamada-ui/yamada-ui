@@ -13,6 +13,8 @@ const agent = proxyUrl ? new HttpsProxyAgent(proxyUrl) : undefined
 const CACHE_DIR = join(tmpdir(), "yamada-ui", "docs")
 const CACHE_TTL = 10 * 60 * 1000
 
+const HEADING_REGEX = /^#{1,6}\s+(.+)$/
+
 interface CacheEntry {
   content: string
   timestamp: number
@@ -76,18 +78,17 @@ export async function fetchDoc(url: string): Promise<string> {
 function headingToSlug(text: string): string {
   return text
     .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
+    .replace(/[^\p{L}\p{N}\s-]/gu, "")
     .trim()
     .replace(/\s+/g, "-")
 }
 
 function extractSection(lines: string[], startIndex: number): string {
-  const headingRegex = /^#{1,6}\s+(.+)$/
   const level = (lines[startIndex]!.match(/^(#{1,6})/)?.[1] ?? "").length
   let end = lines.length
 
   for (let j = startIndex + 1; j < lines.length; j++) {
-    const nextMatch = lines[j]!.match(headingRegex)
+    const nextMatch = lines[j]!.match(HEADING_REGEX)
 
     if (nextMatch) {
       const nextLevel = (lines[j]!.match(/^(#{1,6})/)?.[1] ?? "").length
@@ -105,11 +106,10 @@ function extractSection(lines: string[], startIndex: number): string {
 export function findHeadingIndex(content: string, hash: string): number {
   const slug = hash.startsWith("#") ? hash.slice(1) : hash
   const lines = content.split("\n")
-  const headingRegex = /^#{1,6}\s+(.+)$/
   let headingIndex = 0
 
   for (let i = 0; i < lines.length; i++) {
-    const match = lines[i]!.match(headingRegex)
+    const match = lines[i]!.match(HEADING_REGEX)
 
     if (match) {
       if (headingToSlug(match[1]!) === headingToSlug(slug)) return headingIndex
@@ -124,10 +124,9 @@ export function findHeadingIndex(content: string, hash: string): number {
 export function trimToSection(content: string, hash: string): string {
   const slug = hash.startsWith("#") ? hash.slice(1) : hash
   const lines = content.split("\n")
-  const headingRegex = /^#{1,6}\s+(.+)$/
 
   for (let i = 0; i < lines.length; i++) {
-    const match = lines[i]!.match(headingRegex)
+    const match = lines[i]!.match(HEADING_REGEX)
 
     if (match && headingToSlug(match[1]!) === headingToSlug(slug)) {
       return extractSection(lines, i)
@@ -138,10 +137,13 @@ export function trimToSection(content: string, hash: string): string {
 }
 
 export function extractSections(content: string): string {
-  return content
+  const headings = content
     .split("\n")
-    .filter((line) => /^#{1,6}\s+/.test(line))
-    .join("\n")
+    .filter((line) => HEADING_REGEX.test(line))
+
+  if (headings.length === 0) return ""
+
+  return headings.join("\n") + "\n"
 }
 
 export function trimToSectionByIndex(
@@ -150,11 +152,10 @@ export function trimToSectionByIndex(
   hash: string,
 ): string {
   const lines = content.split("\n")
-  const headingRegex = /^#{1,6}\s+(.+)$/
   let currentIndex = 0
 
   for (let i = 0; i < lines.length; i++) {
-    const match = lines[i]!.match(headingRegex)
+    const match = lines[i]!.match(HEADING_REGEX)
 
     if (match) {
       if (currentIndex === headingIndex) return extractSection(lines, i)

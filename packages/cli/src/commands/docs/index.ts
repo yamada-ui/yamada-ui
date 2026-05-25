@@ -33,7 +33,11 @@ async function readStdin(): Promise<string> {
   )
 }
 
-function parsePath(input: string): { hash: string | undefined; path: string } {
+function parsePath(input: string): {
+  detectedLang: string | undefined
+  hash: string | undefined
+  path: string
+} {
   if (input.startsWith("http://") || input.startsWith("https://")) {
     const url = new URL(input)
 
@@ -45,7 +49,10 @@ function parsePath(input: string): { hash: string | undefined; path: string } {
       )
     }
 
+    const langMatch = url.pathname.match(/^\/(ja|en)(?=\/)/)
+
     return {
+      detectedLang: langMatch?.[1],
       hash: url.hash ? url.hash.slice(1) : undefined,
       path: url.pathname.replace(/^\/(ja|en)(?=\/)/, ""),
     }
@@ -54,10 +61,14 @@ function parsePath(input: string): { hash: string | undefined; path: string } {
   const hashIndex = input.indexOf("#")
 
   if (hashIndex !== -1) {
-    return { hash: input.slice(hashIndex + 1), path: input.slice(0, hashIndex) }
+    return {
+      detectedLang: undefined,
+      hash: input.slice(hashIndex + 1),
+      path: input.slice(0, hashIndex),
+    }
   }
 
-  return { hash: undefined, path: input }
+  return { detectedLang: undefined, hash: undefined, path: input }
 }
 
 export const docs = new Command("docs")
@@ -88,12 +99,14 @@ export const docs = new Command("docs")
 
       let docPath: string | undefined
       let hash: string | undefined
+      let effectiveLang = lang
 
       if (rawInput) {
         const parsed = parsePath(rawInput)
 
         docPath = parsed.path || undefined
         hash = parsed.hash
+        if (parsed.detectedLang) effectiveLang = parsed.detectedLang
       }
 
       if (hash && !docPath) {
@@ -102,18 +115,16 @@ export const docs = new Command("docs")
         )
       }
 
-      const needsEnFallback = lang !== "en" && !!hash
+      const needsEnFallback = effectiveLang !== "en" && !!hash
 
       spinner.start("Fetching documentation")
 
       const [content, enContent] = await Promise.all([
-        fetchDoc(buildUrl(docPath, lang)),
+        fetchDoc(buildUrl(docPath, effectiveLang)),
         needsEnFallback
           ? fetchDoc(buildUrl(docPath, "en"))
           : Promise.resolve(undefined),
       ])
-
-      spinner.succeed("Fetched documentation")
 
       let result = content
 
@@ -131,6 +142,7 @@ export const docs = new Command("docs")
         }
       }
 
+      spinner.succeed("Fetched documentation")
       process.stdout.write(sections ? extractSections(result) : result)
     } catch (e) {
       if (e instanceof Error) {

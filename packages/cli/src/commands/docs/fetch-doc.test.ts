@@ -177,7 +177,7 @@ describe("fetchDoc", () => {
 })
 
 describe("extractSections", () => {
-  test("should return only heading lines joined by newlines", () => {
+  test("should return heading lines with trailing newline", () => {
     const content = [
       "# Button",
       "",
@@ -192,11 +192,17 @@ describe("extractSections", () => {
       "Variants content.",
     ].join("\n")
 
-    expect(extractSections(content)).toBe("# Button\n## Usage\n### Variants")
+    expect(extractSections(content)).toBe("# Button\n## Usage\n### Variants\n")
   })
 
   test("should return empty string when no headings exist", () => {
     expect(extractSections("No headings here.\nJust plain text.")).toBe("")
+  })
+
+  test("should match japanese headings", () => {
+    const content = "# ボタン\n\n## 使い方\n\nContent.\n"
+
+    expect(extractSections(content)).toBe("# ボタン\n## 使い方\n")
   })
 })
 
@@ -275,6 +281,12 @@ describe("findHeadingIndex", () => {
 
   test("should match case-insensitively", () => {
     expect(findHeadingIndex(content, "USAGE")).toBe(1)
+  })
+
+  test("should match japanese headings", () => {
+    const jaContent = "# ボタン\n\n## 使い方\n\nContent.\n"
+
+    expect(findHeadingIndex(jaContent, "使い方")).toBe(1)
   })
 })
 

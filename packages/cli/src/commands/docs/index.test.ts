@@ -244,7 +244,7 @@ describe("docs", () => {
       from: "user",
     })
 
-    expect(stdoutSpy).toHaveBeenCalledWith("# Button\n## Usage\n### Variants")
+    expect(stdoutSpy).toHaveBeenCalledWith("# Button\n## Usage\n### Variants\n")
   })
 
   test("should read path from stdin when no argument given in non-TTY environment", async () => {
@@ -342,5 +342,35 @@ describe("docs", () => {
     await docs.parseAsync(["/docs/components/button"], { from: "user" })
 
     expect(spinner.fail).toHaveBeenCalledWith("An unknown error occurred")
+  })
+
+  test("should not call spinner.succeed when section is not found", async () => {
+    mockResponse("# Button\n\n## Usage\n\nContent.\n")
+    setTTY(true)
+
+    const spinner = ora()
+
+    await docs.parseAsync(["/docs/components/button#nonexistent"], {
+      from: "user",
+    })
+
+    expect(spinner.succeed).not.toHaveBeenCalled()
+    expect(spinner.fail).toHaveBeenCalledWith(
+      expect.stringContaining("Section not found:"),
+    )
+  })
+
+  test("should auto-detect japanese from /ja URL prefix without --lang ja", async () => {
+    mockResponse("# ボタン\n")
+    setTTY(true)
+
+    await docs.parseAsync(["https://yamada-ui.com/ja/docs/components/button"], {
+      from: "user",
+    })
+
+    expect(mockFetch).toHaveBeenCalledWith(
+      "https://yamada-ui.com/ja/docs/components/button.md",
+      expect.anything(),
+    )
   })
 })

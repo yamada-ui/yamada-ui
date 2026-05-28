@@ -28,9 +28,8 @@
   },
   "customizations": {
     "vscode": {
-      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"],
+      "extensions": ["oxc.oxc-vscode"],
       "settings": {
-        "eslint.workingDirectories": [{ "mode": "auto" }],
         "typescript.tsdk": "node_modules/typescript/lib"
       }
     }

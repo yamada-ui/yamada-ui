@@ -11,11 +11,12 @@ import {
 vi.mock("node-fetch", () => ({ default: vi.fn() }))
 
 const mockReadFileSync = vi.fn()
+const mockWriteFileSync = vi.fn()
 
 vi.mock("node:fs", () => ({
   mkdirSync: vi.fn(),
   readFileSync: (...args: unknown[]) => mockReadFileSync(...args),
-  writeFileSync: vi.fn(),
+  writeFileSync: (...args: unknown[]) => mockWriteFileSync(...args),
 }))
 
 const mockFetch = vi.mocked(fetch)
@@ -74,6 +75,7 @@ describe("fetchDoc", () => {
   beforeEach(() => {
     mockFetch.mockReset()
     mockReadFileSync.mockReset()
+    mockWriteFileSync.mockReset()
     mockReadFileSync.mockImplementation(() => {
       throw Object.assign(new Error("ENOENT"), { code: "ENOENT" })
     })
@@ -149,6 +151,22 @@ describe("fetchDoc", () => {
       "https://yamada-ui.com/docs/components/new-page.md",
       expect.anything(),
     )
+  })
+
+  test("should return content even when writing cache fails", async () => {
+    mockWriteFileSync.mockImplementation(() => {
+      throw new Error("EROFS")
+    })
+    mockFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve("# Button\n\nContent here."),
+    } as any)
+
+    const result = await fetchDoc(
+      "https://yamada-ui.com/docs/components/button.md",
+    )
+
+    expect(result).toBe("# Button\n\nContent here.")
   })
 
   test("should use proxy agent when https_proxy env variable is set", async () => {

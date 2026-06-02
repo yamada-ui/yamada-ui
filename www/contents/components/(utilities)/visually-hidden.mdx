@@ -41,11 +41,7 @@ import { VisuallyHidden } from "@workspaces/ui"
 It is used to visually hide elements, but it is accessible in screen readers. By default, it renders a `span` element.
 
 :::tip
-Use `VisuallyHidden` when text should not be visually displayed but should still be read by screen readers. If you only need to provide an accessible name, avoid adding an extra hidden element; set `aria-label` or `aria-labelledby` on the target element instead.
-:::
-
-:::tip
-Do not use `VisuallyHidden` for content that should be hidden from all users. The content of `VisuallyHidden` will still be read by screen readers. For form guidance or additional contextual help, consider visually available components such as [Field](/docs/components/field), [Tooltip](/docs/components/tooltip), or [Popover](/docs/components/popover).
+If you only need to provide an accessible name or description, consider setting `aria-label`, `aria-labelledby`, or `aria-describedby` on the target element. Use `VisuallyHidden` as a last resort when the element needs to be visually hidden and other methods cannot be used.
 :::
 
 ## Props

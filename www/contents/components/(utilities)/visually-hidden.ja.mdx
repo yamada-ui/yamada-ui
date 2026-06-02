@@ -39,11 +39,7 @@ import { VisuallyHidden } from "@workspaces/ui"
 視覚的に要素を隠すために使用されますが、スクリーンリーダーではアクセス可能にします。デフォルトでは、`span`要素をレンダリングします。
 
 :::tip
-`VisuallyHidden`は、視覚的には表示しないテキストをスクリーンリーダーによって読み上げられるようにしたい場合に使用します。アクセシブルな名前を提供するだけであれば、余分な隠し要素を追加せず、対象の要素に`aria-label`または`aria-labelledby`を設定してください。
-:::
-
-:::tip
-すべてのユーザーから隠したいコンテンツには`VisuallyHidden`を使用しないでください。`VisuallyHidden`の内容はスクリーンリーダーによって読み上げられます。フォームの補足や追加の文脈的なヘルプは、[Field](/docs/components/field)、[Tooltip](/docs/components/tooltip)、[Popover](/docs/components/popover)など、視覚的にも利用できるコンポーネントを検討してください。
+アクセシブルな名前や説明を提供するだけであれば、対象の要素に`aria-label`、`aria-labelledby`、または`aria-describedby`を設定することを検討します。視覚的に要素を隠す必要があり、どうしても他の方法で対応できない場合の最終手段として`VisuallyHidden`を使用します。
 :::
 
 ## Props

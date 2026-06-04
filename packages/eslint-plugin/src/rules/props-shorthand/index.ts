@@ -1,11 +1,16 @@
 import type { Rule } from "eslint"
 import type { JSXAttribute } from "estree-jsx"
 import { getShorthandMap } from "./shorthand-map"
+import { createTypedComponentMatcher } from "./typed-component-matcher"
 import { createUIComponentTracker } from "./ui-component-tracker"
 
 interface Options {
   preferred?: "longhand" | "shorthand"
+  sources?: string[]
+  typed?: boolean
 }
+
+const DEFAULT_SOURCES = ["@yamada-ui/react", "@workspaces/ui"] as const
 
 function getAttrName(attr: JSXAttribute): null | string {
   return attr.name.type === "JSXIdentifier" ? attr.name.name : null
@@ -17,10 +22,8 @@ export const propsShorthand: Rule.RuleModule = {
     docs: {
       description:
         "Enforce consistent use of shorthand or longhand style props on Yamada UI components",
-      url: "https://github.com/yamada-ui/yamada-ui/blob/main/packages/eslint-plugin/src/rules/props-shorthand/README.md",
     },
     fixable: "code",
-    hasSuggestions: false,
     messages: {
       duplicateProps:
         "Both '{{a}}' and '{{b}}' are specified for the same style property '{{longhand}}'; keep only one.",
@@ -35,6 +38,12 @@ export const propsShorthand: Rule.RuleModule = {
         additionalProperties: false,
         properties: {
           preferred: { type: "string", enum: ["shorthand", "longhand"] },
+          sources: {
+            type: "array",
+            items: { type: "string" },
+            uniqueItems: true,
+          },
+          typed: { type: "boolean" },
         },
       },
     ],
@@ -46,7 +55,12 @@ export const propsShorthand: Rule.RuleModule = {
 
     const { longhandToShorthands, shorthandToLonghand } = getShorthandMap()
 
-    const tracker = createUIComponentTracker(["@yamada-ui/react"])
+    const tracker = createUIComponentTracker(options.sources ?? DEFAULT_SOURCES)
+
+    const typedMatcher =
+      (options.typed ?? true)
+        ? createTypedComponentMatcher(context.sourceCode.parserServices)
+        : null
 
     return {
       ImportDeclaration(node) {
@@ -54,7 +68,11 @@ export const propsShorthand: Rule.RuleModule = {
       },
 
       JSXOpeningElement(node) {
-        if (!tracker.matchesJSXName(node.name)) return
+        if (
+          !tracker.matchesJSXName(node.name) &&
+          !typedMatcher?.matchesJSXElement(node)
+        )
+          return
 
         const attributes = node.attributes.filter(
           (a): a is JSXAttribute => a.type === "JSXAttribute",
@@ -64,6 +82,7 @@ export const propsShorthand: Rule.RuleModule = {
           string,
           { attr: JSXAttribute; name: string }[]
         >()
+
         for (const attr of attributes) {
           const name = getAttrName(attr)
           if (!name) continue
@@ -81,13 +100,18 @@ export const propsShorthand: Rule.RuleModule = {
         const duplicateNames = new Set<string>()
         for (const [longhand, entries] of byLonghand) {
           if (entries.length < 2) continue
+
           const [first, second] = entries
           if (!first || !second) continue
-          for (const e of entries) duplicateNames.add(e.name)
+
+          for (const e of entries) {
+            duplicateNames.add(e.name)
+          }
+
           context.report({
-            node: first.attr.name,
-            messageId: "duplicateProps",
             data: { a: first.name, b: second.name, longhand },
+            messageId: "duplicateProps",
+            node: first.attr.name,
           })
         }
 
@@ -101,24 +125,25 @@ export const propsShorthand: Rule.RuleModule = {
 
             const shorts = longhandToShorthands.get(name)
             if (!shorts || shorts.length === 0) continue
+
             const short = shorts[0]
             if (!short) continue
 
             context.report({
-              node: attr.name,
-              messageId: "preferShorthand",
               data: { longhand: name, shorthand: short },
               fix: (fixer) => fixer.replaceText(attr.name, short),
+              messageId: "preferShorthand",
+              node: attr.name,
             })
           } else {
             const longhand = shorthandToLonghand.get(name)
             if (!longhand) continue
 
             context.report({
-              node: attr.name,
-              messageId: "preferLonghand",
               data: { longhand, shorthand: name },
               fix: (fixer) => fixer.replaceText(attr.name, longhand),
+              messageId: "preferLonghand",
+              node: attr.name,
             })
           }
         }

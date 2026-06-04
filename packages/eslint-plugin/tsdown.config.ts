@@ -5,7 +5,6 @@ const sharedConfig: UserConfig = {
   target: "es2022",
   entry: "src/index.ts",
   platform: "node",
-  fixedExtension: false,
   sourcemap: true,
   unbundle: true,
 }

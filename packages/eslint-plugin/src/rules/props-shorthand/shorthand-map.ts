@@ -15,13 +15,17 @@ export function getShorthandMap(): ShorthandMap {
 
   const standardByRef = new WeakMap<object, string>()
   for (const [name, def] of Object.entries(standardStyles)) {
-    if (def && typeof def === "object") standardByRef.set(def, name)
+    if (def && typeof def === "object") {
+      standardByRef.set(def, name)
+    }
   }
 
   for (const [short, def] of Object.entries(shorthandStyles)) {
     let long: string | undefined
 
-    if (def && typeof def === "object") long = standardByRef.get(def)
+    if (def && typeof def === "object") {
+      long = standardByRef.get(def)
+    }
 
     if (!long) {
       const properties = (def as { properties?: readonly unknown[] } | null)

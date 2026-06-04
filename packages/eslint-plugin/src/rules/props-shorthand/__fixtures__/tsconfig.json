@@ -1,0 +1,7 @@
+{
+  "extends": "@yamada-ui/workspace/typescript/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve"
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
+}

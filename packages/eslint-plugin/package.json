@@ -13,7 +13,22 @@
   ],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "license": "MIT",
-  "main": "src/index.ts",
+  "main": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist"
   ],
@@ -41,9 +56,7 @@
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "pnpm -w format packages/eslint-plugin",
-    "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test",
-    "prepack": "clean-package",
-    "postpack": "clean-package restore"
+    "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test"
   },
   "devDependencies": {
     "@types/estree-jsx": "^1.0.5",
@@ -54,8 +67,17 @@
     "typescript-eslint": "^8.59.3"
   },
   "peerDependencies": {
+    "@typescript-eslint/parser": ">=8",
     "@yamada-ui/react": "workspace:*",
-    "eslint": ">=9"
+    "eslint": ">=9",
+    "typescript": ">=5"
   },
-  "clean-package": "./clean-package.config.json"
+  "peerDependenciesMeta": {
+    "@typescript-eslint/parser": {
+      "optional": true
+    },
+    "typescript": {
+      "optional": true
+    }
+  }
 }

@@ -6,7 +6,6 @@ import type {
   JSXOpeningElement,
 } from "estree-jsx"
 import { parse } from "@typescript-eslint/parser"
-import { describe, expect, test } from "vitest"
 import { createUIComponentTracker } from "./ui-component-tracker"
 
 type JSXTagNameExpression =
@@ -44,7 +43,7 @@ const parseCode = (code: string): ParsedCode => {
       jsxNames.push((node as unknown as JSXOpeningElement).name)
     }
 
-    for (const key in node) {
+    for (const key of Object.keys(node)) {
       if (key === "parent") continue
       visit((node as Record<string, unknown>)[key])
     }

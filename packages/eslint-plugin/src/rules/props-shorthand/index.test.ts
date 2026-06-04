@@ -1,9 +1,8 @@
 import { RuleTester } from "eslint"
-import { describe, it } from "vitest"
 import { propsShorthand } from "./index"
 
 RuleTester.describe = describe
-RuleTester.it = it
+RuleTester.it = test
 
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -77,6 +76,38 @@ ruleTester.run("props-shorthand", propsShorthand, {
         const App = () => <Y.Box />
       `,
       options: [{ preferred: "shorthand" }],
+    },
+    {
+      name: "sources: explicit list without @yamada-ui/react opts the default out",
+      code: `
+        import { Box } from "@yamada-ui/react"
+        const App = () => <Box margin={1} />
+      `,
+      options: [{ preferred: "shorthand", sources: ["@my/ui"] }],
+    },
+    {
+      name: "sources: package not listed is ignored",
+      code: `
+        import { Box } from "@my/ui"
+        const App = () => <Box margin={1} />
+      `,
+      options: [{ preferred: "shorthand" }],
+    },
+    {
+      name: "typed: true silently falls back when parserServices.program is unavailable",
+      code: `
+        import { Box } from "@yamada-ui/react"
+        const App = () => <Box m={1} />
+      `,
+      options: [{ preferred: "shorthand", typed: true }],
+    },
+    {
+      name: "typed: false disables typed matcher",
+      code: `
+        import { Box } from "@yamada-ui/react"
+        const App = () => <Box m={1} />
+      `,
+      options: [{ preferred: "shorthand", typed: false }],
     },
   ],
   invalid: [
@@ -222,6 +253,73 @@ ruleTester.run("props-shorthand", propsShorthand, {
           data: { a: "bgGradient", b: "bgImage", longhand: "backgroundImage" },
         },
       ],
+    },
+    {
+      name: "sources: custom package name",
+      code: `
+        import { Box } from "@my/ui"
+        const App = () => <Box margin={1} />
+      `,
+      output: `
+        import { Box } from "@my/ui"
+        const App = () => <Box m={1} />
+      `,
+      options: [{ preferred: "shorthand", sources: ["@my/ui"] }],
+      errors: [{ messageId: "preferShorthand" }],
+    },
+    {
+      name: "sources: path alias",
+      code: `
+        import { Box } from "@/components/ui"
+        const App = () => <Box margin={1} />
+      `,
+      output: `
+        import { Box } from "@/components/ui"
+        const App = () => <Box m={1} />
+      `,
+      options: [
+        {
+          preferred: "shorthand",
+          sources: ["@yamada-ui/react", "@/components/ui"],
+        },
+      ],
+      errors: [{ messageId: "preferShorthand" }],
+    },
+    {
+      name: "sources: relative path",
+      code: `
+        import { Box } from "./ui"
+        const App = () => <Box margin={1} />
+      `,
+      output: `
+        import { Box } from "./ui"
+        const App = () => <Box m={1} />
+      `,
+      options: [
+        {
+          preferred: "shorthand",
+          sources: ["@yamada-ui/react", "./ui"],
+        },
+      ],
+      errors: [{ messageId: "preferShorthand" }],
+    },
+    {
+      name: "sources: mixed sources still lint @yamada-ui/react when listed",
+      code: `
+        import { Box } from "@yamada-ui/react"
+        const App = () => <Box margin={1} />
+      `,
+      output: `
+        import { Box } from "@yamada-ui/react"
+        const App = () => <Box m={1} />
+      `,
+      options: [
+        {
+          preferred: "shorthand",
+          sources: ["@yamada-ui/react", "@/components/ui"],
+        },
+      ],
+      errors: [{ messageId: "preferShorthand" }],
     },
   ],
 })

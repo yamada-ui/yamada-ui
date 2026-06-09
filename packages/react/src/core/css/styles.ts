@@ -3096,7 +3096,8 @@ export interface StyleProps {
    *
    * The <code>baseline-shift</code> CSS property sets the position of an element relative to its dominant baseline.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2026-03-24
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-shift
    */

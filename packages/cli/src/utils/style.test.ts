@@ -140,4 +140,21 @@ export type AccordionStyle = typeof accordionStyle
 
     expect(transformHeadless(content)).toBe(content)
   })
+
+  test("should keep unknown properties unchanged", () => {
+    const content = `export const buttonStyle = defineComponentStyle({
+  className: "button",
+
+  base: { color: "red" },
+})
+`
+
+    expect(transformHeadless(content))
+      .toBe(`export const buttonStyle = defineComponentStyle({
+  className: "button",
+
+  base: {},
+})
+`)
+  })
 })

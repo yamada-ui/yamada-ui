@@ -766,6 +766,38 @@ describe("getDiff", () => {
     expect(changeMap.button!["button.style.ts"]).toBeDefined()
   })
 
+  test("should transform removed style sources for headless components", async () => {
+    const config = createConfig()
+    const registryMap: RegistryMap = {
+      local: {
+        button: {
+          headless: true,
+          section: "components",
+          sources: [
+            { name: "index.ts", content: "same\n" },
+            {
+              name: "button.style.ts",
+              content: `export const buttonStyle = defineComponentStyle({\n  base: { color: "red" },\n})\n`,
+            },
+          ],
+        },
+      },
+      remote: {
+        button: {
+          headless: true,
+          section: "components",
+          sources: [{ name: "index.ts", content: "same\n" }],
+        },
+      },
+    }
+
+    const { changeMap } = await getDiff(["button"], registryMap, config)
+
+    const data = changeMap.button!["button.style.ts"]!
+    expect("local" in data && data.local).toContain("base: {}")
+    expect("local" in data && data.local).not.toContain("red")
+  })
+
   test("should skip style value changes when config headless is enabled", async () => {
     const config = { ...createConfig(), components: { headless: true } }
     const registryMap: RegistryMap = {

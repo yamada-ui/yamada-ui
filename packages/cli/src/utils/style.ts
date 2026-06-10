@@ -1,4 +1,15 @@
-import ts from "typescript"
+import type { Expression, Node, ObjectLiteralExpression } from "typescript"
+import {
+  createSourceFile,
+  forEachChild,
+  isArrayLiteralExpression,
+  isCallExpression,
+  isIdentifier,
+  isObjectLiteralExpression,
+  isPropertyAssignment,
+  isSpreadAssignment,
+  ScriptTarget,
+} from "typescript"
 
 const DEFINE_STYLE_NAMES = ["defineComponentSlotStyle", "defineComponentStyle"]
 const OMITTED_DEFAULT_PROPS = ["colorScheme", "size", "variant"]
@@ -14,24 +25,24 @@ export function isStyleFile(fileName: string) {
 }
 
 export function transformHeadless(content: string) {
-  const sourceFile = ts.createSourceFile(
+  const sourceFile = createSourceFile(
     "style.ts",
     content,
-    ts.ScriptTarget.Latest,
+    ScriptTarget.Latest,
     true,
   )
   const edits: Edit[] = []
 
-  function getEmptyText(node: ts.ObjectLiteralExpression) {
+  function getEmptyText(node: ObjectLiteralExpression) {
     const spreads = node.properties
-      .filter((property) => ts.isSpreadAssignment(property))
+      .filter((property) => isSpreadAssignment(property))
       .map((property) => property.getText(sourceFile))
 
     return spreads.length ? `{ ${spreads.join(", ")} }` : "{}"
   }
 
-  function emptyObject(node: ts.Expression) {
-    if (!ts.isObjectLiteralExpression(node)) return
+  function emptyObject(node: Expression) {
+    if (!isObjectLiteralExpression(node)) return
 
     edits.push({
       end: node.getEnd(),
@@ -40,21 +51,21 @@ export function transformHeadless(content: string) {
     })
   }
 
-  function emptyValues(node: ts.Expression) {
-    if (!ts.isObjectLiteralExpression(node)) return
+  function emptyValues(node: Expression) {
+    if (!isObjectLiteralExpression(node)) return
 
     node.properties.forEach((property) => {
-      if (ts.isPropertyAssignment(property)) emptyObject(property.initializer)
+      if (isPropertyAssignment(property)) emptyObject(property.initializer)
     })
   }
 
-  function omitDefaultProps(node: ts.Expression) {
-    if (!ts.isObjectLiteralExpression(node)) return
+  function omitDefaultProps(node: Expression) {
+    if (!isObjectLiteralExpression(node)) return
 
     const properties = node.properties.filter(
       (property) =>
         !(
-          ts.isPropertyAssignment(property) &&
+          isPropertyAssignment(property) &&
           OMITTED_DEFAULT_PROPS.includes(property.name.getText(sourceFile))
         ),
     )
@@ -68,18 +79,18 @@ export function transformHeadless(content: string) {
     edits.push({ end: node.getEnd(), start: node.getStart(sourceFile), text })
   }
 
-  function visit(node: ts.Node) {
+  function visit(node: Node) {
     if (
-      ts.isCallExpression(node) &&
-      ts.isIdentifier(node.expression) &&
+      isCallExpression(node) &&
+      isIdentifier(node.expression) &&
       DEFINE_STYLE_NAMES.includes(node.expression.text)
     ) {
       const slot = node.expression.text === "defineComponentSlotStyle"
       const [arg] = node.arguments
 
-      if (arg && ts.isObjectLiteralExpression(arg)) {
+      if (arg && isObjectLiteralExpression(arg)) {
         arg.properties.forEach((property) => {
-          if (!ts.isPropertyAssignment(property)) return
+          if (!isPropertyAssignment(property)) return
 
           const name = property.name.getText(sourceFile)
           const value = property.initializer
@@ -95,7 +106,7 @@ export function transformHeadless(content: string) {
               break
 
             case "compounds":
-              if (ts.isArrayLiteralExpression(value))
+              if (isArrayLiteralExpression(value))
                 edits.push({
                   end: value.getEnd(),
                   start: value.getStart(sourceFile),
@@ -110,9 +121,9 @@ export function transformHeadless(content: string) {
               break
 
             case "props":
-              if (ts.isObjectLiteralExpression(value)) {
+              if (isObjectLiteralExpression(value)) {
                 value.properties.forEach((property) => {
-                  if (ts.isPropertyAssignment(property))
+                  if (isPropertyAssignment(property))
                     emptyValues(property.initializer)
                 })
               }
@@ -132,7 +143,7 @@ export function transformHeadless(content: string) {
       }
     }
 
-    ts.forEachChild(node, visit)
+    forEachChild(node, visit)
   }
 
   visit(sourceFile)

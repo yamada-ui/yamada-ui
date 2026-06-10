@@ -646,7 +646,7 @@ describe("add", () => {
     const registry = JSON.parse(
       readFileSync(path.join(buttonDir, "registry.json"), "utf-8"),
     )
-    expect(registry.headless).toBeTruthy()
+    expect(registry).toHaveProperty("headless", true)
   })
 
   test("should generate empty styles without recording headless when config headless is enabled", async () => {
@@ -712,7 +712,7 @@ describe("add", () => {
     const registry = JSON.parse(
       readFileSync(path.join(buttonDir, "registry.json"), "utf-8"),
     )
-    expect(registry.headless).toBeFalsy()
+    expect(registry).toHaveProperty("headless", false)
   })
 
   test("should show error when all components add without overwrite and dir exists with --yes", async () => {

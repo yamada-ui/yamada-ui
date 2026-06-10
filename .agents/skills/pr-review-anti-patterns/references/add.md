@@ -4,7 +4,7 @@ One skill run = one anti-pattern. If the PR list given by the user spans two dif
 
 ## 0: Fetch the list
 
-Extract all entries from the [anti-patterns](/.agents/references/review-anti-patterns/index.md) index into a list.
+Extract all entries from the [PR Review Anti-Patterns](/.agents/references/pr-review-anti-patterns/index.md) index into a list.
 
 ## 1: Fetch the PRs
 
@@ -49,7 +49,7 @@ Ask the user whether to include fixes for the PRs they pointed out in this PR as
 ## 8: Add the entry
 
 1. Create a new worktree branched from `origin/main`.
-2. Write out the draft as a file under `.agents/references/review-anti-patterns`, and add it to the list in `.agents/references/review-anti-patterns/index.md` in the same way as other entries.
+2. Write out the draft as a file under `.agents/references/pr-review-anti-patterns`, and add it to the list in `.agents/references/pr-review-anti-patterns/index.md` in the same way as other entries.
 3. If Phase 7 requested including fixes in the PR, fix the missed or misunderstood content identified during the interview in Phase 4.
 4. Commit, push, and create the PR. Include "Anti-pattern" in the PR title since it is required by the search query in Phase 3.
 5. After creating the PR, delete the worktree directory you created, remove the worktree (`git worktree remove <path> && git worktree prune`), and delete the local branch you created (`git branch -D <branch-name>`) to clean up.

@@ -1,4 +1,4 @@
-# Review Anti-Patterns
+# PR Review Anti-Patterns
 
 Case library of past PRs where both bots approved something the maintainer rejected. When a trigger below matches the current diff, read the linked entry. Otherwise skip.
 

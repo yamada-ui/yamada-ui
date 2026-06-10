@@ -1,5 +1,6 @@
 import type { ListrTask } from "listr2"
 import type { Config, Registries } from "../../index.type"
+import { isUndefined } from "@yamada-ui/utils"
 import { Listr } from "listr2"
 import { readFile } from "node:fs/promises"
 import path from "node:path"
@@ -27,6 +28,7 @@ export interface RegistryMap {
 
 export interface GetComponentDataOptions {
   concurrent?: boolean
+  headless?: boolean
   index?: boolean
   tag?: string
   theme?: boolean
@@ -37,6 +39,7 @@ export async function getRegistriesAndFiles(
   config: Config,
   {
     concurrent = true,
+    headless,
     index = false,
     tag,
     theme = false,
@@ -126,10 +129,9 @@ export async function getRegistriesAndFiles(
             },
             {
               task: async (_, task) => {
-                registryMap.remote[componentName] = await fetchRegistry(
-                  componentName,
-                  { tag },
-                )
+                registryMap.remote[componentName] = {
+                  ...(await fetchRegistry(componentName, { tag })),
+                }
 
                 task.title = `Fetched ${c.cyan(componentName)} registry`
               },
@@ -141,6 +143,20 @@ export async function getRegistriesAndFiles(
   )
 
   await tasks.run()
+
+  const globalHeadless = config.components?.headless ?? false
+
+  Object.entries(registryMap.remote).forEach(([componentName, registry]) => {
+    if (registry.section !== "components") return
+
+    if (isUndefined(headless)) {
+      const localHeadless = registryMap.local[componentName]?.headless
+
+      if (!isUndefined(localHeadless)) registry.headless = localHeadless
+    } else if (headless !== globalHeadless) {
+      registry.headless = headless
+    }
+  })
 
   return { fileMap, registryMap }
 }

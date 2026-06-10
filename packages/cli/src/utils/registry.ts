@@ -23,6 +23,7 @@ import {
 import { writeFileSafe } from "./fs"
 import { lintText } from "./lint"
 import { formatText } from "./prettier"
+import { isStyleFile, transformHeadless } from "./style"
 import {
   isJsx,
   transformExtension,
@@ -401,18 +402,27 @@ export async function transformIndexWithFormatAndLint(
   return content
 }
 
+export interface GenerateSourceOptions {
+  headless?: boolean
+}
+
 export async function generateSource(
   dirPath: string,
   section: RegistrySection,
   { name: fileName, content, data, template }: Source,
   config: Config,
   generatedNames: string[] = [],
+  { headless }: GenerateSourceOptions = {},
 ) {
+  const styleFile = section === "components" && isStyleFile(fileName)
+
   fileName = transformExtension(fileName, config.jsx)
 
   const targetPath = path.resolve(dirPath, fileName)
 
   if (content) {
+    if (headless && styleFile) content = transformHeadless(content)
+
     content = transformContent(section, content, config, generatedNames)
 
     if (config.jsx)
@@ -446,10 +456,18 @@ export async function generateSources(
   registry: Registry,
   config: Config,
   generatedNames: string[] = [],
+  options: GenerateSourceOptions = {},
 ) {
   await Promise.all([
     ...registry.sources.map((source) =>
-      generateSource(dirPath, registry.section, source, config, generatedNames),
+      generateSource(
+        dirPath,
+        registry.section,
+        source,
+        config,
+        generatedNames,
+        options,
+      ),
     ),
     writeFileSafe(
       path.resolve(dirPath, REGISTRY_FILE_NAME),

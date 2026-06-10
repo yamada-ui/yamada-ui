@@ -14,10 +14,12 @@ import c from "picocolors"
 import {
   getPackageName,
   isJsx,
+  isStyleFile,
   splitVersion,
   transformContent,
   transformContentWithFormatAndLint,
   transformExtension,
+  transformHeadless,
   transformIndexWithFormatAndLint,
   transformTemplateContent,
   transformTsToJs,
@@ -64,10 +66,13 @@ export async function getDiff(
 
   const tasks = new Listr(
     Object.entries(remote).map(
-      ([componentName, { dependencies, section, sources }]) =>
+      ([componentName, { dependencies, headless, section, sources }]) =>
         ({
           task: async (_, task) => {
             const localRegistry = local[componentName]!
+            const globalHeadless = config.components?.headless ?? false
+            const remoteHeadless = headless ?? globalHeadless
+            const localHeadless = localRegistry.headless ?? globalHeadless
 
             if (componentName === "index") {
               const [source] = sources
@@ -134,9 +139,23 @@ export async function getDiff(
 
               await Promise.all(
                 sources.map(async ({ name, content, data, template }) => {
-                  const source = localRegistry.sources.find(
+                  let source = localRegistry.sources.find(
                     (source) => source.name === name,
                   )
+
+                  const styleFile =
+                    section === "components" && isStyleFile(name)
+
+                  if (styleFile) {
+                    if (remoteHeadless && content)
+                      content = transformHeadless(content)
+
+                    if (localHeadless && source?.content)
+                      source = {
+                        ...source,
+                        content: transformHeadless(source.content),
+                      }
+                  }
 
                   name = transformExtension(name, config.jsx)
 
@@ -277,6 +296,13 @@ export async function getDiff(
 
               removeSources.forEach(({ name, content, data, template }) => {
                 if (content) {
+                  if (
+                    localHeadless &&
+                    section === "components" &&
+                    isStyleFile(name)
+                  )
+                    content = transformHeadless(content)
+
                   let local = transformContent(
                     section,
                     content,

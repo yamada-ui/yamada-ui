@@ -26,6 +26,7 @@ interface Options {
   sequential: boolean
   yes: boolean
   format?: boolean
+  headless?: boolean
   install?: boolean
   lint?: boolean
   tag?: string
@@ -45,6 +46,8 @@ export const update = new Command("update")
   .option("--no-format", "do not format the output files.")
   .option("-l, --lint", "lint the output files.")
   .option("--no-lint", "do not lint the output files.")
+  .option("--headless", "update the component styles to empty.")
+  .option("--no-headless", "update the component styles to default values.")
   .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
   .action(async function (
     targetNames: string[],
@@ -53,6 +56,7 @@ export const update = new Command("update")
       cwd,
       force,
       format,
+      headless,
       install,
       lint,
       sequential,
@@ -140,7 +144,7 @@ export const update = new Command("update")
       const { registryMap } = await getRegistriesAndFiles(
         componentNames,
         config,
-        { concurrent: !sequential, index, tag, theme },
+        { concurrent: !sequential, headless, index, tag, theme },
       )
       const { changeMap, dependencyMap } = await getDiff(
         generatedNames,

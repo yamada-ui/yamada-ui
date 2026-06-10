@@ -51,6 +51,10 @@ vi.mock("node-fetch", () => ({
                 name: "index.ts",
                 content: `export const Button = () => {}\n`,
               },
+              {
+                name: "button.style.ts",
+                content: `export const buttonStyle = defineComponentStyle({\n  base: { color: "red" },\n\n  defaultProps: { variant: "solid" },\n})\n`,
+              },
             ],
           }),
         ok: true,
@@ -90,7 +94,10 @@ vi.mock("node-fetch", () => ({
 
 import { add } from "."
 
-function setupProject(tempDir: string) {
+function setupProject(
+  tempDir: string,
+  overrides: { [key: string]: unknown } = {},
+) {
   const config = {
     $schema: "https://yamada-ui.com/registry/v2/config.schema.json",
     components: { overwrite: true },
@@ -100,6 +107,7 @@ function setupProject(tempDir: string) {
     monorepo: true,
     path: "./workspaces/ui",
     providers: { overwrite: true },
+    ...overrides,
   }
 
   writeFileSync(path.join(tempDir, "ui.json"), JSON.stringify(config))
@@ -605,6 +613,106 @@ describe("add", () => {
     expect(spinner.fail).toHaveBeenCalledWith(
       expect.stringContaining("unknown error"),
     )
+  })
+
+  test("should generate empty styles and record headless with --headless", async () => {
+    setupProject(tempDir)
+
+    await add.parseAsync(
+      [
+        "button",
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--headless",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+
+    const buttonDir = path.join(
+      tempDir,
+      "workspaces",
+      "ui",
+      "src",
+      "components",
+      "button",
+    )
+    const style = readFileSync(path.join(buttonDir, "button.style.ts"), "utf-8")
+    expect(style).toContain("base: {}")
+    expect(style).not.toContain("red")
+    const registry = JSON.parse(
+      readFileSync(path.join(buttonDir, "registry.json"), "utf-8"),
+    )
+    expect(registry.headless).toBeTruthy()
+  })
+
+  test("should generate empty styles without recording headless when config headless is enabled", async () => {
+    setupProject(tempDir, { components: { headless: true, overwrite: true } })
+
+    await add.parseAsync(
+      [
+        "button",
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+
+    const buttonDir = path.join(
+      tempDir,
+      "workspaces",
+      "ui",
+      "src",
+      "components",
+      "button",
+    )
+    const style = readFileSync(path.join(buttonDir, "button.style.ts"), "utf-8")
+    expect(style).toContain("base: {}")
+    expect(style).not.toContain("red")
+    const registry = JSON.parse(
+      readFileSync(path.join(buttonDir, "registry.json"), "utf-8"),
+    )
+    expect(registry.headless).toBeUndefined()
+  })
+
+  test("should generate default styles and record headless with --no-headless when config headless is enabled", async () => {
+    setupProject(tempDir, { components: { headless: true, overwrite: true } })
+
+    await add.parseAsync(
+      [
+        "button",
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--no-headless",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+
+    const buttonDir = path.join(
+      tempDir,
+      "workspaces",
+      "ui",
+      "src",
+      "components",
+      "button",
+    )
+    const style = readFileSync(path.join(buttonDir, "button.style.ts"), "utf-8")
+    expect(style).toContain(`color: "red"`)
+    const registry = JSON.parse(
+      readFileSync(path.join(buttonDir, "registry.json"), "utf-8"),
+    )
+    expect(registry.headless).toBeFalsy()
   })
 
   test("should show error when all components add without overwrite and dir exists with --yes", async () => {

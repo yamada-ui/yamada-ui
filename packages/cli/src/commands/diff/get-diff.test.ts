@@ -671,4 +671,130 @@ describe("getDiff", () => {
     expect(changeMap.button).toBeDefined()
     expect(changeMap.button!["colors/red.ts"]).toBeDefined()
   })
+
+  test("should skip style value changes for headless components", async () => {
+    const config = createConfig()
+    const registryMap: RegistryMap = {
+      local: {
+        button: {
+          headless: true,
+          section: "components",
+          sources: [
+            {
+              name: "button.style.ts",
+              content: `export const buttonStyle = defineComponentStyle({\n  base: { color: "red" },\n})\n`,
+            },
+          ],
+        },
+      },
+      remote: {
+        button: {
+          headless: true,
+          section: "components",
+          sources: [
+            {
+              name: "button.style.ts",
+              content: `export const buttonStyle = defineComponentStyle({\n  base: { color: "blue" },\n})\n`,
+            },
+          ],
+        },
+      },
+    }
+
+    const { changeMap } = await getDiff(["button"], registryMap, config)
+
+    expect(changeMap.button).toBeUndefined()
+  })
+
+  test("should detect structural style changes for headless components", async () => {
+    const config = createConfig()
+    const registryMap: RegistryMap = {
+      local: {
+        button: {
+          headless: true,
+          section: "components",
+          sources: [
+            {
+              name: "button.style.ts",
+              content: `export const buttonStyle = defineComponentStyle({\n  variants: {\n    solid: { color: "red" },\n  },\n})\n`,
+            },
+          ],
+        },
+      },
+      remote: {
+        button: {
+          headless: true,
+          section: "components",
+          sources: [
+            {
+              name: "button.style.ts",
+              content: `export const buttonStyle = defineComponentStyle({\n  variants: {\n    ghost: { color: "blue" },\n    solid: { color: "red" },\n  },\n})\n`,
+            },
+          ],
+        },
+      },
+    }
+
+    const { changeMap } = await getDiff(["button"], registryMap, config)
+
+    expect(changeMap.button).toBeDefined()
+    expect(changeMap.button!["button.style.ts"]).toBeDefined()
+  })
+
+  test("should detect style changes when switching to headless", async () => {
+    const config = createConfig()
+    const content = `export const buttonStyle = defineComponentStyle({\n  base: { color: "red" },\n})\n`
+    const registryMap: RegistryMap = {
+      local: {
+        button: {
+          section: "components",
+          sources: [{ name: "button.style.ts", content }],
+        },
+      },
+      remote: {
+        button: {
+          headless: true,
+          section: "components",
+          sources: [{ name: "button.style.ts", content }],
+        },
+      },
+    }
+
+    const { changeMap } = await getDiff(["button"], registryMap, config)
+
+    expect(changeMap.button).toBeDefined()
+    expect(changeMap.button!["button.style.ts"]).toBeDefined()
+  })
+
+  test("should skip style value changes when config headless is enabled", async () => {
+    const config = { ...createConfig(), components: { headless: true } }
+    const registryMap: RegistryMap = {
+      local: {
+        button: {
+          section: "components",
+          sources: [
+            {
+              name: "button.style.ts",
+              content: `export const buttonStyle = defineComponentStyle({\n  base: { color: "red" },\n})\n`,
+            },
+          ],
+        },
+      },
+      remote: {
+        button: {
+          section: "components",
+          sources: [
+            {
+              name: "button.style.ts",
+              content: `export const buttonStyle = defineComponentStyle({\n  base: { color: "blue" },\n})\n`,
+            },
+          ],
+        },
+      },
+    }
+
+    const { changeMap } = await getDiff(["button"], registryMap, config)
+
+    expect(changeMap.button).toBeUndefined()
+  })
 })

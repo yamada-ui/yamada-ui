@@ -1730,7 +1730,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.BaselineShift>",
       "docs": {
         "baseline-shift": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-03-24"
+          },
           "deprecated": false,
           "description": "The <code>baseline-shift</code> CSS property sets the position of an element relative to its dominant baseline.",
           "experimental": false,
@@ -3376,6 +3379,18 @@
         }
       }
     },
+    "columnRuleBreak": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-rule-break": {
+          "deprecated": false,
+          "description": "The CSS `column-rule-break` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-break"
+        }
+      }
+    },
     "columnRuleColor": {
       "properties": ["columnRuleColor"],
       "token": "colors",
@@ -3394,6 +3409,114 @@
         }
       }
     },
+    "columnRuleInset": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-rule-inset": {
+          "deprecated": false,
+          "description": "The CSS `column-rule-inset` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset"
+        }
+      }
+    },
+    "columnRuleInsetCap": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-rule-inset-cap": {
+          "deprecated": false,
+          "description": "The CSS `column-rule-inset-cap` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap"
+        }
+      }
+    },
+    "columnRuleInsetCapEnd": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-rule-inset-cap-end": {
+          "deprecated": false,
+          "description": "The CSS `column-rule-inset-cap-end` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-end"
+        }
+      }
+    },
+    "columnRuleInsetCapStart": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-rule-inset-cap-start": {
+          "deprecated": false,
+          "description": "The CSS `column-rule-inset-cap-start` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-start"
+        }
+      }
+    },
+    "columnRuleInsetEnd": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-rule-inset-end": {
+          "deprecated": false,
+          "description": "The CSS `column-rule-inset-end` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-end"
+        }
+      }
+    },
+    "columnRuleInsetJunction": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-rule-inset-junction": {
+          "deprecated": false,
+          "description": "The CSS `column-rule-inset-junction` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction"
+        }
+      }
+    },
+    "columnRuleInsetJunctionEnd": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-rule-inset-junction-end": {
+          "deprecated": false,
+          "description": "The CSS `column-rule-inset-junction-end` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction-end"
+        }
+      }
+    },
+    "columnRuleInsetJunctionStart": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-rule-inset-junction-start": {
+          "deprecated": false,
+          "description": "The CSS `column-rule-inset-junction-start` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction-start"
+        }
+      }
+    },
+    "columnRuleInsetStart": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-rule-inset-start": {
+          "deprecated": false,
+          "description": "The CSS `column-rule-inset-start` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-start"
+        }
+      }
+    },
     "columnRuleStyle": {
       "as": true,
       "type": "StyleValueWithCondition<AnyString |CSS.Property.ColumnRuleStyle>",
@@ -3408,6 +3531,18 @@
           "description": "Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-rule-style"
+        }
+      }
+    },
+    "columnRuleVisibilityItems": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "column-rule-visibility-items": {
+          "deprecated": false,
+          "description": "The CSS `column-rule-visibility-items` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-visibility-items"
         }
       }
     },
@@ -7525,6 +7660,186 @@
       },
       "shorthands": ["gy", "gapY"]
     },
+    "rowRule": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule": {
+          "deprecated": false,
+          "description": "The CSS `row-rule` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule"
+        }
+      }
+    },
+    "rowRuleBreak": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-break": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-break` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-break"
+        }
+      }
+    },
+    "rowRuleColor": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-color": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-color` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-color"
+        }
+      }
+    },
+    "rowRuleInset": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-inset": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-inset` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset"
+        }
+      }
+    },
+    "rowRuleInsetCap": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-inset-cap": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-inset-cap` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-cap"
+        }
+      }
+    },
+    "rowRuleInsetCapEnd": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-inset-cap-end": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-inset-cap-end` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-cap-end"
+        }
+      }
+    },
+    "rowRuleInsetCapStart": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-inset-cap-start": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-inset-cap-start` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-start"
+        }
+      }
+    },
+    "rowRuleInsetEnd": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-inset-end": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-inset-end` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-end"
+        }
+      }
+    },
+    "rowRuleInsetJunction": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-inset-junction": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-inset-junction` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction"
+        }
+      }
+    },
+    "rowRuleInsetJunctionEnd": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-inset-junction-end": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-inset-junction-end` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction-end"
+        }
+      }
+    },
+    "rowRuleInsetJunctionStart": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-inset-junction-start": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-inset-junction-start` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction-start"
+        }
+      }
+    },
+    "rowRuleInsetStart": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-inset-start": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-inset-start` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-start"
+        }
+      }
+    },
+    "rowRuleStyle": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-style": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-style` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-style"
+        }
+      }
+    },
+    "rowRuleVisibilityItems": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-visibility-items": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-visibility-items` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-visibility-items"
+        }
+      }
+    },
+    "rowRuleWidth": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "row-rule-width": {
+          "deprecated": false,
+          "description": "The CSS `row-rule-width` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-width"
+        }
+      }
+    },
     "rubyAlign": {
       "as": true,
       "type": "StyleValueWithCondition<AnyString |CSS.Property.RubyAlign>",
@@ -7567,6 +7882,150 @@
           "description": "The <code>ruby-position</code> CSS property sets the position of a ruby annotation in relation to its base text. Annotations can display over, under, or interleaved with the base text.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-position"
+        }
+      }
+    },
+    "rule": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "rule": {
+          "deprecated": false,
+          "description": "The CSS `rule` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule"
+        }
+      }
+    },
+    "ruleBreak": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "rule-break": {
+          "deprecated": false,
+          "description": "The CSS `rule-break` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-break"
+        }
+      }
+    },
+    "ruleColor": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "rule-color": {
+          "deprecated": false,
+          "description": "The CSS `rule-color` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-color"
+        }
+      }
+    },
+    "ruleInset": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "rule-inset": {
+          "deprecated": false,
+          "description": "The CSS `rule-inset` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset"
+        }
+      }
+    },
+    "ruleInsetCap": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "rule-inset-cap": {
+          "deprecated": false,
+          "description": "The CSS `rule-inset-cap` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-cap"
+        }
+      }
+    },
+    "ruleInsetEnd": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "rule-inset-end": {
+          "deprecated": false,
+          "description": "The CSS `rule-inset-end` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-end"
+        }
+      }
+    },
+    "ruleInsetJunction": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "rule-inset-junction": {
+          "deprecated": false,
+          "description": "The CSS `rule-inset-junction` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-junction"
+        }
+      }
+    },
+    "ruleInsetStart": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "rule-inset-start": {
+          "deprecated": false,
+          "description": "The CSS `rule-inset-start` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-start"
+        }
+      }
+    },
+    "ruleOverlap": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "rule-overlap": {
+          "deprecated": false,
+          "description": "The CSS `rule-overlap` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-overlap"
+        }
+      }
+    },
+    "ruleStyle": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "rule-style": {
+          "deprecated": false,
+          "description": "The CSS `rule-style` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-style"
+        }
+      }
+    },
+    "ruleVisibilityItems": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "rule-visibility-items": {
+          "deprecated": false,
+          "description": "The CSS `rule-visibility-items` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-visibility-items"
+        }
+      }
+    },
+    "ruleWidth": {
+      "as": true,
+      "type": "StyleValueWithCondition<AnyString>",
+      "docs": {
+        "rule-width": {
+          "deprecated": false,
+          "description": "The CSS `rule-width` property.",
+          "experimental": true,
+          "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-width"
         }
       }
     },
@@ -9540,8 +9999,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "view-transition-scope": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `view-transition-scope` property.",
+          "description": "The <code>startViewTransition()</code> method of an <code>Element</code> object starts a view transition that affects only that element's DOM tree. You can use this to run separate elements' transitions concurrently.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-view-transitions-2/#view-transition-scope-prop"
         }

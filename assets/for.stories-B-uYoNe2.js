@@ -1,0 +1,177 @@
+import{c as e,i as t}from"./preload-helper-usAeo7Bx.js";import{Dm as n,Dv as r,Fa as i,Ka as a,Pa as o,Rf as s,Sn as c,Tn as l,Ya as u,al as d,by as f,n_ as p,nl as m,ol as h,rl as g,zf as _}from"./iframe-B6Ybn7OE.js";import{n as v,t as y}from"./dist-BeIJbDQd.js";var b,x,S,C,w,T,E,D,O,k,A;t((()=>{y(),b=e(f(),1),o(),m(),a(),n(),c(),s(),x=r(),S={component:i,title:`Components / For`},C=()=>(0,x.jsx)(l,{children:(0,x.jsx)(i,{each:(0,b.useMemo)(()=>Array.from({length:10},(e,t)=>({id:t,name:`${v.person.firstName()} ${v.person.lastName()}`,email:v.internet.email()})),[]),children:({id:e,name:t,email:n})=>(0,x.jsxs)(h,{size:`md`,variant:`outline`,children:[(0,x.jsx)(d,{children:(0,x.jsx)(_,{as:`h1`,fontSize:`lg`,children:t})}),(0,x.jsxs)(g,{pt:`sm`,children:[(0,x.jsxs)(_,{color:`muted`,children:[`Id (Index): `,e]}),(0,x.jsxs)(_,{color:`muted`,children:[`Email: `,n]})]})]},e)})}),w=()=>(0,x.jsx)(l,{children:(0,x.jsx)(i,{each:[],fallback:(0,x.jsx)(u,{description:`There are no items to show`,indicator:(0,x.jsx)(p,{})}),children:(e,t)=>(0,x.jsx)(_,{children:e},t)})}),T=()=>(0,x.jsx)(l,{children:(0,x.jsx)(i,{each:(0,b.useMemo)(()=>Array.from({length:10},(e,t)=>({id:t,name:`${v.person.firstName()} ${v.person.lastName()}`,email:v.internet.email()})),[]),filter:({email:e})=>e.includes(`gmail`),children:({id:e,name:t,email:n})=>(0,x.jsxs)(h,{size:`md`,variant:`outline`,children:[(0,x.jsx)(d,{children:(0,x.jsx)(_,{as:`h1`,fontSize:`lg`,children:t})}),(0,x.jsxs)(g,{pt:`sm`,children:[(0,x.jsxs)(_,{color:`muted`,children:[`Id (Index): `,e]}),(0,x.jsxs)(_,{color:`muted`,children:[`Email: `,n]})]})]},e)})}),E=()=>(0,x.jsx)(l,{children:(0,x.jsx)(i,{each:(0,b.useMemo)(()=>Array.from({length:10},(e,t)=>({id:t,name:`${v.person.firstName()} ${v.person.lastName()}`,email:v.internet.email()})),[]),sort:(e,t)=>e.name.localeCompare(t.name),children:({id:e,name:t,email:n})=>(0,x.jsxs)(h,{size:`md`,variant:`outline`,children:[(0,x.jsx)(d,{children:(0,x.jsx)(_,{as:`h1`,fontSize:`lg`,children:t})}),(0,x.jsxs)(g,{pt:`sm`,children:[(0,x.jsxs)(_,{color:`muted`,children:[`Id (Index): `,e]}),(0,x.jsxs)(_,{color:`muted`,children:[`Email: `,n]})]})]},e)})}),D=()=>(0,x.jsx)(l,{children:(0,x.jsx)(i,{each:(0,b.useMemo)(()=>Array.from({length:10},(e,t)=>({id:t,name:`${v.person.firstName()} ${v.person.lastName()}`,email:v.internet.email()})),[]),offset:5,children:({id:e,name:t,email:n})=>(0,x.jsxs)(h,{size:`md`,variant:`outline`,children:[(0,x.jsx)(d,{children:(0,x.jsx)(_,{as:`h1`,fontSize:`lg`,children:t})}),(0,x.jsxs)(g,{pt:`sm`,children:[(0,x.jsxs)(_,{color:`muted`,children:[`Id (Index): `,e]}),(0,x.jsxs)(_,{color:`muted`,children:[`Email: `,n]})]})]},e)})}),O=()=>(0,x.jsx)(l,{children:(0,x.jsx)(i,{each:(0,b.useMemo)(()=>Array.from({length:10},(e,t)=>({id:t,name:`${v.person.firstName()} ${v.person.lastName()}`,email:v.internet.email()})),[]),limit:5,children:({id:e,name:t,email:n})=>(0,x.jsxs)(h,{size:`md`,variant:`outline`,children:[(0,x.jsx)(d,{children:(0,x.jsx)(_,{as:`h1`,fontSize:`lg`,children:t})}),(0,x.jsxs)(g,{pt:`sm`,children:[(0,x.jsxs)(_,{color:`muted`,children:[`Id (Index): `,e]}),(0,x.jsxs)(_,{color:`muted`,children:[`Email: `,n]})]})]},e)})}),k=()=>(0,x.jsx)(l,{children:(0,x.jsx)(i,{each:(0,b.useMemo)(()=>Array.from({length:10},(e,t)=>({id:t,name:`${v.person.firstName()} ${v.person.lastName()}`,email:v.internet.email()})),[]),reverse:!0,children:({id:e,name:t,email:n})=>(0,x.jsxs)(h,{size:`md`,variant:`outline`,children:[(0,x.jsx)(d,{children:(0,x.jsx)(_,{as:`h1`,fontSize:`lg`,children:t})}),(0,x.jsxs)(g,{pt:`sm`,children:[(0,x.jsxs)(_,{color:`muted`,children:[`Id (Index): `,e]}),(0,x.jsxs)(_,{color:`muted`,children:[`Email: `,n]})]})]},e)})}),C.parameters={...C.parameters,docs:{...C.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo(() => Array.from({
+    length: 10
+  }, (_, index) => ({
+    id: index,
+    name: \`\${faker.person.firstName()} \${faker.person.lastName()}\`,
+    email: faker.internet.email()
+  })), []);
+  return <VStack>
+      <For each={items}>
+        {({
+        id,
+        name,
+        email
+      }) => <Card.Root key={id} size="md" variant="outline">
+            <Card.Header>
+              <Text as="h1" fontSize="lg">
+                {name}
+              </Text>
+            </Card.Header>
+
+            <Card.Body pt="sm">
+              <Text color="muted">Id (Index): {id}</Text>
+              <Text color="muted">Email: {email}</Text>
+            </Card.Body>
+          </Card.Root>}
+      </For>
+    </VStack>;
+}`,...C.parameters?.docs?.source}}},w.parameters={...w.parameters,docs:{...w.parameters?.docs,source:{originalSource:`() => {
+  return <VStack>
+      <For each={[]} fallback={<EmptyState.Root description="There are no items to show" indicator={<BoxIcon />} />}>
+        {(item, index) => <Text key={index}>{item}</Text>}
+      </For>
+    </VStack>;
+}`,...w.parameters?.docs?.source}}},T.parameters={...T.parameters,docs:{...T.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo(() => Array.from({
+    length: 10
+  }, (_, index) => ({
+    id: index,
+    name: \`\${faker.person.firstName()} \${faker.person.lastName()}\`,
+    email: faker.internet.email()
+  })), []);
+  return <VStack>
+      <For each={items} filter={({
+      email
+    }) => email.includes("gmail")}>
+        {({
+        id,
+        name,
+        email
+      }) => <Card.Root key={id} size="md" variant="outline">
+            <Card.Header>
+              <Text as="h1" fontSize="lg">
+                {name}
+              </Text>
+            </Card.Header>
+
+            <Card.Body pt="sm">
+              <Text color="muted">Id (Index): {id}</Text>
+              <Text color="muted">Email: {email}</Text>
+            </Card.Body>
+          </Card.Root>}
+      </For>
+    </VStack>;
+}`,...T.parameters?.docs?.source}}},E.parameters={...E.parameters,docs:{...E.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo(() => Array.from({
+    length: 10
+  }, (_, index) => ({
+    id: index,
+    name: \`\${faker.person.firstName()} \${faker.person.lastName()}\`,
+    email: faker.internet.email()
+  })), []);
+  return <VStack>
+      <For each={items} sort={(a, b) => a.name.localeCompare(b.name)}>
+        {({
+        id,
+        name,
+        email
+      }) => <Card.Root key={id} size="md" variant="outline">
+            <Card.Header>
+              <Text as="h1" fontSize="lg">
+                {name}
+              </Text>
+            </Card.Header>
+
+            <Card.Body pt="sm">
+              <Text color="muted">Id (Index): {id}</Text>
+              <Text color="muted">Email: {email}</Text>
+            </Card.Body>
+          </Card.Root>}
+      </For>
+    </VStack>;
+}`,...E.parameters?.docs?.source}}},D.parameters={...D.parameters,docs:{...D.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo(() => Array.from({
+    length: 10
+  }, (_, index) => ({
+    id: index,
+    name: \`\${faker.person.firstName()} \${faker.person.lastName()}\`,
+    email: faker.internet.email()
+  })), []);
+  return <VStack>
+      <For each={items} offset={5}>
+        {({
+        id,
+        name,
+        email
+      }) => <Card.Root key={id} size="md" variant="outline">
+            <Card.Header>
+              <Text as="h1" fontSize="lg">
+                {name}
+              </Text>
+            </Card.Header>
+
+            <Card.Body pt="sm">
+              <Text color="muted">Id (Index): {id}</Text>
+              <Text color="muted">Email: {email}</Text>
+            </Card.Body>
+          </Card.Root>}
+      </For>
+    </VStack>;
+}`,...D.parameters?.docs?.source}}},O.parameters={...O.parameters,docs:{...O.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo(() => Array.from({
+    length: 10
+  }, (_, index) => ({
+    id: index,
+    name: \`\${faker.person.firstName()} \${faker.person.lastName()}\`,
+    email: faker.internet.email()
+  })), []);
+  return <VStack>
+      <For each={items} limit={5}>
+        {({
+        id,
+        name,
+        email
+      }) => <Card.Root key={id} size="md" variant="outline">
+            <Card.Header>
+              <Text as="h1" fontSize="lg">
+                {name}
+              </Text>
+            </Card.Header>
+
+            <Card.Body pt="sm">
+              <Text color="muted">Id (Index): {id}</Text>
+              <Text color="muted">Email: {email}</Text>
+            </Card.Body>
+          </Card.Root>}
+      </For>
+    </VStack>;
+}`,...O.parameters?.docs?.source}}},k.parameters={...k.parameters,docs:{...k.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo(() => Array.from({
+    length: 10
+  }, (_, index) => ({
+    id: index,
+    name: \`\${faker.person.firstName()} \${faker.person.lastName()}\`,
+    email: faker.internet.email()
+  })), []);
+  return <VStack>
+      <For each={items} reverse>
+        {({
+        id,
+        name,
+        email
+      }) => <Card.Root key={id} size="md" variant="outline">
+            <Card.Header>
+              <Text as="h1" fontSize="lg">
+                {name}
+              </Text>
+            </Card.Header>
+
+            <Card.Body pt="sm">
+              <Text color="muted">Id (Index): {id}</Text>
+              <Text color="muted">Email: {email}</Text>
+            </Card.Body>
+          </Card.Root>}
+      </For>
+    </VStack>;
+}`,...k.parameters?.docs?.source}}},A=[`Basic`,`FallBack`,`Filter`,`Sort`,`Offset`,`Limit`,`Reverse`]}))();export{C as Basic,w as FallBack,T as Filter,O as Limit,D as Offset,k as Reverse,E as Sort,A as __namedExportsOrder,S as default};

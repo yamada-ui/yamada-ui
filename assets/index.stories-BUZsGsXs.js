@@ -1,4 +1,0 @@
-import{i as e}from"./preload-helper-usAeo7Bx.js";import{Dv as t,Rf as n,U as r,W as i,zf as a}from"./iframe-CM6ym36p.js";var o,s,c,l;e((()=>{n(),r(),o=t(),s={title:`Hooks / useMediaQuery`},c=()=>(0,o.jsx)(a,{children:i(`(min-width: 1280px)`)?`larger than 1280px`:`smaller than 1280px`}),c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`() => {
-  const flg = useMediaQuery("(min-width: 1280px)");
-  return <Text>{flg ? "larger than 1280px" : "smaller than 1280px"}</Text>;
-}`,...c.parameters?.docs?.source}}},l=[`Basic`]}))();export{c as Basic,l as __namedExportsOrder,s as default};

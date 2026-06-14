@@ -112,7 +112,8 @@ export function Sidebar() {
   )
 }
 
-interface SidebarItemProps extends NextLinkButtonProps {
+interface SidebarItemProps extends Omit<NextLinkButtonProps, "href"> {
+  href: string
   segment: string
 }
 
@@ -121,8 +122,7 @@ function SidebarItem({ href, segment, ...rest }: SidebarItemProps) {
   const overview = segment === "overview"
   const current = overview
     ? pathname === href
-    : pathname.length <= href.toString().length &&
-      pathname.startsWith(href.toString())
+    : pathname.length <= href.length && pathname.startsWith(href)
 
   return (
     <NextLinkButton

@@ -144,7 +144,6 @@ This is because color mode is implemented using `localStorage` or `cookies`, and
 import viteReact from "@vitejs/plugin-react"
 import type { Plugin } from "vite"
 import { defineConfig } from "vite"
-import tsconfigPaths from "vite-tsconfig-paths"
 import { devtools } from "@tanstack/devtools-vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
 import { COLOR_MODE_STORAGE_KEY, getStorageScript } from "@workspaces/ui"
@@ -166,11 +165,11 @@ function injectColorModeScript(): Plugin {
 const config = defineConfig({
   plugins: [
     devtools(),
-    tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
     viteReact(),
     injectColorModeScript(),
   ],
+  resolve: { tsconfigPaths: true },
 })
 
 export default config
@@ -182,7 +181,6 @@ If you change the `defaultColorMode` in your [config](/docs/theming/configuratio
 import viteReact from "@vitejs/plugin-react"
 import type { Plugin } from "vite"
 import { defineConfig } from "vite"
-import tsconfigPaths from "vite-tsconfig-paths"
 import { devtools } from "@tanstack/devtools-vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
 import { COLOR_MODE_STORAGE_KEY, getStorageScript } from "@workspaces/ui"
@@ -205,11 +203,11 @@ function injectColorModeScript(): Plugin {
 const config = defineConfig({
   plugins: [
     devtools(),
-    tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
     viteReact(),
     injectColorModeScript(),
   ],
+  resolve: { tsconfigPaths: true },
 })
 
 export default config
@@ -225,7 +223,6 @@ This is because theme switching is implemented using `localStorage` or `cookies`
 import viteReact from "@vitejs/plugin-react"
 import type { Plugin } from "vite"
 import { defineConfig } from "vite"
-import tsconfigPaths from "vite-tsconfig-paths"
 import { devtools } from "@tanstack/devtools-vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
 import { THEME_SCHEME_STORAGE_KEY, getStorageScript } from "@workspaces/ui"
@@ -247,11 +244,11 @@ function injectThemeSchemeScript(): Plugin {
 const config = defineConfig({
   plugins: [
     devtools(),
-    tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
     viteReact(),
     injectThemeSchemeScript(),
   ],
+  resolve: { tsconfigPaths: true },
 })
 
 export default config
@@ -263,7 +260,6 @@ If you change the `defaultThemeScheme` in your [config](/docs/theming/configurat
 import viteReact from "@vitejs/plugin-react"
 import type { Plugin } from "vite"
 import { defineConfig } from "vite"
-import tsconfigPaths from "vite-tsconfig-paths"
 import { devtools } from "@tanstack/devtools-vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
 import { THEME_SCHEME_STORAGE_KEY, getStorageScript } from "@workspaces/ui"
@@ -286,11 +282,11 @@ function injectThemeSchemeScript(): Plugin {
 const config = defineConfig({
   plugins: [
     devtools(),
-    tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
     viteReact(),
     injectThemeSchemeScript(),
   ],
+  resolve: { tsconfigPaths: true },
 })
 
 export default config

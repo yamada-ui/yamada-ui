@@ -1,0 +1,61 @@
+name: Dependabot
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+    paths:
+      - "packages/*/package.json"
+      - "pnpm-workspace.yaml"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changeset:
+    name: Changeset
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      HEAD_REF: ${{ github.head_ref }}
+    steps:
+      - name: Fetch metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 #3.1.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Checkout
+        if: ${{ steps.metadata.outputs.package-ecosystem == 'npm_and_yarn' }}
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
+
+      - name: Install
+        if: ${{ steps.metadata.outputs.package-ecosystem == 'npm_and_yarn' }}
+        uses: ./.github/composite-actions/install
+
+      - name: Generate changeset
+        if: ${{ steps.metadata.outputs.package-ecosystem == 'npm_and_yarn' }}
+        run: pnpm forge pr:dependabot
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          UPDATED_DEPENDENCIES_JSON: ${{ steps.metadata.outputs.updated-dependencies-json }}
+
+      - name: Update branch
+        if: ${{ steps.metadata.outputs.package-ecosystem == 'npm_and_yarn' }}
+        run: |
+          git add .changeset packages/react/src/components/icon/icons packages/react/src/core/css/styles.ts
+          git diff --staged --exit-code || git commit -m "ci(dependabot): update dependencies"
+          git fetch origin "$HEAD_REF"
+          git rebase "origin/$HEAD_REF"
+          git push origin "HEAD:$HEAD_REF"

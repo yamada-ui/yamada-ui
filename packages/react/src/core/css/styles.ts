@@ -593,12 +593,23 @@ export const standardStyles = {
   },
   columnHeight: true,
   columnRule: { properties: ["columnRule"], transform: transforms.px },
+  columnRuleBreak: true,
   columnRuleColor: {
     properties: ["columnRuleColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
+  columnRuleInset: true,
+  columnRuleInsetCap: true,
+  columnRuleInsetCapEnd: true,
+  columnRuleInsetCapStart: true,
+  columnRuleInsetEnd: true,
+  columnRuleInsetJunction: true,
+  columnRuleInsetJunctionEnd: true,
+  columnRuleInsetJunctionStart: true,
+  columnRuleInsetStart: true,
   columnRuleStyle: true,
+  columnRuleVisibilityItems: true,
   columnRuleWidth: {
     properties: ["columnRuleWidth"],
     transform: transforms.px,
@@ -1474,9 +1485,36 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  rowRule: true,
+  rowRuleBreak: true,
+  rowRuleColor: true,
+  rowRuleInset: true,
+  rowRuleInsetCap: true,
+  rowRuleInsetCapEnd: true,
+  rowRuleInsetCapStart: true,
+  rowRuleInsetEnd: true,
+  rowRuleInsetJunction: true,
+  rowRuleInsetJunctionEnd: true,
+  rowRuleInsetJunctionStart: true,
+  rowRuleInsetStart: true,
+  rowRuleStyle: true,
+  rowRuleVisibilityItems: true,
+  rowRuleWidth: true,
   rubyAlign: true,
   rubyOverhang: true,
   rubyPosition: true,
+  rule: true,
+  ruleBreak: true,
+  ruleColor: true,
+  ruleInset: true,
+  ruleInsetCap: true,
+  ruleInsetEnd: true,
+  ruleInsetJunction: true,
+  ruleInsetStart: true,
+  ruleOverlap: true,
+  ruleStyle: true,
+  ruleVisibilityItems: true,
+  ruleWidth: true,
   rx: true,
   ry: true,
   saturate: {
@@ -2032,6 +2070,7 @@ export type SizeProperty = (typeof sizeProperties)[number]
 export const sizeProperties = [
   "backfaceVisibility",
   "blockSize",
+  "boxSize",
   "columnWidth",
   "containIntrinsicWidth",
   "flexBasis",
@@ -2039,26 +2078,25 @@ export const sizeProperties = [
   "gridAutoRows",
   "gridTemplateColumns",
   "gridTemplateRows",
-  "height",
   "h",
+  "height",
   "inlineSize",
   "maxBlockSize",
-  "maxHeight",
-  "maxH",
-  "maxInlineSize",
-  "maxWidth",
-  "maxW",
-  "minBlockSize",
-  "minHeight",
-  "minH",
-  "minInlineSize",
-  "minWidth",
-  "minW",
-  "width",
-  "w",
-  "boxSize",
   "maxBoxSize",
+  "maxH",
+  "maxHeight",
+  "maxInlineSize",
+  "maxW",
+  "maxWidth",
+  "minBlockSize",
   "minBoxSize",
+  "minH",
+  "minHeight",
+  "minInlineSize",
+  "minW",
+  "minWidth",
+  "w",
+  "width",
 ] as const
 
 export type AnimationProperty = (typeof animationProperties)[number]
@@ -2071,7 +2109,7 @@ export const aspectRatioProperties = ["aspectRatio"] as const
 
 export type BlurProperty = (typeof blurProperties)[number]
 
-export const blurProperties = ["blur", "backdropBlur"] as const
+export const blurProperties = ["backdropBlur", "blur"] as const
 
 export type BorderProperty = (typeof borderProperties)[number]
 
@@ -2081,14 +2119,14 @@ export const borderProperties = [
   "borderBlockEnd",
   "borderBlockStart",
   "borderBottom",
+  "borderEnd",
   "borderImage",
   "borderInline",
   "borderInlineEnd",
-  "borderEnd",
   "borderInlineStart",
-  "borderStart",
   "borderLeft",
   "borderRight",
+  "borderStart",
   "borderTop",
   "borderX",
   "borderY",
@@ -2097,41 +2135,41 @@ export const borderProperties = [
 export type ColorProperty = (typeof colorProperties)[number]
 
 export const colorProperties = [
-  "color",
-  "textColor",
-  "floodColor",
-  "lightingColor",
-  "stopColor",
-  "stroke",
-  "accentColor",
   "accent",
+  "accentColor",
   "background",
-  "bg",
   "backgroundColor",
+  "bg",
   "bgColor",
   "borderBlockColor",
   "borderBlockEndColor",
   "borderBlockStartColor",
   "borderBottomColor",
   "borderColor",
+  "borderEndColor",
   "borderInlineColor",
   "borderInlineEndColor",
-  "borderEndColor",
   "borderInlineStartColor",
-  "borderStartColor",
   "borderLeftColor",
   "borderRightColor",
+  "borderStartColor",
   "borderTopColor",
-  "caretColor",
   "caret",
+  "caretColor",
+  "color",
   "columnRuleColor",
   "fill",
+  "floodColor",
+  "focusRingColor",
+  "lightingColor",
   "outlineColor",
   "scrollbarColor",
+  "stopColor",
+  "stroke",
   "strokeColor",
+  "textColor",
   "textDecorationColor",
   "textEmphasisColor",
-  "focusRingColor",
 ] as const
 
 export type DurationProperty = (typeof durationProperties)[number]
@@ -2153,11 +2191,11 @@ export type FontProperty = (typeof fontProperties)[number]
 export const fontProperties = [
   "fontFamily",
   "fontSize",
-  "text",
   "fontWeight",
-  "lineHeight",
   "leading",
   "letterSpacing",
+  "lineHeight",
+  "text",
   "tracking",
 ] as const
 
@@ -2165,9 +2203,9 @@ export type GradientProperty = (typeof gradientProperties)[number]
 
 export const gradientProperties = [
   "backgroundImage",
+  "bgGradient",
   "bgImage",
   "bgImg",
-  "bgGradient",
   "borderImageSource",
   "listStyleImage",
   "listStyleImg",
@@ -2176,57 +2214,57 @@ export const gradientProperties = [
 
 export type KeyframeProperty = (typeof keyframeProperties)[number]
 
-export const keyframeProperties = ["animationName", "_keyframes"] as const
+export const keyframeProperties = ["_keyframes", "animationName"] as const
 
 export type RadiusProperty = (typeof radiusProperties)[number]
 
 export const radiusProperties = [
-  "borderBottomLeftRadius",
-  "roundedBottomLeft",
-  "borderBottomRightRadius",
-  "roundedBottomRight",
-  "borderEndEndRadius",
   "borderBottomEndRadius",
-  "roundedBottomEnd",
-  "borderEndStartRadius",
-  "borderBottomStartRadius",
-  "roundedBottomStart",
-  "borderRadius",
-  "rounded",
-  "borderStartEndRadius",
-  "borderTopEndRadius",
-  "roundedTopEnd",
-  "borderStartStartRadius",
-  "borderTopStartRadius",
-  "roundedTopStart",
-  "borderTopLeftRadius",
-  "roundedTopLeft",
-  "borderTopRightRadius",
-  "roundedTopRight",
+  "borderBottomLeftRadius",
   "borderBottomRadius",
-  "roundedBottom",
-  "borderInlineEndRadius",
+  "borderBottomRightRadius",
+  "borderBottomStartRadius",
+  "borderEndEndRadius",
   "borderEndRadius",
-  "roundedEnd",
+  "borderEndStartRadius",
+  "borderInlineEndRadius",
   "borderInlineStartRadius",
-  "borderStartRadius",
-  "roundedStart",
   "borderLeftRadius",
-  "roundedLeft",
+  "borderRadius",
   "borderRightRadius",
-  "roundedRight",
+  "borderStartEndRadius",
+  "borderStartRadius",
+  "borderStartStartRadius",
+  "borderTopEndRadius",
+  "borderTopLeftRadius",
   "borderTopRadius",
+  "borderTopRightRadius",
+  "borderTopStartRadius",
+  "rounded",
+  "roundedBottom",
+  "roundedBottomEnd",
+  "roundedBottomLeft",
+  "roundedBottomRight",
+  "roundedBottomStart",
+  "roundedEnd",
+  "roundedLeft",
+  "roundedRight",
+  "roundedStart",
   "roundedTop",
+  "roundedTopEnd",
+  "roundedTopLeft",
+  "roundedTopRight",
+  "roundedTopStart",
 ] as const
 
 export type ShadowProperty = (typeof shadowProperties)[number]
 
 export const shadowProperties = [
+  "backdropDropShadow",
   "boxShadow",
+  "dropShadow",
   "shadow",
   "textShadow",
-  "dropShadow",
-  "backdropDropShadow",
 ] as const
 
 export type SpaceProperty = (typeof spaceProperties)[number]
@@ -2234,97 +2272,97 @@ export type SpaceProperty = (typeof spaceProperties)[number]
 export const spaceProperties = [
   "bottom",
   "columnGap",
-  "gx",
-  "gapX",
-  "gap",
+  "focusRingOffset",
   "g",
+  "gap",
+  "gapX",
+  "gapY",
+  "gx",
+  "gy",
   "inset",
   "insetBlock",
   "insetBlockEnd",
   "insetBlockStart",
+  "insetEnd",
   "insetInline",
   "insetInlineEnd",
-  "insetEnd",
   "insetInlineStart",
   "insetStart",
+  "insetX",
+  "insetY",
   "left",
-  "margin",
   "m",
+  "margin",
   "marginBlock",
   "marginBlockEnd",
   "marginBlockStart",
   "marginBottom",
-  "mb",
+  "marginEnd",
   "marginInline",
   "marginInlineEnd",
-  "me",
-  "marginEnd",
   "marginInlineStart",
-  "ms",
-  "marginStart",
   "marginLeft",
-  "ml",
   "marginRight",
-  "mr",
+  "marginStart",
   "marginTop",
+  "marginX",
+  "marginY",
+  "mb",
+  "me",
+  "ml",
+  "mr",
+  "ms",
   "mt",
-  "padding",
+  "mx",
+  "my",
   "p",
+  "padding",
   "paddingBlock",
   "paddingBlockEnd",
   "paddingBlockStart",
   "paddingBottom",
-  "pb",
+  "paddingEnd",
   "paddingInline",
   "paddingInlineEnd",
-  "pe",
-  "paddingEnd",
   "paddingInlineStart",
-  "ps",
-  "paddingStart",
   "paddingLeft",
-  "pl",
   "paddingRight",
-  "pr",
+  "paddingStart",
   "paddingTop",
+  "paddingX",
+  "paddingY",
+  "pb",
+  "pe",
+  "pl",
+  "pr",
+  "ps",
   "pt",
+  "px",
+  "py",
   "right",
   "rowGap",
-  "gy",
-  "gapY",
   "scrollMargin",
   "scrollMarginBottom",
   "scrollMarginLeft",
   "scrollMarginRight",
   "scrollMarginTop",
+  "scrollMarginX",
+  "scrollMarginY",
   "scrollPadding",
   "scrollPaddingBottom",
   "scrollPaddingLeft",
   "scrollPaddingRight",
   "scrollPaddingTop",
-  "top",
-  "insetX",
-  "insetY",
-  "marginX",
-  "mx",
-  "marginY",
-  "my",
-  "paddingX",
-  "px",
-  "paddingY",
-  "py",
-  "scrollMarginX",
-  "scrollMarginY",
   "scrollPaddingX",
   "scrollPaddingY",
-  "focusRingOffset",
+  "top",
   "translateX",
   "translateY",
 ] as const
 
 export type ZIndexProperty = (typeof zIndexProperties)[number]
 
-export const zIndexProperties = ["zIndex", "z"] as const
+export const zIndexProperties = ["z", "zIndex"] as const
 
 export interface StyleProps {
   /**
@@ -3058,7 +3096,8 @@ export interface StyleProps {
    *
    * The <code>baseline-shift</code> CSS property sets the position of an element relative to its dominant baseline.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2026-03-24
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-shift
    */
@@ -3592,7 +3631,6 @@ export interface StyleProps {
    */
   borderBottomRadius?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderBottomRightRadius
     | number,
@@ -3754,7 +3792,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-end-start-radius
    */
   borderEndRadius?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
@@ -3975,7 +4012,6 @@ export interface StyleProps {
    */
   borderInlineEndRadius?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -4063,7 +4099,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
    */
   borderInlineStartRadius?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
@@ -4181,7 +4216,6 @@ export interface StyleProps {
    */
   borderLeftRadius?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderTopLeftRadius
     | number,
@@ -4285,7 +4319,6 @@ export interface StyleProps {
    */
   borderRightRadius?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderBottomRightRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -4322,7 +4355,9 @@ export interface StyleProps {
   /**
    * ### border-shape
    *
-   * The CSS `border-shape` property.
+   * The <code>border-shape</code> CSS property sets the geometry of the border box, changing the shape of any applicable border, border image, focus outline, or shadow.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-borders-4/#border-shape
    *
@@ -4412,7 +4447,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-start-start-radius
    */
   borderStartRadius?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
@@ -4559,7 +4593,6 @@ export interface StyleProps {
    */
   borderTopRadius?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderTopLeftRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -4661,11 +4694,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right
    */
   borderX?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.BorderLeft
-    | CSS.Property.BorderRight
-    | number,
+    AnyString | CSS.Property.BorderLeft | CSS.Property.BorderRight | number,
     "borders"
   >
   /**
@@ -4692,11 +4721,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top
    */
   borderY?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.BorderBottom
-    | CSS.Property.BorderTop
-    | number,
+    AnyString | CSS.Property.BorderBottom | CSS.Property.BorderTop | number,
     "borders"
   >
   /**
@@ -4847,7 +4872,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/width
    */
   boxSize?: StyleValueWithCondition<
-    AnyString | AnyString | CSS.Property.Height | CSS.Property.Width | number,
+    AnyString | CSS.Property.Height | CSS.Property.Width | number,
     "sizes"
   >
   /**
@@ -5159,6 +5184,16 @@ export interface StyleProps {
     AnyString | CSS.Property.ColumnRule | number
   >
   /**
+   * ### column-rule-break
+   *
+   * The CSS `column-rule-break` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-break
+   *
+   * @experimental
+   */
+  columnRuleBreak?: StyleValueWithCondition<AnyString>
+  /**
    * ### column-rule-color
    *
    * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
@@ -5174,6 +5209,96 @@ export interface StyleProps {
     "colors"
   >
   /**
+   * ### column-rule-inset
+   *
+   * The CSS `column-rule-inset` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset
+   *
+   * @experimental
+   */
+  columnRuleInset?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-cap
+   *
+   * The CSS `column-rule-inset-cap` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap
+   *
+   * @experimental
+   */
+  columnRuleInsetCap?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-cap-end
+   *
+   * The CSS `column-rule-inset-cap-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-end
+   *
+   * @experimental
+   */
+  columnRuleInsetCapEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-cap-start
+   *
+   * The CSS `column-rule-inset-cap-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-start
+   *
+   * @experimental
+   */
+  columnRuleInsetCapStart?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-end
+   *
+   * The CSS `column-rule-inset-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-end
+   *
+   * @experimental
+   */
+  columnRuleInsetEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-junction
+   *
+   * The CSS `column-rule-inset-junction` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction
+   *
+   * @experimental
+   */
+  columnRuleInsetJunction?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-junction-end
+   *
+   * The CSS `column-rule-inset-junction-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction-end
+   *
+   * @experimental
+   */
+  columnRuleInsetJunctionEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-junction-start
+   *
+   * The CSS `column-rule-inset-junction-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction-start
+   *
+   * @experimental
+   */
+  columnRuleInsetJunctionStart?: StyleValueWithCondition<AnyString>
+  /**
+   * ### column-rule-inset-start
+   *
+   * The CSS `column-rule-inset-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-start
+   *
+   * @experimental
+   */
+  columnRuleInsetStart?: StyleValueWithCondition<AnyString>
+  /**
    * ### column-rule-style
    *
    * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
@@ -5187,6 +5312,16 @@ export interface StyleProps {
   columnRuleStyle?: StyleValueWithCondition<
     AnyString | CSS.Property.ColumnRuleStyle
   >
+  /**
+   * ### column-rule-visibility-items
+   *
+   * The CSS `column-rule-visibility-items` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-visibility-items
+   *
+   * @experimental
+   */
+  columnRuleVisibilityItems?: StyleValueWithCondition<AnyString>
   /**
    * ### column-rule-width
    *
@@ -5728,7 +5863,9 @@ export interface StyleProps {
   /**
    * ### dynamic-range-limit
    *
-   * The CSS `dynamic-range-limit` property.
+   * The <code>dynamic-range-limit</code> CSS property controls the peak luminance of high dynamic range content. You can use this to coordinate the apparent brightness of HDR and SDR content.
+   *
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/dynamic-range-limit
    */
@@ -6976,7 +7113,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/right
    */
   insetX?: StyleValueWithCondition<
-    AnyString | AnyString | CSS.Property.Left | CSS.Property.Right | number,
+    AnyString | CSS.Property.Left | CSS.Property.Right | number,
     "spaces"
   >
   /**
@@ -7003,7 +7140,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/top
    */
   insetY?: StyleValueWithCondition<
-    AnyString | AnyString | CSS.Property.Bottom | CSS.Property.Top | number,
+    AnyString | CSS.Property.Bottom | CSS.Property.Top | number,
     "spaces"
   >
   /**
@@ -7542,7 +7679,6 @@ export interface StyleProps {
    */
   marginX?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.MarginInlineEnd
     | CSS.Property.MarginInlineStart
     | number,
@@ -7572,11 +7708,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-top
    */
   marginY?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.MarginBottom
-    | CSS.Property.MarginTop
-    | number,
+    AnyString | CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
     "spaces"
   >
   /**
@@ -7888,11 +8020,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/max-width
    */
   maxBoxSize?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.MaxHeight
-    | CSS.Property.MaxWidth
-    | number,
+    AnyString | CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
     "sizes"
   >
   /**
@@ -8039,11 +8167,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/min-width
    */
   minBoxSize?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.MinHeight
-    | CSS.Property.MinWidth
-    | number,
+    AnyString | CSS.Property.MinHeight | CSS.Property.MinWidth | number,
     "sizes"
   >
   /**
@@ -8218,7 +8342,6 @@ export interface StyleProps {
    */
   mx?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.MarginInlineEnd
     | CSS.Property.MarginInlineStart
     | number,
@@ -8248,11 +8371,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/margin-top
    */
   my?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.MarginBottom
-    | CSS.Property.MarginTop
-    | number,
+    AnyString | CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
     "spaces"
   >
   /**
@@ -8589,9 +8708,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior
    */
@@ -8603,9 +8720,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior
    */
@@ -8617,9 +8732,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-block
    */
@@ -8631,9 +8744,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-inline
    */
@@ -8645,9 +8756,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-x
    */
@@ -8659,9 +8768,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-y
    */
@@ -8673,9 +8780,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-x
    */
@@ -8687,9 +8792,7 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2025-03-12
-   * @newly_available_date 2022-09-12
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overscroll-behavior-y
    */
@@ -8931,7 +9034,6 @@ export interface StyleProps {
    */
   paddingX?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.PaddingInlineEnd
     | CSS.Property.PaddingInlineStart
     | number,
@@ -8961,11 +9063,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
    */
   paddingY?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.PaddingBottom
-    | CSS.Property.PaddingTop
-    | number,
+    AnyString | CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
     "spaces"
   >
   /**
@@ -9322,7 +9420,6 @@ export interface StyleProps {
    */
   px?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.PaddingInlineEnd
     | CSS.Property.PaddingInlineStart
     | number,
@@ -9352,11 +9449,7 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/padding-top
    */
   py?: StyleValueWithCondition<
-    | AnyString
-    | AnyString
-    | CSS.Property.PaddingBottom
-    | CSS.Property.PaddingTop
-    | number,
+    AnyString | CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
     "spaces"
   >
   /**
@@ -9496,7 +9589,6 @@ export interface StyleProps {
    */
   roundedBottom?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderBottomRightRadius
     | number,
@@ -9587,7 +9679,6 @@ export interface StyleProps {
    */
   roundedEnd?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -9617,7 +9708,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-left-radius
    */
   roundedLeft?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderTopLeftRadius
@@ -9649,7 +9739,6 @@ export interface StyleProps {
    */
   roundedRight?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderBottomRightRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -9680,7 +9769,6 @@ export interface StyleProps {
    */
   roundedStart?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
@@ -9710,7 +9798,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-right-radius
    */
   roundedTop?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.BorderTopLeftRadius
     | CSS.Property.BorderTopRightRadius
@@ -9793,6 +9880,156 @@ export interface StyleProps {
     "spaces"
   >
   /**
+   * ### row-rule
+   *
+   * The CSS `row-rule` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule
+   *
+   * @experimental
+   */
+  rowRule?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-break
+   *
+   * The CSS `row-rule-break` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-break
+   *
+   * @experimental
+   */
+  rowRuleBreak?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-color
+   *
+   * The CSS `row-rule-color` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-color
+   *
+   * @experimental
+   */
+  rowRuleColor?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset
+   *
+   * The CSS `row-rule-inset` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset
+   *
+   * @experimental
+   */
+  rowRuleInset?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-cap
+   *
+   * The CSS `row-rule-inset-cap` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-cap
+   *
+   * @experimental
+   */
+  rowRuleInsetCap?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-cap-end
+   *
+   * The CSS `row-rule-inset-cap-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-cap-end
+   *
+   * @experimental
+   */
+  rowRuleInsetCapEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-cap-start
+   *
+   * The CSS `row-rule-inset-cap-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-start
+   *
+   * @experimental
+   */
+  rowRuleInsetCapStart?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-end
+   *
+   * The CSS `row-rule-inset-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-end
+   *
+   * @experimental
+   */
+  rowRuleInsetEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-junction
+   *
+   * The CSS `row-rule-inset-junction` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction
+   *
+   * @experimental
+   */
+  rowRuleInsetJunction?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-junction-end
+   *
+   * The CSS `row-rule-inset-junction-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction-end
+   *
+   * @experimental
+   */
+  rowRuleInsetJunctionEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-junction-start
+   *
+   * The CSS `row-rule-inset-junction-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction-start
+   *
+   * @experimental
+   */
+  rowRuleInsetJunctionStart?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-inset-start
+   *
+   * The CSS `row-rule-inset-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-start
+   *
+   * @experimental
+   */
+  rowRuleInsetStart?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-style
+   *
+   * The CSS `row-rule-style` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-style
+   *
+   * @experimental
+   */
+  rowRuleStyle?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-visibility-items
+   *
+   * The CSS `row-rule-visibility-items` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-visibility-items
+   *
+   * @experimental
+   */
+  rowRuleVisibilityItems?: StyleValueWithCondition<AnyString>
+  /**
+   * ### row-rule-width
+   *
+   * The CSS `row-rule-width` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-width
+   *
+   * @experimental
+   */
+  rowRuleWidth?: StyleValueWithCondition<AnyString>
+  /**
    * ### ruby-align
    *
    * The <code>ruby-align</code> CSS property sets the spacing and alignment of ruby annotation text when it does not fill its available space.
@@ -9824,6 +10061,126 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/ruby-position
    */
   rubyPosition?: StyleValueWithCondition<AnyString | CSS.Property.RubyPosition>
+  /**
+   * ### rule
+   *
+   * The CSS `rule` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule
+   *
+   * @experimental
+   */
+  rule?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-break
+   *
+   * The CSS `rule-break` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-break
+   *
+   * @experimental
+   */
+  ruleBreak?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-color
+   *
+   * The CSS `rule-color` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-color
+   *
+   * @experimental
+   */
+  ruleColor?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-inset
+   *
+   * The CSS `rule-inset` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset
+   *
+   * @experimental
+   */
+  ruleInset?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-inset-cap
+   *
+   * The CSS `rule-inset-cap` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-cap
+   *
+   * @experimental
+   */
+  ruleInsetCap?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-inset-end
+   *
+   * The CSS `rule-inset-end` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-end
+   *
+   * @experimental
+   */
+  ruleInsetEnd?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-inset-junction
+   *
+   * The CSS `rule-inset-junction` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-junction
+   *
+   * @experimental
+   */
+  ruleInsetJunction?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-inset-start
+   *
+   * The CSS `rule-inset-start` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-start
+   *
+   * @experimental
+   */
+  ruleInsetStart?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-overlap
+   *
+   * The CSS `rule-overlap` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-overlap
+   *
+   * @experimental
+   */
+  ruleOverlap?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-style
+   *
+   * The CSS `rule-style` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-style
+   *
+   * @experimental
+   */
+  ruleStyle?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-visibility-items
+   *
+   * The CSS `rule-visibility-items` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-visibility-items
+   *
+   * @experimental
+   */
+  ruleVisibilityItems?: StyleValueWithCondition<AnyString>
+  /**
+   * ### rule-width
+   *
+   * The CSS `rule-width` property.
+   *
+   * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-width
+   *
+   * @experimental
+   */
+  ruleWidth?: StyleValueWithCondition<AnyString>
   /**
    * ### rx
    *
@@ -10128,7 +10485,6 @@ export interface StyleProps {
    */
   scrollMarginX?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.ScrollMarginLeft
     | CSS.Property.ScrollMarginRight
     | number,
@@ -10158,7 +10514,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-margin-top
    */
   scrollMarginY?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.ScrollMarginBottom
     | CSS.Property.ScrollMarginTop
@@ -10361,7 +10716,6 @@ export interface StyleProps {
    */
   scrollPaddingX?: StyleValueWithCondition<
     | AnyString
-    | AnyString
     | CSS.Property.ScrollPaddingLeft
     | CSS.Property.ScrollPaddingRight
     | number,
@@ -10391,7 +10745,6 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/scroll-padding-top
    */
   scrollPaddingY?: StyleValueWithCondition<
-    | AnyString
     | AnyString
     | CSS.Property.ScrollPaddingBottom
     | CSS.Property.ScrollPaddingTop
@@ -11710,7 +12063,9 @@ export interface StyleProps {
   /**
    * ### view-transition-scope
    *
-   * The CSS `view-transition-scope` property.
+   * The <code>startViewTransition()</code> method of an <code>Element</code> object starts a view transition that affects only that element's DOM tree. You can use this to run separate elements' transitions concurrently.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-view-transitions-2/#view-transition-scope-prop
    *

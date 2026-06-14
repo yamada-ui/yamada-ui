@@ -1,6 +1,5 @@
 # pnpm
 .pnpm-store
-node-jiti
 
 # dependencies
 node_modules
@@ -35,12 +34,13 @@ yarn-error.log*
 next-env.d.ts
 
 # cache
-.eslintcache
 .turbo
 .next
 .vitest-attachments
 .react-router
 .tanstack
+.magi
+.worktrees
 
 # dotenv environment variables file
 .env

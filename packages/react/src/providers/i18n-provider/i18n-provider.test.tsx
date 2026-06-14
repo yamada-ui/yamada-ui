@@ -1,6 +1,6 @@
 import type { FC } from "react"
-import { act, render, renderHook, screen, waitFor } from "#test"
 import { useContext } from "react"
+import { act, render, renderHook, screen, waitFor } from "#test"
 import { noop } from "../../utils"
 import {
   getLanguage,
@@ -56,7 +56,9 @@ describe("I18nProvider", () => {
       return (
         <div>
           <span data-testid="locale">{locale}</span>
-          <button data-testid="change" onClick={() => changeLanguage("ja")} />
+          <button data-testid="change" onClick={() => changeLanguage("ja")}>
+            Change
+          </button>
         </div>
       )
     }

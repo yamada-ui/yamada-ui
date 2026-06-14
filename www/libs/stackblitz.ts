@@ -31,7 +31,7 @@ const INDEX = `<!doctype html>
   </body>
 </html>
 `
-const VITE_CONFIG = `import react from "@vitejs/plugin-react-swc"
+const VITE_CONFIG = `import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 import tsconfigPaths from "vite-tsconfig-paths"
 
@@ -415,12 +415,12 @@ const PACKAGE = {
     "@faker-js/faker": "^10",
   },
   devDependencies: {
-    "@types/node": "^24",
+    "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitejs/plugin-react-swc": "^4",
-    typescript: "^5",
-    vite: "^7",
+    "@vitejs/plugin-react": "^4",
+    typescript: "^6",
+    vite: "^8",
     "vite-tsconfig-paths": "^6",
   },
 }

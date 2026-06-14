@@ -2,13 +2,14 @@
   "name": "@playgrounds/next-pages",
   "version": "2.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "clean": "rimraf node_modules .next .eslintcache tsconfig.tsbuildinfo",
+    "clean": "rimraf node_modules .next .turbo tsconfig.tsbuildinfo",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc",
-    "lint": "eslint . --max-warnings=0 --cache",
+    "typecheck": "tsgo",
+    "lint": "oxlint . --max-warnings=0",
     "format": "pnpm -w format playgrounds/next/pages",
     "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },

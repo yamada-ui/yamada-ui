@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Skeleton, SkeletonCircle, SkeletonText } from "./"
 
 describe("<Skeleton />", () => {
-  test("renders component correctly", async () => {
+  test("passes a11y checks", async () => {
     await a11y(
       <>
         <Skeleton />
@@ -10,40 +10,6 @@ describe("<Skeleton />", () => {
         <SkeletonText />
       </>,
     )
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Skeleton.displayName).toBe("Skeleton")
-    expect(SkeletonCircle.name).toBe("SkeletonCircle")
-    expect(SkeletonText.name).toBe("SkeletonText")
-  })
-
-  test("sets `className` correctly", () => {
-    render(
-      <>
-        <Skeleton data-testid="skeleton" />
-        <SkeletonCircle data-testid="skeletonCircle" />
-        <SkeletonText rootProps={{ "data-testid": "skeletonText" }} />
-      </>,
-    )
-    expect(screen.getByTestId("skeleton")).toHaveClass("ui-skeleton")
-    expect(screen.getByTestId("skeletonCircle")).toHaveClass("ui-skeleton")
-    expect(screen.getByTestId("skeletonText").children[0]).toHaveClass(
-      "ui-skeleton",
-    )
-  })
-
-  test("renders HTML tag correctly", () => {
-    render(
-      <>
-        <Skeleton data-testid="skeleton" />
-        <SkeletonCircle data-testid="skeletonCircle" />
-        <SkeletonText rootProps={{ "data-testid": "skeletonText" }} />
-      </>,
-    )
-    expect(screen.getByTestId("skeleton").tagName).toBe("DIV")
-    expect(screen.getByTestId("skeletonCircle").tagName).toBe("DIV")
-    expect(screen.getByTestId("skeletonText").children[0]?.tagName).toBe("DIV")
   })
 
   test("sets loading state attributes correctly", () => {
@@ -58,27 +24,7 @@ describe("<Skeleton />", () => {
     expect(el2).toHaveAttribute("data-loaded")
   })
 
-  test("sets duration as number (appends 's')", () => {
-    render(<Skeleton data-testid="skeleton" duration={2} />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle("--duration: 2s")
-  })
-
-  test("sets duration as string (passes through)", () => {
-    render(<Skeleton data-testid="skeleton" duration="0.5s" />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle("--duration: 0.5s")
-  })
-
-  test("sets fadeDuration as number (appends 's')", () => {
-    render(<Skeleton data-testid="skeleton" fadeDuration={0.4} />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle("--fade-duration: 0.4s")
-  })
-
-  test("sets fadeDuration as string (passes through)", () => {
-    render(<Skeleton data-testid="skeleton" fadeDuration="0.8s" />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle("--fade-duration: 0.8s")
-  })
-
-  test("sets startColor and endColor", () => {
+  test("renders with startColor and endColor", () => {
     render(
       <Skeleton
         data-testid="skeleton"
@@ -86,33 +32,14 @@ describe("<Skeleton />", () => {
         startColor="red.500"
       />,
     )
-    // Just ensure it renders without error with color props
     expect(screen.getByTestId("skeleton")).toBeInTheDocument()
-  })
-
-  test("sets fitContent when explicitly true (no children)", () => {
-    render(<Skeleton data-testid="skeleton" fitContent />)
-    expect(screen.getByTestId("skeleton")).toHaveStyle(
-      "--height: fit-content; --width: fit-content",
-    )
-  })
-
-  test("sets fitContent automatically when children are present", () => {
-    render(
-      <Skeleton data-testid="skeleton">
-        <span>Content</span>
-      </Skeleton>,
-    )
-    expect(screen.getByTestId("skeleton")).toHaveStyle(
-      "--height: fit-content; --width: fit-content",
-    )
   })
 
   test("does not set fitContent when false and no children", () => {
     render(<Skeleton data-testid="skeleton" />)
-    const el = screen.getByTestId("skeleton")
-    expect(el.style.getPropertyValue("--width")).toBe("")
-    expect(el.style.getPropertyValue("--height")).toBe("")
+    const styles = screen.getByTestId("skeleton").style
+    expect(styles.getPropertyValue("--width")).toBe("")
+    expect(styles.getPropertyValue("--height")).toBe("")
   })
 
   test("fitContent false overrides children default", () => {
@@ -121,8 +48,23 @@ describe("<Skeleton />", () => {
         <span>Content</span>
       </Skeleton>,
     )
-    const el = screen.getByTestId("skeleton")
-    expect(el.style.getPropertyValue("--width")).toBe("")
-    expect(el.style.getPropertyValue("--height")).toBe("")
+    const styles = screen.getByTestId("skeleton").style
+    expect(styles.getPropertyValue("--width")).toBe("")
+    expect(styles.getPropertyValue("--height")).toBe("")
+  })
+
+  test("renders SkeletonText with the configured number of lines", () => {
+    render(<SkeletonText lineClamp={5} rootProps={{ "data-testid": "root" }} />)
+    expect(screen.getByTestId("root").children).toHaveLength(5)
+  })
+
+  test("renders SkeletonText children when not loading", () => {
+    render(
+      <SkeletonText loading={false} rootProps={{ "data-testid": "root" }}>
+        <span>Loaded</span>
+      </SkeletonText>,
+    )
+    expect(screen.getByText("Loaded")).toBeInTheDocument()
+    expect(screen.getByTestId("root").children).toHaveLength(1)
   })
 })

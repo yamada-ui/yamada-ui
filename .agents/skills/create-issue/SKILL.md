@@ -11,141 +11,176 @@ Create a GitHub Issue for yamada-ui.
 
 Use tools to interact with the user throughout the process.
 
-1. **Enter planning mode (required)**
-   - Enter planning mode immediately — present and confirm a plan with the user before executing any side effects
+### 1. **Enter planning mode (required)**
 
-2. **Discover available templates**
-   - Autonomously locate the `.github/ISSUE_TEMPLATE/` directory in the repository and list English templates (excluding `.ja.yml` files)
-   - Read each template file to understand its `name` and required fields
+- Enter planning mode immediately — present and confirm a plan with the user before executing any side effects
 
-3. **Confirm issue type**
-   - Present the available templates to the user and ask which type fits their need
-   - Suggest the appropriate type if unclear
+### 2. **Discover available templates**
 
-4. **Collect information**
-   - Ask for all required fields from the selected template
-   - Ask follow-up questions to gather concrete details, code snippets, and URLs
-   - **For the "PR intent" field, offer three options (separate from the template's Yes/No):**
+- Autonomously locate the `.github/ISSUE_TEMPLATE/` directory in the repository and list English templates (excluding `.ja.yml` files)
+- Read each template file to understand its `name` and required fields
 
-     | Option                   | Description                                  | Template value | Label              |
-     | ------------------------ | -------------------------------------------- | -------------- | ------------------ |
-     | **Yes**                  | Will create a PR                             | `Yes`          | none               |
-     | **No**                   | Will not create a PR                         | `No`           | `triage`           |
-     | **Open to contributors** | Open as a community contribution opportunity | `Yes`          | `good first issue` |
+### 3. **Assess available context**
 
-   If "Open to contributors" is selected, append the following to the issue body:
+- Evaluate whether the current conversation (arguments, prior messages) already contains enough information to draft the issue without asking the user:
+  - Issue type can be determined (e.g., bug, feature, docs)
+  - A clear title and description can be constructed
+  - PR intent can be inferred (e.g., the user said "I'll fix it" → `Yes`; no mention → default to `No`)
+- **If sufficient context exists:** skip steps 4 and 5, proceed directly to step 6 using the inferred values. Do not ask the user for information that is already present.
+- **If context is insufficient:** follow steps 4 and 5 to collect the missing information interactively.
 
-   ```
-   This issue is open to community contribution.
-   ```
+### 4. **Confirm issue type** _(skip if context is sufficient)_
 
-5. **Search for existing issues (duplicates, related, parent/child candidates)**
+- Present the available templates to the user and ask which type fits their need
+- Suggest the appropriate type if unclear
 
-   Search by keyword to find duplicates, related issues, and parent/child candidates:
+### 5. **Collect information** _(skip fields already known from context)_
 
-   ```bash
-   gh api "search/issues?q=repo:yamada-ui/yamada-ui+<keywords>&per_page=20" \
-     --jq '.items[] | {number: .number, title: .title, state: .state, url: .html_url}'
-   ```
+- Ask for all required fields from the selected template
+- Ask follow-up questions to gather concrete details, code snippets, and URLs
+- **For the "PR intent" field, offer three options (separate from the template's Yes/No):**
 
-   Autonomously determine the relationship for each result found:
+  | Option                   | Description                                  | Template value | Label              |
+  | ------------------------ | -------------------------------------------- | -------------- | ------------------ |
+  | **Yes**                  | Will create a PR                             | `Yes`          | none               |
+  | **No**                   | Will not create a PR                         | `No`           | `triage`           |
+  | **Open to contributors** | Open as a community contribution opportunity | `Yes`          | `good first issue` |
 
-   | Judgment                              | Condition                                                  | Action                                                                             |
-   | ------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-   | **Duplicate**                         | Content is nearly identical                                | Abort and present the existing issue URL to the user                               |
-   | **Parent/child (existing is parent)** | Existing issue is a tracking issue; new issue is a subtask | Link new issue as a child via `addSubIssue` API                                    |
-   | **Parent/child (new is parent)**      | New issue is a tracking issue; existing issue is a subtask | After creating the new issue, link existing issue as a child via `addSubIssue` API |
-   | **Depends on**                        | New issue requires the existing one to be resolved first   | Append `Depends on #xxxx` to the issue body                                        |
-   | **Related**                           | Same component or area                                     | Append `Related #xxxx` to the issue body                                           |
-   | **Unrelated**                         | Different content                                          | Do nothing                                                                         |
+If "Open to contributors" is selected, append the following to the issue body:
 
-   To get the Node ID of an existing issue:
+```
+This issue is open to community contribution.
+```
 
-   ```bash
-   gh api repos/yamada-ui/yamada-ui/issues/{issue_number} --jq '{node_id: .node_id, title: .title}'
-   ```
+### 6. **Search for existing issues (duplicates, related, parent/child candidates)**
 
-6. **Autonomously determine Type and Labels**
-   - **Type is required** — every issue must have a Type assigned; never skip this step
-   - Run the commands below to get available options, then decide based on the collected information
-   - Only ask the user for clarification when genuinely uncertain
+Search by keyword to find duplicates, related issues, and parent/child candidates:
 
-   **Fetch available Types:**
+```bash
+gh api "search/issues?q=repo:yamada-ui/yamada-ui+<keywords>&per_page=20" \
+  --jq '.items[] | {number: .number, title: .title, state: .state, url: .html_url}'
+```
 
-   ```bash
-   gh api graphql -f query='{ repository(owner: "yamada-ui", name: "yamada-ui") { issueTypes(first: 20) { nodes { name description } } } }'
-   ```
+Autonomously determine the relationship for each result found:
 
-   **Fetch available Labels:**
+| Judgment                              | Condition                                                  | Action                                                                             |
+| ------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **Duplicate**                         | Content is nearly identical                                | Abort and present the existing issue URL to the user                               |
+| **Parent/child (existing is parent)** | Existing issue is a tracking issue; new issue is a subtask | Link new issue as a child via `addSubIssue` API                                    |
+| **Parent/child (new is parent)**      | New issue is a tracking issue; existing issue is a subtask | After creating the new issue, link existing issue as a child via `addSubIssue` API |
+| **Depends on**                        | New issue requires the existing one to be resolved first   | Append `Depends on #xxxx` to the issue body                                        |
+| **Related**                           | Same component or area                                     | Append `Related #xxxx` to the issue body                                           |
+| **Unrelated**                         | Different content                                          | Do nothing                                                                         |
 
-   ```bash
-   gh api repos/yamada-ui/yamada-ui/labels --paginate --jq '.[] | {name: .name, description: .description}'
-   ```
+To get the Node ID of an existing issue:
 
-   Apply labels based on the PR intent answer from step 4:
-   - `Yes` → no additional label; **automatically assign the issue to the current user** (use `--assignee @me` in `gh issue create`)
-   - `No` → add `triage`
-   - `Open to contributors` → add `good first issue`
+```bash
+gh api repos/yamada-ui/yamada-ui/issues/{issue_number} --jq '{node_id: .node_id, title: .title}'
+```
 
-7. **Design parent/child structure for multiple issues**
-   - When creating multiple issues, always designate one as the parent (tracking issue)
-   - Break individual tasks into child issues under the parent
-   - Factor in any parent/child relationships found with existing issues in step 5
-   - Include the full structure (parent/child, related, depends-on) in the plan presentation
+### 7. **Autonomously determine Type and Labels**
 
-8. **Present plan for user review**
-   - Present the following for user review:
-     - List of issues to create (with parent/child relationships if applicable)
-     - Title, Type, and Labels for each issue (with reasoning)
-     - Relationships with existing issues (`sub-issue`, `Related`, `Depends on`)
-     - Target repository: `yamada-ui/yamada-ui`
-     - **Complete `gh issue create` command for each issue** (all flags filled in — required)
+- **Type is required** — every issue must have a Type assigned; never skip this step
+- Run the commands below to get available options, then decide based on the collected information
+- Only ask the user for clarification when genuinely uncertain
+- In this repo, do **not** rely on `gh issue create --type`; create the issue first, then assign the chosen type with GraphQL
 
-   Use this template for each command:
+**Fetch available Types:**
 
-   ```bash
-   gh issue create \
-     --repo yamada-ui/yamada-ui \
-     --title "<title>" \
-     --body "<body>" \
-     --type "<Type>" \
-     --label "<label1>,<label2>" \
-     [--assignee @me]  # Only if PR intent is Yes
-   ```
+```bash
+gh api graphql -f query='{ repository(owner: "yamada-ui", name: "yamada-ui") { issueTypes(first: 20) { nodes { id name description } } } }'
+```
 
-   **For the `ai-used` checkboxes field in the template:** because this skill is AI-driven by definition, copy the options exactly as written in the template into `--body`, with the "checked the generated content" option set to `[x]` and the "did not use AI" option set to `[ ]`.
-   - Wait for user approval
-   - Apply any requested changes and re-present before proceeding
+**Fetch available Labels:**
 
-9. **Create and link issues after approval**
-   - Exit planning mode and proceed with execution after receiving approval
-   - Execute the exact `gh issue create` commands specified in the plan — do NOT reconstruct them
-   - For multiple issues, create the parent first, then create and link child issues
+```bash
+gh api repos/yamada-ui/yamada-ui/labels --paginate --jq '.[] | {name: .name, description: .description}'
+```
 
-   **Sub-issue linking (for both new and existing issues):**
+Apply labels based on the PR intent answer from step 5:
 
-   ```bash
-   # Get parent issue Node ID
-   gh api repos/yamada-ui/yamada-ui/issues/{parent_issue_number} --jq '.node_id'
+- `Yes` → no additional label; **automatically assign the issue to the current user** (use `--assignee @me` in `gh issue create`)
+- `No` → add `triage`
+- `Open to contributors` → add `good first issue`
 
-   # Write and execute the GraphQL mutation
-   cat > /tmp/add_sub_issue.graphql << 'EOF'
-   mutation AddSubIssue($issueId: ID!, $subIssueUrl: String!) {
-     addSubIssue(input: { issueId: $issueId, subIssueUrl: $subIssueUrl }) {
-       issue { number title }
-       subIssue { number title }
-     }
-   }
-   EOF
+### 8. **Design parent/child structure for multiple issues**
 
-   gh api graphql \
-     -F query=@/tmp/add_sub_issue.graphql \
-     -F issueId="<parent Node ID>" \
-     -F subIssueUrl="https://github.com/yamada-ui/yamada-ui/issues/<child_issue_number>"
-   ```
+- When creating multiple issues, always designate one as the parent (tracking issue)
+- Break individual tasks into child issues under the parent
+- Factor in any parent/child relationships found with existing issues in step 6
+- Include the full structure (parent/child, related, depends-on) in the plan presentation
 
-   - Repeat for each child issue
-   - Display the parent issue URL once all issues are created and linked
+### 9. **Present plan for user review**
+
+- **Title format** — use natural, descriptive English. Do not use commit message format (e.g., `feat(x): ...`). Wrap component names and code identifiers in backticks, and escape those backticks when presenting shell commands.
+  - Good: "Add \`Marquee\` component", "\`Accordion\` throws error when all items are disabled"
+  - Bad: "feat(marquee): add Marquee component", "fix(accordion): throw error when all items are disabled"
+- Present the following for user review:
+  - List of issues to create (with parent/child relationships if applicable)
+  - Title, Type, and Labels for each issue (with reasoning)
+  - Relationships with existing issues (`sub-issue`, `Related`, `Depends on`)
+  - Target repository: `yamada-ui/yamada-ui`
+  - **Concrete create-and-type-assignment commands for each issue** (all placeholders filled in — required)
+
+Use this template for each issue:
+
+```bash
+body_file=$(mktemp)
+cat > "$body_file" << 'EOF'
+<issue body>
+EOF
+
+issue_url=$(gh issue create \
+  --repo yamada-ui/yamada-ui \
+  --title "<title>" \
+  --body-file "$body_file" \
+  [--label "<label1>,<label2>"] \
+  [--assignee @me])  # Only if PR intent is Yes
+
+issue_number=${issue_url##*/}
+issue_node_id=$(gh api "repos/yamada-ui/yamada-ui/issues/$issue_number" --jq '.node_id')
+
+gh api graphql \
+  -f query='mutation($issueId:ID!, $issueTypeId:ID!){ updateIssue(input:{id:$issueId, issueTypeId:$issueTypeId}) { issue { number title issueType { name } } } }' \
+  -F issueId="$issue_node_id" \
+  -F issueTypeId="<issue-type-id>"
+```
+
+**For the `ai-used` checkboxes field in the template:** because this skill is AI-driven by definition, copy the options exactly as written in the issue body passed to `--body-file`, with the "checked the generated content" option set to `[x]` and the "did not use AI" option set to `[ ]`.
+
+- Wait for user approval
+- Apply any requested changes and re-present before proceeding
+
+### 10. **Create and link issues after approval**
+
+- Exit planning mode and proceed with execution after receiving approval
+- Execute the exact create command and follow-up type-assignment mutation specified in the plan — do NOT reconstruct a different flow
+- For multiple issues, create the parent first, then create and link child issues
+
+**Sub-issue linking (for both new and existing issues):**
+
+```bash
+# Get parent issue Node ID
+gh api repos/yamada-ui/yamada-ui/issues/{parent_issue_number} --jq '.node_id'
+
+# Write and execute the GraphQL mutation
+cat > /tmp/add_sub_issue.graphql << 'EOF'
+mutation AddSubIssue($issueId: ID!, $subIssueUrl: String!) {
+  addSubIssue(input: { issueId: $issueId, subIssueUrl: $subIssueUrl }) {
+    issue { number title }
+    subIssue { number title }
+  }
+}
+EOF
+
+gh api graphql \
+  -F query=@/tmp/add_sub_issue.graphql \
+  -F issueId="<parent Node ID>" \
+  -F subIssueUrl="https://github.com/yamada-ui/yamada-ui/issues/<child_issue_number>"
+```
+
+- Repeat for each child issue
+- Display the parent issue URL once all issues are created and linked
 
 ## Notes
 

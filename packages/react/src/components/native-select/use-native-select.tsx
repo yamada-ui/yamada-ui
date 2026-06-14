@@ -4,7 +4,8 @@ import type { ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { cloneElement, useCallback, useMemo } from "react"
-import { ariaAttr, handlerAll, mergeRefs } from "../../utils"
+import { mergeProps } from "../../core"
+import { ariaAttr } from "../../utils"
 import { useFieldProps } from "../field"
 
 interface NativeSelectSharedItem extends Omit<
@@ -70,12 +71,12 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
     } else if (items.length) {
       computedChildren = items.map((item, index) => {
         if ("items" in item) {
-          const { items = [], label, ...rest } = item
+          const { items, label, ...rest } = item
 
           return cloneElement(<optgroup />, {
             key: index,
             children: items.map(({ label, ...rest }, index) =>
-              cloneElement(<option />, {
+              cloneElement(<option aria-label={label} />, {
                 key: index,
                 children: label,
                 ...rest,
@@ -87,7 +88,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
         } else {
           const { label, ...rest } = item
 
-          return cloneElement(<option />, {
+          return cloneElement(<option aria-label={label} />, {
             key: index,
             children: label,
             ...rest,
@@ -115,21 +116,28 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
   )
 
   const getFieldProps: PropGetter<"select"> = useCallback(
-    ({ ref, ...props } = {}) => ({
-      disabled,
-      readOnly,
-      tabIndex: interactive ? undefined : -1,
-      ...ariaProps,
-      ...dataProps,
-      "aria-disabled": ariaAttr(!interactive),
-      "aria-label": placeholder,
-      ...rest,
-      ...props,
-      ref: mergeRefs(ref, rest.ref),
-      children: props.children ?? computedChildren,
-      onBlur: handlerAll(eventProps.onBlur, props.onBlur),
-      onFocus: handlerAll(eventProps.onFocus, props.onFocus),
-    }),
+    ({ ref, ...props } = {}) =>
+      mergeProps(
+        {
+          disabled,
+          readOnly,
+          tabIndex: interactive ? undefined : -1,
+          ...ariaProps,
+          ...dataProps,
+          "aria-disabled": ariaAttr(!interactive),
+          "aria-label": placeholder,
+        },
+        {
+          onBlur: eventProps.onBlur,
+          onFocus: eventProps.onFocus,
+        },
+        rest,
+        props,
+        {
+          ref,
+          children: props.children ?? computedChildren,
+        },
+      )(),
     [
       interactive,
       ariaProps,

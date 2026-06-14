@@ -1,7 +1,6 @@
 import { mkdtempSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import path from "node:path"
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 
 const { mockBuild, mockNodeEval } = vi.hoisted(() => ({
   mockBuild: vi.fn(),

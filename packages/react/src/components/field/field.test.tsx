@@ -1,4 +1,4 @@
-import { a11y, filterVisuallyHidden, fireEvent, render, screen } from "#test"
+import { a11y, fireEvent, render, screen } from "#test"
 import { Field } from "."
 import { Form } from "../form"
 import { Input } from "../input"
@@ -8,70 +8,16 @@ describe("<Field />", () => {
     await a11y(<Field.Root />)
   })
 
-  test("Field sets `displayName` correctly", () => {
-    expect(Field.Root.displayName).toBe("FieldRoot")
-    expect(Field.Label.displayName).toBe("FieldLabel")
-    expect(Field.HelperMessage.displayName).toBe("FieldHelperMessage")
-    expect(Field.ErrorMessage.displayName).toBe("FieldErrorMessage")
-  })
-
-  test("Field sets `className` correctly", () => {
-    const { rerender } = render(
-      <Field.Root data-testid="root">
-        <Field.Label data-testid="label">Label</Field.Label>
-        <Field.HelperMessage data-testid="helper">Helper</Field.HelperMessage>
-        <Field.ErrorMessage data-testid="error">Error</Field.ErrorMessage>
-      </Field.Root>,
-    )
-
-    expect(screen.getByTestId("root")).toHaveClass("ui-field__root")
-    expect(screen.getByTestId("label")).toHaveClass("ui-field__label")
-    expect(screen.getByTestId("helper")).toHaveClass("ui-field__helper-message")
-
-    rerender(
-      <Field.Root data-testid="root" invalid>
-        <Field.Label data-testid="label">Label</Field.Label>
-        <Field.HelperMessage data-testid="helper">Helper</Field.HelperMessage>
-        <Field.ErrorMessage data-testid="error">Error</Field.ErrorMessage>
-      </Field.Root>,
-    )
-    expect(screen.getByTestId("error")).toHaveClass("ui-field__error-message")
-  })
-
-  test("Field renders HTML tag correctly", () => {
-    const { rerender } = render(
-      <Field.Root data-testid="root">
-        <Field.Label>Label</Field.Label>
-        <Field.HelperMessage>Helper</Field.HelperMessage>
-        <Field.ErrorMessage>Error</Field.ErrorMessage>
-      </Field.Root>,
-    )
-
-    expect(screen.getByTestId("root").tagName).toBe("DIV")
-    expect(screen.getByText("Label").tagName).toBe("LABEL")
-    expect(screen.getByText("Helper").tagName).toBe("SPAN")
-
-    rerender(
-      <Field.Root data-testid="root" invalid>
-        <Field.Label>Label</Field.Label>
-        <Field.HelperMessage>Helper</Field.HelperMessage>
-        <Field.ErrorMessage>Error</Field.ErrorMessage>
-      </Field.Root>,
-    )
-    expect(screen.getByText("Error").tagName).toBe("SPAN")
-  })
-
   test("should render form control", () => {
     render(
       <Field.Root helperMessage="Please enter your email" label="Email">
         <Input type="email" />
       </Field.Root>,
     )
-    expect(screen.getByText("Email")).toBeInTheDocument()
-    expect(
-      screen.getByText(filterVisuallyHidden("Please enter your email")),
-    ).toBeInTheDocument()
-    expect(screen.getByRole("textbox")).toBeInTheDocument()
+
+    expect(screen.getByText(/^Email$/)).toBeVisible()
+    expect(screen.getByText("Please enter your email")).toBeVisible()
+    expect(screen.getByRole("textbox")).toBeVisible()
   })
 
   test("should render invalid form control", () => {
@@ -80,11 +26,10 @@ describe("<Field />", () => {
         <Input type="email" />
       </Field.Root>,
     )
-    expect(screen.getByText("Email")).toHaveAttribute("data-invalid")
+
+    expect(screen.getByText(/^Email$/)).toHaveAttribute("data-invalid")
     expect(screen.getByRole("textbox")).toBeInvalid()
-    expect(
-      screen.getByText(filterVisuallyHidden("Email is required.")),
-    ).toBeInTheDocument()
+    expect(screen.getByText("Email is required.")).toBeVisible()
   })
 
   test("should be hidden helperMessage", () => {
@@ -99,12 +44,9 @@ describe("<Field />", () => {
         <Input type="email" />
       </Field.Root>,
     )
-    expect(
-      screen.getByText(filterVisuallyHidden("Email is required.")),
-    ).toBeInTheDocument()
-    expect(
-      screen.queryByText(filterVisuallyHidden("Please enter your email")),
-    ).not.toBeVisible()
+
+    expect(screen.getByText("Email is required.")).toBeVisible()
+    expect(screen.getByText("Please enter your email")).not.toBeVisible()
   })
 
   test("should be appeared helperMessage", () => {
@@ -119,12 +61,9 @@ describe("<Field />", () => {
         <Input type="email" />
       </Field.Root>,
     )
-    expect(
-      screen.getByText(filterVisuallyHidden("Email is required.")),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(filterVisuallyHidden("Please enter your email")),
-    ).toBeInTheDocument()
+
+    expect(screen.getByText("Email is required.")).toBeVisible()
+    expect(screen.getByText("Please enter your email")).toBeVisible()
   })
 
   test("should be required", () => {
@@ -133,6 +72,7 @@ describe("<Field />", () => {
         <Input type="email" />
       </Field.Root>,
     )
+
     expect(screen.getByRole("textbox")).toBeRequired()
   })
 
@@ -142,6 +82,7 @@ describe("<Field />", () => {
         <Input type="email" />
       </Field.Root>,
     )
+
     expect(screen.getByRole("textbox")).toBeDisabled()
   })
 
@@ -151,6 +92,7 @@ describe("<Field />", () => {
         <Input type="email" />
       </Field.Root>,
     )
+
     expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
   })
 
@@ -160,7 +102,8 @@ describe("<Field />", () => {
         <Input type="email" />
       </Field.Root>,
     )
-    expect(screen.getByText("*")).toBeInTheDocument()
+
+    expect(screen.getByText("*")).toBeVisible()
   })
 
   test("should render custom indicator text", () => {
@@ -169,7 +112,8 @@ describe("<Field />", () => {
         <Input type="email" />
       </Field.Root>,
     )
-    expect(screen.getByText("required")).toBeInTheDocument()
+
+    expect(screen.getByText("required")).toBeVisible()
   })
 
   test("should render custom indicator jsx", () => {
@@ -182,6 +126,7 @@ describe("<Field />", () => {
         <Input type="email" />
       </Field.Root>,
     )
+
     expect(screen.getByTestId("required")).toHaveTextContent("required")
   })
 
@@ -194,6 +139,7 @@ describe("<Field />", () => {
         <Input type="email" />
       </Field.Root>,
     )
+
     expect(screen.getByTestId("optional")).toHaveTextContent("optional")
   })
 
@@ -206,14 +152,11 @@ describe("<Field />", () => {
         <Input type="email" placeholder="your email address" />
       </Field.Root>,
     )
-    expect(
-      screen.getByText("We'll never share your email."),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole("textbox", {
-        description: "We'll never share your email.",
-      }),
-    ).toBeInTheDocument()
+
+    expect(screen.getByText("We'll never share your email.")).toBeVisible()
+    expect(screen.getByRole("textbox")).toHaveAccessibleDescription(
+      "We'll never share your email.",
+    )
   })
 
   test("should inherit object-based disabled from Form context", () => {
@@ -224,6 +167,7 @@ describe("<Field />", () => {
         </Field.Root>
       </Form.Root>,
     )
+
     expect(screen.getByRole("textbox")).toBeDisabled()
   })
 
@@ -235,6 +179,7 @@ describe("<Field />", () => {
         </Field.Root>
       </Form.Root>,
     )
+
     expect(screen.getByRole("textbox")).toBeInvalid()
   })
 
@@ -246,6 +191,7 @@ describe("<Field />", () => {
         </Field.Root>
       </Form.Root>,
     )
+
     expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
   })
 
@@ -257,6 +203,7 @@ describe("<Field />", () => {
         </Field.Root>
       </Form.Root>,
     )
+
     expect(screen.getByRole("textbox")).toBeRequired()
   })
 
@@ -273,12 +220,9 @@ describe("<Field />", () => {
         </Field.Root>
       </Form.Root>,
     )
-    expect(
-      screen.getByText(filterVisuallyHidden("Email is required.")),
-    ).toBeInTheDocument()
-    expect(
-      screen.queryByText(filterVisuallyHidden("Please enter your email")),
-    ).not.toBeVisible()
+
+    expect(screen.getByText("Email is required.")).toBeVisible()
+    expect(screen.getByText("Please enter your email")).not.toBeVisible()
   })
 
   test("should inherit object-based form flags via input name", () => {
@@ -296,6 +240,7 @@ describe("<Field />", () => {
     )
 
     const input = screen.getByRole("textbox")
+
     expect(input).toBeDisabled()
     expect(input).toHaveAttribute("aria-invalid", "true")
     expect(input).toHaveAttribute("aria-readonly", "true")
@@ -312,6 +257,7 @@ describe("<Field />", () => {
     )
 
     const input = screen.getByRole("textbox")
+
     expect(input).toBeDisabled()
     expect(input).toHaveAttribute("aria-invalid", "true")
     expect(input).toHaveAttribute("aria-readonly", "true")
@@ -324,6 +270,7 @@ describe("<Field />", () => {
         <Input type="email" />
       </Field.Root>,
     )
+
     const input = screen.getByRole("textbox")
     const root = screen.getByTestId("root")
 

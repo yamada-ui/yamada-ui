@@ -178,7 +178,9 @@ function getCSSCompatData(cssTypes: Awaited<ReturnType<typeof getCSSTypes>>) {
 }
 
 async function getCSSTypes() {
-  const data: { [key: string]: { deprecated: boolean; type: string } } = {}
+  const data: {
+    [key: string]: { deprecated: boolean; type: string; vendor: boolean }
+  } = {}
 
   const [targetPath] = await Array.fromAsync(
     glob(path.resolve("node_modules", "csstype", "index.d.ts")),
@@ -207,9 +209,12 @@ async function getCSSTypes() {
     if (
       name !== "StandardProperties" &&
       name !== "SvgProperties" &&
+      name !== "VendorProperties" &&
       name !== "ObsoleteProperties"
     )
       continue
+
+    const vendor = name === "VendorProperties"
 
     for (const property of type.getProperties()) {
       const name = property.getName()
@@ -237,6 +242,7 @@ async function getCSSTypes() {
             ? `CSS.Globals`
             : `CSS.Property.${value.replace(/<.*?>$/, "")}`,
         deprecated,
+        vendor,
       }
     }
   }
@@ -656,7 +662,15 @@ function main() {
 
       const { data, duplicatedProps, tokenProps, variableLengthProps } =
         generateData(cssCompatData, atRuleCompatData)
-      const content = generateStyles(data, tokenProps, variableLengthProps)
+      const vendorProps = Object.keys(cssTypes).filter(
+        (name) => !!cssTypes[name]?.vendor,
+      )
+      const content = generateStyles(
+        data,
+        tokenProps,
+        variableLengthProps,
+        vendorProps,
+      )
 
       if (duplicatedProps.length) {
         spinner.info(`Duplicated props that are present in "StyledProps"`)

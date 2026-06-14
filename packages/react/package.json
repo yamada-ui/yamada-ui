@@ -109,7 +109,7 @@
     "embla-carousel-react": "^8.6.0",
     "file-selector": "^2.1.2",
     "framesync": "6.1.2",
-    "intl-messageformat": "^11.2.6",
+    "intl-messageformat": "^11.2.8",
     "lucide-react": "1.17.0",
     "motion": "catalog:",
     "react": "catalog:",
@@ -139,7 +139,7 @@
     "@vitest/browser": "catalog:",
     "@vitest/browser-playwright": "catalog:",
     "@yamada-ui/workspace": "workspace:*",
-    "axe-core": "^4.11.4",
+    "axe-core": "^4.12.0",
     "axe-playwright": "^2.2.2",
     "jsdom": "^29.1.1",
     "playwright": "catalog:",
@@ -148,7 +148,7 @@
     "use-mask-input": "^3.10.1",
     "vitest-axe": "catalog:",
     "vitest-browser-react": "2.2.0",
-    "web-features": "3.29.0",
+    "web-features": "3.30.0",
     "yamljs": "catalog:"
   },
   "peerDependencies": {

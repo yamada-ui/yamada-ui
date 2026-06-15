@@ -160,21 +160,14 @@ function getFailures({ testResults }: Report) {
         .slice(1, -1)
         .map((detail) => detail.trim().replace(/^.*(?=Received:)/s, ""))
 
+      if (!details.length) return
+
       failures[categoryName] ??= {}
       failures[categoryName]![storyName] = details
     })
   })
 
-  return Object.fromEntries(
-    Object.entries(failures)
-      .filter(([, stories]) => Object.keys(stories).length)
-      .map(([categoryName, stories]) => [
-        categoryName,
-        Object.fromEntries(
-          Object.entries(stories).filter(([, details]) => details.length),
-        ),
-      ]),
-  )
+  return failures
 }
 
 function createBody(

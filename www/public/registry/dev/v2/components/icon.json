@@ -49,7 +49,7 @@
   "sources": [
     {
       "name": "icon.style.ts",
-      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const iconStyle = defineComponentStyle({\n  base: {\n    color: \"currentColor\",\n    display: \"inline-block\",\n    flexShrink: 0,\n    fontSize: \"1em\",\n    lineHeight: \"1em\",\n  },\n})\n\nexport type IconStyle = typeof iconStyle\n"
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const iconStyle = defineComponentStyle({\n  base: {\n    \"--size\": \"1em\",\n    color: \"currentColor\",\n    display: \"inline-block\",\n    flexShrink: 0,\n    lineHeight: \"1em\",\n  },\n})\n\nexport type IconStyle = typeof iconStyle\n"
     },
     {
       "name": "icon.tsx",

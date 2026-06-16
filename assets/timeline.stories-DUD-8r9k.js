@@ -1,0 +1,234 @@
+import{c as e,i as t}from"./preload-helper-usAeo7Bx.js";import{Ct as n,Dm as r,Dt as i,Dv as a,Et as o,Ff as s,If as c,Ot as l,St as u,Tt as d,Uv as f,Zl as p,by as m,eu as h,mg as g,o_ as _,oh as v,wt as y,wv as b,xt as x}from"./iframe-BuTDpTUb.js";import{n as S,t as C}from"./storybook-A05TUAu9.js";var w,T,E,D,O,k,A,j,M,N,P,F,I,L,R,z;t((()=>{w=e(m(),1),C(),x(),b(),p(),s(),r(),T=a(),E={component:i,title:`Components / Timeline`},D=()=>{let e=(0,w.useMemo)(()=>[{description:`全てはここから始まった！ジョナサンとディオ、運命の出会い‼`,title:`第1部 ファントムブラッド`},{description:`石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼`,title:`第2部 戦闘潮流`},{description:`DIO復活…！永き因縁に終止符を打つスタンドバトル‼`,title:`第3部 スターダストクルセイダース`}],[]);return(0,T.jsx)(i,{items:e})},O=()=>{let e=(0,w.useMemo)(()=>[{description:`全てはここから始まった！ジョナサンとディオ、運命の出会い‼`,title:`第1部 ファントムブラッド`},{description:`石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼`,title:`第2部 戦闘潮流`},{description:`DIO復活…！永き因縁に終止符を打つスタンドバトル‼`,title:`第3部 スターダストクルセイダース`}],[]);return(0,T.jsx)(S,{variant:`stack`,rows:[`plain`,`number`],children:(t,n,r)=>(0,T.jsx)(i,{variant:n,items:e,shape:n===`number`?`rounded`:void 0},r)})},k=()=>{let e=(0,w.useMemo)(()=>[{description:`全てはここから始まった！ジョナサンとディオ、運命の出会い‼`,title:`第1部 ファントムブラッド`},{description:`石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼`,title:`第2部 戦闘潮流`},{description:`DIO復活…！永き因縁に終止符を打つスタンドバトル‼`,title:`第3部 スターダストクルセイダース`}],[]);return(0,T.jsx)(S,{variant:`stack`,rows:[`sm`,`md`,`lg`,`xl`],children:(t,n,r)=>(0,T.jsx)(i,{size:n,items:e},r)})},A=()=>{let e=(0,w.useMemo)(()=>[{description:`全てはここから始まった！ジョナサンとディオ、運命の出会い‼`,title:`第1部 ファントムブラッド`},{description:`石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼`,title:`第2部 戦闘潮流`},{description:`DIO復活…！永き因縁に終止符を打つスタンドバトル‼`,title:`第3部 スターダストクルセイダース`}],[]);return(0,T.jsx)(S,{variant:`stack`,rows:f,children:(t,n,r)=>(0,T.jsx)(i,{colorScheme:n,items:e},r)})},j=()=>{let e=(0,w.useMemo)(()=>[{description:`全てはここから始まった！ジョナサンとディオ、運命の出会い‼`,title:`第1部 ファントムブラッド`},{description:`石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼`,title:`第2部 戦闘潮流`},{description:`DIO復活…！永き因縁に終止符を打つスタンドバトル‼`,title:`第3部 スターダストクルセイダース`}],[]);return(0,T.jsx)(S,{variant:`stack`,rows:[`start`,`center`,`end`],children:(t,n,r)=>(0,T.jsx)(i,{align:n,items:n===`start`?e:e.map((e,t)=>({align:n!==`end`&&t%2==0?`start`:`end`,...e}))},r)})},M=()=>{let e=(0,w.useMemo)(()=>[{description:`全てはここから始まった！ジョナサンとディオ、運命の出会い‼`,title:`第1部 ファントムブラッド`},{description:`石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼`,title:`第2部 戦闘潮流`},{description:`DIO復活…！永き因縁に終止符を打つスタンドバトル‼`,title:`第3部 スターダストクルセイダース`}],[]);return(0,T.jsx)(S,{variant:`stack`,rows:[`circle`,`rounded`,`square`],children:(t,n,r)=>(0,T.jsx)(i,{items:e,shape:n},r)})},N=()=>{let e=(0,w.useMemo)(()=>[{align:`end`,description:`全てはここから始まった！ジョナサンとディオ、運命の出会い‼`,title:`第1部 ファントムブラッド`},{align:`start`,description:`石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼`,title:`第2部 戦闘潮流`},{align:`end`,description:`DIO復活…！永き因縁に終止符を打つスタンドバトル‼`,title:`第3部 スターダストクルセイダース`}],[]);return(0,T.jsx)(i,{align:`center`,items:e})},P=()=>{let e=(0,w.useMemo)(()=>[{description:`全てはここから始まった！ジョナサンとディオ、運命の出会い‼`,indicator:(0,T.jsx)(g,{fontSize:`xl`}),title:`第1部 ファントムブラッド`},{description:`石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼`,indicator:(0,T.jsx)(_,{fontSize:`xl`}),title:`第2部 戦闘潮流`},{description:`DIO復活…！永き因縁に終止符を打つスタンドバトル‼`,indicator:(0,T.jsx)(v,{fontSize:`xl`}),title:`第3部 スターダストクルセイダース`}],[]),t=(0,w.useMemo)(()=>[{description:`ジョナサン・ジョースター`,indicator:(0,T.jsx)(h,{name:`ジョナサン・ジョースター`,src:`https://jojo-portal.com/wp-content/themes/jojo-portal/assets/images/common/about/01/img_chara_01.png`,boxSize:`full`}),title:`君はディオ・ブランドーだね？`,contentProps:{gap:`0`},titleProps:{lineHeight:`short`}},{description:`ディオ・ブランドー`,indicator:(0,T.jsx)(h,{name:`ディオ・ブランドー`,src:`https://jojo-portal.com/wp-content/themes/jojo-portal/assets/images/common/about/01/img_chara_02.png`,boxSize:`full`}),title:`そういう君はジョナサン・ジョースター`,contentProps:{gap:`0`},titleProps:{lineHeight:`short`}}],[]);return(0,T.jsxs)(T.Fragment,{children:[(0,T.jsx)(i,{items:e,shape:`square`}),(0,T.jsx)(i,{indicatorSize:`10`,items:t})]})},F=()=>{let e=(0,w.useMemo)(()=>[{description:`全てはここから始まった！ジョナサンとディオ、運命の出会い‼`,indicator:(0,T.jsx)(c,{layerStyle:`solid`,boxSize:`full`,children:`1`}),title:`第1部 ファントムブラッド`},{description:`石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼`,indicator:(0,T.jsx)(c,{layerStyle:`solid`,boxSize:`full`,children:`2`}),title:`第2部 戦闘潮流`},{description:`DIO復活…！永き因縁に終止符を打つスタンドバトル‼`,indicator:(0,T.jsx)(c,{layerStyle:`solid`,boxSize:`full`,children:`3`}),title:`第3部 スターダストクルセイダース`}],[]);return(0,T.jsx)(i,{size:`lg`,items:e,shape:`rounded`})},I=()=>{let e=(0,w.useMemo)(()=>[{description:`全てはここから始まった！ジョナサンとディオ、運命の出会い‼`,title:`第1部 ファントムブラッド`},{"--separator-style":`dashed`,description:`石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼`,title:`第2部 戦闘潮流`},{description:`DIO復活…！永き因縁に終止符を打つスタンドバトル‼`,title:`第3部 スターダストクルセイダース`}],[]);return(0,T.jsx)(i,{items:e})},L=()=>{let e=(0,w.useMemo)(()=>[{description:`全てはここから始まった！ジョナサンとディオ、運命の出会い‼`,title:`第1部 ファントムブラッド`},{description:`石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼`,title:`第2部 戦闘潮流`},{description:`DIO復活…！永き因縁に終止符を打つスタンドバトル‼`,title:`第3部 スターダストクルセイダース`}],[]);return(0,T.jsx)(i,{attached:!0,items:e})},R=()=>(0,T.jsxs)(i,{children:[(0,T.jsxs)(o,{children:[(0,T.jsx)(u,{children:(0,T.jsx)(d,{})}),(0,T.jsxs)(n,{children:[(0,T.jsx)(l,{children:`第1部 ファントムブラッド`}),(0,T.jsx)(y,{children:`全てはここから始まった！ジョナサンとディオ、運命の出会い‼`})]})]}),(0,T.jsxs)(o,{children:[(0,T.jsx)(u,{children:(0,T.jsx)(d,{})}),(0,T.jsxs)(n,{children:[(0,T.jsx)(l,{children:`第2部 戦闘潮流`}),(0,T.jsx)(y,{children:`石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼`})]})]}),(0,T.jsxs)(o,{children:[(0,T.jsx)(u,{children:(0,T.jsx)(d,{})}),(0,T.jsxs)(n,{children:[(0,T.jsx)(l,{children:`第3部 スターダストクルセイダース`}),(0,T.jsx)(y,{children:`DIO復活…！永き因縁に終止符を打つスタンドバトル‼`})]})]})]}),D.parameters={...D.parameters,docs:{...D.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo<Timeline.Item[]>(() => [{
+    description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+    title: "第1部 ファントムブラッド"
+  }, {
+    description: "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+    title: "第2部 戦闘潮流"
+  }, {
+    description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+    title: "第3部 スターダストクルセイダース"
+  }], []);
+  return <Timeline.Root items={items} />;
+}`,...D.parameters?.docs?.source}}},O.parameters={...O.parameters,docs:{...O.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo<Timeline.Item[]>(() => [{
+    description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+    title: "第1部 ファントムブラッド"
+  }, {
+    description: "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+    title: "第2部 戦闘潮流"
+  }, {
+    description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+    title: "第3部 スターダストクルセイダース"
+  }], []);
+  return <PropsTable variant="stack" rows={["plain", "number"]}>
+      {(_, row, key) => {
+      return <Timeline.Root key={key} variant={row} items={items} shape={row === "number" ? "rounded" : undefined} />;
+    }}
+    </PropsTable>;
+}`,...O.parameters?.docs?.source}}},k.parameters={...k.parameters,docs:{...k.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo<Timeline.Item[]>(() => [{
+    description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+    title: "第1部 ファントムブラッド"
+  }, {
+    description: "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+    title: "第2部 戦闘潮流"
+  }, {
+    description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+    title: "第3部 スターダストクルセイダース"
+  }], []);
+  return <PropsTable variant="stack" rows={["sm", "md", "lg", "xl"]}>
+      {(_, row, key) => {
+      return <Timeline.Root key={key} size={row} items={items} />;
+    }}
+    </PropsTable>;
+}`,...k.parameters?.docs?.source}}},A.parameters={...A.parameters,docs:{...A.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo<Timeline.Item[]>(() => [{
+    description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+    title: "第1部 ファントムブラッド"
+  }, {
+    description: "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+    title: "第2部 戦闘潮流"
+  }, {
+    description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+    title: "第3部 スターダストクルセイダース"
+  }], []);
+  return <PropsTable variant="stack" rows={COLOR_SCHEMES}>
+      {(_, row, key) => {
+      return <Timeline.Root key={key} colorScheme={row} items={items} />;
+    }}
+    </PropsTable>;
+}`,...A.parameters?.docs?.source}}},j.parameters={...j.parameters,docs:{...j.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo<Timeline.Item[]>(() => [{
+    description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+    title: "第1部 ファントムブラッド"
+  }, {
+    description: "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+    title: "第2部 戦闘潮流"
+  }, {
+    description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+    title: "第3部 スターダストクルセイダース"
+  }], []);
+  return <PropsTable variant="stack" rows={["start", "center", "end"]}>
+      {(_, row, key) => {
+      return <Timeline.Root key={key} align={row} items={row !== "start" ? items.map((item, index) => ({
+        align: row !== "end" && index % 2 === 0 ? "start" : "end",
+        ...item
+      })) : items} />;
+    }}
+    </PropsTable>;
+}`,...j.parameters?.docs?.source}}},M.parameters={...M.parameters,docs:{...M.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo<Timeline.Item[]>(() => [{
+    description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+    title: "第1部 ファントムブラッド"
+  }, {
+    description: "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+    title: "第2部 戦闘潮流"
+  }, {
+    description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+    title: "第3部 スターダストクルセイダース"
+  }], []);
+  return <PropsTable variant="stack" rows={["circle", "rounded", "square"]}>
+      {(_, row, key) => {
+      return <Timeline.Root key={key} items={items} shape={row} />;
+    }}
+    </PropsTable>;
+}`,...M.parameters?.docs?.source}}},N.parameters={...N.parameters,docs:{...N.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo<Timeline.Item[]>(() => [{
+    align: "end",
+    description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+    title: "第1部 ファントムブラッド"
+  }, {
+    align: "start",
+    description: "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+    title: "第2部 戦闘潮流"
+  }, {
+    align: "end",
+    description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+    title: "第3部 スターダストクルセイダース"
+  }], []);
+  return <Timeline.Root align="center" items={items} />;
+}`,...N.parameters?.docs?.source}}},P.parameters={...P.parameters,docs:{...P.parameters?.docs,source:{originalSource:`() => {
+  const itemsWithIcon = useMemo<Timeline.Item[]>(() => [{
+    description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+    indicator: <GhostIcon fontSize="xl" />,
+    title: "第1部 ファントムブラッド"
+  }, {
+    description: "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+    indicator: <AxeIcon fontSize="xl" />,
+    title: "第2部 戦闘潮流"
+  }, {
+    description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+    indicator: <SparklesIcon fontSize="xl" />,
+    title: "第3部 スターダストクルセイダース"
+  }], []);
+  const itemsWithAvatar = useMemo<Timeline.Item[]>(() => [{
+    description: "ジョナサン・ジョースター",
+    indicator: <Avatar name="ジョナサン・ジョースター" src="https://jojo-portal.com/wp-content/themes/jojo-portal/assets/images/common/about/01/img_chara_01.png" boxSize="full" />,
+    title: "君はディオ・ブランドーだね？",
+    contentProps: {
+      gap: "0"
+    },
+    titleProps: {
+      lineHeight: "short"
+    }
+  }, {
+    description: "ディオ・ブランドー",
+    indicator: <Avatar name="ディオ・ブランドー" src="https://jojo-portal.com/wp-content/themes/jojo-portal/assets/images/common/about/01/img_chara_02.png" boxSize="full" />,
+    title: "そういう君はジョナサン・ジョースター",
+    contentProps: {
+      gap: "0"
+    },
+    titleProps: {
+      lineHeight: "short"
+    }
+  }], []);
+  return <>
+      <Timeline.Root items={itemsWithIcon} shape="square" />
+      <Timeline.Root indicatorSize="10" items={itemsWithAvatar} />
+    </>;
+}`,...P.parameters?.docs?.source}}},F.parameters={...F.parameters,docs:{...F.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo<Timeline.Item[]>(() => [{
+    description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+    indicator: <Center layerStyle="solid" boxSize="full">
+            1
+          </Center>,
+    title: "第1部 ファントムブラッド"
+  }, {
+    description: "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+    indicator: <Center layerStyle="solid" boxSize="full">
+            2
+          </Center>,
+    title: "第2部 戦闘潮流"
+  }, {
+    description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+    indicator: <Center layerStyle="solid" boxSize="full">
+            3
+          </Center>,
+    title: "第3部 スターダストクルセイダース"
+  }], []);
+  return <Timeline.Root size="lg" items={items} shape="rounded" />;
+}`,...F.parameters?.docs?.source}}},I.parameters={...I.parameters,docs:{...I.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo<Timeline.Item[]>(() => [{
+    description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+    title: "第1部 ファントムブラッド"
+  }, {
+    "--separator-style": "dashed",
+    description: "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+    title: "第2部 戦闘潮流"
+  }, {
+    description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+    title: "第3部 スターダストクルセイダース"
+  }], []);
+  return <Timeline.Root items={items} />;
+}`,...I.parameters?.docs?.source}}},L.parameters={...L.parameters,docs:{...L.parameters?.docs,source:{originalSource:`() => {
+  const items = useMemo<Timeline.Item[]>(() => [{
+    description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+    title: "第1部 ファントムブラッド"
+  }, {
+    description: "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+    title: "第2部 戦闘潮流"
+  }, {
+    description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+    title: "第3部 スターダストクルセイダース"
+  }], []);
+  return <Timeline.Root attached items={items} />;
+}`,...L.parameters?.docs?.source}}},R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`() => {
+  return <Timeline.Root>
+      <Timeline.Item>
+        <Timeline.Connector>
+          <Timeline.Indicator />
+        </Timeline.Connector>
+        <Timeline.Content>
+          <Timeline.Title>第1部 ファントムブラッド</Timeline.Title>
+          <Timeline.Description>
+            全てはここから始まった！ジョナサンとディオ、運命の出会い‼
+          </Timeline.Description>
+        </Timeline.Content>
+      </Timeline.Item>
+
+      <Timeline.Item>
+        <Timeline.Connector>
+          <Timeline.Indicator />
+        </Timeline.Connector>
+        <Timeline.Content>
+          <Timeline.Title>第2部 戦闘潮流</Timeline.Title>
+          <Timeline.Description>
+            石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼
+          </Timeline.Description>
+        </Timeline.Content>
+      </Timeline.Item>
+
+      <Timeline.Item>
+        <Timeline.Connector>
+          <Timeline.Indicator />
+        </Timeline.Connector>
+        <Timeline.Content>
+          <Timeline.Title>第3部 スターダストクルセイダース</Timeline.Title>
+          <Timeline.Description>
+            DIO復活…！永き因縁に終止符を打つスタンドバトル‼
+          </Timeline.Description>
+        </Timeline.Content>
+      </Timeline.Item>
+    </Timeline.Root>;
+}`,...R.parameters?.docs?.source}}},z=[`Basic`,`Variant`,`Size`,`ColorScheme`,`Align`,`Shape`,`Alternate`,`Indicator`,`Number`,`Dashed`,`Attached`,`Composition`]}))();export{j as Align,N as Alternate,L as Attached,D as Basic,A as ColorScheme,R as Composition,I as Dashed,P as Indicator,F as Number,M as Shape,k as Size,O as Variant,z as __namedExportsOrder,E as default};

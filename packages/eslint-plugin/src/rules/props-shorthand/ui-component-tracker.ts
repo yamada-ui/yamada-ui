@@ -6,6 +6,7 @@ import type { TSESTree } from "@typescript-eslint/utils"
 export interface UIComponentTracker {
   matchesJSXName: (node: TSESTree.JSXTagNameExpression) => boolean
   visitImport: (node: TSESTree.ImportDeclaration) => void
+  visitVariableDeclarator: (node: TSESTree.VariableDeclarator) => void
 }
 
 const STYLED_FACTORY_NAME = "styled"
@@ -29,6 +30,15 @@ export function createUIComponentTracker(
   // import * as Y from "@yamada-ui/react" → "Y"
   // import YamadaUI from "@yamada-ui/react" → "YamadaUI"
   const namespaces = new Set<string>()
+
+  // 「styled factory として呼び出せる識別子」を入れる
+  // visitVariableDeclarator で `const X = styled(Box)` の callee と照合します。
+  // namespaces とは別扱い：
+  //  - import * as Y / import YamadaUI は namespaces には入るが、これ単体は呼び出し ≠ wrap なので入らない
+  //  - import { styled } / import { styled as s } のみが入る（local 名）
+  // import { styled }       → "styled"
+  // import { styled as s }  → "s"
+  const styledFactories = new Set<string>()
 
   // 1 つの import 文（例: import { Box } from "@yamada-ui/react"）を表す AST ノード
   // ESLint が各 import 文を見つけるたびにこの関数を呼ぶ
@@ -70,6 +80,9 @@ export function createUIComponentTracker(
           // import { styled } / import { styled as s }
           // styled factory は <styled.div /> のように namespace 形式で使われるので namespaces 側へ
           namespaces.add(spec.local.name)
+          // 同じ factory が `const X = styled(Box)` の形で wrapper 変数を作る用途にも使われるため、
+          // 呼び出し検出用に styledFactories にも登録する（matchesJSXName からは見ない）
+          styledFactories.add(spec.local.name)
         } else {
           // import { Box } / import { Box as B } / import { HStack, VStack }
           // 通常の名前付き import は <Box /> のようにそのまま使われるので components 側へ
@@ -85,6 +98,51 @@ export function createUIComponentTracker(
         // 必ず <Y.X /> 形式で参照されるので namespaces 側へ
         namespaces.add(spec.local.name)
       }
+    }
+  }
+
+  // 変数宣言 1 件（`const X = init` の片側ぶん）を表す AST ノード
+  // ESLint が `const A = 1, B = styled(Box)` のように複数並んでいても、各宣言ごとに呼ばれる
+  //
+  // ここで拾いたいのは「styled factory で wrap したコンポーネント変数」だけ:
+  //   const Wrapped = styled(Box)
+  //   const Wrapped = s(Box)            // import { styled as s }
+  //   const Wrapped = Y.styled(Box)     // import * as Y / default import
+  // これらの左辺 (Wrapped) を components に登録して、<Wrapped /> を Yamada UI 由来として扱う
+  //
+  // 検出しないケース（AST だけでは安全に判定できないので意図的に外す）:
+  //   const Wrapped = withFoo(styled(Box))  // 関数経由の indirection
+  //   { const styled = otherThing; const X = styled(Box) }  // スコープ shadowing
+  function visitVariableDeclarator(node: TSESTree.VariableDeclarator): void {
+    // `const { Wrapped } = ...` のような分割代入は対象外（左辺が単一の識別子に限定）
+    if (node.id.type !== "Identifier") return
+    // `const Wrapped` のような初期化子なしや、`const Wrapped = styled` のような呼び出しでない形は対象外
+    if (!node.init || node.init.type !== "CallExpression") return
+
+    const callee = node.init.callee
+
+    // ケース 1: `const Wrapped = styled(Box)` / `const Wrapped = s(Box)`
+    // styled factory を named import で取り込んだローカル名を直接呼んでいるパターン
+    if (callee.type === "Identifier") {
+      if (styledFactories.has(callee.name)) {
+        components.add(node.id.name)
+      }
+      return
+    }
+
+    // ケース 2: `const Wrapped = Y.styled(Box)` / `const Wrapped = YamadaUI.styled(Box)`
+    // namespace import / default import 経由で styled factory を呼んでいるパターン
+    // - callee.object が namespaces に入っている識別子
+    // - callee.property が "styled"（computed: false なので静的にプロパティ名が判定できる）
+    if (
+      callee.type === "MemberExpression" &&
+      !callee.computed &&
+      callee.object.type === "Identifier" &&
+      namespaces.has(callee.object.name) &&
+      callee.property.type === "Identifier" &&
+      callee.property.name === STYLED_FACTORY_NAME
+    ) {
+      components.add(node.id.name)
     }
   }
 
@@ -127,5 +185,5 @@ export function createUIComponentTracker(
     return false
   }
 
-  return { matchesJSXName, visitImport }
+  return { matchesJSXName, visitImport, visitVariableDeclarator }
 }

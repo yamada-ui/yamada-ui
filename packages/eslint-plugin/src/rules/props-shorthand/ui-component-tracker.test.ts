@@ -6,9 +6,11 @@ import { createUIComponentTracker } from "./ui-component-tracker"
 // parseCode が AST から取り出した、検証に使うノードのまとまり
 // imports: tracker.visitImport に渡す対象
 // jsxNames: tracker.matchesJSXName に渡す対象（<Foo /> や <Foo.Bar /> の名前部分の AST）
+// variableDeclarators: tracker.visitVariableDeclarator に渡す対象（`const X = ...` の宣言ぶん）
 interface ParsedCode {
   imports: TSESTree.ImportDeclaration[]
   jsxNames: TSESTree.JSXTagNameExpression[]
+  variableDeclarators: TSESTree.VariableDeclarator[]
 }
 
 // コード文字列を AST に変換し、検証に必要な ImportDeclaration と
@@ -25,6 +27,7 @@ const parseCode = (code: string): ParsedCode => {
 
   const imports: TSESTree.ImportDeclaration[] = []
   const jsxNames: TSESTree.JSXTagNameExpression[] = []
+  const variableDeclarators: TSESTree.VariableDeclarator[] = []
 
   // AST 全体を再帰的に辿り、必要な type のノードだけ配列に集める
   // node は { type, ... } のオブジェクトか、子ノードを並べた配列のどちらか
@@ -45,6 +48,8 @@ const parseCode = (code: string): ParsedCode => {
     } else if (typed.type === "JSXOpeningElement") {
       // JSXOpeningElement.name が JSXTagNameExpression（タグの名前部分の AST）
       jsxNames.push((node as TSESTree.JSXOpeningElement).name)
+    } else if (typed.type === "VariableDeclarator") {
+      variableDeclarators.push(node as TSESTree.VariableDeclarator)
     }
 
     // ノードのプロパティを順に辿って子ノードへ再帰
@@ -55,21 +60,22 @@ const parseCode = (code: string): ParsedCode => {
     }
   }
   visit(ast)
-  return { imports, jsxNames }
+  return { imports, jsxNames, variableDeclarators }
 }
 
-// コード文字列から tracker を構築し、import 文を全部 visitImport に渡し終わった
-// 状態の tracker と、検証用の JSX タグ名一覧を返すテスト用ヘルパー
+// コード文字列から tracker を構築し、import 文と `const X = styled(...)` 系の宣言を
+// 全部処理し終えた状態の tracker と、検証用の JSX タグ名一覧を返すテスト用ヘルパー
 //
-// ESLint の実際の流れ（ImportDeclaration を全部見終わってから JSXOpeningElement を見る）
-// を再現するため、import の登録を先に済ませてから返している
+// ESLint の実際の流れ（ImportDeclaration → VariableDeclarator → JSXOpeningElement の preorder）
+// を簡略化して再現するため、import → 宣言 の順に登録してから返している
 const setupTracker = (
   code: string,
   sourcePackages: readonly string[] = ["@yamada-ui/react"],
 ) => {
-  const { imports, jsxNames } = parseCode(code)
+  const { imports, jsxNames, variableDeclarators } = parseCode(code)
   const tracker = createUIComponentTracker(sourcePackages)
   for (const imp of imports) tracker.visitImport(imp)
+  for (const decl of variableDeclarators) tracker.visitVariableDeclarator(decl)
   return { jsxNames, tracker }
 }
 
@@ -224,5 +230,112 @@ describe("createUIComponentTracker", () => {
     )
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
     expect(tracker.matchesJSXName(jsxNames[1]!)).toBe(true)
+  })
+
+  // styled wrapper: `const Wrapped = styled(Box)` で作った変数を追跡対象に追加する
+  test("styled wrapper: tracks a variable assigned from the styled factory", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { Box, styled } from "@yamada-ui/react"
+      const Wrapped = styled(Box)
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
+  })
+
+  // styled wrapper: styled factory のエイリアス（styled as s）を呼んでも追跡する
+  test("styled wrapper: tracks via the local alias of the styled factory", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { Box, styled as s } from "@yamada-ui/react"
+      const Wrapped = s(Box)
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
+  })
+
+  // styled wrapper: ホスト要素文字列（"button" など）を渡すパターンも追跡する
+  test("styled wrapper: tracks when wrapping a host element string", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { styled } from "@yamada-ui/react"
+      const Wrapped = styled('button')
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
+  })
+
+  // styled wrapper: チェーン（前段の wrapper を更に wrap）も、各段が factory 経由なら追跡する
+  test("styled wrapper: tracks chained wrapping when each step goes through the factory", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { Box, styled } from "@yamada-ui/react"
+      const First = styled(Box)
+      const Second = styled(First)
+      const App = () => (
+        <>
+          <First />
+          <Second />
+        </>
+      )
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
+    expect(tracker.matchesJSXName(jsxNames[1]!)).toBe(true)
+  })
+
+  // styled wrapper: namespace import 経由（`Y.styled(...)`）の wrap も追跡する
+  test("styled wrapper: tracks `Y.styled(Box)` via a namespace import", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import * as Y from "@yamada-ui/react"
+      const Wrapped = Y.styled(Y.Box)
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
+  })
+
+  // styled wrapper: default import 経由（`YamadaUI.styled(...)`）の wrap も追跡する
+  test("styled wrapper: tracks `YamadaUI.styled(Box)` via a default import", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import YamadaUI from "@yamada-ui/react"
+      const Wrapped = YamadaUI.styled(YamadaUI.Box)
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
+  })
+
+  // styled wrapper: 未知の関数（factory 以外）で wrap した場合は追跡しない
+  test("styled wrapper: ignores wrappers from unknown factory identifiers", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { Box } from "@yamada-ui/react"
+      const Wrapped = withSomething(Box)
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
+  })
+
+  // styled wrapper: 別パッケージから来た同名 `styled` 関数による wrap は追跡しない
+  test("styled wrapper: ignores a `styled` factory imported from another package", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { styled } from "@some/other-lib"
+      const Wrapped = styled('button')
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
+  })
+
+  // styled wrapper: namespace の他メソッド（`Y.somethingElse(...)`）は wrap として扱わない
+  test("styled wrapper: ignores `Y.somethingElse(Box)` even when Y is a tracked namespace", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import * as Y from "@yamada-ui/react"
+      const Wrapped = Y.withSomething(Y.Box)
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
+  })
+
+  // styled wrapper: 初期化子が CallExpression でない（再代入や identifier のみ）場合は対象外
+  test("styled wrapper: ignores non-call initializers", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { styled } from "@yamada-ui/react"
+      const Wrapped = styled
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
   })
 })

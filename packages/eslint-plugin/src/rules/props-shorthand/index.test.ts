@@ -99,6 +99,27 @@ ruleTester.run("props-shorthand", propsShorthand, {
       `,
       options: [{ preferred: "shorthand" }],
     },
+    // styled wrapper 変数（const Wrapped = styled(Box)）も追跡対象に入るので、
+    // 既に shorthand が書かれていれば指摘なし
+    {
+      name: "styled wrapper variable: shorthand prop passes",
+      code: `
+        import { Box, styled } from "@yamada-ui/react"
+        const Wrapped = styled(Box)
+        const App = () => <Wrapped m={1} />
+      `,
+      options: [{ preferred: "shorthand" }],
+    },
+    // 未知の関数で wrap した変数は Yamada UI 由来として扱わないので対象外
+    {
+      name: "wrapper from unknown factory is ignored",
+      code: `
+        import { Box } from "@yamada-ui/react"
+        const Wrapped = withSomething(Box)
+        const App = () => <Wrapped margin={1} />
+      `,
+      options: [{ preferred: "shorthand" }],
+    },
   ],
   invalid: [
     // preferred: shorthand で longhand "margin" が書かれている → "m" への自動修正を期待
@@ -260,6 +281,72 @@ ruleTester.run("props-shorthand", propsShorthand, {
           data: { a: "bgGradient", b: "bgImage", longhand: "backgroundImage" },
         },
       ],
+    },
+    // styled wrapper 変数の属性に longhand が書かれていれば、Box などと同じく shorthand へ自動修正される
+    {
+      name: "styled wrapper variable: padding -> p",
+      code: `
+        import { Box, styled } from "@yamada-ui/react"
+        const Wrapped = styled(Box)
+        const App = () => <Wrapped padding="2" />
+      `,
+      output: `
+        import { Box, styled } from "@yamada-ui/react"
+        const Wrapped = styled(Box)
+        const App = () => <Wrapped p="2" />
+      `,
+      options: [{ preferred: "shorthand" }],
+      errors: [{ messageId: "preferShorthand" }],
+    },
+    // styled factory を local alias `s` 経由で呼んだ wrapper 変数も同様に検出する
+    {
+      name: "styled wrapper variable via alias `s`: padding -> p",
+      code: `
+        import { Box, styled as s } from "@yamada-ui/react"
+        const Wrapped = s(Box)
+        const App = () => <Wrapped padding="2" />
+      `,
+      output: `
+        import { Box, styled as s } from "@yamada-ui/react"
+        const Wrapped = s(Box)
+        const App = () => <Wrapped p="2" />
+      `,
+      options: [{ preferred: "shorthand" }],
+      errors: [{ messageId: "preferShorthand" }],
+    },
+    // namespace import 経由（Y.styled(...)）で wrap した変数も検出する
+    {
+      name: "styled wrapper via namespace import: Y.styled(Y.Box)",
+      code: `
+        import * as Y from "@yamada-ui/react"
+        const Wrapped = Y.styled(Y.Box)
+        const App = () => <Wrapped padding="2" />
+      `,
+      output: `
+        import * as Y from "@yamada-ui/react"
+        const Wrapped = Y.styled(Y.Box)
+        const App = () => <Wrapped p="2" />
+      `,
+      options: [{ preferred: "shorthand" }],
+      errors: [{ messageId: "preferShorthand" }],
+    },
+    // チェーンした wrap（前段の wrapper を更に wrap）でも、末端まで追跡できている
+    {
+      name: "styled wrapper: chained wrapping is tracked",
+      code: `
+        import { Box, styled } from "@yamada-ui/react"
+        const First = styled(Box)
+        const Second = styled(First)
+        const App = () => <Second margin={1} />
+      `,
+      output: `
+        import { Box, styled } from "@yamada-ui/react"
+        const First = styled(Box)
+        const Second = styled(First)
+        const App = () => <Second m={1} />
+      `,
+      options: [{ preferred: "shorthand" }],
+      errors: [{ messageId: "preferShorthand" }],
     },
   ],
 })

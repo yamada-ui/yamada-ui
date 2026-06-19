@@ -116,6 +116,14 @@ export const propsShorthand: RuleModule<MessageIds, Options> = createRule<
         tracker.visitImport(node)
       },
 
+      // `const Wrapped = styled(Box)` のように styled factory で wrap された変数を
+      // tracker に登録する。ESLint は AST 走査の preorder で各 VariableDeclarator を
+      // enter したタイミングでこのビジターを呼ぶので、後段で <Wrapped /> を見るときには
+      // すでに components に追加されている状態になる
+      VariableDeclarator(node) {
+        tracker.visitVariableDeclarator(node)
+      },
+
       // JSX タグの開始要素 <Foo prop="..." > が来るたびに呼ばれる
       JSXOpeningElement(node) {
         // Yamada UI 由来でないタグ（<div /> や別ライブラリのコンポーネント）はスキップ

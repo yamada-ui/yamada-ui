@@ -94,20 +94,22 @@ ruleTester.run("props-shorthand", propsShorthand, {
       options: [{ preferred: "shorthand" }],
     },
     {
-      name: "typed: true silently falls back when parserServices.program is unavailable",
+      name: "styled wrapper variable: shorthand prop passes",
       code: `
-        import { Box } from "@yamada-ui/react"
-        const App = () => <Box m={1} />
+        import { Box, styled } from "@yamada-ui/react"
+        const Wrapped = styled(Box)
+        const App = () => <Wrapped m={1} />
       `,
-      options: [{ preferred: "shorthand", typed: true }],
+      options: [{ preferred: "shorthand" }],
     },
     {
-      name: "typed: false disables typed matcher",
+      name: "wrapper from unknown factory is ignored",
       code: `
         import { Box } from "@yamada-ui/react"
-        const App = () => <Box m={1} />
+        const Wrapped = withSomething(Box)
+        const App = () => <Wrapped margin={1} />
       `,
-      options: [{ preferred: "shorthand", typed: false }],
+      options: [{ preferred: "shorthand" }],
     },
   ],
   invalid: [
@@ -319,6 +321,68 @@ ruleTester.run("props-shorthand", propsShorthand, {
           sources: ["@yamada-ui/react", "@/components/ui"],
         },
       ],
+      errors: [{ messageId: "preferShorthand" }],
+    },
+    {
+      name: "styled wrapper variable: padding -> p",
+      code: `
+        import { Box, styled } from "@yamada-ui/react"
+        const Wrapped = styled(Box)
+        const App = () => <Wrapped padding="2" />
+      `,
+      output: `
+        import { Box, styled } from "@yamada-ui/react"
+        const Wrapped = styled(Box)
+        const App = () => <Wrapped p="2" />
+      `,
+      options: [{ preferred: "shorthand" }],
+      errors: [{ messageId: "preferShorthand" }],
+    },
+    {
+      name: "styled wrapper variable via alias `s`: padding -> p",
+      code: `
+        import { Box, styled as s } from "@yamada-ui/react"
+        const Wrapped = s(Box)
+        const App = () => <Wrapped padding="2" />
+      `,
+      output: `
+        import { Box, styled as s } from "@yamada-ui/react"
+        const Wrapped = s(Box)
+        const App = () => <Wrapped p="2" />
+      `,
+      options: [{ preferred: "shorthand" }],
+      errors: [{ messageId: "preferShorthand" }],
+    },
+    {
+      name: "styled wrapper via namespace import: Y.styled(Y.Box)",
+      code: `
+        import * as Y from "@yamada-ui/react"
+        const Wrapped = Y.styled(Y.Box)
+        const App = () => <Wrapped padding="2" />
+      `,
+      output: `
+        import * as Y from "@yamada-ui/react"
+        const Wrapped = Y.styled(Y.Box)
+        const App = () => <Wrapped p="2" />
+      `,
+      options: [{ preferred: "shorthand" }],
+      errors: [{ messageId: "preferShorthand" }],
+    },
+    {
+      name: "styled wrapper: chained wrapping is tracked",
+      code: `
+        import { Box, styled } from "@yamada-ui/react"
+        const First = styled(Box)
+        const Second = styled(First)
+        const App = () => <Second padding="2" />
+      `,
+      output: `
+        import { Box, styled } from "@yamada-ui/react"
+        const First = styled(Box)
+        const Second = styled(First)
+        const App = () => <Second p="2" />
+      `,
+      options: [{ preferred: "shorthand" }],
       errors: [{ messageId: "preferShorthand" }],
     },
   ],

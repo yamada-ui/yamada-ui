@@ -319,10 +319,6 @@ importers:
         version: 7.3.1
 
   packages/eslint-plugin:
-    dependencies:
-      typescript:
-        specifier: '>=5'
-        version: 6.0.3
     devDependencies:
       '@types/estree-jsx':
         specifier: ^1.0.5

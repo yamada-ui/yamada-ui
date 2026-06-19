@@ -1,13 +1,11 @@
 import type { Rule } from "eslint"
 import type { JSXAttribute } from "estree-jsx"
 import { getShorthandMap } from "./shorthand-map"
-import { createTypedComponentMatcher } from "./typed-component-matcher"
 import { createUIComponentTracker } from "./ui-component-tracker"
 
 interface Options {
   preferred?: "longhand" | "shorthand"
   sources?: string[]
-  typed?: boolean
 }
 
 const DEFAULT_SOURCES = ["@yamada-ui/react", "@workspaces/ui"] as const
@@ -43,7 +41,6 @@ export const propsShorthand: Rule.RuleModule = {
             items: { type: "string" },
             uniqueItems: true,
           },
-          typed: { type: "boolean" },
         },
       },
     ],
@@ -57,22 +54,17 @@ export const propsShorthand: Rule.RuleModule = {
 
     const tracker = createUIComponentTracker(options.sources ?? DEFAULT_SOURCES)
 
-    const typedMatcher =
-      (options.typed ?? true)
-        ? createTypedComponentMatcher(context.sourceCode.parserServices)
-        : null
-
     return {
       ImportDeclaration(node) {
         tracker.visitImport(node)
       },
 
+      VariableDeclarator(node) {
+        tracker.visitVariableDeclarator(node)
+      },
+
       JSXOpeningElement(node) {
-        if (
-          !tracker.matchesJSXName(node.name) &&
-          !typedMatcher?.matchesJSXElement(node)
-        )
-          return
+        if (!tracker.matchesJSXName(node.name)) return
 
         const attributes = node.attributes.filter(
           (a): a is JSXAttribute => a.type === "JSXAttribute",

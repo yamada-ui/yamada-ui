@@ -4,6 +4,7 @@ import type {
   JSXMemberExpression,
   JSXNamespacedName,
   JSXOpeningElement,
+  VariableDeclarator,
 } from "estree-jsx"
 import { parse } from "@typescript-eslint/parser"
 import { createUIComponentTracker } from "./ui-component-tracker"
@@ -16,6 +17,7 @@ type JSXTagNameExpression =
 interface ParsedCode {
   imports: ImportDeclaration[]
   jsxNames: JSXTagNameExpression[]
+  variableDeclarators: VariableDeclarator[]
 }
 
 const parseCode = (code: string): ParsedCode => {
@@ -27,6 +29,7 @@ const parseCode = (code: string): ParsedCode => {
 
   const imports: ImportDeclaration[] = []
   const jsxNames: JSXTagNameExpression[] = []
+  const variableDeclarators: VariableDeclarator[] = []
 
   const visit = (node: unknown): void => {
     if (!node || typeof node !== "object") return
@@ -41,6 +44,8 @@ const parseCode = (code: string): ParsedCode => {
       imports.push(node as unknown as ImportDeclaration)
     } else if (typed.type === "JSXOpeningElement") {
       jsxNames.push((node as unknown as JSXOpeningElement).name)
+    } else if (typed.type === "VariableDeclarator") {
+      variableDeclarators.push(node as unknown as VariableDeclarator)
     }
 
     for (const key of Object.keys(node)) {
@@ -49,16 +54,17 @@ const parseCode = (code: string): ParsedCode => {
     }
   }
   visit(ast)
-  return { imports, jsxNames }
+  return { imports, jsxNames, variableDeclarators }
 }
 
 const setupTracker = (
   code: string,
   sourcePackages: readonly string[] = ["@yamada-ui/react"],
 ) => {
-  const { imports, jsxNames } = parseCode(code)
+  const { imports, jsxNames, variableDeclarators } = parseCode(code)
   const tracker = createUIComponentTracker(sourcePackages)
   for (const imp of imports) tracker.visitImport(imp)
+  for (const decl of variableDeclarators) tracker.visitVariableDeclarator(decl)
   return { jsxNames, tracker }
 }
 
@@ -200,5 +206,95 @@ describe("createUIComponentTracker", () => {
     )
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
     expect(tracker.matchesJSXName(jsxNames[1]!)).toBe(true)
+  })
+
+  test("styled wrapper: tracks a variable assigned from the styled factory", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { Box, styled } from "@yamada-ui/react"
+      const Wrapped = styled(Box)
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
+  })
+
+  test("styled wrapper: tracks a variable via an aliased styled factory", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { Box, styled as s } from "@yamada-ui/react"
+      const Wrapped = s(Box)
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
+  })
+
+  test("styled wrapper: tracks a variable wrapped through a namespace import", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import * as Y from "@yamada-ui/react"
+      const Wrapped = Y.styled(Y.Box)
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
+  })
+
+  test("styled wrapper: tracks chained wrappers built on a previous wrapper", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { Box, styled } from "@yamada-ui/react"
+      const First = styled(Box)
+      const Second = styled(First)
+      const App = () => <Second />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
+  })
+
+  test("styled wrapper: ignores variables produced by an unknown factory", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { Box } from "@yamada-ui/react"
+      const Wrapped = withSomething(Box)
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
+  })
+
+  test("styled wrapper: ignores destructured assignments even if the initializer looks like styled()", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { Box, styled } from "@yamada-ui/react"
+      const { Wrapped } = styled(Box)
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
+  })
+
+  test("styled wrapper: ignores member access whose property is not `styled`", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import * as Y from "@yamada-ui/react"
+      const Wrapped = Y.other(Y.Box)
+      const App = () => <Wrapped />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
+  })
+
+  test("styled wrapper: tracks the result of styled() regardless of the wrapped argument", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { styled } from "@yamada-ui/react"
+      const Internal = () => null
+      const WrappedComponent = styled(Internal)
+      const WrappedTag = styled("section")
+      const App = () => (
+        <>
+          <WrappedComponent />
+          <WrappedTag />
+        </>
+      )
+    `)
+    expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
+    expect(tracker.matchesJSXName(jsxNames[1]!)).toBe(true)
+  })
+
+  test("custom function wrappers around UI components are not tracked", () => {
+    const { jsxNames, tracker } = setupTracker(`
+      import { Box } from "@yamada-ui/react"
+      const MyBox = (props) => <Box {...props} />
+      const App = () => <MyBox />
+    `)
+    expect(tracker.matchesJSXName(jsxNames[1]!)).toBe(false)
   })
 })

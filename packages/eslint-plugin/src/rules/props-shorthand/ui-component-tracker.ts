@@ -3,6 +3,7 @@ import type {
   JSXIdentifier,
   JSXMemberExpression,
   JSXNamespacedName,
+  VariableDeclarator,
 } from "estree-jsx"
 
 type JSXTagNameExpression =
@@ -13,6 +14,7 @@ type JSXTagNameExpression =
 export interface UIComponentTracker {
   matchesJSXName: (node: JSXTagNameExpression) => boolean
   visitImport: (node: ImportDeclaration) => void
+  visitVariableDeclarator: (node: VariableDeclarator) => void
 }
 
 const STYLED_FACTORY_NAME = "styled"
@@ -23,6 +25,8 @@ export function createUIComponentTracker(
   const components = new Set<string>()
 
   const namespaces = new Set<string>()
+
+  const styledFactories = new Set<string>()
 
   function visitImport(node: ImportDeclaration): void {
     const source =
@@ -38,6 +42,7 @@ export function createUIComponentTracker(
 
         if (imported === STYLED_FACTORY_NAME) {
           namespaces.add(spec.local.name)
+          styledFactories.add(spec.local.name)
         } else {
           components.add(spec.local.name)
         }
@@ -46,6 +51,34 @@ export function createUIComponentTracker(
         spec.type === "ImportNamespaceSpecifier"
       ) {
         namespaces.add(spec.local.name)
+      }
+    }
+  }
+
+  function visitVariableDeclarator(node: VariableDeclarator): void {
+    if (node.id.type !== "Identifier") return
+    if (!node.init || node.init.type !== "CallExpression") return
+
+    const callee = node.init.callee
+
+    if (callee.type === "Identifier") {
+      if (styledFactories.has(callee.name)) {
+        components.add(node.id.name)
+      }
+      return
+    }
+
+    if (callee.type === "MemberExpression") {
+      const object = callee.object
+      const property = callee.property
+      if (
+        object.type === "Identifier" &&
+        namespaces.has(object.name) &&
+        !callee.computed &&
+        property.type === "Identifier" &&
+        property.name === STYLED_FACTORY_NAME
+      ) {
+        components.add(node.id.name)
       }
     }
   }
@@ -70,5 +103,5 @@ export function createUIComponentTracker(
     return false
   }
 
-  return { matchesJSXName, visitImport }
+  return { matchesJSXName, visitImport, visitVariableDeclarator }
 }

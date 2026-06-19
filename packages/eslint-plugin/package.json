@@ -69,14 +69,10 @@
   "peerDependencies": {
     "@typescript-eslint/parser": ">=8",
     "@yamada-ui/react": "workspace:*",
-    "eslint": ">=9",
-    "typescript": ">=5"
+    "eslint": ">=9"
   },
   "peerDependenciesMeta": {
     "@typescript-eslint/parser": {
-      "optional": true
-    },
-    "typescript": {
       "optional": true
     }
   }

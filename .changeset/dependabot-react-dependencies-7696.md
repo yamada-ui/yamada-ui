@@ -2,4 +2,4 @@
 "@yamada-ui/react": patch
 ---
 
-Updated icons.
+Updated dependencies.

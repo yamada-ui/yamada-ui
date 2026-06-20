@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/cli",
   "type": "module",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "The official CLI for Yamada UI projects",
   "keywords": [
     "theme",
@@ -65,7 +65,7 @@
     "prettier": "catalog:",
     "prompts": "^2.4.2",
     "rimraf": "catalog:",
-    "semver": "^7.7.4",
+    "semver": "^7.8.2",
     "sucrase": "^3.35.1",
     "validate-npm-package-name": "^7.0.2",
     "yamljs": "catalog:"

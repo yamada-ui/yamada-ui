@@ -37,7 +37,7 @@ catalog:
   sucrase: ^3.35.1
   tsx: ^4.22.4
   typescript: ^6.0.3
-  vite: ^8.0.3
+  vite: ^8.0.16
   vitest: ^4.1.8
   vitest-axe: ^0.1.0
   yamljs: ^0.3.0

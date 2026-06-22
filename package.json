@@ -87,6 +87,7 @@
   "pnpm": {
     "overrides": {
       "axios": "^1.15.0",
+      "esbuild@>=0.27.3 <0.28.1": "0.28.1",
       "follow-redirects": "^1.16.0",
       "jsdom": "29.0.1"
     }

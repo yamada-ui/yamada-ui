@@ -1,1 +1,0 @@
-import{c as e,i as t}from"./preload-helper-usAeo7Bx.js";import{t as n}from"./react-IGKVQItS.js";import{dt as r,vt as i}from"./core-Bhdtn0pR.js";var a,o,s=t((()=>{a=e(n(),1),r(),o=(e,t)=>{let n=i(e);(0,a.useEffect)(()=>{if(t==null)return;let e=null;return e=setTimeout(n,t),()=>{clearTimeout(e)}},[t,n])}}));export{o as n,s as t};

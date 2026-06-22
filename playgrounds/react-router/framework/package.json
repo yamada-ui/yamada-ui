@@ -17,7 +17,7 @@
     "@react-router/node": "^7.17.0",
     "@react-router/serve": "^7.17.0",
     "@yamada-ui/react": "workspace:*",
-    "isbot": "^5.1.41",
+    "isbot": "^5.1.42",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "^7.17.0"

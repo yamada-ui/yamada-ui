@@ -79,7 +79,7 @@
     "storybook": "^10.4.4",
     "tsdown": "^0.22.2",
     "tsx": "catalog:",
-    "turbo": "^2.9.16",
+    "turbo": "^2.9.18",
     "typescript": "catalog:",
     "vitest": "catalog:",
     "wait-on": "^9.0.10"

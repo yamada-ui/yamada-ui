@@ -2,14 +2,13 @@ import type { Element } from "hast"
 import type { Root } from "mdast"
 import type { Plugin } from "unified"
 import GithubSlugger from "github-slugger"
-import matter from "gray-matter"
 import { headingRank } from "hast-util-heading-rank"
 import { toString } from "hast-util-to-string"
 import { readFile } from "node:fs/promises"
 import { visit } from "unist-util-visit"
 import { CONSTANTS } from "@/constants"
 import { getLocale, langs } from "@/utils/i18n"
-import { replaceProps } from "@/utils/markdown"
+import { matter, replaceProps } from "@/utils/markdown"
 
 function extractSlugs(content: string) {
   const slugger = new GithubSlugger()

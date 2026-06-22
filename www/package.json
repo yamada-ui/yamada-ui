@@ -69,7 +69,6 @@
     "commander": "catalog:",
     "dotenv": "catalog:",
     "github-slugger": "^2.0.0",
-    "gray-matter": "^4.0.3",
     "hast-util-heading-rank": "^3.0.0",
     "hast-util-to-string": "^3.0.1",
     "hastscript": "^9.0.1",
@@ -82,6 +81,7 @@
     "sucrase": "catalog:",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.1.0",
-    "velite": "^0.3.1"
+    "velite": "^0.3.1",
+    "yaml": "^2.9.0"
   }
 }

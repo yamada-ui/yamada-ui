@@ -1,10 +1,10 @@
 import { isUndefined } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
-import matter from "gray-matter"
 import { glob, readdir, readFile } from "node:fs/promises"
 import path from "node:path"
 import ora from "ora"
 import c from "picocolors"
+import { matter } from "@/utils/markdown/matter"
 
 const MIN_RESEMBLE_SCORE = 0.3
 const MAX_RESEMBLE_COUNT = 8

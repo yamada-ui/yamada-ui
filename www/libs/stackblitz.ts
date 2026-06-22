@@ -419,8 +419,8 @@ const PACKAGE = {
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^4",
-    typescript: "^6",
-    vite: "^8",
+    typescript: "^5",
+    vite: "^7",
     "vite-tsconfig-paths": "^6",
   },
 }

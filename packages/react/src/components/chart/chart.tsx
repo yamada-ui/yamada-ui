@@ -140,14 +140,12 @@ export function gradients(
     const value = Math.floor(100 - (100 / length) * index)
     const percent = `${value}%`
 
-    if (strategy === "invert") {
+    if (strategy === "invert")
       return [
         `tint(colors.${color as string}, ${percent})`,
         `shade(colors.${color as string}, ${percent})`,
       ]
-    } else {
-      return `${strategy}(colors.${color as string}, ${percent})`
-    }
+    else return `${strategy}(colors.${color as string}, ${percent})`
   })
 }
 

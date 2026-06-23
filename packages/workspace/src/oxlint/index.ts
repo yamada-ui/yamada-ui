@@ -11,6 +11,7 @@ import {
   sharedTestFiles,
   sharedUnitTestFiles,
 } from "./shared.ts"
+import { stylisticConfig } from "./stylistic.ts"
 import { testingLibraryConfig } from "./testing-library.ts"
 import { typescriptConfig } from "./typescript.ts"
 import { vitestConfig } from "./vitest.ts"
@@ -30,6 +31,7 @@ export {
   sharedFiles,
   sharedTestFiles,
   sharedUnitTestFiles,
+  stylisticConfig,
   testingLibraryConfig,
   typescriptConfig,
   vitestConfig,

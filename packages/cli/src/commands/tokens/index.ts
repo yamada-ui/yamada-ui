@@ -123,15 +123,13 @@ function extractPaths(
   if (!isObject(target) && !isArray(target)) return []
 
   return Object.entries(target).reduce<string[]>((prev, [key, value]) => {
-    if (isObject(value) && shouldProcess(value) && maxDepth > 1) {
+    if (isObject(value) && shouldProcess(value) && maxDepth > 1)
       extractPaths(value, {
         maxDepth: maxDepth - 1,
         replaceKey,
         shouldProcess,
       }).forEach((nestedKey) => prev.push(replaceKey(`${key}.${nestedKey}`)))
-    } else {
-      prev.push(replaceKey(key))
-    }
+    else prev.push(replaceKey(key))
 
     return prev
   }, [])
@@ -182,14 +180,13 @@ function generateThemeTokens(
 
       prev[key] = []
 
-      if (isObject(target) || isArray(target)) {
+      if (isObject(target) || isArray(target))
         prev[key] = extractPaths(target, {
           maxDepth,
           replaceKey,
           shouldProcess: (obj) =>
             shouldProcess(obj) && additionalShouldProcess(obj),
         }).flatMap(flatMap)
-      }
 
       if (isObject(theme.semanticTokens)) {
         const target = getObject(theme.semanticTokens, key)
@@ -224,7 +221,7 @@ function generateThemeTokens(
   const { colorSchemes } = extractColorSchemes(theme, tokens.colors)
   const themeSchemes = extractThemeSchemes(theme)
 
-  if (internal) {
+  if (internal)
     return [
       `import type { UsageThemeTokens } from "./system"`,
       ``,
@@ -239,7 +236,7 @@ function generateThemeTokens(
       }),
       `}`,
     ].join("\n")
-  } else {
+  else
     return [
       `import type { UsageThemeTokens } from "${PACKAGE_NAME}"`,
       ``,
@@ -256,7 +253,6 @@ function generateThemeTokens(
       `  }`,
       `}`,
     ].join("\n")
-  }
 }
 
 async function getTheme(path: string, cwd: string) {
@@ -358,10 +354,7 @@ export const tokens = new Command("tokens")
 
       end()
     } catch (e) {
-      if (e instanceof Error) {
-        spinner.fail(e.message)
-      } else {
-        spinner.fail("An unknown error occurred")
-      }
+      if (e instanceof Error) spinner.fail(e.message)
+      else spinner.fail("An unknown error occurred")
     }
   })

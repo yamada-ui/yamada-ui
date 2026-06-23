@@ -11,13 +11,9 @@ export function printDiff(changes: Changes | undefined, detail = false) {
     console.log("")
 
     diff.forEach(({ added, removed, value }) => {
-      if (added) {
-        return process.stdout.write(c.green(value))
-      } else if (removed) {
-        return process.stdout.write(c.red(value))
-      } else {
-        if (detail) return process.stdout.write(value)
-      }
+      if (added) return process.stdout.write(c.green(value))
+      else if (removed) return process.stdout.write(c.red(value))
+      else if (detail) return process.stdout.write(value)
     })
   })
 }
@@ -57,21 +53,18 @@ export function printDiffFile(name: string, diff: Diff = [], space = "") {
 export function printDiffDependencies({ add, remove, update }: DependencyMap) {
   console.log("- dependencies")
 
-  if (add.length) {
+  if (add.length)
     add.forEach((name) => {
       console.log(`  - ${c.green(getPackageName(name))}`)
     })
-  }
 
-  if (remove.length) {
+  if (remove.length)
     remove.forEach((name) => {
       console.log(`  - ${c.red(getPackageName(name))}`)
     })
-  }
 
-  if (update.length) {
+  if (update.length)
     update.forEach(({ name, current, wanted }) => {
       console.log(`  - ${name}@${c.red(current)}->${c.green(wanted)}`)
     })
-  }
 }

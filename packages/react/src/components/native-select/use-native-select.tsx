@@ -66,9 +66,8 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
   const computedChildren = useMemo(() => {
     let computedChildren: ReactNode = null
 
-    if (children) {
-      computedChildren = children
-    } else if (items.length) {
+    if (children) computedChildren = children
+    else if (items.length)
       computedChildren = items.map((item, index) => {
         if ("items" in item) {
           const { items, label, ...rest } = item
@@ -95,7 +94,6 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
           })
         }
       })
-    }
 
     return (
       <>

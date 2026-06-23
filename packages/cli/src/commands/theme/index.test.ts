@@ -19,7 +19,7 @@ vi.mock("../../utils", async (importOriginal) => {
 
 vi.mock("node-fetch", () => ({
   default: vi.fn().mockImplementation((url: string) => {
-    if (url.includes("theme.json")) {
+    if (url.includes("theme.json"))
       return Promise.resolve({
         json: () =>
           Promise.resolve({
@@ -31,7 +31,7 @@ vi.mock("node-fetch", () => ({
           }),
         ok: true,
       })
-    }
+
     return Promise.resolve({ ok: false, status: 404 })
   }),
 }))

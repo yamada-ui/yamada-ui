@@ -50,11 +50,10 @@ export async function render(
 ) {
   const user = userEvent.setup()
 
-  if (withProvider) {
+  if (withProvider)
     options.wrapper ??= (props: PropsWithChildren) => (
       <UIProvider {...props} {...providerProps} />
     )
-  }
 
   const result = await originalRender(ui, options)
 
@@ -69,11 +68,10 @@ export function renderHook<Y, M>(
     ...options
   }: BrowserRenderHookOptions<M> = {},
 ): Promise<OriginalRenderHookResult<Y, M>> {
-  if (withProvider) {
+  if (withProvider)
     options.wrapper ??= (props: PropsWithChildren) => (
       <UIProvider {...props} {...providerProps} />
     )
-  }
 
   return originalRenderHook(renderCallback, options)
 }

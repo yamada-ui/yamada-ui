@@ -477,11 +477,9 @@ export const Dynamic: Story = () => {
 
     setItems(nextItems)
 
-    if (removeIndex < index) {
-      setIndex(index - 1)
-    } else if (removeIndex === index) {
+    if (removeIndex < index) setIndex(index - 1)
+    else if (removeIndex === index)
       setIndex(Math.min(index, nextItems.length - 1))
-    }
   }
 
   return (

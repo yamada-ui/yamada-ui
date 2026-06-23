@@ -18,17 +18,13 @@ describe("DOM", () => {
     )
 
     afterEach(() => {
-      if (platformDescriptor) {
+      if (platformDescriptor)
         Object.defineProperty(navigator, "platform", platformDescriptor)
-      } else {
-        delete (navigator as any).platform
-      }
+      else delete (navigator as any).platform
 
-      if (vendorDescriptor) {
+      if (vendorDescriptor)
         Object.defineProperty(navigator, "vendor", vendorDescriptor)
-      } else {
-        delete (navigator as any).vendor
-      }
+      else delete (navigator as any).vendor
     })
 
     test("should return true in Safari-like WebKit", () => {

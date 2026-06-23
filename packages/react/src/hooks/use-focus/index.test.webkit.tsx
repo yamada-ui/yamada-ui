@@ -50,17 +50,13 @@ describe("useFocusOnPointerDown", () => {
   })
 
   afterEach(() => {
-    if (platformDescriptor) {
+    if (platformDescriptor)
       Object.defineProperty(navigator, "platform", platformDescriptor)
-    } else {
-      delete (navigator as any).platform
-    }
+    else delete (navigator as any).platform
 
-    if (vendorDescriptor) {
+    if (vendorDescriptor)
       Object.defineProperty(navigator, "vendor", vendorDescriptor)
-    } else {
-      delete (navigator as any).vendor
-    }
+    else delete (navigator as any).vendor
   })
 
   test("prevents default behavior and focuses on the target element", async () => {

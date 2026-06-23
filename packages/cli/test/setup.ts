@@ -19,16 +19,11 @@ vi.mock("listr2", () => ({
       this.tasks = tasks
     }
     add(tasks: any) {
-      if (Array.isArray(tasks)) {
-        this.tasks.push(...tasks)
-      } else {
-        this.tasks.push(tasks)
-      }
+      if (Array.isArray(tasks)) this.tasks.push(...tasks)
+      else this.tasks.push(tasks)
     }
     async run() {
-      for (const task of this.tasks) {
-        await task.task({}, { title: task.title })
-      }
+      for (const task of this.tasks) await task.task({}, { title: task.title })
     }
   },
 }))

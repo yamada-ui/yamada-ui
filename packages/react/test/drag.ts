@@ -37,11 +37,8 @@ const defaultKeys = (i: number) => {
   const isStart = i === 0
   const isEnd = i === DEFAULT_COUNT - 1
 
-  if (isStart) {
-    return "[MouseLeft>]"
-  } else if (isEnd) {
-    return "[/MouseLeft]"
-  }
+  if (isStart) return "[MouseLeft>]"
+  else if (isEnd) return "[/MouseLeft]"
 
   return undefined
 }

@@ -37,13 +37,13 @@ function createMockConfig(overrides: Partial<Config> = {}): Config {
     cwd: "/tmp",
     format: { enabled: false },
     getSection: (value?: string) => {
-      if (value && ["components", "hooks", "providers"].includes(value)) {
+      if (value && ["components", "hooks", "providers"].includes(value))
         return {
           path: `./${value}`,
           resolvedPath: `/tmp/workspaces/ui/src/${value}`,
           section: value as Section,
         }
-      }
+
       return undefined
     },
     getSectionPath: (section: Section) => `./${section}`,
@@ -345,7 +345,7 @@ describe("fetchRegistries", () => {
     } as Partial<Config>)
 
     mockFetch.mockImplementation((url: string) => {
-      if (url.includes("button.json")) {
+      if (url.includes("button.json"))
         return Promise.resolve({
           json: () =>
             Promise.resolve({
@@ -359,7 +359,7 @@ describe("fetchRegistries", () => {
             }),
           ok: true,
         })
-      }
+
       return Promise.resolve({
         json: () =>
           Promise.resolve({
@@ -381,7 +381,7 @@ describe("fetchRegistries", () => {
     const config = createMockConfig()
 
     mockFetch.mockImplementation((url: string) => {
-      if (url.includes("button.json")) {
+      if (url.includes("button.json"))
         return Promise.resolve({
           json: () =>
             Promise.resolve({
@@ -395,7 +395,7 @@ describe("fetchRegistries", () => {
             }),
           ok: true,
         })
-      }
+
       return Promise.resolve({
         json: () =>
           Promise.resolve({

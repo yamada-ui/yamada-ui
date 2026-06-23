@@ -100,9 +100,8 @@ export function omitImportant(value: any): string {
 }
 
 export function insertImportant(value: any, style?: StyleConfig): any {
-  if (isString(value)) {
-    return value + " !important"
-  } else if (isObject(value)) {
+  if (isString(value)) return value + " !important"
+  else if (isObject(value))
     if (style?.important) {
       return Object.fromEntries(
         Object.entries(value).map(([key, value]) => [
@@ -113,11 +112,8 @@ export function insertImportant(value: any, style?: StyleConfig): any {
     } else {
       if (!style?.properties) return value
 
-      for (const property of style.properties) {
-        value[property] += " !important"
-      }
+      for (const property of style.properties) value[property] += " !important"
     }
-  }
 
   return value
 }
@@ -135,11 +131,9 @@ export function tokenToVar(system: System) {
 
     const resolvedToken = `${token}.${value}`
 
-    if (isCSSToken(system)(resolvedToken)) {
+    if (isCSSToken(system)(resolvedToken))
       return system.cssMap[resolvedToken]!.ref
-    } else {
-      return fallbackValue || value
-    }
+    else return fallbackValue || value
   }
 }
 
@@ -147,11 +141,9 @@ export function varToValue(system: System) {
   return function (variable: string): string {
     const value = system.cssVars[variable]
 
-    if (isCSSVar(value)) {
+    if (isCSSVar(value))
       return varToValue(system)(value.replace(/^var\(/, "").replace(/\)$/, ""))
-    } else {
-      return value
-    }
+    else return value
   }
 }
 

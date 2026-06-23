@@ -101,11 +101,9 @@ export function convertColor(color: string, fallback?: string) {
 }
 
 export function calcFormat(color: string): ColorFormat {
-  if (color.startsWith("hsl") || color.startsWith("rgb")) {
+  if (color.startsWith("hsl") || color.startsWith("rgb"))
     return color.split("(")[0] as ColorFormat
-  } else {
-    return color.length === 9 ? "hexa" : "hex"
-  }
+  else return color.length === 9 ? "hexa" : "hex"
 }
 
 export function getAlpha(color: string) {

@@ -56,15 +56,12 @@ export function splitObject<Y extends Dict, M extends keyof Y>(
   const picked: Dict = {}
   const omitted: Dict = {}
 
-  for (const [key, value] of Object.entries(obj)) {
+  for (const [key, value] of Object.entries(obj))
     if (
       isFunction(funcOrKeys) ? funcOrKeys(key) : funcOrKeys?.includes(key as M)
-    ) {
+    )
       picked[key] = value
-    } else {
-      omitted[key] = value
-    }
-  }
+    else omitted[key] = value
 
   return [picked, omitted] as [{ [D in M]: Y[D] }, Omit<Y, M>]
 }
@@ -126,35 +123,28 @@ export function merge<Y extends Dict>(
 ): Y {
   let result = Object.assign({}, target)
 
-  if (isObject(source) && options.shouldProcess?.(source)) {
-    if (isObject(target)) {
+  if (isObject(source) && options.shouldProcess?.(source))
+    if (isObject(target))
       for (const [sourceKey, sourceValue] of Object.entries(source)) {
         const targetValue: any = target[sourceKey]
 
-        if (options.shouldProcess(sourceValue)) {
+        if (options.shouldProcess(sourceValue))
           if (
             options.mergeArray &&
             isArray(sourceValue) &&
             isArray(targetValue)
-          ) {
+          )
             result[sourceKey] = targetValue.concat(...sourceValue)
-          } else if (
+          else if (
             !isFunction(sourceValue) &&
             isObject(sourceValue) &&
             target.hasOwnProperty(sourceKey)
-          ) {
+          )
             result[sourceKey] = merge(targetValue, sourceValue, options)
-          } else {
-            Object.assign(result, { [sourceKey]: sourceValue })
-          }
-        } else {
-          Object.assign(result, { [sourceKey]: sourceValue })
-        }
+          else Object.assign(result, { [sourceKey]: sourceValue })
+        else Object.assign(result, { [sourceKey]: sourceValue })
       }
-    } else {
-      result = source
-    }
-  }
+    else result = source
 
   return result as Y
 }
@@ -176,7 +166,7 @@ export function flattenObject<Y extends Dict>(
   if (!isObject(obj) && !isArray(obj)) return obj
 
   return Object.entries(obj).reduce<any>((result, [key, value]) => {
-    if (isObject(value) && shouldProcess(value) && maxDepth > 1) {
+    if (isObject(value) && shouldProcess(value) && maxDepth > 1)
       Object.entries(
         flattenObject(value, {
           maxDepth: maxDepth - 1,
@@ -186,9 +176,7 @@ export function flattenObject<Y extends Dict>(
       ).forEach(([childKey, childValue]) => {
         result[`${key}${separator}${childKey}`] = childValue
       })
-    } else {
-      result[key] = value
-    }
+    else result[key] = value
 
     return result
   }, {}) as Y
@@ -202,17 +190,14 @@ export function replaceObject<Y = any>(
   objOrArray: Y,
   callBack: (value: any) => any,
 ): Y {
-  if (isArray(objOrArray)) {
-    return objOrArray.map(callBack) as Y
-  } else if (isObject(objOrArray)) {
+  if (isArray(objOrArray)) return objOrArray.map(callBack) as Y
+  else if (isObject(objOrArray))
     return Object.entries(objOrArray).reduce<Dict>((obj, [key, value]) => {
       obj[key] = callBack(value)
 
       return obj
     }, {}) as Y
-  } else {
-    return callBack(objOrArray)
-  }
+  else return callBack(objOrArray)
 }
 
 export function getObject(
@@ -262,9 +247,6 @@ export function memoizeObject(func: typeof getObject) {
 export const getMemoizedObject = memoizeObject(getObject)
 
 export function wrapWithKey<Y>(obj: Y, key?: string) {
-  if (key) {
-    return { [key]: obj }
-  } else {
-    return obj
-  }
+  if (key) return { [key]: obj }
+  else return obj
 }

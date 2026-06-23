@@ -154,7 +154,7 @@ function getConditionStyle<Y extends boolean = false>(
 
     const breakpointObj = queries.reduce<Style<Y>>(
       (prev, { breakpoint, query }) => {
-        if (!isUndefined(value[breakpoint])) {
+        if (!isUndefined(value[breakpoint]))
           prev = merge(
             prev,
             getModifierStyle<Y>(
@@ -162,7 +162,6 @@ function getConditionStyle<Y extends boolean = false>(
               mergedStyle,
             )({ ...options, selectors: [...selectors, query] }),
           )
-        }
 
         return prev
       },
@@ -194,13 +193,11 @@ function getModifierStyle<Y extends boolean = false>(
 
     if (!value) return style
 
-    if (isArray(value)) {
+    if (isArray(value))
       style = getColorModeStyle<Y>(value, mergedStyle)(options)
-    } else if (isObject(value)) {
+    else if (isObject(value))
       style = getConditionStyle<Y>(value, mergedStyle)(options)
-    } else {
-      style = getStyle<Y>(mergedStyle[value])({ ...options, value })
-    }
+    else style = getStyle<Y>(mergedStyle[value])({ ...options, value })
 
     return style
   }
@@ -312,17 +309,11 @@ export function mergeSlotCSS<Y extends string>(
 
   const temp: (CSSObject | undefined)[] = []
 
-  if (isArray(slot)) {
-    temp.push(...slot.map((slot) => style[slot]))
-  } else if (isObject(slot)) {
-    if (isArray(slot.slot)) {
-      temp.push(...slot.slot.map((slot) => style[slot]))
-    } else {
-      temp.push(style[slot.slot])
-    }
-  } else {
-    temp.push(style[slot])
-  }
+  if (isArray(slot)) temp.push(...slot.map((slot) => style[slot]))
+  else if (isObject(slot))
+    if (isArray(slot.slot)) temp.push(...slot.slot.map((slot) => style[slot]))
+    else temp.push(style[slot.slot])
+  else temp.push(style[slot])
 
   if (css) temp.push(...toArray(css))
 
@@ -515,15 +506,13 @@ function useStyle<
 
       styleRef.current = style
 
-      if (hasSlot) {
+      if (hasSlot)
         computedProps.css = mergeSlotCSS<ComponentSlotName<M>>(
           slot,
           style as CSSSlotObject,
           computedProps.css,
         )
-      } else {
-        computedProps.css = mergeCSS(style as CSSObject, computedProps.css)
-      }
+      else computedProps.css = mergeCSS(style as CSSObject, computedProps.css)
     } else {
       computedProps.css = propsRef.current.css
     }

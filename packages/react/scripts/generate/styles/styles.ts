@@ -46,13 +46,10 @@ function generateDoc(docs?: Docs | string) {
 
         if (see) rows.push("", `@see ${see}`)
 
-        if (experimental && deprecated) {
+        if (experimental && deprecated)
           rows.push("", `@experimental`, `@deprecated`)
-        } else if (experimental) {
-          rows.push("", `@experimental`)
-        } else if (deprecated) {
-          rows.push("", `@deprecated`)
-        }
+        else if (experimental) rows.push("", `@experimental`)
+        else if (deprecated) rows.push("", `@deprecated`)
       },
     )
 

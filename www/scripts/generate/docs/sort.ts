@@ -16,11 +16,8 @@ function findDocMap(items: DocMap[], inputPath: string) {
   const docMap = items.find(({ pathname, segment }) => {
     const group = segment.startsWith("(") && segment.endsWith(")")
 
-    if (group) {
-      return inputPath.split("/").at(-1) === segment
-    } else {
-      return inputPath === pathname
-    }
+    if (group) return inputPath.split("/").at(-1) === segment
+    else return inputPath === pathname
   })
 
   if (docMap) return docMap
@@ -43,11 +40,9 @@ function replaceDocMap(
     } else {
       const group = item.segment.startsWith("(") && item.segment.endsWith(")")
 
-      if (group && inputPath.split("/").at(-1) === item.segment) {
+      if (group && inputPath.split("/").at(-1) === item.segment)
         item.items = items
-      } else {
-        replaceDocMap(item, items, inputPath)
-      }
+      else replaceDocMap(item, items, inputPath)
     }
   })
 }

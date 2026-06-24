@@ -17,11 +17,9 @@ type CSSObject =
 export const useAnimation = (cssObj: CSSObject): string => {
   const system = useSystem()
 
-  if (isArray(cssObj)) {
+  if (isArray(cssObj))
     return cssObj.map((cssObj) => animation(cssObj, { css, system })).join(", ")
-  } else {
-    return animation(cssObj, { css, system })
-  }
+  else return animation(cssObj, { css, system })
 }
 
 /**
@@ -57,22 +55,17 @@ export const useDynamicAnimation = <
   const cache = useRef<Map<string, string>>(new Map<string, string>())
 
   const [animations, setAnimations] = useState<string | undefined>(() => {
-    for (const [key, styles] of Object.entries(arrayOrObj)) {
-      if (isArray(styles)) {
+    for (const [key, styles] of Object.entries(arrayOrObj))
+      if (isArray(styles))
         cache.current.set(
           key,
           styles.map((style) => animation(style, { css, system })).join(", "),
         )
-      } else {
-        cache.current.set(key, animation(styles, { css, system }))
-      }
-    }
+      else cache.current.set(key, animation(styles, { css, system }))
 
-    if (isArray(keys.current)) {
+    if (isArray(keys.current))
       return keys.current.map((key) => cache.current.get(key)).join(", ")
-    } else {
-      return cache.current.get(keys.current ?? "")
-    }
+    else return cache.current.get(keys.current ?? "")
   })
 
   const setAnimation = useCallback(
@@ -83,13 +76,11 @@ export const useDynamicAnimation = <
         | keyof Y,
     ) => {
       const args = (() => {
-        if (!isUndefined(keys.current) && isArray(arrayOrObj)) {
+        if (!isUndefined(keys.current) && isArray(arrayOrObj))
           return isArray(keys.current)
             ? keys.current.map(Number)
             : Number(keys.current)
-        } else {
-          return keys.current
-        }
+        else return keys.current
       })() as (keyof Y)[] | keyof Y | undefined
 
       const keyOrArray = runIfFn(keysOrFunc, args)
@@ -98,13 +89,11 @@ export const useDynamicAnimation = <
         ? keyOrArray.map(String)
         : String(keyOrArray)
 
-      if (isArray(keys.current)) {
+      if (isArray(keys.current))
         setAnimations(
           keys.current.map((key) => cache.current.get(key)).join(", "),
         )
-      } else {
-        setAnimations(cache.current.get(keys.current))
-      }
+      else setAnimations(cache.current.get(keys.current))
     },
     [arrayOrObj],
   )

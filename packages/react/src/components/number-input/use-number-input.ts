@@ -299,11 +299,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       const stepValue = getStepRatio(ev) * step
       const direction = Math.sign(ev.deltaY)
 
-      if (direction === -1) {
-        increment(stepValue)
-      } else if (direction === 1) {
-        decrement(stepValue)
-      }
+      if (direction === -1) increment(stepValue)
+      else if (direction === 1) decrement(stepValue)
     },
     { passive: false },
   )

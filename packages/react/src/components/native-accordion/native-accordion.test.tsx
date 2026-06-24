@@ -44,17 +44,14 @@ describe("<NativeAccordion />", () => {
 
     expect(generatedName).toBeTruthy()
 
-    for (const item of renderedItems) {
+    for (const item of renderedItems)
       expect(item).toHaveAttribute("name", generatedName)
-    }
   })
 
   test("preserves empty string `name` on all items", () => {
     const { container } = render(<NativeAccordion.Root name="" items={items} />)
     const renderedItems = Array.from(container.querySelectorAll("details"))
 
-    for (const item of renderedItems) {
-      expect(item).toHaveAttribute("name", "")
-    }
+    for (const item of renderedItems) expect(item).toHaveAttribute("name", "")
   })
 })

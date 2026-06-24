@@ -40,18 +40,13 @@ export const useSystemColorMode = ({
         func(e.matches ? "dark" : "light")
       }
 
-      if (typeof mql?.addListener === "function") {
-        mql.addListener(listener)
-      } else {
-        mql?.addEventListener("change", listener)
-      }
+      if (typeof mql?.addListener === "function") mql.addListener(listener)
+      else mql?.addEventListener("change", listener)
 
       return () => {
-        if (typeof mql?.removeListener === "function") {
+        if (typeof mql?.removeListener === "function")
           mql.removeListener(listener)
-        } else {
-          mql?.removeEventListener("change", listener)
-        }
+        else mql?.removeEventListener("change", listener)
       }
     },
     [getWindow],

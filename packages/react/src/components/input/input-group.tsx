@@ -42,15 +42,13 @@ export const InputGroupRoot = ((props: InputGroupRootProps) => {
       validChildren.map((child, index) => {
         const first = !index
 
-        if (isSomeElement(child.type, InputElement)) {
+        if (isSomeElement(child.type, InputElement))
           return cloneElement(child, {
             "data-ungrouped": "",
             placement: first ? "start" : "end",
             ...child.props,
           })
-        } else {
-          return child
-        }
+        else return child
       }),
     [validChildren],
   )

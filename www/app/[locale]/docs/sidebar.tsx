@@ -70,7 +70,7 @@ export function Sidebar() {
     >
       <Box as="nav" _lastChild={{ mb: "0" }}>
         {items.map(({ items, pathname: href, segment, status, title }) => {
-          if (items) {
+          if (items)
             return (
               <Box key={segment} my="lg" _lastChild={{ mb: "0" }}>
                 <Text
@@ -96,7 +96,7 @@ export function Sidebar() {
                 })}
               </Box>
             )
-          } else {
+          else
             return (
               <SidebarItem key={segment} href={href!} segment={segment}>
                 <Text as="span" lineClamp={1}>
@@ -105,7 +105,6 @@ export function Sidebar() {
                 {status ? <Status status={status} /> : null}
               </SidebarItem>
             )
-          }
         })}
       </Box>
     </Box>

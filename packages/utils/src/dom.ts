@@ -14,14 +14,13 @@ export function getPlatform(): string {
 export function getUserAgent(): string {
   const userAgentData = (navigator as any).userAgentData
 
-  if (userAgentData && isArray(userAgentData.brands)) {
+  if (userAgentData && isArray(userAgentData.brands))
     return userAgentData.brands
       .map(
         ({ brand, version }: { brand: string; version: string }) =>
           `${brand}/${version}`,
       )
       .join(" ")
-  }
 
   return navigator.userAgent
 }
@@ -190,11 +189,8 @@ export function getActiveElement(
   while (activeEl?.shadowRoot) {
     const el = activeEl.shadowRoot.activeElement as HTMLElement | null
 
-    if (el === activeEl) {
-      break
-    } else {
-      activeEl = el
-    }
+    if (el === activeEl) break
+    else activeEl = el
   }
 
   return activeEl
@@ -208,9 +204,7 @@ export function getTabbableElements(
   const els = Array.from(el.querySelectorAll<HTMLElement>(focusableSelector))
   const tabbableEls = els.filter(isTabbableElement)
 
-  if (includeEl && isTabbableElement(el)) {
-    tabbableEls.unshift(el)
-  }
+  if (includeEl && isTabbableElement(el)) tabbableEls.unshift(el)
 
   tabbableEls.forEach((el, i) => {
     if (isFrame(el) && el.contentDocument) {
@@ -220,9 +214,7 @@ export function getTabbableElements(
     }
   })
 
-  if (!tabbableEls.length && includeEl) {
-    return els
-  }
+  if (!tabbableEls.length && includeEl) return els
 
   return tabbableEls
 }
@@ -359,15 +351,14 @@ export function getPx(value: number | string | undefined): number {
 }
 
 export function getTabIndex(node: HTMLElement | SVGElement) {
-  if (node.tabIndex < 0) {
+  if (node.tabIndex < 0)
     if (
       (/^(audio|video|details)$/.test(node.localName) ||
         isEditableElement(node)) &&
       !hasTabIndex(node)
-    ) {
+    )
       return 0
-    }
-  }
+
   return node.tabIndex
 }
 
@@ -422,9 +413,7 @@ export function getFocusableElements(
 
   const include = includeEl
 
-  if (include && isHTMLElement(el) && isFocusableElement(el)) {
-    els.unshift(el)
-  }
+  if (include && isHTMLElement(el) && isFocusableElement(el)) els.unshift(el)
 
   const focusableEls = els.filter(isFocusableElement)
 
@@ -458,11 +447,8 @@ export function setAttribute(
   el.setAttribute(qualifiedName, cx(prev, value) ?? "")
 
   return () => {
-    if (prev === null) {
-      el.removeAttribute(qualifiedName)
-    } else {
-      el.setAttribute(qualifiedName, prev)
-    }
+    if (prev === null) el.removeAttribute(qualifiedName)
+    else el.setAttribute(qualifiedName, prev)
   }
 }
 

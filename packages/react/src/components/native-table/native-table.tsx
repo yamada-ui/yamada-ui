@@ -47,15 +47,13 @@ export { NativeTablePropsContext, useNativeTablePropsContext }
  */
 export const NativeTableRoot = withProvider(
   ({ withScrollArea, scrollAreaProps, ...rest }) => {
-    if (withScrollArea) {
+    if (withScrollArea)
       return (
         <NativeTableScrollArea {...scrollAreaProps}>
           <styled.table {...rest} />
         </NativeTableScrollArea>
       )
-    } else {
-      return <styled.table {...rest} />
-    }
+    else return <styled.table {...rest} />
   },
   "root",
 )(undefined, ({ layout: tableLayout, ...rest }) => ({

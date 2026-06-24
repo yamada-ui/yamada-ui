@@ -47,15 +47,13 @@ export function transformInterpolation(
   value: any,
   callback: (value: string, fallbackValue?: string) => string,
 ) {
-  if (isString(value)) {
+  if (isString(value))
     return value.replace(/\{(.*?)\}/g, (_, value) => {
       const [token, fallbackValue] = value.split(/,(.+)/)
 
       return callback(token.trim(), fallbackValue?.trim())
     })
-  } else {
-    return value
-  }
+  else return value
 }
 
 export function getVar(token: string, fallback?: string) {
@@ -176,11 +174,9 @@ export function createVars(
       }
 
       function createAnimationVar(value: VariableValue) {
-        if (isArray(value)) {
+        if (isArray(value))
           return value.map((value) => animation(value, options)).join(",")
-        } else {
-          return animation(value, options)
-        }
+        else return animation(value, options)
       }
 
       function createGradientVar(token: string, value: DefineThemeValue) {
@@ -337,13 +333,12 @@ export function varAttr<Y = StyleValueWithCondition<number | string>>(
 ): undefined | Y {
   if (isUndefined(value) || isNull(value) || isCSSFunction(value)) return value
 
-  if (isObject(value) || isArray(value)) {
+  if (isObject(value) || isArray(value))
     return replaceObject(value, (value) => varAttr(value, token, fallbackValue))
-  } else {
+  else
     return token
       ? (`{${token}.${value as number | string}, ${fallbackValue ?? (value as number | string)}}` as Y)
       : value
-  }
 }
 
 export function injectVars<Y extends Dict | Dict[] | undefined>(
@@ -364,16 +359,15 @@ export function injectVars<Y extends Dict | Dict[] | undefined>(
         if (target) {
           const { token } = getStyle(prop) ?? {}
 
-          if (isCSSVar(value) || isInterpolation(value)) {
+          if (isCSSVar(value) || isInterpolation(value))
             result.push([`--${target}`, value])
-          } else {
+          else
             result.push([
               `--${target}`,
               replaceObject(value, (value) =>
                 token ? `{${token}.${value}, ${value}}` : value,
               ),
             ])
-          }
         } else if (isObject(value)) {
           result.push([prop, injectVars(value, targets)])
         } else {
@@ -385,9 +379,6 @@ export function injectVars<Y extends Dict | Dict[] | undefined>(
     )
   }
 
-  if (isArray(objOrArray)) {
-    return objOrArray.map(callback) as Y
-  } else {
-    return callback(objOrArray) as Y
-  }
+  if (isArray(objOrArray)) return objOrArray.map(callback) as Y
+  else return callback(objOrArray) as Y
 }

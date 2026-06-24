@@ -124,9 +124,8 @@ export function mergeProps(...args: (Dict | undefined)[]) {
         result[key] = !isUndefined(props[key]) ? props[key] : result[key]
       }
 
-      for (const key in props) {
+      for (const key in props)
         if (isUndefined(result[key])) result[key] = props[key]
-      }
     }
 
     return result as any

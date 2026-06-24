@@ -102,9 +102,6 @@ const isValidEvent = (
 
   if (target) if (!getDocument(target).contains(target)) return false
 
-  if (isArray(ref)) {
-    return !ref.some((ref) => ref.current?.contains(target))
-  } else {
-    return !ref.current?.contains(target)
-  }
+  if (isArray(ref)) return !ref.some((ref) => ref.current?.contains(target))
+  else return !ref.current?.contains(target)
 }

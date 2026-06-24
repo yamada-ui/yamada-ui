@@ -93,9 +93,7 @@ export function createStore<Y, M extends CustomMethods<Y>>(
   }
 
   function update(key?: string | string[]) {
-    if (!isUndefined(key)) {
-      toArray(key).forEach(executeQueue)
-    }
+    if (!isUndefined(key)) toArray(key).forEach(executeQueue)
 
     executeQueue(DEFAULT_IDENTIFIER)
   }
@@ -143,13 +141,10 @@ export function createStore<Y, M extends CustomMethods<Y>>(
     }
 
     function getSnapshot<H extends ReturnValue<Y, D>>(): H {
-      if (!isUndefined(path)) {
-        if (isObject(ref.current)) {
-          return getMemoizedObject(ref.current, path)
-        } else if (isArray(ref.current)) {
+      if (!isUndefined(path))
+        if (isObject(ref.current)) return getMemoizedObject(ref.current, path)
+        else if (isArray(ref.current))
           return ref.current[path as number] as unknown as H
-        }
-      }
 
       return ref.current as unknown as H
     }

@@ -1,4 +1,3 @@
-import { fileURLToPath } from "node:url"
 import { defineConfig } from "oxlint"
 import { sharedFiles, sharedTestFiles } from "./shared.ts"
 
@@ -6,14 +5,6 @@ export const reactConfig = defineConfig({
   overrides: [
     {
       files: sharedFiles,
-      jsPlugins: [
-        {
-          name: "custom-react",
-          specifier: fileURLToPath(
-            new URL("./plugins/use-client-newline.ts", import.meta.url),
-          ),
-        },
-      ],
       plugins: ["react", "jsx-a11y"],
       rules: {
         "react/forward-ref-uses-ref": "error",
@@ -28,8 +19,6 @@ export const reactConfig = defineConfig({
 
         "jsx-a11y/no-autofocus": "off",
         "jsx-a11y/prefer-tag-over-role": "off",
-
-        "custom-react/use-client-newline": "error",
       },
     },
     {

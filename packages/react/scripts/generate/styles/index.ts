@@ -287,15 +287,9 @@ function generateType({
     const isFraction = hasTransform("fraction", transforms)
     const isNumber = isPx || isFraction
 
-    if (typeof type === "string") {
-      result = addType(result, type)
-    } else {
-      if (type?.length) {
-        result = addType(result, type.join(" | "))
-      } else {
-        result = addType(result, "AnyString")
-      }
-    }
+    if (typeof type === "string") result = addType(result, type)
+    else if (type?.length) result = addType(result, type.join(" | "))
+    else result = addType(result, "AnyString")
 
     if (isNumber) result = addType(result, ` | number`)
   }
@@ -500,11 +494,10 @@ function generateData(
           tokenProps[token].push(prop)
         }
 
-        if (shorthands) {
+        if (shorthands)
           shorthands.forEach((shorthandProp) => {
             if (token) tokenProps[token]?.push(shorthandProp)
           })
-        }
 
         return [name, { ...config, type, docs, shorthands }] as const
       })
@@ -573,11 +566,10 @@ function generateData(
         tokenProps[token].push(prop)
       }
 
-      if (shorthands) {
+      if (shorthands)
         shorthands.forEach((shorthandProp) => {
           if (token) tokenProps[token]?.push(shorthandProp)
         })
-      }
 
       return [prop, { ...config, type, docs, shorthands }] as const
     }

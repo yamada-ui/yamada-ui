@@ -123,9 +123,8 @@ function InboxItem({
   resetMapRef.current.set(id, off)
 
   const reset = () => {
-    for (const [resetId, func] of resetMapRef.current.entries()) {
+    for (const [resetId, func] of resetMapRef.current.entries())
       if (id !== resetId) func()
-    }
   }
 
   return (

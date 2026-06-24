@@ -15,9 +15,8 @@ describe("<ResizableTrigger />", () => {
           <button
             data-testid="mock-set-layout"
             onClick={() => {
-              if (controlRef.current) {
+              if (controlRef.current)
                 controlRef.current.setLayout = setLayoutMock
-              }
             }}
           >
             mock

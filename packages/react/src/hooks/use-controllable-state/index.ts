@@ -138,9 +138,8 @@ export function useControllableEventState<
           ? (ev.target.checked as Y)
           : (ev.target.value as Y)
 
-      if (!controlled || isUndefined(value) || isNull(value)) {
+      if (!controlled || isUndefined(value) || isNull(value))
         setDefaultValue(value)
-      }
 
       onChange(ev)
     },

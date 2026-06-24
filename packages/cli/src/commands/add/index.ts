@@ -106,11 +106,10 @@ export const add = new Command("add")
         }
 
         if (!overwrite && existsSync(config.paths.ui.src)) {
-          if (yes) {
+          if (yes)
             throw new Error(
               `The directory already exists. Use ${c.cyan("--overwrite")} to overwrite it.`,
             )
-          }
 
           const { overwrite } = await prompts({
             type: "confirm",
@@ -142,11 +141,10 @@ export const add = new Command("add")
         spinner.succeed("Got generated components")
 
         if (!overwrite && existsNames.length) {
-          if (yes) {
+          if (yes)
             throw new Error(
               `The ${existsNames.map((name) => c.yellow(name)).join(", ")} components already exist. Use ${c.cyan("--overwrite")} to overwrite them.`,
             )
-          }
 
           const colorizedNames = existsNames.map((name) => c.yellow(name))
 
@@ -202,7 +200,7 @@ export const add = new Command("add")
 
       spinner.succeed("Fetched registries")
 
-      if (componentNames.length !== registryNames.length) {
+      if (componentNames.length !== registryNames.length)
         if (!yes) {
           const colorizedNames = registryNames.map((name) => c.yellow(name))
 
@@ -217,7 +215,6 @@ export const add = new Command("add")
 
           if (!proceed) process.exit(0)
         }
-      }
 
       const targetNames = [
         ...new Set([...omittedGeneratedNames, ...registryNames]),
@@ -245,7 +242,7 @@ export const add = new Command("add")
       )
 
       if (affectedNames.length && generatedNameMap) {
-        if (!overwrite) {
+        if (!overwrite)
           if (!yes) {
             const colorizedNames = affectedNames.map((name) => c.yellow(name))
 
@@ -265,9 +262,8 @@ export const add = new Command("add")
           } else {
             overwrite = true
           }
-        }
 
-        if (overwrite) {
+        if (overwrite)
           Object.entries(generatedNameMap).forEach(([section, names]) => {
             names.forEach((name) => {
               if (!affectedNames.includes(name)) return
@@ -340,12 +336,11 @@ export const add = new Command("add")
               })
             })
           })
-        }
       }
 
       const indexFileName = transformExtension("index.ts", config.jsx)
 
-      if (existsSync(config.paths.ui.index)) {
+      if (existsSync(config.paths.ui.index))
         tasks.add({
           task: async (_, task) => {
             let content = await readFile(config.paths.ui.index, "utf-8")
@@ -358,7 +353,7 @@ export const add = new Command("add")
           },
           title: `Updating ${c.cyan(indexFileName)}`,
         })
-      } else {
+      else
         tasks.add({
           task: async (_, task) => {
             const {
@@ -374,7 +369,6 @@ export const add = new Command("add")
           },
           title: `Generating ${c.cyan(indexFileName)}`,
         })
-      }
 
       if (dependencies.length) {
         const targetPath = config.monorepo ? config.paths.ui.root : cwd
@@ -389,7 +383,7 @@ export const add = new Command("add")
 
         spinner.succeed(`Checked ${c.cyan("package.json")} dependencies`)
 
-        if (!install && notInstalledDependencies.length) {
+        if (!install && notInstalledDependencies.length)
           if (!yes) {
             const colorizedNames = notInstalledDependencies.map((value) =>
               c.yellow(
@@ -417,9 +411,8 @@ export const add = new Command("add")
           } else {
             install = true
           }
-        }
 
-        if (install) {
+        if (install)
           tasks.add({
             task: async (_, task) => {
               await installDependencies(
@@ -431,17 +424,13 @@ export const add = new Command("add")
             },
             title: "Installing dependencies",
           })
-        }
       }
 
       await tasks.run()
 
       end()
     } catch (e) {
-      if (e instanceof Error) {
-        spinner.fail(e.message)
-      } else {
-        spinner.fail("An unknown error occurred")
-      }
+      if (e instanceof Error) spinner.fail(e.message)
+      else spinner.fail("An unknown error occurred")
     }
   })

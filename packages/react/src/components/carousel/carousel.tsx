@@ -328,25 +328,21 @@ export const CarouselIndicators = withContext<"div", CarouselIndicatorsProps>(
     getIndicatorsProps,
   } = useCarouselContext()
   const computedChildren = useMemo(() => {
-    if (children) {
-      return children
-    } else {
+    if (children) return children
+    else
       return Array.from({ length: snapCount }, (_, index) => {
         if (render) {
           const component = render({ index, selected: index === selectedIndex })
 
-          if (isValidElement<HTMLProps<"button">>(component)) {
+          if (isValidElement<HTMLProps<"button">>(component))
             return cloneElement(component, {
               ...getIndicatorProps({ key: index, index }),
             })
-          } else {
-            return component
-          }
+          else return component
         } else {
           return <CarouselIndicator key={index} index={index} />
         }
       })
-    }
   }, [children, getIndicatorProps, render, selectedIndex, snapCount])
 
   return {

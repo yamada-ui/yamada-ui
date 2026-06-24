@@ -127,23 +127,18 @@ function withDisplayName<
 function getSlotKey<Y extends string>(slot?: ComponentSlot<Y>) {
   if (!slot) return "unknown"
 
-  if (isArray(slot) || !isObject(slot)) {
+  if (isArray(slot) || !isObject(slot))
     return toCamelCase(toArray(slot).join("-"))
-  } else {
-    return toCamelCase(slot.name)
-  }
+  else return toCamelCase(slot.name)
 }
 
 function getSlotName<Y extends string>(slot?: ComponentSlot<Y>) {
   if (!slot) return ""
 
-  if (isArray(slot)) {
+  if (isArray(slot))
     return slot.map((value) => toPascalCase(value as string)).join("")
-  } else if (isObject(slot)) {
-    return toPascalCase(slot.name)
-  } else {
-    return toPascalCase(slot as string)
-  }
+  else if (isObject(slot)) return toPascalCase(slot.name)
+  else return toPascalCase(slot as string)
 }
 
 export function createComponent<

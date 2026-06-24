@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 2.1.4
+
+### Patch Changes
+
+- [#7714](https://github.com/yamada-ui/yamada-ui/pull/7714) [`3da9bbb`](https://github.com/yamada-ui/yamada-ui/commit/3da9bbbd8fcc58e91658dd037a9183b9a10e9045) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Apply consistent curly style across published packages.
+
 ## 2.1.3
 
 ### Patch Changes

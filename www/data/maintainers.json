@@ -192,16 +192,16 @@
     }
   },
   {
-    "name": { "en": "Sora Fujitani", "ja": "Sora Fujitani" },
+    "name": { "en": "nikoniko", "ja": "にこにこ" },
     "description": {
-      "en": "software engineer, 2001, a bright introvert.",
-      "ja": "software engineer, 2001, 明るい根暗です。"
+      "en": "Hobbyist engineer.",
+      "ja": "趣味でエンジニアをしています。"
     },
     "github": {
-      "id": "sorafujitani",
-      "icon": "https://avatars.githubusercontent.com/u/76100848?v=4",
-      "url": "https://github.com/sorafujitani"
+      "id": "2525-engineer",
+      "icon": "https://avatars.githubusercontent.com/u/267330382?v=4",
+      "url": "https://api.github.com/users/2525-engineer"
     },
-    "x": { "url": "https://x.com/sorafujitani" }
+    "x": { "url": "https://x.com/2525_engineer" }
   }
 ]

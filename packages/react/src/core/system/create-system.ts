@@ -212,14 +212,13 @@ function createColorSchemeTokens(
   ) {
     if (isUndefined(value)) return
 
-    if (!secondaryKey || secondaryKey === "base") {
+    if (!secondaryKey || secondaryKey === "base")
       results[`colors.${primaryKey}`] = { semantic: true, value }
-    } else {
+    else
       results[`colors.${primaryKey}.${secondaryKey}`] = {
         semantic: true,
         value,
       }
-    }
   }
 
   function processValue(primaryKey: string, colors: any, keyOrValue: any) {

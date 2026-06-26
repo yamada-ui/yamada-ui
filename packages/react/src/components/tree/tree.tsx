@@ -92,15 +92,12 @@ const getReactNodeOrFunction = (
   custom?: TreeItemReactNode,
   root?: TreeItemReactNode,
 ): ReactNodeOrFunction<TreeCallBackProps> => {
-  if (isObject(custom) && ("group" in custom || "item" in custom)) {
+  if (isObject(custom) && ("group" in custom || "item" in custom))
     return custom[type]
-  } else if (custom) {
-    return custom
-  } else if (isObject(root) && ("group" in root || "item" in root)) {
+  else if (custom) return custom
+  else if (isObject(root) && ("group" in root || "item" in root))
     return root[type]
-  } else {
-    return root
-  }
+  else return root
 }
 
 interface ComponentContext extends Pick<

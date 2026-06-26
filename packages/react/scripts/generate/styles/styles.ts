@@ -46,13 +46,10 @@ function generateDoc(docs?: Docs | string) {
 
         if (see) rows.push("", `@see ${see}`)
 
-        if (experimental && deprecated) {
+        if (experimental && deprecated)
           rows.push("", `@experimental`, `@deprecated`)
-        } else if (experimental) {
-          rows.push("", `@experimental`)
-        } else if (deprecated) {
-          rows.push("", `@deprecated`)
-        }
+        else if (experimental) rows.push("", `@experimental`)
+        else if (deprecated) rows.push("", `@deprecated`)
       },
     )
 
@@ -112,6 +109,7 @@ export function generateStyles(
   { additional, atRule, pseudo, standard, styled }: Data,
   tokenProps: { [key in ThemeToken]?: string[] },
   variableLengthProps: string[],
+  vendorProps: string[],
 ) {
   const shorthandStyles: [string, string][] = []
   const styleProps: [string, string, string?][] = []
@@ -142,6 +140,7 @@ export function generateStyles(
   const styledStyles = Object.entries(styled).map(generateStyles)
   const atRuleStyles = Object.entries(atRule).map(generateStyles)
 
+  const vendorProperties = vendorProps.map((property) => `"${property}"`)
   const variableLengthProperties = variableLengthProps.map(
     (property) => `"${property}"`,
   )
@@ -215,6 +214,10 @@ export function generateStyles(
     `export type StyleProperty = keyof typeof styles`,
     ``,
     `export const styleProperties = Object.keys(styles) as StyleProperty[]`,
+    ``,
+    `export type VendorProperty = typeof vendorProps[number]`,
+    ``,
+    `export const vendorProperties = [${vendorProperties.join(", ")}] as const`,
     ``,
     `export type VariableLengthProperty = typeof variableLengthProperties[number]`,
     ``,

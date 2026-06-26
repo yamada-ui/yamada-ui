@@ -1,5 +1,20 @@
 # @yamada-ui/cli
 
+## 2.1.8
+
+### Patch Changes
+
+- [#7695](https://github.com/yamada-ui/yamada-ui/pull/7695) [`407725c`](https://github.com/yamada-ui/yamada-ui/commit/407725c3fbfc31159dcd80de2507c26ac307b674) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7709](https://github.com/yamada-ui/yamada-ui/pull/7709) [`1a83738`](https://github.com/yamada-ui/yamada-ui/commit/1a8373868b84ed35cc3e96711b9bd2c5637a3ba1) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7710](https://github.com/yamada-ui/yamada-ui/pull/7710) [`c4e55da`](https://github.com/yamada-ui/yamada-ui/commit/c4e55dab70041ed57962ab0ea82b3c8c89b28720) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7714](https://github.com/yamada-ui/yamada-ui/pull/7714) [`3da9bbb`](https://github.com/yamada-ui/yamada-ui/commit/3da9bbbd8fcc58e91658dd037a9183b9a10e9045) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Apply consistent curly style across published packages.
+
+- Updated dependencies [[`3da9bbb`](https://github.com/yamada-ui/yamada-ui/commit/3da9bbbd8fcc58e91658dd037a9183b9a10e9045)]:
+  - @yamada-ui/utils@2.1.4
+
 ## 2.1.7
 
 ### Patch Changes

@@ -857,9 +857,8 @@ describe("<Select />", () => {
 
     const options = page.getByRole("option").elements()
 
-    for (const option of options) {
+    for (const option of options)
       expect(option).toHaveAttribute("data-custom", "true")
-    }
   })
 
   test("renders with groupProps on the root", async () => {

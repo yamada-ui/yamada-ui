@@ -64,19 +64,18 @@ export const useFocusOnShow = <Y extends HTMLElement>(
     } else {
       const firstFocusable = getFirstFocusableElement(target)
 
-      if (firstFocusable) {
+      if (firstFocusable)
         requestAnimationFrame(() => {
           firstFocusable.focus({ preventScroll })
 
           focused.current = true
         })
-      } else {
+      else
         requestAnimationFrame(() => {
           target.focus({ preventScroll })
 
           focused.current = true
         })
-      }
     }
   }, [getTarget, trulyShouldFocus, getFocusTarget, preventScroll])
 

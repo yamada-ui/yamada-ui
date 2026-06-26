@@ -42,7 +42,7 @@ export const Highlight: FC<HighlightProps> = ({
   const chunks = useHighlight({ query, text })
   const { colorScheme } = rest
 
-  if (fragment) {
+  if (fragment)
     return (
       <>
         {chunks.map(({ match, text }, index) =>
@@ -56,7 +56,7 @@ export const Highlight: FC<HighlightProps> = ({
         )}
       </>
     )
-  } else {
+  else
     return (
       <Text {...rest}>
         {chunks.map(({ match, text }, index) =>
@@ -70,5 +70,4 @@ export const Highlight: FC<HighlightProps> = ({
         )}
       </Text>
     )
-  }
 }

@@ -393,7 +393,7 @@ export function TokensPreview({
     }
 
     case "spaces": {
-      if (semantic) {
+      if (semantic)
         return (
           <Container.Root my="lg">
             <Container.Body
@@ -416,7 +416,7 @@ export function TokensPreview({
             </Container.Body>
           </Container.Root>
         )
-      } else {
+      else
         return (
           <Container.Root my="lg">
             <Container.Body
@@ -443,7 +443,6 @@ export function TokensPreview({
             </Container.Body>
           </Container.Root>
         )
-      }
     }
 
     case "sizes": {
@@ -484,7 +483,7 @@ export function TokensPreview({
     }
 
     case "colors": {
-      if (semantic) {
+      if (semantic)
         return (
           <VStack my="lg">
             <Container.Root>
@@ -746,7 +745,7 @@ export function TokensPreview({
             </For>
           </VStack>
         )
-      } else {
+      else
         return (
           <Container.Root my="lg">
             <Container.Body
@@ -783,7 +782,6 @@ export function TokensPreview({
             </Container.Body>
           </Container.Root>
         )
-      }
     }
 
     case "keyframes": {

@@ -114,11 +114,8 @@ export const Picture: FC<PictureProps> = ({
       },
     )
 
-    if (enableSorting) {
-      return computedSources.sort(compareSources)
-    } else {
-      return computedSources
-    }
+    if (enableSorting) return computedSources.sort(compareSources)
+    else return computedSources
   }, [
     sourcesProp,
     enableSorting,

@@ -7,38 +7,38 @@ catalog:
   "@emotion/react": ^11.14.0
   "@faker-js/faker": ^10.4.0
   "@lucide/lab": ^0.1.2
-  "@tanstack/react-router": ^1.170.10
+  "@tanstack/react-router": ^1.170.15
   "@types/yamljs": ^0.2.34
-  "@typescript/native-preview": 7.0.0-dev.20260527.2
-  "@vitest/browser": ^4.1.5
-  "@vitest/browser-playwright": ^4.1.5
-  "@vitest/ui": ^4.1.5
+  "@typescript/native-preview": 7.0.0-dev.20260614.1
+  "@vitest/browser": ^4.1.8
+  "@vitest/browser-playwright": ^4.1.8
+  "@vitest/ui": ^4.1.8
   "@vitejs/plugin-react": ^6.0.2
   commander: ^14.0.3
   dayjs: ^1.11.21
   dotenv: ^17.4.0
-  eslint: ^10.4.1
+  eslint: ^10.5.0
   "eslint-plugin-unused-imports": ^4.4.1
   motion: ^12.38.0
-  next: ^16.2.2
-  oxlint: ^1.67.0
+  next: ^16.2.7
+  oxlint: ^1.69.0
   oxlint-tsgolint: ^0.23.0
   ora: ^9.4.0
-  oxfmt: ^0.52.0
+  oxfmt: ^0.54.0
   playwright: ^1.60.0
   picocolors: ^1.1.1
   prettier: ^3.8.1
-  react: ^19.2.4
-  react-dom: ^19.2.4
-  react-hook-form: ^7.77.0
+  react: ^19.2.7
+  react-dom: ^19.2.7
+  react-hook-form: ^7.79.0
   react-icons: ^5.6.0
   rimraf: ^6.1.3
   scroll-into-view-if-needed: ^3.1.0
   sucrase: ^3.35.1
   tsx: ^4.22.4
   typescript: ^6.0.3
-  vite: ^8.0.3
-  vitest: ^4.1.5
+  vite: ^8.0.16
+  vitest: ^4.1.8
   vitest-axe: ^0.1.0
   yamljs: ^0.3.0
 dedupeDirectDeps: true

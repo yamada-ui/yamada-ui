@@ -192,11 +192,10 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
 
       if (!value?.length) return nextValue
 
-      if (value.startsWith(eventValue.charAt(0))) {
+      if (value.startsWith(eventValue.charAt(0)))
         nextValue = eventValue.charAt(1)
-      } else if (value.startsWith(eventValue.charAt(1))) {
+      else if (value.startsWith(eventValue.charAt(1)))
         nextValue = eventValue.charAt(0)
-      }
 
       return nextValue
     },

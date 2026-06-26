@@ -30,6 +30,7 @@
     "@octokit/request-error": "^7.1.0",
     "@octokit/rest": "^22.0.1",
     "@octokit/webhooks": "^14.2.0",
+    "@stylistic/eslint-plugin": "^5.10.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@typescript/native-preview": "catalog:",
     "dotenv": "catalog:",

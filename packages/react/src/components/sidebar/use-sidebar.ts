@@ -194,11 +194,9 @@ export const useSidebar = ({
   const onExpandedChange = useCallback(
     (value: string) => {
       setExpandedValue((prev) => {
-        if (prev.includes(value)) {
+        if (prev.includes(value))
           return prev.filter((prevValue) => prevValue !== value)
-        } else {
-          return [...prev, value]
-        }
+        else return [...prev, value]
       })
     },
     [setExpandedValue],
@@ -433,15 +431,12 @@ export const useSidebarItem = ({
   }, [disabled, group, value, onClose, onExpandedChange])
 
   const onGroupToggle = useCallback(() => {
-    if (groupOpen) {
-      onGroupClose()
-    } else {
-      onGroupOpen()
-    }
+    if (groupOpen) onGroupClose()
+    else onGroupOpen()
   }, [groupOpen, onGroupClose, onGroupOpen])
 
   useSafeLayoutEffect(() => {
-    if (defaultExpanded) {
+    if (defaultExpanded)
       if (async && !initialAsyncRef.current) {
         initialAsyncRef.current = true
 
@@ -455,9 +450,7 @@ export const useSidebarItem = ({
       } else {
         onOpen()
       }
-    } else {
-      onClose()
-    }
+    else onClose()
   }, [defaultExpanded])
 
   const getItemProps: PropGetter<"li"> = useCallback(

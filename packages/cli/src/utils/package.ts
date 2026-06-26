@@ -60,20 +60,17 @@ export function getVersion(
 
   let currentVersion: string | undefined
 
-  if (isObject(dependencies) && name in dependencies) {
+  if (isObject(dependencies) && name in dependencies)
     currentVersion = dependencies[name]
-  } else if (isObject(devDependencies) && name in devDependencies) {
+  else if (isObject(devDependencies) && name in devDependencies)
     currentVersion = devDependencies[name]
-  }
 
   if (!version) return currentVersion
   if (!currentVersion) return { wanted: version }
 
-  if (currentVersion === version || semver.satisfies(currentVersion, version)) {
+  if (currentVersion === version || semver.satisfies(currentVersion, version))
     return currentVersion
-  } else {
-    return { current: currentVersion, wanted: version }
-  }
+  else return { current: currentVersion, wanted: version }
 }
 
 export function findDependencies(packageJson: Dict, dependencies: string[]) {
@@ -136,19 +133,13 @@ export function packageAddArgs(
 ) {
   const args: string[] = []
 
-  if (packageManager === "npm") {
-    args.push("install")
-  } else {
-    args.push("add")
-  }
+  if (packageManager === "npm") args.push("install")
+  else args.push("add")
 
-  if (dev) {
-    if (packageManager === "npm" || packageManager === "pnpm") {
+  if (dev)
+    if (packageManager === "npm" || packageManager === "pnpm")
       args.push("--save-dev")
-    } else {
-      args.push("--dev")
-    }
-  }
+    else args.push("--dev")
 
   if (exact) args.push("--save-exact")
 

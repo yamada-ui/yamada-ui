@@ -38,21 +38,19 @@ export async function replaceProps(text: string) {
       const namespace = Object.values(data).some((data) => isNamespace(data))
       const content = Object.entries(data)
         .flatMap(([rootName, propsOrNamespace]) => {
-          if (isNamespace(propsOrNamespace)) {
+          if (isNamespace(propsOrNamespace))
             return Object.entries(propsOrNamespace).flatMap(([name, props]) => {
               return [
                 !single ? `### ${rootName}.${name}` : null,
                 createTable(headers, createRows(props)),
               ]
             })
-          } else if (!namespace || all) {
+          else if (!namespace || all)
             return [
               !single ? `### ${rootName}` : null,
               createTable(headers, createRows(propsOrNamespace)),
             ]
-          } else {
-            return []
-          }
+          else return []
         })
         .filter(Boolean)
         .join("\n\n")

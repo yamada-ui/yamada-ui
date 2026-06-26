@@ -121,11 +121,10 @@ function groupingFiles(
       omittedPath.startsWith("components") ||
       omittedPath.startsWith("providers")
 
-    if (packageName === "@yamada-ui/react") {
+    if (packageName === "@yamada-ui/react")
       omittedPath = omittedPath.replace(/^(components|hooks|providers)\//, "")
-    } else if (packageName === "@yamada-ui/cli") {
+    else if (packageName === "@yamada-ui/cli")
       omittedPath = omittedPath.replace(/^(commands|utils)\//, "")
-    }
 
     const groupName = omittedPath.split("/")[0]!.replace(/.(ts|tsx)$/, "")
     const transformedGroupName = camelCase

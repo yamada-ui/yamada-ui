@@ -224,21 +224,16 @@ describe("useFocusOnPointerDown", () => {
       vendor: Object.getOwnPropertyDescriptor(window.navigator, "vendor"),
     }
 
-    for (const [key, value] of Object.entries(overrides)) {
+    for (const [key, value] of Object.entries(overrides))
       Object.defineProperty(window.navigator, key, {
         configurable: true,
         value,
       })
-    }
 
     return () => {
-      for (const [key, descriptor] of Object.entries(descriptors)) {
-        if (descriptor) {
-          Object.defineProperty(window.navigator, key, descriptor)
-        } else {
-          Reflect.deleteProperty(window.navigator, key)
-        }
-      }
+      for (const [key, descriptor] of Object.entries(descriptors))
+        if (descriptor) Object.defineProperty(window.navigator, key, descriptor)
+        else Reflect.deleteProperty(window.navigator, key)
     }
   }
 

@@ -248,9 +248,6 @@ export function useI18n<Y extends IntlKey>(key?: Y) {
       t: () => "",
     }
 
-  if (key) {
-    return { ...context, t: translation }
-  } else {
-    return context
-  }
+  if (key) return { ...context, t: translation }
+  else return context
 }

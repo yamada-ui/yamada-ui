@@ -60,11 +60,8 @@ export const NoticeRoot = withProvider<"fragment", NoticeRootProps>(
 
     const getLimit = useCallback<NoticeMethods["getLimit"]>(
       (target) => {
-        if (target === placement && updatedLimit !== limit) {
-          return updatedLimit
-        } else {
-          return limit
-        }
+        if (target === placement && updatedLimit !== limit) return updatedLimit
+        else return limit
       },
       [placement, limit, updatedLimit],
     )

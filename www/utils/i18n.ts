@@ -14,14 +14,12 @@ export function getLang(locale?: string) {
 }
 
 export function getLocale(lang?: string) {
-  if (!lang) {
-    return CONSTANTS.I18N.DEFAULT_LOCALE
-  } else {
+  if (!lang) return CONSTANTS.I18N.DEFAULT_LOCALE
+  else
     return (
       CONSTANTS.I18N.LOCALES.find((locale) => locale.startsWith(lang)) ??
       CONSTANTS.I18N.DEFAULT_LOCALE
     )
-  }
 }
 
 export const langConditions: { [key in Lang]: string } = {

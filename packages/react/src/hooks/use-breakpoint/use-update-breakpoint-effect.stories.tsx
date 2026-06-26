@@ -17,13 +17,9 @@ export const Basic = () => {
   })
 
   useUpdateBreakpointEffect((breakpoint) => {
-    if (breakpoint === "sm") {
-      setDevice("mobile")
-    } else if (breakpoint === "md") {
-      setDevice("tablet")
-    } else {
-      setDevice("desktop")
-    }
+    if (breakpoint === "sm") setDevice("mobile")
+    else if (breakpoint === "md") setDevice("tablet")
+    else setDevice("desktop")
   }, [])
 
   return (

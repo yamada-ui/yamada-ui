@@ -50,13 +50,9 @@ function createQueries(breakpoints: Dict<number>, config: BreakpointConfig) {
       let minW = down ? relatedWidth : width
       let maxW = down ? width : relatedWidth
 
-      if (breakpoint === "base") {
-        if (down) {
-          maxW = undefined
-        } else {
-          minW = undefined
-        }
-      }
+      if (breakpoint === "base")
+        if (down) maxW = undefined
+        else minW = undefined
 
       if (down) {
         if (minW) minW += 1
@@ -102,11 +98,8 @@ function transformBreakpoints(
     Object.entries(breakpoints)
       .map(([name, value]) => [name, getPx(value)] as const)
       .sort((a, b) => {
-        if (config.direction !== "up") {
-          return b[1] - a[1]
-        } else {
-          return a[1] - b[1]
-        }
+        if (config.direction !== "up") return b[1] - a[1]
+        else return a[1] - b[1]
       }),
   )
 }

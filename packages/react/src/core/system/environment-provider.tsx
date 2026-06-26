@@ -35,19 +35,18 @@ export const EnvironmentProvider: FC<EnvironmentProviderProps> = ({
   }, [value, ref])
 
   const context = useMemo<Environment>(() => {
-    if (createdDom()) {
+    if (createdDom())
       return {
         getDocument: () => getDocument(getRootNode()),
         getRootNode,
         getWindow: () => getWindow(getRootNode()),
       }
-    } else {
+    else
       return {
         getDocument: () => undefined,
         getRootNode: () => undefined,
         getWindow: () => undefined,
       }
-    }
   }, [getRootNode])
 
   return (

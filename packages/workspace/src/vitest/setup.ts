@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/vitest"
 
 expect.extend(matchers)
 
-if (typeof window.matchMedia !== "function") {
+if (typeof window.matchMedia !== "function")
   Object.defineProperty(window, "matchMedia", {
     configurable: true,
     enumerable: true,
@@ -20,7 +20,6 @@ if (typeof window.matchMedia !== "function") {
     })),
     writable: true,
   })
-}
 
 if (typeof globalThis.ResizeObserver !== "function") {
   class ResizeObserverMock {

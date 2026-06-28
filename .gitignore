@@ -41,6 +41,7 @@ next-env.d.ts
 .tanstack
 .magi
 .worktrees
+.eslintcache
 
 # dotenv environment variables file
 .env

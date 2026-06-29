@@ -5,11 +5,11 @@ packages:
 blockExoticSubdeps: true
 catalog:
   "@emotion/react": ^11.14.0
-  "@faker-js/faker": ^10.4.0
+  "@faker-js/faker": ^10.5.0
   "@lucide/lab": ^0.1.2
-  "@tanstack/react-router": ^1.170.15
+  "@tanstack/react-router": ^1.170.16
   "@types/yamljs": ^0.2.34
-  "@typescript/native-preview": 7.0.0-dev.20260614.1
+  "@typescript/native-preview": 7.0.0-dev.20260621.1
   "@vitest/browser": ^4.1.9
   "@vitest/browser-playwright": ^4.1.9
   "@vitest/ui": ^4.1.9
@@ -24,8 +24,8 @@ catalog:
   oxlint: ^1.70.0
   oxlint-tsgolint: ^0.23.0
   ora: ^9.4.0
-  oxfmt: ^0.54.0
-  playwright: ^1.60.0
+  oxfmt: ^0.55.0
+  playwright: ^1.61.0
   picocolors: ^1.1.1
   prettier: ^3.8.1
   react: ^19.2.7

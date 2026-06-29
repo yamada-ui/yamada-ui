@@ -215,7 +215,7 @@ export function generateStyles(
     ``,
     `export const styleProperties = Object.keys(styles) as StyleProperty[]`,
     ``,
-    `export type VendorProperty = typeof vendorProps[number]`,
+    `export type VendorProperty = typeof vendorProperties[number]`,
     ``,
     `export const vendorProperties = [${vendorProperties.join(", ")}] as const`,
     ``,

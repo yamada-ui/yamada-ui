@@ -1,1 +1,0 @@
-import{i as e}from"./preload-helper-usAeo7Bx.js";import{B as t,n,t as r}from"./core-DkLkzQLq.js";var i,a=e((()=>{r(),i=t({})})),o,s,c,l,u=e((()=>{r(),a(),{PropsContext:o,usePropsContext:s,withContext:c}=n(`image`,i),l=c(`img`)(void 0,({fit:e,...t})=>({objectFit:e,...t}))}));export{u as n,a as r,l as t};

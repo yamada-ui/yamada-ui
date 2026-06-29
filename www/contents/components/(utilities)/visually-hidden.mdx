@@ -40,6 +40,10 @@ import { VisuallyHidden } from "@workspaces/ui"
 
 It is used to visually hide elements, but it is accessible in screen readers. By default, it renders a `span` element.
 
+:::tip
+If you only need to provide an accessible name or description, consider setting `aria-label`, `aria-labelledby`, or `aria-describedby` on the target element. Use `VisuallyHidden` as a last resort when the element needs to be visually hidden and other methods cannot be used.
+:::
+
 ## Props
 
 <PropsTable name="visually-hidden" />

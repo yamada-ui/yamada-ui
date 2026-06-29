@@ -110,7 +110,7 @@
     "file-selector": "^2.1.2",
     "framesync": "6.1.2",
     "intl-messageformat": "^11.2.8",
-    "lucide-react": "1.18.0",
+    "lucide-react": "1.21.0",
     "motion": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
@@ -148,7 +148,7 @@
     "use-mask-input": "^3.10.2",
     "vitest-axe": "catalog:",
     "vitest-browser-react": "2.2.0",
-    "web-features": "3.30.0",
+    "web-features": "3.31.0",
     "yamljs": "catalog:"
   },
   "peerDependencies": {

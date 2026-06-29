@@ -65,6 +65,11 @@
       },
       "required": ["components", "hooks", "providers"]
     },
+    "headless": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the registry styles are generated empty."
+    },
     "section": {
       "type": "string",
       "description": "The section of the registry.",

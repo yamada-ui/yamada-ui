@@ -20,7 +20,7 @@ function createRow(prop: string, { as, docs, properties, token }: StyleConfig) {
     const property = prop.startsWith("--") ? prop : toKebabCase(prop)
     const href = isObject(docs) ? docs[property]?.see : undefined
 
-    if (href) {
+    if (href)
       value = (
         <Code
           as="a"
@@ -34,9 +34,7 @@ function createRow(prop: string, { as, docs, properties, token }: StyleConfig) {
           {property}
         </Code>
       )
-    } else {
-      value = property
-    }
+    else value = property
   } else if (properties) {
     value = (
       <VStack alignItems="flex-start" gap="xs">
@@ -46,7 +44,7 @@ function createRow(prop: string, { as, docs, properties, token }: StyleConfig) {
             : toKebabCase(property)
           const href = isObject(docs) ? docs[property]?.see : undefined
 
-          if (href) {
+          if (href)
             return (
               <Code
                 key={index}
@@ -61,7 +59,7 @@ function createRow(prop: string, { as, docs, properties, token }: StyleConfig) {
                 {property}
               </Code>
             )
-          } else {
+          else
             return (
               <Code
                 key={index}
@@ -72,7 +70,6 @@ function createRow(prop: string, { as, docs, properties, token }: StyleConfig) {
                 {property}
               </Code>
             )
-          }
         })}
       </VStack>
     )
@@ -101,11 +98,10 @@ export function StylePropsTable() {
         return Object.entries(data).flatMap(([prop, config]) => {
           const rows = [{ prop, ...createRow(prop, config) }]
 
-          if (config.shorthands) {
+          if (config.shorthands)
             config.shorthands.forEach((shorthandProp) => {
               rows.push({ prop: shorthandProp, ...createRow(prop, config) })
             })
-          }
 
           return rows
         })

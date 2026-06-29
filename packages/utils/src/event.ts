@@ -115,11 +115,8 @@ export function focusTrap(
 
     ev.preventDefault()
 
-    if (isFunction(onFocus)) {
-      onFocus(elToFocus)
-    } else {
-      elToFocus.focus()
-    }
+    if (isFunction(onFocus)) onFocus(elToFocus)
+    else elToFocus.focus()
   }
 
   return addDomEvent(el, "keydown", onKeyDown, true)
@@ -160,11 +157,8 @@ export function focusTransfer(
 
     ev.preventDefault()
 
-    if (isFunction(onFocus)) {
-      onFocus(elToFocus)
-    } else {
-      elToFocus.focus()
-    }
+    if (isFunction(onFocus)) onFocus(elToFocus)
+    else elToFocus.focus()
   }
 
   return addDomEvent(doc, "keydown", onKeyDown, true)

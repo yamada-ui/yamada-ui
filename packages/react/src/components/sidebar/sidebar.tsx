@@ -161,15 +161,12 @@ const getReactNodeOrFunction = (
   custom?: SidebarItemReactNode,
   root?: SidebarItemReactNode,
 ): ReactNodeOrFunction<SidebarItemCallBackProps> => {
-  if (isObject(custom) && ("group" in custom || "item" in custom)) {
+  if (isObject(custom) && ("group" in custom || "item" in custom))
     return custom[type]
-  } else if (custom) {
-    return custom
-  } else if (isObject(root) && ("group" in root || "item" in root)) {
+  else if (custom) return custom
+  else if (isObject(root) && ("group" in root || "item" in root))
     return root[type]
-  } else {
-    return root
-  }
+  else return root
 }
 
 interface ComponentContext extends Pick<
@@ -1362,9 +1359,8 @@ const SidebarItemTooltip: FC<SidebarItemTooltipProps> = (props) => {
   const { mode, placement } = useComponentContext()
   const offcanvas = mode === "offcanvas"
 
-  if (offcanvas || disabled) {
-    return children
-  } else {
+  if (offcanvas || disabled) return children
+  else
     return (
       <Tooltip
         closeOnClick={false}
@@ -1375,7 +1371,6 @@ const SidebarItemTooltip: FC<SidebarItemTooltipProps> = (props) => {
         {children}
       </Tooltip>
     )
-  }
 }
 
 export interface SidebarItemTriggerProps extends HTMLStyledProps<"button"> {}

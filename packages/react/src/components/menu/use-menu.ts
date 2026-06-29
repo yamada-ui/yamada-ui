@@ -193,11 +193,8 @@ export const useMenu = ({
 
       ev.preventDefault()
 
-      if (!open) {
-        onOpen()
-      } else {
-        onClose()
-      }
+      if (!open) onOpen()
+      else onClose()
     },
     [disabled, onClose, onOpen, open],
   )
@@ -768,17 +765,14 @@ export const useMenuOptionGroup = <
   const onChange = useCallback(
     (selectedValue: string) => {
       setValue((prev) => {
-        if (radio && isString(prev)) {
-          return selectedValue as M
-        } else if (!radio && isArray(prev)) {
+        if (radio && isString(prev)) return selectedValue as M
+        else if (!radio && isArray(prev))
           return (
             prev.includes(selectedValue)
               ? prev.filter((value) => value !== selectedValue)
               : prev.concat(selectedValue)
           ) as M
-        } else {
-          return prev
-        }
+        else return prev
       })
     },
     [radio, setValue],

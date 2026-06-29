@@ -74,11 +74,8 @@ export const useRadioGroup = <Y extends string = string>(
     (valueOrEv: ChangeEvent<HTMLInputElement> | Y) => {
       if (!interactive) return
 
-      if (isObject(valueOrEv)) {
-        setValue(valueOrEv.target.value as Y)
-      } else {
-        setValue(valueOrEv)
-      }
+      if (isObject(valueOrEv)) setValue(valueOrEv.target.value as Y)
+      else setValue(valueOrEv)
     },
     [interactive, setValue],
   )

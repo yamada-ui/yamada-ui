@@ -401,13 +401,12 @@ export const ManualSorting: Story = () => {
 
           setData((prev) =>
             prev.toSorted((a, b) => {
-              if (isNumber(a[id]) && isNumber(b[id])) {
+              if (isNumber(a[id]) && isNumber(b[id]))
                 return desc ? a[id] - b[id] : b[id] - a[id]
-              } else if (isString(a[id]) && isString(b[id])) {
+              else if (isString(a[id]) && isString(b[id]))
                 return desc
                   ? a[id].localeCompare(b[id])
                   : b[id].localeCompare(a[id])
-              }
 
               return 0
             }),

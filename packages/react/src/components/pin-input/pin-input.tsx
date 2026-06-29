@@ -62,13 +62,11 @@ export const PinInputRoot = withProvider<"div", PinInputRootProps>(
     const cloneChildren = useMemo(() => {
       const validChildren = getValidChildren(children)
 
-      if (validChildren.length) {
-        return validChildren
-      } else {
+      if (validChildren.length) return validChildren
+      else
         return Array.from({ length: items }, (_, index) => (
           <PinInputField key={index} index={index} />
         ))
-      }
     }, [children, items])
     const context = useMemo(
       () => ({ errorBorderColor, focusBorderColor, getInputProps }),

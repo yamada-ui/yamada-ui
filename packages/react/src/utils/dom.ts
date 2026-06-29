@@ -55,13 +55,10 @@ export function runKeyAction<Y>(
 export function isComposing(
   ev: React.ChangeEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
 ): boolean {
-  if ("keyCode" in ev) {
-    return ev.nativeEvent.isComposing || ev.keyCode === 229
-  } else if (ev.nativeEvent instanceof InputEvent) {
+  if ("keyCode" in ev) return ev.nativeEvent.isComposing || ev.keyCode === 229
+  else if (ev.nativeEvent instanceof InputEvent)
     return ev.nativeEvent.isComposing
-  } else {
-    return false
-  }
+  else return false
 }
 
 export function useAttributeObserver(
@@ -116,7 +113,5 @@ export const visuallyHiddenAttributes = {
 export function* useIds() {
   const id = React.useId()
 
-  for (let i = 0; ; i++) {
-    yield `${id}-${i}`
-  }
+  for (let i = 0; ; i++) yield `${id}-${i}`
 }

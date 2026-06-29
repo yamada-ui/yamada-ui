@@ -606,13 +606,11 @@ export const Table = withContext(
         colIndex: number,
         rowIndex: number,
       ) => {
-        for (let i = 0; i < colSpan; i++) {
+        for (let i = 0; i < colSpan; i++)
           cellMap.set(`${colIndex + i}-${rowIndex}`, `${colIndex}-${rowIndex}`)
-        }
 
-        for (let i = 1; i < rowSpan; i++) {
+        for (let i = 1; i < rowSpan; i++)
           cellMap.set(`${colIndex}-${rowIndex + i}`, `${colIndex}-${rowIndex}`)
-        }
       }
 
       const insertCellMapByHeaderGroup = (
@@ -1178,7 +1176,7 @@ const TruncatedText: FC<TruncatedTextProps> = ({
   truncated,
   ...rest
 }) => {
-  if (lineClamp || truncated) {
+  if (lineClamp || truncated)
     return (
       <styled.span
         lineClamp={lineClamp}
@@ -1189,7 +1187,5 @@ const TruncatedText: FC<TruncatedTextProps> = ({
         {children}
       </styled.span>
     )
-  } else {
-    return children
-  }
+  else return children
 }

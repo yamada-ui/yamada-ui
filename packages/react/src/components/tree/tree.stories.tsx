@@ -433,7 +433,7 @@ export const Filtering: Story = () => {
 
       return items
         .map((item) => {
-          if ("children" in item) {
+          if ("children" in item)
             if (isString(item.label) && match(item.label, value)) {
               return item
             } else {
@@ -441,9 +441,7 @@ export const Filtering: Story = () => {
 
               if (children.length) return { ...item, children }
             }
-          } else if (isString(item.label) && match(item.label, value)) {
-            return item
-          }
+          else if (isString(item.label) && match(item.label, value)) return item
         })
         .filter((item) => !isUndefined(item))
     },

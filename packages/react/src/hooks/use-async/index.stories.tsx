@@ -13,11 +13,8 @@ export const Basic = () => {
     async () =>
       new Promise<string>((resolve, reject) => {
         setTimeout(() => {
-          if (Math.random() > 0.5) {
-            resolve("✌️")
-          } else {
-            reject(new Error("A pseudo random error occurred"))
-          }
+          if (Math.random() > 0.5) resolve("✌️")
+          else reject(new Error("A pseudo random error occurred"))
         }, 3000)
       }),
     [],

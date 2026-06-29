@@ -630,7 +630,6 @@ export interface UseChartAreaProps extends Merge<
     | "animationBegin"
     | "animationDuration"
     | "animationEasing"
-    | "baseLine"
     | "baseValue"
     | "connectNulls"
     | "data"
@@ -638,7 +637,6 @@ export interface UseChartAreaProps extends Merge<
     | "dot"
     | "hide"
     | "isAnimationActive"
-    | "isRange"
     | "label"
     | "legendType"
     | "name"
@@ -662,7 +660,6 @@ export const useChartArea = ({
   animationBegin,
   animationDuration,
   animationEasing,
-  baseLine,
   baseValue,
   children,
   connectNulls,
@@ -737,7 +734,6 @@ export const useChartArea = ({
       animationBegin,
       animationDuration,
       animationEasing,
-      baseLine,
       baseValue,
       children,
       connectNulls,
@@ -767,7 +763,6 @@ export const useChartArea = ({
       animationBegin,
       animationDuration,
       animationEasing,
-      baseLine,
       baseValue,
       children,
       connectNulls,

@@ -37,7 +37,7 @@ export const ColorSwatchGroup = (({
   const empty = items.length === 0
   const threeColors = items.length === 3
 
-  if (empty) {
+  if (empty)
     return (
       <ColorSwatch
         aria-label={t("Color swatch group")}
@@ -47,7 +47,7 @@ export const ColorSwatchGroup = (({
         {...rest}
       />
     )
-  } else {
+  else
     return (
       <ColorSwatch
         aria-label={t("Color swatch group")}
@@ -70,5 +70,4 @@ export const ColorSwatchGroup = (({
         </Grid>
       </ColorSwatch>
     )
-  }
 }) as Component<"div", ColorSwatchGroupProps>

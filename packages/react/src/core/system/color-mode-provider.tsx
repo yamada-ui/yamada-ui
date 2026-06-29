@@ -186,7 +186,7 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
 export const useColorMode = (): ColorModeContext => {
   const context = use(ColorModeContext)
 
-  if (isEmptyObject(context)) {
+  if (isEmptyObject(context))
     return {
       changeColorMode: noop,
       colorMode: "light",
@@ -194,7 +194,5 @@ export const useColorMode = (): ColorModeContext => {
       internalColorMode: "light",
       toggleColorMode: noop,
     }
-  } else {
-    return context
-  }
+  else return context
 }

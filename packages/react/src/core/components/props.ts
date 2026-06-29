@@ -14,7 +14,7 @@ import {
   omitObject,
   splitObject,
 } from "../../utils"
-import { conditionProperties, styleProperties } from "../css"
+import { conditionProperties, styleProperties, vendorProperties } from "../css"
 
 type Optionalize<Y> = [Extract<Y, undefined>] extends [never]
   ? Y
@@ -35,6 +35,7 @@ function isEvent(key: string) {
 export const cssProps = new Set<string>([
   ...conditionProperties,
   ...styleProperties,
+  ...vendorProperties,
 ])
 
 export type ShouldForwardProp = (prop: string) => boolean
@@ -123,9 +124,8 @@ export function mergeProps(...args: (Dict | undefined)[]) {
         result[key] = !isUndefined(props[key]) ? props[key] : result[key]
       }
 
-      for (const key in props) {
+      for (const key in props)
         if (isUndefined(result[key])) result[key] = props[key]
-      }
     }
 
     return result as any

@@ -141,9 +141,8 @@ describe("init", () => {
       readFileSync(path.join(outdirPath, "tsconfig.json"), "utf-8"),
     )
     // Without src, include paths should not contain "src/"
-    for (const inc of tsconfig.include) {
-      expect(inc).not.toContain("src/")
-    }
+    for (const inc of tsconfig.include) expect(inc).not.toContain("src/")
+
     // Files at root, not in src/
     expect(existsSync(path.join(outdirPath, "index.ts"))).toBeTruthy()
   })

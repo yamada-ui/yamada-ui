@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@tanstack/react-router": "catalog:",
-    "@tanstack/react-start": "^1.168.6",
+    "@tanstack/react-start": "^1.168.26",
     "@yamada-ui/react": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:"

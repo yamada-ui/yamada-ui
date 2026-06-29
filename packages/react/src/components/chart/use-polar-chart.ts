@@ -1365,7 +1365,7 @@ export const useChartRadial = <Y extends Dict>({
   ...rest
 }: UseChartRadialProps<Y>) => {
   const shape = useMemo<UseChartRadialProps<Y>["shape"]>(() => {
-    if (isFunction(shapeProp)) {
+    if (isFunction(shapeProp))
       return (props: any) => {
         props.className = props.className?.replace(/\s*\bundefined\b/g, "")
 
@@ -1373,9 +1373,7 @@ export const useChartRadial = <Y extends Dict>({
 
         return shapeProp({ name, ...props })
       }
-    } else {
-      return shapeProp
-    }
+    else return shapeProp
   }, [nameKey, shapeProp])
   const background = useMemo<UseChartRadialProps<Y>["background"]>(() => {
     if (!backgroundProp) return backgroundProp

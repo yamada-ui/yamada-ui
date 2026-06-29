@@ -117,9 +117,8 @@ async function updateDependencies(packageName: string) {
     !updatedDependencyNames.some((dependency) =>
       dependencyNames.includes(dependency),
     )
-  ) {
+  )
     return
-  }
 
   const filePath = path.join(
     CHANGESET_PATH,

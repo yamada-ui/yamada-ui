@@ -3,15 +3,12 @@ import defaultTheme from "@/data/theme.json"
 import { createTable } from "./create-table"
 
 function replaceValue(value: any) {
-  if (typeof value === "object") {
+  if (typeof value === "object")
     return JSON.stringify(value)
       .replace(/"(\w+)":/g, " $1: ")
       .replace(/}$/, " }")
-  } else if (typeof value === "string") {
-    return `\"${value.replace(/"/g, "'")}\"`
-  } else {
-    return value
-  }
+  else if (typeof value === "string") return `\"${value.replace(/"/g, "'")}\"`
+  else return value
 }
 
 function getTokens(
@@ -20,31 +17,28 @@ function getTokens(
   sizes: boolean,
   fractional?: boolean,
 ) {
-  if (semantic) {
-    if (sizes) {
-      if (fractional) {
+  if (semantic)
+    if (sizes)
+      if (fractional)
         return Object.fromEntries(
           Object.entries(defaultTheme.semanticTokens.sizes).filter(([key]) =>
             key.includes("/"),
           ),
         )
-      } else {
+      else
         return Object.fromEntries(
           Object.entries(defaultTheme.semanticTokens.sizes).filter(
             ([key]) => !key.includes("/"),
           ),
         )
-      }
-    } else {
+    else
       return defaultTheme.semanticTokens[
         token as keyof typeof defaultTheme.semanticTokens
       ] as DefineThemeTokens | undefined
-    }
-  } else {
+  else
     return defaultTheme[token as keyof typeof defaultTheme] as
       | DefineThemeTokens
       | undefined
-  }
 }
 
 export function replaceTokensTable(text: string) {
@@ -72,18 +66,12 @@ export function replaceTokensTable(text: string) {
       const content = createTable(
         ["Token", "Value"],
         Object.entries(tokens).flatMap(([token, value]) => {
-          if (
-            typeof value === "object" &&
-            !Array.isArray(value) &&
-            !keyframes
-          ) {
+          if (typeof value === "object" && !Array.isArray(value) && !keyframes)
             return Object.entries(value).map(([key, value]) => [
               `\`${token}.${key}\``,
               `\`${replaceValue(value)}\``,
             ])
-          } else {
-            return [[`\`${token}\``, `\`${replaceValue(value)}\``]]
-          }
+          else return [[`\`${token}\``, `\`${replaceValue(value)}\``]]
         }),
       )
 

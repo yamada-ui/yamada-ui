@@ -112,6 +112,6 @@ the following types:
 
 ## License
 
-By contributing code to the `Yamada UI` GitHub repository, you agree that your contributed code will be licensed under the MIT license.
+By contributing code to the Yamada UI GitHub repository, you agree that your contributed code will be licensed under the MIT license.
 
 ### Thank you for reading till the end. I love you too. 💖

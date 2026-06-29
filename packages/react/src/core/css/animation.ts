@@ -13,15 +13,10 @@ const styleSheet = createdDom()
 
 function transformAnimationValue(value: Dict) {
   return Object.entries(value).reduce<Dict>((prev, [key, value]) => {
-    if (key === "keyframes") {
-      prev._keyframes = value
-    } else if (key === "duration") {
-      prev.animationDuration = value
-    } else if (key === "timingFunction") {
-      prev.animationTimingFunction = value
-    } else {
-      prev[key] = value
-    }
+    if (key === "keyframes") prev._keyframes = value
+    else if (key === "duration") prev.animationDuration = value
+    else if (key === "timingFunction") prev.animationTimingFunction = value
+    else prev[key] = value
 
     return prev
   }, {})

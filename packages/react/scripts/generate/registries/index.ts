@@ -80,11 +80,8 @@ async function getExternals(): Promise<ExternalsMap> {
   return Object.fromEntries(
     Object.entries<string>({ ...dependencies, ...devDependencies }).map(
       ([key, value]) => {
-        if (value === "catalog:") {
-          return [key, catalog[key]]
-        } else {
-          return [key, value]
-        }
+        if (value === "catalog:") return [key, catalog[key]]
+        else return [key, value]
       },
     ),
   )
@@ -177,26 +174,20 @@ async function formatSource(data: string) {
   while (match != null) {
     const [target] = match
 
-    if (new RegExp(`../(${PROVIDE_SECTIONS.join("|")})`).test(target)) {
-      if (target.includes("import type")) {
-        importTypeDeclarations.push(target)
-      } else {
-        importDeclarations.push(target)
-      }
-    }
+    if (new RegExp(`../(${PROVIDE_SECTIONS.join("|")})`).test(target))
+      if (target.includes("import type")) importTypeDeclarations.push(target)
+      else importDeclarations.push(target)
 
     match = regexp.exec(data)
   }
 
   if (!importDeclarations.length && !importTypeDeclarations.length) return data
 
-  if (importDeclarations.length) {
+  if (importDeclarations.length)
     data = replaceImportDeclarations(data, importDeclarations)
-  }
 
-  if (importTypeDeclarations.length) {
+  if (importTypeDeclarations.length)
     data = replaceImportDeclarations(data, importTypeDeclarations)
-  }
 
   return format(data)
 }

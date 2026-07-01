@@ -40,7 +40,7 @@ Yamada UIは、[Chakra UI](https://github.com/chakra-ui/chakra-ui)、[shadcn/ui]
 
 貢献したいと思いませんか？ それは、とても素晴らしいことです！
 
-あなたを支援するために[ガイドライン](./CONTRIBUTING.ja.md)を準備しています。
+あなたを支援するために[ガイドライン](./CONTRIBUTING.ja.md)を準備しています。コンポーネント、フック、スタイルAPI、テーマの動作を変更する場合は、[設計原則](./DESIGN.md)も確認してください。
 
 もし、ドキュメントへの貢献に興味がある場合は、こちらの[ガイドライン](https://yamada-ui.com/ja/docs/community/contributing)を参照してください。
 

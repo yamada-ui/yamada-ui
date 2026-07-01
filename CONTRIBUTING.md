@@ -6,6 +6,8 @@
 
 When it comes to open source, there are different ways you can contribute, all of which are valuable. Here are some guidelines that should help you as you prepare your contribution.
 
+If your change adds or updates components, hooks, style APIs, or theme behavior, also read the [design principles](./DESIGN.md).
+
 ## Setup the Project
 
 The following steps will get you up and running to contribute to Yamada UI:
@@ -97,7 +99,7 @@ the following types:
    can be either `docs`, `fix`, `feat`, `build`, or any other conventional
    commit type. `scope` is just a short id that describes the scope of work.
 
-3. After making changes, please add test code for those changes. Run `pnpm test` or `pnpm test <package-name>` to ensure all tests pass. please check [Tips for Test](https://github.com/yamada-ui/yamada-ui/wiki/Tips-for-Test) for further guidance.
+3. After making changes, add or update tests when the change introduces behavior, public contracts, accessibility behavior, regressions, or integration points that are not already covered. Run `pnpm test` or `pnpm test <package-name>` to ensure all relevant tests pass. Please check [Tips for Test](https://github.com/yamada-ui/yamada-ui/wiki/Tips-for-Test) for further guidance.
 
 4. Run `pnpm changeset` to create a detailed description of your changes. This
    will be used to generate a changelog when we publish an update.

@@ -22,7 +22,7 @@ Avoid adding features only because another library has them. Add API surface whe
 
 Component APIs should be boring in the best way: names, defaults, controlled state, uncontrolled state, slots, and style props should match nearby components unless there is a specific reason to differ.
 
-Prefer explicit props for component behavior and style-system props for visual styling. Do not add one-off visual props when the same result can be expressed through tokens, variants, sizes, color schemes, recipes, or existing style props.
+Prefer explicit props for component behavior and style-system props for visual styling. Do not add one-off visual props when the same result can be expressed through tokens, variants, sizes, color schemes, semantic tokens, CSS variables, or existing style props.
 
 For compound components, keep each slot independently understandable. Slot names should describe their role in the rendered component, not the implementation detail that happens to render them. Root components should own shared context, state, and accessibility wiring; child slots should consume that context without duplicating it.
 
@@ -38,17 +38,21 @@ Do not make users pass required ARIA props for the common case when the componen
 
 ## Styling And Theming
 
-Styling should flow through the Yamada UI system: theme tokens, semantic tokens, recipes, variants, sizes, color schemes, style props, and CSS-in-JS composition. Prefer token references over raw values when the value expresses a design decision.
+Styling should flow through the Yamada UI system: theme tokens, semantic tokens, variants, sizes, color schemes, style props, CSS variables, and CSS-in-JS composition. Prefer token references over raw values when the value expresses a design decision.
 
 Default styles should be useful, consistent, and themeable. They should not assume one brand, one app shell, or one documentation-site aesthetic. Component internals may use CSS variables when they make variants, slots, or state styles easier to compose.
 
 Keep styling APIs orthogonal. Variants describe visual intent, sizes describe scale, color schemes describe palette, and style props provide local overrides. Do not add a variant that only changes size, a size that only changes color, or a color scheme that encodes layout.
+
+Prefer semantic or layout components when they express the user's intent. Use `Box` for generic containers or styling glue when no more specific component communicates the intent.
 
 When adding tokens or style props, confirm they fit the existing naming model and can be documented clearly. Prefer extending a general style capability over adding component-specific styling escape hatches.
 
 ## Documentation And Examples
 
 Docs should teach the public API, not the implementation. Every new or changed component behavior should be reflected in the docs when users need to know about it.
+
+Keep English and Japanese docs semantically aligned when both files exist. The wording does not need to be literal, but requirements, warnings, examples, and API guidance should not become stronger, weaker, or different between languages.
 
 Examples should start with the common path, then show controlled state, composition, accessibility requirements, and styling variations when relevant. Avoid examples that only demonstrate internal mechanics or artificial combinations users are unlikely to copy.
 
@@ -68,4 +72,4 @@ Keep changes focused. Do not bundle unrelated fixes, broad refactors, or documen
 
 Before adding new API surface, compare nearby components and choose the smallest API that preserves consistency. Before changing behavior, identify the current public contract, the intended new contract, and the docs or tests that prove the difference.
 
-Good design changes leave the library easier to use and easier to maintain. If an implementation needs comments to explain ordinary control flow, split the responsibilities or simplify the structure before adding explanation.
+Good design changes leave the library easier to use and easier to maintain. If ordinary control flow needs explanatory comments, split the responsibilities or simplify the structure instead. Use JSDoc or suppression comments only where the repository rules explicitly allow them.

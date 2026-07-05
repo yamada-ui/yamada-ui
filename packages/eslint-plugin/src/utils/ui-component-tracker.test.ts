@@ -20,6 +20,9 @@ interface ParsedCode {
   variableDeclarators: VariableDeclarator[]
 }
 
+// テスト用ヘルパー: コード文字列をパースして、tracker に渡すべき
+// 3 種類のノード（import / 変数宣言 / JSX タグ名）を収集する。
+// ESLint の走査を模倣するため、AST を再帰的にたどっている。
 const parseCode = (code: string): ParsedCode => {
   const ast = parse(code, {
     ecmaFeatures: { jsx: true },
@@ -59,6 +62,8 @@ const parseCode = (code: string): ParsedCode => {
   return { imports, jsxNames, variableDeclarators }
 }
 
+// テスト用ヘルパー: tracker を生成し、収集したノードを実際の
+// visitor 呼び出しと同じ順序（import → 変数宣言）で流し込む
 const setupTracker = (
   code: string,
   sourcePackages: readonly string[] = ["@yamada-ui/react"],
@@ -72,6 +77,7 @@ const setupTracker = (
 }
 
 describe("createUIComponentTracker", () => {
+  // named import: 対象パッケージから import したコンポーネントを追跡する
   test("named imports: tracks a bare component imported from sourcePackages", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { Box } from "@yamada-ui/react"
@@ -80,6 +86,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
   })
 
+  // named import: ローカルの別名で登録され、元の名前ではヒットしない
   test("named imports: registers under the local alias and ignores the original name", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { Box as B } from "@yamada-ui/react"
@@ -94,6 +101,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[1]!)).toBe(false)
   })
 
+  // named import: `styled` は namespace のベースとしても扱われる（<styled.div />）
   test("named imports: treats the `styled` factory as a namespace base", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { styled } from "@yamada-ui/react"
@@ -102,6 +110,8 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
   })
 
+  // named import: `styled` の判定は別名ではなくエクスポート元の名前で行う
+  // （`styled as s` なら <s.div /> がヒットし、<styled.div /> はヒットしない）
   test("named imports: classifies the `styled` factory by its original exported name, not the alias", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { styled as s } from "@yamada-ui/react"
@@ -116,6 +126,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[1]!)).toBe(false)
   })
 
+  // named import: 1 つの import 文の複数指定子をすべて登録する
   test("named imports: registers multiple specifiers from a single import", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { Box, HStack, styled } from "@yamada-ui/react"
@@ -132,6 +143,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[2]!)).toBe(true)
   })
 
+  // namespace import: `import * as Y` からのメンバーアクセス JSX を追跡する
   test("namespace imports: tracks `import * as Y` for member-access JSX", () => {
     const { jsxNames, tracker } = setupTracker(`
       import * as Y from "@yamada-ui/react"
@@ -140,6 +152,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
   })
 
+  // namespace import: 深くネストしたメンバーアクセスは最左のベースで解決する
   test("namespace imports: resolves the leftmost base in deeply nested member access", () => {
     const { jsxNames, tracker } = setupTracker(`
       import * as Y from "@yamada-ui/react"
@@ -148,6 +161,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
   })
 
+  // namespace import: namespace 名を単独の識別子として使ってもヒットしない（<Y />）
   test("namespace imports: does not match a bare identifier whose name was registered as a namespace", () => {
     const { jsxNames, tracker } = setupTracker(`
       import * as Y from "@yamada-ui/react"
@@ -156,6 +170,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
   })
 
+  // default import: namespace のベースとして登録される（<YamadaUI.Box /> はヒット、<YamadaUI /> 単独はヒットしない）
   test("default imports: registers default imports as a namespace base", () => {
     const { jsxNames, tracker } = setupTracker(`
       import YamadaUI from "@yamada-ui/react"
@@ -170,6 +185,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[1]!)).toBe(false)
   })
 
+  // sourcePackages 外のパッケージからの import は無視する
   test("ignores imports from packages outside sourcePackages", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { Box } from "@some/other-lib"
@@ -178,6 +194,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
   })
 
+  // ネイティブ HTML 要素（<div />）はヒットしない
   test("ignores native HTML elements", () => {
     const { jsxNames, tracker } = setupTracker(`
       const App = () => <div />
@@ -185,6 +202,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
   })
 
+  // 指定子のない副作用 import（import "pkg"）では何も登録されない
   test("ignores side-effect-only imports (no specifiers)", () => {
     const { jsxNames, tracker } = setupTracker(`
       import "@yamada-ui/react"
@@ -193,6 +211,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
   })
 
+  // sourcePackages 配列: リストのいずれのパッケージからの import もヒットする
   test("sourcePackages array: matches imports from any of the listed packages", () => {
     const { jsxNames, tracker } = setupTracker(
       `
@@ -211,6 +230,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[1]!)).toBe(true)
   })
 
+  // styled ラッパー: styled ファクトリの戻り値を代入した変数を追跡する
   test("styled wrapper: tracks a variable assigned from the styled factory", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { Box, styled } from "@yamada-ui/react"
@@ -220,6 +240,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
   })
 
+  // styled ラッパー: 別名 import した styled ファクトリ（s(Box)）でも追跡する
   test("styled wrapper: tracks a variable via an aliased styled factory", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { Box, styled as s } from "@yamada-ui/react"
@@ -229,6 +250,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
   })
 
+  // styled ラッパー: namespace 経由の Y.styled(...) でも追跡する
   test("styled wrapper: tracks a variable wrapped through a namespace import", () => {
     const { jsxNames, tracker } = setupTracker(`
       import * as Y from "@yamada-ui/react"
@@ -238,6 +260,8 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
   })
 
+  // styled ラッパー: ラッパーをさらに styled で包むチェーンも追跡する
+  // （styled(First) の引数が既存ラッパーでも callee が styled なら登録される）
   test("styled wrapper: tracks chained wrappers built on a previous wrapper", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { Box, styled } from "@yamada-ui/react"
@@ -248,6 +272,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(true)
   })
 
+  // styled ラッパー: 未知のファクトリ（withSomething(Box)）の戻り値は追跡しない
   test("styled wrapper: ignores variables produced by an unknown factory", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { Box } from "@yamada-ui/react"
@@ -257,6 +282,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
   })
 
+  // styled ラッパー: 初期化式が styled() でも分割代入なら追跡しない
   test("styled wrapper: ignores destructured assignments even if the initializer looks like styled()", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { Box, styled } from "@yamada-ui/react"
@@ -266,6 +292,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
   })
 
+  // styled ラッパー: property が `styled` 以外のメンバーアクセス（Y.other(...)）は追跡しない
   test("styled wrapper: ignores member access whose property is not `styled`", () => {
     const { jsxNames, tracker } = setupTracker(`
       import * as Y from "@yamada-ui/react"
@@ -275,6 +302,8 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[0]!)).toBe(false)
   })
 
+  // styled ラッパー: 引数が何であれ（独自コンポーネントでもタグ名文字列でも）
+  // styled() の戻り値は追跡される
   test("styled wrapper: tracks the result of styled() regardless of the wrapped argument", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { styled } from "@yamada-ui/react"
@@ -292,6 +321,7 @@ describe("createUIComponentTracker", () => {
     expect(tracker.matchesJSXName(jsxNames[1]!)).toBe(true)
   })
 
+  // UI コンポーネントを包む独自の関数コンポーネントは追跡されない
   test("custom function wrappers around UI components are not tracked", () => {
     const { jsxNames, tracker } = setupTracker(`
       import { Box } from "@yamada-ui/react"

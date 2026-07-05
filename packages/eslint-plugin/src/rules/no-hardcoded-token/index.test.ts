@@ -17,6 +17,7 @@ const ruleTester = new RuleTester({
 ruleTester.run("no-hardcoded-token", noHardcodedToken, {
   valid: [
     {
+      // 数値のトークン参照（spaces/sizes は数値リテラルを検査しない）
       name: "numeric token reference (spaces/sizes skip numeric)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -24,6 +25,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // 既存のトークン名（検出パターンに一致しないため素通し）
       name: "existing token name (doesn't match detection pattern)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -31,6 +33,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // トークンスケールを持たない prop は検査されない
       name: "prop has no token scale",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -38,10 +41,12 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // UI コンポーネントではない要素（import なし）は検査されない
       name: "non-UI component (no import)",
       code: `const App = () => <div p="14px" />`,
     },
     {
+      // CSS 関数（calc）はスキップされる
       name: "CSS function (calc)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -49,6 +54,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // CSS 変数（var）はスキップされる
       name: "CSS variable",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -56,6 +62,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // 動的な値（変数参照）は検査されない
       name: "dynamic value",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -63,6 +70,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // 式入りのテンプレートリテラルは検査されない
       name: "template literal with expressions",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -70,6 +78,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // ゼロ値はスキップされる
       name: "zero value",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -77,6 +86,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // CSS グローバルキーワード（inherit）はスキップされる
       name: "CSS keyword",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -84,6 +94,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // ignoreScales オプションで除外したスケールは検査されない
       name: "ignored scale",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -92,6 +103,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       options: [{ ignoreScales: ["colors"] }],
     },
     {
+      // 単位なしの文字列 "4" は検出パターンに一致しない
       name: "string '4' doesn't match detection pattern (no unit)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -99,6 +111,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // 負の数値トークン参照（mt={-4}）は正当な書き方
       name: "negative token reference (numeric)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -106,6 +119,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // borderWidth はトークンスケールを持たないため検査されない
       name: "borderWidth has no token scale",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -113,6 +127,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // スペースを含む複合値（色 2 つの一括指定）はスキップされる
       name: "space-containing compound value (2 colors)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -120,6 +135,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // keyframes スケールは検出対象から除外されている
       name: "keyframes scale is excluded from detection",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -127,6 +143,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // rem 単位付きのゼロ値もスキップされる
       name: "zero value with rem unit",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -134,6 +151,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       `,
     },
     {
+      // em 単位付きのゼロ値もスキップされる
       name: "zero value with em unit",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -143,6 +161,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
   ],
   invalid: [
     {
+      // spaces: rem 値を数値キーのトークンへ fix
       name: "spaces: rem value to numeric token",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -160,6 +179,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // spaces: `=` 前後に空白があっても安全に fix できる
       name: "spaces: rem value to numeric token with whitespace around equals",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -177,6 +197,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // fontSizes: rem 値を文字列キーのトークンへ fix
       name: "fontSizes: rem value to string token",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -194,6 +215,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // colors: hex カラーをカラートークンへ fix
       name: "colors: hex color",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -211,6 +233,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // radii: 9999px を full トークンへ fix
       name: "radii: 9999px to full",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -228,6 +251,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // fontWeight: 文字列 "700" を bold へ fix
       name: "fontWeight: string 700 to bold",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -245,6 +269,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // fontWeight: 数値リテラル 700 も bold へ fix
       name: "fontWeight: numeric literal 700 to bold",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -262,6 +287,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // borders: 複合値 "1px solid" をトークンへ fix
       name: "borders: compound value",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -279,6 +305,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // durations: animationDuration の時間値をトークンへ fix
       name: "durations: animationDuration",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -300,6 +327,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // durations: transitionDuration の時間値をトークンへ fix
       name: "durations: transitionDuration",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -321,6 +349,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // easings: cubic-bezier をイージングトークンへ fix
       name: "easings: transitionTimingFunction",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -342,6 +371,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // letterSpacings: 負の em 値でもトークンキーが文字列なら fix できる
       name: "letterSpacings: negative em value with string token key",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -363,6 +393,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // lineHeights: 数値文字列 "1.5" をトークンへ fix
       name: "lineHeights: numeric string to token",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -384,6 +415,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // lineHeights: 数値リテラル 1.5 もトークンへ fix
       name: "lineHeights: numeric literal to token",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -405,6 +437,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // zIndices: 数値文字列 "9999" をトークンへ fix
       name: "zIndices: numeric string to token",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -422,6 +455,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // aspectRatios: 分数 "16 / 9" をトークンへ fix
       name: "aspectRatios: fraction to token",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -443,6 +477,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // spaces: 1px は文字列キーの px トークンへ fix
       name: "spaces: 1px to px token",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -460,6 +495,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // 一致するトークンなし: fix せず報告のみ（noHardcodedTokenNoFix）
       name: "no matching token: noHardcodedTokenNoFix",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -474,6 +510,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // 一致するカラートークンなし: fix せず報告のみ
       name: "no matching color token: noHardcodedTokenNoFix",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -488,6 +525,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // レスポンシブ配列: 各要素が個別に検出・fix される（エラー 2 件）
       name: "responsive array (2 errors)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -509,6 +547,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // 三項演算子: 両分岐が個別に検出・fix される（エラー 2 件）
       name: "conditional expression (2 errors)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -530,6 +569,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // レスポンシブオブジェクト: 各値が個別に検出・fix される（エラー 2 件）
       name: "responsive object (2 errors)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -551,6 +591,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // 式なしテンプレートリテラル: 数値キーのトークンへ fix
       name: "template literal without expressions (numeric token)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -568,6 +609,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // 式なしテンプレートリテラル: 文字列キーのトークンへ fix
       name: "template literal without expressions (string token)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -585,6 +627,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // 省略形 prop（bg）も正式名と同じスケールで検出される
       name: "shorthand prop: bg",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -602,6 +645,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // 大文字の hex も小文字に正規化して照合される
       name: "hex uppercase normalized",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -619,6 +663,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // 負の CSS 値 -0.25rem: 数値キートークンのため fix せず報告のみ
       name: "negative CSS value: -0.25rem (noHardcodedTokenNoFix)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -633,6 +678,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // 負の CSS 値 -1rem: 数値キートークンのため fix せず報告のみ
       name: "negative CSS value: -1rem (noHardcodedTokenNoFix)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -647,6 +693,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // rgb 構文: theme の blackAlpha 値と一致すれば fix される
       name: "rgb syntax: blackAlpha",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -668,6 +715,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // rgb 構文: theme の whiteAlpha 値と一致すれば fix される
       name: "rgb syntax: whiteAlpha",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -689,6 +737,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // 16px に一致する spaces トークンはない（4px 刻みのため）: 報告のみ
       name: "16px has no matching spaces token (noHardcodedTokenNoFix)",
       code: `
         import { Box } from "@yamada-ui/react"
@@ -703,6 +752,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // namespace import 経由の <Y.Box /> も検出される
       name: "namespace import",
       code: `
         import * as Y from "@yamada-ui/react"
@@ -720,6 +770,7 @@ ruleTester.run("no-hardcoded-token", noHardcodedToken, {
       ],
     },
     {
+      // styled ファクトリでラップしたコンポーネントも検出される
       name: "styled factory wrapper",
       code: `
         import { Box, styled } from "@yamada-ui/react"

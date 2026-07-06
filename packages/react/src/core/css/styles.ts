@@ -6165,7 +6165,8 @@ export interface StyleProps {
    *
    * The <code>field-sizing</code> CSS property allows form controls such as <code>&#x3C;textarea></code> to be sized based on their content.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2026-06-16
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/field-sizing
    */

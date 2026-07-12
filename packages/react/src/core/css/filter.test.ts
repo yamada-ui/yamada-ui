@@ -6,7 +6,7 @@ describe("generateFilter", () => {
     const transform = generateFilter("filter")
     const result = transform("10px", {
       prev: {},
-      properties: ["--blur"] as any,
+      properties: ["--blur"],
       system,
     })
     expect(result).toStrictEqual({
@@ -19,7 +19,7 @@ describe("generateFilter", () => {
     const transform = generateFilter("filter")
     const result = transform("10px", {
       prev: { filter: "brightness(0.5)" },
-      properties: ["--blur"] as any,
+      properties: ["--blur"],
       system,
     })
     expect(result).toStrictEqual({
@@ -32,7 +32,7 @@ describe("generateFilter", () => {
     const transform = generateFilter("backdropFilter")
     const result = transform("5px", {
       prev: {},
-      properties: ["--backdrop-blur"] as any,
+      properties: ["--backdrop-blur"],
       system,
     })
     expect(result).toStrictEqual({
@@ -45,7 +45,7 @@ describe("generateFilter", () => {
     const transform = generateFilter()
     const result = transform("10px", {
       prev: {},
-      properties: ["--blur"] as any,
+      properties: ["--blur"],
       system,
     })
     expect(result.filter).toBeDefined()

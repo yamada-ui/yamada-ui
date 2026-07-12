@@ -7,19 +7,18 @@ const mockRect = (
   rect: Partial<DOMRect>,
 ): (() => void) => {
   const original = el.getBoundingClientRect
-  el.getBoundingClientRect = () =>
-    ({
-      bottom: 0,
-      height: 0,
-      left: 0,
-      right: 0,
-      toJSON: noop,
-      top: 0,
-      width: 0,
-      x: 0,
-      y: 0,
-      ...rect,
-    }) as DOMRect
+  el.getBoundingClientRect = () => ({
+    bottom: 0,
+    height: 0,
+    left: 0,
+    right: 0,
+    toJSON: noop,
+    top: 0,
+    width: 0,
+    x: 0,
+    y: 0,
+    ...rect,
+  })
   return () => {
     el.getBoundingClientRect = original
   }

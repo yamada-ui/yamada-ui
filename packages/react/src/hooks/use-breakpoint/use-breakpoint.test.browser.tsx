@@ -148,10 +148,10 @@ describe("useBreakpoint", () => {
               },
             },
           ] as ResizeObserverEntry[],
-          this as unknown as ResizeObserver,
+          this,
         )
       }
-    } as unknown as typeof ResizeObserver
+    }
 
     const container = document.createElement("div")
     const containerRef = { current: container }
@@ -199,7 +199,7 @@ describe("useBreakpoint", () => {
       constructor(cb: ResizeObserverCallback) {
         capturedCb = cb
       }
-    } as unknown as typeof ResizeObserver
+    }
 
     const containerRef = { current: document.createElement("div") }
     const config: ThemeConfig = {
@@ -225,7 +225,7 @@ describe("useBreakpoint", () => {
 
     const rafSpy = vi.spyOn(window, "requestAnimationFrame")
 
-    capturedCb?.([] as unknown as ResizeObserverEntry[], {} as ResizeObserver)
+    capturedCb?.([], {} as ResizeObserver)
 
     expect(rafSpy).not.toHaveBeenCalled()
 

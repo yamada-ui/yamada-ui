@@ -1,3 +1,7 @@
+<p align='center'>
+  English | <a href='./DESIGN.ja.md'>日本語</a>
+</p>
+
 # Design Principles
 
 Yamada UI is a React component library for building beautiful, consistent, accessible interfaces with advanced styling. This document is for maintainers and contributors who are adding or changing components, hooks, style APIs, or theme behavior.
@@ -64,11 +68,9 @@ Add or update tests when a change introduces a new branch, public contract, obse
 
 Tests should verify user-observable behavior. Prefer queries and assertions that match how users and assistive technologies interact with components. Avoid tests that lock in private implementation details unless the implementation detail is itself the public contract.
 
-For browser-sensitive behavior such as focus, portals, positioning, animation timing, or pointer interaction, use the test type that exercises the real behavior instead of relying only on a lightweight unit test.
+When focus, positioning, animation timing, pointer interaction, portal behavior, or other behavior depends on real-browser semantics that cannot be represented reliably in jsdom, use a browser test instead of relying only on a lightweight unit test.
 
 ## Change Discipline
-
-Keep changes focused. Do not bundle unrelated fixes, broad refactors, or documentation rewrites into a component change. If you discover a separate issue, report it or handle it in a separate change.
 
 Before adding new API surface, compare nearby components and choose the smallest API that preserves consistency. Before changing behavior, identify the current public contract, the intended new contract, and the docs or tests that prove the difference.
 

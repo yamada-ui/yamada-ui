@@ -354,7 +354,7 @@ export const useDatePicker = <
               dayjs(defaultInputValue).toDate(),
               inputFormat,
             ) as MaybeInputValue<Range>
-          else return defaultInputValue as MaybeInputValue<Range>
+          else return defaultInputValue
         }
       else if (isDate(value))
         return dateToString(value) as MaybeInputValue<Range>

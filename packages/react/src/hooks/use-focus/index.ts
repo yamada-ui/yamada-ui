@@ -51,7 +51,7 @@ export const useFocusOnShow = <Y extends HTMLElement>(
     const target = getTarget()
 
     if (!target || !trulyShouldFocus || focused.current) return
-    if (target.contains(document.activeElement as HTMLElement)) return
+    if (target.contains(document.activeElement)) return
 
     const focusTarget = getFocusTarget()
 

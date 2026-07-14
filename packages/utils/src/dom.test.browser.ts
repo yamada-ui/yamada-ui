@@ -199,7 +199,7 @@ describe("DOM", () => {
         width: 0,
         x: 10,
         y: 0,
-      } as DOMRect)
+      })
 
       const unlock = scrollLock(document)
       expect(document.body.hasAttribute("data-scroll-lock")).toBeTruthy()

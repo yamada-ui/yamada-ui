@@ -107,7 +107,7 @@ export function extractFlatObject<Y extends Dict, M>(
     )
   }
 
-  return Object.fromEntries(flatMap(obj)) as { [key: string]: M }
+  return Object.fromEntries(flatMap(obj))
 }
 
 export interface MergeOptions {

@@ -23,12 +23,12 @@ describe("animation", () => {
 
   test("handles object values", () => {
     const options = createMockOptions()
-    options.css = (() => () => ({
+    options.css = () => () => ({
       animationDuration: "1s",
       animationName: "fadeIn",
       animationTimingFunction: "ease-in",
       delay: "1s",
-    })) as any
+    })
 
     const result = animation(
       {
@@ -71,10 +71,10 @@ describe("keyframes", () => {
 
   test("handles object values", () => {
     const options = createMockOptions()
-    options.css = (() => () => ({
+    options.css = () => () => ({
       from: { opacity: 0 },
       to: { opacity: 1 },
-    })) as any
+    })
 
     const result = keyframes(
       { from: { opacity: 0 }, to: { opacity: 1 } },

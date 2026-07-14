@@ -190,7 +190,7 @@ export const useSlider = <Y extends [number, number] | number = number>(
       } else {
         currentIndex.current = 0
 
-        onChangeStart?.(value as Y)
+        onChangeStart?.(value)
       }
 
       onChange(currentIndex.current, panValue)

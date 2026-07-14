@@ -70,7 +70,7 @@ function createMockConfig(overrides: Partial<Config> = {}): Config {
       },
     },
     ...overrides,
-  } as Config
+  }
 }
 
 describe("transformContent", () => {
@@ -342,7 +342,7 @@ describe("fetchRegistries", () => {
   test("should fetch dependencies when config has dependencies enabled", async () => {
     const config = createMockConfig({
       components: { dependencies: true },
-    } as Partial<Config>)
+    })
 
     mockFetch.mockImplementation((url: string) => {
       if (url.includes("button.json"))

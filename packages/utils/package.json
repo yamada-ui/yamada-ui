@@ -59,7 +59,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "color2k": "^2.0.3"
+    "color2k": "^2.0.4"
   },
   "devDependencies": {
     "@vitest/browser": "catalog:",

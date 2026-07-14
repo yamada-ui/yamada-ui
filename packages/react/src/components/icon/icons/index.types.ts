@@ -1134,6 +1134,7 @@ export type IconNames =
   | "PanelTopDashedIcon"
   | "PanelTopIcon"
   | "PanelTopOpenIcon"
+  | "PaperBagIcon"
   | "PaperclipIcon"
   | "ParasolIcon"
   | "ParenthesesIcon"

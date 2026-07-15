@@ -3384,8 +3384,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-rule-break": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-rule-break` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-break"
         }
@@ -3414,8 +3415,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-rule-inset": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-rule-inset` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset"
         }
@@ -3426,8 +3428,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-rule-inset-cap": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-rule-inset-cap` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap"
         }
@@ -3438,8 +3441,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-rule-inset-cap-end": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-rule-inset-cap-end` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-end"
         }
@@ -3450,8 +3454,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-rule-inset-cap-start": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-rule-inset-cap-start` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-start"
         }
@@ -3462,8 +3467,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-rule-inset-end": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-rule-inset-end` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-end"
         }
@@ -3474,8 +3480,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-rule-inset-junction": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-rule-inset-junction` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction"
         }
@@ -3486,8 +3493,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-rule-inset-junction-end": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-rule-inset-junction-end` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction-end"
         }
@@ -3498,8 +3506,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-rule-inset-junction-start": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-rule-inset-junction-start` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction-start"
         }
@@ -3510,8 +3519,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-rule-inset-start": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-rule-inset-start` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-start"
         }
@@ -3539,8 +3549,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-rule-visibility-items": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-rule-visibility-items` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-visibility-items"
         }
@@ -4075,7 +4086,8 @@
       "docs": {
         "counter-set": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-06-11",
             "newly_available_date": "2023-12-11"
           },
           "deprecated": false,
@@ -4201,7 +4213,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.FieldSizing>",
       "docs": {
         "field-sizing": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-06-16"
+          },
           "deprecated": false,
           "description": "The <code>field-sizing</code> CSS property allows form controls such as <code>&#x3C;textarea></code> to be sized based on their content.",
           "experimental": false,
@@ -6104,7 +6119,8 @@
       "docs": {
         "mask": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-06-07",
             "newly_available_date": "2023-12-07"
           },
           "deprecated": false,
@@ -6198,7 +6214,8 @@
       "docs": {
         "mask-clip": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-06-07",
             "newly_available_date": "2023-12-07"
           },
           "deprecated": false,
@@ -6214,7 +6231,8 @@
       "docs": {
         "mask-composite": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-06-07",
             "newly_available_date": "2023-12-07"
           },
           "deprecated": false,
@@ -6231,7 +6249,8 @@
       "docs": {
         "mask-image": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-06-07",
             "newly_available_date": "2023-12-07"
           },
           "deprecated": false,
@@ -6247,7 +6266,8 @@
       "docs": {
         "mask-mode": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-06-07",
             "newly_available_date": "2023-12-07"
           },
           "deprecated": false,
@@ -6263,7 +6283,8 @@
       "docs": {
         "mask-origin": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-06-07",
             "newly_available_date": "2023-12-07"
           },
           "deprecated": false,
@@ -6279,7 +6300,8 @@
       "docs": {
         "mask-position": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-06-07",
             "newly_available_date": "2023-12-07"
           },
           "deprecated": false,
@@ -6295,7 +6317,8 @@
       "docs": {
         "mask-repeat": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-06-07",
             "newly_available_date": "2023-12-07"
           },
           "deprecated": false,
@@ -6311,7 +6334,8 @@
       "docs": {
         "mask-size": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-06-07",
             "newly_available_date": "2023-12-07"
           },
           "deprecated": false,
@@ -7665,8 +7689,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule"
         }
@@ -7677,8 +7702,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-break": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-break` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-break"
         }
@@ -7689,8 +7715,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-color": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-color` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-color"
         }
@@ -7701,8 +7728,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-inset": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-inset` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset"
         }
@@ -7713,8 +7741,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-inset-cap": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-inset-cap` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-cap"
         }
@@ -7725,8 +7754,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-inset-cap-end": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-inset-cap-end` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-cap-end"
         }
@@ -7737,8 +7767,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-inset-cap-start": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-inset-cap-start` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-start"
         }
@@ -7749,8 +7780,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-inset-end": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-inset-end` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-end"
         }
@@ -7761,8 +7793,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-inset-junction": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-inset-junction` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction"
         }
@@ -7773,8 +7806,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-inset-junction-end": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-inset-junction-end` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction-end"
         }
@@ -7785,8 +7819,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-inset-junction-start": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-inset-junction-start` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction-start"
         }
@@ -7797,8 +7832,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-inset-start": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-inset-start` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-start"
         }
@@ -7809,8 +7845,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-style": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-style` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-style"
         }
@@ -7821,8 +7858,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-visibility-items": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-visibility-items` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-visibility-items"
         }
@@ -7833,8 +7871,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "row-rule-width": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `row-rule-width` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-width"
         }
@@ -7890,8 +7929,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "rule": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `rule` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule"
         }
@@ -7902,8 +7942,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "rule-break": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `rule-break` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-break"
         }
@@ -7914,8 +7955,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "rule-color": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `rule-color` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-color"
         }
@@ -7926,8 +7968,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "rule-inset": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `rule-inset` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset"
         }
@@ -7938,8 +7981,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "rule-inset-cap": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `rule-inset-cap` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-cap"
         }
@@ -7950,8 +7994,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "rule-inset-end": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `rule-inset-end` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-end"
         }
@@ -7962,8 +8007,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "rule-inset-junction": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `rule-inset-junction` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-junction"
         }
@@ -7974,8 +8020,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "rule-inset-start": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `rule-inset-start` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-start"
         }
@@ -7986,8 +8033,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "rule-overlap": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `rule-overlap` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-overlap"
         }
@@ -7998,8 +8046,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "rule-style": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `rule-style` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-style"
         }
@@ -8010,8 +8059,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "rule-visibility-items": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `rule-visibility-items` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-visibility-items"
         }
@@ -8022,8 +8072,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "rule-width": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `rule-width` property.",
+          "description": "The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-gaps-1/#propdef-rule-width"
         }

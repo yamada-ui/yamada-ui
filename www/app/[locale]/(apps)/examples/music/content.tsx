@@ -146,7 +146,7 @@ function ContentHeader({ mode, setMode, ...rest }: ContentHeaderProps) {
         ]}
         value={mode}
         w={{ base: "auto", sm: "full" }}
-        onChange={(value) => setMode(value as ContentMode)}
+        onChange={(value) => setMode(value)}
       />
 
       <Spacer display={{ base: "block", sm: "none" }} />

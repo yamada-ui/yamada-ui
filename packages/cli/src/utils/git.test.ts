@@ -17,7 +17,7 @@ const { execFileAsync } = vi.mocked(await import("./fs"))
 
 describe("isInGitRepo", () => {
   test("should return true when in git repo", async () => {
-    execFileAsync.mockResolvedValueOnce({ stderr: "", stdout: "true" } as any)
+    execFileAsync.mockResolvedValueOnce({ stderr: "", stdout: "true" })
     await expect(isInGitRepo()).resolves.toBeTruthy()
   })
 
@@ -40,31 +40,31 @@ describe("initGit", () => {
 
   test("should return false when already in git repo", async () => {
     execFileAsync
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
-      .mockResolvedValueOnce({ stderr: "", stdout: "true" } as any)
+      .mockResolvedValueOnce({ stderr: "", stdout: "" })
+      .mockResolvedValueOnce({ stderr: "", stdout: "true" })
     await expect(initGit(tempDir)).resolves.toBeFalsy()
   })
 
   test("should init git and return true", async () => {
     execFileAsync
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
+      .mockResolvedValueOnce({ stderr: "", stdout: "" })
       .mockRejectedValueOnce(new Error("not a git repo"))
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
-      .mockResolvedValueOnce({ stderr: "", stdout: "main" } as any)
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
+      .mockResolvedValueOnce({ stderr: "", stdout: "" })
+      .mockResolvedValueOnce({ stderr: "", stdout: "main" })
+      .mockResolvedValueOnce({ stderr: "", stdout: "" })
+      .mockResolvedValueOnce({ stderr: "", stdout: "" })
     await expect(initGit(tempDir)).resolves.toBeTruthy()
   })
 
   test("should checkout main when no default branch", async () => {
     execFileAsync
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
+      .mockResolvedValueOnce({ stderr: "", stdout: "" })
       .mockRejectedValueOnce(new Error("not a git repo"))
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
+      .mockResolvedValueOnce({ stderr: "", stdout: "" })
       .mockRejectedValueOnce(new Error("no default branch"))
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
+      .mockResolvedValueOnce({ stderr: "", stdout: "" })
+      .mockResolvedValueOnce({ stderr: "", stdout: "" })
+      .mockResolvedValueOnce({ stderr: "", stdout: "" })
     await expect(initGit(tempDir)).resolves.toBeTruthy()
   })
 
@@ -75,10 +75,10 @@ describe("initGit", () => {
 
   test("should cleanup .git on error after init", async () => {
     execFileAsync
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
+      .mockResolvedValueOnce({ stderr: "", stdout: "" })
       .mockRejectedValueOnce(new Error("not a git repo"))
-      .mockResolvedValueOnce({ stderr: "", stdout: "" } as any)
-      .mockResolvedValueOnce({ stderr: "", stdout: "main" } as any)
+      .mockResolvedValueOnce({ stderr: "", stdout: "" })
+      .mockResolvedValueOnce({ stderr: "", stdout: "main" })
       .mockRejectedValueOnce(new Error("add failed"))
     await expect(initGit(tempDir)).resolves.toBeFalsy()
   })

@@ -302,7 +302,7 @@ export function isFocusableElement(el: HTMLElement | null): el is HTMLElement {
 
 export function isTabbableElement(el: HTMLElement | null): el is HTMLElement {
   if (el != null && el.tabIndex > 0) return true
-  return isFocusableElement(el) && !hasNegativeTabIndex(el as Element)
+  return isFocusableElement(el) && !hasNegativeTabIndex(el)
 }
 
 export function contains(
@@ -367,7 +367,7 @@ export function isTruthyDataAttr(condition: any): boolean {
 }
 
 export function dataAttr(condition: any): string | undefined {
-  return (condition ? "" : undefined) as string | undefined
+  return condition ? "" : undefined
 }
 
 type Booleanish = "false" | "true" | boolean

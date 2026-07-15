@@ -87,7 +87,7 @@ function getStyle<Y extends boolean = false>(
               style = {
                 [`--${rootName}-${name}-${modifier}`]: `"${value}"`,
                 ...style,
-              } as CSSObject
+              }
 
             return [name, getSelectorStyle(selectors, style ?? {})]
           } else {
@@ -95,7 +95,7 @@ function getStyle<Y extends boolean = false>(
               style = {
                 [`--${rootName}-${name}-${modifier}`]: `"${value}"`,
                 ...style,
-              } as CSSObject
+              }
 
             return [name, style]
           }
@@ -290,13 +290,11 @@ export function getSlotClassName<Y extends string>(
     return cx(bem(className, element), bem(className, element, modifier))
   } else if (isObject(slot)) {
     const slotArray = toArray(slot.slot)
-    const [element, modifier] = slotArray.map((value) =>
-      toKebabCase(value as string),
-    )
+    const [element, modifier] = slotArray.map((value) => toKebabCase(value))
 
     return cx(bem(className, element), bem(className, element, modifier))
   } else {
-    return bem(className, toKebabCase(slot as string))
+    return bem(className, toKebabCase(slot))
   }
 }
 
@@ -526,8 +524,7 @@ function useStyle<
 
     if (className) props.className = className
 
-    if (!isEqualProps(propsRef.current, props))
-      propsRef.current = props as unknown as WithoutThemeProps<Y, M, D>
+    if (!isEqualProps(propsRef.current, props)) propsRef.current = props
   }
 
   return [

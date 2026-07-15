@@ -46,7 +46,10 @@ export const createNoRestrictedImportConfig = (
   defineConfig({
     overrides: (args.length
       ? args
-      : [[sharedFiles.map((file) => `src/${file}`)]]
+      : ([[sharedFiles.map((file) => `src/${file}`)]] as [
+          string[],
+          ...string[],
+        ][])
     ).map(([files, ...patterns]) => ({
       files,
       rules: {

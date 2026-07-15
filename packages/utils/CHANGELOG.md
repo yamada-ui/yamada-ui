@@ -1,5 +1,13 @@
 # @yamada-ui/utils
 
+## 2.1.5
+
+### Patch Changes
+
+- [#7746](https://github.com/yamada-ui/yamada-ui/pull/7746) [`77354be`](https://github.com/yamada-ui/yamada-ui/commit/77354bec8d9495b40d550b7a84c27fb36a7e239b) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7747](https://github.com/yamada-ui/yamada-ui/pull/7747) [`29c1dc4`](https://github.com/yamada-ui/yamada-ui/commit/29c1dc44353e6ad9fee2da36c8cddc5fd9df5315) Thanks [@dependabot](https://github.com/apps/dependabot)! - Remove unnecessary type assertions.
+
 ## 2.1.4
 
 ### Patch Changes

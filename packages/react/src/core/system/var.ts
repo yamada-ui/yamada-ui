@@ -96,6 +96,7 @@ export function createVars(
   prefix: string = DEFAULT_VAR_PREFIX,
   theme: UsageTheme,
   breakpoints: Breakpoints,
+  rootNode?: System["rootNode"],
 ) {
   return function (tokens: VariableTokens) {
     const { getQuery, isResponsive } = breakpoints
@@ -115,7 +116,7 @@ export function createVars(
       cssVars: Dict = {},
       prevTokens?: VariableTokens,
     ): { cssMap: CSSMap; cssVars: Dict } {
-      const system: System = { ...defaultSystem, cssMap }
+      const system: System = { ...defaultSystem, cssMap, rootNode }
       const options = { css, system, theme }
 
       function getRelatedReference(
@@ -194,13 +195,13 @@ export function createVars(
       function createKeyframesVar(token: string, value: any) {
         return function (semantic: boolean) {
           if (!semantic) {
-            return injectKeyframes(css(system, theme)(value))
+            return injectKeyframes(css(system, theme)(value), rootNode)
           } else {
             const [variable, reference] = getRelatedReference(token, value)
 
             return variable
               ? reference
-              : injectKeyframes(css(system, theme)(value))
+              : injectKeyframes(css(system, theme)(value), rootNode)
           }
         }
       }

@@ -122,6 +122,19 @@ describe("createSystem", () => {
 })
 
 describe("useSystem", () => {
+  test("uses the shadow root for keyframe styles", () => {
+    const host = document.createElement("div")
+    const shadowRoot = host.attachShadow({ mode: "open" })
+    const { result } = renderHook(() => useSystem(), {
+      providerProps: { rootNode: shadowRoot },
+    })
+
+    expect(result.current.rootNode).toBe(shadowRoot)
+    expect(
+      shadowRoot.querySelector('style[data-emotion="css"]')?.parentNode,
+    ).toBe(shadowRoot)
+  })
+
   test("returns system from provider", () => {
     const { result } = renderHook(() => useSystem())
     expect(result.current.breakpoints).toBeDefined()

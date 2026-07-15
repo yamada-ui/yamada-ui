@@ -77,7 +77,7 @@ export const attributes = {
    * Styles for when `data-mode` is applied to any parent of this component or element.
    */
   _dark:
-    ".dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]",
+    ":host([data-mode=dark]) &, .dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]",
   /**
    * The CSS `&:is([data-end], [data-group-end])` attribute selector.
    */
@@ -122,7 +122,7 @@ export const attributes = {
    * Styles for when `data-mode` is applied to any parent of this component or element.
    */
   _light:
-    ".light &:not([data-mode]), [data-mode=light] &:not([data-mode]), &[data-mode=light]",
+    ":host([data-mode=light]) &, .light &:not([data-mode]), [data-mode=light] &:not([data-mode]), &[data-mode=light]",
   /**
    * The CSS `&[data-loaded]` attribute selector.
    */

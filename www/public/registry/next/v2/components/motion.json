@@ -2,7 +2,7 @@
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": [],
-    "externals": ["motion@^12.38.0"],
+    "externals": ["motion@^12.42.2"],
     "hooks": [],
     "providers": []
   },

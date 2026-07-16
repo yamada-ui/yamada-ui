@@ -1,0 +1,1 @@
+import{i as e}from"./preload-helper-B45gAKPr.js";import{B as t,n,t as r}from"./core-CBrv4WaS.js";var i,a=e((()=>{r(),i=t({})})),o,s,c,l,u=e((()=>{r(),a(),{PropsContext:o,usePropsContext:s,withContext:c}=n(`text`,i),l=c(`p`)(void 0,({align:e,casing:t,decoration:n,...r})=>({textAlign:e,textDecoration:n,textTransform:t,...r}))}));export{u as n,a as r,l as t};

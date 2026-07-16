@@ -11,7 +11,7 @@ import {
   useMemo,
   useState,
 } from "react"
-import { isEmptyObject, noop } from "../../utils"
+import { isDocument, isEmptyObject, noop } from "../../utils"
 import { COLOR_MODE_STORAGE_KEY } from "../constant"
 import { useEnvironment } from "./environment-provider"
 import { createStorageManager } from "./storage-manager"
@@ -85,7 +85,6 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
     [cookie, defaultColorMode, storage, storageKey],
   )
   const environment = useEnvironment()
-  const { getDocument } = environment
   const [internalColorMode, setInternalColorMode] =
     useState<ColorModeWithSystem>(storageManager.get())
   const { getSystemColorMode, systemColorMode } = useSystemColorMode({
@@ -104,32 +103,36 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
 
   const setDataset = useCallback(
     (colorMode: ColorMode) => {
-      const doc = getDocument()
+      const root = environment.getRootElement()
 
-      if (!doc) return
+      if (!root) return
 
       const cleanup = disableTransitionOnChange
         ? getPreventTransition(environment)
         : undefined
 
-      doc.documentElement.dataset.mode = colorMode
-      doc.documentElement.style.colorScheme = colorMode
+      root.dataset.mode = colorMode
+      root.style.colorScheme = colorMode
 
       cleanup?.()
     },
-    [disableTransitionOnChange, environment, getDocument],
+    [disableTransitionOnChange, environment],
   )
 
   const setClassName = useCallback(
     (isDark: boolean) => {
-      const doc = getDocument()
+      const doc = environment.getDocument()
+      const rootNode = environment.getRootNode()
+      const root = environment.getRootElement()
 
-      if (!doc) return
+      if (!doc || !root) return
 
-      doc.body.classList.add(isDark ? "dark" : "light")
-      doc.body.classList.remove(isDark ? "light" : "dark")
+      const target = isDocument(rootNode) ? doc.body : root
+
+      target.classList.add(isDark ? "dark" : "light")
+      target.classList.remove(isDark ? "light" : "dark")
     },
-    [getDocument],
+    [environment],
   )
 
   const changeColorMode = useCallback(

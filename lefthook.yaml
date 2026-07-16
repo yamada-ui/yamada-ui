@@ -68,8 +68,8 @@ pre-commit:
               pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix --no-error-on-unmatched-pattern
             stage_fixed: true
 
-          - name: vite
-            root: playgrounds/vite/
+          - name: shadow-dom
+            root: playgrounds/shadow-dom/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
               pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix --no-error-on-unmatched-pattern
@@ -84,6 +84,13 @@ pre-commit:
 
           - name: tanstack-start
             root: playgrounds/tanstack/start/
+            glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
+            run: |
+              pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix --no-error-on-unmatched-pattern
+            stage_fixed: true
+
+          - name: vite
+            root: playgrounds/vite/
             glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
             run: |
               pnpm oxlint {staged_files} --type-check --max-warnings=0 --fix --no-error-on-unmatched-pattern

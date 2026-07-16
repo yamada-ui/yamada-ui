@@ -16,6 +16,7 @@ describe("EnvironmentProvider", () => {
       withProvider: false,
     })
     expect(result.current.getDocument()).toBe(document)
+    expect(result.current.getRootElement()).toBe(document.documentElement)
     expect(result.current.getWindow()).toBe(window)
     expect(result.current.getRootNode()).toBeDefined()
   })
@@ -28,6 +29,7 @@ describe("EnvironmentProvider", () => {
         <EnvironmentProvider value={customNode}>{children}</EnvironmentProvider>
       ),
     })
+    expect(result.current.getRootElement()).toBe(customNode)
     expect(result.current.getRootNode()).toBe(customNode)
   })
 
@@ -41,6 +43,7 @@ describe("EnvironmentProvider", () => {
         </EnvironmentProvider>
       ),
     })
+    expect(result.current.getRootElement()).toBe(customNode)
     expect(result.current.getRootNode()).toBe(customNode)
   })
 })

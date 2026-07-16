@@ -663,6 +663,34 @@ importers:
         specifier: 'catalog:'
         version: 8.1.0(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0)
 
+  playgrounds/shadow-dom:
+    dependencies:
+      '@emotion/cache':
+        specifier: ^11.14.0
+        version: 11.14.0
+      '@yamada-ui/react':
+        specifier: workspace:*
+        version: link:../../packages/react
+      react:
+        specifier: 'catalog:'
+        version: 19.2.7
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.7(react@19.2.7)
+      react-shadow:
+        specifier: ^20.6.0
+        version: 20.6.0(prop-types@15.8.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+    devDependencies:
+      '@vitejs/plugin-react':
+        specifier: 'catalog:'
+        version: 6.0.3(vite@8.1.0(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
+      '@yamada-ui/workspace':
+        specifier: workspace:*
+        version: link:../../packages/workspace
+      vite:
+        specifier: 'catalog:'
+        version: 8.1.0(@types/node@25.9.4)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0)
+
   playgrounds/tanstack/router:
     dependencies:
       '@tanstack/react-router':
@@ -1658,7 +1686,7 @@ packages:
     resolution: {integrity: sha512-pxHCpT2ex+0q+HH91/zsdHkw/lXd468DIN2zvfvLtPKLLMo6gQj7oLObq8PhkrxOZb/gGCq03S3Z7PDhS8pduQ==}
 
   '@emotion/cache@11.14.0':
-    resolution: {integrity: sha512-L/B1lc/TViYk4DcpGxtAVbx0ZyiKM5ktoIyafGkH6zg/tj+mA+NE//aPYKG0k8kCHSHVJrpLpcAlOBEXQ3SavA==}
+    resolution: {integrity: sha512-L/B1lc/TViYk4DcpGxtAVbx0ZyiKM5ktoIyafGkH6zg/tj+mA+NE//aPYKG0k8kCHSHVJrpLpcAlOBEXQ3SavA==, tarball: https://registry.npmjs.org/@emotion/cache/-/cache-11.14.0.tgz}
 
   '@emotion/css@11.13.5':
     resolution: {integrity: sha512-wQdD0Xhkn3Qy2VNcIzbLP9MR8TafI0MJb7BEAXKp+w4+XqErksWR4OXomuDzPsN4InLdGhVe6EYcn2ZIUCpB8w==}
@@ -1670,7 +1698,7 @@ packages:
     resolution: {integrity: sha512-QgD4fyscGcbbKwJmqNvUMSE02OsHUa+lAWKdEUIJKgqe5IwRSKd7+KhibEWdaKwgjLj0DRSHA9biAIqGBk05lw==}
 
   '@emotion/memoize@0.9.0':
-    resolution: {integrity: sha512-30FAj7/EoJ5mwVPOWhAyCX+FPfMDrVecJAM+Iw9NRoSl4BBAQeqj4cApHHUXOVvIPgLVDsCFoz/hGD+5QQD1GQ==}
+    resolution: {integrity: sha512-30FAj7/EoJ5mwVPOWhAyCX+FPfMDrVecJAM+Iw9NRoSl4BBAQeqj4cApHHUXOVvIPgLVDsCFoz/hGD+5QQD1GQ==, tarball: https://registry.npmjs.org/@emotion/memoize/-/memoize-0.9.0.tgz}
 
   '@emotion/react@11.14.0':
     resolution: {integrity: sha512-O000MLDBDdk/EohJPFUqvnp4qnHeYkVP5B0xEG0D/L7cOKP9kefu2DXn8dj74cQfsEzUqh+sr1RzFqiL1o+PpA==}
@@ -6152,6 +6180,9 @@ packages:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
 
+  humps@2.0.1:
+    resolution: {integrity: sha512-E0eIbrFWUhwfXJmsbdjRQFQPrl5pTEoKlz163j1mTqqUnU9PgR4AgB8AIITzuB3vLBdxZXyZ9TDIrwB2OASz4g==, tarball: https://registry.npmjs.org/humps/-/humps-2.0.1.tgz}
+
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
     engines: {node: '>=0.10.0'}
@@ -7820,6 +7851,13 @@ packages:
       react-dom:
         optional: true
 
+  react-shadow@20.6.0:
+    resolution: {integrity: sha512-kY+w4OMNZ8Nj9YI9eiTgvvJ/wYO7XyX1D/LYhvwQZv5vw69iCiDtGB0BX/2U8gLUuZAMN+x/7rHJKqHh8wXFHQ==, tarball: https://registry.npmjs.org/react-shadow/-/react-shadow-20.6.0.tgz}
+    peerDependencies:
+      prop-types: ^15.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   react-style-singleton@2.2.3:
     resolution: {integrity: sha512-b6jSvxvVnyptAiLjbkWLE/lOnR4lfTtDAl+eUC7RZy+QQWc6wRzIV2CE6xBuMmDxc2qIihtDCZD5NPOFl7fRBQ==}
     engines: {node: '>=10'}
@@ -8362,7 +8400,7 @@ packages:
         optional: true
 
   stylis@4.2.0:
-    resolution: {integrity: sha512-Orov6g6BB1sDfYgzWfTHDOxamtX1bE/zo104Dh9e6fqJ3PooipYyfJ0pUmrZO2wAvO8YbEyeFrkV91XTsGMSrw==}
+    resolution: {integrity: sha512-Orov6g6BB1sDfYgzWfTHDOxamtX1bE/zo104Dh9e6fqJ3PooipYyfJ0pUmrZO2wAvO8YbEyeFrkV91XTsGMSrw==, tarball: https://registry.npmjs.org/stylis/-/stylis-4.2.0.tgz}
 
   sucrase@3.35.1:
     resolution: {integrity: sha512-DhuTmvZWux4H1UOnWMB3sk0sbaCVOoQZjv8u1rDoTV0HTdGem9hkAZtl4JZy8P2z4Bg0nT+YMeOFyVr4zcG5Tw==}
@@ -8802,7 +8840,7 @@ packages:
     hasBin: true
 
   vite@7.3.6:
-    resolution: {integrity: sha512-4XP60spRGjSZFf1qYH+dJIkK2znL3zQfl9KkOV9MkkRR/3Dls0dxaBsQPTloEc5BLXWPL9vsOxopxyKoMmDueg==}
+    resolution: {integrity: sha512-4XP60spRGjSZFf1qYH+dJIkK2znL3zQfl9KkOV9MkkRR/3Dls0dxaBsQPTloEc5BLXWPL9vsOxopxyKoMmDueg==, tarball: https://registry.npmjs.org/vite/-/vite-7.3.6.tgz}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -14483,6 +14521,8 @@ snapshots:
 
   human-signals@2.1.0: {}
 
+  humps@2.0.1: {}
+
   iconv-lite@0.4.24:
     dependencies:
       safer-buffer: 2.1.2
@@ -16609,6 +16649,13 @@ snapshots:
       react: 19.2.7
       set-cookie-parser: 2.7.2
     optionalDependencies:
+      react-dom: 19.2.7(react@19.2.7)
+
+  react-shadow@20.6.0(prop-types@15.8.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+    dependencies:
+      humps: 2.0.1
+      prop-types: 15.8.1
+      react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
 
   react-style-singleton@2.2.3(@types/react@19.2.17)(react@19.2.7):

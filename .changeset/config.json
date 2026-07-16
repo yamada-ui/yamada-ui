@@ -23,6 +23,7 @@
     "@playgrounds/next-app",
     "@playgrounds/next-pages",
     "@playgrounds/react-router-framework",
+    "@playgrounds/shadow-dom",
     "@playgrounds/tanstack-router",
     "@playgrounds/tanstack-start",
     "@playgrounds/vite"

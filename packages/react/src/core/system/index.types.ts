@@ -240,6 +240,12 @@ export interface ThemeConfig {
      * @default 'ui'
      */
     varPrefix?: string
+    /**
+     * The root selector to attach to variable names when converting each token of the theme to CSS variable names.
+     *
+     * @default ':host, :root, [data-mode]'
+     */
+    varRoot?: string
   }
   /**
    * The default color mode.
@@ -710,6 +716,7 @@ export interface System {
   cssVars: Dict
   layers: Layers
   utils: SystemUtils
+  rootNode?: Document | Node | ShadowRoot
 }
 
 export type StyledTheme<Y extends UsageTheme = Theme> = Y & {

@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/react": minor
+"@yamada-ui/react": patch
 ---
 
 Export store utility types.

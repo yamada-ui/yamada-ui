@@ -1,47 +1,71 @@
 {
   "$schema": "https://raw.githubusercontent.com/magi-ai/opencode-magi/main/schema.json",
   "language": "en",
-  "github": {
-    "owner": "yamada-ui",
-    "repo": "yamada-ui"
-  },
-  "review": {
-    "agents": [
-      {
+  "mode": "multi",
+  "github": { "owner": "yamada-ui", "repo": "yamada-ui" },
+  "agents": {
+    "refs": {
+      "melchior": {
         "id": "Melchior",
         "account": "melchior-magi",
-        "model": "openai/gpt-5.5"
+        "model": [
+          {
+            "id": "opencode-go/minimax-m3",
+            "variant": "high"
+          }
+        ]
       },
-      {
+      "balthasar": {
         "id": "Balthasar",
         "account": "balthasar-magi",
-        "model": "opencode/deepseek-v4-flash-free"
+        "model": [
+          {
+            "id": "opencode-go/mimo-v2.5-pro"
+          }
+        ]
       },
-      {
+      "caspar": {
         "id": "Caspar",
         "account": "caspar-magi",
-        "model": "opencode/qwen3.6-plus-free"
+        "model": [
+          {
+            "id": "opencode-go/qwen3.7-plus",
+            "variant": "high"
+          }
+        ]
+      },
+      "hirotomoyamada": {
+        "account": "hirotomoyamada",
+        "model": [
+          {
+            "id": "openai/gpt-5.6-terra-fast",
+            "variant": "high"
+          }
+        ],
+        "author": {
+          "name": "hirotomoyamada",
+          "email": "hirotomo.yamada@avap.co.jp"
+        }
       }
-    ],
-    "merge": {
-      "queue": true,
-      "approvalPolicy": "unanimous"
     },
+    "permissions": { "webfetch": "allow", "websearch": "allow" }
+  },
+  "review": {
+    "reviewers": [
+      { "ref": "melchior" },
+      { "ref": "balthasar" },
+      { "ref": "caspar" }
+    ],
+    "merge": { "queue": true, "approvalPolicy": "unanimous" },
     "prompts": {
       "reviewGuidelines": ".agents/references/pr-review-guidelines.md"
     }
   },
   "merge": {
-    "editor": {
-      "account": "hirotomoyamada",
-      "model": "openai/gpt-5.5",
-      "author": {
-        "name": "hirotomoyamada",
-        "email": "hirotomo.yamada@avap.co.jp"
-      }
-    },
+    "editor": { "ref": "hirotomoyamada" },
     "prompts": {
-      "editGuidelines": ".agents/references/edit-guidelines.md"
-    }
+      "editGuidelines": ".agents/references/pr-edit-guidelines.md"
+    },
+    "automation": { "conflict": true, "merge": false }
   }
 }

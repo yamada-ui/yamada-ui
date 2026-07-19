@@ -9,7 +9,7 @@ catalog:
   "@lucide/lab": ^0.1.2
   "@tanstack/react-router": ^1.170.17
   "@types/yamljs": ^0.2.34
-  "@typescript/native-preview": 7.0.0-dev.20260706.1
+  "@typescript/native-preview": 7.0.0-dev.20260707.2
   "@vitest/browser": ^4.1.9
   "@vitest/browser-playwright": ^4.1.9
   "@vitest/ui": ^4.1.9

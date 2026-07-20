@@ -1,0 +1,9 @@
+import{c as e,i as t}from"./preload-helper-B45gAKPr.js";import{t as n}from"./react-CymAsZIc.js";import{$t as r,n as i,pt as a,t as o}from"./core-CBrv4WaS.js";import{t as s}from"./jsx-runtime-BBQGix-2.js";import{Gu as c,Sa as l,Wu as u,xa as d}from"./iframe-BI2Pxu8D.js";var f,p,m,h,g,_=t((()=>{f=e(n(),1),o(),a(),c(),{PropsContext:p,usePropsContext:m,withContext:h}=i(`aspect-ratio`,u),g=h(`div`)(void 0,({children:e,ratio:t=4/3,...n})=>{let i=f.Children.only(e);return{...n,children:i,_before:{display:`block`,h:0,pb:r(t,e=>`${1/e*100}%`)}}})})),v,y,b,x,S;t((()=>{d(),_(),v=s(),y={component:g,title:`Components / AspectRatio`},b=()=>(0,v.jsx)(g,{w:`md`,children:(0,v.jsx)(l,{src:`https://tohoentertainmentonline.com/img/godzillastore/top/bg.png`,alt:`シン・ゴジラ`})}),x=()=>(0,v.jsx)(g,{ratio:16/9,w:`full`,children:(0,v.jsx)(`iframe`,{src:`https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12974.591815632506!2d139.6932331!3d35.6117497!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b1a487a026f%3A0x16e7e351187c8216!2z5qCq5byP5Lya56S-IOOCouODkOODg-ODlw!5e0!3m2!1sja!2sjp!4v1674728815443!5m2!1sja!2sjp`,title:`map`})}),b.parameters={...b.parameters,docs:{...b.parameters?.docs,source:{originalSource:`() => {
+  return <AspectRatio w="md">
+      <Image src="https://tohoentertainmentonline.com/img/godzillastore/top/bg.png" alt="シン・ゴジラ" />
+    </AspectRatio>;
+}`,...b.parameters?.docs?.source}}},x.parameters={...x.parameters,docs:{...x.parameters?.docs,source:{originalSource:`() => {
+  return <AspectRatio ratio={16 / 9} w="full">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12974.591815632506!2d139.6932331!3d35.6117497!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b1a487a026f%3A0x16e7e351187c8216!2z5qCq5byP5Lya56S-IOOCouODkOODg-ODlw!5e0!3m2!1sja!2sjp!4v1674728815443!5m2!1sja!2sjp" title="map" />
+    </AspectRatio>;
+}`,...x.parameters?.docs?.source}}},S=[`Basic`,`Ratio`]}))();export{b as Basic,x as Ratio,S as __namedExportsOrder,y as default};

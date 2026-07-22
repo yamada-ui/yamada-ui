@@ -30,6 +30,7 @@ import { css } from "../css"
 import { useEnvironment } from "./environment-provider"
 import { createStorageManager } from "./storage-manager"
 import { useSystem } from "./system-provider"
+import { createVarRules } from "./var"
 
 export const getPreventTransition = (environment: Environment) => {
   const win = environment.getWindow()
@@ -170,18 +171,18 @@ export const GlobalStyles: FC = () => {
     return css(system, theme)(style)
   }, [system, theme])
 
-  const cssVars = useMemo(() => {
-    return {
-      [system.config.css?.varRoot ?? ":host, :root, [data-mode]"]:
-        system.cssVars,
-    }
+  const varRules = useMemo(() => {
+    return createVarRules(
+      system.config.css?.varRoot ?? ":host, :root",
+      system.cssVars,
+    )
   }, [system])
 
   return (
     <Global
       styles={[
         atRule,
-        wrap("tokens", cssVars),
+        wrap("tokens", varRules),
         wrap("reset", resetStyle),
         wrap("global", globalStyle),
       ]}

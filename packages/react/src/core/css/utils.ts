@@ -139,7 +139,7 @@ export function tokenToVar(system: System) {
 
 export function varToValue(system: System) {
   return function (variable: string): string {
-    const value = system.cssVars[variable]
+    const value = system.cssVars.light[variable]
 
     if (isCSSVar(value))
       return varToValue(system)(value.replace(/^var\(/, "").replace(/\)$/, ""))

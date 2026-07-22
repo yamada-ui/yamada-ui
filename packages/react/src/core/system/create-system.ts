@@ -106,7 +106,7 @@ export const defaultSystem: System = {
   breakpoints: createBreakpoints(),
   config: {},
   cssMap: {},
-  cssVars: {},
+  cssVars: { light: {}, dark: {} },
   layers: createLayers(),
   utils: { getClassName: bem },
 }
@@ -152,8 +152,6 @@ export function createSystem(
     const themeSchemeEntries = Object.entries<Dict>(theme.themeSchemes)
 
     for (const [themeScheme, nestedTheme] of themeSchemeEntries) {
-      const themeCondition = `[data-theme=${themeScheme}] &:not([data-theme]), &[data-theme=${themeScheme}]`
-
       const nestedPrimaryTokens = {
         ...createTokens(nestedTheme, "primary", shouldProcess),
         ...createColorSchemeTokens(theme, nestedTheme, shouldProcess),
@@ -175,7 +173,8 @@ export function createSystem(
         createVars(prefix, theme, breakpoints, rootNode)(nestedTertiaryTokens),
       )({ ...primaryTokens, ...secondaryTokens, ...tertiaryTokens })
 
-      cssVars[themeCondition] = nestedCSSVars
+      cssVars.themes ??= {}
+      cssVars.themes[themeScheme] = nestedCSSVars
     }
   }
 

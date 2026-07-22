@@ -1,9 +1,26 @@
 import type { Environment } from "./environment-provider"
 import type { ThemeScheme } from "./index.types"
-import { act, renderHook } from "#test"
+import { act, render, renderHook } from "#test"
+import { UIProvider } from "../../providers/ui-provider"
 import { getPreventTransition, useTheme } from "./theme-provider"
 
 describe("ThemeProvider", () => {
+  test("renders color mode variable rules", () => {
+    render(
+      <UIProvider>
+        <div />
+      </UIProvider>,
+      { withProvider: false },
+    )
+
+    const styles = [...document.head.querySelectorAll("style")]
+      .map((style) => style.textContent)
+      .join("")
+
+    expect(styles).toContain(":host([data-mode=dark])")
+    expect(styles).not.toContain(":host:host([data-mode=dark])")
+  })
+
   test("inserts transition styles into the shadow root", () => {
     const host = document.createElement("div")
     const shadowRoot = host.attachShadow({ mode: "open" })

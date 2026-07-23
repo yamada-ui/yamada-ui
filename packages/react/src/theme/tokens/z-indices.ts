@@ -18,4 +18,6 @@ export const zIndices = defineTokens.zIndices({
   vegeta: 9997,
   sonGoku: 9998,
   beerus: 9999,
+
+  infinity: 2147483647,
 })

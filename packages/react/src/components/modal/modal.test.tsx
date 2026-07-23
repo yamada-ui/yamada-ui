@@ -36,7 +36,7 @@ const TestComponent: FC<Modal.RootProps> = (props) => {
 
 describe("<Modal />", () => {
   test("passes a11y check", async () => {
-    await a11y(<TestComponent zIndex="modal" />)
+    await a11y(<TestComponent />)
   })
 
   test("sets aria attributes correctly", () => {

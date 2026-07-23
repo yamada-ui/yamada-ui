@@ -378,6 +378,7 @@ export type IconNames =
   | "CircleDotIcon"
   | "CircleEllipsisIcon"
   | "CircleEqualIcon"
+  | "CircleEuroSignIcon"
   | "CircleFadingArrowUpIcon"
   | "CircleFadingPlusIcon"
   | "CircleGaugeIcon"

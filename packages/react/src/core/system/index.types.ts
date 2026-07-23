@@ -243,7 +243,7 @@ export interface ThemeConfig {
     /**
      * The root selector to attach to variable names when converting each token of the theme to CSS variable names.
      *
-     * @default ':host, :root, [data-mode]'
+     * @default ':host, :root'
      */
     varRoot?: string
   }
@@ -664,6 +664,12 @@ export interface CSSMap {
   [key: string]: { ref: string; var: string }
 }
 
+export interface CSSVars {
+  dark: Dict
+  light: Dict
+  themes?: { [key: string]: { dark: Dict; light: Dict } }
+}
+
 export interface CustomTheme {}
 export type DefaultTheme = typeof theme
 
@@ -713,7 +719,7 @@ export interface System {
   breakpoints: Breakpoints
   config: ThemeConfig
   cssMap: CSSMap
-  cssVars: Dict
+  cssVars: CSSVars
   layers: Layers
   utils: SystemUtils
   rootNode?: Document | Node | ShadowRoot

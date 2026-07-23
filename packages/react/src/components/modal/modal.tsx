@@ -34,6 +34,7 @@ interface ComponentContext
 
 export interface ModalRootProps
   extends
+    Omit<HTMLStyledProps<"div">, "scrollBehavior" | "title">,
     ThemeProps<ModalStyle>,
     Omit<UseModalProps, "title">,
     Pick<

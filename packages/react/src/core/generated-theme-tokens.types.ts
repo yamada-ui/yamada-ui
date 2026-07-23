@@ -1068,6 +1068,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "freeza"
     | "ginyu"
     | "guldo"
+    | "infinity"
     | "jeice"
     | "kurillin"
     | "nappa"

@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 2.1.10
+
+### Patch Changes
+
+- [#7754](https://github.com/yamada-ui/yamada-ui/pull/7754) [`4a90898`](https://github.com/yamada-ui/yamada-ui/commit/4a90898d9de700f1c443547df8c4e25b236514e0) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
 ## 2.1.9
 
 ### Patch Changes

@@ -58,7 +58,7 @@ export const skeletonStyle = defineComponentStyle({
       animationName: "bg-position",
       animationTimingFunction: "ease-in-out",
       bgImage:
-        "linear-gradient(270deg, {start-color}, {end-color}, {end-color}, {start-color})",
+        "linear(270deg, {start-color}, {end-color}, {end-color}, {start-color})",
       bgSize: "400% 100%",
     },
   },

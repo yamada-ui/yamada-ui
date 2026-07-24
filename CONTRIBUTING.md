@@ -22,6 +22,10 @@ cd yamada-ui
 
 3. Setup all the dependencies and packages by running `pnpm install`. This command will install dependencies.
 
+### Dev Container (optional)
+
+An optional [Dev Container](https://containers.dev/) configuration is in `.devcontainer/` for editors that support it (Docker required). Local development without a container remains the default.
+
 ## Development
 
 To improve our development process, we have set up tools and systems. Yamada UI uses a monorepo structure and treats each component as an independent package.

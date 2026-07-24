@@ -6,6 +6,8 @@
 
 When it comes to open source, there are different ways you can contribute, all of which are valuable. Here are some guidelines that should help you as you prepare your contribution.
 
+If your change adds or updates components, hooks, style APIs, or theme behavior, also read the [design principles](./DESIGN.md).
+
 ## Setup the Project
 
 The following steps will get you up and running to contribute to Yamada UI:

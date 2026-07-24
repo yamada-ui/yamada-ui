@@ -38,7 +38,7 @@ Please support this project with you or your organization. Your logo will appear
 
 ## Contributing
 
-Wouldn't you like to contribute? That's amazing! We have prepared a [contribution guide](./CONTRIBUTING.md) to assist you.
+Wouldn't you like to contribute? That's amazing! We have prepared a [contribution guide](./CONTRIBUTING.md) to assist you. If you are changing components, hooks, style APIs, or theme behavior, also read the [design principles](./DESIGN.md).
 
 If you're interested in contributing to the documentation, please refer to this [contribution guide](https://yamada-ui.com/docs/community/contributing).
 

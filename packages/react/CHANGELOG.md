@@ -1,5 +1,29 @@
 # @yamada-ui/react
 
+## 2.3.0
+
+### Minor Changes
+
+- [#7760](https://github.com/yamada-ui/yamada-ui/pull/7760) [`4b54e88`](https://github.com/yamada-ui/yamada-ui/commit/4b54e88f15dbce90a11fcd17cf4a0629b455c8fc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add the `infinity` z-index token.
+
+### Patch Changes
+
+- [#7758](https://github.com/yamada-ui/yamada-ui/pull/7758) [`f2608c6`](https://github.com/yamada-ui/yamada-ui/commit/f2608c6656e796046503a2b680d2342c51cdf392) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix dark mode tokens in Shadow DOM.
+
+- [#7757](https://github.com/yamada-ui/yamada-ui/pull/7757) [`53acb22`](https://github.com/yamada-ui/yamada-ui/commit/53acb221e3d860370ccbe1477c75b5ec43ecfeee) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7757](https://github.com/yamada-ui/yamada-ui/pull/7757) [`53acb22`](https://github.com/yamada-ui/yamada-ui/commit/53acb221e3d860370ccbe1477c75b5ec43ecfeee) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7751](https://github.com/yamada-ui/yamada-ui/pull/7751) [`6b36f30`](https://github.com/yamada-ui/yamada-ui/commit/6b36f301d80df2cf82757d126d4e0074d9db75c8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Export store utility types.
+
+- [#7762](https://github.com/yamada-ui/yamada-ui/pull/7762) [`4977106`](https://github.com/yamada-ui/yamada-ui/commit/49771060653b6425c84e50f87143dc57fc149394) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add style props to the `Modal.Root` type definition.
+
+- [#7767](https://github.com/yamada-ui/yamada-ui/pull/7767) [`96ba695`](https://github.com/yamada-ui/yamada-ui/commit/96ba6953329a4fac065ae82f1b21e7754af7be19) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactor component gradient values to use shorthand syntax.
+
+- [#7764](https://github.com/yamada-ui/yamada-ui/pull/7764) [`2eb128f`](https://github.com/yamada-ui/yamada-ui/commit/2eb128f9891c7df4f6db210b13aadb9e72955a51) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Support multiple gradients in a single gradient property.
+
+- [#7749](https://github.com/yamada-ui/yamada-ui/pull/7749) [`ad3acd4`](https://github.com/yamada-ui/yamada-ui/commit/ad3acd4e16a2474c8e1480b324eb3802f0501730) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix components and styles in shadow DOM environments.
+
 ## 2.2.4
 
 ### Patch Changes

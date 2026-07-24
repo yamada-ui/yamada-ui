@@ -141,4 +141,14 @@ describe("gradient", () => {
       "linear-gradient(to right, var(--ui-colors-red), var(--ui-colors-green), var(--ui-colors-blue), var(--ui-colors-yellow))",
     )
   })
+
+  test("handles multiple gradients", () => {
+    const result = gradient(
+      "radial(red.500, transparent), radial(red.300, transparent)",
+      options,
+    )
+    expect(result).toBe(
+      "radial-gradient(var(--ui-colors-red-500), var(--ui-colors-transparent)), radial-gradient(var(--ui-colors-red-300), var(--ui-colors-transparent))",
+    )
+  })
 })

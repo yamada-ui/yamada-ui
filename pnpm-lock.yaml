@@ -290,6 +290,9 @@ importers:
       sucrase:
         specifier: ^3.35.1
         version: 3.35.1
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
       validate-npm-package-name:
         specifier: ^7.0.2
         version: 7.0.2

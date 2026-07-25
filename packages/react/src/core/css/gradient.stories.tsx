@@ -16,6 +16,18 @@ export const Basic = () => {
   )
 }
 
+export const Multiple = () => {
+  return (
+    <Box
+      bgAttachment="fixed"
+      bgGradient="radial(at 80% -20%, #fff 10%, transparent 40%), radial(at 0% 70%, #fff, transparent 50%), radial(at 0% 0%, #0ff, transparent), radial(at 80% 40%, #ff9, transparent 40%), radial(at 100% 100%, #675ee3, transparent)"
+      height="md"
+      rounded="l3"
+      w="full"
+    />
+  )
+}
+
 export const ColorCode = () => {
   return (
     <Heading

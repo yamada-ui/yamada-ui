@@ -746,7 +746,7 @@ export interface UseMenuOptionGroupProps<
 
 export const useMenuOptionGroup = <
   Y extends "checkbox" | "radio" = "checkbox",
-  M extends Y extends "checkbox" ? string[] : string = Y extends "checkbox"
+  M extends (Y extends "checkbox" ? string[] : string) = Y extends "checkbox"
     ? string[]
     : string,
 >({

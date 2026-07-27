@@ -94,6 +94,11 @@
         "type": "Omit<PortalProps, \"children\">",
         "description": "Props for portal component.",
         "required": false
+      },
+      "positionerProps": {
+        "type": "Omit<PopoverPositionerProps, \"children\">",
+        "description": "Props for positioner component.",
+        "required": false
       }
     },
     "Footer": {
@@ -669,6 +674,11 @@
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
       "description": "Props for portal component.",
+      "required": false
+    },
+    "positionerProps": {
+      "type": "Omit<PopoverPositionerProps, \"children\">",
+      "description": "Props for positioner component.",
       "required": false
     }
   },

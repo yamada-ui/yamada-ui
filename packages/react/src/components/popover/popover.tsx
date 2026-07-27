@@ -286,10 +286,14 @@ export interface PopoverContentProps
    * Props for portal component.
    */
   portalProps?: Omit<PortalProps, "children">
+  /**
+   * Props for positioner component.
+   */
+  positionerProps?: Omit<PopoverPositionerProps, "children">
 }
 
 export const PopoverContent = withContext<"div", PopoverContentProps>(
-  ({ portalProps, ...rest }) => {
+  ({ portalProps, positionerProps, ...rest }) => {
     const { animationScheme, duration, open, getContentProps } =
       useComponentContext()
     const popupAnimationProps = usePopupAnimationProps({
@@ -301,7 +305,7 @@ export const PopoverContent = withContext<"div", PopoverContentProps>(
       <AnimatePresence>
         {open ? (
           <Portal {...portalProps}>
-            <PopoverPositioner>
+            <PopoverPositioner {...positionerProps}>
               <motion.div
                 {...popupAnimationProps}
                 {...cast<HTMLMotionProps>(

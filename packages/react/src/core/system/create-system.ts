@@ -106,7 +106,7 @@ export const defaultSystem: System = {
   breakpoints: createBreakpoints(),
   config: {},
   cssMap: {},
-  cssVars: {},
+  cssVars: { light: {}, dark: {} },
   layers: createLayers(),
   utils: { getClassName: bem },
 }
@@ -114,6 +114,7 @@ export const defaultSystem: System = {
 export function createSystem(
   theme: UsageTheme,
   config: ThemeConfig = {},
+  rootNode?: Document | Node | ShadowRoot,
 ): System {
   const prefix = config.css?.varPrefix ?? DEFAULT_VAR_PREFIX
   const breakpoints = createBreakpoints(theme.breakpoints, config.breakpoint)
@@ -130,9 +131,9 @@ export function createSystem(
   const tertiaryTokens = createTokens(theme, "tertiary", shouldProcess)
 
   const { cssMap, cssVars } = mergeVars(
-    createVars(prefix, theme, breakpoints)(primaryTokens),
-    createVars(prefix, theme, breakpoints)(secondaryTokens),
-    createVars(prefix, theme, breakpoints)(tertiaryTokens),
+    createVars(prefix, theme, breakpoints, rootNode)(primaryTokens),
+    createVars(prefix, theme, breakpoints, rootNode)(secondaryTokens),
+    createVars(prefix, theme, breakpoints, rootNode)(tertiaryTokens),
   )()
 
   const getClassName = (
@@ -151,8 +152,6 @@ export function createSystem(
     const themeSchemeEntries = Object.entries<Dict>(theme.themeSchemes)
 
     for (const [themeScheme, nestedTheme] of themeSchemeEntries) {
-      const themeCondition = `[data-theme=${themeScheme}] &:not([data-theme]), &[data-theme=${themeScheme}]`
-
       const nestedPrimaryTokens = {
         ...createTokens(nestedTheme, "primary", shouldProcess),
         ...createColorSchemeTokens(theme, nestedTheme, shouldProcess),
@@ -169,12 +168,13 @@ export function createSystem(
       )
 
       const { cssVars: nestedCSSVars } = mergeVars(
-        createVars(prefix, theme, breakpoints)(nestedPrimaryTokens),
-        createVars(prefix, theme, breakpoints)(nestedSecondaryTokens),
-        createVars(prefix, theme, breakpoints)(nestedTertiaryTokens),
+        createVars(prefix, theme, breakpoints, rootNode)(nestedPrimaryTokens),
+        createVars(prefix, theme, breakpoints, rootNode)(nestedSecondaryTokens),
+        createVars(prefix, theme, breakpoints, rootNode)(nestedTertiaryTokens),
       )({ ...primaryTokens, ...secondaryTokens, ...tertiaryTokens })
 
-      cssVars[themeCondition] = nestedCSSVars
+      cssVars.themes ??= {}
+      cssVars.themes[themeScheme] = nestedCSSVars
     }
   }
 
@@ -184,6 +184,7 @@ export function createSystem(
     cssMap,
     cssVars,
     layers,
+    rootNode,
     utils: { getClassName },
   }
 }

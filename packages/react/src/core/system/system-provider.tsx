@@ -4,6 +4,7 @@ import type { FC, PropsWithChildren } from "react"
 import type { System, ThemeConfig, UsageTheme } from "./index.types"
 import { createContext, use, useMemo } from "react"
 import { createSystem, defaultSystem } from "./create-system"
+import { useEnvironment } from "./environment-provider"
 
 interface SystemContext extends System {}
 
@@ -25,7 +26,12 @@ export const SystemProvider: FC<SystemProviderProps> = ({
   config,
   theme = {},
 }) => {
-  const system = useMemo(() => createSystem(theme, config), [theme, config])
+  const { getRootNode } = useEnvironment()
+  const rootNode = getRootNode()
+  const system = useMemo(
+    () => createSystem(theme, config, rootNode),
+    [theme, config, rootNode],
+  )
 
   return <SystemContext value={system}>{children}</SystemContext>
 }

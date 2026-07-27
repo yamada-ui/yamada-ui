@@ -72,7 +72,7 @@ export const progressStyle = defineComponentSlotStyle({
           "--stripe-angle": "45deg",
           "--stripe-color": ["rgba(255, 255, 255, 0.3)", "rgba(0, 0, 0, 0.3)"],
           "--stripe-size": "1rem",
-          bgImage: `linear-gradient(
+          bgImage: `linear(
             {stripe-angle},
             {stripe-color} 25%,
             transparent 25%,

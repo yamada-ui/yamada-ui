@@ -13,11 +13,11 @@ import { useSyncExternalStore } from "react"
 
 const DEFAULT_IDENTIFIER = "default"
 
-interface Subscribe {
+export interface StoreSubscribe {
   (listener: () => void): () => void
 }
 
-interface Store<Y> {
+export interface Store<Y> {
   queue: Map<string, (() => void)[]>
   ref: { current: Y }
   get: () => Y
@@ -44,35 +44,35 @@ type ReturnValue<Y, D> = Y extends any[]
     ? ReturnObjectValue<Y, D>
     : Y
 
-interface UseStore<Y> {
+export interface UseStore<Y> {
   <D extends IndexOrPath<Y>>(path?: D, key?: string): ReturnValue<Y, D>
 }
 
-interface CreateMethod<Y, M extends Function> {
+export interface CreateStoreMethod<Y, M extends Function> {
   (store: Store<Y>): M
 }
 
-type Methods<Y, M extends CustomMethods<Y>> = Omit<
+export type StoreMethods<Y, M extends CustomStoreMethods<Y>> = Omit<
   Store<Y>,
   "key" | "update"
 > & {
   [D in keyof M]: ReturnType<M[D]>
 } & { update: () => void }
 
-interface CustomMethods<Y> {
-  [key: string]: CreateMethod<Y, (...args: any[]) => Promise<void> | void>
+export interface CustomStoreMethods<Y> {
+  [key: string]: CreateStoreMethod<Y, (...args: any[]) => Promise<void> | void>
 }
 
-interface CreateStoreOptions<Y> {
+export interface CreateStoreOptions<Y> {
   proxyHandler?: ProxyHandler<{ current: Y }>
-  subscribe?: CreateMethod<Y, Subscribe>
+  subscribe?: CreateStoreMethod<Y, StoreSubscribe>
 }
 
-export function createStore<Y, M extends CustomMethods<Y>>(
+export function createStore<Y, M extends CustomStoreMethods<Y>>(
   initialState: (() => Y) | Y,
   additionalMethods?: M,
   options: CreateStoreOptions<Y> = {},
-): [UseStore<Y>, Methods<Y, M>] {
+): [UseStore<Y>, StoreMethods<Y, M>] {
   const queue = new Map<string, (() => void)[]>()
   const ref = new Proxy(
     { current: runIfFn(initialState) },

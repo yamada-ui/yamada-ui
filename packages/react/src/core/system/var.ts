@@ -1,7 +1,9 @@
 import type { Dict } from "../../utils"
 import type { CSSProperties, StyleValueWithCondition } from "../css"
 import type {
+  ColorMode,
   CSSMap,
+  CSSVars,
   DefineThemeValue,
   System,
   ThemeToken,
@@ -13,7 +15,9 @@ import type { Breakpoints } from "./breakpoint"
 import {
   calc,
   escape,
+  filterEmpty,
   isArray,
+  isEmptyObject,
   isNull,
   isObject,
   isString,
@@ -25,7 +29,6 @@ import { DEFAULT_VAR_PREFIX } from "../constant"
 import {
   animation,
   colorMix,
-  conditions,
   css,
   getStyle,
   gradient,
@@ -96,10 +99,9 @@ export function createVars(
   prefix: string = DEFAULT_VAR_PREFIX,
   theme: UsageTheme,
   breakpoints: Breakpoints,
+  rootNode?: System["rootNode"],
 ) {
   return function (tokens: VariableTokens) {
-    const { getQuery, isResponsive } = breakpoints
-
     function tokenToVar(token: string): Variable {
       token = token.replace(/\./g, "-")
       token = token.replace(/\//g, "\\/")
@@ -112,10 +114,10 @@ export function createVars(
 
     return function (
       cssMap: CSSMap = {},
-      cssVars: Dict = {},
+      cssVars: CSSVars = { light: {}, dark: {} },
       prevTokens?: VariableTokens,
-    ): { cssMap: CSSMap; cssVars: Dict } {
-      const system: System = { ...defaultSystem, cssMap }
+    ): { cssMap: CSSMap; cssVars: CSSVars } {
+      const system: System = { ...defaultSystem, cssMap, rootNode }
       const options = { css, system, theme }
 
       function getRelatedReference(
@@ -194,13 +196,13 @@ export function createVars(
       function createKeyframesVar(token: string, value: any) {
         return function (semantic: boolean) {
           if (!semantic) {
-            return injectKeyframes(css(system, theme)(value))
+            return injectKeyframes(css(system, theme)(value), rootNode)
           } else {
             const [variable, reference] = getRelatedReference(token, value)
 
             return variable
               ? reference
-              : injectKeyframes(css(system, theme)(value))
+              : injectKeyframes(css(system, theme)(value), rootNode)
           }
         }
       }
@@ -228,30 +230,29 @@ export function createVars(
         value: VariableValue,
         variable: string,
       ) {
-        return function (semantic: boolean, queries: string[] = []) {
+        return function (
+          semantic: boolean,
+          colorMode: ColorMode = "light",
+          breakpoint: string = "base",
+        ) {
           if (isAnimation(token)) value = createAnimationVar(value)
 
           if (isArray(value)) {
-            const [lightValue, darkValue] = value
-
-            createVar(token, lightValue, variable)(semantic, queries)
-            createVar(
-              token,
-              darkValue,
-              variable,
-            )(semantic, [...queries, conditions._dark])
-          } else if (isResponsive(value, true)) {
-            Object.entries(value).forEach(([key, value]) => {
-              if (key === "base") {
-                createVar(token, value, variable)(semantic, queries)
-              } else {
-                const query = getQuery(key)
-
-                if (!query) return
-
-                createVar(token, value, variable)(semantic, [...queries, query])
-              }
-            })
+            value.forEach((value, index) =>
+              createVar(token, value, variable)(
+                semantic,
+                !index ? "light" : "dark",
+                breakpoint,
+              ),
+            )
+          } else if (breakpoints.isResponsive(value, true)) {
+            Object.entries(value).forEach(([breakpoint, value]) =>
+              createVar(token, value, variable)(
+                semantic,
+                colorMode,
+                breakpoint,
+              ),
+            )
           } else {
             const computedValue: DefineThemeValue = valueToVar(value)
 
@@ -276,17 +277,18 @@ export function createVars(
             if (!isObject(resolvedValue))
               resolvedValue = { [variable]: resolvedValue }
 
-            const resolvedCssVars = queries.reduceRight<Dict>(
-              (prev, key) => ({ [key]: prev }),
-              resolvedValue,
-            )
+            const query = breakpoints.getQuery(breakpoint)
 
-            cssVars = merge(cssVars, resolvedCssVars)
+            if (query)
+              resolvedValue = { [colorMode]: { [query]: resolvedValue } }
+            else resolvedValue = { [colorMode]: resolvedValue }
+
+            cssVars = merge(cssVars, resolvedValue)
           }
         }
       }
 
-      for (let [token, { semantic, value }] of Object.entries(tokens)) {
+      for (const [token, { semantic, value }] of Object.entries(tokens)) {
         const { reference, variable } = tokenToVar(token)
 
         createVar(token, value, variable)(semantic)
@@ -313,7 +315,7 @@ export type CreateVars = ReturnType<ReturnType<typeof createVars>>
 export function mergeVars(...fns: CreateVars[]) {
   return function (prevTokens?: VariableTokens) {
     let cssMap: CSSMap = {}
-    let cssVars: Dict = {}
+    let cssVars: CSSVars = { light: {}, dark: {} }
 
     for (const fn of fns) {
       const result = fn(cssMap, cssVars, prevTokens)
@@ -324,6 +326,67 @@ export function mergeVars(...fns: CreateVars[]) {
 
     return { cssMap, cssVars }
   }
+}
+
+function createSelector(selectors: string, attr?: string): string {
+  return selectors
+    .split(",")
+    .map((selector) => {
+      selector = selector.trim()
+
+      if (!attr) return selector
+      else if (selector === ":host") return `${selector}(${attr})`
+      else return `${selector}${attr}`
+    })
+    .join(", ")
+}
+
+export function createVarRules(varRoot: string, cssVars: CSSVars): Dict {
+  return Object.fromEntries(
+    Object.entries(cssVars).flatMap(([colorMode, cssVars]) => {
+      if (isEmptyObject(cssVars)) return []
+
+      if (colorMode === "light" || colorMode === "dark") {
+        const dark = colorMode === "dark"
+        const attr = `[data-mode=${colorMode}]`
+        const selector = createSelector(varRoot, dark ? attr : undefined)
+
+        return [[[selector, attr].join(", "), cssVars]]
+      } else {
+        return Object.entries<Dict>(cssVars).flatMap(([themeScheme, cssVars]) =>
+          Object.entries(cssVars).flatMap(([colorMode, cssVars]) => {
+            if (isEmptyObject(cssVars)) return []
+
+            const dark = colorMode === "dark"
+            const attrs = {
+              colorMode: `[data-mode=${colorMode}]`,
+              themeScheme: `[data-theme=${themeScheme}]`,
+            }
+            const attr = !dark
+              ? attrs.themeScheme
+              : `${attrs.themeScheme}${attrs.colorMode}`
+            const selector = createSelector(varRoot, attr)
+
+            return [
+              [
+                filterEmpty([
+                  selector,
+                  attr,
+                  `${attrs.themeScheme} ${attrs.colorMode}`,
+                  dark ? `${attrs.colorMode} ${attrs.themeScheme}` : undefined,
+                  `:host(${attrs.themeScheme}) ${attrs.colorMode}`,
+                  dark
+                    ? `:host(${attrs.colorMode}) ${attrs.themeScheme}`
+                    : undefined,
+                ]).join(", "),
+                cssVars,
+              ],
+            ]
+          }),
+        )
+      }
+    }),
+  )
 }
 
 export function varAttr<Y = StyleValueWithCondition<number | string>>(

@@ -1,6 +1,7 @@
 import type { ChangeEventHandler, CSSProperties, RefCallback } from "react"
 import type { UseAutosizeProps } from "./use-autosize"
-import { page, render, renderHook } from "#test/browser"
+import { createPortal } from "react-dom"
+import { a11y, page, render, renderHook } from "#test/browser"
 import { useAutosize } from "./use-autosize"
 import { useTextarea } from "./use-textarea"
 
@@ -91,6 +92,41 @@ const HookTextarea = ({
 }
 
 describe("useAutosize", () => {
+  test("passes a11y", async () => {
+    await a11y(<AutoSizeTextarea />, { withProvider: false })
+  })
+
+  test("measures the textarea in the shadow root", async () => {
+    const host = document.createElement("div")
+    const shadowRoot = host.attachShadow({ mode: "open" })
+    document.body.appendChild(host)
+    const bodyAppendChild = vi.spyOn(document.body, "appendChild")
+    const rootAppendChild = vi.spyOn(shadowRoot, "appendChild")
+    const { user } = await render(
+      createPortal(<AutoSizeTextarea minRows={1} />, shadowRoot),
+      { withProvider: false },
+    )
+    const textarea = getAutosizeTextarea()
+
+    await user.type(textarea, "Line 1\nLine 2")
+
+    await expect.poll(() => textarea.rows).toBe(2)
+    expect(
+      rootAppendChild.mock.calls.some(
+        ([node]) =>
+          node instanceof HTMLTextAreaElement &&
+          node.style.visibility === "hidden",
+      ),
+    ).toBeTruthy()
+    expect(
+      bodyAppendChild.mock.calls.some(
+        ([node]) => node instanceof HTMLTextAreaElement,
+      ),
+    ).toBeFalsy()
+
+    host.remove()
+  })
+
   test("adjusts the rows of the textarea based on content", async () => {
     const { user } = await render(<AutoSizeTextarea minRows={1} />, {
       withProvider: false,

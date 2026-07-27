@@ -82,7 +82,7 @@ export const resetStyle = defineStyles.resetStyle({
     overflow: "visible",
   },
 
-  html: {
+  ":host, html": {
     fontFamily:
       "system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
     lineHeight: 1.5,
@@ -146,12 +146,12 @@ export const resetStyle = defineStyles.resetStyle({
   },
 
   "@media (prefers-reduced-motion: no-preference)": {
-    ":where(html:focus-within)": {
+    ":host(:focus-within), :where(html:focus-within)": {
       scrollBehavior: "smooth",
     },
   },
 
-  ":where(html:has(dialog:modal[open]))": {
+  ":host(:has(dialog:modal[open])), :where(html:has(dialog:modal[open]))": {
     overflow: "clip",
   },
 

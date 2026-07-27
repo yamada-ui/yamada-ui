@@ -133,5 +133,3 @@ export const CustomControl: Story = () => {
 
   return <AlphaSlider.Root color="#775999" value={value} onChange={setValue} />
 }
-
-// linear-gradient(117deg, rgb(102, 102, 102) 0%, rgb(216, 44, 69) 22%, rgb(255, 142, 95) 44%, rgb(113, 232, 255) 76%, rgb(245, 245, 245) 100%)

@@ -8,10 +8,10 @@ import { colorSwatchStyle } from "./color-swatch.style"
 
 export const checkersProps: HTMLStyledProps = {
   bgImage: [
-    "linear-gradient(45deg, {checkers-fg} 25%, transparent 25%)",
-    "linear-gradient(-45deg, {checkers-fg} 25%, transparent 25%)",
-    "linear-gradient(45deg, transparent 75%, {checkers-fg} 75%)",
-    "linear-gradient(-45deg, {checkers-bg} 75%, {checkers-fg} 75%)",
+    "linear(45deg, {checkers-fg} 25%, transparent 25%)",
+    "linear(-45deg, {checkers-fg} 25%, transparent 25%)",
+    "linear(45deg, transparent 75%, {checkers-fg} 75%)",
+    "linear(-45deg, {checkers-bg} 75%, {checkers-fg} 75%)",
   ].join(", "),
   bgPosition: `0 0, 0 4px, 4px -4px, -4px 0`,
   bgSize: `8px 8px`,

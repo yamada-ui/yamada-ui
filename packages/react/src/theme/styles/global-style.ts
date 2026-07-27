@@ -12,7 +12,7 @@ export const globalStyle = defineStyles.globalStyle({
   "*::placeholder, *[data-placeholder]": {
     color: "fg.subtle",
   },
-  body: {
+  ":host, body": {
     colorScheme: "mono",
     bg: "bg",
     color: "fg",

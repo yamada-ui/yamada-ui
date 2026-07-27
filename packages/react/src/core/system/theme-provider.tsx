@@ -18,38 +18,49 @@ import {
   ThemeContext,
 } from "@emotion/react"
 import { use, useCallback, useEffect, useMemo, useState } from "react"
-import { isEmptyObject, isObject, isUndefined, merge } from "../../utils"
+import {
+  isEmptyObject,
+  isObject,
+  isShadowRoot,
+  isUndefined,
+  merge,
+} from "../../utils"
 import { THEME_SCHEME_STORAGE_KEY } from "../constant"
 import { css } from "../css"
 import { useEnvironment } from "./environment-provider"
 import { createStorageManager } from "./storage-manager"
 import { useSystem } from "./system-provider"
+import { createVarRules } from "./var"
 
 export const getPreventTransition = (environment: Environment) => {
-  const { getDocument, getWindow } = environment
-  const win = getWindow()
-  const doc = getDocument()
+  const win = environment.getWindow()
+  const doc = environment.getDocument()
+  const root = environment.getRootElement()
+  const rootNode = environment.getRootNode()
 
-  if (!win || !doc) return
+  if (!win || !doc || !root) return
 
   const css = doc.createElement("style")
+  const shadowRoot = isShadowRoot(rootNode)
+  const selector = shadowRoot ? ":host, *" : "*"
+  const container = shadowRoot ? rootNode : doc.head
 
   const node = doc.createTextNode(
-    `*{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`,
+    `${selector}{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`,
   )
 
   css.appendChild(node)
 
-  doc.head.appendChild(css)
+  container.appendChild(css)
 
   return () => {
-    const forceReflow = () => win.getComputedStyle(doc.body)
+    const forceReflow = () => win.getComputedStyle(root)
 
     forceReflow()
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        doc.head.removeChild(css)
+        container.removeChild(css)
       })
     })
   }
@@ -107,14 +118,13 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 
   const changeThemeScheme: ChangeThemeScheme = useCallback(
     (themeScheme) => {
-      const { getDocument } = environment
-      const doc = getDocument()
+      const root = environment.getRootElement()
 
       const cleanup = disableTransitionOnChange
         ? getPreventTransition(environment)
         : undefined
 
-      if (doc) doc.documentElement.dataset.theme = themeScheme
+      if (root) root.dataset.theme = themeScheme
 
       cleanup?.()
 
@@ -161,15 +171,18 @@ export const GlobalStyles: FC = () => {
     return css(system, theme)(style)
   }, [system, theme])
 
-  const cssVars = useMemo(() => {
-    return { ":host, :root, [data-mode]": system.cssVars }
+  const varRules = useMemo(() => {
+    return createVarRules(
+      system.config.css?.varRoot ?? ":host, :root",
+      system.cssVars,
+    )
   }, [system])
 
   return (
     <Global
       styles={[
         atRule,
-        wrap("tokens", cssVars),
+        wrap("tokens", varRules),
         wrap("reset", resetStyle),
         wrap("global", globalStyle),
       ]}

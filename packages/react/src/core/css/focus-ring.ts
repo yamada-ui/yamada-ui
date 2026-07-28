@@ -21,6 +21,7 @@ export const focusRingStyle = {
     outlineWidth: "{focus-ring-width, 2px}",
   },
   none: {
+    boxShadow: "none",
     outline: "none",
   },
   outline: {

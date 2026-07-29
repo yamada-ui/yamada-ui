@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom"
 import { page, render } from "#test/browser"
 import { Popover } from "."
 import { Button } from "../button"
@@ -130,6 +131,34 @@ describe("<Popover />", () => {
     await expect.poll(() => page.getByText("Popover Header").query()).toBeNull()
     await expect.poll(() => page.getByText("Popover Body").query()).toBeNull()
     await expect.poll(() => page.getByText("Popover Footer").query()).toBeNull()
+  })
+
+  test("should not close when content is clicked in shadow DOM", async () => {
+    const host = document.createElement("div")
+    const shadowRoot = host.attachShadow({ mode: "open" })
+    document.body.appendChild(host)
+
+    try {
+      const { user } = await render(createPortal(<Component />, shadowRoot), {
+        providerProps: { rootNode: shadowRoot },
+      })
+      const triggerButton = page.getByRole("button", {
+        name: "Popover Trigger",
+      })
+
+      await user.click(triggerButton)
+
+      const content = page.getByRole("dialog")
+
+      await expect.element(content).toBeVisible()
+      expect(content.element().getRootNode()).toBe(shadowRoot)
+
+      await user.click(page.getByText("Popover Body"))
+
+      await expect.element(content).toBeVisible()
+    } finally {
+      host.remove()
+    }
   })
 
   test("should close when close trigger is activated", async () => {

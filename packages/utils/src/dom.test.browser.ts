@@ -1,6 +1,7 @@
 import {
   getActiveElement,
   getFocusableElements,
+  getNextTabbableElement,
   getPx,
   isActiveElement,
   isFocusableElement,
@@ -106,6 +107,23 @@ describe("DOM", () => {
       input.focus()
       expect(getActiveElement(document)).toBe(input)
       document.body.removeChild(input)
+    })
+  })
+
+  describe("getNextTabbableElement", () => {
+    test("should use the active element inside a shadow root", () => {
+      const host = document.createElement("div")
+      const shadowRoot = host.attachShadow({ mode: "open" })
+      const firstButton = document.createElement("button")
+      const secondButton = document.createElement("button")
+      shadowRoot.append(firstButton, secondButton)
+      document.body.appendChild(host)
+
+      firstButton.focus()
+
+      expect(getNextTabbableElement(shadowRoot)).toBe(secondButton)
+
+      host.remove()
     })
   })
 

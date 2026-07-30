@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/react": minor
+"@yamada-ui/react": patch
 ---
 
 Add shorthand content and slot props to Popover.

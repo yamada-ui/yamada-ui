@@ -1,22 +1,26 @@
 export type Primitive =
   | bigint
   | boolean
+  | Date
+  | Function
   | null
   | number
   | string
   | symbol
   | undefined
 
-type PathImpl<Y extends number | string | symbol, M> = Y extends number | string
-  ? M extends Primitive
+type PathImpl<Y extends number | string | symbol, M, D = Primitive> = Y extends
+  | number
+  | string
+  ? M extends D
     ? `${Y}`
-    : `${Y}.${Path<M>}`
+    : `${Y}.${Path<M, D>}` | `${Y}`
   : ``
 
-export type Path<Y> = Y extends any[]
+export type Path<Y, M = Primitive> = Y extends any[]
   ? `${number}`
   : {
-      [M in keyof Y]-?: PathImpl<M, Y[M]>
+      [D in keyof Y]-?: PathImpl<D, Y[D], M>
     }[keyof Y]
 
 export type Value<
@@ -42,7 +46,7 @@ export type Length<Y extends any[]> = Y["length"]
 
 export type Merge<Y, M> = M & Omit<Y, keyof M>
 
-export type DeepMerge<Y, M> = Y extends any[] | Date | Function | Primitive
+export type DeepMerge<Y, M> = Y extends any[] | Primitive
   ? M
   : Y extends object
     ? M extends object
@@ -58,7 +62,7 @@ export type DeepMerge<Y, M> = Y extends any[] | Date | Function | Primitive
       : M
     : M
 
-export type DeepPartial<Y> = Y extends any[] | Date | Function | Primitive
+export type DeepPartial<Y> = Y extends any[] | Primitive
   ? Y
   : {
       [P in keyof Y]?: DeepPartial<Y[P]>

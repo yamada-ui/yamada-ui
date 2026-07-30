@@ -1342,6 +1342,11 @@
           "segment": "react",
           "items": [
             {
+              "title": "v2.2.6",
+              "segment": "2-2-6",
+              "pathname": "/docs/changelog/react/2-2-6"
+            },
+            {
               "title": "v2.2.5",
               "segment": "2-2-5",
               "pathname": "/docs/changelog/react/2-2-5"
@@ -1503,6 +1508,11 @@
               "pathname": "/docs/changelog/cli/2-1-2"
             },
             {
+              "title": "v2.1.11",
+              "segment": "2-1-11",
+              "pathname": "/docs/changelog/cli/2-1-11"
+            },
+            {
               "title": "v2.1.10",
               "segment": "2-1-10",
               "pathname": "/docs/changelog/cli/2-1-10"
@@ -1568,6 +1578,11 @@
           "title": "@yamada-ui/utils",
           "segment": "utils",
           "items": [
+            {
+              "title": "v2.1.6",
+              "segment": "2-1-6",
+              "pathname": "/docs/changelog/utils/2-1-6"
+            },
             {
               "title": "v2.1.5",
               "segment": "2-1-5",

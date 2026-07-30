@@ -192,6 +192,7 @@
         "pagination",
         "password-input",
         "popover",
+        "portal",
         "tip",
         "toggle"
       ],
@@ -675,7 +676,7 @@
   },
   "focus-lock": {
     "dependencies": { "components": [], "hooks": [] },
-    "dependents": { "components": ["drawer", "modal"], "hooks": [] },
+    "dependents": { "components": ["drawer", "modal", "portal"], "hooks": [] },
     "resembles": ["visually-hidden"]
   },
   "for": {
@@ -1004,7 +1005,7 @@
       ],
       "hooks": ["use-value", "use-disclosure"]
     },
-    "dependents": { "components": ["drawer"], "hooks": [] },
+    "dependents": { "components": ["drawer", "portal"], "hooks": [] },
     "resembles": [
       "drawer",
       "popover",
@@ -1223,7 +1224,10 @@
     ]
   },
   "portal": {
-    "dependencies": { "components": [], "hooks": [] },
+    "dependencies": {
+      "components": ["button", "modal", "focus-lock"],
+      "hooks": []
+    },
     "dependents": {
       "components": [
         "action-bar",

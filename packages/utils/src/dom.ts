@@ -113,9 +113,12 @@ export function isFrame(el: any): el is HTMLIFrameElement {
 
 export function isActiveElement(
   el: HTMLElement,
-  rootNode: Document | ShadowRoot,
+  rootNode: Document | Node | ShadowRoot,
 ): boolean {
-  return getActiveElement(rootNode) === el
+  return (
+    (isDocument(rootNode) || isShadowRoot(rootNode)) &&
+    getActiveElement(rootNode) === el
+  )
 }
 
 export function isHiddenElement(el: HTMLElement): boolean {
@@ -197,14 +200,15 @@ export function getActiveElement(
 }
 
 export function getTabbableElements(
-  el: HTMLElement | null,
+  el: HTMLElement | null | ShadowRoot,
   includeEl?: boolean,
 ) {
   if (!el) return []
   const els = Array.from(el.querySelectorAll<HTMLElement>(focusableSelector))
   const tabbableEls = els.filter(isTabbableElement)
 
-  if (includeEl && isTabbableElement(el)) tabbableEls.unshift(el)
+  if (includeEl && isHTMLElement(el) && isTabbableElement(el))
+    tabbableEls.unshift(el)
 
   tabbableEls.forEach((el, i) => {
     if (isFrame(el) && el.contentDocument) {
@@ -220,7 +224,7 @@ export function getTabbableElements(
 }
 
 export function getFirstTabbableElement(
-  el: HTMLElement | null,
+  el: HTMLElement | null | ShadowRoot,
   includeEl?: boolean,
 ): HTMLElement | null {
   const [first] = getTabbableElements(el, includeEl)
@@ -229,12 +233,12 @@ export function getFirstTabbableElement(
 }
 
 export function getNextTabbableElement(
-  el: HTMLElement | null,
+  el: HTMLElement | null | ShadowRoot,
   current?: HTMLElement | null,
 ): HTMLElement | null {
   const els = getTabbableElements(el)
-  const doc = el?.ownerDocument || document
-  const currentElement = current ?? (doc.activeElement as HTMLElement | null)
+  const rootNode = isShadowRoot(el) ? el : el?.ownerDocument || document
+  const currentElement = current ?? getActiveElement(rootNode)
 
   if (!currentElement) return null
 
@@ -242,7 +246,7 @@ export function getNextTabbableElement(
 }
 
 export function getLastTabbableElement(
-  el: HTMLElement | null,
+  el: HTMLElement | null | ShadowRoot,
   includeEl?: boolean,
 ): HTMLElement | null {
   const els = getTabbableElements(el, includeEl)
@@ -251,7 +255,7 @@ export function getLastTabbableElement(
 }
 
 export function getTabbableElementEdges(
-  el: HTMLElement | null,
+  el: HTMLElement | null | ShadowRoot,
   includeEl?: boolean,
 ): [HTMLElement | null, HTMLElement | null] {
   const els = getTabbableElements(el, includeEl)

@@ -1,6 +1,6 @@
 "use client"
 
-import type { FC, PropsWithChildren } from "react"
+import type { FC, PropsWithChildren, ReactNode } from "react"
 import type {
   HTMLProps,
   HTMLStyledProps,
@@ -15,9 +15,16 @@ import type { PopoverStyle } from "./popover.style"
 import type { UsePopoverProps, UsePopoverReturn } from "./use-popover"
 import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
-import { createSlotComponent } from "../../core"
+import { createSlotComponent, mergeProps } from "../../core"
 import { useValue } from "../../hooks/use-value"
-import { cast, filterUndefined, runIfFn } from "../../utils"
+import {
+  cast,
+  filterUndefined,
+  isFunction,
+  runIfFn,
+  useSplitChildren,
+  wrapOrPassProps,
+} from "../../utils"
 import { fadeScaleVariants } from "../fade-scale"
 import { motion } from "../motion"
 import { Portal } from "../portal"
@@ -143,13 +150,28 @@ interface ComponentContext
       | "getTriggerProps"
       | "open"
     >,
-    UsePopupAnimationProps {}
+    UsePopupAnimationProps,
+    Pick<
+      PopoverRootProps,
+      | "anchorProps"
+      | "bodyProps"
+      | "closeTriggerProps"
+      | "contentProps"
+      | "footerProps"
+      | "headerProps"
+      | "triggerProps"
+    > {}
 
 export interface PopoverRootProps
   extends
     Merge<UsePopoverProps, UsePopoverStyleProps>,
     UsePopupAnimationProps,
-    ThemeProps<PopoverStyle> {
+    ThemeProps<PopoverStyle>,
+    ShorthandPopoverContentProps {
+  /**
+   * The popover anchor to use.
+   */
+  anchor?: ReactNode
   /**
    * The children of the popover.
    */
@@ -157,6 +179,38 @@ export interface PopoverRootProps
     open: boolean
     onClose: () => void
   }>
+  /**
+   * The popover trigger to use.
+   */
+  trigger?: ReactNode
+  /**
+   * Props for anchor element.
+   */
+  anchorProps?: Omit<PopoverAnchorProps, "asChild" | "children">
+  /**
+   * Props for body element.
+   */
+  bodyProps?: Omit<PopoverBodyProps, "children">
+  /**
+   * Props for close trigger element.
+   */
+  closeTriggerProps?: Omit<PopoverCloseTriggerProps, "asChild" | "children">
+  /**
+   * Props for content element.
+   */
+  contentProps?: Omit<PopoverContentProps, "children">
+  /**
+   * Props for footer element.
+   */
+  footerProps?: Omit<PopoverFooterProps, "children">
+  /**
+   * Props for header element.
+   */
+  headerProps?: Omit<PopoverHeaderProps, "children">
+  /**
+   * Props for trigger element.
+   */
+  triggerProps?: Omit<PopoverTriggerProps, "asChild" | "children">
 }
 
 const {
@@ -181,8 +235,33 @@ export { PopoverPropsContext, usePopoverPropsContext }
  */
 export const PopoverRoot: FC<PopoverRootProps> = (props) => {
   const styleProps = usePopoverStyleProps(props)
-  const [styleContext, { animationScheme, children, duration, ...rest }] =
-    useRootComponentProps({ ...props, ...styleProps })
+  const [
+    styleContext,
+    {
+      anchor: anchorProp,
+      animationScheme,
+      body,
+      children,
+      duration,
+      footer,
+      header,
+      trigger: triggerProp,
+      anchorProps,
+      bodyProps,
+      closeTriggerProps,
+      contentProps,
+      footerProps,
+      headerProps,
+      triggerProps,
+      ...rest
+    },
+  ] = useRootComponentProps({ ...props, ...styleProps })
+  const [omittedChildren, trigger, anchor, customContent] = useSplitChildren(
+    isFunction(children) ? undefined : children,
+    PopoverTrigger,
+    PopoverAnchor,
+    PopoverContent,
+  )
   const {
     open,
     getAnchorProps,
@@ -200,6 +279,11 @@ export const PopoverRoot: FC<PopoverRootProps> = (props) => {
       animationScheme,
       duration,
       open,
+      anchorProps,
+      bodyProps,
+      closeTriggerProps,
+      contentProps,
+      footerProps,
       getAnchorProps,
       getBodyProps,
       getCloseTriggerProps,
@@ -208,11 +292,19 @@ export const PopoverRoot: FC<PopoverRootProps> = (props) => {
       getHeaderProps,
       getPositionerProps,
       getTriggerProps,
+      headerProps,
+      triggerProps,
     }),
     [
       open,
       animationScheme,
+      anchorProps,
+      bodyProps,
+      closeTriggerProps,
+      contentProps,
       duration,
+      footerProps,
+      headerProps,
       getAnchorProps,
       getBodyProps,
       getCloseTriggerProps,
@@ -221,13 +313,33 @@ export const PopoverRoot: FC<PopoverRootProps> = (props) => {
       getHeaderProps,
       getPositionerProps,
       getTriggerProps,
+      triggerProps,
     ],
   )
+  const customAnchor = anchorProp ? (
+    <PopoverAnchor>{anchorProp}</PopoverAnchor>
+  ) : null
+  const customTrigger = triggerProp ? (
+    <PopoverTrigger>{triggerProp}</PopoverTrigger>
+  ) : null
+  const customContentProp =
+    header !== undefined || body !== undefined || footer !== undefined ? (
+      <ShorthandPopoverContent body={body} footer={footer} header={header} />
+    ) : null
 
   return (
     <StyleContext value={styleContext}>
       <ComponentContext value={componentContext}>
-        {runIfFn(children, { open, onClose })}
+        {isFunction(children) ? (
+          runIfFn(children, { open, onClose })
+        ) : (
+          <>
+            {anchor ?? customAnchor}
+            {trigger ?? customTrigger}
+            {omittedChildren}
+            {customContent ?? customContentProp}
+          </>
+        )}
       </ComponentContext>
     </StyleContext>
   )
@@ -239,9 +351,9 @@ export const PopoverTrigger = withContext<"button", PopoverTriggerProps>(
   "button",
   "trigger",
 )({ asChild: true }, (props) => {
-  const { getTriggerProps } = useComponentContext()
+  const { getTriggerProps, triggerProps } = useComponentContext()
 
-  return getTriggerProps(props)
+  return getTriggerProps(mergeProps(triggerProps, props)())
 })
 
 export interface PopoverCloseTriggerProps extends HTMLStyledProps<"button"> {}
@@ -252,9 +364,9 @@ export const PopoverCloseTrigger = withContext<
 >("button", { name: "CloseTrigger", slot: ["trigger", "close"] })(
   { asChild: true },
   (props) => {
-    const { getCloseTriggerProps } = useComponentContext()
+    const { closeTriggerProps, getCloseTriggerProps } = useComponentContext()
 
-    return getCloseTriggerProps(props)
+    return getCloseTriggerProps(mergeProps(closeTriggerProps, props)())
   },
 )
 
@@ -264,9 +376,9 @@ export const PopoverAnchor = withContext<"div", PopoverAnchorProps>(
   "div",
   "anchor",
 )({ asChild: true }, (props) => {
-  const { getAnchorProps } = useComponentContext()
+  const { anchorProps, getAnchorProps } = useComponentContext()
 
-  return getAnchorProps(props)
+  return getAnchorProps(mergeProps(anchorProps, props)())
 })
 
 interface PopoverPositionerProps extends HTMLStyledProps {}
@@ -293,9 +405,18 @@ export interface PopoverContentProps
 }
 
 export const PopoverContent = withContext<"div", PopoverContentProps>(
-  ({ portalProps, positionerProps, ...rest }) => {
-    const { animationScheme, duration, open, getContentProps } =
-      useComponentContext()
+  ({
+    portalProps: portalPropsProp,
+    positionerProps: positionerPropsProp,
+    ...rest
+  }) => {
+    const {
+      animationScheme,
+      duration,
+      open,
+      contentProps: { portalProps, positionerProps, ...contentProps } = {},
+      getContentProps,
+    } = useComponentContext()
     const popupAnimationProps = usePopupAnimationProps({
       animationScheme,
       duration,
@@ -304,12 +425,16 @@ export const PopoverContent = withContext<"div", PopoverContentProps>(
     return (
       <AnimatePresence>
         {open ? (
-          <Portal {...portalProps}>
-            <PopoverPositioner {...positionerProps}>
+          <Portal {...mergeProps(portalProps, portalPropsProp)()}>
+            <PopoverPositioner
+              {...mergeProps(positionerProps, positionerPropsProp)()}
+            >
               <motion.div
                 {...popupAnimationProps}
                 {...cast<HTMLMotionProps>(
-                  getContentProps(cast<HTMLProps>(rest)),
+                  getContentProps(
+                    cast<HTMLProps>(mergeProps(contentProps, rest)()),
+                  ),
                 )}
               />
             </PopoverPositioner>
@@ -321,15 +446,48 @@ export const PopoverContent = withContext<"div", PopoverContentProps>(
   "content",
 )()
 
+interface ShorthandPopoverContentProps {
+  /**
+   * The popover body to use.
+   */
+  body?: PopoverBodyProps | ReactNode
+  /**
+   * The popover footer to use.
+   */
+  footer?: PopoverFooterProps | ReactNode
+  /**
+   * The popover header to use.
+   */
+  header?: PopoverHeaderProps | ReactNode
+}
+
+const ShorthandPopoverContent: FC<ShorthandPopoverContentProps> = ({
+  body,
+  footer,
+  header,
+}) => {
+  const customHeader = wrapOrPassProps(PopoverHeader, header)
+  const customBody = wrapOrPassProps(PopoverBody, body)
+  const customFooter = wrapOrPassProps(PopoverFooter, footer)
+
+  return (
+    <PopoverContent>
+      {customHeader}
+      {customBody}
+      {customFooter}
+    </PopoverContent>
+  )
+}
+
 export interface PopoverHeaderProps extends HTMLStyledProps {}
 
 export const PopoverHeader = withContext<"div", PopoverHeaderProps>(
   "div",
   "header",
 )(undefined, (props) => {
-  const { getHeaderProps } = useComponentContext()
+  const { getHeaderProps, headerProps } = useComponentContext()
 
-  return getHeaderProps(props)
+  return getHeaderProps(mergeProps(headerProps, props)())
 })
 
 export interface PopoverBodyProps extends HTMLStyledProps {}
@@ -337,9 +495,9 @@ export interface PopoverBodyProps extends HTMLStyledProps {}
 export const PopoverBody = withContext<"div", PopoverBodyProps>("div", "body")(
   undefined,
   (props) => {
-    const { getBodyProps } = useComponentContext()
+    const { bodyProps, getBodyProps } = useComponentContext()
 
-    return getBodyProps(props)
+    return getBodyProps(mergeProps(bodyProps, props)())
   },
 )
 
@@ -349,7 +507,7 @@ export const PopoverFooter = withContext<"div", PopoverFooterProps>(
   "div",
   "footer",
 )(undefined, (props) => {
-  const { getFooterProps } = useComponentContext()
+  const { footerProps, getFooterProps } = useComponentContext()
 
-  return getFooterProps(props)
+  return getFooterProps(mergeProps(footerProps, props)())
 })

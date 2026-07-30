@@ -271,9 +271,19 @@
         "description": "The modal body to use.",
         "required": false
       },
+      "bodyProps": {
+        "type": "Omit<ModalBodyProps, \"children\">",
+        "description": "Props for body element.",
+        "required": false
+      },
       "cancel": {
         "type": "ButtonProps | ReactNode",
         "description": "The modal cancel button to use.",
+        "required": false
+      },
+      "closeButtonProps": {
+        "type": "Omit<ModalCloseButtonProps, \"children\">",
+        "description": "Props for close button element.",
         "required": false
       },
       "closeOnEsc": {
@@ -286,6 +296,16 @@
         "type": "boolean",
         "defaultValue": "true",
         "description": "If `true`, the modal will close when the overlay is clicked.",
+        "required": false
+      },
+      "closeTriggerProps": {
+        "type": "Omit<ModalCloseTriggerProps, \"asChild\" | \"children\">",
+        "description": "Props for close trigger element.",
+        "required": false
+      },
+      "contentProps": {
+        "type": "Omit<ModalContentProps, \"children\">",
+        "description": "Props for content element.",
         "required": false
       },
       "defaultOpen": {
@@ -309,9 +329,19 @@
         "description": "The modal footer to use.",
         "required": false
       },
+      "footerProps": {
+        "type": "Omit<ModalFooterProps, \"children\">",
+        "description": "Props for footer element.",
+        "required": false
+      },
       "header": {
         "type": "ModalHeaderProps | ReactNode",
         "description": "The modal header to use.",
+        "required": false
+      },
+      "headerProps": {
+        "type": "Omit<ModalHeaderProps, \"children\">",
+        "description": "Props for header element.",
         "required": false
       },
       "initialFocusRef": {
@@ -370,6 +400,16 @@
         "description": "If `true`, the element will be opened.",
         "required": false
       },
+      "openTriggerProps": {
+        "type": "Omit<ModalOpenTriggerProps, \"asChild\" | \"children\">",
+        "description": "Props for open trigger element.",
+        "required": false
+      },
+      "overlayProps": {
+        "type": "Omit<ModalOverlayProps, \"children\">",
+        "description": "Props for overlay element.",
+        "required": false
+      },
       "portalProps": {
         "type": "Omit<PortalProps, \"children\">",
         "description": "Props to be forwarded to the portal component.",
@@ -389,6 +429,11 @@
       "title": {
         "type": "ModalTitleProps | ReactNode",
         "description": "The modal title to use.",
+        "required": false
+      },
+      "titleProps": {
+        "type": "Omit<ModalTitleProps, \"children\">",
+        "description": "Props for title element.",
         "required": false
       },
       "trigger": {
@@ -703,9 +748,19 @@
       "description": "The modal body to use.",
       "required": false
     },
+    "bodyProps": {
+      "type": "Omit<ModalBodyProps, \"children\">",
+      "description": "Props for body element.",
+      "required": false
+    },
     "cancel": {
       "type": "ButtonProps | ReactNode",
       "description": "The modal cancel button to use.",
+      "required": false
+    },
+    "closeButtonProps": {
+      "type": "Omit<ModalCloseButtonProps, \"children\">",
+      "description": "Props for close button element.",
       "required": false
     },
     "closeOnEsc": {
@@ -718,6 +773,16 @@
       "type": "boolean",
       "defaultValue": "true",
       "description": "If `true`, the modal will close when the overlay is clicked.",
+      "required": false
+    },
+    "closeTriggerProps": {
+      "type": "Omit<ModalCloseTriggerProps, \"asChild\" | \"children\">",
+      "description": "Props for close trigger element.",
+      "required": false
+    },
+    "contentProps": {
+      "type": "Omit<ModalContentProps, \"children\">",
+      "description": "Props for content element.",
       "required": false
     },
     "defaultOpen": {
@@ -741,9 +806,19 @@
       "description": "The modal footer to use.",
       "required": false
     },
+    "footerProps": {
+      "type": "Omit<ModalFooterProps, \"children\">",
+      "description": "Props for footer element.",
+      "required": false
+    },
     "header": {
       "type": "ModalHeaderProps | ReactNode",
       "description": "The modal header to use.",
+      "required": false
+    },
+    "headerProps": {
+      "type": "Omit<ModalHeaderProps, \"children\">",
+      "description": "Props for header element.",
       "required": false
     },
     "initialFocusRef": {
@@ -802,6 +877,16 @@
       "description": "If `true`, the element will be opened.",
       "required": false
     },
+    "openTriggerProps": {
+      "type": "Omit<ModalOpenTriggerProps, \"asChild\" | \"children\">",
+      "description": "Props for open trigger element.",
+      "required": false
+    },
+    "overlayProps": {
+      "type": "Omit<ModalOverlayProps, \"children\">",
+      "description": "Props for overlay element.",
+      "required": false
+    },
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
       "description": "Props to be forwarded to the portal component.",
@@ -821,6 +906,11 @@
     "title": {
       "type": "ModalTitleProps | ReactNode",
       "description": "The modal title to use.",
+      "required": false
+    },
+    "titleProps": {
+      "type": "Omit<ModalTitleProps, \"children\">",
+      "description": "Props for title element.",
       "required": false
     },
     "trigger": {

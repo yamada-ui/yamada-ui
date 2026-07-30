@@ -10,6 +10,7 @@ import { useCounter } from "../../hooks/use-counter"
 import { useEventListener } from "../../hooks/use-event-listener"
 import {
   ariaAttr,
+  isActiveElement,
   isComposing,
   mergeRefs,
   runKeyAction,
@@ -289,8 +290,12 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     inputRef.current,
     "wheel",
     (ev) => {
-      const ownerDocument = inputRef.current?.ownerDocument ?? document
-      const focused = ownerDocument.activeElement === inputRef.current
+      if (!inputRef.current) return
+
+      const focused = isActiveElement(
+        inputRef.current,
+        inputRef.current.getRootNode(),
+      )
 
       if (!allowMouseWheel || !focused) return
 

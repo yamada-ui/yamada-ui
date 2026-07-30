@@ -1,5 +1,32 @@
 # @yamada-ui/react
 
+## 2.2.6
+
+### Patch Changes
+
+- [#7789](https://github.com/yamada-ui/yamada-ui/pull/7789) [`887506e`](https://github.com/yamada-ui/yamada-ui/commit/887506e743b48a07f928433e7a769c0a6e0d94d7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add props for the tooltip positioner element.
+
+- [#7791](https://github.com/yamada-ui/yamada-ui/pull/7791) [`cdb35ee`](https://github.com/yamada-ui/yamada-ui/commit/cdb35eeb3b432725683d9856aa45e24ef296730f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add shorthand content and slot props to Popover.
+
+- [#7778](https://github.com/yamada-ui/yamada-ui/pull/7778) [`fd1845b`](https://github.com/yamada-ui/yamada-ui/commit/fd1845b5872b0d509fc35e8abae4f2533e79a0e8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Prevent Popover from closing when its content is clicked inside a Shadow DOM.
+
+- [#7775](https://github.com/yamada-ui/yamada-ui/pull/7775) [`fedb63b`](https://github.com/yamada-ui/yamada-ui/commit/fedb63bac546ddb0fb8cd0e4003fc9449be92883) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix `none` focus ring presets so they clear previously applied box shadows.
+
+- [#7790](https://github.com/yamada-ui/yamada-ui/pull/7790) [`8c625c2`](https://github.com/yamada-ui/yamada-ui/commit/8c625c2c9995218bd8d910f46d230f3f28db9759) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add slot props to modal root.
+
+- [#7787](https://github.com/yamada-ui/yamada-ui/pull/7787) [`c1d56b6`](https://github.com/yamada-ui/yamada-ui/commit/c1d56b6ec94a54575ca527cf336e2116d461d563) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix NumberInput mouse wheel updates for focused inputs inside Shadow DOM.
+
+- [#7785](https://github.com/yamada-ui/yamada-ui/pull/7785) [`20fda34`](https://github.com/yamada-ui/yamada-ui/commit/20fda347d50f00747397a294671938d5218be8c2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Resolve event related targets from the active Shadow DOM element.
+
+- [#7792](https://github.com/yamada-ui/yamada-ui/pull/7792) [`28ee7d0`](https://github.com/yamada-ui/yamada-ui/commit/28ee7d0baeaf7454f489a272aa4f675863adb4f2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix focus locking for portalized content within modals in Shadow DOM.
+
+- [#7786](https://github.com/yamada-ui/yamada-ui/pull/7786) [`018cc36`](https://github.com/yamada-ui/yamada-ui/commit/018cc36de2528c721e7d758e1c5d6fff42ea027b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix focus management inside Shadow DOM.
+
+- [#7788](https://github.com/yamada-ui/yamada-ui/pull/7788) [`546d65e`](https://github.com/yamada-ui/yamada-ui/commit/546d65e5650df827f037d8637c190ce09620e190) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix Editable focus cleanup in Shadow DOM.
+
+- Updated dependencies [[`bbeeecb`](https://github.com/yamada-ui/yamada-ui/commit/bbeeecb9005c82cd4234c90b2219414c6587e8e9), [`c1d56b6`](https://github.com/yamada-ui/yamada-ui/commit/c1d56b6ec94a54575ca527cf336e2116d461d563), [`018cc36`](https://github.com/yamada-ui/yamada-ui/commit/018cc36de2528c721e7d758e1c5d6fff42ea027b), [`546d65e`](https://github.com/yamada-ui/yamada-ui/commit/546d65e5650df827f037d8637c190ce09620e190)]:
+  - @yamada-ui/utils@2.1.6
+
 ## 2.2.5
 
 ### Patch Changes

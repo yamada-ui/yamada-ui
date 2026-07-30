@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom"
 import { a11y, page, render } from "#test/browser"
 import { Editable } from "./"
 
@@ -187,6 +188,71 @@ describe("<Editable />", () => {
 
     expect(onSubmit).not.toHaveBeenCalled()
     expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
+  })
+
+  test("cancels without submitting when the input is blurred to a cancel trigger in shadow DOM", async () => {
+    const host = document.createElement("div")
+    const shadowRoot = host.attachShadow({ delegatesFocus: true, mode: "open" })
+    const onCancel = vi.fn()
+    const onSubmit = vi.fn()
+    document.body.appendChild(host)
+
+    try {
+      const { user } = await render(
+        createPortal(
+          <Editable.Root
+            defaultValue="Some text"
+            startWithEditView
+            onCancel={onCancel}
+            onSubmit={onSubmit}
+          >
+            <Editable.Preview />
+            <Editable.Input />
+            <Editable.CancelTrigger>
+              <button>Cancel</button>
+            </Editable.CancelTrigger>
+          </Editable.Root>,
+          shadowRoot,
+        ),
+        { providerProps: { rootNode: shadowRoot } },
+      )
+
+      await user.click(page.getByRole("button", { name: "Cancel" }))
+
+      expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
+      expect(onSubmit).not.toHaveBeenCalled()
+    } finally {
+      host.remove()
+    }
+  })
+
+  test("releases focus from the input after submitting in shadow DOM", async () => {
+    const host = document.createElement("div")
+    const shadowRoot = host.attachShadow({ mode: "open" })
+    document.body.appendChild(host)
+
+    try {
+      const { user } = await render(
+        createPortal(
+          <Editable.Root defaultValue="Some text" startWithEditView>
+            <Editable.Preview />
+            <Editable.Input />
+          </Editable.Root>,
+          shadowRoot,
+        ),
+        { providerProps: { rootNode: shadowRoot } },
+      )
+
+      const input = page.getByRole("textbox")
+      const inputRoot = input.element().getRootNode() as ShadowRoot
+
+      await user.click(input)
+      await expect.poll(() => inputRoot.activeElement).toBe(input.element())
+      await user.keyboard("{Enter}")
+      await expect.poll(() => inputRoot.activeElement).toBeNull()
+    } finally {
+      host.remove()
+    }
   })
 
   test("supports children as a function reflecting the editing state", async () => {

@@ -113,9 +113,12 @@ export function isFrame(el: any): el is HTMLIFrameElement {
 
 export function isActiveElement(
   el: HTMLElement,
-  rootNode: Document | ShadowRoot,
+  rootNode: Document | Node | ShadowRoot,
 ): boolean {
-  return getActiveElement(rootNode) === el
+  return (
+    (isDocument(rootNode) || isShadowRoot(rootNode)) &&
+    getActiveElement(rootNode) === el
+  )
 }
 
 export function isHiddenElement(el: HTMLElement): boolean {

@@ -161,6 +161,38 @@ describe("<Popover />", () => {
     }
   })
 
+  test("should not close when focus moves to content in shadow DOM without a related target", async () => {
+    const host = document.createElement("div")
+    const shadowRoot = host.attachShadow({ mode: "open" })
+    document.body.appendChild(host)
+
+    try {
+      const { user } = await render(createPortal(<Component />, shadowRoot), {
+        providerProps: { rootNode: shadowRoot },
+      })
+      const triggerButton = page.getByRole("button", {
+        name: "Popover Trigger",
+      })
+
+      await user.click(triggerButton)
+
+      const content = page.getByRole("dialog")
+
+      await user.click(content)
+      await expect.poll(() => shadowRoot.activeElement).toBe(content.element())
+
+      triggerButton
+        .element()
+        .dispatchEvent(
+          new FocusEvent("focusout", { bubbles: true, relatedTarget: null }),
+        )
+
+      await expect.element(content).toBeVisible()
+    } finally {
+      host.remove()
+    }
+  })
+
   test("should close when close trigger is activated", async () => {
     const { user } = await render(<ComponentWithCloseTrigger />)
 

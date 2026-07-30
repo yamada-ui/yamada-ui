@@ -95,7 +95,7 @@ export function getEventRelatedTarget(ev: React.FocusEvent | React.MouseEvent) {
       getRootNode?: () => Document | ShadowRoot
     }
   ).getRootNode
-  const root = getRootNode?.()
+  const root = getRootNode?.call(ev.currentTarget)
 
   return ((root && getActiveElement(root)) ??
     ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null

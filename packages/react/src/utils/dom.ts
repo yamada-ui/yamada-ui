@@ -90,9 +90,14 @@ export function useAttributeObserver(
 export function getEventRelatedTarget(ev: React.FocusEvent | React.MouseEvent) {
   if (ev.relatedTarget) return ev.relatedTarget as HTMLElement
 
-  const root = ev.currentTarget.getRootNode() as Document | ShadowRoot
+  const getRootNode = (
+    ev.currentTarget as unknown as {
+      getRootNode?: () => Document | ShadowRoot
+    }
+  ).getRootNode
+  const root = getRootNode?.()
 
-  return (getActiveElement(root) ??
+  return ((root && getActiveElement(root)) ??
     ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null
 }
 

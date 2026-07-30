@@ -14,7 +14,11 @@
     "hooks": ["use-value", "use-disclosure"],
     "providers": ["i18n-provider"]
   },
-  "dependents": { "components": ["drawer"], "hooks": [], "providers": [] },
+  "dependents": {
+    "components": ["drawer", "portal"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "components",
   "sources": [
     {

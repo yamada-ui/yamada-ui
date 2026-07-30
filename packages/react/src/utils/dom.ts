@@ -1,4 +1,4 @@
-import type { AnyString } from "@yamada-ui/utils"
+import { type AnyString, getActiveElement } from "@yamada-ui/utils"
 import * as React from "react"
 
 type KeyboardNavigationKey =
@@ -88,7 +88,11 @@ export function useAttributeObserver(
 }
 
 export function getEventRelatedTarget(ev: React.FocusEvent | React.MouseEvent) {
-  return (ev.relatedTarget ??
+  if (ev.relatedTarget) return ev.relatedTarget as HTMLElement
+
+  const root = ev.currentTarget.getRootNode() as Document | ShadowRoot
+
+  return (getActiveElement(root) ??
     ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null
 }
 

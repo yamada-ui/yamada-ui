@@ -35,11 +35,15 @@ export interface TooltipProps
   /**
    * Props for content element.
    */
-  contentProps?: HTMLMotionProps
+  contentProps?: TooltipContentProps
   /**
    * Props for portal component.
    */
   portalProps?: Omit<PortalProps, "children">
+  /**
+   * Props for positioner element.
+   */
+  positionerProps?: Omit<TooltipPositionerProps, "children">
 }
 
 const {
@@ -67,6 +71,7 @@ export const Tooltip: FC<TooltipProps> = (props) => {
       duration = 0.1,
       contentProps,
       portalProps,
+      positionerProps,
       ...rest
     },
   ] = useRootComponentProps(props)
@@ -88,7 +93,7 @@ export const Tooltip: FC<TooltipProps> = (props) => {
       <AnimatePresence>
         {open ? (
           <Portal {...portalProps}>
-            <TooltipPositioner {...getPositionerProps()}>
+            <TooltipPositioner {...getPositionerProps(positionerProps)}>
               <TooltipContent
                 {...popupAnimationProps}
                 {...cast<HTMLMotionProps>(

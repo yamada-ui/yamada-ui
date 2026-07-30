@@ -13,7 +13,7 @@ import type { UseModalProps, UseModalReturn } from "./use-modal"
 import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { cast, isArray, useSplitChildren, wrapOrPassProps } from "../../utils"
 import { Button } from "../button"
@@ -30,7 +30,19 @@ interface ComponentContext
   extends
     Omit<UseModalReturn, "getRootProps">,
     UsePopupAnimationProps,
-    Pick<ModalRootProps, "withCloseButton"> {}
+    Pick<
+      ModalRootProps,
+      | "bodyProps"
+      | "closeButtonProps"
+      | "closeTriggerProps"
+      | "contentProps"
+      | "footerProps"
+      | "headerProps"
+      | "openTriggerProps"
+      | "overlayProps"
+      | "titleProps"
+      | "withCloseButton"
+    > {}
 
 export interface ModalRootProps
   extends
@@ -76,9 +88,45 @@ export interface ModalRootProps
    */
   withOverlay?: boolean
   /**
+   * Props for body element.
+   */
+  bodyProps?: Omit<ModalBodyProps, "children">
+  /**
+   * Props for close button element.
+   */
+  closeButtonProps?: Omit<ModalCloseButtonProps, "children">
+  /**
+   * Props for close trigger element.
+   */
+  closeTriggerProps?: Omit<ModalCloseTriggerProps, "asChild" | "children">
+  /**
+   * Props for content element.
+   */
+  contentProps?: Omit<ModalContentProps, "children">
+  /**
+   * Props for footer element.
+   */
+  footerProps?: Omit<ModalFooterProps, "children">
+  /**
+   * Props for header element.
+   */
+  headerProps?: Omit<ModalHeaderProps, "children">
+  /**
+   * Props for open trigger element.
+   */
+  openTriggerProps?: Omit<ModalOpenTriggerProps, "asChild" | "children">
+  /**
+   * Props for overlay element.
+   */
+  overlayProps?: Omit<ModalOverlayProps, "children">
+  /**
    * Props to be forwarded to the portal component.
    */
   portalProps?: Omit<PortalProps, "children">
+  /**
+   * Props for title element.
+   */
+  titleProps?: Omit<ModalTitleProps, "children">
   /**
    * Callback function to run side effects after the modal has closed.
    */
@@ -126,7 +174,16 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
     trigger,
     withCloseButton = true,
     withOverlay = true,
+    bodyProps,
+    closeButtonProps,
+    closeTriggerProps,
+    contentProps,
+    footerProps,
+    headerProps,
+    openTriggerProps,
+    overlayProps,
     portalProps,
+    titleProps,
     onCancel,
     onCloseComplete,
     onMiddle,
@@ -149,9 +206,33 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
         duration,
         open,
         withCloseButton,
+        bodyProps,
+        closeButtonProps,
+        closeTriggerProps,
+        contentProps,
+        footerProps,
+        headerProps,
+        openTriggerProps,
+        overlayProps,
+        titleProps,
         ...rest,
       }),
-      [animationScheme, duration, open, withCloseButton, rest],
+      [
+        animationScheme,
+        duration,
+        open,
+        withCloseButton,
+        contentProps,
+        bodyProps,
+        footerProps,
+        headerProps,
+        titleProps,
+        openTriggerProps,
+        closeTriggerProps,
+        closeButtonProps,
+        overlayProps,
+        rest,
+      ],
     )
 
     return (
@@ -210,9 +291,12 @@ export const ModalOpenTrigger = withContext<"button", ModalOpenTriggerProps>(
   "button",
   { name: "OpenTrigger", slot: ["trigger", "open"] },
 )(undefined, (props) => {
-  const { getOpenTriggerProps } = useComponentContext()
+  const { getOpenTriggerProps, openTriggerProps } = useComponentContext()
 
-  return { asChild: true, ...getOpenTriggerProps(props) }
+  return {
+    asChild: true,
+    ...getOpenTriggerProps(mergeProps(openTriggerProps, props)()),
+  }
 })
 
 export interface ModalCloseTriggerProps extends HTMLStyledProps<"button"> {}
@@ -221,9 +305,12 @@ export const ModalCloseTrigger = withContext<"button", ModalCloseTriggerProps>(
   "button",
   { name: "CloseTrigger", slot: ["trigger", "close"] },
 )(undefined, (props) => {
-  const { getCloseTriggerProps } = useComponentContext()
+  const { closeTriggerProps, getCloseTriggerProps } = useComponentContext()
 
-  return { asChild: true, ...getCloseTriggerProps(props) }
+  return {
+    asChild: true,
+    ...getCloseTriggerProps(mergeProps(closeTriggerProps, props)()),
+  }
 })
 
 export interface ModalCloseButtonProps extends CloseButtonProps {}
@@ -232,9 +319,9 @@ export const ModalCloseButton = withContext<"button", ModalCloseButtonProps>(
   CloseButton,
   "closeButton",
 )(undefined, (props) => {
-  const { getCloseButtonProps } = useComponentContext()
+  const { closeButtonProps, getCloseButtonProps } = useComponentContext()
 
-  return { ...getCloseButtonProps(props) }
+  return { ...getCloseButtonProps(mergeProps(closeButtonProps, props)()) }
 })
 
 export interface ModalOverlayProps extends HTMLMotionProps {}
@@ -244,6 +331,7 @@ export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
     animationScheme,
     duration: durationProp,
     getOverlayProps,
+    overlayProps,
   } = useComponentContext()
   const duration = useValue(durationProp)
 
@@ -258,7 +346,9 @@ export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
             variants: fadeVariants,
           }
         : {})}
-      {...cast<HTMLMotionProps>(getOverlayProps(cast<HTMLProps>(props)))}
+      {...cast<HTMLMotionProps>(
+        getOverlayProps(cast<HTMLProps>(mergeProps(overlayProps, props)())),
+      )}
     />
   )
 }, "overlay")()
@@ -268,8 +358,13 @@ export interface ModalContentProps
 
 export const ModalContent = withContext<"section", ModalContentProps>(
   ({ children, ...rest }) => {
-    const { animationScheme, duration, withCloseButton, getContentProps } =
-      useComponentContext()
+    const {
+      animationScheme,
+      duration,
+      withCloseButton,
+      contentProps,
+      getContentProps,
+    } = useComponentContext()
     const [omittedChildren, customCloseButton] = useSplitChildren(
       children,
       ModalCloseButton,
@@ -283,7 +378,9 @@ export const ModalContent = withContext<"section", ModalContentProps>(
       <motion.section
         {...popupAnimationProps}
         {...cast<HTMLMotionPropsWithoutAs<"section">>(
-          getContentProps(cast<HTMLProps<"section">>(rest)),
+          getContentProps(
+            cast<HTMLProps<"section">>(mergeProps(contentProps, rest)()),
+          ),
         )}
       >
         {customCloseButton ?? (withCloseButton ? <ModalCloseButton /> : null)}
@@ -338,7 +435,7 @@ interface ShorthandModalContentProps {
   onSuccess?: (onClose: () => void) => void
 }
 
-export const ShorthandModalContent: FC<ShorthandModalContentProps> = ({
+const ShorthandModalContent: FC<ShorthandModalContentProps> = ({
   body,
   cancel,
   footer,
@@ -392,9 +489,9 @@ export const ModalHeader = withContext<"header", ModalHeaderProps>(
   "header",
   "header",
 )(undefined, (props) => {
-  const { getHeaderProps } = useComponentContext()
+  const { getHeaderProps, headerProps } = useComponentContext()
 
-  return { ...getHeaderProps(props) }
+  return { ...getHeaderProps(mergeProps(headerProps, props)()) }
 })
 
 export interface ModalTitleProps extends HTMLStyledProps<"h2"> {}
@@ -402,9 +499,9 @@ export interface ModalTitleProps extends HTMLStyledProps<"h2"> {}
 export const ModalTitle = withContext<"h2", ModalTitleProps>("h2", "title")(
   undefined,
   (props) => {
-    const { getTitleProps } = useComponentContext()
+    const { getTitleProps, titleProps } = useComponentContext()
 
-    return { ...getTitleProps(props) }
+    return { ...getTitleProps(mergeProps(titleProps, props)()) }
   },
 )
 
@@ -413,9 +510,9 @@ export interface ModalBodyProps extends HTMLStyledProps {}
 export const ModalBody = withContext<"div", ModalBodyProps>("div", "body")(
   undefined,
   (props) => {
-    const { getBodyProps } = useComponentContext()
+    const { bodyProps, getBodyProps } = useComponentContext()
 
-    return { ...getBodyProps(props) }
+    return { ...getBodyProps(mergeProps(bodyProps, props)()) }
   },
 )
 
@@ -425,7 +522,7 @@ export const ModalFooter = withContext<"footer", ModalFooterProps>(
   "footer",
   "footer",
 )(undefined, (props) => {
-  const { getFooterProps } = useComponentContext()
+  const { footerProps, getFooterProps } = useComponentContext()
 
-  return { ...getFooterProps(props) }
+  return { ...getFooterProps(mergeProps(footerProps, props)()) }
 })

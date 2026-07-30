@@ -38,6 +38,16 @@ export const Basic: Story = () => {
   )
 }
 
+export const PropsPattern: Story = () => {
+  return (
+    <Popover.Root
+      body="がんばれカカロット……お前がナンバー１だ！！"
+      header="ベジータ!"
+      trigger={<Button>Click me</Button>}
+    />
+  )
+}
+
 export const Size: Story = () => {
   return (
     <PropsTable variant="stack" rows={["xs", "sm", "md", "lg"]}>

@@ -3,11 +3,13 @@
 import type { RefObject } from "react"
 import { useCallback, useRef } from "react"
 import {
+  contains,
   getActiveElement,
   getDocument,
   getFirstFocusableElement,
   isRefObject,
   isSafari,
+  isShadowRoot,
   useUpdateEffect,
 } from "../../utils"
 import { useEventListener } from "../use-event-listener"
@@ -51,7 +53,9 @@ export const useFocusOnShow = <Y extends HTMLElement>(
     const target = getTarget()
 
     if (!target || !trulyShouldFocus || focused.current) return
-    if (target.contains(document.activeElement)) return
+    const rootNode = target.getRootNode()
+    const root = isShadowRoot(rootNode) ? rootNode : getDocument(target)
+    if (contains(target, getActiveElement(root))) return
 
     const focusTarget = getFocusTarget()
 
@@ -107,24 +111,22 @@ export const useFocusOnPointerDown = ({
   enabled,
 }: UseFocusOnMouseDownProps) => {
   useEventListener(
-    () => getDocument(ref.current),
+    () => ref.current?.getRootNode() ?? getDocument(ref.current),
     "pointerdown",
     (ev) => {
       if (!isSafari() || !enabled) return
+
       const target = ev.target as HTMLElement
-
       const els = elements ?? [ref]
-
+      const rootNode = ref.current?.getRootNode()
+      const root = isShadowRoot(rootNode) ? rootNode : getDocument(ref.current)
       const validTarget = els.some((elOrRef) => {
         const el = isRefObject(elOrRef) ? elOrRef.current : elOrRef
 
         return el?.contains(target) || el === target
       })
 
-      if (
-        getActiveElement(getDocument(ref.current)) !== target &&
-        validTarget
-      ) {
+      if (getActiveElement(root) !== target && validTarget) {
         ev.preventDefault()
 
         target.focus()

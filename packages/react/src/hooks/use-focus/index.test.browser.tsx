@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import type { UseFocusOnMouseDownProps, UseFocusOnShowProps } from "./"
-import { useRef } from "react"
+import { useCallback, useRef } from "react"
+import { createPortal } from "react-dom"
 import { a11y, page, render } from "#test/browser"
 import { useFocusOnPointerDown, useFocusOnShow } from "./"
 
@@ -171,6 +172,80 @@ describe("useFocusOnShow", () => {
     rerender(<ComponentWithActiveElement visible />)
 
     await expect.element(button).toHaveFocus()
+  })
+
+  test("does not move focus already inside a nested shadow root", async () => {
+    const ComponentInShadowDOM: FC<{
+      visible: boolean
+      onActiveButton: (activeButton: HTMLButtonElement) => void
+    }> = ({ visible, onActiveButton }) => {
+      const ref = useRef<HTMLDivElement>(null)
+      const focusRef = useRef<HTMLButtonElement>(null)
+      const nestedHostRef = useCallback(
+        (nestedHost: HTMLDivElement | null) => {
+          if (!nestedHost || nestedHost.shadowRoot) return
+
+          const nestedShadowRoot = nestedHost.attachShadow({ mode: "open" })
+          const activeButton = document.createElement("button")
+          activeButton.textContent = "Active Button"
+          nestedShadowRoot.appendChild(activeButton)
+          onActiveButton(activeButton)
+        },
+        [onActiveButton],
+      )
+      useFocusOnShow(ref, {
+        focusTarget: focusRef,
+        shouldFocus: true,
+        visible,
+      })
+
+      return (
+        <div ref={ref}>
+          <div ref={nestedHostRef} />
+          <button ref={focusRef}>Focus Button</button>
+        </div>
+      )
+    }
+    const host = document.createElement("div")
+    const shadowRoot = host.attachShadow({ mode: "open" })
+    document.body.appendChild(host)
+
+    try {
+      let activeButton!: HTMLButtonElement
+      const onActiveButton = (button: HTMLButtonElement) => {
+        activeButton = button
+      }
+      const { rerender } = await render(
+        createPortal(
+          <ComponentInShadowDOM
+            visible={false}
+            onActiveButton={onActiveButton}
+          />,
+          shadowRoot,
+        ),
+        { providerProps: { rootNode: shadowRoot } },
+      )
+
+      activeButton.focus()
+      rerender(
+        createPortal(
+          <ComponentInShadowDOM visible onActiveButton={onActiveButton} />,
+          shadowRoot,
+        ),
+      )
+      activeButton.dispatchEvent(
+        new Event("transitionend", { bubbles: true, composed: true }),
+      )
+      await new Promise<void>((resolve) =>
+        requestAnimationFrame(() => resolve()),
+      )
+
+      expect((activeButton.getRootNode() as ShadowRoot).activeElement).toBe(
+        activeButton,
+      )
+    } finally {
+      host.remove()
+    }
   })
 
   test("does not throw when ref.current is null", async () => {

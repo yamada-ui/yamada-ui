@@ -110,7 +110,7 @@
     "file-selector": "^2.1.2",
     "framesync": "6.1.2",
     "intl-messageformat": "^11.2.11",
-    "lucide-react": "1.25.0",
+    "lucide-react": "1.27.0",
     "motion": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
@@ -119,7 +119,7 @@
     "react-focus-lock": "^2.13.7",
     "react-remove-scroll": "^2.7.2",
     "react-resizable-panels": "^4.12.2",
-    "recharts": "^3.9.2",
+    "recharts": "^3.10.1",
     "scroll-into-view-if-needed": "catalog:",
     "sonner": "^2.0.7",
     "uqr": "^0.1.3"
@@ -148,7 +148,7 @@
     "use-mask-input": "^3.11.0",
     "vitest-axe": "catalog:",
     "vitest-browser-react": "2.2.0",
-    "web-features": "3.34.0",
+    "web-features": "3.34.2",
     "yamljs": "catalog:"
   },
   "peerDependencies": {

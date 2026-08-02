@@ -78,12 +78,12 @@
     "picocolors": "catalog:",
     "rimraf": "catalog:",
     "storybook": "^10.5.2",
-    "tsdown": "^0.22.12",
+    "tsdown": "^0.22.14",
     "tsx": "catalog:",
-    "turbo": "^2.10.5",
+    "turbo": "^2.10.7",
     "typescript": "catalog:",
     "vitest": "catalog:",
-    "wait-on": "^9.0.10"
+    "wait-on": "^9.1.0"
   },
   "pnpm": {
     "overrides": {

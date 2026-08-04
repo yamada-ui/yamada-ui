@@ -2,14 +2,14 @@
 
 import type { Component } from "../../../core"
 import type { IconProps } from "../icon"
-import { History as OriginalHistoryIcon } from "lucide-react"
+import { ScanSquare as OriginalScanSquareIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
- * `HistoryIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `ScanSquareIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const HistoryIcon = component(Icon)({
-  as: OriginalHistoryIcon,
+export const ScanSquareIcon = component(Icon)({
+  as: OriginalScanSquareIcon,
 }) as Component<"svg", IconProps>

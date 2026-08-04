@@ -49,7 +49,7 @@ export const Basic: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -65,7 +65,7 @@ export const Composition: Story = () => {
   return (
     <AreaChart.Root data={data}>
       <AreaChart.Tooltip
-        labelFormatter={(value) => dayjs(value).format("MMM")}
+        labelFormatter={(value) => dayjs(value as string).format("MMM")}
       />
       <AreaChart.XAxis
         dataKey="date"
@@ -101,7 +101,7 @@ export const Size: Story = () => {
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -133,7 +133,7 @@ export const ColorScheme: Story = () => {
             ) as AreaChart.AreaProps<Data>[]
           }
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -162,7 +162,7 @@ export const Gradient: Story = () => {
       series={series}
       areaProps={{ withGradient: true }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -189,7 +189,7 @@ export const Color: Story = () => {
       series={series}
       areaProps={{ stackId: "stack" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -216,7 +216,7 @@ export const Filled: Story = () => {
       series={series}
       areaProps={{ fillOpacity: "1", stackId: "stack" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -258,7 +258,7 @@ export const Type: Story = () => {
           series={series}
           areaProps={{ type }}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -290,7 +290,7 @@ export const Stacked: Story = () => {
         syncId="chart"
         areaProps={{ stackId: "stack" }}
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -300,7 +300,7 @@ export const Stacked: Story = () => {
 
       <AreaChart.Root data={data} series={series}>
         <AreaChart.Tooltip
-          labelFormatter={(value) => dayjs(value).format("MMM")}
+          labelFormatter={(value) => dayjs(value as string).format("MMM")}
         />
         <AreaChart.XAxis
           dataKey="date"
@@ -334,7 +334,7 @@ export const StackedExpanded: Story = () => {
       areaProps={{ stackId: "stack" }}
       chartProps={{ stackOffset: "expand" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -366,7 +366,7 @@ export const YAxis: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -444,7 +444,7 @@ export const Name: Story = () => {
       series={series}
       withLegend
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -500,7 +500,7 @@ export const Dot: Story = () => {
       series={series}
       areaProps={{ dot: true, label: true }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -531,7 +531,7 @@ export const Unit: Story = () => {
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
         formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -561,7 +561,7 @@ export const LabelList: Story = () => {
         series={series}
         areaProps={{ dot: true, label: true }}
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -586,7 +586,7 @@ export const LabelList: Story = () => {
           },
         }}
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         yAxisProps={{
           domain: [0, 10000],
@@ -624,7 +624,7 @@ export const Orientation: Story = () => {
             },
           }}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -656,7 +656,7 @@ export const Synced: Story = () => {
         series={series}
         syncId="chart"
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -669,7 +669,7 @@ export const Synced: Story = () => {
         series={series}
         syncId="chart"
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -707,7 +707,7 @@ export const ConnectNull: Story = () => {
       series={series}
       areaProps={{ connectNulls: true, dot: true }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -740,7 +740,7 @@ export const Formatter: Story = () => {
           Number(value).toLocaleString(),
           toTitleCase(name),
         ],
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -770,7 +770,7 @@ export const ReferenceLine: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -812,7 +812,7 @@ export const AxisTickLine: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -843,7 +843,7 @@ export const AxisLabel: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -874,7 +874,7 @@ export const Domain: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -906,7 +906,7 @@ export const TooltipCursor: Story = () => {
       series={series}
       tooltipProps={{
         cursor: true,
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -957,7 +957,7 @@ export const DisabledActiveDot: Story = () => {
       series={series}
       areaProps={{ activeDot: false }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1011,7 +1011,7 @@ export const CustomAxis: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1047,7 +1047,7 @@ export const CustomArea: Story = () => {
       series={series}
       areaProps={{ strokeDasharray: "15 15" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1074,7 +1074,7 @@ export const CustomReferenceLine: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1116,7 +1116,7 @@ export const CustomDot: Story = () => {
       series={series}
       areaProps={{ activeDot: false }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -1145,7 +1145,7 @@ export const CustomActiveDot: Story = () => {
       series={series}
       areaProps={{ activeDot: { fill: ["blue", "red"] } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -1173,7 +1173,7 @@ export const CustomLabelList: Story = () => {
         label: { color: "red" },
       }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -1206,7 +1206,7 @@ export const CustomGrid: Story = () => {
       series={series}
       gridProps={{ strokeDasharray: "15 15" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -1235,7 +1235,7 @@ export const CustomTooltipCursor: Story = () => {
       series={series}
       tooltipProps={{
         cursor: { stroke: ["red", "blue"] },
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",

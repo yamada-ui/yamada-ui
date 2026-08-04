@@ -78,19 +78,21 @@
     "picocolors": "catalog:",
     "rimraf": "catalog:",
     "storybook": "^10.5.4",
-    "tsdown": "^0.22.12",
+    "tsdown": "^0.22.14",
     "tsx": "catalog:",
-    "turbo": "^2.10.5",
+    "turbo": "^2.10.7",
     "typescript": "catalog:",
     "vitest": "catalog:",
-    "wait-on": "^9.0.10"
+    "wait-on": "^9.1.0"
   },
   "pnpm": {
     "overrides": {
       "axios": "^1.15.0",
       "esbuild@>=0.27.3 <0.28.1": "0.28.1",
       "follow-redirects": "^1.16.0",
-      "jsdom": "29.0.1"
+      "jsdom": "29.0.1",
+      "playwright": "^1.62.0",
+      "playwright-core": "^1.62.0"
     }
   }
 }

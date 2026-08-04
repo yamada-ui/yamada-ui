@@ -2,14 +2,14 @@
 
 import type { Component } from "../../../core"
 import type { IconProps } from "../icon"
-import { Podcast as OriginalPodcastIcon } from "lucide-react"
+import { LayoutFreeform as OriginalLayoutFreeformIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
- * `PodcastIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `LayoutFreeformIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const PodcastIcon = component(Icon)({
-  as: OriginalPodcastIcon,
+export const LayoutFreeformIcon = component(Icon)({
+  as: OriginalLayoutFreeformIcon,
 }) as Component<"svg", IconProps>

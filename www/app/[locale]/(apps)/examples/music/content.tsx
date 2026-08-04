@@ -12,8 +12,8 @@ import {
   Heading,
   HStack,
   Input,
+  MicSignalIcon,
   Modal,
-  PodcastIcon,
   SegmentedControl,
   Separator,
   Spacer,
@@ -247,7 +247,7 @@ function ContentPodcasts({ ...rest }: ContentPodcastsProps) {
         rounded="l3"
         w="full"
       >
-        <PodcastIcon color="fg.muted" fontSize="6xl" />
+        <MicSignalIcon color="fg.muted" fontSize="6xl" />
 
         <VStack alignItems="center" gap="sm">
           <Heading as="h3" size="xl">

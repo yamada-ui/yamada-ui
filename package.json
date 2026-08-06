@@ -88,11 +88,13 @@
   "pnpm": {
     "overrides": {
       "axios": "^1.15.0",
+      "brace-expansion@5": "5.0.9",
       "esbuild@>=0.27.3 <0.28.1": "0.28.1",
       "follow-redirects": "^1.16.0",
       "jsdom": "29.0.1",
       "playwright": "^1.62.0",
-      "playwright-core": "^1.62.0"
+      "playwright-core": "^1.62.0",
+      "sharp": "0.35.3"
     }
   }
 }

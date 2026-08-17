@@ -40,20 +40,6 @@ const DEFAULT_LANGUAGE: Language = {
 
 export const LOCALES = Object.keys(INTL) as readonly Locale[]
 
-export function getLanguage(locale?: string, dir?: TextDirection): Language {
-  locale ??= createdDom() ? navigator.language : DEFAULT_LOCALE
-
-  try {
-    Intl.DateTimeFormat.supportedLocalesOf([locale])
-  } catch (_err) {
-    locale = DEFAULT_LOCALE
-  }
-
-  dir ??= isRtl(locale) ? "rtl" : "ltr"
-
-  return { dir, locale }
-}
-
 type IntlData = DefaultIntlData
 type IntlKey = keyof IntlData
 type IntlPath = Path<IntlData>
@@ -94,6 +80,10 @@ export interface I18nProviderProps {
    */
   dir?: TextDirection
   /**
+   * The fallback locale to use if no matching locale is available.
+   */
+  fallbackLocale?: AnyString | Locale
+  /**
    * The formats to pass to the `intlMessageFormat` instance.
    */
   formats?: Formats
@@ -118,24 +108,105 @@ export interface I18nProviderProps {
 export const I18nProvider: FC<I18nProviderProps> = ({
   children,
   dir: forcedDir,
+  fallbackLocale = DEFAULT_LOCALE,
   formats,
-  intl = INTL as Dict,
+  intl: forcedIntl,
   intlMessageFormatOptions,
   locale: forcedLocale,
 }) => {
-  const [language, setLanguage] = useState(getLanguage(forcedLocale, forcedDir))
+  const intl = useMemo<Dict>(() => {
+    if (!forcedIntl) return INTL
+
+    if (isEmptyObject(forcedIntl)) return INTL
+
+    return forcedIntl
+  }, [forcedIntl])
+  const locales = useMemo(() => Object.keys(intl), [intl])
+
+  const getFallbackLocale = useCallback(
+    (language?: string) => {
+      if (language)
+        for (const key of locales) if (key.startsWith(language)) return key
+
+      if (locales.includes(fallbackLocale)) return fallbackLocale
+
+      if (createdDom()) {
+        try {
+          const { language } = new Intl.Locale(fallbackLocale)
+
+          for (const key of locales) if (key.startsWith(language)) return key
+        } catch {
+          return locales[0]!
+        }
+      } else {
+        const language = fallbackLocale.split("-")[0]!
+
+        for (const key of locales) if (key.startsWith(language)) return key
+      }
+
+      return locales[0]!
+    },
+    [locales, fallbackLocale],
+  )
+
+  const getLocale = useCallback(
+    (forcedLocale?: string) => {
+      if (forcedLocale) {
+        if (locales.includes(forcedLocale)) return forcedLocale
+
+        const language = forcedLocale.split("-")[0]!
+
+        return getFallbackLocale(language)
+      } else if (createdDom()) {
+        try {
+          const { language, region } = new Intl.Locale(navigator.language)
+          const locale = `${language}-${region}`
+
+          return locales.includes(locale) ? locale : getFallbackLocale(language)
+        } catch {
+          return getFallbackLocale()
+        }
+      } else {
+        return getFallbackLocale()
+      }
+    },
+    [locales, getFallbackLocale],
+  )
+
+  const getLanguage = useCallback(
+    (locale?: string, dir?: TextDirection): Language => {
+      locale = getLocale(locale)
+
+      try {
+        Intl.DateTimeFormat.supportedLocalesOf([locale])
+      } catch {
+        locale = getFallbackLocale()
+      }
+
+      dir ??= isRtl(locale) ? "rtl" : "ltr"
+
+      return { dir, locale }
+    },
+    [getLocale, getFallbackLocale],
+  )
+
+  const [{ dir, locale }, setLanguage] = useState(
+    getLanguage(forcedLocale, forcedDir),
+  )
   const controlled = !isUndefined(forcedLocale)
-  const { locale } = language
 
   const messages = useMemo(() => intl[locale], [intl, locale])
 
   const changeSystemLanguage = useCallback(() => {
     setLanguage(getLanguage())
-  }, [])
+  }, [getLanguage])
 
-  const changeLanguage = useCallback((locale?: string, dir?: TextDirection) => {
-    setLanguage(getLanguage(locale, dir))
-  }, [])
+  const changeLanguage = useCallback(
+    (locale?: string, dir?: TextDirection) => {
+      setLanguage(getLanguage(locale, dir))
+    },
+    [getLanguage],
+  )
 
   const getValue = useCallback(
     (path: number | string) => {
@@ -198,11 +269,16 @@ export const I18nProvider: FC<I18nProviderProps> = ({
     [getValue, locale, formats, intlMessageFormatOptions],
   )
 
-  const value = useMemo(() => {
-    const rest = { changeLanguage, getTranslation, t: getTranslation() }
-
-    return { ...language, ...rest }
-  }, [changeLanguage, getTranslation, language])
+  const value = useMemo(
+    () => ({
+      changeLanguage,
+      dir,
+      getTranslation,
+      locale,
+      t: getTranslation(),
+    }),
+    [changeLanguage, dir, getTranslation, locale],
+  )
 
   useEffect(() => {
     if (controlled) return
@@ -216,7 +292,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({
 
   useUpdateEffect(() => {
     setLanguage(getLanguage(forcedLocale, forcedDir))
-  }, [forcedLocale, forcedDir])
+  }, [forcedLocale, forcedDir, getLanguage])
 
   return <I18nContext value={value}>{children}</I18nContext>
 }

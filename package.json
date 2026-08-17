@@ -88,6 +88,7 @@
   "pnpm": {
     "overrides": {
       "axios": "^1.15.0",
+      "@babel/types": "7.29.8",
       "brace-expansion@5": "5.0.9",
       "esbuild@>=0.27.3 <0.28.1": "0.28.1",
       "follow-redirects": "^1.16.0",

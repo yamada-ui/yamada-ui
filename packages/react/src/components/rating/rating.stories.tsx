@@ -6,11 +6,11 @@ import { COLOR_SCHEMES } from "../../utils"
 import { Field } from "../field"
 import {
   FaceAngryIcon,
-  FaceSlightlyFrowningIcon,
-  GhostIcon,
-  FaceNeutralIcon,
-  FaceSlightlySmilingIcon,
   FaceGrinningIcon,
+  FaceNeutralIcon,
+  FaceSlightlyFrowningIcon,
+  FaceSlightlySmilingIcon,
+  GhostIcon,
 } from "../icon"
 
 type Story = StoryFn<typeof Rating>

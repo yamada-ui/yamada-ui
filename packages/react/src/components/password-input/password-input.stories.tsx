@@ -9,8 +9,8 @@ import { Field } from "../field"
 import { For } from "../for"
 import {
   FaceSlightlyFrowningIcon,
-  KeyIcon,
   FaceSlightlySmilingIcon,
+  KeyIcon,
 } from "../icon"
 import { InputGroup } from "../input"
 import { VStack } from "../stack"

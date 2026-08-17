@@ -2,40 +2,7 @@ import type { FC } from "react"
 import { useContext } from "react"
 import { act, render, renderHook, screen, waitFor } from "#test"
 import { noop } from "../../utils"
-import {
-  getLanguage,
-  I18nContext,
-  I18nProvider,
-  useI18n,
-} from "./i18n-provider"
-
-describe("getLanguage", () => {
-  test("returns language with provided locale", () => {
-    const lang = getLanguage("ja")
-
-    expect(lang.locale).toBe("ja")
-    expect(lang.dir).toBe("ltr")
-  })
-
-  test("returns rtl direction for rtl locale", () => {
-    const lang = getLanguage("ar")
-
-    expect(lang.dir).toBe("rtl")
-  })
-
-  test("falls back to default for unsupported locale", () => {
-    const lang = getLanguage("invalid-xxxxx-yyy")
-
-    expect(lang.locale).toBe("en-US")
-  })
-
-  test("uses provided dir override", () => {
-    const lang = getLanguage("en", "rtl")
-
-    expect(lang.locale).toBe("en")
-    expect(lang.dir).toBe("rtl")
-  })
-})
+import { I18nContext, I18nProvider, useI18n } from "./i18n-provider"
 
 describe("I18nProvider", () => {
   test("renders children", () => {
@@ -70,12 +37,12 @@ describe("I18nProvider", () => {
       { withProvider: false },
     )
 
-    expect(screen.getByTestId("locale").textContent).toBe("en")
+    expect(screen.getByTestId("locale").textContent).toBe("en-GB")
 
     await user.click(screen.getByTestId("change"))
 
     await waitFor(() => {
-      expect(screen.getByTestId("locale").textContent).toBe("ja")
+      expect(screen.getByTestId("locale").textContent).toBe("ja-JP")
     })
   })
 
@@ -159,7 +126,7 @@ describe("I18nProvider", () => {
       { withProvider: false },
     )
 
-    expect(screen.getByTestId("locale").textContent).toBe("en")
+    expect(screen.getByTestId("locale").textContent).toBe("en-GB")
 
     rerender(
       <I18nProvider locale="ja">
@@ -168,7 +135,105 @@ describe("I18nProvider", () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByTestId("locale").textContent).toBe("ja")
+      expect(screen.getByTestId("locale").textContent).toBe("ja-JP")
+    })
+  })
+
+  test("uses language-only messages for a regional locale", () => {
+    const intl = {
+      ja: {
+        closeButton: {
+          Close: "閉じる",
+        },
+      },
+    }
+
+    const { result } = renderHook(() => useI18n(), {
+      providerProps: { intl, locale: "ja-JP" },
+    })
+
+    expect(result.current.locale).toBe("ja")
+    expect(result.current.t("closeButton.Close" as any)).toBe("閉じる")
+  })
+
+  test("uses an available fallback locale", () => {
+    const intl = {
+      "en-GB": {
+        closeButton: {
+          Close: "Close",
+        },
+      },
+    }
+
+    const { result } = renderHook(() => useI18n(), {
+      providerProps: { intl, locale: "jk" },
+    })
+
+    expect(result.current.locale).toBe("en-GB")
+    expect(result.current.t("closeButton.Close" as any)).toBe("Close")
+  })
+
+  test("determines direction from locale", () => {
+    const { result } = renderHook(() => useI18n(), {
+      providerProps: { locale: "ar" },
+    })
+
+    expect(result.current.locale).toBe("ar-AE")
+    expect(result.current.dir).toBe("rtl")
+  })
+
+  test("uses a forced direction", () => {
+    const { result } = renderHook(() => useI18n(), {
+      providerProps: { dir: "rtl", locale: "en" },
+    })
+
+    expect(result.current.locale).toBe("en-GB")
+    expect(result.current.dir).toBe("rtl")
+  })
+
+  test("re-resolves the locale when intl changes", async () => {
+    const englishIntl = {
+      "en-US": {
+        closeButton: {
+          Close: "Close",
+        },
+      },
+    }
+    const japaneseIntl = {
+      "ja-JP": {
+        closeButton: {
+          Close: "閉じる",
+        },
+      },
+    }
+    const TestComponent: FC = () => {
+      const { locale, t } = useI18n()
+
+      return (
+        <>
+          <span data-testid="locale">{locale}</span>
+          <span data-testid="translation">{t("closeButton.Close" as any)}</span>
+        </>
+      )
+    }
+    const { rerender } = render(
+      <I18nProvider intl={englishIntl} locale="ja">
+        <TestComponent />
+      </I18nProvider>,
+      { withProvider: false },
+    )
+
+    expect(screen.getByTestId("locale").textContent).toBe("en-US")
+
+    rerender(
+      <I18nProvider intl={japaneseIntl} locale="ja">
+        <TestComponent />
+      </I18nProvider>,
+    )
+
+    await waitFor(() => {
+      expect(screen.getByTestId("locale").textContent).toBe("ja-JP")
+      expect(screen.getByTestId("translation").textContent).toBe("閉じる")
     })
   })
 

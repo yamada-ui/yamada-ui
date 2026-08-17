@@ -51,7 +51,10 @@ export const UIProvider: FC<UIProviderProps> = ({
   config = defaultConfig,
   cookie,
   dir,
+  fallbackLocale,
+  formats,
   intl,
+  intlMessageFormatOptions,
   locale,
   rootNode,
   storage,
@@ -60,7 +63,14 @@ export const UIProvider: FC<UIProviderProps> = ({
 }) => {
   return (
     <EnvironmentProvider value={rootNode}>
-      <I18nProvider dir={dir} intl={intl} locale={locale}>
+      <I18nProvider
+        dir={dir}
+        fallbackLocale={fallbackLocale}
+        formats={formats}
+        intl={intl}
+        intlMessageFormatOptions={intlMessageFormatOptions}
+        locale={locale}
+      >
         <SystemProvider config={config} theme={theme}>
           <ThemeProvider
             config={config}

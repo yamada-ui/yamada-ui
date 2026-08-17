@@ -80,7 +80,7 @@
     "storybook": "^10.5.7",
     "tsdown": "^0.22.14",
     "tsx": "catalog:",
-    "turbo": "^2.10.7",
+    "turbo": "^2.10.9",
     "typescript": "catalog:",
     "vitest": "catalog:",
     "wait-on": "^9.1.0"
@@ -88,6 +88,7 @@
   "pnpm": {
     "overrides": {
       "axios": "^1.15.0",
+      "@babel/types": "7.29.8",
       "brace-expansion@5": "5.0.9",
       "esbuild@>=0.27.3 <0.28.1": "0.28.1",
       "follow-redirects": "^1.16.0",

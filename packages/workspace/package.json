@@ -27,7 +27,7 @@
   "dependencies": {
     "@cspell/eslint-plugin": "^10.0.1",
     "@limegrass/eslint-plugin-import-alias": "^1.6.1",
-    "@octokit/request-error": "^7.1.0",
+    "@octokit/request-error": "^7.1.1",
     "@octokit/rest": "^22.0.1",
     "@octokit/webhooks": "^14.2.0",
     "@stylistic/eslint-plugin": "^5.10.0",
@@ -37,7 +37,7 @@
     "eslint-plugin-perfectionist": "^5.10.1",
     "eslint-plugin-testing-library": "^7.16.2",
     "eslint-plugin-unused-imports": "catalog:",
-    "globals": "^17.8.0",
+    "globals": "^17.9.0",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
     "oxlint-tsgolint": "catalog:",

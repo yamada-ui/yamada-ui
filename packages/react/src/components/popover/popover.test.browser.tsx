@@ -1,7 +1,8 @@
 import { createPortal } from "react-dom"
-import { page, render } from "#test/browser"
+import { a11y, page, render } from "#test/browser"
 import { Popover } from "."
 import { Button } from "../button"
+import { Menu } from "../menu"
 
 describe("<Popover />", () => {
   const Component = (props: Popover.RootProps) => {
@@ -39,6 +40,33 @@ describe("<Popover />", () => {
       </Popover.Root>
     )
   }
+
+  const ComponentWithMenu = () => {
+    return (
+      <Popover.Root>
+        <Popover.Trigger>
+          <Button>Popover Trigger</Button>
+        </Popover.Trigger>
+
+        <Popover.Content>
+          <Menu.Root>
+            <Menu.Trigger>
+              <Button>Menu Trigger</Button>
+            </Menu.Trigger>
+
+            <Menu.Content>
+              <Menu.Item value="item-1">Menu Item 1</Menu.Item>
+              <Menu.Item value="item-2">Menu Item 2</Menu.Item>
+            </Menu.Content>
+          </Menu.Root>
+        </Popover.Content>
+      </Popover.Root>
+    )
+  }
+
+  test("passes a11y checks", async () => {
+    await a11y(<Component defaultOpen />)
+  })
 
   test("should close with escape key", async () => {
     const { user } = await render(<Component />)
@@ -131,6 +159,20 @@ describe("<Popover />", () => {
     await expect.poll(() => page.getByText("Popover Header").query()).toBeNull()
     await expect.poll(() => page.getByText("Popover Body").query()).toBeNull()
     await expect.poll(() => page.getByText("Popover Footer").query()).toBeNull()
+  })
+
+  test("keeps parent popover open when hovering portalled menu items", async () => {
+    const { user } = await render(<ComponentWithMenu />)
+
+    await user.click(page.getByRole("button", { name: "Popover Trigger" }))
+    await user.click(page.getByRole("button", { name: "Menu Trigger" }))
+    await user.hover(page.getByRole("menuitem", { name: "Menu Item 1" }))
+    await user.hover(page.getByRole("menuitem", { name: "Menu Item 2" }))
+
+    await expect
+      .element(page.getByRole("menuitem", { name: "Menu Item 2" }))
+      .toHaveFocus()
+    await expect.element(page.getByRole("dialog")).toBeVisible()
   })
 
   test("should not close when content is clicked in shadow DOM", async () => {

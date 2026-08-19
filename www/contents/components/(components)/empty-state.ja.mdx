@@ -41,6 +41,14 @@ import { EmptyState } from "@workspaces/ui"
 </EmptyState.Root>
 ```
 
+:::tip
+データの読み込み中は、[Loading](/docs/components/loading)や[Skeleton](/docs/components/skeleton)を使用します。`EmptyState`は、読み込み完了後にリソースが空または利用できない場合に使用します。
+:::
+
+:::tip
+リソースが空または利用できない状態ではなくユーザーに情報を伝達したい場合は、[Alert](/docs/components/alert)を使用します。
+:::
+
 ### サイズを変更する
 
 ```tsx preview

@@ -2,7 +2,7 @@
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": ["button", "tooltip"],
-    "externals": ["recharts@^3.9.2"],
+    "externals": ["recharts@^3.10.1"],
     "hooks": [],
     "providers": []
   },

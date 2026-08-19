@@ -193,11 +193,11 @@ export const usePopover = ({
   const onBlur = useCallback(
     (ev: FocusEvent<HTMLDivElement>) => {
       const relatedTarget = getEventRelatedTarget(ev)
-      const popup = relatedTarget?.hasAttribute("data-popup")
+      const popup = relatedTarget?.closest("[data-popup]")
 
+      if (popup) return
       if (contains(triggerRef.current, relatedTarget)) return
       if (contains(contentRef.current, relatedTarget)) return
-      if (contains(contentRef.current, ev.target) && popup) return
 
       if (closeOnBlur) onClose()
     },

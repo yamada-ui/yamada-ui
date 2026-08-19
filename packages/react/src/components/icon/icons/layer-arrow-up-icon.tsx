@@ -2,14 +2,14 @@
 
 import type { Component } from "../../../core"
 import type { IconProps } from "../icon"
-import { Annoyed as OriginalAnnoyedIcon } from "lucide-react"
+import { LayerArrowUp as OriginalLayerArrowUpIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
- * `AnnoyedIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `LayerArrowUpIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const AnnoyedIcon = component(Icon)({
-  as: OriginalAnnoyedIcon,
+export const LayerArrowUpIcon = component(Icon)({
+  as: OriginalLayerArrowUpIcon,
 }) as Component<"svg", IconProps>

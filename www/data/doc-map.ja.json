@@ -1342,6 +1342,11 @@
           "segment": "react",
           "items": [
             {
+              "title": "v2.2.7",
+              "segment": "2-2-7",
+              "pathname": "/docs/changelog/react/2-2-7"
+            },
+            {
               "title": "v2.2.6",
               "segment": "2-2-6",
               "pathname": "/docs/changelog/react/2-2-6"
@@ -1506,6 +1511,11 @@
               "title": "v2.1.2",
               "segment": "2-1-2",
               "pathname": "/docs/changelog/cli/2-1-2"
+            },
+            {
+              "title": "v2.1.12",
+              "segment": "2-1-12",
+              "pathname": "/docs/changelog/cli/2-1-12"
             },
             {
               "title": "v2.1.11",

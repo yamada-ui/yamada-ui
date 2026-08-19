@@ -55,14 +55,14 @@
     "@changesets/types": "^6.1.0",
     "@commitlint/cli": "^20.5.2",
     "@commitlint/config-conventional": "^20.5.0",
-    "@storybook/addon-a11y": "^10.5.2",
-    "@storybook/addon-docs": "^10.5.2",
-    "@storybook/cli": "^10.5.2",
-    "@storybook/react-vite": "^10.5.2",
+    "@storybook/addon-a11y": "^10.5.7",
+    "@storybook/addon-docs": "^10.5.7",
+    "@storybook/cli": "^10.5.7",
+    "@storybook/react-vite": "^10.5.7",
     "@storybook/test-runner": "^0.24.4",
     "@types/node": "^25.9.5",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "@typescript/analyze-trace": "^0.11.0",
     "@typescript/native-preview": "catalog:",
     "@vitest/coverage-istanbul": "^4.1.10",
@@ -77,20 +77,25 @@
     "oxlint-tsgolint": "catalog:",
     "picocolors": "catalog:",
     "rimraf": "catalog:",
-    "storybook": "^10.5.2",
-    "tsdown": "^0.22.12",
+    "storybook": "^10.5.7",
+    "tsdown": "^0.22.14",
     "tsx": "catalog:",
-    "turbo": "^2.10.5",
+    "turbo": "^2.10.9",
     "typescript": "catalog:",
     "vitest": "catalog:",
-    "wait-on": "^9.0.10"
+    "wait-on": "^9.1.0"
   },
   "pnpm": {
     "overrides": {
       "axios": "^1.15.0",
+      "@babel/types": "7.29.8",
+      "brace-expansion@5": "5.0.9",
       "esbuild@>=0.27.3 <0.28.1": "0.28.1",
       "follow-redirects": "^1.16.0",
-      "jsdom": "29.0.1"
+      "jsdom": "29.0.1",
+      "playwright": "^1.62.0",
+      "playwright-core": "^1.62.0",
+      "sharp": "0.35.3"
     }
   }
 }

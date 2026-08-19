@@ -6,7 +6,11 @@
     "hooks": ["use-descendants", "use-disclosure", "use-controllable-state"],
     "providers": []
   },
-  "dependents": { "components": ["select"], "hooks": [], "providers": [] },
+  "dependents": {
+    "components": ["popover", "select"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "components",
   "sources": [
     {

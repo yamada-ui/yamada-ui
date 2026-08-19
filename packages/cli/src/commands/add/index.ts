@@ -39,6 +39,7 @@ interface Options {
   sequential: boolean
   yes: boolean
   format?: boolean
+  headless?: boolean
   lint?: boolean
   tag?: string
 }
@@ -57,6 +58,8 @@ export const add = new Command("add")
   .option("--no-format", "do not format the output files.")
   .option("-l, --lint", "lint the output files.")
   .option("--no-lint", "do not lint the output files.")
+  .option("--headless", "generate the component styles empty.")
+  .option("--no-headless", "generate the component styles with default values.")
   .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
   .action(async function (
     componentNames: string[],
@@ -64,6 +67,7 @@ export const add = new Command("add")
       config: configPath,
       cwd,
       format,
+      headless,
       install,
       lint,
       overwrite,
@@ -220,17 +224,28 @@ export const add = new Command("add")
         ...new Set([...omittedGeneratedNames, ...registryNames]),
       ]
 
+      const globalHeadless = config.components?.headless ?? false
+      const componentHeadless = headless ?? globalHeadless
+      const persistHeadless =
+        !isUndefined(headless) && headless !== globalHeadless
+
       const tasks = new Listr(
         Object.entries(registries)
           .map(([name, registry]): ListrTask | undefined => {
             if (!config.isSection(registry.section)) return
 
+            const components = registry.section === "components"
             const sectionPath = config.getSectionResolvedPath(registry.section)
             const dirPath = path.join(sectionPath, name)
 
+            if (components && persistHeadless)
+              registry = { ...registry, headless }
+
             return {
               task: async (_, task) => {
-                await generateSources(dirPath, registry, config, targetNames)
+                await generateSources(dirPath, registry, config, targetNames, {
+                  headless: components && componentHeadless,
+                })
 
                 task.title = `Generated ${c.cyan(name)}`
               },

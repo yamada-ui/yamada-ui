@@ -40,18 +40,19 @@ interface Options {
 }
 
 export const diff = new Command("diff")
-  .description("check for updates against the registry.")
-  .argument("[component]", "component to check.")
-  .option("--cwd <path>", "current working directory.", cwd)
-  .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
-  .option("-s, --sequential", "run tasks sequentially.", false)
-  .option("-d, --detail", "show detailed changes.", false)
-  .option("-y, --yes", "skip all confirmation prompts.", false)
-  .option("-u, --update", "update files when there are file diff.")
-  .option("--no-update", "do not update files when there are file diff.")
-  .option("-i, --install", "install dependencies when updating files.")
-  .option("--no-install", "do not install dependencies when updating files.")
-  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
+  .description("Check for updates against the registry.")
+  .helpOption("-h, --help", "Display help for command.")
+  .argument("[component]", "Component to check.")
+  .option("--cwd <path>", "Current working directory.", cwd)
+  .option("-c, --config <path>", "Path to the config file.", CONFIG_FILE_NAME)
+  .option("-s, --sequential", "Run tasks sequentially.", false)
+  .option("-d, --detail", "Show detailed changes.", false)
+  .option("-y, --yes", "Skip all confirmation prompts.", false)
+  .option("-u, --update", "Update files when there are file diff.")
+  .option("--no-update", "Do not update files when there are file diff.")
+  .option("-i, --install", "Install dependencies when updating files.")
+  .option("--no-install", "Do not install dependencies when updating files.")
+  .option("-t, --tag <name>", "Tag for the registries (e.g. dev, next).")
   .action(async function (
     targetName: string | undefined,
     {

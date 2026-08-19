@@ -25,8 +25,14 @@ export function run() {
   console.log(`${c.dim(packageJson.description)}\n`)
 
   const program = new Command("Yamada UI CLI")
-    .version(packageJson.version, "-v, --version", "display the version number")
+    .version(
+      packageJson.version,
+      "-v, --version",
+      "Display the version number.",
+    )
     .usage(`${c.green("<command>")} [options]`)
+    .helpOption("-h, --help", "Display help for command.")
+    .helpCommand("help [command]", "Display help for command.")
 
   program.addCommand(init)
   program.addCommand(add)

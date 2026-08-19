@@ -980,7 +980,7 @@
       "components": ["popover", "button", "icon"],
       "hooks": ["use-descendants", "use-disclosure"]
     },
-    "dependents": { "components": ["select"], "hooks": [] },
+    "dependents": { "components": ["popover", "select"], "hooks": [] },
     "resembles": [
       "select",
       "autocomplete",
@@ -1194,6 +1194,7 @@
       "components": [
         "native-popover",
         "button",
+        "menu",
         "motion",
         "portal",
         "fade-scale",

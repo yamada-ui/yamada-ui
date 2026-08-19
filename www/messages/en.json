@@ -80,6 +80,14 @@
       "pink": "Pink"
     }
   },
+  "guides": {
+    "title": "Guides",
+    "description": "Find answers to common questions related to Yamada UI.",
+    "guides": "{count, plural, =1 {# guide} other {# guides}}",
+    "backToGuides": "Back to Guides",
+    "searchPlaceholder": "Search guides...",
+    "notFound": "No results found for \"{value}\"."
+  },
   "changelog": {
     "title": "Changelog",
     "latest": "Explore the changelog for the latest version of Yamada UI. Learn about the features, bug fixes, and improvements.",
@@ -95,6 +103,7 @@
       "icons": "Icons",
       "playground": "Playground",
       "themes": "Themes",
+      "guides": "Guides",
       "colors": "Colors",
       "github": "GitHub repository",
       "colorMode": "Change to {colorMode}",

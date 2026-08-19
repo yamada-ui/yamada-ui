@@ -14,11 +14,7 @@ import type {
 import { withEmotionCache } from "@emotion/react"
 import { serializeStyles } from "@emotion/serialize"
 import { useInsertionEffectAlwaysWithSyncFallback } from "@emotion/use-insertion-effect-with-fallbacks"
-import {
-  getRegisteredStyles,
-  insertStyles,
-  registerStyles,
-} from "@emotion/utils"
+import { getRegisteredStyles, registerStyles } from "@emotion/utils"
 import { useMemo, useRef } from "react"
 import isEqual from "react-fast-compare"
 import { Slot } from "../../components/slot"
@@ -50,11 +46,57 @@ interface InsertionProps {
   serialized: SerializedStyles
 }
 
+function normalizeHostSelector(rule: string, className: string) {
+  const selector = `.${className}`
+
+  return rule
+    .replaceAll(
+      `${selector}:host([data-mode=dark]) ${selector}`,
+      `:host([data-mode=dark]) ${selector}`,
+    )
+    .replaceAll(
+      `${selector}:host([data-mode=light]) ${selector}`,
+      `:host([data-mode=light]) ${selector}`,
+    )
+}
+
+function insertStyles(cache: EmotionCache, serialized: SerializedStyles) {
+  const className = `${cache.key}-${serialized.name}`
+
+  if (!isUndefined(cache.inserted[serialized.name])) return
+
+  const sheet = Object.create(cache.sheet) as typeof cache.sheet
+
+  sheet.insert = (rule) => {
+    cache.sheet.insert(normalizeHostSelector(rule, className))
+  }
+
+  let styleForSsr = ""
+  let current: SerializedStyles | undefined = serialized
+
+  do {
+    const style =
+      cache.insert(
+        serialized === current ? `.${className}` : "",
+        current,
+        sheet,
+        true,
+      ) || undefined
+
+    if (!createdDom() && !isUndefined(style))
+      styleForSsr += normalizeHostSelector(style, className)
+
+    current = current.next
+  } while (current !== undefined)
+
+  return styleForSsr || undefined
+}
+
 const Insertion: FC<InsertionProps> = ({ cache, htmlTag, serialized }) => {
   registerStyles(cache, serialized, htmlTag)
 
   const style = useInsertionEffectAlwaysWithSyncFallback(() =>
-    insertStyles(cache, serialized, htmlTag),
+    insertStyles(cache, serialized),
   )
 
   if (!createdDom() && !isUndefined(style)) {

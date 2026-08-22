@@ -43,6 +43,14 @@ import { Breadcrumb } from "@workspaces/ui"
 </Breadcrumb.Root>
 ```
 
+:::tip
+`Breadcrumb.Link` renders as an `<a>` element by default. If your framework provides a link component, set `as={FrameworkLink}`. For integration with each framework's link component, see the documentation for your framework [here](/docs/get-started#pick-your-framework).
+:::
+
+:::tip
+To display the progress of a multi-step process, use [Steps](/docs/components/steps).
+:::
+
 ### Use items
 
 ```tsx preview functional

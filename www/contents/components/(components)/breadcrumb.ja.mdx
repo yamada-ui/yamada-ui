@@ -43,6 +43,14 @@ import { Breadcrumb } from "@workspaces/ui"
 </Breadcrumb.Root>
 ```
 
+:::tip
+`Breadcrumb.Link`は、デフォルトで`<a>`要素としてレンダリングされます。フレームワークがリンクコンポーネントを提供している場合は、`as={FrameworkLink}`を設定します。各フレームワークのリンクコンポーネントとの統合は、[こちら](/docs/get-started#pick-your-framework)から使用しているフレームワークのドキュメントをご覧ください。
+:::
+
+:::tip
+複数のステップのプロセスの進行状況を表示する場合は、[Steps](/docs/components/steps)を使用します。
+:::
+
 ### itemsを使う
 
 ```tsx preview functional

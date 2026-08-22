@@ -1,0 +1,59 @@
+import type { Source } from "../../index.type"
+import c from "picocolors"
+
+interface Tree {
+  [key: string]: null | Tree
+}
+
+function buildTree(sources: Source[]): Tree {
+  const tree: Tree = {}
+
+  for (const source of sources) {
+    const parts = source.name.split("/")
+    let current = tree
+
+    for (const [i, part] of parts.entries()) {
+      if (!part) continue
+
+      if (i === parts.length - 1) {
+        current[part] = null
+      } else {
+        current[part] = current[part] || {}
+        current = current[part]
+      }
+    }
+  }
+
+  return tree
+}
+
+function printTreeNode(node: Tree, prefix = "") {
+  const keys = Object.keys(node)
+
+  for (const [index, key] of keys.entries()) {
+    const isLast = index === keys.length - 1
+    const connector = isLast ? "└─" : "├─"
+    const isDir = node[key] !== null
+
+    console.log(
+      `${c.dim(prefix + connector)} ${isDir ? c.bold(key) : c.green(key)}`,
+    )
+
+    if (isDir) {
+      const newPrefix = prefix + (isLast ? "   " : "│  ")
+      printTreeNode(node[key] as Tree, newPrefix)
+    }
+  }
+}
+
+export function printTree(component: string, sources: Source[]) {
+  console.log(`\n${c.blue("Directory listing for:")} ${c.bold(component)}\n`)
+  printTreeNode(buildTree(sources), "  ")
+  console.log()
+}
+
+export function printSource(file: string, content: string) {
+  console.log(`\n${c.dim("---")} ${c.bold(c.green(file))} ${c.dim("---")}\n`)
+  console.log(content)
+  console.log(`\n${c.dim("--- End of file ---")}\n`)
+}

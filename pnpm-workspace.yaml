@@ -5,9 +5,9 @@ packages:
 blockExoticSubdeps: true
 catalog:
   "@emotion/react": ^11.14.0
-  "@faker-js/faker": ^10.5.0
+  "@faker-js/faker": ^10.6.0
   "@lucide/lab": ^0.2.0
-  "@tanstack/react-router": ^1.170.25
+  "@tanstack/react-router": ^1.170.29
   "@types/yamljs": ^0.2.34
   "@typescript/native-preview": 7.0.0-dev.20260707.2
   "@vitest/browser": ^4.1.10
@@ -15,7 +15,7 @@ catalog:
   "@vitest/ui": ^4.1.10
   "@vitejs/plugin-react": ^6.0.4
   commander: ^14.0.3
-  dayjs: ^1.11.21
+  dayjs: ^1.11.22
   dotenv: ^17.4.0
   eslint: ^10.8.1
   "eslint-plugin-unused-imports": ^4.4.1
@@ -24,7 +24,7 @@ catalog:
   oxlint: ^1.77.0
   oxlint-tsgolint: ^0.25.0
   ora: ^9.4.0
-  oxfmt: ^0.62.0
+  oxfmt: ^0.63.0
   playwright: ^1.62.0
   picocolors: ^1.1.1
   prettier: ^3.8.1

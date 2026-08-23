@@ -80,7 +80,7 @@
     "storybook": "^10.5.7",
     "tsdown": "^0.22.14",
     "tsx": "catalog:",
-    "turbo": "^2.10.9",
+    "turbo": "^2.10.10",
     "typescript": "catalog:",
     "vitest": "catalog:",
     "wait-on": "^9.1.0"

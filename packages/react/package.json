@@ -118,7 +118,7 @@
     "react-fast-compare": "^3.2.2",
     "react-focus-lock": "^2.13.7",
     "react-remove-scroll": "^2.7.2",
-    "react-resizable-panels": "^4.12.2",
+    "react-resizable-panels": "^4.12.3",
     "recharts": "^3.10.1",
     "scroll-into-view-if-needed": "catalog:",
     "sonner": "^2.0.8",

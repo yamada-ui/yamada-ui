@@ -65,6 +65,7 @@ const TARGET_SECTIONS = ["components", "hooks", "providers"]
 const PROVIDE_SECTIONS = ["core", "utils", "theme"]
 const IGNORED_FILE_NAME = [
   ".test.(ts|tsx)",
+  ".test.(browser|chromium|firefox|webkit).(ts|tsx)",
   ".stories.(ts|tsx)",
   "^(?!.*\\.(ts|tsx)$).*",
 ]
@@ -241,6 +242,7 @@ async function getSources() {
                     await Promise.all(
                       dirents.map(async (dirent) => {
                         if (dirent.isDirectory()) return
+                        if (shouldIgnoreFileName(dirent.name)) return
 
                         const targetPath = path.join(
                           dirent.parentPath,

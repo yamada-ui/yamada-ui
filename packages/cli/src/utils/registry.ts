@@ -255,22 +255,26 @@ export function transformContent(
 
       if (!generated || !section) return
 
-      if (section === targetSection) {
-        replaceValue = `from "${path.join("..", name)}"`
-      } else {
-        const { path: relativePath } = getSection(section) ?? {}
+      const sourceSectionPath = getSection(targetSection)?.path ?? targetSection
+      const { path: sectionPath } = getSection(section) ?? {}
 
-        if (!relativePath) return
+      if (!sectionPath) return
 
-        replaceValue = `from "${path.join("..", "..", relativePath, name)}"`
-      }
+      let relPath = path.posix.relative(
+        path.posix.join(sourceSectionPath, "dummy"),
+        path.posix.join(sectionPath, name),
+      )
+
+      if (!relPath.startsWith(".")) relPath = `./${relPath}`
+
+      replaceValue = `from "${relPath}"`
     } else {
       const depth = (value.match(/\.\.\//g) || []).length
 
       if (!depth) return
 
       if (depth === 1) {
-        if (generated) replaceValue = `from "${path.join("..", name)}"`
+        if (generated) replaceValue = `from "${path.posix.join("..", name)}"`
         else replaceValue = `from "${PACKAGE_NAME}/${targetSection}/${name}"`
       } else {
         const omittedValue = value.replace(/(\.\.\/|\.\/)/g, "")
@@ -281,12 +285,16 @@ export function transformContent(
         if (!section || !sectionPath) return
 
         if (generated) {
-          const targetDepth = (sectionPath.match(/\.\.\//g) || []).length
-          const neededDepth = depth + targetDepth
-          const omittedTargetPath = sectionPath.replace(/(\.\.\/|\.\/)/g, "")
-          const position = "../".repeat(neededDepth)
+          const sourceSectionPath =
+            getSection(targetSection)?.path ?? targetSection
+          let relPath = path.posix.relative(
+            path.posix.join(sourceSectionPath, "dummy"),
+            path.posix.join(sectionPath, name),
+          )
 
-          replaceValue = `from "${position}${omittedTargetPath}/${name}"`
+          if (!relPath.startsWith(".")) relPath = `./${relPath}`
+
+          replaceValue = `from "${relPath}"`
         } else {
           replaceValue = `from "${PACKAGE_NAME}/${section}/${name}"`
         }

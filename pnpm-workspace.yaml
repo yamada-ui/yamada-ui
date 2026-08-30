@@ -17,11 +17,11 @@ catalog:
   commander: ^14.0.3
   dayjs: ^1.11.23
   dotenv: ^17.4.0
-  eslint: ^10.8.1
+  eslint: ^10.9.0
   "eslint-plugin-unused-imports": ^4.4.1
   motion: ^12.43.0
   next: ^16.3.2
-  oxlint: ^1.77.0
+  oxlint: ^1.79.0
   oxlint-tsgolint: ^0.25.0
   ora: ^9.4.0
   oxfmt: ^0.64.0

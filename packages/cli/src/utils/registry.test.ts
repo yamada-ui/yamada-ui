@@ -88,6 +88,31 @@ describe("transformContent", () => {
     expect(result).toContain("../../hooks/use-hook")
   })
 
+  test("should transform cross-section imports with custom nested paths", () => {
+    const config = createMockConfig({
+      getSection: (value?: string) => {
+        if (value === "components")
+          return {
+            path: "./components/primitive",
+            resolvedPath: "/tmp/workspaces/ui/src/components/primitive",
+            section: "components",
+          }
+        if (value === "hooks")
+          return {
+            path: "./components/hooks",
+            resolvedPath: "/tmp/workspaces/ui/src/components/hooks",
+            section: "hooks",
+          }
+        return undefined
+      },
+    })
+    const content = `import { useValue } from "../../hooks/use-value"\n`
+    const result = transformContent("components", content, config, [
+      "use-value",
+    ])
+    expect(result).toContain("../../hooks/use-value")
+  })
+
   test("should transform relative imports depth 1", () => {
     const config = createMockConfig()
     const content = `import { helper } from "../helper"\n`
@@ -106,7 +131,7 @@ describe("transformContent", () => {
     const config = createMockConfig()
     const content = `import { useHook } from "../../hooks/use-hook"\n`
     const result = transformContent("components", content, config, ["use-hook"])
-    expect(result).toContain("use-hook")
+    expect(result).toContain("../../hooks/use-hook")
   })
 
   test("should replace ungenerated deep relative import with package import", () => {

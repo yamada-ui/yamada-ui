@@ -255,19 +255,19 @@ export function transformContent(
 
       if (!generated || !section) return
 
-      const sourceSectionPath = getSection(targetSection)?.path ?? targetSection
       const { path: sectionPath } = getSection(section) ?? {}
 
       if (!sectionPath) return
 
-      let relPath = path.posix.relative(
-        path.posix.join(sourceSectionPath, "dummy"),
+      const relativePath = path.posix.relative(
+        path.posix.join(
+          getSection(targetSection)?.path ?? targetSection,
+          "dummy",
+        ),
         path.posix.join(sectionPath, name),
       )
 
-      if (!relPath.startsWith(".")) relPath = `./${relPath}`
-
-      replaceValue = `from "${relPath}"`
+      replaceValue = `from "${relativePath.startsWith(".") ? relativePath : `./${relativePath}`}"`
     } else {
       const depth = (value.match(/\.\.\//g) || []).length
 
@@ -285,16 +285,15 @@ export function transformContent(
         if (!section || !sectionPath) return
 
         if (generated) {
-          const sourceSectionPath =
-            getSection(targetSection)?.path ?? targetSection
-          let relPath = path.posix.relative(
-            path.posix.join(sourceSectionPath, "dummy"),
+          const relativePath = path.posix.relative(
+            path.posix.join(
+              getSection(targetSection)?.path ?? targetSection,
+              "dummy",
+            ),
             path.posix.join(sectionPath, name),
           )
 
-          if (!relPath.startsWith(".")) relPath = `./${relPath}`
-
-          replaceValue = `from "${relPath}"`
+          replaceValue = `from "${relativePath.startsWith(".") ? relativePath : `./${relativePath}`}"`
         } else {
           replaceValue = `from "${PACKAGE_NAME}/${section}/${name}"`
         }

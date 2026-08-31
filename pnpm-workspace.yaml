@@ -10,9 +10,9 @@ catalog:
   "@tanstack/react-router": ^1.170.25
   "@types/yamljs": ^0.2.34
   "@typescript/native-preview": 7.0.0-dev.20260707.2
-  "@vitest/browser": ^4.1.10
-  "@vitest/browser-playwright": ^4.1.10
-  "@vitest/ui": ^4.1.10
+  "@vitest/browser": ^4.1.11
+  "@vitest/browser-playwright": ^4.1.11
+  "@vitest/ui": ^4.1.11
   "@vitejs/plugin-react": ^6.0.4
   commander: ^14.0.3
   dayjs: ^1.11.21
@@ -38,7 +38,7 @@ catalog:
   tsx: ^4.23.12
   typescript: ^6.0.3
   vite: ^8.0.16
-  vitest: ^4.1.10
+  vitest: ^4.1.11
   vitest-axe: ^0.1.0
   yamljs: ^0.3.0
 dedupeDirectDeps: true

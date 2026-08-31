@@ -131,7 +131,7 @@
     "@lucide/lab": "catalog:",
     "@mdn/browser-compat-data": "7.3.17",
     "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.3",
+    "@testing-library/user-event": "^14.6.6",
     "@types/babel__traverse": "^7.28.0",
     "@types/jsdom": "^28.0.1",
     "@types/yamljs": "catalog:",

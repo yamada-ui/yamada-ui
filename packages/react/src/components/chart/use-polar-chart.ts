@@ -15,9 +15,10 @@ import type {
   TextProps,
 } from "recharts"
 import type { PolarChartProps } from "recharts/types/util/types"
+import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict, Merge } from "../../utils"
 import { isValidElement, useCallback, useMemo } from "react"
-import { type HTMLProps, mergeProps, type PropGetter } from "../../core"
+import { mergeProps } from "../../core"
 import { dataAttr, isFunction, isObject, isUndefined } from "../../utils"
 import { useChartContext } from "./use-chart"
 

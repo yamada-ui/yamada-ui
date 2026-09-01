@@ -7,6 +7,7 @@ import type {
   HTMLStyledProps,
   ThemeProps,
 } from "../../core"
+import type { ReactNodeOrFunction } from "../../utils"
 import type { CheckboxProps } from "../checkbox"
 import type { CollapseProps } from "../collapse"
 import type { Loading } from "../loading"
@@ -27,7 +28,6 @@ import {
   dataAttr,
   isObject,
   isString,
-  type ReactNodeOrFunction,
   runIfFn,
 } from "../../utils"
 import { Checkbox } from "../checkbox"

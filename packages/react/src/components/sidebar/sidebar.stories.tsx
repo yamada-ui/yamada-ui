@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { type FC, useCallback, useRef, useState } from "react"
+import type { FC } from "react"
+import { useCallback, useRef, useState } from "react"
 import { Sidebar } from "."
 import { styled } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"

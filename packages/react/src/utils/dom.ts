@@ -1,4 +1,5 @@
-import { type AnyString, getActiveElement } from "@yamada-ui/utils"
+import type { AnyString } from "@yamada-ui/utils"
+import { getActiveElement } from "@yamada-ui/utils"
 import * as React from "react"
 
 type KeyboardNavigationKey =

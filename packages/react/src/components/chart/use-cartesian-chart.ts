@@ -10,14 +10,10 @@ import type {
   YAxisProps,
 } from "recharts"
 import type { CartesianChartProps } from "recharts/types/util/types"
+import type { HTMLProps, PropGetter, SimpleDirection } from "../../core"
 import type { Dict, Merge } from "../../utils"
 import { isValidElement, useCallback, useMemo } from "react"
-import {
-  type HTMLProps,
-  mergeProps,
-  type PropGetter,
-  type SimpleDirection,
-} from "../../core"
+import { mergeProps } from "../../core"
 import { dataAttr, isFunction, isObject, isUndefined } from "../../utils"
 import { useChartContext } from "./use-chart"
 

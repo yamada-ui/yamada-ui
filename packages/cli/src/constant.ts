@@ -5,7 +5,8 @@ export const PACKAGE_NAME = "@yamada-ui/react"
 export const CONFIG_FILE_NAME = "ui.json"
 export const REGISTRY_FILE_NAME = "registry.json"
 export const REGISTRY_VERSION = "v2"
-export const REGISTRY_URL = "https://yamada-ui.com/registry"
+export const DOCS_BASE_URL = "https://yamada-ui.com"
+export const REGISTRY_URL = `${DOCS_BASE_URL}/registry`
 export const SECTION_NAMES = ["components", "hooks", "providers"] as const
 export const DEFAULT_PACKAGE_NAME = {
   ui: "@workspaces/ui",

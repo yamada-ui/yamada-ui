@@ -1,5 +1,21 @@
 # @yamada-ui/react
 
+## 2.2.8
+
+### Patch Changes
+
+- [#7826](https://github.com/yamada-ui/yamada-ui/pull/7826) [`d28da79`](https://github.com/yamada-ui/yamada-ui/commit/d28da7922437181aa70b2a8f665959cfa6c1f6ea) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7826](https://github.com/yamada-ui/yamada-ui/pull/7826) [`d28da79`](https://github.com/yamada-ui/yamada-ui/commit/d28da7922437181aa70b2a8f665959cfa6c1f6ea) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7826](https://github.com/yamada-ui/yamada-ui/pull/7826) [`d28da79`](https://github.com/yamada-ui/yamada-ui/commit/d28da7922437181aa70b2a8f665959cfa6c1f6ea) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7826](https://github.com/yamada-ui/yamada-ui/pull/7826) [`d28da79`](https://github.com/yamada-ui/yamada-ui/commit/d28da7922437181aa70b2a8f665959cfa6c1f6ea) Thanks [@dependabot](https://github.com/apps/dependabot)! - Format ICU type definitions.
+
+- [#7825](https://github.com/yamada-ui/yamada-ui/pull/7825) [`e943765`](https://github.com/yamada-ui/yamada-ui/commit/e94376583f34d77b62930da27c677ccf414ce497) Thanks [@jji05](https://github.com/jji05)! - Exclude browser test files from component registry generation.
+
+- [#7824](https://github.com/yamada-ui/yamada-ui/pull/7824) [`5406b11`](https://github.com/yamada-ui/yamada-ui/commit/5406b115d2b68f3f6e2b8ea4805925bd353b7e10) Thanks [@dependabot](https://github.com/apps/dependabot)! - Formatted file import statements.
+
 ## 2.2.7
 
 ### Patch Changes

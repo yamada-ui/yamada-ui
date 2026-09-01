@@ -1,7 +1,7 @@
 {
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
-    "components": ["button", "modal", "focus-lock"],
+    "components": ["focus-lock"],
     "externals": [],
     "hooks": [],
     "providers": []
@@ -28,10 +28,6 @@
     {
       "name": "index.ts",
       "content": "export { Portal } from \"./portal\"\nexport type { PortalProps } from \"./portal\"\n"
-    },
-    {
-      "name": "portal.test.browser.tsx",
-      "content": "import { createPortal } from \"react-dom\"\nimport { a11y, page, render } from \"#test/browser\"\nimport { Button } from \"../button\"\nimport { Modal } from \"../modal\"\nimport { Portal } from \"./portal\"\n\nconst Component = () => {\n  return (\n    <Modal.Root>\n      <Modal.OpenTrigger>\n        <Button>Open Modal</Button>\n      </Modal.OpenTrigger>\n\n      <Modal.Content>\n        <Modal.Header>\n          <Modal.Title>Modal Title</Modal.Title>\n        </Modal.Header>\n\n        <Modal.Body>\n          <Button>Modal Action</Button>\n          <Portal>\n            <Button>Portal Action</Button>\n          </Portal>\n        </Modal.Body>\n      </Modal.Content>\n    </Modal.Root>\n  )\n}\n\ndescribe(\"<Portal />\", () => {\n  test(\"passes a11y checks\", async () => {\n    await a11y(<Component />)\n  })\n\n  test(\"keeps focus within a modal in shadow DOM\", async () => {\n    const host = document.createElement(\"div\")\n    const shadowRoot = host.attachShadow({ mode: \"open\" })\n    document.body.appendChild(host)\n\n    try {\n      const { user } = await render(createPortal(<Component />, shadowRoot), {\n        providerProps: { rootNode: shadowRoot },\n      })\n      const portalAction = page.getByRole(\"button\", { name: \"Portal Action\" })\n\n      await user.click(page.getByRole(\"button\", { name: \"Open Modal\" }))\n      await user.click(portalAction)\n\n      await expect\n        .poll(() => shadowRoot.activeElement)\n        .toBe(portalAction.element())\n    } finally {\n      host.remove()\n    }\n  })\n})\n"
     },
     {
       "name": "portal.tsx",

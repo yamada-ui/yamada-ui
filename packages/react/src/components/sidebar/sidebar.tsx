@@ -12,6 +12,8 @@ import type { ReactNodeOrFunction } from "../../utils"
 import type { CollapseProps } from "../collapse"
 import type { Loading } from "../loading"
 import type { WithTransitionProps } from "../motion"
+import type { TooltipProps } from "../tooltip"
+import type { SidebarStyle } from "./sidebar.style"
 import type {
   UseSidebarGroupProps,
   UseSidebarGroupReturn,
@@ -45,8 +47,8 @@ import { Collapse } from "../collapse"
 import { Drawer } from "../drawer"
 import { ChevronRightIcon } from "../icon"
 import { useLoadingComponent } from "../loading"
-import { Tooltip, type TooltipProps } from "../tooltip"
-import { sidebarStyle, type SidebarStyle } from "./sidebar.style"
+import { Tooltip } from "../tooltip"
+import { sidebarStyle } from "./sidebar.style"
 import {
   SidebarContext,
   SidebarDescendantsContext,

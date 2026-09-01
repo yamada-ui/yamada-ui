@@ -7,7 +7,7 @@
     "providers": []
   },
   "dependents": {
-    "components": ["dropzone", "highlight", "loading", "tooltip"],
+    "components": ["highlight", "loading"],
     "hooks": [],
     "providers": []
   },

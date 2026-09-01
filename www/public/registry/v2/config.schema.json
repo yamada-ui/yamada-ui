@@ -73,6 +73,11 @@
           "type": "boolean",
           "default": true,
           "description": "Whether to include dependents when adding components."
+        },
+        "headless": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to generate the components with empty styles."
         }
       }
     },

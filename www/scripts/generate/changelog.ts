@@ -142,6 +142,7 @@ function main() {
         CONSTANTS.I18N.LOCALES.map(async (locale) => {
           const date = new Intl.DateTimeFormat(locale, {
             dateStyle: "long",
+            timeZone: "UTC",
           }).format(new Date(pullRequest.merged_at ?? pullRequest.updated_at))
           const { lang, t } = await getI18n(locale)
 

@@ -96,6 +96,9 @@ catalogs:
     sucrase:
       specifier: ^3.35.1
       version: 3.35.1
+    tsx:
+      specifier: ^4.23.13
+      version: 4.23.13
     typescript:
       specifier: ^6.0.3
       version: 6.0.3
@@ -218,7 +221,7 @@ importers:
         specifier: ^0.22.14
         version: 0.22.14(@typescript/native-preview@7.0.0-dev.20260707.2)(oxc-resolver@11.24.2)(tsx@4.23.13)(typescript@6.0.3)
       tsx:
-        specifier: 4.23.13
+        specifier: 'catalog:'
         version: 4.23.13
       turbo:
         specifier: ^2.10.12

@@ -1478,6 +1478,26 @@
           "segment": "cli",
           "items": [
             {
+              "title": "v2.1.13",
+              "segment": "2-1-13",
+              "pathname": "/docs/changelog/cli/2-1-13"
+            },
+            {
+              "title": "v2.1.12",
+              "segment": "2-1-12",
+              "pathname": "/docs/changelog/cli/2-1-12"
+            },
+            {
+              "title": "v2.1.11",
+              "segment": "2-1-11",
+              "pathname": "/docs/changelog/cli/2-1-11"
+            },
+            {
+              "title": "v2.1.10",
+              "segment": "2-1-10",
+              "pathname": "/docs/changelog/cli/2-1-10"
+            },
+            {
               "title": "v2.1.9",
               "segment": "2-1-9",
               "pathname": "/docs/changelog/cli/2-1-9"
@@ -1516,26 +1536,6 @@
               "title": "v2.1.2",
               "segment": "2-1-2",
               "pathname": "/docs/changelog/cli/2-1-2"
-            },
-            {
-              "title": "v2.1.13",
-              "segment": "2-1-13",
-              "pathname": "/docs/changelog/cli/2-1-13"
-            },
-            {
-              "title": "v2.1.12",
-              "segment": "2-1-12",
-              "pathname": "/docs/changelog/cli/2-1-12"
-            },
-            {
-              "title": "v2.1.11",
-              "segment": "2-1-11",
-              "pathname": "/docs/changelog/cli/2-1-11"
-            },
-            {
-              "title": "v2.1.10",
-              "segment": "2-1-10",
-              "pathname": "/docs/changelog/cli/2-1-10"
             },
             {
               "title": "v2.1.1",

@@ -185,29 +185,29 @@ function main() {
           const lang = getLang(locale)
 
           changelogItems.forEach((item) => {
+            if (!item.items) return
+
             const data = packages.find(({ name }) =>
               name.includes(item.segment),
             )
 
-            if (!data || !item.items) return
+            if (data) {
+              const segment = data.version.replaceAll(".", "-")
 
-            const { version } = data
-            const title = `v${version}`
-            const segment = version.replaceAll(".", "-")
-            const exists = item.items.some((item) => item.segment === segment)
+              if (!item.items.some((item) => item.segment === segment))
+                item.items.push({
+                  title: `v${data.version}`,
+                  // eslint-disable-next-line perfectionist/sort-objects
+                  segment,
+                  // eslint-disable-next-line perfectionist/sort-objects
+                  pathname:
+                    "/" + path.join("docs", "changelog", item.segment, segment),
+                })
+            }
 
-            if (exists) return
-
-            item.items.push({
-              title,
-              // eslint-disable-next-line perfectionist/sort-objects
-              segment,
-              // eslint-disable-next-line perfectionist/sort-objects
-              pathname:
-                "/" + path.join("docs", "changelog", item.segment, segment),
-            })
-
-            item.items.sort((a, b) => b.segment.localeCompare(a.segment))
+            item.items.sort((a, b) =>
+              b.segment.localeCompare(a.segment, undefined, { numeric: true }),
+            )
           })
 
           await writeFileWithFormat(

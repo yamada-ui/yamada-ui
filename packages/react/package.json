@@ -110,7 +110,7 @@
     "file-selector": "^2.1.2",
     "framesync": "6.1.2",
     "intl-messageformat": "^11.2.14",
-    "lucide-react": "1.33.0",
+    "lucide-react": "1.38.0",
     "motion": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
@@ -145,10 +145,10 @@
     "playwright": "catalog:",
     "react-hook-form": "catalog:",
     "react-icons": "catalog:",
-    "use-mask-input": "^3.13.0",
+    "use-mask-input": "^3.14.1",
     "vitest-axe": "catalog:",
     "vitest-browser-react": "2.2.0",
-    "web-features": "3.35.1",
+    "web-features": "3.36.0",
     "yamljs": "catalog:"
   },
   "peerDependencies": {

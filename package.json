@@ -70,7 +70,7 @@
     "@vitest/ui": "catalog:",
     "clean-package": "^2.2.0",
     "commander": "catalog:",
-    "lefthook": "^2.1.10",
+    "lefthook": "^2.1.12",
     "ora": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
@@ -80,7 +80,7 @@
     "storybook": "^10.5.10",
     "tsdown": "^0.22.14",
     "tsx": "catalog:",
-    "turbo": "^2.10.11",
+    "turbo": "^2.10.12",
     "typescript": "catalog:",
     "vitest": "catalog:",
     "wait-on": "^9.1.0"

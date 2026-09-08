@@ -27,7 +27,7 @@
   "dependencies": {
     "@cspell/eslint-plugin": "^10.1.1",
     "@limegrass/eslint-plugin-import-alias": "^1.6.1",
-    "@octokit/request-error": "^7.1.1",
+    "@octokit/request-error": "^7.1.2",
     "@octokit/rest": "^22.0.1",
     "@octokit/webhooks": "^14.2.0",
     "@stylistic/eslint-plugin": "^5.10.0",

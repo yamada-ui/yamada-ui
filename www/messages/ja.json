@@ -80,6 +80,14 @@
       "pink": "ピンク"
     }
   },
+  "guides": {
+    "title": "ガイド",
+    "description": "Yamada UIに関するよくある質問の答えを見つけましょう。",
+    "guides": "{count, plural, other {#件のガイド}}",
+    "backToGuides": "ガイド一覧に戻る",
+    "searchPlaceholder": "ガイドを検索する...",
+    "notFound": "「{value}」に該当する結果が見つかりませんでした。"
+  },
   "changelog": {
     "title": "変更履歴",
     "latest": "Yamada UIの最新バージョンの変更履歴をご覧ください。機能・バグ修正・改善点についてご確認ください。",
@@ -96,6 +104,7 @@
       "playground": "プレイグラウンド",
       "colors": "カラー",
       "themes": "テーマ",
+      "guides": "ガイド",
       "github": "GitHubリポジトリ",
       "colorMode": "{colorMode}に変更する",
       "lang": "言語を変更する",

@@ -5,6 +5,7 @@ import { PropsTable } from "#storybook"
 import { useInterval } from "../../hooks/use-interval"
 import { uuid } from "../../utils"
 import { Button, IconButton } from "../button"
+import { Flex } from "../flex"
 import { Heading } from "../heading"
 import { PlusIcon, XIcon } from "../icon"
 import { Text } from "../text"
@@ -484,29 +485,31 @@ export const Dynamic: Story = () => {
 
   return (
     <Tabs.Root index={index} items={items} manual onChange={setIndex}>
-      <Tabs.List>
-        {items.map(({ id, tab }, index) => {
-          const hasRemove = items.length > 1
+      <Flex align="center" borderBottomWidth="1px">
+        <Tabs.List borderBottomWidth="0">
+          {items.map(({ id, tab }, index) => {
+            const hasRemove = items.length > 1
 
-          return (
-            <Tabs.Tab key={id} index={index} transition="none">
-              {tab}
-              {hasRemove ? (
-                <IconButton
-                  as="span"
-                  size="2xs"
-                  variant="ghost"
-                  aria-label="Remove Tab"
-                  icon={<XIcon />}
-                  onClick={(ev) => {
-                    ev.stopPropagation()
-                    onRemoveTab(id!)
-                  }}
-                />
-              ) : null}
-            </Tabs.Tab>
-          )
-        })}
+            return (
+              <Tabs.Tab key={id} index={index} transition="none">
+                {tab}
+                {hasRemove ? (
+                  <IconButton
+                    as="span"
+                    size="2xs"
+                    variant="ghost"
+                    aria-label="Remove Tab"
+                    icon={<XIcon />}
+                    onClick={(ev) => {
+                      ev.stopPropagation()
+                      onRemoveTab(id!)
+                    }}
+                  />
+                ) : null}
+              </Tabs.Tab>
+            )
+          })}
+        </Tabs.List>
 
         <Button
           size="xs"
@@ -516,7 +519,7 @@ export const Dynamic: Story = () => {
         >
           Add Tab
         </Button>
-      </Tabs.List>
+      </Flex>
 
       {items.map(({ id, panel }, index) => (
         <Tabs.Panel key={id} index={index}>

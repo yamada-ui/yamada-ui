@@ -35,6 +35,10 @@ vi.mock("node-fetch", () => ({
                 name: "index.ts",
                 content: `export const Button = () => {}\n`,
               },
+              {
+                name: "button.style.ts",
+                content: `export const buttonStyle = defineComponentStyle({\n  base: { color: "blue" },\n})\n`,
+              },
             ],
           }),
         ok: true,
@@ -126,6 +130,123 @@ describe("update", () => {
 
   afterEach(() => {
     rmSync(tempDir, { force: true, recursive: true })
+  })
+
+  test("should skip style value changes for headless components", async () => {
+    setupProjectWithComponent(tempDir)
+
+    const buttonDir = path.join(
+      tempDir,
+      "workspaces",
+      "ui",
+      "src",
+      "components",
+      "button",
+    )
+    writeFileSync(
+      path.join(buttonDir, "registry.json"),
+      JSON.stringify({
+        dependencies: {
+          components: [],
+          externals: [],
+          hooks: [],
+          providers: [],
+        },
+        headless: true,
+        section: "components",
+        sources: [
+          { name: "index.ts", content: `export const Button = () => {}\n` },
+          {
+            name: "button.style.ts",
+            content: `export const buttonStyle = defineComponentStyle({\n  base: { color: "red" },\n})\n`,
+          },
+        ],
+      }),
+    )
+
+    vi.mocked(console.log).mockClear()
+
+    await update.parseAsync(
+      [
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+        "--force",
+      ],
+      { from: "user" },
+    )
+
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringContaining("No updates found."),
+    )
+  })
+
+  test("should switch component to headless with --headless", async () => {
+    setupProjectWithComponent(tempDir)
+
+    const buttonDir = path.join(
+      tempDir,
+      "workspaces",
+      "ui",
+      "src",
+      "components",
+      "button",
+    )
+    writeFileSync(
+      path.join(buttonDir, "registry.json"),
+      JSON.stringify({
+        dependencies: {
+          components: [],
+          externals: [],
+          hooks: [],
+          providers: [],
+        },
+        section: "components",
+        sources: [
+          { name: "index.ts", content: `export const Button = () => {}\n` },
+          {
+            name: "button.style.ts",
+            content: `export const buttonStyle = defineComponentStyle({\n  base: { color: "blue" },\n})\n`,
+          },
+        ],
+      }),
+    )
+
+    const { updateFiles } = await import("./update-files")
+    vi.mocked(updateFiles).mockClear()
+
+    await update.parseAsync(
+      [
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--headless",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+        "--force",
+      ],
+      { from: "user" },
+    )
+
+    expect(updateFiles).toHaveBeenCalledWith(
+      expect.objectContaining({
+        button: expect.objectContaining({
+          "button.style.ts": expect.anything(),
+        }),
+      }),
+      expect.anything(),
+      expect.objectContaining({
+        remote: expect.objectContaining({
+          button: expect.objectContaining({ headless: true }),
+        }),
+      }),
+      expect.anything(),
+      expect.anything(),
+    )
   })
 
   test("should update all components", async () => {

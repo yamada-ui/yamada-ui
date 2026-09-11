@@ -95,7 +95,7 @@
       "jsdom": "29.0.1",
       "playwright": "^1.62.0",
       "playwright-core": "^1.62.0",
-      "sharp": "0.35.3"
+      "sharp": "0.35.4"
     }
   }
 }

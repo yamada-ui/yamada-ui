@@ -1,5 +1,15 @@
 # @yamada-ui/react
 
+## 2.2.9
+
+### Patch Changes
+
+- [#7834](https://github.com/yamada-ui/yamada-ui/pull/7834) [`0adff41`](https://github.com/yamada-ui/yamada-ui/commit/0adff41ae1983c574f914f4dd6bd40f26be757bb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7834](https://github.com/yamada-ui/yamada-ui/pull/7834) [`0adff41`](https://github.com/yamada-ui/yamada-ui/commit/0adff41ae1983c574f914f4dd6bd40f26be757bb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7834](https://github.com/yamada-ui/yamada-ui/pull/7834) [`0adff41`](https://github.com/yamada-ui/yamada-ui/commit/0adff41ae1983c574f914f4dd6bd40f26be757bb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
 ## 2.2.8
 
 ### Patch Changes

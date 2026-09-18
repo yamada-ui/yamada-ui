@@ -5,8 +5,8 @@ import { PropsTable } from "#storybook"
 import { useInterval } from "../../hooks/use-interval"
 import { uuid } from "../../utils"
 import { Button, IconButton } from "../button"
-import { Heading } from "../heading"
 import { PlusIcon, XIcon } from "../icon"
+import { HStack } from "../stack"
 import { Text } from "../text"
 import { Tabs } from "./"
 
@@ -484,14 +484,12 @@ export const Dynamic: Story = () => {
 
   return (
     <Tabs.Root index={index} items={items} manual onChange={setIndex}>
-      <Tabs.List>
-        {items.map(({ id, tab }, index) => {
-          const hasRemove = items.length > 1
-
-          return (
+      <HStack borderBottomWidth="1px" gap="0" overflowX="auto" pb="px">
+        <Tabs.List borderBottomWidth="0">
+          {items.map(({ id, tab }, index) => (
             <Tabs.Tab key={id} index={index} transition="none">
               {tab}
-              {hasRemove ? (
+              {items.length > 1 ? (
                 <IconButton
                   as="span"
                   size="2xs"
@@ -505,27 +503,25 @@ export const Dynamic: Story = () => {
                 />
               ) : null}
             </Tabs.Tab>
-          )
-        })}
+          ))}
+        </Tabs.List>
 
         <Button
           size="xs"
           variant="ghost"
+          minW="fit-content"
           startIcon={<PlusIcon />}
           onClick={onAddTab}
         >
           Add Tab
         </Button>
-      </Tabs.List>
+      </HStack>
 
       {items.map(({ id, panel }, index) => (
         <Tabs.Panel key={id} index={index}>
-          <Heading>
-            {panel} {id}
-          </Heading>
-
           <Text>index: {index}</Text>
           <Text>id: {id}</Text>
+          <Text>panel: {panel}</Text>
         </Tabs.Panel>
       ))}
     </Tabs.Root>

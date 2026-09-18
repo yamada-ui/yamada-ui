@@ -2,6 +2,13 @@ packages:
   - "packages/**"
   - "playgrounds/**"
   - "www/**"
+allowBuilds:
+  "@parcel/watcher": true
+  "@swc/core": true
+  esbuild: true
+  lefthook: true
+  sharp: true
+  unrs-resolver: true
 blockExoticSubdeps: true
 catalog:
   "@emotion/react": ^11.14.0
@@ -42,12 +49,17 @@ catalog:
   vitest-axe: ^0.1.0
   yamljs: ^0.3.0
 dedupeDirectDeps: true
+enablePrePostScripts: true
 minimumReleaseAge: 1440
-onlyBuiltDependencies:
-  - "@parcel/watcher"
-  - "@swc/core"
-  - "esbuild"
-  - "lefthook"
-  - "sharp"
-  - "unrs-resolver"
+overrides:
+  axios: ^1.15.0
+  "@babel/types": 7.29.8
+  "brace-expansion@5": 5.0.9
+  "esbuild@>=0.27.3 <0.28.1": 0.28.1
+  follow-redirects: ^1.16.0
+  jsdom: 29.0.1
+  playwright: ^1.62.0
+  playwright-core: ^1.62.0
+  sharp: 0.35.4
 strictDepBuilds: true
+strictPeerDependencies: false

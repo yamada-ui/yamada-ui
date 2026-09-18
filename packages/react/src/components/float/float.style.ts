@@ -6,6 +6,7 @@ export const floatStyle = defineComponentStyle({
     boxSize: "fit-content",
     display: "inline-flex",
     justifyContent: "center",
+    pointerEvents: "none",
     position: "absolute",
   },
 

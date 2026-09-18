@@ -1,3 +1,4 @@
+export * from "./style"
 export * from "./config"
 export * from "./fs"
 export * from "./git"

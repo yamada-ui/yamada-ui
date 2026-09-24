@@ -1,0 +1,35 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{A as t,M as n,Nn as r,Tn as i,Zn as a}from"./props-Bz1FL_va.js";import{t as o}from"./jsx-runtime-BdxMnOeJ.js";import{d as s,f as c,l,u}from"./utils-DG4lHdyV.js";import{d,i as f,n as p,r as m}from"./create-component-DtmnY_ce.js";import{n as h,t as g}from"./use-progress-D-VogxAS.js";import{n as _,t as v}from"./for-BIl9Q3L3.js";import{n as y,t as b}from"./props-table-CLkISL0o.js";var x;function S(){return(S=e((()=>{d(),x=f({base:{circle:{"--c":`calc(2 * 3.14159 * {r})`,"--cx":`calc({size} / 2)`,"--cy":`calc({size} / 2)`,"--r":`calc({size} / 2 - {thickness} / 2)`,boxSize:`{size}`,_indeterminate:{animationDuration:`2s`,animationIterationCount:`infinite`,animationName:`spin`,animationTimingFunction:`linear`}},label:{fontWeight:`medium`,left:`50%`,letterSpacing:`tight`,lineHeight:`1`,position:`absolute`,textAlign:`center`,top:`50%`,transform:`translate(-50%, -50%)`},range:{cx:`{cx}`,cy:`{cy}`,fill:`transparent`,r:`{r}`,strokeDasharray:`{c}`,strokeDashoffset:`calc({c} * ((100 - {percent}) / 100))`,strokeWidth:`{thickness}`,transform:`rotate(-90deg)`,transformOrigin:`center center`,transitionDuration:`slow`,transitionProperty:`stroke-dashoffset, stroke-dasharray`,_indeterminate:{animationDuration:`{duration, 1.5s}`,animationIterationCount:`infinite`,animationTimingFunction:`linear`,_keyframes:{"0%":{strokeDasharray:`1, 400`,strokeDashoffset:`0`},"50%":{strokeDasharray:`400, 400`,strokeDashoffset:`-100%`},"100%":{strokeDasharray:`400, 400`,strokeDashoffset:`-260%`}}}},root:{display:`inline-flex`,position:`relative`},track:{cx:`{cx}`,cy:`{cy}`,fill:`transparent`,r:`{r}`,strokeWidth:`{thickness}`}},props:{shape:{rounded:{range:{strokeLinecap:`round`,_indeterminate:{strokeLinecap:`butt`}}},square:{range:{strokeLinecap:`butt`}}}},variants:{outline:{range:{stroke:`colorScheme.solid`},track:{stroke:`bg.subtle`}},subtle:{range:{stroke:`colorScheme.solid/80`},track:{stroke:[`colorScheme.muted`,`colorScheme.subtle`]}}},sizes:{xs:{label:{fontSize:`2xs`},root:{"--size":`{sizes.6}`,"--thickness":`{sizes.1}`}},sm:{label:{fontSize:`2xs`},root:{"--size":`{sizes.8}`,"--thickness":`{sizes.1.5}`}},md:{label:{fontSize:`2xs`},root:{"--size":`{sizes.10}`,"--thickness":`{sizes.1.5}`}},lg:{label:{fontSize:`xs`},root:{"--size":`{sizes.12}`,"--thickness":`{sizes.2}`}},xl:{label:{fontSize:`sm`},root:{"--size":`{sizes.14}`,"--thickness":`{sizes.2}`}}},defaultProps:{size:`md`,variant:`outline`,shape:`rounded`}})})))()}var C,w,T,E,D,O,k,A,j,M;function N(){return(N=e((()=>{m(),l(),s(),t(),g(),S(),C=o(),{PropsContext:w,usePropsContext:T,withContext:E,withProvider:D}=p(`circle-progress`,x),O=D(({css:e,children:t,max:n,min:r,rangeColor:i,trackColor:a,value:o,circleProps:s,rangeProps:l,trackProps:d,...f})=>{let{percent:p,getRangeProps:m,getRootProps:g,getTrackProps:_}=h({max:n,min:r,value:o});return(0,C.jsxs)(c.div,{css:u(e,{"--percent":p}),...f,children:[(0,C.jsxs)(k,{...g(s),children:[(0,C.jsx)(A,{stroke:a,..._(d)}),(0,C.jsx)(j,{stroke:i,...m(l)})]}),t]})},`root`)(({boxSize:e,duration:t,thickness:r,...i})=>({"--duration":a(t)?`${t}s`:t,"--size":n(e,`sizes`),"--thickness":n(r,`sizes`),...i})),k=E(`svg`,`circle`)(),A=E(`circle`,`track`)(),j=E(`circle`,`range`)(),M=E(`span`,`label`)()})))()}var P,F,I,L,R,z,B,V,H,U,W,G,K;function q(){return(q=e((()=>{y(),r(),_(),N(),P=o(),F={component:O,title:`Components / CircleProgress`},I=()=>(0,P.jsx)(O,{value:75}),L=()=>(0,P.jsx)(b,{columns:[`outline`,`subtle`],rows:i,children:(e,t,n)=>(0,P.jsx)(O,{colorScheme:t,variant:e,value:75},n)}),R=()=>(0,P.jsx)(b,{variant:`stack`,rows:[`xs`,`sm`,`md`,`lg`,`xl`],children:(e,t,n)=>(0,P.jsx)(O,{size:t,value:75},n)}),z=()=>(0,P.jsx)(b,{variant:`stack`,rows:[`rounded`,`square`],children:(e,t,n)=>(0,P.jsx)(O,{shape:t,value:50},n)}),B=()=>(0,P.jsx)(O,{value:null}),V=()=>(0,P.jsx)(O,{duration:2,value:null}),H=()=>(0,P.jsx)(O,{thickness:1,value:31}),U=()=>(0,P.jsx)(v,{each:[`md`,`lg`,`xl`],children:(e,t)=>(0,P.jsx)(O,{size:e,value:75,children:(0,P.jsx)(M,{children:`75%`})},t)}),W=()=>(0,P.jsx)(O,{rangeColor:`red.500`,trackColor:`blue.500`,value:31}),G=()=>(0,P.jsx)(O,{boxSize:`100px`,value:31}),K=[`Basic`,`Variant`,`Size`,`Shape`,`Indeterminate`,`Duration`,`Thickness`,`Label`,`CustomColor`,`CustomSize`],I.parameters={...I.parameters,docs:{...I.parameters?.docs,source:{originalSource:`() => {
+  return <CircleProgress.Root value={75} />;
+}`,...I.parameters?.docs?.source}}},L.parameters={...L.parameters,docs:{...L.parameters?.docs,source:{originalSource:`() => {
+  return <PropsTable columns={["outline", "subtle"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
+      return <CircleProgress.Root key={key} colorScheme={row} variant={column} value={75} />;
+    }}
+    </PropsTable>;
+}`,...L.parameters?.docs?.source}}},R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`() => {
+  return <PropsTable variant="stack" rows={["xs", "sm", "md", "lg", "xl"]}>
+      {(_, row, key) => {
+      return <CircleProgress.Root key={key} size={row} value={75} />;
+    }}
+    </PropsTable>;
+}`,...R.parameters?.docs?.source}}},z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`() => {
+  return <PropsTable variant="stack" rows={["rounded", "square"]}>
+      {(_, row, key) => <CircleProgress.Root key={key} shape={row} value={50} />}
+    </PropsTable>;
+}`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`() => {
+  return <CircleProgress.Root value={null} />;
+}`,...B.parameters?.docs?.source}}},V.parameters={...V.parameters,docs:{...V.parameters?.docs,source:{originalSource:`() => {
+  return <CircleProgress.Root duration={2} value={null} />;
+}`,...V.parameters?.docs?.source}}},H.parameters={...H.parameters,docs:{...H.parameters?.docs,source:{originalSource:`() => {
+  return <CircleProgress.Root thickness={1} value={31} />;
+}`,...H.parameters?.docs?.source}}},U.parameters={...U.parameters,docs:{...U.parameters?.docs,source:{originalSource:`() => {
+  return <For each={["md", "lg", "xl"] as const}>
+      {(size, index) => <CircleProgress.Root key={index} size={size} value={75}>
+          <CircleProgress.Label>75%</CircleProgress.Label>
+        </CircleProgress.Root>}
+    </For>;
+}`,...U.parameters?.docs?.source}}},W.parameters={...W.parameters,docs:{...W.parameters?.docs,source:{originalSource:`() => {
+  return <CircleProgress.Root rangeColor="red.500" trackColor="blue.500" value={31} />;
+}`,...W.parameters?.docs?.source}}},G.parameters={...G.parameters,docs:{...G.parameters?.docs,source:{originalSource:`() => {
+  return <CircleProgress.Root boxSize="100px" value={31} />;
+}`,...G.parameters?.docs?.source}}}})))()}q();export{I as Basic,W as CustomColor,G as CustomSize,V as Duration,B as Indeterminate,U as Label,z as Shape,R as Size,H as Thickness,L as Variant,K as __namedExportsOrder,F as default};

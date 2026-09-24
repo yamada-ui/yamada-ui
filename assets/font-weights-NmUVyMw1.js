@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{d as t,u as n}from"./create-component-DtmnY_ce.js";var r;function i(){return(i=e((()=>{t(),r=n.fontWeights({hairline:100,thin:200,light:300,normal:400,medium:500,semibold:600,bold:700,extrabold:800,black:900})})))()}export{i as n,r as t};

@@ -1,0 +1,6 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-DiVRNtpo.js";import{t as n}from"./jsx-runtime-BdxMnOeJ.js";import{r,t as i}from"./badge-CipZruh7.js";function a(e){return window.addEventListener(`online`,e),window.addEventListener(`offline`,e),()=>{window.removeEventListener(`online`,e),window.removeEventListener(`offline`,e)}}function o(){return window.navigator.onLine}function s(e=()=>!0){return(0,c.useSyncExternalStore)(a,o,e)}var c;function l(){return(l=e((()=>{c=t()})))()}var u,d,f,p;function m(){return(m=e((()=>{r(),l(),u=n(),d={title:`Hooks / useOnline`},f=()=>{let e=s();return(0,u.jsx)(i,{colorScheme:e?`green`:`red`,children:e?`Online`:`Offline`})},p=[`Basic`],f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`() => {
+  const online = useOnline();
+  return <Badge colorScheme={online ? "green" : "red"}>
+      {online ? "Online" : "Offline"}
+    </Badge>;
+}`,...f.parameters?.docs?.source}}}})))()}m();export{f as Basic,p as __namedExportsOrder,d as default};

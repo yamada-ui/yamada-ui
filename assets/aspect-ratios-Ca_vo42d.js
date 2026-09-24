@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{d as t,u as n}from"./create-component-DtmnY_ce.js";var r;function i(){return(i=e((()=>{t(),r=n.aspectRatios({wide:`16 / 9`,bronze:`3.302 / 1`,golden:`1.618 / 1`,landscape:`4 / 3`,portrait:`3 / 4`,silver:`1.414 / 1`,square:`1 / 1`,ultrawide:`18 / 5`})})))()}export{i as n,r as t};

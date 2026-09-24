@@ -1,0 +1,6 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-DiVRNtpo.js";import{t as n}from"./jsx-runtime-BdxMnOeJ.js";import{n as r,t as i}from"./box-C47iDJeO.js";var a,o,s;function c(){return(c=e((()=>{a=t(),o={events:[`keypress`,`mousemove`,`touchmove`,`click`,`scroll`],initialState:!0},s=(e,t)=>{let{events:n,initialState:r}={...o,...t},[i,s]=(0,a.useState)(r),c=(0,a.useRef)(void 0);return(0,a.useEffect)(()=>{let t=()=>{s(!1),c.current&&clearTimeout(c.current),c.current=setTimeout(()=>s(!0),e)};return n.forEach(e=>document.addEventListener(e,t)),()=>{n.forEach(e=>document.removeEventListener(e,t))}},[n,e]),i}})))()}var l,u,d,f;function p(){return(p=e((()=>{c(),r(),l=n(),u={title:`Hooks / useIdle`},d=()=>{let e=s(2e3);return(0,l.jsxs)(i,{bg:e?`blue.500`:`red.500`,color:`white`,p:`md`,rounded:`l2`,transitionDuration:`moderate`,transitionProperty:`all`,children:[`Current state: `,e?`idle`:`not idle`]})},f=[`Basic`],d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`() => {
+  const idle = useIdle(2000);
+  return <Box bg={idle ? "blue.500" : "red.500"} color="white" p="md" rounded="l2" transitionDuration="moderate" transitionProperty="all">
+      Current state: {idle ? "idle" : "not idle"}
+    </Box>;
+}`,...d.parameters?.docs?.source}}}})))()}p();export{d as Basic,f as __namedExportsOrder,u as default};

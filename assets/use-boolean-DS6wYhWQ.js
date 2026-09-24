@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-DiVRNtpo.js";var n,r;function i(){return(i=e((()=>{n=t(),r=(e=!1)=>{let[t,r]=(0,n.useState)(e),i=(0,n.useCallback)(()=>r(!0),[]);return[t,{off:(0,n.useCallback)(()=>r(!1),[]),toggle:(0,n.useCallback)(()=>r(e=>!e),[]),on:i}]}})))()}export{r as n,i as t};

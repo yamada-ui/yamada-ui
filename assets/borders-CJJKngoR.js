@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{d as t,u as n}from"./create-component-DtmnY_ce.js";var r;function i(){return(i=e((()=>{t(),r=n.borders({xs:`0.5px solid`,sm:`1px solid`,md:`2px solid`,lg:`4px solid`,xl:`8px solid`})})))()}export{i as n,r as t};

@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{n as t,r as n}from"./color-mode-provider-CifNlfSs.js";var r,i;function a(){return(a=e((()=>{t(),r=(e,t)=>{let{colorMode:r}=n();return i(e,t)(r)},i=(e,t)=>n=>n===`light`?e:t})))()}export{a as n,r,i as t};

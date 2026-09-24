@@ -1,0 +1,6 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./jsx-runtime-BdxMnOeJ.js";import{a as n,d as r,r as i,t as a}from"./create-component-DtmnY_ce.js";import{n as o,t as s}from"./check-icon-B4K3BaPN.js";import{r as c,t as l}from"./icon-button-BPVZ8V7k.js";var u;function d(){return(d=e((()=>{r(),u=n({base:{layerStyle:`visuallyHidden`}})})))()}var f,p,m,h;function g(){return(g=e((()=>{i(),d(),{PropsContext:f,usePropsContext:p,withContext:m}=a(`visually-hidden`,u),h=m(`span`)()})))()}var _,v,y,b;function x(){return(x=e((()=>{c(),o(),g(),_=t(),v={component:h,title:`Components / VisuallyHidden`},y=()=>(0,_.jsxs)(l,{children:[(0,_.jsx)(h,{children:`Checkmark`}),(0,_.jsx)(s,{fontSize:`2xl`})]}),b=[`Basic`],y.parameters={...y.parameters,docs:{...y.parameters?.docs,source:{originalSource:`() => {
+  return <IconButton>
+      <VisuallyHidden>Checkmark</VisuallyHidden>
+      <CheckIcon fontSize="2xl" />
+    </IconButton>;
+}`,...y.parameters?.docs?.source}}}})))()}x();export{y as Basic,b as __namedExportsOrder,v as default};

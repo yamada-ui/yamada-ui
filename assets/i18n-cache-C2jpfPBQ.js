@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";var t;function n(){return(n=e((()=>{t=e=>{let t=new Map;return function(n,r){let i=n+(r?Object.entries(r).sort((e,t)=>e[0]<t[0]?-1:1).join():``);if(t.has(i))return t.get(i);let a=new e(n,r);return t.set(i,a),a}}})))()}export{n,t};

@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{a as t,d as n,r,t as i}from"./create-component-DtmnY_ce.js";var a;function o(){return(o=e((()=>{n(),a=t({})})))()}var s,c,l,u;function d(){return(d=e((()=>{r(),o(),{PropsContext:s,usePropsContext:c,withContext:l}=i(`image`,a),u=l(`img`)(void 0,({fit:e,...t})=>({objectFit:e,...t}))})))()}export{d as n,u as t};

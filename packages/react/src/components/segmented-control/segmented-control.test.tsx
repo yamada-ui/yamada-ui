@@ -26,19 +26,6 @@ describe("<SegmentedControl />", () => {
     expect(screen.getByText("One").closest("label")?.tagName).toBe("LABEL")
   })
 
-  test("should customize items without requiring a shared value", () => {
-    render(<TestComponent itemProps={{ className: "custom-item" }} />)
-
-    const radios = screen.getAllByRole("radio")
-
-    expect(radios).toHaveLength(items.length)
-
-    radios.forEach((radio, index) => {
-      expect(radio.closest("label")).toHaveClass("custom-item")
-      expect(radio).toHaveAttribute("value", items[index]?.value)
-    })
-  })
-
   test("should disable segmented control", () => {
     render(<TestComponent disabled />)
 

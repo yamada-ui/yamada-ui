@@ -6,7 +6,7 @@
   "engines": {
     "node": ">=24.14"
   },
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@12.4.2",
   "license": "MIT",
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "repository": {
@@ -84,18 +84,5 @@
     "typescript": "catalog:",
     "vitest": "catalog:",
     "wait-on": "^9.1.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "axios": "^1.15.0",
-      "@babel/types": "7.29.8",
-      "brace-expansion@5": "5.0.9",
-      "esbuild@>=0.27.3 <0.28.1": "0.28.1",
-      "follow-redirects": "^1.16.0",
-      "jsdom": "29.0.1",
-      "playwright": "^1.62.0",
-      "playwright-core": "^1.62.0",
-      "sharp": "0.35.4"
-    }
   }
 }

@@ -78,7 +78,7 @@ export const menuStyle = defineComponentSlotStyle({
     },
     separator: {
       "& + hr": { display: "none" },
-      "&:last-child, &:first-child": { display: "none" },
+      "&:last-child, &:not(* + hr)": { display: "none" },
       borderBottomWidth: "{border-width}",
       mx: "calc({space} * -1)",
       my: "{space}",

@@ -17,19 +17,19 @@ catalog:
   commander: ^14.0.3
   dayjs: ^1.11.23
   dotenv: ^17.4.0
-  eslint: ^10.9.1
+  eslint: ^10.10.0
   "eslint-plugin-unused-imports": ^4.4.1
   motion: ^12.43.0
   next: ^16.3.5
-  oxlint: ^1.80.0
+  oxlint: ^1.83.0
   oxlint-tsgolint: ^0.25.0
   ora: ^9.4.0
   oxfmt: ^0.67.0
   playwright: ^1.63.0
   picocolors: ^1.1.1
   prettier: ^3.9.6
-  react: ^19.2.8
-  react-dom: ^19.2.8
+  react: ^19.3.0
+  react-dom: ^19.3.0
   react-hook-form: ^7.88.0
   react-icons: ^5.7.0
   rimraf: ^6.1.3

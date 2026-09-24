@@ -131,7 +131,7 @@
     "@lucide/lab": "catalog:",
     "@mdn/browser-compat-data": "7.3.17",
     "@testing-library/react": "^16.3.3",
-    "@testing-library/user-event": "^14.6.6",
+    "@testing-library/user-event": "^14.6.7",
     "@types/babel__traverse": "^7.28.0",
     "@types/jsdom": "^28.0.1",
     "@types/yamljs": "catalog:",
@@ -147,7 +147,7 @@
     "react-icons": "catalog:",
     "use-mask-input": "^3.14.2",
     "vitest-axe": "catalog:",
-    "vitest-browser-react": "2.2.0",
+    "vitest-browser-react": "2.3.0",
     "web-features": "3.38.0",
     "yamljs": "catalog:"
   },

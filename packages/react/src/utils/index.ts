@@ -17,6 +17,7 @@ export type {
   Dict,
   EventType,
   FlattenObjectOptions,
+  FunctionOf,
   FunctionOrValue,
   Length,
   Merge,

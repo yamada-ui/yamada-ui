@@ -157,7 +157,10 @@ export const nativeTableStyle = defineComponentSlotStyle({
      */
     withColumnBorders: {
       true: {
-        tr: { "& th, td": { borderRightWidth: "1px" } },
+        tr: {
+          "& th, td": { borderRightWidth: "1px" },
+          _lastChild: { borderRightWidth: "0" },
+        },
       },
     },
   },

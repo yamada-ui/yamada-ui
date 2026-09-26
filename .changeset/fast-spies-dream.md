@@ -1,5 +1,5 @@
 ---
-"@yamada-ui/cli": major
+"@yamada-ui/cli": patch
 "@yamada-ui/react": patch
 "@yamada-ui/utils": patch
 ---

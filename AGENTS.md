@@ -9,6 +9,13 @@ Yamada UI is a React UI component library built with CSS-in-JS (Emotion).
 - **Do not bundle multiple fixes**: If you encounter a separate issue while working on a fix, do not fix it in the same PR. Create a separate issue and submit a separate PR.
 - **Do not run format, lint, or typecheck unless explicitly asked**: Format, lint and typecheck are handled by lefthook on commit. However, run tests for the changed files locally to verify that the implementation works correctly.
 - **Do not write comments**: JSDoc and comments that suppress linter or formatter errors are allowed, but all other comments are not. Programs that require comments to be understood should have their structure questioned. Programs must be simple and immediately understandable by reading the code itself.
+- **Sign all agent-authored content**: When posting a comment, creating an issue, or opening a PR, append a footer to the message indicating that it was written by an agent. The footer must include the name of the agent and the name of the model used. Example:
+
+  ```markdown
+  ---
+
+  Written by an agent (opencode, glm-5.5).
+  ```
 
 ## Rules
 

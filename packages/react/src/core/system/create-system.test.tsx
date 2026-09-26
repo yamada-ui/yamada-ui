@@ -1,4 +1,4 @@
-import type { CSSVars } from "./index.types"
+import type { CSSVars } from "./index.type"
 import { renderHook } from "#test"
 import { createSystem, defaultSystem } from "./create-system"
 import { useSystem } from "./system-provider"

@@ -1,5 +1,5 @@
 import type { Transition } from "motion/react"
-import type { MotionTransitionProps } from "./index.types"
+import type { MotionTransitionProps } from "./index.type"
 import { isNumber, isUndefined } from "../../utils"
 
 export const createTransition = {

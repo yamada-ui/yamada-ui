@@ -1,4 +1,4 @@
-import type { Path, Primitive } from "./index.types"
+import type { Path, Primitive } from "./index.type"
 import * as utils from "."
 
 describe("index", () => {

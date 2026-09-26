@@ -7,7 +7,7 @@ import type {
   CSSMediaObject,
   CSSObject,
   StyleValueWithCondition,
-} from "./index.types"
+} from "./index.type"
 import { transforms } from "./config"
 import { pipe } from "./utils"
 

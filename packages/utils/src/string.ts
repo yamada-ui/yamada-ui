@@ -1,4 +1,4 @@
-import type { AnyString } from "./index.types"
+import type { AnyString } from "./index.type"
 import { isString } from "./assertion"
 
 export function cx(

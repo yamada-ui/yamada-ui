@@ -1,5 +1,5 @@
 import type { StyledTheme, System, UsageTheme } from "../system"
-import type { CSSObject, CSSObjectOrFunction } from "./index.types"
+import type { CSSObject, CSSObjectOrFunction } from "./index.type"
 import { css as emotionCSS } from "@emotion/css"
 import { useMemo } from "react"
 import { toArray } from "../../utils"

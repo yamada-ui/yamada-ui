@@ -1,6 +1,6 @@
 import type { Length } from "../../utils"
 import type { DOMElement } from "../components"
-import type { CSSObject } from "./index.types"
+import type { CSSObject } from "./index.type"
 
 type ReplaceSelector<
   Y extends string[],

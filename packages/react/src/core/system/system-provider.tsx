@@ -1,7 +1,7 @@
 "use client"
 
 import type { FC, PropsWithChildren } from "react"
-import type { System, ThemeConfig, UsageTheme } from "./index.types"
+import type { System, ThemeConfig, UsageTheme } from "./index.type"
 import { createContext, use, useMemo } from "react"
 import { createSystem, defaultSystem } from "./create-system"
 import { useEnvironment } from "./environment-provider"

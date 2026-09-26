@@ -1,4 +1,4 @@
-import type { CSSObject } from "./index.types"
+import type { CSSObject } from "./index.type"
 import type { Transform } from "./utils"
 
 export const focusRingStyle = {

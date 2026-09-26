@@ -4,7 +4,7 @@ export default {
   test: {
     coverage: {
       exclude: [
-        "**/*.types.{ts,tsx}",
+        "**/*.type.{ts,tsx}",
         "**/*.stories.{ts,tsx}",
         "**/*.test.{ts,tsx}",
         "**/*.test.*.{ts,tsx}",

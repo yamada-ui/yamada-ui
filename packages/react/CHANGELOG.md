@@ -1,5 +1,30 @@
 # @yamada-ui/react
 
+## 2.2.9
+
+### Patch Changes
+
+- [#7834](https://github.com/yamada-ui/yamada-ui/pull/7834) [`0adff41`](https://github.com/yamada-ui/yamada-ui/commit/0adff41ae1983c574f914f4dd6bd40f26be757bb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7851](https://github.com/yamada-ui/yamada-ui/pull/7851) [`bb4212f`](https://github.com/yamada-ui/yamada-ui/commit/bb4212f989063367960f72bd5d9456dbd3b142b2) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7834](https://github.com/yamada-ui/yamada-ui/pull/7834) [`0adff41`](https://github.com/yamada-ui/yamada-ui/commit/0adff41ae1983c574f914f4dd6bd40f26be757bb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7851](https://github.com/yamada-ui/yamada-ui/pull/7851) [`bb4212f`](https://github.com/yamada-ui/yamada-ui/commit/bb4212f989063367960f72bd5d9456dbd3b142b2) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7853](https://github.com/yamada-ui/yamada-ui/pull/7853) [`c2374da`](https://github.com/yamada-ui/yamada-ui/commit/c2374da89aa1a22cbbb2cf033c6a7179c7b77c8b) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7834](https://github.com/yamada-ui/yamada-ui/pull/7834) [`0adff41`](https://github.com/yamada-ui/yamada-ui/commit/0adff41ae1983c574f914f4dd6bd40f26be757bb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7851](https://github.com/yamada-ui/yamada-ui/pull/7851) [`bb4212f`](https://github.com/yamada-ui/yamada-ui/commit/bb4212f989063367960f72bd5d9456dbd3b142b2) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7869](https://github.com/yamada-ui/yamada-ui/pull/7869) [`564930f`](https://github.com/yamada-ui/yamada-ui/commit/564930fcf5a2d1edd3370efeec26ba45ea35ae5c) Thanks [@taroj1205](https://github.com/taroj1205)! - Infer shape callback parameters from the callable arm of ActiveShape and share the extraction helper as FunctionOf so registry-copied chart sources typecheck under TypeScript 5.
+
+- [#7858](https://github.com/yamada-ui/yamada-ui/pull/7858) [`b6828a0`](https://github.com/yamada-ui/yamada-ui/commit/b6828a0a568614703f4185c19773bdd8dc3c64ee) Thanks [@taroj1205](https://github.com/taroj1205)! - Fix Emotion SSR unsafe-selector warning emitted by menu separators by replacing `:first-child` with an equivalent `:not()` sibling selector.
+
+- Updated dependencies [[`564930f`](https://github.com/yamada-ui/yamada-ui/commit/564930fcf5a2d1edd3370efeec26ba45ea35ae5c)]:
+  - @yamada-ui/utils@2.1.7
+
 ## 2.2.8
 
 ### Patch Changes

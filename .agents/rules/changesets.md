@@ -8,7 +8,7 @@ Generate the changeset through the CLI. Do not create the file under `.changeset
 pnpm changeset add
 ```
 
-If the CLI is unavailable or broken, write the file manually and report that fallback.
+The CLI requires interactive input to select packages and bump types. If the CLI is unavailable or broken, or the execution environment does not support interactive input, write the file manually and report the reason for that fallback.
 
 **Bump type**
 

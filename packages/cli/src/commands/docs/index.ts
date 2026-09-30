@@ -19,9 +19,7 @@ interface Options {
 async function readStdin(): Promise<string> {
   const chunks: Buffer[] = []
 
-  for await (const chunk of process.stdin) {
-    chunks.push(chunk as Buffer)
-  }
+  for await (const chunk of process.stdin) chunks.push(chunk as Buffer)
 
   const text = Buffer.concat(chunks).toString()
 
@@ -43,11 +41,10 @@ function parsePath(input: string): {
 
     const docsHostname = new URL(DOCS_BASE_URL).hostname
 
-    if (url.hostname !== docsHostname) {
+    if (url.hostname !== docsHostname)
       throw new Error(
         `Invalid URL: only ${c.cyan(docsHostname)} URLs are supported, got ${c.yellow(url.hostname)}`,
       )
-    }
 
     const langMatch = url.pathname.match(/^\/(ja|en)(?=\/)/)
 
@@ -60,13 +57,12 @@ function parsePath(input: string): {
 
   const hashIndex = input.indexOf("#")
 
-  if (hashIndex !== -1) {
+  if (hashIndex !== -1)
     return {
       detectedLang: undefined,
       hash: input.slice(hashIndex + 1),
       path: input.slice(0, hashIndex),
     }
-  }
 
   return { detectedLang: undefined, hash: undefined, path: input }
 }
@@ -109,11 +105,10 @@ export const docs = new Command("docs")
         if (parsed.detectedLang) effectiveLang = parsed.detectedLang
       }
 
-      if (hash && !docPath) {
+      if (hash && !docPath)
         throw new Error(
           `A documentation path is required when specifying a section hash: ${c.yellow(`#${hash}`)}`,
         )
-      }
 
       const needsEnFallback = effectiveLang !== "en" && !!hash
 
@@ -128,28 +123,19 @@ export const docs = new Command("docs")
 
       let result = content
 
-      if (hash) {
-        if (!needsEnFallback) {
-          result = trimToSection(content, hash)
-        } else {
-          const idx = findHeadingIndex(enContent!, hash)
-
-          if (idx === -1) {
-            throw new Error(`Section not found: ${c.yellow(`#${hash}`)}`)
-          }
-
-          result = trimToSectionByIndex(content, idx, hash)
-        }
-      }
+      if (hash)
+        result = needsEnFallback
+          ? trimToSectionByIndex(
+              content,
+              findHeadingIndex(enContent!, hash),
+              hash,
+            )
+          : trimToSection(content, hash)
 
       spinner.succeed("Fetched documentation")
       process.stdout.write(sections ? extractSections(result) : result)
     } catch (e) {
-      if (e instanceof Error) {
-        spinner.fail(e.message)
-      } else {
-        spinner.fail("An unknown error occurred")
-      }
+      spinner.fail(e instanceof Error ? e.message : "An unknown error occurred")
 
       process.exit(1)
     }

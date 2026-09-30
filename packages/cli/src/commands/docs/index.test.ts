@@ -25,9 +25,7 @@ function mockStdinStream(text: string): () => void {
   })
 
   return () => {
-    if (descriptor) {
-      Object.defineProperty(process, "stdin", descriptor)
-    }
+    if (descriptor) Object.defineProperty(process, "stdin", descriptor)
   }
 }
 

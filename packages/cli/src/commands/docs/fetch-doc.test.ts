@@ -1,4 +1,6 @@
 import fetch from "node-fetch"
+import { homedir } from "node:os"
+import { join } from "node:path"
 import {
   buildUrl,
   extractSections,
@@ -10,11 +12,14 @@ import {
 
 vi.mock("node-fetch", () => ({ default: vi.fn() }))
 
+const mockLstatSync = vi.fn()
+const mockMkdirSync = vi.fn()
 const mockReadFileSync = vi.fn()
 const mockWriteFileSync = vi.fn()
 
 vi.mock("node:fs", () => ({
-  mkdirSync: vi.fn(),
+  lstatSync: (...args: unknown[]) => mockLstatSync(...args),
+  mkdirSync: (...args: unknown[]) => mockMkdirSync(...args),
   readFileSync: (...args: unknown[]) => mockReadFileSync(...args),
   writeFileSync: (...args: unknown[]) => mockWriteFileSync(...args),
 }))
@@ -24,6 +29,26 @@ const mockFetch = vi.mocked(fetch)
 function makeCacheEntry(content: string, timestamp: number): string {
   return JSON.stringify({ content, timestamp })
 }
+
+const fencedContent = [
+  "# Button",
+  "",
+  "## Installation",
+  "",
+  "```bash",
+  "# Install packages",
+  "pnpm add @yamada-ui/react",
+  "```",
+  "",
+  "~~~~sh",
+  "## Not a heading",
+  "~~~",
+  "~~~~",
+  "",
+  "## Usage",
+  "",
+  "Usage content.",
+].join("\n")
 
 describe("buildUrl", () => {
   test("should return llms.txt url when no path given", () => {
@@ -74,8 +99,11 @@ describe("buildUrl", () => {
 describe("fetchDoc", () => {
   beforeEach(() => {
     mockFetch.mockReset()
+    mockLstatSync.mockReset()
+    mockMkdirSync.mockReset()
     mockReadFileSync.mockReset()
     mockWriteFileSync.mockReset()
+    mockLstatSync.mockReturnValue({ mode: 0o40700, uid: process.getuid?.() })
     mockReadFileSync.mockImplementation(() => {
       throw Object.assign(new Error("ENOENT"), { code: "ENOENT" })
     })
@@ -153,6 +181,118 @@ describe("fetchDoc", () => {
     )
   })
 
+  test.each([
+    ["owned by another user", { mode: 0o100600, uid: -1 }],
+    ["writable by others", { mode: 0o100666, uid: process.getuid?.() }],
+  ])("should fetch instead of trusting a cache file %s", async (_, stats) => {
+    mockLstatSync.mockImplementation((path: string) =>
+      path.endsWith("docs")
+        ? { mode: 0o40700, uid: process.getuid?.() }
+        : stats,
+    )
+    mockReadFileSync.mockReturnValue(
+      makeCacheEntry("# Planted Content\n", Date.now()),
+    )
+    mockFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve("# Real Content\n"),
+    } as any)
+
+    const result = await fetchDoc(
+      "https://yamada-ui.com/docs/components/planted.md",
+    )
+
+    expect(result).toBe("# Real Content\n")
+  })
+
+  test("should skip ownership checks where getuid is unavailable", async () => {
+    vi.stubGlobal("process", { ...process, getuid: undefined })
+    mockReadFileSync.mockReturnValue(
+      makeCacheEntry("# Cached Content\n", Date.now()),
+    )
+
+    const result = await fetchDoc(
+      "https://yamada-ui.com/docs/components/cached.md",
+    )
+
+    expect(result).toBe("# Cached Content\n")
+    expect(mockLstatSync).not.toHaveBeenCalled()
+
+    vi.unstubAllGlobals()
+  })
+
+  test("should fetch instead of trusting a cache directory writable by others", async () => {
+    mockLstatSync.mockReturnValue({
+      mode: 0o40777,
+      uid: process.getuid?.(),
+    })
+    mockReadFileSync.mockReturnValue(
+      makeCacheEntry("# Planted Content\n", Date.now()),
+    )
+    mockFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve("# Real Content\n"),
+    } as any)
+
+    const result = await fetchDoc(
+      "https://yamada-ui.com/docs/components/planted.md",
+    )
+
+    expect(result).toBe("# Real Content\n")
+    expect(mockWriteFileSync).not.toHaveBeenCalled()
+  })
+
+  test("should write cache privately under the user cache directory", async () => {
+    vi.stubEnv("XDG_CACHE_HOME", "")
+    vi.resetModules()
+
+    const { fetchDoc: freshFetchDoc } = await import("./fetch-doc")
+
+    mockFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve("# Button\n"),
+    } as any)
+
+    await freshFetchDoc("https://yamada-ui.com/docs/components/button.md")
+
+    const cacheDir = join(homedir(), ".cache", "yamada-ui", "docs")
+
+    expect(mockMkdirSync).toHaveBeenCalledWith(cacheDir, {
+      mode: 0o700,
+      recursive: true,
+    })
+    expect(mockWriteFileSync).toHaveBeenCalledWith(
+      expect.stringMatching(new RegExp(`^${cacheDir}`)),
+      expect.any(String),
+      { mode: 0o600 },
+    )
+
+    vi.unstubAllEnvs()
+    vi.resetModules()
+  })
+
+  test("should write cache under XDG_CACHE_HOME when it is set", async () => {
+    vi.stubEnv("XDG_CACHE_HOME", "/xdg-cache")
+    vi.resetModules()
+
+    const { fetchDoc: freshFetchDoc } = await import("./fetch-doc")
+
+    mockFetch.mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve("# Button\n"),
+    } as any)
+
+    await freshFetchDoc("https://yamada-ui.com/docs/components/button.md")
+
+    expect(mockMkdirSync).toHaveBeenCalledWith(
+      join("/xdg-cache", "yamada-ui", "docs"),
+      expect.anything(),
+    )
+
+    vi.unstubAllEnvs()
+    vi.resetModules()
+  })
+
   test("should return content even when writing cache fails", async () => {
     mockWriteFileSync.mockImplementation(() => {
       throw new Error("EROFS")
@@ -222,6 +362,12 @@ describe("extractSections", () => {
 
     expect(extractSections(content)).toBe("# ボタン\n## 使い方\n")
   })
+
+  test("should ignore comments inside fenced code", () => {
+    expect(extractSections(fencedContent)).toBe(
+      "# Button\n## Installation\n## Usage\n",
+    )
+  })
 })
 
 describe("trimToSection", () => {
@@ -257,6 +403,20 @@ describe("trimToSection", () => {
 
   test("should throw when section is not found", () => {
     expect(() => trimToSection(content, "nonexistent")).toThrow(
+      "Section not found:",
+    )
+  })
+
+  test("should keep fenced code containing comments within the section", () => {
+    const result = trimToSection(fencedContent, "installation")
+
+    expect(result).toContain("# Install packages")
+    expect(result).toContain("pnpm add @yamada-ui/react")
+    expect(result).not.toContain("Usage content.")
+  })
+
+  test("should not match comments inside fenced code", () => {
+    expect(() => trimToSection(fencedContent, "install-packages")).toThrow(
       "Section not found:",
     )
   })
@@ -305,6 +465,10 @@ describe("findHeadingIndex", () => {
     const jaContent = "# ボタン\n\n## 使い方\n\nContent.\n"
 
     expect(findHeadingIndex(jaContent, "使い方")).toBe(1)
+  })
+
+  test("should not count comments inside fenced code", () => {
+    expect(findHeadingIndex(fencedContent, "usage")).toBe(2)
   })
 })
 
@@ -360,5 +524,12 @@ describe("trimToSectionByIndex", () => {
     expect(result).toContain("Usage content.")
     expect(result).toContain("Sub content.")
     expect(result).not.toContain("Props content.")
+  })
+
+  test("should keep fenced code containing comments within the section", () => {
+    const result = trimToSectionByIndex(fencedContent, 1, "installation")
+
+    expect(result).toContain("## Not a heading")
+    expect(result).not.toContain("Usage content.")
   })
 })

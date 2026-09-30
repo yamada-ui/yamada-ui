@@ -312,9 +312,7 @@ export const UseClose = () => {
   }
 
   const onClose = () => {
-    if (ref.current) {
-      notice.close(ref.current)
-    }
+    if (ref.current) notice.close(ref.current)
   }
 
   const onCloseAll = () => {
@@ -344,14 +342,13 @@ export const UseUpdate = () => {
   }
 
   const onUpdate = () => {
-    if (ref.current) {
+    if (ref.current)
       notice.update(ref.current, {
         colorScheme: "blue",
         description: "人生はワン･ツー･デカルチャー！！頑張れ、私。",
         duration: 5000,
         title: "ランカ・リー",
       })
-    }
   }
 
   return (

@@ -325,10 +325,7 @@ describe("<DatePicker />", () => {
 
   test("handles calendarProps", () => {
     render(
-      <DatePicker
-        defaultOpen
-        calendarProps={{ "data-testid": "calendar" } as any}
-      />,
+      <DatePicker defaultOpen calendarProps={{ "data-testid": "calendar" }} />,
     )
 
     expect(screen.getByTestId("calendar")).toBeInTheDocument()
@@ -341,7 +338,7 @@ describe("<DatePicker />", () => {
   })
 
   test("handles elementProps", () => {
-    render(<DatePicker elementProps={{ "data-testid": "element" } as any} />)
+    render(<DatePicker elementProps={{ "data-testid": "element" }} />)
 
     expect(screen.getByTestId("element")).toBeInTheDocument()
   })

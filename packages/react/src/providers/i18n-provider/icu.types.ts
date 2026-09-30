@@ -88,9 +88,9 @@ type ParseBlock<
 
 type ParseBlocks<Y, M extends string = string> = Y extends [infer D, ...infer H]
   ? {
-      [R in
-        | keyof ParseBlock<D, M>
-        | keyof ParseBlocks<H, M>]: R extends keyof ParseBlock<D, M>
+      [
+        R in keyof ParseBlock<D, M> | keyof ParseBlocks<H, M>
+      ]: R extends keyof ParseBlock<D, M>
         ? ParseBlock<D, M>[R]
         : R extends keyof ParseBlocks<H, M>
           ? ParseBlocks<H, M>[R]
@@ -104,9 +104,9 @@ type ParseElement<Y> = {
 
 type ParseElements<Y> = Y extends [infer M, ...infer D]
   ? {
-      [H in
-        | keyof ParseElement<M>
-        | keyof ParseElements<D>]: H extends keyof ParseElement<M>
+      [
+        H in keyof ParseElement<M> | keyof ParseElements<D>
+      ]: H extends keyof ParseElement<M>
         ? ParseElement<M>[H]
         : H extends keyof ParseElements<D>
           ? ParseElements<D>[H]
@@ -115,11 +115,11 @@ type ParseElements<Y> = Y extends [infer M, ...infer D]
   : {}
 
 export type IcuArgs<Y, M extends string = string> = ExcludeEmptyObject<{
-  [D in
-    | keyof ParseBlocks<FindBlocks<ExcludeEscape<Y>>, M>
-    | keyof ParseElements<
-        FindElements<ExcludeEscape<Y>>
-      >]: D extends keyof ParseBlocks<FindBlocks<ExcludeEscape<Y>>, M>
+  [
+    D in
+      | keyof ParseBlocks<FindBlocks<ExcludeEscape<Y>>, M>
+      | keyof ParseElements<FindElements<ExcludeEscape<Y>>>
+  ]: D extends keyof ParseBlocks<FindBlocks<ExcludeEscape<Y>>, M>
     ? ParseBlocks<FindBlocks<ExcludeEscape<Y>>, M>[D]
     : D extends keyof ParseElements<FindElements<ExcludeEscape<Y>>>
       ? ParseElements<FindElements<ExcludeEscape<Y>>>[D]

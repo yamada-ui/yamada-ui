@@ -92,26 +92,22 @@ export const ZStack = withContext<"div", ZStackProps>(
 
     const vertical = useCallback(
       (space: string) => {
-        if (direction.startsWith("start")) {
+        if (direction.startsWith("start"))
           return { [!reverse ? "bottom" : "top"]: space }
-        } else if (direction.startsWith("end")) {
+        else if (direction.startsWith("end"))
           return { [!reverse ? "top" : "bottom"]: space }
-        } else {
-          return { [!reverse ? "top" : "bottom"]: 0 }
-        }
+        else return { [!reverse ? "top" : "bottom"]: 0 }
       },
       [direction, reverse],
     )
 
     const horizontal = useCallback(
       (space: string) => {
-        if (direction.endsWith("-start")) {
+        if (direction.endsWith("-start"))
           return { [!reverse ? "right" : "left"]: space }
-        } else if (direction.endsWith("-end")) {
+        else if (direction.endsWith("-end"))
           return { [!reverse ? "left" : "right"]: space }
-        } else {
-          return { [!reverse ? "left" : "right"]: 0 }
-        }
+        else return { [!reverse ? "left" : "right"]: 0 }
       },
       [direction, reverse],
     )

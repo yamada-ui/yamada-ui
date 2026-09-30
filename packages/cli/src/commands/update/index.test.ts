@@ -4,7 +4,7 @@ import path from "node:path"
 
 vi.mock("node-fetch", () => ({
   default: vi.fn().mockImplementation((url: string) => {
-    if (url.includes("index.json")) {
+    if (url.includes("index.json"))
       return Promise.resolve({
         json: () =>
           Promise.resolve({
@@ -18,8 +18,8 @@ vi.mock("node-fetch", () => ({
           }),
         ok: true,
       })
-    }
-    if (url.includes("components/button.json")) {
+
+    if (url.includes("components/button.json"))
       return Promise.resolve({
         json: () =>
           Promise.resolve({
@@ -39,7 +39,7 @@ vi.mock("node-fetch", () => ({
           }),
         ok: true,
       })
-    }
+
     return Promise.resolve({ ok: false, status: 404 })
   }),
 }))

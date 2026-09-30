@@ -102,11 +102,8 @@ export async function generateDocMap(docs: Doc[]) {
             prev[itemIndex].title = title
             prev[itemIndex].pathname = getPathname("docs", ...omittedSlug)
 
-            if (status) {
-              prev[itemIndex].status = status
-            } else {
-              delete prev[itemIndex].status
-            }
+            if (status) prev[itemIndex].status = status
+            else delete prev[itemIndex].status
           } else {
             if (segment.match(/^\(|\)$/)) {
               const title = t(`docs.group.${segment.replace(/^\(|\)$/g, "")}`)

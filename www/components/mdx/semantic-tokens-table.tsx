@@ -57,7 +57,7 @@ export function SemanticTokensTable({
         <NativeTable.Tbody>
           {Object.entries(semanticTokens).map(
             ([semanticToken, semanticValue], index) => {
-              if (isObject(semanticValue)) {
+              if (isObject(semanticValue))
                 return Object.entries(semanticValue).map(
                   ([key, value], index) => {
                     return (
@@ -69,7 +69,7 @@ export function SemanticTokensTable({
                     )
                   },
                 )
-              } else {
+              else
                 return (
                   <Row
                     key={index}
@@ -77,7 +77,6 @@ export function SemanticTokensTable({
                     value={semanticValue}
                   />
                 )
-              }
             },
           )}
         </NativeTable.Tbody>

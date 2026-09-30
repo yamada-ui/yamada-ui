@@ -34,11 +34,8 @@ describe("useAsyncRetry", () => {
     const asyncFunction = async () =>
       new Promise((resolve, reject) => {
         attempt += 1
-        if (attempt === 2) {
-          resolve("success")
-        } else {
-          reject("fail")
-        }
+        if (attempt === 2) resolve("success")
+        else reject("fail")
       })
     const { result } = renderHook(() => useAsyncRetry(asyncFunction, []))
 

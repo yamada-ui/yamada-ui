@@ -12,7 +12,7 @@ function createRow(prop: string, { docs, token }: StyleConfig) {
   const [name, { see } = {}] =
     (isObject(docs) ? Object.entries(docs)[0] : undefined) ?? []
 
-  if (name && see) {
+  if (name && see)
     value = (
       <Code
         as="a"
@@ -26,7 +26,6 @@ function createRow(prop: string, { docs, token }: StyleConfig) {
         @{name}
       </Code>
     )
-  }
 
   return {
     prop,

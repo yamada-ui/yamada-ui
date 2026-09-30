@@ -51,20 +51,16 @@ function transformColorModeArray(breakpoints: Breakpoints) {
   return function (key: string, [lightValue, darkValue]: any[]): Dict {
     let computedCSS: Dict = {}
 
-    if (isConditionalObject(breakpoints)(lightValue)) {
+    if (isConditionalObject(breakpoints)(lightValue))
       computedCSS = transformConditionalObject(breakpoints)(key, lightValue)
-    } else {
-      computedCSS[key] = lightValue
-    }
+    else computedCSS[key] = lightValue
 
-    if (isConditionalObject(breakpoints)(darkValue)) {
+    if (isConditionalObject(breakpoints)(darkValue))
       computedCSS[conditions._dark] = transformConditionalObject(breakpoints)(
         key,
         darkValue,
       )
-    } else {
-      computedCSS[conditions._dark] = { [key]: darkValue }
-    }
+    else computedCSS[conditions._dark] = { [key]: darkValue }
 
     return computedCSS
   }
@@ -80,7 +76,7 @@ function transformConditionalObject(breakpoints: Breakpoints) {
       (prev, { breakpoint, query }) => {
         const breakpointValue = value[breakpoint]
 
-        if (!isUndefined(breakpointValue)) {
+        if (!isUndefined(breakpointValue))
           if (isArray(breakpointValue)) {
             const colorModeValue = transformColorModeArray(breakpoints)(
               key,
@@ -109,7 +105,6 @@ function transformConditionalObject(breakpoints: Breakpoints) {
                 : { [key]: breakpointValue },
             )
           }
-        }
 
         return prev
       },
@@ -133,13 +128,10 @@ function transformConditionalObject(breakpoints: Breakpoints) {
 
 export function transformConditionalValue({ breakpoints }: System) {
   return function (key: string, value: any) {
-    if (isArray(value)) {
-      return transformColorModeArray(breakpoints)(key, value)
-    } else if (isConditionalObject(breakpoints)(value)) {
+    if (isArray(value)) return transformColorModeArray(breakpoints)(key, value)
+    else if (isConditionalObject(breakpoints)(value))
       return transformConditionalObject(breakpoints)(key, value)
-    } else {
-      return { [key]: value }
-    }
+    else return { [key]: value }
   }
 }
 
@@ -150,14 +142,12 @@ function expandCSS(system: System) {
     for (let [key, value] of Object.entries(css)) {
       if (value == null) continue
 
-      if (!isVariableLength(key)) {
+      if (!isVariableLength(key))
         computedCSS = merge(
           computedCSS,
           transformConditionalValue(system)(key, value),
         )
-      } else {
-        computedCSS = merge(computedCSS, { [key]: value })
-      }
+      else computedCSS = merge(computedCSS, { [key]: value })
     }
 
     return computedCSS
@@ -187,19 +177,13 @@ function valueToVar(system: System) {
       },
     )
 
-    if (prop.startsWith("--") && isString(result)) {
-      if (result.includes("colorScheme.")) {
+    if (prop.startsWith("--") && isString(result))
+      if (result.includes("colorScheme."))
         return getColorSchemeVar(system)(result)
-      } else if (result.includes("colors.")) {
-        return colorMix(result, { system })
-      } else if (isCSSToken(system)(result)) {
-        return system.cssMap[result]!.ref
-      } else {
-        return result
-      }
-    } else {
-      return result
-    }
+      else if (result.includes("colors.")) return colorMix(result, { system })
+      else if (isCSSToken(system)(result)) return system.cssMap[result]!.ref
+      else return result
+    else return result
   }
 }
 
@@ -223,13 +207,8 @@ function insertCSS(
   prop: string,
   properties?: string[],
 ) {
-  if (properties) {
-    for (const property of properties) {
-      prev[property] = value
-    }
-  } else {
-    prev[prop] = value
-  }
+  if (properties) for (const property of properties) prev[property] = value
+  else prev[prop] = value
 
   return prev
 }
@@ -267,11 +246,9 @@ export function css(system: System, theme: UsageTheme = {}) {
         if (isObject(value)) {
           value = style?.transform?.(value, options) ?? value
 
-          if (isObject(value)) {
+          if (isObject(value))
             prev = mergeCSS(prev, createCSS(value), prop, style?.properties)
-          } else {
-            prev = insertCSS(prev, value, prop, style?.properties)
-          }
+          else prev = insertCSS(prev, value, prop, style?.properties)
 
           continue
         }

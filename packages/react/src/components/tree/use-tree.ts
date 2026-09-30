@@ -258,11 +258,9 @@ export const useTree = <Multiple extends boolean = false>({
   const onExpandedChange = useCallback(
     (value: string) => {
       setExpandedValue((prev) => {
-        if (prev.includes(value)) {
+        if (prev.includes(value))
           return prev.filter((prevValue) => prevValue !== value)
-        } else {
-          return [...prev, value]
-        }
+        else return [...prev, value]
       })
     },
     [setExpandedValue],
@@ -277,11 +275,8 @@ export const useTree = <Multiple extends boolean = false>({
         (descendant) => value === descendant.value,
       )
 
-      if (descendant) {
-        onActiveDescendant(descendant, false)
-      } else {
-        onActiveDescendant(expandedDescendants.at(0), false)
-      }
+      if (descendant) onActiveDescendant(descendant, false)
+      else onActiveDescendant(expandedDescendants.at(0), false)
     } else {
       onActiveDescendant(expandedDescendants.at(0), false)
     }
@@ -524,16 +519,14 @@ export const useTreeItem = ({
 
       if (disabled || !selectedValue) return
 
-      if (multiple) {
+      if (multiple)
         onSelectedChange((prev) => {
           if (!isArray(prev)) return prev
 
           if (ev.ctrlKey || ev.metaKey) {
-            if (prev.includes(selectedValue)) {
+            if (prev.includes(selectedValue))
               return prev.filter((prevValue) => prevValue !== selectedValue)
-            } else {
-              return [...prev, selectedValue]
-            }
+            else return [...prev, selectedValue]
           } else if (ev.shiftKey && prev[0]) {
             if (prev[0] === selectedValue) return prev
 
@@ -542,9 +535,7 @@ export const useTreeItem = ({
             return [selectedValue]
           }
         })
-      } else {
-        onSelectedChange(selectedValue)
-      }
+      else onSelectedChange(selectedValue)
     },
     [descendants, disabled, multiple, onSelectedChange, value],
   )
@@ -577,11 +568,8 @@ export const useTreeItem = ({
   }, [disabled, onClose, onExpandedChange, value])
 
   const onGroupToggle = useCallback(() => {
-    if (groupOpen) {
-      onGroupClose()
-    } else {
-      onGroupOpen()
-    }
+    if (groupOpen) onGroupClose()
+    else onGroupOpen()
   }, [groupOpen, onGroupClose, onGroupOpen])
 
   const onKeyDown = useCallback(
@@ -766,18 +754,15 @@ export const useTreeItem = ({
           target.push(...parentTarget)
         }
 
-        if (ev.target.checked) {
-          return [...new Set([...prev, ...target])]
-        } else {
-          return prev.filter((prevValue) => !target.includes(prevValue))
-        }
+        if (ev.target.checked) return [...new Set([...prev, ...target])]
+        else return prev.filter((prevValue) => !target.includes(prevValue))
       })
     },
     [disabled, group, onCheckedChange, value, nested, descendants, context],
   )
 
   useSafeLayoutEffect(() => {
-    if (defaultExpanded) {
+    if (defaultExpanded)
       if (async && !initialAsyncRef.current) {
         initialAsyncRef.current = true
 
@@ -791,9 +776,7 @@ export const useTreeItem = ({
       } else {
         onOpen()
       }
-    } else {
-      onClose()
-    }
+    else onClose()
   }, [async, defaultExpanded, onClose, onGroupChildren, onOpen])
 
   useSafeLayoutEffect(() => {

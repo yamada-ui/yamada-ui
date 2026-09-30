@@ -92,11 +92,8 @@ export const FileInput = withProvider<"input", FileInputProps>(
         if (component) {
           const node = component({ index, value })
 
-          if (isValidElement(node)) {
-            return cloneElement(node, { key: index })
-          } else {
-            return node
-          }
+          if (isValidElement(node)) return cloneElement(node, { key: index })
+          else return node
         } else {
           return (
             <FileInputTag key={index}>

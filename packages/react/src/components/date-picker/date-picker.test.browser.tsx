@@ -976,13 +976,13 @@ describe("<DatePicker />", () => {
   test("handles parseDate", async () => {
     const parseDate = vi.fn((value: string) => {
       const parts = value.split("/")
-      if (parts.length === 3) {
+      if (parts.length === 3)
         return new Date(
           Number(parts[0]),
           Number(parts[1]) - 1,
           Number(parts[2]),
         )
-      }
+
       return undefined
     })
 

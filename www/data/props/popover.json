@@ -91,6 +91,11 @@
         "type": "Omit<PortalProps, \"children\">",
         "description": "Props for portal component.",
         "required": false
+      },
+      "positionerProps": {
+        "type": "Omit<PopoverPositionerProps, \"children\">",
+        "description": "Props for positioner component.",
+        "required": false
       }
     },
     "Footer": {
@@ -144,6 +149,16 @@
         "description": "The size of the component.",
         "required": false
       },
+      "anchor": {
+        "type": "ReactNode",
+        "description": "The popover anchor to use.",
+        "required": false
+      },
+      "anchorProps": {
+        "type": "Omit<PopoverAnchorProps, \"asChild\" | \"children\">",
+        "description": "Props for anchor element.",
+        "required": false
+      },
       "animationScheme": {
         "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" | \"none\" | \"scale\" ...",
         "defaultValue": "\"scale\"",
@@ -168,6 +183,16 @@
         "description": "If `true`, scrolling will be disabled on the `body` when the modal opens.",
         "required": false
       },
+      "body": {
+        "type": "PopoverBodyProps | ReactNode",
+        "description": "The popover body to use.",
+        "required": false
+      },
+      "bodyProps": {
+        "type": "Omit<PopoverBodyProps, \"children\">",
+        "description": "Props for body element.",
+        "required": false
+      },
       "children": {
         "type": "ReactNodeOrFunction<{\n    open: boolean\n    onClose: () => void\n  }>",
         "description": "The children of the popover.",
@@ -189,6 +214,16 @@
         "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, the popover will hide on scroll.",
+        "required": false
+      },
+      "closeTriggerProps": {
+        "type": "Omit<PopoverCloseTriggerProps, \"asChild\" | \"children\">",
+        "description": "Props for close trigger element.",
+        "required": false
+      },
+      "contentProps": {
+        "type": "Omit<PopoverContentProps, \"children\">",
+        "description": "Props for content element.",
         "required": false
       },
       "defaultOpen": {
@@ -219,10 +254,30 @@
         "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.",
         "required": false
       },
+      "footer": {
+        "type": "PopoverFooterProps | ReactNode",
+        "description": "The popover footer to use.",
+        "required": false
+      },
+      "footerProps": {
+        "type": "Omit<PopoverFooterProps, \"children\">",
+        "description": "Props for footer element.",
+        "required": false
+      },
       "gutter": {
         "type": "number",
         "defaultValue": "8",
         "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier.",
+        "required": false
+      },
+      "header": {
+        "type": "PopoverHeaderProps | ReactNode",
+        "description": "The popover header to use.",
+        "required": false
+      },
+      "headerProps": {
+        "type": "Omit<PopoverHeaderProps, \"children\">",
+        "description": "Props for header element.",
         "required": false
       },
       "initialFocusRef": {
@@ -306,6 +361,16 @@
         "type": "boolean",
         "defaultValue": "true",
         "description": "Whether to use `transform` for positioning instead of `top` and `left`\n(layout) in the `floatingStyles` object.",
+        "required": false
+      },
+      "trigger": {
+        "type": "ReactNode",
+        "description": "The popover trigger to use.",
+        "required": false
+      },
+      "triggerProps": {
+        "type": "Omit<PopoverTriggerProps, \"asChild\" | \"children\">",
+        "description": "Props for trigger element.",
         "required": false
       },
       "updateRef": {
@@ -433,6 +498,11 @@
       "type": "Omit<PortalProps, \"children\">",
       "description": "Props for portal component.",
       "required": false
+    },
+    "positionerProps": {
+      "type": "Omit<PopoverPositionerProps, \"children\">",
+      "description": "Props for positioner component.",
+      "required": false
     }
   },
   "PopoverFooter": {
@@ -486,6 +556,16 @@
       "description": "The size of the component.",
       "required": false
     },
+    "anchor": {
+      "type": "ReactNode",
+      "description": "The popover anchor to use.",
+      "required": false
+    },
+    "anchorProps": {
+      "type": "Omit<PopoverAnchorProps, \"asChild\" | \"children\">",
+      "description": "Props for anchor element.",
+      "required": false
+    },
     "animationScheme": {
       "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" | \"none\" | \"scale\" ...",
       "defaultValue": "\"scale\"",
@@ -510,6 +590,16 @@
       "description": "If `true`, scrolling will be disabled on the `body` when the modal opens.",
       "required": false
     },
+    "body": {
+      "type": "PopoverBodyProps | ReactNode",
+      "description": "The popover body to use.",
+      "required": false
+    },
+    "bodyProps": {
+      "type": "Omit<PopoverBodyProps, \"children\">",
+      "description": "Props for body element.",
+      "required": false
+    },
     "children": {
       "type": "ReactNodeOrFunction<{\n    open: boolean\n    onClose: () => void\n  }>",
       "description": "The children of the popover.",
@@ -531,6 +621,16 @@
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the popover will hide on scroll.",
+      "required": false
+    },
+    "closeTriggerProps": {
+      "type": "Omit<PopoverCloseTriggerProps, \"asChild\" | \"children\">",
+      "description": "Props for close trigger element.",
+      "required": false
+    },
+    "contentProps": {
+      "type": "Omit<PopoverContentProps, \"children\">",
+      "description": "Props for content element.",
       "required": false
     },
     "defaultOpen": {
@@ -561,10 +661,30 @@
       "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.",
       "required": false
     },
+    "footer": {
+      "type": "PopoverFooterProps | ReactNode",
+      "description": "The popover footer to use.",
+      "required": false
+    },
+    "footerProps": {
+      "type": "Omit<PopoverFooterProps, \"children\">",
+      "description": "Props for footer element.",
+      "required": false
+    },
     "gutter": {
       "type": "number",
       "defaultValue": "8",
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier.",
+      "required": false
+    },
+    "header": {
+      "type": "PopoverHeaderProps | ReactNode",
+      "description": "The popover header to use.",
+      "required": false
+    },
+    "headerProps": {
+      "type": "Omit<PopoverHeaderProps, \"children\">",
+      "description": "Props for header element.",
       "required": false
     },
     "initialFocusRef": {
@@ -648,6 +768,16 @@
       "type": "boolean",
       "defaultValue": "true",
       "description": "Whether to use `transform` for positioning instead of `top` and `left`\n(layout) in the `floatingStyles` object.",
+      "required": false
+    },
+    "trigger": {
+      "type": "ReactNode",
+      "description": "The popover trigger to use.",
+      "required": false
+    },
+    "triggerProps": {
+      "type": "Omit<PopoverTriggerProps, \"asChild\" | \"children\">",
+      "description": "Props for trigger element.",
       "required": false
     },
     "updateRef": {

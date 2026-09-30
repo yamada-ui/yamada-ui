@@ -141,7 +141,7 @@ describe("insertImportant", () => {
   test("handles object values with properties in style config", () => {
     const result = insertImportant(
       { color: "red", fontSize: "16px" },
-      { properties: ["color" as any] },
+      { properties: ["color"] },
     )
     expect(result.color).toBe("red !important")
     expect(result.fontSize).toBe("16px")

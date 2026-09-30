@@ -204,44 +204,30 @@ export const isInRange = (date: Date, minDate?: Date, maxDate?: Date) => {
 }
 
 export const sortDates = (dates: Date[], type: "asc" | "desc" = "asc") => {
-  if (type === "asc") {
+  if (type === "asc")
     return dates.sort((a, b) => (dayjs(a).isAfter(b, "date") ? 1 : -1))
-  } else {
-    return dates.sort((a, b) => (dayjs(a).isBefore(b, "date") ? 1 : -1))
-  }
+  else return dates.sort((a, b) => (dayjs(a).isBefore(b, "date") ? 1 : -1))
 }
 
 export const updateMaybeDateValue =
   (value: Date, max?: number) =>
   (prev: MaybeDate): MaybeDate => {
     if (isArray(prev)) {
-      if (isIncludeDates(value, prev)) {
+      if (isIncludeDates(value, prev))
         return prev.filter((prevValue) => !isSameDate(prevValue, value))
-      } else if (!isNumber(max) || prev.length < max) {
-        return [...prev, value]
-      } else {
-        return prev
-      }
+      else if (!isNumber(max) || prev.length < max) return [...prev, value]
+      else return prev
     } else if (isObject(prev) && !isDate(prev)) {
       const { end, start } = prev
 
-      if ((start && end) || !start) {
-        return { end: undefined, start: value }
-      } else {
-        if (isSameDate(start, value)) {
-          return { end: undefined, start: undefined }
-        } else if (isBeforeDate(value, start)) {
-          return { end: start, start: value }
-        } else {
-          return { end: value, start }
-        }
-      }
+      if ((start && end) || !start) return { end: undefined, start: value }
+      else if (isSameDate(start, value))
+        return { end: undefined, start: undefined }
+      else if (isBeforeDate(value, start)) return { end: start, start: value }
+      else return { end: value, start }
     } else {
-      if (isSameDate(prev, value)) {
-        return undefined
-      } else {
-        return value
-      }
+      if (isSameDate(prev, value)) return undefined
+      else return value
     }
   }
 
@@ -254,11 +240,8 @@ export const getAdjustedMonth = (value: MaybeDate, month: Date) => {
     if (lastValue && !isSameMonth(lastValue, month))
       month = dayjs(lastValue).set("date", 1).toDate()
   } else if (isObject(value)) {
-    if (value.end) {
-      month = dayjs(value.end).set("date", 1).toDate()
-    } else if (value.start) {
-      month = dayjs(value.start).set("date", 1).toDate()
-    }
+    if (value.end) month = dayjs(value.end).set("date", 1).toDate()
+    else if (value.start) month = dayjs(value.start).set("date", 1).toDate()
   }
 
   return month
@@ -473,13 +456,11 @@ export const useCalendar = <
   )
   const dayFormat = useCallback(
     (value: Date) => {
-      if (format.day) {
+      if (format.day)
         return dateTimeFormat(value, {
           day: format.day,
         })
-      } else {
-        return value.getDate().toString()
-      }
+      else return value.getDate().toString()
     },
     [dateTimeFormat, format.day],
   )
@@ -495,11 +476,9 @@ export const useCalendar = <
       if (dayjs(minDate).isAfter(dayjs(defaultMonth)))
         defaultMonth = dayjs(minDate).set("date", 1).toDate()
 
-      if (valueProp) {
-        defaultMonth = getAdjustedMonth(valueProp, defaultMonth)
-      } else if (defaultValue) {
+      if (valueProp) defaultMonth = getAdjustedMonth(valueProp, defaultMonth)
+      else if (defaultValue)
         defaultMonth = getAdjustedMonth(defaultValue, defaultMonth)
-      }
 
       return defaultMonth
     },
@@ -571,17 +550,16 @@ export const useCalendar = <
 
   const onMonthChange = useCallback(
     (month: Date) => {
-      if (isAfterMonth(month, maxDate)) {
+      if (isAfterMonth(month, maxDate))
         setMonth(dayjs(maxDate).set("date", 1).toDate())
-      } else if (isBeforeMonth(month, minDate)) {
+      else if (isBeforeMonth(month, minDate))
         setMonth(dayjs(minDate).set("date", 1).toDate())
-      } else {
+      else
         setMonth((prev) => {
           if (isSameMonth(prev, month)) return prev
 
           return month
         })
-      }
     },
     [maxDate, minDate, setMonth],
   )
@@ -615,11 +593,10 @@ export const useCalendar = <
         if (firstValue && isSameMonth(month, firstValue))
           index = firstValue.getDate() - 1
       } else if (isObject(value)) {
-        if (value.start && isSameMonth(month, value.start)) {
+        if (value.start && isSameMonth(month, value.start))
           index = value.start.getDate() - 1
-        } else if (value.end && isSameMonth(month, value.end)) {
+        else if (value.end && isSameMonth(month, value.end))
           index = value.end.getDate() - 1
-        }
       }
     } else if (isSameMonth(month, new Date())) {
       index = new Date().getDate() - 1
@@ -848,18 +825,16 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
     [highlightToday, value],
   )
   const selected = useMemo(() => {
-    if (isDate(selectedValue)) {
-      return isSameDate(selectedValue, value)
-    } else if (isArray(selectedValue)) {
+    if (isDate(selectedValue)) return isSameDate(selectedValue, value)
+    else if (isArray(selectedValue))
       return selectedValue.some((selectedValue) =>
         isSameDate(selectedValue, value),
       )
-    } else if (isObject(selectedValue)) {
+    else if (isObject(selectedValue))
       return (
         isSameDate(selectedValue.start, value) ||
         isSameDate(selectedValue.end, value)
       )
-    }
   }, [selectedValue, value])
   const disabled = useMemo(() => {
     if (rootDisabled) return true
@@ -954,11 +929,9 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
 
         if (!descendant) return
 
-        if (descendant.disabled) {
+        if (descendant.disabled)
           onFocusDescendant(descendants.enabledNextValue(descendant, false))
-        } else {
-          onFocusDescendant(descendant)
-        }
+        else onFocusDescendant(descendant)
       })
     },
     [descendants, minDate, onFocusDescendant, onMonthChange],
@@ -975,11 +948,9 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
 
         if (!descendant) return
 
-        if (descendant.disabled) {
+        if (descendant.disabled)
           onFocusDescendant(descendants.enabledPrevValue(descendant, false))
-        } else {
-          onFocusDescendant(descendant)
-        }
+        else onFocusDescendant(descendant)
       })
     },
     [descendants, maxDate, onFocusDescendant, onMonthChange],
@@ -998,18 +969,14 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
         Enter: onClick,
         Home: () => onPrevTraverseDate(getStartOfWeek(value, startDayOfWeek)),
         PageDown: (ev) => {
-          if (ev.shiftKey) {
+          if (ev.shiftKey)
             onNextTraverseDate(dayjs(value).add(1, "year").toDate())
-          } else {
-            onNextTraverseDate(dayjs(value).add(1, "month").toDate())
-          }
+          else onNextTraverseDate(dayjs(value).add(1, "month").toDate())
         },
         PageUp: (ev) => {
-          if (ev.shiftKey) {
+          if (ev.shiftKey)
             onPrevTraverseDate(dayjs(value).subtract(1, "year").toDate())
-          } else {
-            onPrevTraverseDate(dayjs(value).subtract(1, "month").toDate())
-          }
+          else onPrevTraverseDate(dayjs(value).subtract(1, "month").toDate())
         },
         Space: onClick,
       })

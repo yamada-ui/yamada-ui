@@ -419,8 +419,8 @@ const PACKAGE = {
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^4",
-    typescript: "^6",
-    vite: "^8",
+    typescript: "^5",
+    vite: "^7",
     "vite-tsconfig-paths": "^6",
   },
 }
@@ -526,20 +526,17 @@ const IMPORTS = [
     "SidebarUserMenuButton",
   ].join(", ")} } from "@/misc"`,
   ...Object.entries(EXTERNAL_MODULES).map(([source, value]) => {
-    if (Array.isArray(value)) {
+    if (Array.isArray(value))
       return `import { ${value.join(", ")} } from "${source}"`
-    } else {
-      return `import ${value} from "${source}"`
-    }
+    else return `import ${value} from "${source}"`
   }),
 ]
 
 function generateDependencies(code: string) {
   const dependencies: { [key: string]: string } = {}
 
-  for (const name of Object.keys(EXTERNAL_MODULES)) {
+  for (const name of Object.keys(EXTERNAL_MODULES))
     if (code.includes(` from "${name}"`)) dependencies[name] = "latest"
-  }
 
   return dependencies
 }
@@ -568,11 +565,8 @@ async function generateCode(
 ) {
   let code = `${IMPORTS.join("\n")}\n\nfunction App() { {{content}} }`
 
-  if (functional) {
-    code = code.replace("{{content}}", content)
-  } else {
-    code = code.replace("{{content}}", `return ( ${content} )`)
-  }
+  if (functional) code = code.replace("{{content}}", content)
+  else code = code.replace("{{content}}", `return ( ${content} )`)
 
   if (client) code = `"use client"\n\n` + code
 

@@ -262,7 +262,7 @@ export const useClickable = <
     [pressed, onMouseLeaveProp, disableTouchBehavior],
   )
 
-  if (button) {
+  if (button)
     return {
       ...props,
       ref: mergeRefs(ref, refCb),
@@ -277,7 +277,7 @@ export const useClickable = <
       onMouseOver: onMouseOverProp,
       onMouseUp: onMouseUpProp,
     }
-  } else {
+  else
     return {
       ...props,
       ref: mergeRefs(ref, refCb),
@@ -293,7 +293,6 @@ export const useClickable = <
       onMouseOver,
       onMouseUp,
     }
-  }
 }
 
 export type UseClickableReturn = ReturnType<typeof useClickable>

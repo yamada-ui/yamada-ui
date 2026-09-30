@@ -95,13 +95,11 @@ export const useToggle = <Y extends string = string>(
   const interactive = !(readOnly || disabled)
   const controlled = !isUndefined(groupValue)
   const trulyChecked = useMemo(() => {
-    if (!controlled) {
-      return checked
-    } else {
+    if (!controlled) return checked
+    else
       return isArray(groupValue)
         ? groupValue.includes(value ?? "")
         : value === groupValue
-    }
   }, [controlled, groupValue, checked, value])
 
   if (controlled && isUndefined(value))

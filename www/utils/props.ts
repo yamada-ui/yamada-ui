@@ -37,7 +37,7 @@ export async function getProps(
       .filter(([rootName]) => !pick || pick.includes(rootName))
       .filter(([rootName]) => !omit?.includes(rootName))
       .map(([rootName, propsOrNamespace]) => {
-        if (isNamespace(propsOrNamespace)) {
+        if (isNamespace(propsOrNamespace))
           return [
             rootName,
             Object.fromEntries(
@@ -49,9 +49,7 @@ export async function getProps(
                 .filter(([name]) => !omit?.includes(`${rootName}.${name}`)),
             ),
           ]
-        } else {
-          return [rootName, propsOrNamespace]
-        }
+        else return [rootName, propsOrNamespace]
       }),
   ) as { [key: string]: Namespace | Props }
 }

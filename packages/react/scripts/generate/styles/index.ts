@@ -178,7 +178,9 @@ function getCSSCompatData(cssTypes: Awaited<ReturnType<typeof getCSSTypes>>) {
 }
 
 async function getCSSTypes() {
-  const data: { [key: string]: { deprecated: boolean; type: string } } = {}
+  const data: {
+    [key: string]: { deprecated: boolean; type: string; vendor: boolean }
+  } = {}
 
   const [targetPath] = await Array.fromAsync(
     glob(path.resolve("node_modules", "csstype", "index.d.ts")),
@@ -207,9 +209,12 @@ async function getCSSTypes() {
     if (
       name !== "StandardProperties" &&
       name !== "SvgProperties" &&
+      name !== "VendorProperties" &&
       name !== "ObsoleteProperties"
     )
       continue
+
+    const vendor = name === "VendorProperties"
 
     for (const property of type.getProperties()) {
       const name = property.getName()
@@ -237,6 +242,7 @@ async function getCSSTypes() {
             ? `CSS.Globals`
             : `CSS.Property.${value.replace(/<.*?>$/, "")}`,
         deprecated,
+        vendor,
       }
     }
   }
@@ -281,15 +287,9 @@ function generateType({
     const isFraction = hasTransform("fraction", transforms)
     const isNumber = isPx || isFraction
 
-    if (typeof type === "string") {
-      result = addType(result, type)
-    } else {
-      if (type?.length) {
-        result = addType(result, type.join(" | "))
-      } else {
-        result = addType(result, "AnyString")
-      }
-    }
+    if (typeof type === "string") result = addType(result, type)
+    else if (type?.length) result = addType(result, type.join(" | "))
+    else result = addType(result, "AnyString")
 
     if (isNumber) result = addType(result, ` | number`)
   }
@@ -494,11 +494,10 @@ function generateData(
           tokenProps[token].push(prop)
         }
 
-        if (shorthands) {
+        if (shorthands)
           shorthands.forEach((shorthandProp) => {
             if (token) tokenProps[token]?.push(shorthandProp)
           })
-        }
 
         return [name, { ...config, type, docs, shorthands }] as const
       })
@@ -567,11 +566,10 @@ function generateData(
         tokenProps[token].push(prop)
       }
 
-      if (shorthands) {
+      if (shorthands)
         shorthands.forEach((shorthandProp) => {
           if (token) tokenProps[token]?.push(shorthandProp)
         })
-      }
 
       return [prop, { ...config, type, docs, shorthands }] as const
     }
@@ -656,7 +654,15 @@ function main() {
 
       const { data, duplicatedProps, tokenProps, variableLengthProps } =
         generateData(cssCompatData, atRuleCompatData)
-      const content = generateStyles(data, tokenProps, variableLengthProps)
+      const vendorProps = Object.keys(cssTypes).filter(
+        (name) => !!cssTypes[name]?.vendor,
+      )
+      const content = generateStyles(
+        data,
+        tokenProps,
+        variableLengthProps,
+        vendorProps,
+      )
 
       if (duplicatedProps.length) {
         spinner.info(`Duplicated props that are present in "StyledProps"`)

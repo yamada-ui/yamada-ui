@@ -90,17 +90,15 @@ export const useAccordion = ({
     (indexProp || defaultIndexProp) != null &&
     !isArray(indexProp || defaultIndexProp) &&
     multiple
-  ) {
+  )
     console.warn(
       `Accordion: If 'multiple' is passed, then 'index' or 'defaultIndex' must be an array.`,
     )
-  }
 
-  if (multiple && toggle) {
+  if (multiple && toggle)
     console.warn(
       `Accordion: If 'multiple' is passed, 'toggle' will be ignored. Either remove 'toggle' or 'multiple' depending on whether you want multiple accordions visible or not`,
     )
-  }
 
   const descendants = useAccordionDescendants()
 
@@ -178,17 +176,14 @@ export const useAccordionItem = ({
     (open: boolean) => {
       if (index === -1) return
 
-      if (multiple && isArray(selectedIndex)) {
+      if (multiple && isArray(selectedIndex))
         setIndex(
           open
             ? selectedIndex.concat(index)
             : selectedIndex.filter((i) => i !== index),
         )
-      } else if (open) {
-        setIndex(index)
-      } else if (toggle) {
-        setIndex(-1)
-      }
+      else if (open) setIndex(index)
+      else if (toggle) setIndex(-1)
     },
     [multiple, toggle, index, selectedIndex, setIndex],
   )

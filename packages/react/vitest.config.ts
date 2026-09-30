@@ -1,12 +1,11 @@
 import type { PlaywrightProviderOptions } from "@vitest/browser-playwright"
-import type { BrowserInstanceOption } from "vitest/node"
 import react from "@vitejs/plugin-react"
 import { playwright } from "@vitest/browser-playwright"
 import { defineProject, mergeConfig } from "@yamada-ui/workspace/vitest"
 import sharedConfig from "@yamada-ui/workspace/vitest/config"
 
 const browsers: {
-  browser: BrowserInstanceOption["browser"]
+  browser: "chromium" | "firefox" | "webkit"
   options?: PlaywrightProviderOptions
 }[] = [
   { browser: "chromium" },
@@ -53,7 +52,7 @@ export default mergeConfig(sharedConfig, {
             browser: {
               enabled: true,
               headless: true,
-              instances: [{ browser }],
+              instances: [{ browser: browser }],
               provider: playwright(options),
             },
             globals: true,

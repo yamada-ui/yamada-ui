@@ -14,6 +14,7 @@ export const baseConfig = defineConfig({
       files: sharedFiles,
       plugins: ["eslint"],
       rules: {
+        curly: ["error", "multi", "consistent"],
         "no-console": ["warn", { allow: ["warn", "error"] }],
         "no-empty": "off",
         "no-prototype-builtins": "off",

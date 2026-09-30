@@ -71,7 +71,7 @@ describe("colorMix", () => {
   test("creates variable when properties are provided", () => {
     const result = colorMix("red.500", {
       fallback: "red",
-      properties: ["color"] as any,
+      properties: ["color"],
       system,
     })
     expect(result).toBeDefined()

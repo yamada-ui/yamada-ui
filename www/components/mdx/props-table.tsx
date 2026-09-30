@@ -27,7 +27,7 @@ export async function PropsTable({
   const slugger = new GithubSlugger()
 
   return Object.entries(data).map(([rootName, propsOrNamespace], index) => {
-    if (isNamespace(propsOrNamespace)) {
+    if (isNamespace(propsOrNamespace))
       return Object.entries(propsOrNamespace)
 
         .map(([name, props], index) => {
@@ -40,14 +40,13 @@ export async function PropsTable({
             </Fragment>
           )
         })
-    } else if (!namespace || all) {
+    else if (!namespace || all)
       return (
         <Fragment key={index}>
           {!single ? <H3 id={slugger.slug(rootName)}>{rootName}</H3> : null}
           <Table props={propsOrNamespace} />
         </Fragment>
       )
-    }
   })
 }
 

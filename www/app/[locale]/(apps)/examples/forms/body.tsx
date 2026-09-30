@@ -102,9 +102,8 @@ function SidebarButton({
   resetMapRef.current.set(label, off)
 
   const reset = () => {
-    for (const [resetLabel, func] of resetMapRef.current.entries()) {
+    for (const [resetLabel, func] of resetMapRef.current.entries())
       if (label !== resetLabel) func()
-    }
   }
 
   return (

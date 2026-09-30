@@ -1,4 +1,3 @@
-import type { ComponentCompound, CSSSlotObject } from "../../core"
 import { defineComponentSlotStyle } from "../../core"
 import { formStyle } from "../form"
 
@@ -71,9 +70,7 @@ export const fieldsetStyle = defineComponentSlotStyle({
     },
   },
 
-  compounds: (
-    formStyle.compounds as ComponentCompound<CSSSlotObject>[] | undefined
-  )?.map(({ css, ...rest }) => ({
+  compounds: formStyle.compounds?.map(({ css, ...rest }) => ({
     css: { root: css.group },
     ...rest,
   })),

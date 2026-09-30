@@ -37,11 +37,11 @@ const agent = process.env.https_proxy
 const registryStore = new Map<string, Registry>()
 
 function getRegistryUrl(name: string, tag = "") {
-  if (name === "index") {
+  if (name === "index")
     return path.posix.join(REGISTRY_URL, tag, REGISTRY_VERSION, "index.json")
-  } else if (name === "theme") {
+  else if (name === "theme")
     return path.posix.join(REGISTRY_URL, tag, REGISTRY_VERSION, "theme.json")
-  } else if (name.startsWith("use-")) {
+  else if (name.startsWith("use-"))
     return path.posix.join(
       REGISTRY_URL,
       tag,
@@ -49,7 +49,7 @@ function getRegistryUrl(name: string, tag = "") {
       "hooks",
       `${name}.json`,
     )
-  } else if (name.endsWith("-provider")) {
+  else if (name.endsWith("-provider"))
     return path.posix.join(
       REGISTRY_URL,
       tag,
@@ -57,7 +57,7 @@ function getRegistryUrl(name: string, tag = "") {
       "providers",
       `${name}.json`,
     )
-  } else {
+  else
     return path.posix.join(
       REGISTRY_URL,
       tag,
@@ -65,7 +65,6 @@ function getRegistryUrl(name: string, tag = "") {
       "components",
       `${name}.json`,
     )
-  }
 }
 
 export async function fetchRegistryNames(tag?: string): Promise<string[]> {
@@ -256,26 +255,27 @@ export function transformContent(
 
       if (!generated || !section) return
 
-      if (section === targetSection) {
-        replaceValue = `from "${path.join("..", name)}"`
-      } else {
-        const { path: relativePath } = getSection(section) ?? {}
+      const { path: sectionPath } = getSection(section) ?? {}
 
-        if (!relativePath) return
+      if (!sectionPath) return
 
-        replaceValue = `from "${path.join("..", "..", relativePath, name)}"`
-      }
+      const relativePath = path.posix.relative(
+        path.posix.join(
+          getSection(targetSection)?.path ?? targetSection,
+          "dummy",
+        ),
+        path.posix.join(sectionPath, name),
+      )
+
+      replaceValue = `from "${relativePath.startsWith(".") ? relativePath : `./${relativePath}`}"`
     } else {
       const depth = (value.match(/\.\.\//g) || []).length
 
       if (!depth) return
 
       if (depth === 1) {
-        if (generated) {
-          replaceValue = `from "${path.join("..", name)}"`
-        } else {
-          replaceValue = `from "${PACKAGE_NAME}/${targetSection}/${name}"`
-        }
+        if (generated) replaceValue = `from "${path.posix.join("..", name)}"`
+        else replaceValue = `from "${PACKAGE_NAME}/${targetSection}/${name}"`
       } else {
         const omittedValue = value.replace(/(\.\.\/|\.\/)/g, "")
         const query = omittedValue.split("/").slice(0, -1).join("/")
@@ -285,12 +285,15 @@ export function transformContent(
         if (!section || !sectionPath) return
 
         if (generated) {
-          const targetDepth = (sectionPath.match(/\.\.\//g) || []).length
-          const neededDepth = depth + targetDepth
-          const omittedTargetPath = sectionPath.replace(/(\.\.\/|\.\/)/g, "")
-          const position = "../".repeat(neededDepth)
+          const relativePath = path.posix.relative(
+            path.posix.join(
+              getSection(targetSection)?.path ?? targetSection,
+              "dummy",
+            ),
+            path.posix.join(sectionPath, name),
+          )
 
-          replaceValue = `from "${position}${omittedTargetPath}/${name}"`
+          replaceValue = `from "${relativePath.startsWith(".") ? relativePath : `./${relativePath}`}"`
         } else {
           replaceValue = `from "${PACKAGE_NAME}/${section}/${name}"`
         }

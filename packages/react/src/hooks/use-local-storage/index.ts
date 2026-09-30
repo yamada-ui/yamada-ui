@@ -50,9 +50,8 @@ export const createStorage = <Y>(type: StorageType, name: string) => {
           !(type in window) ||
           (window[type] as null | Storage | undefined) == null ||
           skipStorage
-        ) {
+        )
           return (defaultValue ?? "") as Y
-        }
 
         const storageValue = window[type].getItem(key)
 

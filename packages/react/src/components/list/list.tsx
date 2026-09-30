@@ -98,15 +98,13 @@ export interface ListIconProps extends HTMLStyledProps<"svg"> {}
 
 export const ListItemIcon = withContext<"svg", ListIconProps>(
   ({ children, ...rest }) => {
-    if (isValidElement<HTMLProps<"svg">>(children)) {
+    if (isValidElement<HTMLProps<"svg">>(children))
       return cloneElement(children, {
         ...children.props,
         ...rest,
         role: "presentation",
       })
-    } else {
-      return null
-    }
+    else return null
   },
   "icon",
 )({ "data-list-icon": "" })

@@ -279,11 +279,10 @@ describe("<Loading.Suspense />", () => {
     const cache: { value?: string } = {}
 
     const SuspendingChild: FC = () => {
-      if (cache.value === undefined) {
+      if (cache.value === undefined)
         throw promise.then((value) => {
           cache.value = value
         })
-      }
 
       return <div data-testid="child">{cache.value}</div>
     }

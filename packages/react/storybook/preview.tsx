@@ -34,13 +34,13 @@ const preview: Preview = {
       const unstyled = layout === "unstyled"
       const centered = layout === "centered"
 
-      if (unstyled) {
+      if (unstyled)
         return (
           <UIProvider config={config} dir={dir} locale={locale}>
             <Story />
           </UIProvider>
         )
-      } else {
+      else
         return (
           <UIProvider config={config} dir={dir} locale={locale}>
             <VStack
@@ -56,7 +56,6 @@ const preview: Preview = {
             </VStack>
           </UIProvider>
         )
-      }
     },
   ],
   globalTypes: {

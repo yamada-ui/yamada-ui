@@ -26,18 +26,16 @@ export const getBreakpointValue =
   (system: System, breakpoint: Breakpoint): Y => {
     const breakpoints = system.breakpoints.keys
 
-    if (!breakpoints.length) {
+    if (!breakpoints.length)
       console.warn("getBreakpointValue: `breakpoints` is undefined.")
-    }
 
     const currentIndex = breakpoints.indexOf(breakpoint)
 
     for (let i = currentIndex; 0 < i; i--) {
       const nextBreakpoint = breakpoints[i]
 
-      if (nextBreakpoint && values.hasOwnProperty(nextBreakpoint)) {
+      if (nextBreakpoint && values.hasOwnProperty(nextBreakpoint))
         return values[nextBreakpoint] as Y
-      }
     }
 
     return values.base as Y

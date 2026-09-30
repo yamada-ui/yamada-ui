@@ -17,7 +17,14 @@ describe("useControllableEventState", () => {
         onChange,
       })
 
-      return <input type="text" value={value} onChange={setValue} />
+      return (
+        <input
+          type="text"
+          aria-label="Test input"
+          value={value}
+          onChange={setValue}
+        />
+      )
     }
 
     const { user } = await render(<Component />)
@@ -38,7 +45,14 @@ describe("useControllableEventState", () => {
         defaultValue: "initial",
       })
 
-      return <input type="text" value={value} onChange={setValue} />
+      return (
+        <input
+          type="text"
+          aria-label="Test input"
+          value={value}
+          onChange={setValue}
+        />
+      )
     }
 
     const { user } = await render(<Component />)

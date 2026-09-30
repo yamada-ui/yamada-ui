@@ -1,6 +1,7 @@
 import {
   getActiveElement,
   getFocusableElements,
+  getNextTabbableElement,
   getPx,
   isActiveElement,
   isFocusableElement,
@@ -109,6 +110,23 @@ describe("DOM", () => {
     })
   })
 
+  describe("getNextTabbableElement", () => {
+    test("should use the active element inside a shadow root", () => {
+      const host = document.createElement("div")
+      const shadowRoot = host.attachShadow({ mode: "open" })
+      const firstButton = document.createElement("button")
+      const secondButton = document.createElement("button")
+      shadowRoot.append(firstButton, secondButton)
+      document.body.appendChild(host)
+
+      firstButton.focus()
+
+      expect(getNextTabbableElement(shadowRoot)).toBe(secondButton)
+
+      host.remove()
+    })
+  })
+
   describe("isActiveElement", () => {
     test("should return true if the element is the active element", () => {
       const input = document.createElement("input")
@@ -199,7 +217,7 @@ describe("DOM", () => {
         width: 0,
         x: 10,
         y: 0,
-      } as DOMRect)
+      })
 
       const unlock = scrollLock(document)
       expect(document.body.hasAttribute("data-scroll-lock")).toBeTruthy()

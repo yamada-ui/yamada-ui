@@ -157,11 +157,10 @@ export const theme = new Command("theme")
       const outdirPath = path.resolve(cwd, themePath)
 
       if (!overwrite && existsSync(outdirPath)) {
-        if (yes) {
+        if (yes)
           throw new Error(
             `The directory already exists. Use ${c.cyan("--overwrite")} to overwrite it.`,
           )
-        }
 
         const { overwrite } = await prompts({
           type: "confirm",
@@ -247,7 +246,7 @@ export const theme = new Command("theme")
         { concurrent: true },
       )
 
-      if (config.monorepo) {
+      if (config.monorepo)
         tasks.add({
           task: async (_, task) => {
             const targetPath = path.resolve(outdirPath, "package.json")
@@ -288,19 +287,17 @@ export const theme = new Command("theme")
           },
           title: `Generating ${c.cyan("package.json")}`,
         })
-      }
 
-      if (!config.jsx) {
+      if (!config.jsx)
         tasks.add({
           task: async (_, task) => {
             const targetPath = path.resolve(outdirPath, "tsconfig.json")
             const tsconfig = { ...TSCONFIG_JSON }
 
-            if (!monorepoConfig.src) {
+            if (!monorepoConfig.src)
               tsconfig.include = tsconfig.include.map((value) =>
                 value.replace(/src\//, ""),
               )
-            }
 
             const content = JSON.stringify(tsconfig)
 
@@ -314,7 +311,6 @@ export const theme = new Command("theme")
           },
           title: `Generating ${c.cyan("tsconfig.json")}`,
         })
-      }
 
       await tasks.run()
 
@@ -363,10 +359,7 @@ export const theme = new Command("theme")
 
       end()
     } catch (e) {
-      if (e instanceof Error) {
-        spinner.fail(e.message)
-      } else {
-        spinner.fail("An unknown error occurred")
-      }
+      if (e instanceof Error) spinner.fail(e.message)
+      else spinner.fail("An unknown error occurred")
     }
   })

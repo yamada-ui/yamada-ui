@@ -111,16 +111,14 @@ export const Indicator = withProvider(
     disabled ??= numeric && !showZero && label <= 0
 
     const computedLabel = useMemo(() => {
-      if (numeric && label > overflowCount) {
+      if (numeric && label > overflowCount)
         return (
           <>
             {overflowCount}
             <styled.span>+</styled.span>
           </>
         )
-      } else {
-        return label
-      }
+      else return label
     }, [numeric, label, overflowCount])
 
     return (

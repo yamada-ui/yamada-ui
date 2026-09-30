@@ -101,7 +101,7 @@ export const diff = new Command("diff")
 
       spinner.succeed("Got generated components")
 
-      if (theme && !existsTheme) {
+      if (theme && !existsTheme)
         throw new Error(
           [
             `No ${c.yellow("theme")} found.`,
@@ -109,13 +109,12 @@ export const diff = new Command("diff")
             "to generate it.",
           ].join(" "),
         )
-      }
 
-      if (!index && !theme) {
+      if (!index && !theme)
         if (targetName) {
-          if (generatedNames.includes(targetName)) {
+          if (generatedNames.includes(targetName))
             componentNames.push(targetName)
-          } else {
+          else
             throw new Error(
               [
                 `No ${c.yellow(targetName)} found in generated components.`,
@@ -123,7 +122,6 @@ export const diff = new Command("diff")
                 "to add it.",
               ].join(" "),
             )
-          }
         } else {
           componentNames.push(...generatedNames)
 
@@ -131,9 +129,8 @@ export const diff = new Command("diff")
 
           if (existsTheme) theme = true
         }
-      }
 
-      if (!index && !theme && !componentNames.length) {
+      if (!index && !theme && !componentNames.length)
         throw new Error(
           [
             "No components found.",
@@ -141,7 +138,6 @@ export const diff = new Command("diff")
             "to add components.",
           ].join(" "),
         )
-      }
 
       const { registryMap } = await getRegistriesAndFiles(
         componentNames,
@@ -222,10 +218,7 @@ export const diff = new Command("diff")
 
       end()
     } catch (e) {
-      if (e instanceof Error) {
-        spinner.fail(e.message)
-      } else {
-        spinner.fail("An unknown error occurred")
-      }
+      if (e instanceof Error) spinner.fail(e.message)
+      else spinner.fail("An unknown error occurred")
     }
   })

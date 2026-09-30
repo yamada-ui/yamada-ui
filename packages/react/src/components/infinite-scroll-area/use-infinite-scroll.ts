@@ -11,11 +11,8 @@ const isScrollable = (el: HTMLElement, vertical: boolean) => {
 
   if (["auto", "overlay", "scroll"].includes(style.overflow)) return true
 
-  if (vertical) {
-    return ["auto", "overlay", "scroll"].includes(style.overflowY)
-  } else {
-    return ["auto", "overlay", "scroll"].includes(style.overflowX)
-  }
+  if (vertical) return ["auto", "overlay", "scroll"].includes(style.overflowY)
+  else return ["auto", "overlay", "scroll"].includes(style.overflowX)
 }
 
 export interface UseInfiniteScrollProps extends Omit<
@@ -237,9 +234,8 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
         root &&
         isScrollable(root, vertical) &&
         !root.hasAttribute("tabindex")
-      ) {
+      )
         root.setAttribute("tabindex", "0")
-      }
     }
 
     const setupObserver = async () => {

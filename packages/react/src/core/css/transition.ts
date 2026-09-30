@@ -46,7 +46,7 @@ export function generateTransition(
   return function (value, { prev }) {
     switch (type) {
       case "transition":
-        if (value in properties) {
+        if (value in properties)
           return {
             transition: properties[value]?.join(", "),
             transitionDuration: prev?.transitionDuration ?? "200ms",
@@ -54,15 +54,11 @@ export function generateTransition(
               prev?.transitionTimingFunction ??
               "cubic-bezier(0.42, 0, 0.58, 1)",
           }
-        } else {
-          return value
-        }
+        else return value
+
       case "property":
-        if (value in properties) {
-          return properties[value]?.join(", ")
-        } else {
-          return value
-        }
+        if (value in properties) return properties[value]?.join(", ")
+        else return value
     }
   }
 }

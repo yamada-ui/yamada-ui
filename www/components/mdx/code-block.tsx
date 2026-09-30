@@ -38,7 +38,7 @@ export function CodeBlock({
 
   if (!children) return null
 
-  if (preview) {
+  if (preview)
     return (
       <>
         <Tabs.Root size="sm" variant="subtle" gap="md" my="lg">
@@ -109,7 +109,7 @@ export function CodeBlock({
         ) : null}
       </>
     )
-  } else if (title) {
+  else if (title)
     return (
       <Grid my="lg" {...rest}>
         <Flex
@@ -132,13 +132,12 @@ export function CodeBlock({
         </Pre>
       </Grid>
     )
-  } else {
+  else
     return (
       <Pre lang={lang} highlight={highlight} my="lg">
         {children}
       </Pre>
     )
-  }
 }
 
 export interface PreProps extends Omit<BoxProps, "children"> {

@@ -50,11 +50,8 @@ export const transforms = {
   colorMix,
   container: generateAtRule("container"),
   content: (value) => {
-    if (isObject(value)) {
-      return { content: "''", ...value }
-    } else {
-      return value
-    }
+    if (isObject(value)) return { content: "''", ...value }
+    else return value
   },
   deg: (value) => {
     if (isCSSVar(value) || value == null) return value
@@ -93,13 +90,12 @@ export const transforms = {
   transform,
   transition: generateTransition,
   truncated: (value: boolean) => {
-    if (value) {
+    if (value)
       return {
         overflow: "hidden",
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
       }
-    }
   },
 } satisfies { [key: string]: Transform }
 

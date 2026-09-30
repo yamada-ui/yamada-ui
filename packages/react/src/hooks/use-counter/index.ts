@@ -130,11 +130,8 @@ export const useCounter = ({
     (step = stepProp) => {
       let next: number | string
 
-      if (value === "") {
-        next = parse(step)
-      } else {
-        next = parse(value) + step
-      }
+      if (value === "") next = parse(step)
+      else next = parse(value) + step
 
       next = clamp(next)
 
@@ -147,11 +144,8 @@ export const useCounter = ({
     (step = stepProp) => {
       let next: number | string
 
-      if (value === "") {
-        next = parse(-step)
-      } else {
-        next = parse(value) - step
-      }
+      if (value === "") next = parse(-step)
+      else next = parse(value) - step
 
       next = clamp(next)
 
@@ -163,11 +157,9 @@ export const useCounter = ({
   const reset = useCallback(() => {
     let next: number | string
 
-    if (props.defaultValue == null) {
-      next = ""
-    } else {
+    if (props.defaultValue == null) next = ""
+    else
       next = casting(props.defaultValue, stepProp, props.precision) ?? minValue
-    }
 
     update(next)
   }, [props.defaultValue, props.precision, stepProp, update, minValue])

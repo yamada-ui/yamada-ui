@@ -87,13 +87,11 @@ export const useCheckboxGroup = <Y extends string = string>(
       if (isObject(valueOrEv)) valueOrEv = valueOrEv.target.value as Y
 
       setValue((prev) => {
-        if (prev.includes(valueOrEv)) {
+        if (prev.includes(valueOrEv))
           return prev.filter((prevValue) => prevValue !== valueOrEv)
-        } else if (!isNumber(max) || prev.length < max) {
+        else if (!isNumber(max) || prev.length < max)
           return [...prev, valueOrEv]
-        } else {
-          return prev
-        }
+        else return prev
       })
     },
     [interactive, max, setValue],

@@ -59,11 +59,8 @@ export function createStorageManager<Y extends string, M extends Y = Y>(
       }
     },
     set(value: Y) {
-      if (storage === "localStorage") {
-        localStorage.setItem(storageKey, value)
-      } else {
-        document.cookie = `${storageKey}=${value}; max-age=31536000; path=/`
-      }
+      if (storage === "localStorage") localStorage.setItem(storageKey, value)
+      else document.cookie = `${storageKey}=${value}; max-age=31536000; path=/`
     },
   }
 }

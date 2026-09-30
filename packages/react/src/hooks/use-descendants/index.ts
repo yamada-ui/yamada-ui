@@ -154,23 +154,19 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
   const indexOf = (target?: Descendant<Y, M> | null | Y) => {
     if (!target) return -1
 
-    if (target instanceof Node) {
-      return descendants.get(target)?.index ?? -1
-    } else {
-      return descendants.get(target.node)?.index ?? -1
-    }
+    if (target instanceof Node) return descendants.get(target)?.index ?? -1
+    else return descendants.get(target.node)?.index ?? -1
   }
 
   const enabledIndexOf = (target?: Descendant<Y, M> | null | Y) => {
     if (!target) return -1
 
-    if (target instanceof Node) {
+    if (target instanceof Node)
       return enabledValues().findIndex(({ node }) => node.isSameNode(target))
-    } else {
+    else
       return enabledValues().findIndex(({ node }) =>
         node.isSameNode(target.node),
       )
-    }
   }
 
   const values = (props?: Partial<M>) =>

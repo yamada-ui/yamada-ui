@@ -30,11 +30,8 @@ export const Show = <Y,>({
 }: ShowProps<Y>): ReactNode => {
   let result: ReactNode
 
-  if (!when) {
-    result = fallback
-  } else {
-    result = runIfFn(children, when)
-  }
+  if (!when) result = fallback
+  else result = runIfFn(children, when)
 
   // eslint-disable-next-line react/jsx-no-useless-fragment
   return isValidElement(result) ? result : <>{result}</>

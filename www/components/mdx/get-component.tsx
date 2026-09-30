@@ -421,22 +421,13 @@ export function getComponent(
 
     const Component = evalCode(transformedCode, components)
 
-    if (isFunction(Component)) {
-      return <Component />
-    } else if (isValidElement(Component)) {
-      return Component
-    } else {
-      return null
-    }
+    if (isFunction(Component)) return <Component />
+    else if (isValidElement(Component)) return Component
+    else return null
   } catch (e) {
-    if (process.env.NODE_ENV === "development") {
-      if (e instanceof Error) {
-        return <Text color="error">{e.toString()}</Text>
-      } else {
-        return null
-      }
-    } else {
-      throw e
-    }
+    if (process.env.NODE_ENV === "development")
+      if (e instanceof Error) return <Text color="error">{e.toString()}</Text>
+      else return null
+    else throw e
   }
 }

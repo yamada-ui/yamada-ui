@@ -33,7 +33,10 @@ const serializeValue = (value: any) =>
 
 type ReorderGroupProps<Y = string> = Merge<
   HTMLMotionProps<"ul">,
-  Pick<Parameters<typeof Reorder.Group<Y>>[0], "axis" | "onReorder" | "values">
+  Pick<
+    Parameters<typeof Reorder.Group<Y[]>>[0],
+    "axis" | "onReorder" | "values"
+  >
 >
 type ReorderItemProps<Y = string> = Merge<
   HTMLMotionProps<"li">,

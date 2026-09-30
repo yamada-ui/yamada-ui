@@ -1,12 +1,10 @@
 "use client"
 
 import type { HTMLProps, PropGetter } from "../../core"
+import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback } from "react"
 import { mergeProps, useEnvironment } from "../../core"
-import {
-  useDisclosure,
-  type UseDisclosureProps,
-} from "../../hooks/use-disclosure"
+import { useDisclosure } from "../../hooks/use-disclosure"
 import { useEventListener } from "../../hooks/use-event-listener"
 import { useI18n } from "../../providers/i18n-provider"
 import { handlerAll, useIds } from "../../utils"

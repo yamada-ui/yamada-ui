@@ -40,9 +40,9 @@ describe("<Textarea />", () => {
     render(<Textarea rows={1} />)
 
     const textarea = screen.getByRole("textbox")
-    if (!(textarea instanceof HTMLTextAreaElement)) {
+    if (!(textarea instanceof HTMLTextAreaElement))
       throw new Error("Expected HTMLTextAreaElement")
-    }
+
     expect(textarea.rows).toBe(1)
   })
 })

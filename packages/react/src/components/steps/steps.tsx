@@ -195,9 +195,8 @@ export const StepsList = withContext<"ol", StepsListProps>(
     const { items } = useComponentContext()
     const { getListProps } = useStepsContext()
     const computedChildren = useMemo(() => {
-      if (children) {
-        return children
-      } else {
+      if (children) return children
+      else
         return items?.map(
           (
             {
@@ -240,7 +239,6 @@ export const StepsList = withContext<"ol", StepsListProps>(
             </StepsItem>
           ),
         )
-      }
     }, [children, items])
 
     return <styled.ol {...getListProps(rest)}>{computedChildren}</styled.ol>
@@ -384,9 +382,8 @@ export const StepsContents: FC<StepsContentsProps> = ({ children }) => {
   const { items } = useComponentContext()
 
   return useMemo(() => {
-    if (children) {
-      return children
-    } else {
+    if (children) return children
+    else
       return items?.map(({ content, contentProps }, index) =>
         isUndefined(content) || isNull(content) ? null : (
           <StepsContent key={index} index={index} {...contentProps}>
@@ -394,7 +391,6 @@ export const StepsContents: FC<StepsContentsProps> = ({ children }) => {
           </StepsContent>
         ),
       )
-    }
   }, [children, items])
 }
 

@@ -36,6 +36,22 @@ describe("<Popover />", () => {
     )
     expect(screen.getByTestId("fn-child")).toHaveTextContent("open")
   })
+
+  test("passes positioner props to the positioner", () => {
+    render(
+      <Popover.Root defaultOpen>
+        <Popover.Trigger>
+          <Button>Popover Trigger</Button>
+        </Popover.Trigger>
+
+        <Popover.Content positionerProps={{ "data-testid": "positioner" }}>
+          Popover Content
+        </Popover.Content>
+      </Popover.Root>,
+    )
+
+    expect(screen.getByTestId("positioner")).toBeInTheDocument()
+  })
 })
 
 describe("usePopupAnimationProps", () => {

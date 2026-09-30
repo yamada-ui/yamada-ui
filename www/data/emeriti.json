@@ -1,16 +1,15 @@
 [
   {
-    "name": { "en": "Tomoya Nakamura", "ja": "Tomoya Nakamura" },
+    "name": { "en": "Kae Okamura", "ja": "Okamura Kae" },
     "description": {
-      "en": "Software engineer based in Tokyo.",
-      "ja": "東京を拠点に活動するソフトウェアエンジニア。"
+      "en": "Japanese frontend engineer in South Korea.",
+      "ja": "韓国でフロントエンジニアとして活動している日本人です。"
     },
     "github": {
-      "id": "nakayan5",
-      "icon": "https://avatars.githubusercontent.com/u/63556889?v=4",
-      "url": "https://github.com/nakayan5"
-    },
-    "x": { "url": "https://x.com/nakachan_js" }
+      "id": "kaehehehe",
+      "icon": "https://avatars.githubusercontent.com/u/77221488?v=4",
+      "url": "https://github.com/kaehehehe"
+    }
   },
   {
     "name": { "en": "Kei Setoguchi", "ja": "Kei Setoguchi" },
@@ -37,5 +36,18 @@
       "url": "https://github.com/suzukisan22"
     },
     "x": { "url": "https://x.com/itsmeryota" }
+  },
+  {
+    "name": { "en": "Tomoya Nakamura", "ja": "Tomoya Nakamura" },
+    "description": {
+      "en": "Software engineer based in Tokyo.",
+      "ja": "東京を拠点に活動するソフトウェアエンジニア。"
+    },
+    "github": {
+      "id": "nakayan5",
+      "icon": "https://avatars.githubusercontent.com/u/63556889?v=4",
+      "url": "https://github.com/nakayan5"
+    },
+    "x": { "url": "https://x.com/nakachan_js" }
   }
 ]

@@ -6,6 +6,7 @@ import {
   addDomEvent,
   createdDom,
   handlerAll,
+  isShadowRoot,
   mergeRefs,
   noop,
   pickObject,
@@ -115,7 +116,10 @@ const calcRows = (
 
   cloneEl.value = value
 
-  document.body.appendChild(cloneEl)
+  const rootNode = el.getRootNode()
+  const container = isShadowRoot(rootNode) ? rootNode : el.ownerDocument.body
+
+  container.appendChild(cloneEl)
 
   let rows: number
 
@@ -132,7 +136,7 @@ const calcRows = (
     rows = Math.min(maxRows, Math.max(minRows, lineBreaks + 1))
   }
 
-  document.body.removeChild(cloneEl)
+  container.removeChild(cloneEl)
 
   return rows
 }

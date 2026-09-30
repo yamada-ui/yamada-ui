@@ -84,19 +84,13 @@ export function findChildren<Y = any, M = any>(
 ): [React.ReactElement<Y> | undefined, ...React.ReactElement<M>[]] {
   const child = findChild(children, ...types)
 
-  if (child) {
+  if (child)
     return children.sort((a, b) => {
-      if (types.some((type) => isSomeElement(a.type, type))) {
-        return -1
-      } else if (types.some((type) => isSomeElement(b.type, type))) {
-        return 1
-      } else {
-        return 0
-      }
+      if (types.some((type) => isSomeElement(a.type, type))) return -1
+      else if (types.some((type) => isSomeElement(b.type, type))) return 1
+      else return 0
     }) as [React.ReactElement<Y> | undefined, ...React.ReactElement<M>[]]
-  } else {
-    return [undefined, ...(children as React.ReactElement<M>[])]
-  }
+  else return [undefined, ...(children as React.ReactElement<M>[])]
 }
 
 export function useFindChildren<Y = any, M = any>(

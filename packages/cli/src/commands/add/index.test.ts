@@ -19,7 +19,7 @@ vi.mock("../../utils", async (importOriginal) => {
 
 vi.mock("node-fetch", () => ({
   default: vi.fn().mockImplementation((url: string) => {
-    if (url.includes("index.json")) {
+    if (url.includes("index.json"))
       return Promise.resolve({
         json: () =>
           Promise.resolve({
@@ -33,8 +33,8 @@ vi.mock("node-fetch", () => ({
           }),
         ok: true,
       })
-    }
-    if (url.includes("components/button.json")) {
+
+    if (url.includes("components/button.json"))
       return Promise.resolve({
         json: () =>
           Promise.resolve({
@@ -55,8 +55,8 @@ vi.mock("node-fetch", () => ({
           }),
         ok: true,
       })
-    }
-    if (url.includes("components/card.json")) {
+
+    if (url.includes("components/card.json"))
       return Promise.resolve({
         json: () =>
           Promise.resolve({
@@ -77,13 +77,13 @@ vi.mock("node-fetch", () => ({
           }),
         ok: true,
       })
-    }
-    if (url.includes("names.json")) {
+
+    if (url.includes("names.json"))
       return Promise.resolve({
         json: () => Promise.resolve(["button", "card"]),
         ok: true,
       })
-    }
+
     return Promise.resolve({ ok: false, status: 404 })
   }),
 }))

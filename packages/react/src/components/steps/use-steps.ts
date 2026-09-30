@@ -89,13 +89,9 @@ export const useSteps = ({
 
   const getStatus = useCallback(
     (indexProp: number): StepStatusScheme => {
-      if (indexProp < index) {
-        return "complete"
-      } else if (indexProp > index) {
-        return "incomplete"
-      } else {
-        return "current"
-      }
+      if (indexProp < index) return "complete"
+      else if (indexProp > index) return "incomplete"
+      else return "current"
     },
     [index],
   )

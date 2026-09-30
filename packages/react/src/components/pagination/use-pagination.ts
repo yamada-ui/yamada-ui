@@ -157,7 +157,7 @@ export const usePagination = ({
 
   const getItemProps: PropGetter<"button", { page?: Page }> = useCallback(
     ({ page, ...props } = {}) => {
-      if (isNumber(page)) {
+      if (isNumber(page))
         return {
           type: "button",
           "aria-current": currentPage === page ? "page" : undefined,
@@ -166,9 +166,7 @@ export const usePagination = ({
           ...props,
           onClick: handlerAll(props.onClick, () => onChange(page)),
         }
-      } else {
-        return { ...props, "data-ellipsis": "" }
-      }
+      else return { ...props, "data-ellipsis": "" }
     },
     [currentPage, t, onChange, disabled],
   )

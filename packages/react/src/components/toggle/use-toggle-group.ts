@@ -80,11 +80,8 @@ export const useToggleGroup = <Y extends string | string[] = string>({
 
   const onReset = useCallback((targetValue?: string[]) => {
     onChangeMapRef.current.forEach((onChange, value) => {
-      if (targetValue?.includes(value)) {
-        onChange(true)
-      } else {
-        onChange(false)
-      }
+      if (targetValue?.includes(value)) onChange(true)
+      else onChange(false)
     })
   }, [])
 

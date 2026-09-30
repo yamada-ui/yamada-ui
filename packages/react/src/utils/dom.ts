@@ -1,4 +1,5 @@
 import type { AnyString } from "@yamada-ui/utils"
+import { getActiveElement } from "@yamada-ui/utils"
 import * as React from "react"
 
 type KeyboardNavigationKey =
@@ -55,13 +56,10 @@ export function runKeyAction<Y>(
 export function isComposing(
   ev: React.ChangeEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>,
 ): boolean {
-  if ("keyCode" in ev) {
-    return ev.nativeEvent.isComposing || ev.keyCode === 229
-  } else if (ev.nativeEvent instanceof InputEvent) {
+  if ("keyCode" in ev) return ev.nativeEvent.isComposing || ev.keyCode === 229
+  else if (ev.nativeEvent instanceof InputEvent)
     return ev.nativeEvent.isComposing
-  } else {
-    return false
-  }
+  else return false
 }
 
 export function useAttributeObserver(
@@ -91,7 +89,16 @@ export function useAttributeObserver(
 }
 
 export function getEventRelatedTarget(ev: React.FocusEvent | React.MouseEvent) {
-  return (ev.relatedTarget ??
+  if (ev.relatedTarget) return ev.relatedTarget as HTMLElement
+
+  const getRootNode = (
+    ev.currentTarget as unknown as {
+      getRootNode?: () => Document | ShadowRoot
+    }
+  ).getRootNode
+  const root = getRootNode?.call(ev.currentTarget)
+
+  return ((root && getActiveElement(root)) ??
     ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null
 }
 
@@ -116,7 +123,5 @@ export const visuallyHiddenAttributes = {
 export function* useIds() {
   const id = React.useId()
 
-  for (let i = 0; ; i++) {
-    yield `${id}-${i}`
-  }
+  for (let i = 0; ; i++) yield `${id}-${i}`
 }

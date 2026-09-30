@@ -2,7 +2,7 @@
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": ["icon", "motion", "text", "portal", "center"],
-    "externals": ["motion@^12.38.0", "react-remove-scroll@^2.7.2"],
+    "externals": ["motion@^12.43.0", "react-remove-scroll@^2.7.2"],
     "hooks": ["use-timeout"],
     "providers": []
   },
@@ -44,10 +44,6 @@
     {
       "name": "loading.style.ts",
       "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const loadingStyle = defineComponentStyle({\n  base: {\n    color: [\"colorScheme.500\", \"colorScheme.600\"],\n    fontSize: \"1em\",\n  },\n})\n\nexport type LoadingStyle = typeof loadingStyle\n"
-    },
-    {
-      "name": "loading.test.browser.tsx",
-      "content": "import type { FC } from \"react\"\nimport { page, render } from \"#test/browser\"\nimport { useLoading } from \"./loading-provider\"\n\nfunction clickElement(testId: string) {\n  const el = page.getByTestId(testId).element()\n\n  if (el instanceof HTMLElement) el.click()\n}\n\ndescribe(\"useLoading\", () => {\n  test(\"screen.finish removes screen loading\", async () => {\n    const TestComponent: FC = () => {\n      const { screen: screenLoading } = useLoading()\n\n      return (\n        <>\n          <button data-testid=\"start\" onClick={() => screenLoading.start()}>\n            Start\n          </button>\n          <button data-testid=\"finish\" onClick={() => screenLoading.finish()}>\n            Finish\n          </button>\n        </>\n      )\n    }\n\n    const { user } = await render(<TestComponent />)\n    await user.click(page.getByTestId(\"start\"))\n\n    await expect\n      .poll(() => document.querySelector(\"div[data-loading]\"))\n      .toBeTruthy()\n    clickElement(\"finish\")\n\n    await expect\n      .poll(() => document.querySelector(\"div[data-loading]\"))\n      .toBeFalsy()\n  })\n\n  test(\"force clears loading state\", async () => {\n    const TestComponent: FC = () => {\n      const { page: pageLoading } = useLoading()\n\n      return (\n        <>\n          <button\n            data-testid=\"force\"\n            onClick={() =>\n              pageLoading.force({ loadingCount: 1, message: \"Forced loading\" })\n            }\n          >\n            Force\n          </button>\n          <button\n            data-testid=\"force-off\"\n            onClick={() => pageLoading.force({ loadingCount: 0 })}\n          >\n            Force Off\n          </button>\n        </>\n      )\n    }\n\n    const { user } = await render(<TestComponent />)\n    await user.click(page.getByTestId(\"force\"))\n\n    await expect.element(page.getByText(\"Forced loading\")).toBeInTheDocument()\n    clickElement(\"force-off\")\n\n    await expect\n      .element(page.getByText(\"Forced loading\").query())\n      .not.toBeInTheDocument()\n  })\n\n  test(\"start with duration auto-finishes\", async () => {\n    const TestComponent: FC = () => {\n      const { background } = useLoading()\n\n      return (\n        <button\n          data-testid=\"start\"\n          onClick={() => background.start({ duration: 100 })}\n        >\n          Start\n        </button>\n      )\n    }\n\n    const { user } = await render(<TestComponent />)\n    await user.click(page.getByTestId(\"start\"))\n\n    await expect\n      .poll(() => document.querySelector(\"div[data-loading]\"))\n      .toBeTruthy()\n\n    await expect\n      .poll(() => document.querySelector(\"div[data-loading]\"))\n      .toBeFalsy()\n  })\n})\n"
     },
     {
       "name": "loading.tsx",

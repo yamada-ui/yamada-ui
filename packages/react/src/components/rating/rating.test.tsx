@@ -11,9 +11,7 @@ describe("<Rating />", () => {
 
     const items = container.querySelectorAll(".ui-rating__item")
 
-    for (let i = 1; i < 5; i++) {
-      expect(items[i]).toHaveAttribute("data-filled")
-    }
+    for (let i = 1; i < 5; i++) expect(items[i]).toHaveAttribute("data-filled")
   })
 
   test("renders disabled rating with aria-disabled", () => {
@@ -36,12 +34,11 @@ describe("<Rating />", () => {
     const items = container.querySelectorAll(".ui-rating__item")
     expect(items[3]).toHaveAttribute("data-filled")
 
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i < 3; i++)
       expect(items[i]).not.toHaveAttribute("data-filled")
-    }
-    for (let i = 4; i < items.length; i++) {
+
+    for (let i = 4; i < items.length; i++)
       expect(items[i]).not.toHaveAttribute("data-filled")
-    }
   })
 
   test("applies custom color per value", () => {

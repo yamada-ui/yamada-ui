@@ -1,6 +1,6 @@
 import type { UsageTheme } from "../system"
 import { system } from "#test"
-import { animation, keyframes } from "./animation"
+import { animation, injectKeyframes, keyframes } from "./animation"
 
 const createMockOptions = () => ({
   css: () => () => ({}),
@@ -23,12 +23,12 @@ describe("animation", () => {
 
   test("handles object values", () => {
     const options = createMockOptions()
-    options.css = (() => () => ({
+    options.css = () => () => ({
       animationDuration: "1s",
       animationName: "fadeIn",
       animationTimingFunction: "ease-in",
       delay: "1s",
-    })) as any
+    })
 
     const result = animation(
       {
@@ -58,6 +58,17 @@ describe("animation", () => {
 })
 
 describe("keyframes", () => {
+  test("inserts styles into the shadow root", () => {
+    const host = document.createElement("div")
+    const shadowRoot = host.attachShadow({ mode: "open" })
+    const headStyleCount = document.head.querySelectorAll("style").length
+
+    injectKeyframes({ from: { opacity: 0 }, to: { opacity: 1 } }, shadowRoot)
+
+    expect(shadowRoot.querySelector("style")?.parentNode).toBe(shadowRoot)
+    expect(document.head.querySelectorAll("style")).toHaveLength(headStyleCount)
+  })
+
   test("handles not values", () => {
     const options = createMockOptions()
     expect(keyframes(null, options)).toBeNull()
@@ -71,10 +82,10 @@ describe("keyframes", () => {
 
   test("handles object values", () => {
     const options = createMockOptions()
-    options.css = (() => () => ({
+    options.css = () => () => ({
       from: { opacity: 0 },
       to: { opacity: 1 },
-    })) as any
+    })
 
     const result = keyframes(
       { from: { opacity: 0 }, to: { opacity: 1 } },

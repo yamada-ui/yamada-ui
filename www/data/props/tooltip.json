@@ -42,7 +42,7 @@
       "required": false
     },
     "contentProps": {
-      "type": "HTMLMotionProps",
+      "type": "TooltipContentProps",
       "description": "Props for content element.",
       "required": false
     },
@@ -131,6 +131,11 @@
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
       "description": "Props for portal component.",
+      "required": false
+    },
+    "positionerProps": {
+      "type": "Omit<TooltipPositionerProps, \"children\">",
+      "description": "Props for positioner element.",
       "required": false
     },
     "preventOverflow": {

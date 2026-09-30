@@ -98,7 +98,7 @@ export const update = new Command("update")
       const index = all || targetNames.includes("index")
       const theme = all ? existsTheme : targetNames.includes("theme")
 
-      if (theme && !existsTheme) {
+      if (theme && !existsTheme)
         throw new Error(
           [
             `No ${c.yellow("theme")} found.`,
@@ -106,7 +106,6 @@ export const update = new Command("update")
             "to generate it.",
           ].join(" "),
         )
-      }
 
       const omittedTargetNames = targetNames.filter(
         (name) => !["index", "theme"].includes(name),
@@ -122,7 +121,7 @@ export const update = new Command("update")
           (name) => !generatedNames.includes(name),
         )
 
-        if (notFoundNames.length) {
+        if (notFoundNames.length)
           throw new Error(
             [
               `No ${notFoundNames.map((name) => c.yellow(name)).join(", ")} found in generated components.`,
@@ -130,9 +129,7 @@ export const update = new Command("update")
               "to add it.",
             ].join(" "),
           )
-        } else {
-          componentNames.push(...omittedTargetNames)
-        }
+        else componentNames.push(...omittedTargetNames)
       } else if (all || (!index && !theme)) {
         componentNames.push(...generatedNames)
       }
@@ -177,10 +174,7 @@ export const update = new Command("update")
 
       end()
     } catch (e) {
-      if (e instanceof Error) {
-        spinner.fail(e.message)
-      } else {
-        spinner.fail("An unknown error occurred")
-      }
+      if (e instanceof Error) spinner.fail(e.message)
+      else spinner.fail("An unknown error occurred")
     }
   })

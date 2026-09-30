@@ -1,5 +1,6 @@
 import type { FC } from "react"
-import { type Locator, locators } from "vitest/browser"
+import type { Locator } from "vitest/browser"
+import { locators } from "vitest/browser"
 import { page, render, renderHook } from "#test/browser"
 import { Button } from "../button"
 import { Drawer } from "./"

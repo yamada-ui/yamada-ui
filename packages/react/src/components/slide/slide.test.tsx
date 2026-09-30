@@ -43,9 +43,8 @@ describe("<Slide />", () => {
       const enterFn = slideVariants.enter
       const exitFn = slideVariants.exit
 
-      if (typeof enterFn !== "function" || typeof exitFn !== "function") {
+      if (typeof enterFn !== "function" || typeof exitFn !== "function")
         throw new Error("slideVariants.enter/exit must be functions")
-      }
 
       const enterResult = enterFn({ placement: undefined }, {}, {})
       const exitResult = exitFn({ placement: undefined }, {}, {})

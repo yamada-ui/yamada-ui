@@ -50,7 +50,7 @@ export async function getRegistriesAndFiles(
 
   const tasks = new Listr([], { concurrent })
 
-  if (index) {
+  if (index)
     tasks.add([
       {
         task: async (_, task) => {
@@ -76,9 +76,8 @@ export async function getRegistriesAndFiles(
         title: `Fetching ${c.cyan("index")} registry`,
       },
     ])
-  }
 
-  if (theme) {
+  if (theme)
     tasks.add([
       {
         task: async (_, task) => {
@@ -103,7 +102,6 @@ export async function getRegistriesAndFiles(
         title: `Fetching ${c.cyan("theme")} registry`,
       },
     ])
-  }
 
   tasks.add(
     componentNames

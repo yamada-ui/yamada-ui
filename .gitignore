@@ -1,6 +1,3 @@
-# worktree
-.worktrees
-
 # pnpm
 .pnpm-store
 
@@ -42,6 +39,8 @@ next-env.d.ts
 .vitest-attachments
 .react-router
 .tanstack
+.magi
+.worktrees
 
 # dotenv environment variables file
 .env

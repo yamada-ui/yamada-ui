@@ -1,8 +1,10 @@
 import { isFunction } from "./assertion"
 import {
+  getActiveElement,
   getDocument,
   getNextTabbableElement,
   getTabbableElementEdges,
+  isShadowRoot,
 } from "./dom"
 import { noop } from "./function"
 
@@ -96,7 +98,8 @@ export function focusTrap(
 ) {
   if (!el) return noop
 
-  const doc = getDocument(el)
+  const rootNode = el.getRootNode()
+  const root = isShadowRoot(rootNode) ? rootNode : getDocument(el)
 
   function onKeyDown(ev: KeyboardEvent) {
     if (ev.key !== "Tab") return
@@ -106,20 +109,17 @@ export function focusTrap(
     const [firstTabbable, lastTabbable] = getTabbableElementEdges(el, false)
 
     if (ev.shiftKey) {
-      if (doc.activeElement === firstTabbable) elToFocus = lastTabbable
+      if (getActiveElement(root) === firstTabbable) elToFocus = lastTabbable
     } else {
-      if (doc.activeElement === lastTabbable) elToFocus = firstTabbable
+      if (getActiveElement(root) === lastTabbable) elToFocus = firstTabbable
     }
 
     if (!elToFocus) return
 
     ev.preventDefault()
 
-    if (isFunction(onFocus)) {
-      onFocus(elToFocus)
-    } else {
-      elToFocus.focus()
-    }
+    if (isFunction(onFocus)) onFocus(elToFocus)
+    else elToFocus.focus()
   }
 
   return addDomEvent(el, "keydown", onKeyDown, true)
@@ -130,8 +130,9 @@ export function focusTransfer(
   target?: HTMLElement | null,
   onFocus?: (elToFocus: HTMLElement) => void,
 ) {
+  const targetRootNode = target?.getRootNode()
   const doc = getDocument(el)
-  const body = doc.body
+  const tabbableRoot = isShadowRoot(targetRootNode) ? targetRootNode : doc.body
 
   function onKeyDown(ev: KeyboardEvent) {
     if (ev.key !== "Tab") return
@@ -139,20 +140,21 @@ export function focusTransfer(
     let elToFocus: HTMLElement | null | undefined = null
 
     const [firstTabbable, lastTabbable] = getTabbableElementEdges(el, false)
-    const nextTabbable = getNextTabbableElement(body, target)
+    const nextTabbable = getNextTabbableElement(tabbableRoot, target)
     const noTabbableEls = !firstTabbable && !lastTabbable
+    const activeElement = getActiveElement(doc)
 
     if (ev.shiftKey) {
-      if (nextTabbable === doc.activeElement) {
-        if (doc.activeElement !== lastTabbable) elToFocus = lastTabbable
-      } else if (doc.activeElement === firstTabbable || noTabbableEls) {
-        if (doc.activeElement !== target) elToFocus = target
+      if (nextTabbable === activeElement) {
+        if (activeElement !== lastTabbable) elToFocus = lastTabbable
+      } else if (activeElement === firstTabbable || noTabbableEls) {
+        if (activeElement !== target) elToFocus = target
       }
     } else {
-      if (doc.activeElement === target) {
-        if (doc.activeElement !== firstTabbable) elToFocus = firstTabbable
-      } else if (doc.activeElement === lastTabbable || noTabbableEls) {
-        if (doc.activeElement !== nextTabbable) elToFocus = nextTabbable
+      if (activeElement === target) {
+        if (activeElement !== firstTabbable) elToFocus = firstTabbable
+      } else if (activeElement === lastTabbable || noTabbableEls) {
+        if (activeElement !== nextTabbable) elToFocus = nextTabbable
       }
     }
 
@@ -160,11 +162,8 @@ export function focusTransfer(
 
     ev.preventDefault()
 
-    if (isFunction(onFocus)) {
-      onFocus(elToFocus)
-    } else {
-      elToFocus.focus()
-    }
+    if (isFunction(onFocus)) onFocus(elToFocus)
+    else elToFocus.focus()
   }
 
   return addDomEvent(doc, "keydown", onKeyDown, true)

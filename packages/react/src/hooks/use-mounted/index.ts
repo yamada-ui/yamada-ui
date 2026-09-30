@@ -24,13 +24,9 @@ export function useMounted({ delay = 0, state = false }: UseMountedProps = {}) {
 
     let timeoutId: NodeJS.Timeout | null = null
 
-    if (state) {
-      if (delay > 0) {
-        timeoutId = setTimeout(() => setMounted(true), delay)
-      } else {
-        setMounted(true)
-      }
-    }
+    if (state)
+      if (delay > 0) timeoutId = setTimeout(() => setMounted(true), delay)
+      else setMounted(true)
 
     return () => {
       mountedRef.current = false
@@ -41,12 +37,10 @@ export function useMounted({ delay = 0, state = false }: UseMountedProps = {}) {
     }
   }, [delay, state])
 
-  if (state) {
-    return mounted
-  } else {
+  if (state) return mounted
+  else
     // eslint-disable-next-line react-hooks/rules-of-hooks
     return useCallback(() => mountedRef.current, [])
-  }
 }
 
 export type UseMountedReturn = ReturnType<typeof useMounted>

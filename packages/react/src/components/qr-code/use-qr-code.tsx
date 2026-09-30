@@ -111,15 +111,14 @@ export const useQrCode = ({
   const paths: string[] = useMemo(() => {
     const result: string[] = []
 
-    for (let row = 0; row < encoded.size; row++) {
+    for (let row = 0; row < encoded.size; row++)
       for (let col = 0; col < encoded.size; col++) {
         const x = col * pixelSize
         const y = row * pixelSize
-        if (encoded.data[row]?.[col]) {
+        if (encoded.data[row]?.[col])
           result.push(`M${x},${y}h${pixelSize}v${pixelSize}h-${pixelSize}z`)
-        }
       }
-    }
+
     return result
   }, [encoded.data, encoded.size, pixelSize])
 

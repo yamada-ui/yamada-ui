@@ -1,5 +1,31 @@
 # @yamada-ui/utils
 
+## 2.1.6
+
+### Patch Changes
+
+- [#7784](https://github.com/yamada-ui/yamada-ui/pull/7784) [`bbeeecb`](https://github.com/yamada-ui/yamada-ui/commit/bbeeecb9005c82cd4234c90b2219414c6587e8e9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix Path to include array and object keys.
+
+- [#7787](https://github.com/yamada-ui/yamada-ui/pull/7787) [`c1d56b6`](https://github.com/yamada-ui/yamada-ui/commit/c1d56b6ec94a54575ca527cf336e2116d461d563) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix NumberInput mouse wheel updates for focused inputs inside Shadow DOM.
+
+- [#7786](https://github.com/yamada-ui/yamada-ui/pull/7786) [`018cc36`](https://github.com/yamada-ui/yamada-ui/commit/018cc36de2528c721e7d758e1c5d6fff42ea027b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix focus management inside Shadow DOM.
+
+- [#7788](https://github.com/yamada-ui/yamada-ui/pull/7788) [`546d65e`](https://github.com/yamada-ui/yamada-ui/commit/546d65e5650df827f037d8637c190ce09620e190) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix Editable focus cleanup in Shadow DOM.
+
+## 2.1.5
+
+### Patch Changes
+
+- [#7746](https://github.com/yamada-ui/yamada-ui/pull/7746) [`77354be`](https://github.com/yamada-ui/yamada-ui/commit/77354bec8d9495b40d550b7a84c27fb36a7e239b) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7747](https://github.com/yamada-ui/yamada-ui/pull/7747) [`29c1dc4`](https://github.com/yamada-ui/yamada-ui/commit/29c1dc44353e6ad9fee2da36c8cddc5fd9df5315) Thanks [@dependabot](https://github.com/apps/dependabot)! - Remove unnecessary type assertions.
+
+## 2.1.4
+
+### Patch Changes
+
+- [#7714](https://github.com/yamada-ui/yamada-ui/pull/7714) [`3da9bbb`](https://github.com/yamada-ui/yamada-ui/commit/3da9bbbd8fcc58e91658dd037a9183b9a10e9045) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Apply consistent curly style across published packages.
+
 ## 2.1.3
 
 ### Patch Changes

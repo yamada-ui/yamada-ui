@@ -1,11 +1,11 @@
 {
   "gold": [],
-  "platinum": [
+  "platinum": [],
+  "silver": [
     {
       "href": "https://avap.co.jp",
       "src": "/sponsors/avap.svg",
       "alt": "Avap Co., Ltd."
     }
-  ],
-  "silver": []
+  ]
 }

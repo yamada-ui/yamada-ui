@@ -320,15 +320,13 @@ interface FieldRequiredIndicatorProps extends HTMLStyledProps<"span"> {}
 
 const FieldRequiredIndicator = withContext<"span", FieldRequiredIndicatorProps>(
   ({ children, ...rest }) => {
-    if (!isValidElement(children)) {
+    if (!isValidElement(children))
       return (
         <styled.span aria-hidden role="presentation" {...rest}>
           {children ?? <>*</>}
         </styled.span>
       )
-    } else {
-      return children
-    }
+    else return children
   },
   "requiredIndicator",
 )()

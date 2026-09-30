@@ -1,20 +1,14 @@
 "use client"
 
 import type { ReactNode, RefObject } from "react"
+import type { HTMLProps, PropGetter } from "../../core"
+import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { Children, useCallback, useId, useRef, useState } from "react"
-import {
-  type HTMLProps,
-  mergeProps,
-  type PropGetter,
-  useEnvironment,
-} from "../../core"
+import { mergeProps, useEnvironment } from "../../core"
 import { useAsyncCallback } from "../../hooks/use-async-callback"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
-import {
-  useDisclosure,
-  type UseDisclosureProps,
-} from "../../hooks/use-disclosure"
+import { useDisclosure } from "../../hooks/use-disclosure"
 import { useWindowEvent } from "../../hooks/use-window-event"
 import { useI18n } from "../../providers/i18n-provider"
 import {
@@ -194,11 +188,9 @@ export const useSidebar = ({
   const onExpandedChange = useCallback(
     (value: string) => {
       setExpandedValue((prev) => {
-        if (prev.includes(value)) {
+        if (prev.includes(value))
           return prev.filter((prevValue) => prevValue !== value)
-        } else {
-          return [...prev, value]
-        }
+        else return [...prev, value]
       })
     },
     [setExpandedValue],
@@ -433,15 +425,12 @@ export const useSidebarItem = ({
   }, [disabled, group, value, onClose, onExpandedChange])
 
   const onGroupToggle = useCallback(() => {
-    if (groupOpen) {
-      onGroupClose()
-    } else {
-      onGroupOpen()
-    }
+    if (groupOpen) onGroupClose()
+    else onGroupOpen()
   }, [groupOpen, onGroupClose, onGroupOpen])
 
   useSafeLayoutEffect(() => {
-    if (defaultExpanded) {
+    if (defaultExpanded)
       if (async && !initialAsyncRef.current) {
         initialAsyncRef.current = true
 
@@ -455,9 +444,7 @@ export const useSidebarItem = ({
       } else {
         onOpen()
       }
-    } else {
-      onClose()
-    }
+    else onClose()
   }, [defaultExpanded])
 
   const getItemProps: PropGetter<"li"> = useCallback(

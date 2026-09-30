@@ -1,5 +1,170 @@
 # @yamada-ui/react
 
+## 2.2.8
+
+### Patch Changes
+
+- [#7826](https://github.com/yamada-ui/yamada-ui/pull/7826) [`d28da79`](https://github.com/yamada-ui/yamada-ui/commit/d28da7922437181aa70b2a8f665959cfa6c1f6ea) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7826](https://github.com/yamada-ui/yamada-ui/pull/7826) [`d28da79`](https://github.com/yamada-ui/yamada-ui/commit/d28da7922437181aa70b2a8f665959cfa6c1f6ea) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7826](https://github.com/yamada-ui/yamada-ui/pull/7826) [`d28da79`](https://github.com/yamada-ui/yamada-ui/commit/d28da7922437181aa70b2a8f665959cfa6c1f6ea) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7826](https://github.com/yamada-ui/yamada-ui/pull/7826) [`d28da79`](https://github.com/yamada-ui/yamada-ui/commit/d28da7922437181aa70b2a8f665959cfa6c1f6ea) Thanks [@dependabot](https://github.com/apps/dependabot)! - Format ICU type definitions.
+
+- [#7825](https://github.com/yamada-ui/yamada-ui/pull/7825) [`e943765`](https://github.com/yamada-ui/yamada-ui/commit/e94376583f34d77b62930da27c677ccf414ce497) Thanks [@jji05](https://github.com/jji05)! - Exclude browser test files from component registry generation.
+
+- [#7824](https://github.com/yamada-ui/yamada-ui/pull/7824) [`5406b11`](https://github.com/yamada-ui/yamada-ui/commit/5406b115d2b68f3f6e2b8ea4805925bd353b7e10) Thanks [@dependabot](https://github.com/apps/dependabot)! - Formatted file import statements.
+
+## 2.2.7
+
+### Patch Changes
+
+- [#7812](https://github.com/yamada-ui/yamada-ui/pull/7812) [`e35683a`](https://github.com/yamada-ui/yamada-ui/commit/e35683ade722885cece2f41326d1d0119e9b058a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where `UIProvider` did not forward all `I18nProvider` props.
+
+- [#7812](https://github.com/yamada-ui/yamada-ui/pull/7812) [`e35683a`](https://github.com/yamada-ui/yamada-ui/commit/e35683ade722885cece2f41326d1d0119e9b058a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where `I18nProvider` did not resolve browser locales to available message dictionaries, and added a `fallbackLocale` prop.
+
+- [#7797](https://github.com/yamada-ui/yamada-ui/pull/7797) [`842ed7b`](https://github.com/yamada-ui/yamada-ui/commit/842ed7b2acdd11abeb51300670d2500b6d937b43) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7809](https://github.com/yamada-ui/yamada-ui/pull/7809) [`67d596f`](https://github.com/yamada-ui/yamada-ui/commit/67d596f9d9ec6b550ba1b35ef7f106c8610aafdb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7795](https://github.com/yamada-ui/yamada-ui/pull/7795) [`83280a2`](https://github.com/yamada-ui/yamada-ui/commit/83280a274312ddd57fd02b7ba9048f251a8acb2e) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7797](https://github.com/yamada-ui/yamada-ui/pull/7797) [`842ed7b`](https://github.com/yamada-ui/yamada-ui/commit/842ed7b2acdd11abeb51300670d2500b6d937b43) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7809](https://github.com/yamada-ui/yamada-ui/pull/7809) [`67d596f`](https://github.com/yamada-ui/yamada-ui/commit/67d596f9d9ec6b550ba1b35ef7f106c8610aafdb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7797](https://github.com/yamada-ui/yamada-ui/pull/7797) [`842ed7b`](https://github.com/yamada-ui/yamada-ui/commit/842ed7b2acdd11abeb51300670d2500b6d937b43) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7809](https://github.com/yamada-ui/yamada-ui/pull/7809) [`67d596f`](https://github.com/yamada-ui/yamada-ui/commit/67d596f9d9ec6b550ba1b35ef7f106c8610aafdb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7816](https://github.com/yamada-ui/yamada-ui/pull/7816) [`3f9102a`](https://github.com/yamada-ui/yamada-ui/commit/3f9102ab1dad9939620991eff767952f11b9f622) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix color mode style conditions in Shadow DOM.
+
+- [#7814](https://github.com/yamada-ui/yamada-ui/pull/7814) [`babb916`](https://github.com/yamada-ui/yamada-ui/commit/babb91691ccfdf27a55e491bd3e4498216df3fd8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Prevent Popover from closing when focus moves to a portalled nested popup.
+
+## 2.2.6
+
+### Patch Changes
+
+- [#7789](https://github.com/yamada-ui/yamada-ui/pull/7789) [`887506e`](https://github.com/yamada-ui/yamada-ui/commit/887506e743b48a07f928433e7a769c0a6e0d94d7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add props for the tooltip positioner element.
+
+- [#7791](https://github.com/yamada-ui/yamada-ui/pull/7791) [`cdb35ee`](https://github.com/yamada-ui/yamada-ui/commit/cdb35eeb3b432725683d9856aa45e24ef296730f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add shorthand content and slot props to Popover.
+
+- [#7778](https://github.com/yamada-ui/yamada-ui/pull/7778) [`fd1845b`](https://github.com/yamada-ui/yamada-ui/commit/fd1845b5872b0d509fc35e8abae4f2533e79a0e8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Prevent Popover from closing when its content is clicked inside a Shadow DOM.
+
+- [#7775](https://github.com/yamada-ui/yamada-ui/pull/7775) [`fedb63b`](https://github.com/yamada-ui/yamada-ui/commit/fedb63bac546ddb0fb8cd0e4003fc9449be92883) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix `none` focus ring presets so they clear previously applied box shadows.
+
+- [#7790](https://github.com/yamada-ui/yamada-ui/pull/7790) [`8c625c2`](https://github.com/yamada-ui/yamada-ui/commit/8c625c2c9995218bd8d910f46d230f3f28db9759) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add slot props to modal root.
+
+- [#7787](https://github.com/yamada-ui/yamada-ui/pull/7787) [`c1d56b6`](https://github.com/yamada-ui/yamada-ui/commit/c1d56b6ec94a54575ca527cf336e2116d461d563) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix NumberInput mouse wheel updates for focused inputs inside Shadow DOM.
+
+- [#7785](https://github.com/yamada-ui/yamada-ui/pull/7785) [`20fda34`](https://github.com/yamada-ui/yamada-ui/commit/20fda347d50f00747397a294671938d5218be8c2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Resolve event related targets from the active Shadow DOM element.
+
+- [#7792](https://github.com/yamada-ui/yamada-ui/pull/7792) [`28ee7d0`](https://github.com/yamada-ui/yamada-ui/commit/28ee7d0baeaf7454f489a272aa4f675863adb4f2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix focus locking for portalized content within modals in Shadow DOM.
+
+- [#7786](https://github.com/yamada-ui/yamada-ui/pull/7786) [`018cc36`](https://github.com/yamada-ui/yamada-ui/commit/018cc36de2528c721e7d758e1c5d6fff42ea027b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix focus management inside Shadow DOM.
+
+- [#7788](https://github.com/yamada-ui/yamada-ui/pull/7788) [`546d65e`](https://github.com/yamada-ui/yamada-ui/commit/546d65e5650df827f037d8637c190ce09620e190) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix Editable focus cleanup in Shadow DOM.
+
+- Updated dependencies [[`bbeeecb`](https://github.com/yamada-ui/yamada-ui/commit/bbeeecb9005c82cd4234c90b2219414c6587e8e9), [`c1d56b6`](https://github.com/yamada-ui/yamada-ui/commit/c1d56b6ec94a54575ca527cf336e2116d461d563), [`018cc36`](https://github.com/yamada-ui/yamada-ui/commit/018cc36de2528c721e7d758e1c5d6fff42ea027b), [`546d65e`](https://github.com/yamada-ui/yamada-ui/commit/546d65e5650df827f037d8637c190ce09620e190)]:
+  - @yamada-ui/utils@2.1.6
+
+## 2.2.5
+
+### Patch Changes
+
+- [#7758](https://github.com/yamada-ui/yamada-ui/pull/7758) [`f2608c6`](https://github.com/yamada-ui/yamada-ui/commit/f2608c6656e796046503a2b680d2342c51cdf392) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix dark mode tokens in Shadow DOM.
+
+- [#7757](https://github.com/yamada-ui/yamada-ui/pull/7757) [`53acb22`](https://github.com/yamada-ui/yamada-ui/commit/53acb221e3d860370ccbe1477c75b5ec43ecfeee) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7769](https://github.com/yamada-ui/yamada-ui/pull/7769) [`1f2278f`](https://github.com/yamada-ui/yamada-ui/commit/1f2278fdffbfd6214add4f2d6de7b24685634c10) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7757](https://github.com/yamada-ui/yamada-ui/pull/7757) [`53acb22`](https://github.com/yamada-ui/yamada-ui/commit/53acb221e3d860370ccbe1477c75b5ec43ecfeee) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7769](https://github.com/yamada-ui/yamada-ui/pull/7769) [`1f2278f`](https://github.com/yamada-ui/yamada-ui/commit/1f2278fdffbfd6214add4f2d6de7b24685634c10) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7769](https://github.com/yamada-ui/yamada-ui/pull/7769) [`1f2278f`](https://github.com/yamada-ui/yamada-ui/commit/1f2278fdffbfd6214add4f2d6de7b24685634c10) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7751](https://github.com/yamada-ui/yamada-ui/pull/7751) [`6b36f30`](https://github.com/yamada-ui/yamada-ui/commit/6b36f301d80df2cf82757d126d4e0074d9db75c8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Export store utility types.
+
+- [#7762](https://github.com/yamada-ui/yamada-ui/pull/7762) [`4977106`](https://github.com/yamada-ui/yamada-ui/commit/49771060653b6425c84e50f87143dc57fc149394) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add style props to the `Modal.Root` type definition.
+
+- [#7767](https://github.com/yamada-ui/yamada-ui/pull/7767) [`96ba695`](https://github.com/yamada-ui/yamada-ui/commit/96ba6953329a4fac065ae82f1b21e7754af7be19) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactor component gradient values to use shorthand syntax.
+
+- [#7764](https://github.com/yamada-ui/yamada-ui/pull/7764) [`2eb128f`](https://github.com/yamada-ui/yamada-ui/commit/2eb128f9891c7df4f6db210b13aadb9e72955a51) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Support multiple gradients in a single gradient property.
+
+- [#7773](https://github.com/yamada-ui/yamada-ui/pull/7773) [`1dfb24f`](https://github.com/yamada-ui/yamada-ui/commit/1dfb24f1533cf763c6f1841a4d84af9d337d3c5e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add positioner props to Popover Content.
+
+- [#7749](https://github.com/yamada-ui/yamada-ui/pull/7749) [`ad3acd4`](https://github.com/yamada-ui/yamada-ui/commit/ad3acd4e16a2474c8e1480b324eb3802f0501730) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix components and styles in shadow DOM environments.
+
+- [#7760](https://github.com/yamada-ui/yamada-ui/pull/7760) [`4b54e88`](https://github.com/yamada-ui/yamada-ui/commit/4b54e88f15dbce90a11fcd17cf4a0629b455c8fc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add the `infinity` z-index token.
+
+## 2.2.4
+
+### Patch Changes
+
+- [#7727](https://github.com/yamada-ui/yamada-ui/pull/7727) [`3749d81`](https://github.com/yamada-ui/yamada-ui/commit/3749d816355d4bc9ae0f397cd735d6c16698d6e1) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7740](https://github.com/yamada-ui/yamada-ui/pull/7740) [`189178f`](https://github.com/yamada-ui/yamada-ui/commit/189178f615d4e542e83ee93388931f3699f0fb83) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7746](https://github.com/yamada-ui/yamada-ui/pull/7746) [`77354be`](https://github.com/yamada-ui/yamada-ui/commit/77354bec8d9495b40d550b7a84c27fb36a7e239b) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7727](https://github.com/yamada-ui/yamada-ui/pull/7727) [`3749d81`](https://github.com/yamada-ui/yamada-ui/commit/3749d816355d4bc9ae0f397cd735d6c16698d6e1) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7740](https://github.com/yamada-ui/yamada-ui/pull/7740) [`189178f`](https://github.com/yamada-ui/yamada-ui/commit/189178f615d4e542e83ee93388931f3699f0fb83) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7746](https://github.com/yamada-ui/yamada-ui/pull/7746) [`77354be`](https://github.com/yamada-ui/yamada-ui/commit/77354bec8d9495b40d550b7a84c27fb36a7e239b) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7727](https://github.com/yamada-ui/yamada-ui/pull/7727) [`3749d81`](https://github.com/yamada-ui/yamada-ui/commit/3749d816355d4bc9ae0f397cd735d6c16698d6e1) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7740](https://github.com/yamada-ui/yamada-ui/pull/7740) [`189178f`](https://github.com/yamada-ui/yamada-ui/commit/189178f615d4e542e83ee93388931f3699f0fb83) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7747](https://github.com/yamada-ui/yamada-ui/pull/7747) [`29c1dc4`](https://github.com/yamada-ui/yamada-ui/commit/29c1dc44353e6ad9fee2da36c8cddc5fd9df5315) Thanks [@dependabot](https://github.com/apps/dependabot)! - Remove unnecessary type assertions.
+
+- Updated dependencies [[`77354be`](https://github.com/yamada-ui/yamada-ui/commit/77354bec8d9495b40d550b7a84c27fb36a7e239b), [`29c1dc4`](https://github.com/yamada-ui/yamada-ui/commit/29c1dc44353e6ad9fee2da36c8cddc5fd9df5315)]:
+  - @yamada-ui/utils@2.1.5
+
+## 2.2.3
+
+### Patch Changes
+
+- [#7693](https://github.com/yamada-ui/yamada-ui/pull/7693) [`555ea71`](https://github.com/yamada-ui/yamada-ui/commit/555ea71bcc85af681d1dc5395a34f504b212b396) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed an issue where vendor-specific CSS properties were not correctly generated by style props.
+
+- [#7709](https://github.com/yamada-ui/yamada-ui/pull/7709) [`1a83738`](https://github.com/yamada-ui/yamada-ui/commit/1a8373868b84ed35cc3e96711b9bd2c5637a3ba1) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7695](https://github.com/yamada-ui/yamada-ui/pull/7695) [`407725c`](https://github.com/yamada-ui/yamada-ui/commit/407725c3fbfc31159dcd80de2507c26ac307b674) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7696](https://github.com/yamada-ui/yamada-ui/pull/7696) [`28e0acc`](https://github.com/yamada-ui/yamada-ui/commit/28e0accb75c66331a929ddf7120990e37c95e736) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7709](https://github.com/yamada-ui/yamada-ui/pull/7709) [`1a83738`](https://github.com/yamada-ui/yamada-ui/commit/1a8373868b84ed35cc3e96711b9bd2c5637a3ba1) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7695](https://github.com/yamada-ui/yamada-ui/pull/7695) [`407725c`](https://github.com/yamada-ui/yamada-ui/commit/407725c3fbfc31159dcd80de2507c26ac307b674) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7714](https://github.com/yamada-ui/yamada-ui/pull/7714) [`3da9bbb`](https://github.com/yamada-ui/yamada-ui/commit/3da9bbbd8fcc58e91658dd037a9183b9a10e9045) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Apply consistent curly style across published packages.
+
+- [#7691](https://github.com/yamada-ui/yamada-ui/pull/7691) [`67bbf53`](https://github.com/yamada-ui/yamada-ui/commit/67bbf53e8fdbaab3a3b51fcf0feb28dd358d5d0d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Avoid generating a fake font size token fallback for the default Icon size.
+
+- Updated dependencies [[`3da9bbb`](https://github.com/yamada-ui/yamada-ui/commit/3da9bbbd8fcc58e91658dd037a9183b9a10e9045)]:
+  - @yamada-ui/utils@2.1.4
+
+## 2.2.2
+
+### Patch Changes
+
+- [#7662](https://github.com/yamada-ui/yamada-ui/pull/7662) [`d5f41b7`](https://github.com/yamada-ui/yamada-ui/commit/d5f41b74f407c1716bcfc78ba9e91e568f0ef87c) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7686](https://github.com/yamada-ui/yamada-ui/pull/7686) [`4f53bca`](https://github.com/yamada-ui/yamada-ui/commit/4f53bca56a1ea69069dcb12cc0f981185161a0b1) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7662](https://github.com/yamada-ui/yamada-ui/pull/7662) [`d5f41b7`](https://github.com/yamada-ui/yamada-ui/commit/d5f41b74f407c1716bcfc78ba9e91e568f0ef87c) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7686](https://github.com/yamada-ui/yamada-ui/pull/7686) [`4f53bca`](https://github.com/yamada-ui/yamada-ui/commit/4f53bca56a1ea69069dcb12cc0f981185161a0b1) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7662](https://github.com/yamada-ui/yamada-ui/pull/7662) [`d5f41b7`](https://github.com/yamada-ui/yamada-ui/commit/d5f41b74f407c1716bcfc78ba9e91e568f0ef87c) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7686](https://github.com/yamada-ui/yamada-ui/pull/7686) [`4f53bca`](https://github.com/yamada-ui/yamada-ui/commit/4f53bca56a1ea69069dcb12cc0f981185161a0b1) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7554](https://github.com/yamada-ui/yamada-ui/pull/7554) [`1bda1b3`](https://github.com/yamada-ui/yamada-ui/commit/1bda1b3a44cce23bba58cce688c5f7b04df7d2ee) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed incorrect `@see` URL in JSDoc of `loading` components.
+
 ## 2.2.1
 
 ### Patch Changes

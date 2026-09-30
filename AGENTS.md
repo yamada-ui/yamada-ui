@@ -4,7 +4,7 @@ Yamada UI is a React UI component library built with CSS-in-JS (Emotion).
 
 ## Critical Rules
 
-- **Tests are required**: Add or update tests when a change introduces a new branch, contract, or regression path that is not already covered by existing tests (in the same package or in dependency units). Coverage delta — not the presence of a test in the diff — is the criterion.
+- **Do not add unnecessary tests**: Do not add or update tests just because files were changed. Tests are required only when the change introduces a new branch, contract, observable behavior, or regression path that is not already verified by existing tests in the same package or dependent units. If existing tests already cover the affected behavior, do not add unnecessary tests.
 - **Accessibility is required**: All components must support ARIA attributes, keyboard navigation, and screen readers. Report any concerns.
 - **Do not bundle multiple fixes**: If you encounter a separate issue while working on a fix, do not fix it in the same PR. Create a separate issue and submit a separate PR.
 - **Do not run format, lint, or typecheck unless explicitly asked**: Format, lint and typecheck are handled by lefthook on commit. However, run tests for the changed files locally to verify that the implementation works correctly.
@@ -24,8 +24,9 @@ When performing one of the actions below, read the linked rule first.
 - Creating PRs:
   - [PR Rules](.agents/rules/pr.md)
 - Reviewing PRs:
-  - [PR Merge Guide](.agents/references/pr-merge-guide.md)
-  - [Review Anti-Patterns](.agents/references/review-anti-patterns/index.md)
+  - [PR Merge Guidelines](.agents/references/pr-merge-guidelines.md)
+  - [PR Review Guidelines](.agents/references/pr-review-guidelines.md)
+  - [PR Review Anti-Patterns](.agents/references/pr-review-anti-patterns/index.md)
 
 When editing or reviewing files that match a pattern below, read the linked rule first.
 
@@ -34,6 +35,8 @@ When editing or reviewing files that match a pattern below, read the linked rule
   - `.claude/skills/**/*.md`
 - [Changesets](.agents/rules/changesets.md):
   - `packages/{cli,react,utils}/src/**/*.{ts,tsx}`
+  - `!packages/{cli,react,utils}/src/**/*.test.{ts,tsx}`
+  - `!packages/{cli,react,utils}/src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}`
   - `.changeset/*.md`
 - [Test Categorization](.agents/rules/test-categorization.md):
   - `packages/react/src/**/*.test.{ts,tsx}`

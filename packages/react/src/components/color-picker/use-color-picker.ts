@@ -228,9 +228,9 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       if (
         contains(fieldRef.current, ev.relatedTarget) ||
         contains(contentRef.current, ev.relatedTarget)
-      ) {
+      )
         ev.preventDefault()
-      } else {
+      else
         setValue((prev) => {
           if (!prev) return prev
 
@@ -244,7 +244,6 @@ export const useColorPicker = (props: UseColorPickerProps) => {
 
           return value
         })
-      }
     },
     [format, formatInput, pattern, setValue],
   )
@@ -255,11 +254,8 @@ export const useColorPicker = (props: UseColorPickerProps) => {
 
       onInputChangeProp?.(ev)
 
-      if (runIfFn(closeOnChange, ev)) {
-        onClose()
-      } else if (runIfFn(openOnChange, ev)) {
-        onOpen()
-      }
+      if (runIfFn(closeOnChange, ev)) onClose()
+      else if (runIfFn(openOnChange, ev)) onOpen()
 
       let inputValue = ev.target.value
 

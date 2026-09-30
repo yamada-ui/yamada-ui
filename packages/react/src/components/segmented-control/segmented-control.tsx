@@ -93,15 +93,13 @@ export const SegmentedControlRoot = withProvider(
       getRootProps,
     } = useSegmentedControl({ orientation: computedOrientation, ...rest })
     const cloneChildren = useMemo(() => {
-      if (children) {
-        return children
-      } else {
+      if (children) return children
+      else
         return items.map(({ label, ...rest }, index) => (
           <SegmentedControlItem key={index} {...rest}>
             {label}
           </SegmentedControlItem>
         ))
-      }
     }, [children, items])
     const context = useMemo(
       () => ({ id, name, disabled, orientation, readOnly, setValue, value }),

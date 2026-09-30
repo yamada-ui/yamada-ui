@@ -7,6 +7,7 @@ export const importConfig = defineConfig({
       files: sharedFiles,
       plugins: ["import"],
       rules: {
+        "import/consistent-type-specifier-style": "error",
         "import/extensions": [
           "error",
           "ignorePackages",
@@ -14,6 +15,7 @@ export const importConfig = defineConfig({
             sharedFiles.map((value) => [value.split(".").at(-1), "never"]),
           ),
         ],
+        "import/no-duplicates": "error",
       },
     },
     {
@@ -46,7 +48,10 @@ export const createNoRestrictedImportConfig = (
   defineConfig({
     overrides: (args.length
       ? args
-      : [[sharedFiles.map((file) => `src/${file}`)]]
+      : ([[sharedFiles.map((file) => `src/${file}`)]] as [
+          string[],
+          ...string[],
+        ][])
     ).map(([files, ...patterns]) => ({
       files,
       rules: {

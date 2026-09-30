@@ -37,13 +37,13 @@ function createMockConfig(overrides: Partial<Config> = {}): Config {
     cwd: "/tmp",
     format: { enabled: false },
     getSection: (value?: string) => {
-      if (value && ["components", "hooks", "providers"].includes(value)) {
+      if (value && ["components", "hooks", "providers"].includes(value))
         return {
           path: `./${value}`,
           resolvedPath: `/tmp/workspaces/ui/src/${value}`,
           section: value as Section,
         }
-      }
+
       return undefined
     },
     getSectionPath: (section: Section) => `./${section}`,
@@ -70,7 +70,7 @@ function createMockConfig(overrides: Partial<Config> = {}): Config {
       },
     },
     ...overrides,
-  } as Config
+  }
 }
 
 describe("transformContent", () => {
@@ -86,6 +86,31 @@ describe("transformContent", () => {
     const content = `import { useHook } from "@yamada-ui/react/hooks/use-hook"\n`
     const result = transformContent("components", content, config, ["use-hook"])
     expect(result).toContain("../../hooks/use-hook")
+  })
+
+  test("should transform cross-section imports with custom nested paths", () => {
+    const config = createMockConfig({
+      getSection: (value?: string) => {
+        if (value === "components")
+          return {
+            path: "./components/primitive",
+            resolvedPath: "/tmp/workspaces/ui/src/components/primitive",
+            section: "components",
+          }
+        if (value === "hooks")
+          return {
+            path: "./components/hooks",
+            resolvedPath: "/tmp/workspaces/ui/src/components/hooks",
+            section: "hooks",
+          }
+        return undefined
+      },
+    })
+    const content = `import { useValue } from "../../hooks/use-value"\n`
+    const result = transformContent("components", content, config, [
+      "use-value",
+    ])
+    expect(result).toContain("../../hooks/use-value")
   })
 
   test("should transform relative imports depth 1", () => {
@@ -106,7 +131,7 @@ describe("transformContent", () => {
     const config = createMockConfig()
     const content = `import { useHook } from "../../hooks/use-hook"\n`
     const result = transformContent("components", content, config, ["use-hook"])
-    expect(result).toContain("use-hook")
+    expect(result).toContain("../../hooks/use-hook")
   })
 
   test("should replace ungenerated deep relative import with package import", () => {
@@ -342,10 +367,10 @@ describe("fetchRegistries", () => {
   test("should fetch dependencies when config has dependencies enabled", async () => {
     const config = createMockConfig({
       components: { dependencies: true },
-    } as Partial<Config>)
+    })
 
     mockFetch.mockImplementation((url: string) => {
-      if (url.includes("button.json")) {
+      if (url.includes("button.json"))
         return Promise.resolve({
           json: () =>
             Promise.resolve({
@@ -359,7 +384,7 @@ describe("fetchRegistries", () => {
             }),
           ok: true,
         })
-      }
+
       return Promise.resolve({
         json: () =>
           Promise.resolve({
@@ -381,7 +406,7 @@ describe("fetchRegistries", () => {
     const config = createMockConfig()
 
     mockFetch.mockImplementation((url: string) => {
-      if (url.includes("button.json")) {
+      if (url.includes("button.json"))
         return Promise.resolve({
           json: () =>
             Promise.resolve({
@@ -395,7 +420,7 @@ describe("fetchRegistries", () => {
             }),
           ok: true,
         })
-      }
+
       return Promise.resolve({
         json: () =>
           Promise.resolve({

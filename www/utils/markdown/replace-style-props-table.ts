@@ -33,22 +33,16 @@ function createColumns(
     const property = prop.startsWith("--") ? prop : toKebabCase(prop)
     const href = isObject(docs) ? docs[property]?.see : undefined
 
-    if (href) {
-      value = `[\`${property}\`](${href})`
-    } else {
-      value = `\`${property}\``
-    }
+    if (href) value = `[\`${property}\`](${href})`
+    else value = `\`${property}\``
   } else if (properties) {
     value = properties
       .map((property) => {
         property = property.startsWith("--") ? property : toKebabCase(property)
         const href = isObject(docs) ? docs[property]?.see : undefined
 
-        if (href) {
-          return `[\`${property}\`](${href})`
-        } else {
-          return `\`${property}\``
-        }
+        if (href) return `[\`${property}\`](${href})`
+        else return `\`${property}\``
       })
       .join(", ")
   }
@@ -65,14 +59,13 @@ function createRows(atRule: boolean) {
         return Object.entries(data).flatMap(([prop, config]) => {
           const rows = [[`\`${prop}\``, ...createColumns(prop, config)]]
 
-          if (config.shorthands) {
+          if (config.shorthands)
             config.shorthands.forEach((shorthandProp) => {
               rows.push([
                 `\`${shorthandProp}\``,
                 ...createColumns(prop, config),
               ])
             })
-          }
 
           return rows
         })

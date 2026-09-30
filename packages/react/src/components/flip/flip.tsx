@@ -147,11 +147,10 @@ export const Flip = withProvider(
       if (
         from.offsetWidth !== to.offsetWidth ||
         from.offsetHeight !== to.offsetHeight
-      ) {
+      )
         console.warn(
           `Flip: "from" element (width: ${from.offsetWidth}px, height: ${from.offsetHeight}px) does not match "to" element (width: ${to.offsetWidth}px, height: ${to.offsetHeight}px). Please ensure both elements have the same dimensions.`,
         )
-      }
 
       setRect({ height: from.offsetHeight, width: from.offsetWidth })
     }, [fromRef, toRef])

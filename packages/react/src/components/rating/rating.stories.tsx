@@ -5,12 +5,12 @@ import { Rating } from "."
 import { COLOR_SCHEMES } from "../../utils"
 import { Field } from "../field"
 import {
-  AngryIcon,
-  FrownIcon,
+  FaceAngryIcon,
+  FaceGrinningIcon,
+  FaceNeutralIcon,
+  FaceSlightlyFrowningIcon,
+  FaceSlightlySmilingIcon,
   GhostIcon,
-  LaughIcon,
-  SmileIcon,
-  SmilePlusIcon,
 } from "../icon"
 
 type Story = StoryFn<typeof Rating>
@@ -133,19 +133,19 @@ export const CustomIcon: Story = () => {
   const getIcon = (value: number) => {
     switch (value) {
       case 1:
-        return <AngryIcon />
+        return <FaceAngryIcon />
 
       case 2:
-        return <FrownIcon />
+        return <FaceSlightlyFrowningIcon />
 
       case 3:
-        return <SmileIcon />
+        return <FaceNeutralIcon />
 
       case 4:
-        return <LaughIcon />
+        return <FaceSlightlySmilingIcon />
 
       case 5:
-        return <SmilePlusIcon />
+        return <FaceGrinningIcon />
 
       default:
         return null

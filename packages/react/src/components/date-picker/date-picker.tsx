@@ -242,7 +242,7 @@ const DatePickerField = withContext<"div", DatePickerFieldProps>(
 )({ "data-group-propagate": "" }, ({ children, ...rest }) => {
   const { range, separator, getInputProps, inputProps } = useComponentContext()
   const computedChildren = useMemo(() => {
-    if (range) {
+    if (range)
       return (
         <>
           <DatePickerAdjustInput
@@ -254,14 +254,13 @@ const DatePickerField = withContext<"div", DatePickerFieldProps>(
           />
         </>
       )
-    } else {
+    else
       return (
         <>
           {children}
           <DatePickerInput {...getInputProps(inputProps)} />
         </>
       )
-    }
   }, [children, getInputProps, inputProps, range, separator])
 
   return {

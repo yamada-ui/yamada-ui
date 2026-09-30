@@ -65,7 +65,7 @@ export const Keyframes = () => {
                     bg="green"
                     bgImage={
                       token === "bg-position"
-                        ? `linear-gradient(
+                        ? `linear(
                       45deg,
                       {stripe-color} 25%,
                       transparent 25%,

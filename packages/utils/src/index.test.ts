@@ -1,3 +1,4 @@
+import type { Path, Primitive } from "./index.types"
 import * as utils from "."
 
 describe("index", () => {
@@ -14,5 +15,28 @@ describe("index", () => {
     expect(typeof utils.omitObject).toBe("function")
     expect(typeof utils.isNumber).toBe("function")
     expect(typeof utils.calc).toBe("function")
+  })
+
+  test("should include array and object keys in Path", () => {
+    expectTypeOf<
+      Path<{
+        array: [0, 0]
+        object: { value: 0 }
+      }>
+    >().toEqualTypeOf<"array" | "object" | "object.value" | `array.${number}`>()
+  })
+
+  test("should include Date and Function in Primitive", () => {
+    expectTypeOf<Primitive>().toEqualTypeOf<
+      | bigint
+      | boolean
+      | Date
+      | Function
+      | null
+      | number
+      | string
+      | symbol
+      | undefined
+    >()
   })
 })

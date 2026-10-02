@@ -1,5 +1,18 @@
 # @yamada-ui/cli
 
+## 2.1.14
+
+### Patch Changes
+
+- [#7835](https://github.com/yamada-ui/yamada-ui/pull/7835) [`af99519`](https://github.com/yamada-ui/yamada-ui/commit/af99519fd103f3d064ce35452e6dc493ea151fca) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7851](https://github.com/yamada-ui/yamada-ui/pull/7851) [`bb4212f`](https://github.com/yamada-ui/yamada-ui/commit/bb4212f989063367960f72bd5d9456dbd3b142b2) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7852](https://github.com/yamada-ui/yamada-ui/pull/7852) [`9712f9f`](https://github.com/yamada-ui/yamada-ui/commit/9712f9fc47f257d4e6ffbcfb085359a9b0babf78) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- Updated dependencies [[`564930f`](https://github.com/yamada-ui/yamada-ui/commit/564930fcf5a2d1edd3370efeec26ba45ea35ae5c)]:
+  - @yamada-ui/utils@2.1.7
+
 ## 2.1.13
 
 ### Patch Changes

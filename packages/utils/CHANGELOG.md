@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 2.1.7
+
+### Patch Changes
+
+- [#7869](https://github.com/yamada-ui/yamada-ui/pull/7869) [`564930f`](https://github.com/yamada-ui/yamada-ui/commit/564930fcf5a2d1edd3370efeec26ba45ea35ae5c) Thanks [@taroj1205](https://github.com/taroj1205)! - Infer shape callback parameters from the callable arm of ActiveShape and share the extraction helper as FunctionOf so registry-copied chart sources typecheck under TypeScript 5.
+
 ## 2.1.6
 
 ### Patch Changes

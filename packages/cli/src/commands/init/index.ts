@@ -44,6 +44,7 @@ import {
 interface Options {
   config: string
   cwd: string
+  headless: boolean
   jsx: boolean
   overwrite: boolean
   yes: boolean
@@ -78,12 +79,14 @@ export const init = new Command("init")
   .option("--no-format", "do not use Prettier.")
   .option("-l, --lint", "use ESLint.")
   .option("--no-lint", "do not use ESLint.")
+  .option("--headless", "generate the component styles empty.", false)
   .option("--outdir <path>", "output directory path.")
   .action(async function ({
     src,
     config: configPath,
     cwd,
     format,
+    headless,
     install,
     jsx,
     lint,
@@ -186,6 +189,7 @@ export const init = new Command("init")
 
       if (monorepo) config.monorepo = monorepo
       if (jsx) config.jsx = jsx
+      if (headless) config.components = { ...config.components, headless }
 
       config.path = outdir
       config.format = { enabled: format }

@@ -48,7 +48,7 @@ export interface SegmentedControlRootProps<Y extends string = string>
   /**
    * Props for the item component.
    */
-  itemProps?: SegmentedControlItemProps
+  itemProps?: Omit<SegmentedControlItemProps, "value">
 }
 
 const {

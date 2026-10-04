@@ -2623,7 +2623,7 @@ export interface StyleProps {
   /**
    * ### container
    *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   * Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2025-08-14
@@ -5677,7 +5677,7 @@ export interface StyleProps {
   /**
    * ### container
    *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   * Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2025-08-14
@@ -5689,7 +5689,7 @@ export interface StyleProps {
   /**
    * ### container-name
    *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   * Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2025-08-14
@@ -5703,7 +5703,7 @@ export interface StyleProps {
   /**
    * ### container-type
    *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   * Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2025-08-14
@@ -6362,7 +6362,9 @@ export interface StyleProps {
   /**
    * ### flow-tolerance
    *
-   * The CSS `flow-tolerance` property.
+   * The <code>display: grid-lanes</code> and <code>display: inline-grid-lanes</code> CSS declarations create a layout where items are tightly packed in parallel lanes. Items are placed one by one in the lane that has the most available space. Also known as masonry.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-grid-3/#propdef-flow-tolerance
    *
@@ -8896,7 +8898,8 @@ export interface StyleProps {
    *
    * The <code>overflow-anchor</code> CSS property sets an element as a possible scroll anchor, reducing unintended scrolling when document changes occur above the current scrollport. This is enabled by default where supported.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2026-09-14
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-anchor
    */
@@ -9406,7 +9409,8 @@ export interface StyleProps {
    *
    * The <code>paint-order</code> CSS property sets the z-order of strokes, fills, and (in SVG content) markers. For example, <code>paint-order: markers stroke fill;</code> draws the markers, then stroke on top of markers, then fill on top of both markers and stroke.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-09-22
    * @newly_available_date 2024-03-22
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/paint-order
@@ -12455,7 +12459,8 @@ export interface StyleProps {
    *
    * The <code>white-space-collapse</code> CSS property sets whether new line characters are shown as line breaks, and whether multiple consecutive spaces are all displayed or combined.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-09-19
    * @newly_available_date 2024-03-19
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space-collapse

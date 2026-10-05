@@ -86,7 +86,7 @@
     "gen:icons": "tsx scripts/generate/icons",
     "gen:props": "tsx scripts/generate/props",
     "gen:registries": "tsx scripts/generate/registries",
-    "gen:tokens": "pnpm -C ../cli dev tokens src/theme/index.ts --internal -fl -o src/core/generated-theme-tokens.types.ts",
+    "gen:tokens": "pnpm -C ../cli dev tokens src/theme/index.ts --internal -fl -o src/core/generated-theme-tokens.type.ts",
     "notification:release": "tsx scripts/notification/release",
     "prepack": "clean-package",
     "postpack": "clean-package restore"

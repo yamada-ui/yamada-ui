@@ -1,7 +1,7 @@
 "use client"
 
 import type { Dict } from "../../utils"
-import type { HTMLMotionProps, MotionStyledComponent } from "./index.types"
+import type { HTMLMotionProps, MotionStyledComponent } from "./index.type"
 import { motion } from "motion/react"
 import { useMemo } from "react"
 import { styled, useSystem } from "../../core"

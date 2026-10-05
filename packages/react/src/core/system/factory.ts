@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import type { As, DOMElement, StyledComponent } from "../components"
 import type { CSSModifierObject, CSSPropObject } from "../css"
-import type { ComponentStyle, ThemeProps } from "./index.types"
+import type { ComponentStyle, ThemeProps } from "./index.type"
 import type { StyledOptions } from "./styled"
 import { createStyled } from "./styled"
 

@@ -324,9 +324,9 @@ export const tokens = new Command("tokens")
       } else if (inputPath.includes("/")) {
         const dirPath = inputPath.split("/").slice(0, -1).join("/")
 
-        outPath = path.join(dirPath, "index.types.ts")
+        outPath = path.join(dirPath, "index.type.ts")
       } else {
-        outPath = path.join(cwd, "index.types.ts")
+        outPath = path.join(cwd, "index.type.ts")
       }
 
       const { config: themeConfig, theme } = await getTheme(inputPath, cwd)

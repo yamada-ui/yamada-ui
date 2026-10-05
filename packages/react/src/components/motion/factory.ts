@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import type { DOMElement, StyledOptions } from "../../core"
-import type { MotionStyledComponent } from "./index.types"
+import type { MotionStyledComponent } from "./index.type"
 import { motion as originalMotion } from "motion/react"
 import { styled } from "../../core"
 

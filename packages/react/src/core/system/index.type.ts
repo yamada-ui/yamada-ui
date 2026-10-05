@@ -10,7 +10,7 @@ import type {
   StyleValue,
   StyleValueWithCondition,
 } from "../css"
-import type { GeneratedThemeTokens } from "../generated-theme-tokens.types"
+import type { GeneratedThemeTokens } from "../generated-theme-tokens.type"
 import type { Breakpoints } from "./breakpoint"
 import type { Layers } from "./layer"
 

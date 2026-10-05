@@ -1,6 +1,6 @@
 "use client"
 
-import type { ColorMode } from "./index.types"
+import type { ColorMode } from "./index.type"
 import { useCallback, useEffect, useState } from "react"
 import { fnAll, useCallbackRef, useSafeLayoutEffect } from "../../utils"
 import { useEnvironment } from "./environment-provider"

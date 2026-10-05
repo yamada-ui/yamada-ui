@@ -10,7 +10,7 @@ import type {
   ComponentStyle,
   System,
   UsageTheme,
-} from "./index.types"
+} from "./index.type"
 import { withEmotionCache } from "@emotion/react"
 import { serializeStyles } from "@emotion/serialize"
 import { useInsertionEffectAlwaysWithSyncFallback } from "@emotion/use-insertion-effect-with-fallbacks"

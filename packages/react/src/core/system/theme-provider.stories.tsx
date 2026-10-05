@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import type { ThemeScheme } from "./index.types"
+import type { ThemeScheme } from "./index.type"
 import { useMemo } from "react"
 import { Badge } from "../../components/badge"
 import { Button } from "../../components/button"

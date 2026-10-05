@@ -1,7 +1,7 @@
 import type { Dict } from "../../utils"
 import type { Breakpoints, System, UsageTheme } from "../system"
 import type { StyleConfig } from "./config"
-import type { CSSObjectOrFunction } from "./index.types"
+import type { CSSObjectOrFunction } from "./index.type"
 import type { StyleProperty, VariableLengthProperty } from "./styles"
 import type { TransformOptions } from "./utils"
 import {

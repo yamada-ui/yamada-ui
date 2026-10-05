@@ -115,10 +115,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
             flexDirection="column"
             items={items}
             w="full"
-            itemProps={{
-              variant: { base: "ghost", _current: "solid" },
-              justifyContent: "flex-start",
-            }}
+            itemProps={{ justifyContent: "flex-start" }}
             onClose={onClose}
           />
 

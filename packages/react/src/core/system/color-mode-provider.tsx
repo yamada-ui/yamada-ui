@@ -1,7 +1,7 @@
 "use client"
 
 import type { FC, PropsWithChildren } from "react"
-import type { ColorMode, ColorModeWithSystem, ThemeConfig } from "./index.types"
+import type { ColorMode, ColorModeWithSystem, ThemeConfig } from "./index.type"
 import type { Storage } from "./storage-manager"
 import {
   createContext,

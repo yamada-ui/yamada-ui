@@ -16,25 +16,33 @@ export function NavMenu({ items, itemProps, onClose, ...rest }: NavMenuProps) {
 
   return (
     <ButtonGroup.Root as="nav" size="sm" variant="ghost" gap="xs" {...rest}>
-      {items.map(({ href, label }) => (
-        <NextLinkButton
-          key={href}
-          href={href}
-          aria-current={pathname.startsWith(href) ? "page" : undefined}
-          external={href.startsWith("https://")}
-          fontWeight="normal"
-          {...itemProps}
-          onClick={handlerAll(itemProps?.onClick, () => {
-            if (pathname !== href) return
+      {items.map(({ href, label }) => {
+        const external = href.startsWith("https://")
+        const current =
+          !external &&
+          pathname.startsWith(href.split("/").slice(0, 2).join("/"))
 
-            onClose?.()
+        return (
+          <NextLinkButton
+            key={href}
+            href={href}
+            variant={{ base: "ghost", _current: "solid" }}
+            aria-current={current ? "page" : undefined}
+            external={external}
+            fontWeight="normal"
+            {...itemProps}
+            onClick={handlerAll(itemProps?.onClick, () => {
+              if (pathname !== href) return
 
-            window.scrollTo({ behavior: "smooth", top: 0 })
-          })}
-        >
-          {label}
-        </NextLinkButton>
-      ))}
+              onClose?.()
+
+              window.scrollTo({ behavior: "smooth", top: 0 })
+            })}
+          >
+            {label}
+          </NextLinkButton>
+        )
+      })}
     </ButtonGroup.Root>
   )
 }

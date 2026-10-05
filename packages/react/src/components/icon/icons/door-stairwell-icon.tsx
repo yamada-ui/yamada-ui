@@ -2,14 +2,14 @@
 
 import type { Component } from "../../../core"
 import type { IconProps } from "../icon"
-import { Album as OriginalAlbumIcon } from "lucide-react"
+import { DoorStairwell as OriginalDoorStairwellIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
- * `AlbumIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `DoorStairwellIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const AlbumIcon = component(Icon)({
-  as: OriginalAlbumIcon,
+export const DoorStairwellIcon = component(Icon)({
+  as: OriginalDoorStairwellIcon,
 }) as Component<"svg", IconProps>

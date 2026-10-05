@@ -23,7 +23,7 @@ import type {
   HTMLStyledProps,
   ThemeProps,
 } from "../../core"
-import type { Dict, Merge } from "../../utils"
+import type { Dict, FunctionOf, Merge } from "../../utils"
 import type {
   ChartActiveDot,
   ChartDot,
@@ -569,7 +569,7 @@ export const ChartPie = withContext<"svg", ChartPieProps>((props) => {
     sectorProps,
     ...rest
   } = mergeProps(pieProps, props)()
-  const shape: UseChartPieProps["shape"] = useCallback(
+  const shape = useCallback<FunctionOf<UseChartPieProps["shape"]>>(
     (props, index) => {
       if (isNumber(activeIndex)) props.isActive = index === activeIndex
 
@@ -1267,7 +1267,7 @@ export const ChartRadial = withContext<"svg", ChartRadialProps>(
     const labelProps = useSlotComponentProps({}, "labelList")
     const backgroundProps = useSlotComponentProps({}, "radialBackground")
     const css = useMemo(() => getCSS(system, theme), [system, theme])
-    const shape: UseChartRadialProps<Y>["shape"] = useCallback(
+    const shape = useCallback<FunctionOf<UseChartRadialProps<Y>["shape"]>>(
       (props) => {
         const color = rest.fill ?? rest.color
 

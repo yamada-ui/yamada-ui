@@ -1,5 +1,48 @@
 # @yamada-ui/react
 
+## 2.2.9
+
+### Patch Changes
+
+- [#7834](https://github.com/yamada-ui/yamada-ui/pull/7834) [`0adff41`](https://github.com/yamada-ui/yamada-ui/commit/0adff41ae1983c574f914f4dd6bd40f26be757bb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7851](https://github.com/yamada-ui/yamada-ui/pull/7851) [`bb4212f`](https://github.com/yamada-ui/yamada-ui/commit/bb4212f989063367960f72bd5d9456dbd3b142b2) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7878](https://github.com/yamada-ui/yamada-ui/pull/7878) [`c92698b`](https://github.com/yamada-ui/yamada-ui/commit/c92698b586566d1cc9d1d9815352e73a46c00789) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7834](https://github.com/yamada-ui/yamada-ui/pull/7834) [`0adff41`](https://github.com/yamada-ui/yamada-ui/commit/0adff41ae1983c574f914f4dd6bd40f26be757bb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7851](https://github.com/yamada-ui/yamada-ui/pull/7851) [`bb4212f`](https://github.com/yamada-ui/yamada-ui/commit/bb4212f989063367960f72bd5d9456dbd3b142b2) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7853](https://github.com/yamada-ui/yamada-ui/pull/7853) [`c2374da`](https://github.com/yamada-ui/yamada-ui/commit/c2374da89aa1a22cbbb2cf033c6a7179c7b77c8b) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7878](https://github.com/yamada-ui/yamada-ui/pull/7878) [`c92698b`](https://github.com/yamada-ui/yamada-ui/commit/c92698b586566d1cc9d1d9815352e73a46c00789) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7834](https://github.com/yamada-ui/yamada-ui/pull/7834) [`0adff41`](https://github.com/yamada-ui/yamada-ui/commit/0adff41ae1983c574f914f4dd6bd40f26be757bb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7851](https://github.com/yamada-ui/yamada-ui/pull/7851) [`bb4212f`](https://github.com/yamada-ui/yamada-ui/commit/bb4212f989063367960f72bd5d9456dbd3b142b2) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7878](https://github.com/yamada-ui/yamada-ui/pull/7878) [`c92698b`](https://github.com/yamada-ui/yamada-ui/commit/c92698b586566d1cc9d1d9815352e73a46c00789) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7874](https://github.com/yamada-ui/yamada-ui/pull/7874) [`1917766`](https://github.com/yamada-ui/yamada-ui/commit/1917766c4df9491f8618f62d5637969cf63073b6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Standardize type definition filenames on `*.type.ts`, including the CLI token generator's default output; rename existing generated files and update references, or pass `--out` with the previous filename to preserve it.
+
+- [#7864](https://github.com/yamada-ui/yamada-ui/pull/7864) [`ab76410`](https://github.com/yamada-ui/yamada-ui/commit/ab76410d476a5dfe15653438d72799c0dd68856e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix `List` item and icon customization by forwarding `itemProps` and `iconProps` from the root and supporting per-item `iconProps` overrides.
+
+- [#7869](https://github.com/yamada-ui/yamada-ui/pull/7869) [`564930f`](https://github.com/yamada-ui/yamada-ui/commit/564930fcf5a2d1edd3370efeec26ba45ea35ae5c) Thanks [@taroj1205](https://github.com/taroj1205)! - Infer shape callback parameters from the callable arm of ActiveShape and share the extraction helper as FunctionOf so registry-copied chart sources typecheck under TypeScript 5.
+
+- [#7858](https://github.com/yamada-ui/yamada-ui/pull/7858) [`b6828a0`](https://github.com/yamada-ui/yamada-ui/commit/b6828a0a568614703f4185c19773bdd8dc3c64ee) Thanks [@taroj1205](https://github.com/taroj1205)! - Fix Emotion SSR unsafe-selector warning emitted by menu separators by replacing `:first-child` with an equivalent `:not()` sibling selector.
+
+- [#7866](https://github.com/yamada-ui/yamada-ui/pull/7866) [`9f2a014`](https://github.com/yamada-ui/yamada-ui/commit/9f2a0145d194f80b5e71acf2410f3ab09596afc8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Remove the unnecessary rightmost border from `Table` and `NativeTable` when `withColumnBorders` is enabled.
+
+- [#7877](https://github.com/yamada-ui/yamada-ui/pull/7877) [`5234ea3`](https://github.com/yamada-ui/yamada-ui/commit/5234ea352a41422ddf5cfe2485a4a90a0f854e3b) Thanks [@taroj1205](https://github.com/taroj1205)! - Remove `any` from the radial shape callback in `useChartRadial` so its props infer from `ActiveShape`.
+
+- [#7850](https://github.com/yamada-ui/yamada-ui/pull/7850) [`7f5a003`](https://github.com/yamada-ui/yamada-ui/commit/7f5a00365488ffd4ab59dcf07b26b8130f6d9de0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Prevent `Float` and `Indicator` from intercepting pointer events on interactive children.
+
+- [#7862](https://github.com/yamada-ui/yamada-ui/pull/7862) [`a95cf7e`](https://github.com/yamada-ui/yamada-ui/commit/a95cf7ec0e52bced993052e40e9edce631497f84) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Omit `value` from `SegmentedControl`'s `itemProps` so items can be customized without specifying an unnecessary value.
+
+- Updated dependencies [[`1917766`](https://github.com/yamada-ui/yamada-ui/commit/1917766c4df9491f8618f62d5637969cf63073b6), [`564930f`](https://github.com/yamada-ui/yamada-ui/commit/564930fcf5a2d1edd3370efeec26ba45ea35ae5c)]:
+  - @yamada-ui/utils@2.1.7
+
 ## 2.2.8
 
 ### Patch Changes

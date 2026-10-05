@@ -1,5 +1,5 @@
 import type { Dict } from "../../utils"
-import type { LayerScheme, LayersConfig } from "./index.types"
+import type { LayerScheme, LayersConfig } from "./index.type"
 import { runIfFn } from "../../utils"
 import { DEFAULT_LAYERS } from "../constant"
 

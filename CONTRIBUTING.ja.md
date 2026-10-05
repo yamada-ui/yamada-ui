@@ -14,7 +14,7 @@
 
 2. あなたのローカルにクローンします。
 
-```sh
+```bash
 git clone https://github.com/<your_github_username>/yamada-ui.git
 
 cd yamada-ui

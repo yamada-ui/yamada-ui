@@ -17,7 +17,7 @@ import type {
   DefineThemeTokens,
   ThemeConfig,
   UsageTheme,
-} from "./index.types"
+} from "./index.type"
 
 interface DefineConfig {
   (value: ThemeConfig): ThemeConfig

@@ -6,14 +6,12 @@ import { useCallback, useState } from "react"
 import { dataAttr, isTouchDevice, mergeRefs } from "../../utils"
 import { useEventListeners } from "../use-event-listener"
 
-type Props<Y extends HTMLElement = HTMLElement> = Omit<
-  HTMLAttributes<Y>,
-  "ref" | "size" | keyof StyledProps
->
+export type UseClickableElementProps<Y extends HTMLElement = HTMLElement> =
+  Omit<HTMLAttributes<Y>, "ref" | "size" | keyof StyledProps>
 
 export type UseClickableProps<
   Y extends HTMLElement = HTMLElement,
-  M extends Props<Y> = Props<Y>,
+  M extends UseClickableElementProps<Y> = UseClickableElementProps<Y>,
 > = M & {
   /**
    * Whether or not trigger click on pressing `Enter`.
@@ -68,7 +66,7 @@ const isValidElement = (
 
 export const useClickable = <
   Y extends HTMLElement = HTMLElement,
-  M extends Props<Y> = Props<Y>,
+  M extends UseClickableElementProps<Y> = UseClickableElementProps<Y>,
 >(
   {
     ref,

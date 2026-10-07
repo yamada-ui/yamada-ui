@@ -1,12 +1,12 @@
 import type { FC } from "react"
+import type * as Utils from "../../utils"
 import { useContext } from "react"
 import { act, render, renderHook, screen, waitFor } from "#test"
-import * as utils from "../../utils"
-import { noop } from "../../utils"
+import { createdDom, noop } from "../../utils"
 import { I18nContext, I18nProvider, useI18n } from "./i18n-provider"
 
 vi.mock("../../utils", async (importOriginal) => {
-  const actual = await importOriginal<typeof utils>()
+  const actual = await importOriginal<typeof Utils>()
 
   return { ...actual, createdDom: vi.fn(() => true) }
 })
@@ -387,7 +387,7 @@ describe("I18nProvider locale resolution", () => {
   const intl = { "de-DE": {}, "en-US": {}, "ja-JP": {} }
 
   afterEach(() => {
-    vi.mocked(utils.createdDom).mockReturnValue(true)
+    vi.mocked(createdDom).mockReturnValue(true)
     vi.restoreAllMocks()
   })
 
@@ -411,8 +411,8 @@ describe("I18nProvider locale resolution", () => {
     ["fr-FR", false, "de-DE"],
   ])(
     "resolves an unknown locale with fallback %s when createdDom is %s",
-    (fallbackLocale, createdDom, expected) => {
-      vi.mocked(utils.createdDom).mockReturnValue(createdDom)
+    (fallbackLocale, mounted, expected) => {
+      vi.mocked(createdDom).mockReturnValue(mounted)
 
       expect(renderLocale({ fallbackLocale, intl, locale: "xx" })).toBe(
         expected,
@@ -421,7 +421,7 @@ describe("I18nProvider locale resolution", () => {
   )
 
   test("uses the fallback locale without a DOM when uncontrolled", () => {
-    vi.mocked(utils.createdDom).mockReturnValue(false)
+    vi.mocked(createdDom).mockReturnValue(false)
 
     expect(renderLocale({ fallbackLocale: "en-US", intl })).toBe("en-US")
   })

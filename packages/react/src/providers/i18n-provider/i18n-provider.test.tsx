@@ -411,8 +411,8 @@ describe("I18nProvider locale resolution", () => {
     ["fr-FR", false, "de-DE"],
   ])(
     "resolves an unknown locale with fallback %s when createdDom is %s",
-    (fallbackLocale, mounted, expected) => {
-      vi.mocked(createdDom).mockReturnValue(mounted)
+    (fallbackLocale, hasDom, expected) => {
+      vi.mocked(createdDom).mockReturnValue(hasDom)
 
       expect(renderLocale({ fallbackLocale, intl, locale: "xx" })).toBe(
         expected,

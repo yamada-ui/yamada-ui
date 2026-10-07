@@ -17,6 +17,7 @@ export function Examples() {
       as="section"
       columnCount="auto"
       columnWidth="calc(sm + {space} * 2)"
+      contain="layout"
       gap="{space}"
     >
       <PaymentMethod />

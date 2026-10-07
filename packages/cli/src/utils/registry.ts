@@ -10,6 +10,7 @@ import type {
 import { merge } from "@yamada-ui/utils"
 import { HttpsProxyAgent } from "https-proxy-agent"
 import fetch from "node-fetch"
+import { existsSync } from "node:fs"
 import { readdir, readFile } from "node:fs/promises"
 import path from "node:path"
 import c from "picocolors"
@@ -213,7 +214,13 @@ export async function getGeneratedNameMap(
         return [
           section,
           dirents
-            .filter((dirent) => dirent.isDirectory())
+            .filter(
+              (dirent) =>
+                dirent.isDirectory() &&
+                existsSync(
+                  path.join(sectionPath, dirent.name, REGISTRY_FILE_NAME),
+                ),
+            )
             .map((dirent) => dirent.name),
         ]
       } catch {

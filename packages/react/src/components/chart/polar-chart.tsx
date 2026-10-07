@@ -70,6 +70,7 @@ import {
   getCSS,
   mergeProps,
   styled,
+  transforms,
   useSystem,
   useTheme,
   varAttr,
@@ -80,6 +81,7 @@ import {
   isFunction,
   isNumber,
   isObject,
+  replaceObject,
   runIfFn,
   splitObject,
 } from "../../utils"
@@ -456,7 +458,7 @@ export const PolarChart = withProvider(
     ...rest
   }) => ({
     "--active-dot-fill": varAttr(activeDotFill, "colors"),
-    "--active-dot-r": activeDotRadius,
+    "--active-dot-r": replaceObject(activeDotRadius, transforms.px),
     "--active-dot-stroke": varAttr(activeDotStroke, "colors"),
     "--active-dot-stroke-width": activeDotStrokeWidth,
     "--angle-axis-line-stroke": varAttr(angleAxisLineStroke, "colors"),
@@ -464,7 +466,7 @@ export const PolarChart = withProvider(
     "--angle-axis-text-color": varAttr(angleAxisTextColor, "colors"),
     "--angle-axis-text-fill": varAttr(angleAxisTextFill, "colors"),
     "--dot-fill": varAttr(dotFill, "colors"),
-    "--dot-r": dotRadius,
+    "--dot-r": replaceObject(dotRadius, transforms.px),
     "--dot-stroke": varAttr(dotStroke, "colors"),
     "--dot-stroke-width": dotStrokeWidth,
     "--grid-stroke": varAttr(gridStroke, "colors"),

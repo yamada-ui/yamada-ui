@@ -1,8 +1,32 @@
 import type { FC } from "react"
+import type * as Utils from "../../utils"
 import { useContext } from "react"
 import { act, render, renderHook, screen, waitFor } from "#test"
-import { noop } from "../../utils"
+import { createdDom, noop } from "../../utils"
 import { I18nContext, I18nProvider, useI18n } from "./i18n-provider"
+
+vi.mock("../../utils", async (importOriginal) => {
+  const actual = await importOriginal<typeof Utils>()
+
+  return { ...actual, createdDom: vi.fn(() => true) }
+})
+
+const LocaleText: FC = () => {
+  const { locale } = useI18n()
+
+  return <span data-testid="locale">{locale}</span>
+}
+
+const renderLocale = (props: Parameters<typeof I18nProvider>[0]) => {
+  render(
+    <I18nProvider {...props}>
+      <LocaleText />
+    </I18nProvider>,
+    { withProvider: false },
+  )
+
+  return screen.getByTestId("locale").textContent
+}
 
 describe("I18nProvider", () => {
   test("renders children", () => {
@@ -295,6 +319,36 @@ describe("I18nProvider", () => {
     expect(screen.getByTestId("result").textContent).toBe("Count is 5")
   })
 
+  test("translation resolves string replaceValues as paths", () => {
+    const customIntl = {
+      "en-US": {
+        closeButton: { Close: "Close" },
+        test: { "Press {label}": "Press {label}" },
+      },
+    }
+    const TestComponent: FC = () => {
+      const { t } = useI18n()
+
+      return (
+        <span data-testid="result">
+          {t(
+            "test.Press {label}" as any,
+            { label: "closeButton.Close" } as any,
+          )}
+        </span>
+      )
+    }
+
+    render(
+      <I18nProvider intl={customIntl} locale="en-US">
+        <TestComponent />
+      </I18nProvider>,
+      { withProvider: false },
+    )
+
+    expect(screen.getByTestId("result").textContent).toBe("Press Close")
+  })
+
   test("translation returns value when IntlMessageFormat throws", () => {
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
@@ -329,6 +383,69 @@ describe("I18nProvider", () => {
   })
 })
 
+describe("I18nProvider locale resolution", () => {
+  const intl = { "de-DE": {}, "en-US": {}, "ja-JP": {} }
+
+  afterEach(() => {
+    vi.mocked(createdDom).mockReturnValue(true)
+    vi.restoreAllMocks()
+  })
+
+  test.each([
+    ["ja-JP", undefined, "ja-JP"],
+    ["ja-XX", undefined, "ja-JP"],
+    ["!!", "en-US", "en-US"],
+  ])(
+    "uses the locale for browser language %s and fallback %s when uncontrolled",
+    (language, fallbackLocale, expected) => {
+      vi.spyOn(navigator, "language", "get").mockReturnValue(language)
+
+      expect(renderLocale({ fallbackLocale, intl })).toBe(expected)
+    },
+  )
+
+  test.each([
+    ["ja-XX", true, "ja-JP"],
+    ["ja-XX", false, "ja-JP"],
+    ["fr-FR", true, "de-DE"],
+    ["fr-FR", false, "de-DE"],
+  ])(
+    "resolves an unknown locale with fallback %s when createdDom is %s",
+    (fallbackLocale, hasDom, expected) => {
+      vi.mocked(createdDom).mockReturnValue(hasDom)
+
+      expect(renderLocale({ fallbackLocale, intl, locale: "xx" })).toBe(
+        expected,
+      )
+    },
+  )
+
+  test("uses the fallback locale without a DOM when uncontrolled", () => {
+    vi.mocked(createdDom).mockReturnValue(false)
+
+    expect(renderLocale({ fallbackLocale: "en-US", intl })).toBe("en-US")
+  })
+
+  test("uses the first locale when the fallback locale is invalid", () => {
+    expect(renderLocale({ fallbackLocale: "!!", intl, locale: "xx" })).toBe(
+      "de-DE",
+    )
+  })
+
+  test("uses the fallback locale when a locale is not supported", () => {
+    expect(
+      renderLocale({
+        intl: { "de-DE": {}, "en-US": {}, invalid_tag: {} },
+        locale: "invalid_tag",
+      }),
+    ).toBe("en-US")
+  })
+
+  test("uses the default messages when intl is empty", () => {
+    expect(renderLocale({ intl: {}, locale: "ja" })).toBe("ja-JP")
+  })
+})
+
 describe("useI18n", () => {
   test("returns translation function with key", () => {
     const { result } = renderHook(() => useI18n("closeButton"))
@@ -351,6 +468,14 @@ describe("useI18n", () => {
     const translated = result.current.t("nonexistent.path" as any)
 
     expect(translated).toBe("nonexistent.path")
+  })
+
+  test("translation with key resolves relative paths", () => {
+    const { result } = renderHook(() => useI18n("closeButton"), {
+      providerProps: { locale: "ja-JP" },
+    })
+
+    expect(result.current.t("Close" as any)).toBe("閉じる")
   })
 
   test("translation returns known value", () => {

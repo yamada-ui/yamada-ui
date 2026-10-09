@@ -1,5 +1,13 @@
 # @yamada-ui/cli
 
+## 2.1.15
+
+### Patch Changes
+
+- [#7885](https://github.com/yamada-ui/yamada-ui/pull/7885) [`96d378c`](https://github.com/yamada-ui/yamada-ui/commit/96d378cdca07228bc25842c90e0e7ad1fe1c74cc) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Exclude custom directories without a registry from generated component discovery.
+
+- [#7890](https://github.com/yamada-ui/yamada-ui/pull/7890) [`f934b79`](https://github.com/yamada-ui/yamada-ui/commit/f934b79389bedd30246e3ffb6868aedeebd4af1c) Thanks [@taroj1205](https://github.com/taroj1205)! - Add `react`, `react-dom`, and their types to the generated monorepo theme package so it resolves the same `@yamada-ui/react` instance as the ui package.
+
 ## 2.1.14
 
 ### Patch Changes

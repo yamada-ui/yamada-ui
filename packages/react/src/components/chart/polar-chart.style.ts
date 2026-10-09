@@ -100,7 +100,7 @@ export const polarChartStyle = defineComponentSlotStyle({
     },
     root: {
       "--active-dot-fill": "{radar-color}",
-      "--active-dot-r": "4",
+      "--active-dot-r": "4px",
       "--active-dot-stroke": "{radar-color}",
       "--active-dot-stroke-width": "0",
       "--angle-axis-line-stroke": "currentColor",
@@ -108,7 +108,7 @@ export const polarChartStyle = defineComponentSlotStyle({
       "--angle-axis-text-color": "colors.fg.muted",
       "--angle-axis-text-fill": "currentColor",
       "--dot-fill": "{radar-stroke}",
-      "--dot-r": "4",
+      "--dot-r": "4px",
       "--dot-stroke": "{radar-stroke}",
       "--dot-stroke-width": "0",
       "--grid-stroke": "colors.border",

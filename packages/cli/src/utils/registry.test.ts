@@ -485,21 +485,28 @@ describe("getGeneratedNameMap", () => {
     rmSync(tempDir, { force: true, recursive: true })
   })
 
-  test("should return generated component names by section", async () => {
-    const srcPath = path.join(tempDir, "src")
-    mkdirSync(path.join(srcPath, "components", "button"), { recursive: true })
-    mkdirSync(path.join(srcPath, "hooks", "use-toggle"), { recursive: true })
-    mkdirSync(path.join(srcPath, "providers"), { recursive: true })
+  test.each([
+    ["components", "button", "custom-button"],
+    ["hooks", "use-toggle", "use-custom"],
+    ["providers", "ui-provider", "query-client"],
+  ] as const)(
+    "should exclude custom directories in %s",
+    async (section, name, customName) => {
+      const srcPath = path.join(tempDir, "src")
+      const generatedPath = path.join(srcPath, section, name)
+      mkdirSync(generatedPath, { recursive: true })
+      writeFileSync(path.join(generatedPath, "registry.json"), "{}")
+      mkdirSync(path.join(srcPath, section, customName), { recursive: true })
 
-    const config = createMockConfig({
-      getSectionResolvedPath: (section: Section) => path.join(srcPath, section),
-    })
+      const config = createMockConfig({
+        getSectionResolvedPath: (section: Section) =>
+          path.join(srcPath, section),
+      })
 
-    const result = await getGeneratedNameMap(config)
-    expect(result.components).toContain("button")
-    expect(result.hooks).toContain("use-toggle")
-    expect(result.providers).toStrictEqual([])
-  })
+      const result = await getGeneratedNameMap(config)
+      expect(result[section]).toStrictEqual([name])
+    },
+  )
 
   test("should return empty arrays when sections don't exist", async () => {
     const config = createMockConfig({

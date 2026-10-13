@@ -6,7 +6,7 @@
   "engines": {
     "node": ">=24.14"
   },
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@12.4.2",
   "license": "MIT",
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
   "repository": {
@@ -84,10 +84,5 @@
     "typescript": "catalog:",
     "vitest": "catalog:",
     "wait-on": "^9.5.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "velite@0.3.1>sharp": "^0.35.5"
-    }
   }
 }

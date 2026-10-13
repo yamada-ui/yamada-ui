@@ -80,7 +80,6 @@ jobs:
           commit: "ci(changesets): updated packages"
           setupGitUser: false
         env:
-          NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create @dev release
@@ -89,7 +88,6 @@ jobs:
           git checkout ${{ github.ref_name }}
           pnpm release:dev
         env:
-          NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create @next release
@@ -98,7 +96,6 @@ jobs:
           git checkout ${{ github.ref_name }}
           pnpm release:next
         env:
-          NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   post_release:

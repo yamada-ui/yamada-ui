@@ -1,5 +1,20 @@
 # @yamada-ui/react
 
+## 2.2.11
+
+### Patch Changes
+
+- [#7894](https://github.com/yamada-ui/yamada-ui/pull/7894) [`74d3758`](https://github.com/yamada-ui/yamada-ui/commit/74d3758135841da737635bce77bd27136a4a3178) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7894](https://github.com/yamada-ui/yamada-ui/pull/7894) [`74d3758`](https://github.com/yamada-ui/yamada-ui/commit/74d3758135841da737635bce77bd27136a4a3178) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7894](https://github.com/yamada-ui/yamada-ui/pull/7894) [`74d3758`](https://github.com/yamada-ui/yamada-ui/commit/74d3758135841da737635bce77bd27136a4a3178) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7895](https://github.com/yamada-ui/yamada-ui/pull/7895) [`8f82f01`](https://github.com/yamada-ui/yamada-ui/commit/8f82f01aa27305bbd2506440217c8e9b2e7e73f4) Thanks [@dependabot](https://github.com/apps/dependabot)! - Add lazy initializer support for `Calendar` and `DatePicker` default values and months, and preserve initial dates for today highlighting and placeholders.
+
+- Updated dependencies [[`8f82f01`](https://github.com/yamada-ui/yamada-ui/commit/8f82f01aa27305bbd2506440217c8e9b2e7e73f4)]:
+  - @yamada-ui/utils@2.1.8
+
 ## 2.2.10
 
 ### Patch Changes

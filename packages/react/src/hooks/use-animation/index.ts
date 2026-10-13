@@ -5,7 +5,7 @@ import { useCallback, useRef, useState } from "react"
 import { animation, css, useSystem } from "../../core"
 import { isArray, isUndefined, runIfFn } from "../../utils"
 
-type CSSObject =
+export type UseAnimationProps =
   | Token<CSSAnimationObject, "animations">
   | Token<CSSAnimationObject, "animations">[]
 
@@ -14,24 +14,24 @@ type CSSObject =
  *
  * @see https://yamada-ui.com/docs/hooks/use-animation
  */
-export const useAnimation = (cssObj: CSSObject): string => {
+export const useAnimation = (arrayOrObj: UseAnimationProps): string => {
   const system = useSystem()
 
-  if (isArray(cssObj))
-    return cssObj.map((cssObj) => animation(cssObj, { css, system })).join(", ")
-  else return animation(cssObj, { css, system })
+  if (isArray(arrayOrObj))
+    return arrayOrObj.map((obj) => animation(obj, { css, system })).join(", ")
+  else return animation(arrayOrObj, { css, system })
 }
+
+export type UseDynamicAnimationProps =
+  | Token<CSSAnimationObject, "animations">[]
+  | { [key: string]: UseAnimationProps }
 
 /**
  * `useDynamicAnimation` is a custom hook used to switch animations.
  *
  * @see https://yamada-ui.com/docs/hooks/use-dynamic-animation
  */
-export const useDynamicAnimation = <
-  Y extends
-    | Token<CSSAnimationObject, "animations">[]
-    | { [key: string]: CSSObject },
->(
+export const useDynamicAnimation = <Y extends UseDynamicAnimationProps>(
   arrayOrObj: Y,
   init?: (keyof Y)[] | keyof Y,
 ): [

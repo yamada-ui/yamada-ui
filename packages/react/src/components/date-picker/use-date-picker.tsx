@@ -226,7 +226,7 @@ export const useDatePicker = <
       multiple = false,
       closeOnSelect = !multiple,
       defaultInputValue,
-      defaultMonth = new Date(),
+      defaultMonth = () => new Date(),
       range = false,
       defaultValue = (range
         ? { end: undefined, start: undefined }
@@ -283,6 +283,7 @@ export const useDatePicker = <
   const startInputRef = useRef<HTMLInputElement>(null)
   const endInputRef = useRef<HTMLInputElement>(null)
   const focusByClickRef = useRef<boolean>(false)
+  const [currentDate] = useState<Date>(() => new Date())
   const [focused, setFocused] = useState(false)
   const [value, setValue] = useControllableState({
     defaultValue: defaultValue as MaybeDateValue<Multiple, Range>,
@@ -291,15 +292,12 @@ export const useDatePicker = <
   })
   const [month, setMonth] = useControllableState({
     defaultValue: () => {
-      let value = defaultMonth
+      let defaultValue = runIfFn(defaultMonth)
 
-      if (dayjs(minDate).isAfter(dayjs(defaultMonth)))
-        value = dayjs(minDate).set("date", 1).toDate()
+      if (dayjs(minDate).isAfter(dayjs(defaultValue)))
+        defaultValue = dayjs(minDate).set("date", 1).toDate()
 
-      if (valueProp) value = getAdjustedMonth(valueProp, value)
-      else if (defaultValue) value = getAdjustedMonth(defaultValue, value)
-
-      return value
+      return getAdjustedMonth(value, defaultValue)
     },
     value: monthProp,
     onChange: onChangeMonthProp,
@@ -430,19 +428,19 @@ export const useDatePicker = <
   const { endPlaceholder, startPlaceholder } = useMemo(() => {
     if (range) {
       const startPlaceholder =
-        placeholderProp ?? dateTimeFormat(new Date(), inputFormat)
+        placeholderProp ?? dateTimeFormat(currentDate, inputFormat)
       const endPlaceholder =
         placeholderProp ??
-        dateTimeFormat(dayjs().add(1, "day").toDate(), inputFormat)
+        dateTimeFormat(dayjs(currentDate).add(1, "day").toDate(), inputFormat)
 
       return { endPlaceholder, startPlaceholder }
     } else {
       const placeholder =
-        placeholderProp ?? dateTimeFormat(new Date(), inputFormat)
+        placeholderProp ?? dateTimeFormat(currentDate, inputFormat)
 
       return { endPlaceholder: placeholder, startPlaceholder: placeholder }
     }
-  }, [dateTimeFormat, inputFormat, placeholderProp, range])
+  }, [dateTimeFormat, inputFormat, placeholderProp, range, currentDate])
 
   const onChange = useCallback(
     (value: MaybeDateValue<Multiple, Range>) => {

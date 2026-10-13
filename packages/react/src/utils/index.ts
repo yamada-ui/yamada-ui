@@ -2,7 +2,7 @@ export * from "./children"
 export * from "./context"
 export * from "./dom"
 export * from "./effect"
-export type * from "./index.types"
+export type * from "./index.type"
 export * from "./ref"
 export * from "./ssr"
 export * from "./store"
@@ -17,6 +17,7 @@ export type {
   Dict,
   EventType,
   FlattenObjectOptions,
+  FunctionOf,
   FunctionOrValue,
   Length,
   Merge,

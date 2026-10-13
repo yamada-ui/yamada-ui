@@ -47,6 +47,11 @@
         "type": "ReactElement<any>",
         "description": "The icon to use.",
         "required": false
+      },
+      "iconProps": {
+        "type": "ListIconProps",
+        "description": "Props for the icon component.",
+        "required": false
       }
     },
     "Root": {
@@ -68,6 +73,16 @@
       "colorScheme": {
         "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
+        "required": false
+      },
+      "iconProps": {
+        "type": "ListIconProps",
+        "description": "Props for the icon component.",
+        "required": false
+      },
+      "itemProps": {
+        "type": "ListItemProps",
+        "description": "Props for the item component.",
         "required": false
       },
       "items": {
@@ -134,6 +149,11 @@
       "type": "ReactElement<any>",
       "description": "The icon to use.",
       "required": false
+    },
+    "iconProps": {
+      "type": "ListIconProps",
+      "description": "Props for the icon component.",
+      "required": false
     }
   },
   "ListRoot": {
@@ -155,6 +175,16 @@
     "colorScheme": {
       "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "ListIconProps",
+      "description": "Props for the icon component.",
+      "required": false
+    },
+    "itemProps": {
+      "type": "ListItemProps",
+      "description": "Props for the item component.",
       "required": false
     },
     "items": {

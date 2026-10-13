@@ -5,7 +5,7 @@ import type {
   System,
   ThemeConfig,
   UsageTheme,
-} from "./index.types"
+} from "./index.type"
 import { bem, flattenObject, isArray, isObject, isUndefined } from "../../utils"
 import { DEFAULT_VAR_PREFIX } from "../constant"
 import { createBreakpoints } from "./breakpoint"

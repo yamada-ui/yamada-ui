@@ -93,7 +93,7 @@
         "required": false
       },
       "itemProps": {
-        "type": "SegmentedControlItemProps",
+        "type": "Omit<SegmentedControlItemProps, \"value\">",
         "description": "Props for the item component.",
         "required": false
       },
@@ -219,7 +219,7 @@
       "required": false
     },
     "itemProps": {
-      "type": "SegmentedControlItemProps",
+      "type": "Omit<SegmentedControlItemProps, \"value\">",
       "description": "Props for the item component.",
       "required": false
     },

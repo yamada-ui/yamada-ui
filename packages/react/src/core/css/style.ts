@@ -1,5 +1,5 @@
 import type { Dict } from "../../utils"
-import type { CSSObject } from "./index.types"
+import type { CSSObject } from "./index.type"
 import type { Transform } from "./utils"
 import { isString } from "../../utils"
 

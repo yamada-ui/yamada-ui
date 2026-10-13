@@ -1,10 +1,10 @@
 import type { FC } from "react"
-import type { PanEventProps } from "./"
+import type { UsePanEventProps } from "./"
 import { vi } from "vitest"
 import { page, render } from "#test/browser"
 import { usePanEvent } from "./"
 
-const setup = async (props: PanEventProps = {}) => {
+const setup = async (props: UsePanEventProps = {}) => {
   const Component: FC = () => {
     const [ref, getProps] = usePanEvent<HTMLButtonElement>(props)
 

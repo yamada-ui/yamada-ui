@@ -24,7 +24,9 @@ export const Size: Story = () => {
   return (
     <PropsTable variant="stack" rows={["xs", "sm", "md", "lg", "xl"]}>
       {(_, row, key) => {
-        return <Calendar.Root key={key} size={row} defaultValue={new Date()} />
+        return (
+          <Calendar.Root key={key} size={row} defaultValue={() => new Date()} />
+        )
       }}
     </PropsTable>
   )
@@ -38,7 +40,7 @@ export const ColorScheme: Story = () => {
           <Calendar.Root
             key={key}
             colorScheme={row}
-            defaultValue={new Date(new Date().setDate(1))}
+            defaultValue={() => new Date(new Date().setDate(1))}
           />
         )
       }}
@@ -52,10 +54,10 @@ export const Shape: Story = () => {
       {(_, row, key) => (
         <Calendar.Root
           key={key}
-          defaultValue={{
+          defaultValue={() => ({
             end: new Date(new Date().setDate(new Date().getDate() + 4)),
             start: new Date(),
-          }}
+          })}
           range
           shape={row}
         />
@@ -82,19 +84,23 @@ export const Format: Story = () => {
 }
 
 export const DefaultValue: Story = () => {
-  return <Calendar.Root defaultValue={new Date()} />
+  return <Calendar.Root defaultValue={() => new Date()} />
 }
 
 export const DefaultMonth: Story = () => {
-  return <Calendar.Root defaultMonth={new Date("2025-10-01")} />
+  return <Calendar.Root defaultMonth={() => new Date("2025-10-01")} />
 }
 
 export const MinDate: Story = () => {
-  return <Calendar.Root minDate={new Date(new Date().setDate(1))} />
+  const [minDate] = useState(() => new Date(new Date().setDate(1)))
+
+  return <Calendar.Root minDate={minDate} />
 }
 
 export const MaxDate: Story = () => {
-  return <Calendar.Root maxDate={new Date(new Date().setDate(18))} />
+  const [maxDate] = useState(() => new Date(new Date().setDate(18)))
+
+  return <Calendar.Root maxDate={maxDate} />
 }
 
 export const Disabled: Story = () => {
@@ -227,7 +233,7 @@ export const CustomComponent: Story = () => {
 }
 
 export const CustomControl: Story = () => {
-  const [value, setValue] = useState<Date | undefined>(new Date())
+  const [value, setValue] = useState<Date | undefined>(() => new Date())
 
   return <Calendar.Root value={value} onChange={setValue} />
 }

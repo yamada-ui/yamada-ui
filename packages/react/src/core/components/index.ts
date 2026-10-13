@@ -1,5 +1,5 @@
 export * from "./use-component-style"
 export * from "./create-component"
-export type * from "./index.types"
+export type * from "./index.type"
 export * from "./props"
 export * from "./utils"

@@ -6,7 +6,8 @@ source: components/format
 ---
 
 ```tsx preview functional client
-const formattedValue = useFormatDateTime(new Date())
+const [value] = useState<Date>(() => new Date())
+const formattedValue = useFormatDateTime(value)
 
 return <Text>{formattedValue}</Text>
 ```
@@ -30,7 +31,8 @@ import { useFormatDateTime } from "@workspaces/ui"
 :::
 
 ```tsx
-const formattedValue = useFormatDateTime(new Date())
+const [value] = useState<Date>(() => new Date())
+const formattedValue = useFormatDateTime(value)
 ```
 
 It formats date time according to the specified locale and options. The hook returns the formatted value directly.
@@ -44,11 +46,12 @@ It formats date time according to the specified locale and options. The hook ret
 To change the locale, set a value for [locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#locales).
 
 ```tsx preview functional client
-const enValue = useFormatDateTime(new Date(), { locale: "en-US" })
-const jaValue = useFormatDateTime(new Date(), { locale: "ja-JP" })
-const deValue = useFormatDateTime(new Date(), { locale: "de-DE" })
-const frValue = useFormatDateTime(new Date(), { locale: "fr-FR" })
-const zhValue = useFormatDateTime(new Date(), { locale: "zh-CN" })
+const [value] = useState<Date>(() => new Date())
+const enValue = useFormatDateTime(value, { locale: "en-US" })
+const jaValue = useFormatDateTime(value, { locale: "ja-JP" })
+const deValue = useFormatDateTime(value, { locale: "de-DE" })
+const frValue = useFormatDateTime(value, { locale: "fr-FR" })
+const zhValue = useFormatDateTime(value, { locale: "zh-CN" })
 
 return (
   <Grid templateColumns="auto 1fr" gap="sm">
@@ -91,7 +94,8 @@ const App = () => {
 To convert to year, set a value for [year](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#year).
 
 ```tsx preview functional client
-const formattedValue = useFormatDateTime(new Date(), { year: "numeric" })
+const [value] = useState<Date>(() => new Date())
+const formattedValue = useFormatDateTime(value, { year: "numeric" })
 
 return <Text>{formattedValue}</Text>
 ```
@@ -101,7 +105,8 @@ return <Text>{formattedValue}</Text>
 To convert to month, set a value for [month](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#month).
 
 ```tsx preview functional client
-const formattedValue = useFormatDateTime(new Date(), { month: "long" })
+const [value] = useState<Date>(() => new Date())
+const formattedValue = useFormatDateTime(value, { month: "long" })
 
 return <Text>{formattedValue}</Text>
 ```
@@ -111,7 +116,8 @@ return <Text>{formattedValue}</Text>
 To convert to day, set a value for [day](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#day).
 
 ```tsx preview functional client
-const formattedValue = useFormatDateTime(new Date(), { day: "2-digit" })
+const [value] = useState<Date>(() => new Date())
+const formattedValue = useFormatDateTime(value, { day: "2-digit" })
 
 return <Text>{formattedValue}</Text>
 ```
@@ -121,7 +127,8 @@ return <Text>{formattedValue}</Text>
 To convert to weekday, set a value for [weekday](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#weekday).
 
 ```tsx preview functional client
-const formattedValue = useFormatDateTime(new Date(), { weekday: "long" })
+const [value] = useState<Date>(() => new Date())
+const formattedValue = useFormatDateTime(value, { weekday: "long" })
 
 return <Text>{formattedValue}</Text>
 ```

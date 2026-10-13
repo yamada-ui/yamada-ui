@@ -877,7 +877,7 @@
             "newly_available_date": "2023-02-14"
           },
           "deprecated": false,
-          "description": "Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.",
+          "description": "Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/At-rules/@container"
         }
@@ -3666,7 +3666,7 @@
             "newly_available_date": "2023-02-14"
           },
           "deprecated": false,
-          "description": "Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.",
+          "description": "Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container"
         }
@@ -3683,7 +3683,7 @@
             "newly_available_date": "2023-02-14"
           },
           "deprecated": false,
-          "description": "Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.",
+          "description": "Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container-name"
         }
@@ -3700,7 +3700,7 @@
             "newly_available_date": "2023-02-14"
           },
           "deprecated": false,
-          "description": "Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.",
+          "description": "Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.",
           "experimental": false,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/container-type"
         }
@@ -4471,8 +4471,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "flow-tolerance": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `flow-tolerance` property.",
+          "description": "The <code>display: grid-lanes</code> and <code>display: inline-grid-lanes</code> CSS declarations create a layout where items are tightly packed in parallel lanes. Items are placed one by one in the lane that has the most available space. Also known as masonry.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-grid-3/#propdef-flow-tolerance"
         }
@@ -6883,7 +6884,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.OverflowAnchor>",
       "docs": {
         "overflow-anchor": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-09-14"
+          },
           "deprecated": false,
           "description": "The <code>overflow-anchor</code> CSS property sets an element as a possible scroll anchor, reducing unintended scrolling when document changes occur above the current scrollport. This is enabled by default where supported.",
           "experimental": false,
@@ -7333,7 +7337,8 @@
       "docs": {
         "paint-order": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-09-22",
             "newly_available_date": "2024-03-22"
           },
           "deprecated": false,
@@ -10098,7 +10103,8 @@
       "docs": {
         "white-space-collapse": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-09-19",
             "newly_available_date": "2024-03-19"
           },
           "deprecated": false,

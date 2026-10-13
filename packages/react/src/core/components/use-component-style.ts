@@ -21,7 +21,7 @@ import type {
   WithoutThemeProps,
 } from "../system"
 import type { ComponentSlot, ComponentSlotName } from "./create-component"
-import type { HTMLStyledProps } from "./index.types"
+import type { HTMLStyledProps } from "./index.type"
 import { useRef } from "react"
 import {
   bem,

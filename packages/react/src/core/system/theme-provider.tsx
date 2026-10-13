@@ -10,7 +10,7 @@ import type {
   ThemeConfig,
   ThemeScheme,
   UsageTheme,
-} from "./index.types"
+} from "./index.type"
 import type { Storage } from "./storage-manager"
 import {
   ThemeProvider as EmotionThemeProvider,

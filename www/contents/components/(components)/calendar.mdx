@@ -38,11 +38,11 @@ If you want to have a date entered, use [DatePicker](/docs/components/date-picke
 
 ### Change Size
 
-```tsx preview
+```tsx preview client
 <Wrap gap="md">
   <For each={["xs", "sm", "md", "lg", "xl"]}>
     {(size, index) => (
-      <Calendar.Root key={index} size={size} defaultValue={new Date()} />
+      <Calendar.Root key={index} size={size} defaultValue={() => new Date()} />
     )}
   </For>
 </Wrap>
@@ -50,14 +50,14 @@ If you want to have a date entered, use [DatePicker](/docs/components/date-picke
 
 ### Change Color Scheme
 
-```tsx preview
+```tsx preview client
 <Wrap gap="md">
   <For each={["success", "warning"]}>
     {(colorScheme, index) => (
       <Calendar.Root
         key={index}
         colorScheme={colorScheme}
-        defaultValue={new Date(new Date().setDate(1))}
+        defaultValue={() => new Date(new Date().setDate(1))}
       />
     )}
   </For>
@@ -66,7 +66,7 @@ If you want to have a date entered, use [DatePicker](/docs/components/date-picke
 
 ### Change Shape
 
-```tsx preview
+```tsx preview client
 <Wrap gap="md">
   <For each={["rounded", "circle", "square"]}>
     {(shape, index) => (
@@ -74,10 +74,10 @@ If you want to have a date entered, use [DatePicker](/docs/components/date-picke
         key={index}
         shape={shape}
         range
-        defaultValue={{
+        defaultValue={() => ({
           start: new Date(),
           end: new Date(new Date().setDate(new Date().getDate() + 4)),
-        }}
+        })}
       />
     )}
   </For>
@@ -105,32 +105,36 @@ return <Calendar.Root format={format} />
 
 To set a default date, set `defaultValue` to a `Date`.
 
-```tsx preview
-<Calendar.Root defaultValue={new Date()} />
+```tsx preview client
+<Calendar.Root defaultValue={() => new Date()} />
 ```
 
 ### Set Default Month
 
 To set a default month, set `defaultMonth` to a `Date`.
 
-```tsx preview
-<Calendar.Root defaultMonth={new Date("2025-10-01")} />
+```tsx preview client
+<Calendar.Root defaultMonth={() => new Date("2025-10-01")} />
 ```
 
 ### Set Minimum Date
 
 To set the minimum selectable date, set `minDate` to a `Date`.
 
-```tsx preview
-<Calendar.Root minDate={new Date(new Date().setDate(1))} />
+```tsx preview functional client
+const [minDate] = useState(() => new Date(new Date().setDate(1)))
+
+return <Calendar.Root minDate={minDate} />
 ```
 
 ### Set Maximum Date
 
 To set the maximum selectable date, set `maxDate` to a `Date`.
 
-```tsx preview
-<Calendar.Root maxDate={new Date(new Date().setDate(18))} />
+```tsx preview functional client
+const [maxDate] = useState(() => new Date(new Date().setDate(18)))
+
+return <Calendar.Root maxDate={maxDate} />
 ```
 
 ### Disable
@@ -284,7 +288,7 @@ You can customize components to change the display.
 ### Control
 
 ```tsx preview functional client
-const [value, setValue] = useState<Date | undefined>(new Date())
+const [value, setValue] = useState<Date | undefined>(() => new Date())
 
 return <Calendar.Root value={value} onChange={setValue} />
 ```

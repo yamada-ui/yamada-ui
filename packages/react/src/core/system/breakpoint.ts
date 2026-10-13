@@ -3,7 +3,7 @@ import type {
   Breakpoint,
   BreakpointConfig,
   DefineThemeBreakpointTokens,
-} from "./index.types"
+} from "./index.type"
 import { getPx, isObject } from "../../utils"
 
 interface BreakpointQuery {

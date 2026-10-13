@@ -4,9 +4,9 @@ import type { FocusEvent, KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import type { Descendant } from "../../hooks/use-descendants"
 import type { Locale } from "../../providers/i18n-provider"
-import type { AnyString, Dict } from "../../utils"
+import type { AnyString, Dict, ToFunction } from "../../utils"
 import dayjs from "dayjs"
-import { useCallback, useMemo, useRef } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 import { mergeProps, useSplitProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
@@ -22,6 +22,7 @@ import {
   isNumber,
   isObject,
   mergeRefs,
+  runIfFn,
   runKeyAction,
   useUpdateEffect,
   visuallyHiddenAttributes,
@@ -292,11 +293,13 @@ export interface UseCalendarProps<
    *
    * @default new Date()
    */
-  defaultMonth?: Date
+  defaultMonth?: (() => Date) | Date
   /**
    * The initial value of the calendar.
    */
-  defaultValue?: MaybeDateValue<Multiple, Range>
+  defaultValue?:
+    | MaybeDateValue<Multiple, Range>
+    | ToFunction<Exclude<MaybeDateValue<Multiple, Range>, undefined>>
   /**
    * If `true`, disables the calendar.
    *
@@ -392,7 +395,7 @@ export const useCalendar = <
   Multiple extends boolean = false,
   Range extends boolean = false,
 >({
-  defaultMonth = new Date(),
+  defaultMonth = () => new Date(),
   multiple = false as Multiple,
   range = false as Range,
   defaultValue = (range
@@ -466,6 +469,7 @@ export const useCalendar = <
   )
   const descendants = useCalendarDescendants()
   const monthRef = useRef<HTMLTableElement>(null)
+  const [currentDate] = useState<Date>(() => new Date())
   const [value, setValue] = useControllableState({
     defaultValue,
     value: valueProp,
@@ -473,14 +477,12 @@ export const useCalendar = <
   })
   const [month, setMonth] = useControllableState({
     defaultValue: () => {
+      defaultMonth = runIfFn(defaultMonth)
+
       if (dayjs(minDate).isAfter(dayjs(defaultMonth)))
         defaultMonth = dayjs(minDate).set("date", 1).toDate()
 
-      if (valueProp) defaultMonth = getAdjustedMonth(valueProp, defaultMonth)
-      else if (defaultValue)
-        defaultMonth = getAdjustedMonth(defaultValue, defaultMonth)
-
-      return defaultMonth
+      return getAdjustedMonth(value, defaultMonth)
     },
     value: monthProp,
     onChange: onChangeMonthProp,
@@ -746,6 +748,7 @@ export const useCalendar = <
   )
 
   return {
+    currentDate,
     descendants,
     disabled,
     endOfMonth,
@@ -792,6 +795,7 @@ export interface UseCalendarDayProps extends Omit<HTMLProps<"td">, "value"> {
 export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
   const { t } = useI18n("calendar")
   const {
+    currentDate,
     disabled: rootDisabled,
     excludeDate,
     holidays,
@@ -821,8 +825,8 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
     [weekendDays, value],
   )
   const today = useMemo(
-    () => highlightToday && isSameDate(value, new Date()),
-    [highlightToday, value],
+    () => highlightToday && isSameDate(value, currentDate),
+    [highlightToday, value, currentDate],
   )
   const selected = useMemo(() => {
     if (isDate(selectedValue)) return isSameDate(selectedValue, value)

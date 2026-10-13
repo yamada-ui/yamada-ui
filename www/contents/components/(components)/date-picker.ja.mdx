@@ -66,7 +66,7 @@ import { DatePicker } from "@workspaces/ui"
 
 ### カラースキームを変更する
 
-```tsx preview
+```tsx preview client
 <VStack>
   <For each={["success", "warning"]}>
     {(colorScheme, index) => (
@@ -74,7 +74,7 @@ import { DatePicker } from "@workspaces/ui"
         key={index}
         colorScheme={colorScheme}
         today
-        defaultValue={new Date(new Date().setDate(1))}
+        defaultValue={() => new Date(new Date().setDate(1))}
       />
     )}
   </For>
@@ -127,28 +127,31 @@ return <DatePicker format={format} />
 
 最小日付を設定する場合は、`minDate`に`Date`を設定します。
 
-```tsx preview
-<DatePicker minDate={new Date(new Date().setDate(1))} />
+```tsx preview functional client
+const [minDate] = useState(() => new Date(new Date().setDate(1)))
+
+return <DatePicker minDate={minDate} />
 ```
 
 ### 最大日付を設定する
 
 最大日付を設定する場合は、`maxDate`に`Date`を設定します。
 
-```tsx preview
-<DatePicker maxDate={new Date(new Date().setDate(18))} />
+```tsx preview functional client
+const [maxDate] = useState(() => new Date(new Date().setDate(18)))
+
+return <DatePicker maxDate={maxDate} />
 ```
 
 ### 最小と最大の範囲外を許可する
 
 デフォルトでは、最小と最大の日付の範囲外が入力された場合、自動的に最小または最大の日付に置換されます。この制御を無効にし、最小と最大の範囲外を許可する場合は、`allowInputBeyond`を`true`に設定します。
 
-```tsx preview
-<DatePicker
-  minDate={new Date(new Date().setDate(1))}
-  maxDate={new Date(new Date().setDate(18))}
-  allowInputBeyond
-/>
+```tsx preview functional client
+const [minDate] = useState(() => new Date(new Date().setDate(1)))
+const [maxDate] = useState(() => new Date(new Date().setDate(18)))
+
+return <DatePicker minDate={minDate} maxDate={maxDate} allowInputBeyond />
 ```
 
 ### 今日の強調を無効にする
@@ -222,8 +225,8 @@ return <DatePicker format={format} />
 
 パターンを設定する場合は、`pattern`に正規表現を設定します。
 
-```tsx preview
-<DatePicker pattern={/[^\w, ]/g} defaultValue={new Date()} />
+```tsx preview client
+<DatePicker pattern={/[^\w, ]/g} defaultValue={() => new Date()} />
 ```
 
 ### 入力された値の解析をハンドルする
@@ -430,16 +433,16 @@ ESCキーが入力された時にドロップダウンを閉じない場合は�
 
 ### 形を変える
 
-```tsx preview
+```tsx preview client
 <VStack>
   <For each={["rounded", "circle", "square"]}>
     {(shape, index) => (
       <DatePicker
         key={index}
-        defaultValue={{
+        defaultValue={() => ({
           end: new Date(new Date().setDate(new Date().getDate() + 4)),
           start: new Date(),
-        }}
+        })}
         range
         calendarProps={{ shape }}
       />
@@ -582,10 +585,10 @@ ESCキーが入力された時にドロップダウンを閉じない場合は�
 
 ### 制御する
 
-```tsx preview functional
-const [value, onChange] = useState<Date | null>(new Date())
+```tsx preview functional client
+const [value, setValue] = useState<Date | undefined>(() => new Date())
 
-return <DatePicker value={value} onChange={onChange} />
+return <DatePicker value={value} onChange={setValue} />
 ```
 
 ## Props

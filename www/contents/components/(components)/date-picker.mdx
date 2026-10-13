@@ -66,7 +66,7 @@ If you want users to view or select a date from an always-visible calendar, use 
 
 ### Change Color Scheme
 
-```tsx preview
+```tsx preview client
 <VStack>
   <For each={["success", "warning"]}>
     {(colorScheme, index) => (
@@ -74,7 +74,7 @@ If you want users to view or select a date from an always-visible calendar, use 
         key={index}
         colorScheme={colorScheme}
         today
-        defaultValue={new Date(new Date().setDate(1))}
+        defaultValue={() => new Date(new Date().setDate(1))}
       />
     )}
   </For>
@@ -127,28 +127,31 @@ To set a default month, set `defaultMonth` to a `Date`.
 
 To set the minimum selectable date, set `minDate` to a `Date`.
 
-```tsx preview
-<DatePicker minDate={new Date(new Date().setDate(1))} />
+```tsx preview functional client
+const [minDate] = useState(() => new Date(new Date().setDate(1)))
+
+return <DatePicker minDate={minDate} />
 ```
 
 ### Set Maximum Date
 
 To set the maximum selectable date, set `maxDate` to a `Date`.
 
-```tsx preview
-<DatePicker maxDate={new Date(new Date().setDate(18))} />
+```tsx preview functional client
+const [maxDate] = useState(() => new Date(new Date().setDate(18)))
+
+return <DatePicker maxDate={maxDate} />
 ```
 
 ### Allow Values Outside Minimum and Maximum Range
 
 By default, if a date outside the minimum and maximum range is entered, it is automatically replaced with the minimum or maximum date. To disable this control and allow values outside the range, set `allowInputBeyond` to `true`.
 
-```tsx preview
-<DatePicker
-  minDate={new Date(new Date().setDate(1))}
-  maxDate={new Date(new Date().setDate(18))}
-  allowInputBeyond
-/>
+```tsx preview functional client
+const [minDate] = useState(() => new Date(new Date().setDate(1)))
+const [maxDate] = useState(() => new Date(new Date().setDate(18)))
+
+return <DatePicker minDate={minDate} maxDate={maxDate} allowInputBeyond />
 ```
 
 ### Disable Today Highlighting
@@ -222,8 +225,8 @@ To change which days are treated as weekends, set `weekendDays` to an array of d
 
 To set a pattern, set a regular expression to `pattern`.
 
-```tsx preview
-<DatePicker pattern={/[^\w, ]/g} defaultValue={new Date()} />
+```tsx preview client
+<DatePicker pattern={/[^\w, ]/g} defaultValue={() => new Date()} />
 ```
 
 ### Handle Parsing of Entered Values
@@ -430,16 +433,16 @@ To disallow input, set `allowInput` to `false`.
 
 ### Change Shape
 
-```tsx preview
+```tsx preview client
 <VStack>
   <For each={["rounded", "circle", "square"]}>
     {(shape, index) => (
       <DatePicker
         key={index}
-        defaultValue={{
+        defaultValue={() => ({
           end: new Date(new Date().setDate(new Date().getDate() + 4)),
           start: new Date(),
-        }}
+        })}
         range
         calendarProps={{ shape }}
       />
@@ -582,10 +585,10 @@ You can customize Calendar to change the display.
 
 ### Control
 
-```tsx preview functional
-const [value, onChange] = useState<Date | null>(new Date())
+```tsx preview functional client
+const [value, setValue] = useState<Date | undefined>(() => new Date())
 
-return <DatePicker value={value} onChange={onChange} />
+return <DatePicker value={value} onChange={setValue} />
 ```
 
 ## Props

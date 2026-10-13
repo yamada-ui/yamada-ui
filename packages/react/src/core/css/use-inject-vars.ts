@@ -1,7 +1,7 @@
 "use client"
 
 import type { Dict } from "../../utils"
-import type { CSSObject, CSSProperties } from "./index.types"
+import type { CSSObject, CSSProperties } from "./index.type"
 import { useMemo, useRef } from "react"
 import { cssProps } from "../components"
 import { injectVars } from "../system"

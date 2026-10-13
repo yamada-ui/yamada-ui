@@ -32,11 +32,11 @@ export const DEFAULT_CONFIG: UserConfig = {
 }
 export const REQUIRED_DEPENDENCIES: RequiredDependencies = {
   ui: ["react@^19", "react-dom@^19", `${PACKAGE_NAME}@^2`],
-  theme: [`${PACKAGE_NAME}@^2`],
+  theme: ["react@^19", "react-dom@^19", `${PACKAGE_NAME}@^2`],
 }
 export const REQUIRED_DEV_DEPENDENCIES: RequiredDependencies = {
   ui: ["@types/react@^19", "@types/react-dom@^19"],
-  theme: [],
+  theme: ["@types/react@^19", "@types/react-dom@^19"],
 }
 export const DEFAULT_PACKAGE_JSON = {
   version: "1.0.0",

@@ -4,7 +4,7 @@ import type { Formats, Options } from "intl-messageformat"
 import type { FC, ReactNode } from "react"
 import type { TextDirection } from "../../core"
 import type { AnyString, Dict, Path, Value } from "../../utils"
-import type { IcuArgs } from "./icu.types"
+import type { IcuArgs } from "./icu.type"
 import type { DefaultIntlData } from "./intl"
 import IntlMessageFormat from "intl-messageformat"
 import {

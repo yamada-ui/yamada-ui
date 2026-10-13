@@ -15,7 +15,7 @@ import type {
   DOMElement,
   HTMLStyledProps,
   Component as OriginalComponent,
-} from "./index.types"
+} from "./index.type"
 import { Fragment } from "react"
 import {
   createContext,

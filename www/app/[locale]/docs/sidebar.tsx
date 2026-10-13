@@ -17,6 +17,8 @@ export function Sidebar() {
   const changelog = pathname.startsWith("/docs/changelog")
 
   useSafeLayoutEffect(() => {
+    window.scrollTo({ behavior: "instant", top: 0 })
+
     const sidebar = ref.current
 
     if (!sidebar) return

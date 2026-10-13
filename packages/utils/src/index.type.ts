@@ -38,6 +38,10 @@ export type Prettify<Y> = {
 
 export type FunctionOrValue<Y, M> = ((props: Y) => M) | M
 
+export type FunctionOf<Y> = Extract<Y, (...args: any[]) => any>
+
+export type ToFunction<Y> = Y extends unknown ? () => Y : never
+
 export type AnyString = string & {}
 
 export type Booleanish<Y> = Y extends "false" | "true" ? boolean : Y

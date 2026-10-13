@@ -1,4 +1,4 @@
-import type { Dict } from "./index.types"
+import type { Dict } from "./index.type"
 import {
   isArray,
   isFunction,

@@ -1,0 +1,50 @@
+# pnpm
+.pnpm-store
+node-jiti
+
+# dependencies
+node_modules
+
+# compiled
+storybook-static
+coverage
+__screenshots__
+report.json
+trace
+dist
+build
+.vercel
+.velite
+
+# misc
+.DS_Store
+*.pem
+.vscode
+.idea
+.node-version
+.git
+
+# debug
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# cache
+.eslintcache
+.turbo
+.next
+.vitest-attachments
+.react-router
+.tanstack
+
+# dotenv environment variables file
+.env
+.env.*
+!.env.example
+*.local.*

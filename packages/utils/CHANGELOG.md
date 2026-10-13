@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 2.1.8
+
+### Patch Changes
+
+- [#7895](https://github.com/yamada-ui/yamada-ui/pull/7895) [`8f82f01`](https://github.com/yamada-ui/yamada-ui/commit/8f82f01aa27305bbd2506440217c8e9b2e7e73f4) Thanks [@dependabot](https://github.com/apps/dependabot)! - Add the `ToFunction` utility type to convert each union member into a zero-argument function type.
+
 ## 2.1.7
 
 ### Patch Changes

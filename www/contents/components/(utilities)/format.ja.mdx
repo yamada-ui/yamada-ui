@@ -46,55 +46,67 @@ import { Format } from "@workspaces/ui"
 
 ロケールを変更する場合は、[locale](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#locales)に値を設定します。
 
-```tsx preview
-<Grid templateColumns="auto 1fr" gap="sm">
-  <Text fontWeight="semibold">英語</Text>
-  <Format.DateTime value={new Date()} locale="en-US" />
+```tsx preview functional client
+const [value] = useState<Date>(() => new Date())
 
-  <Text fontWeight="semibold">日本語</Text>
-  <Format.DateTime value={new Date()} locale="ja-JP" />
+return (
+  <Grid templateColumns="auto 1fr" gap="sm">
+    <Text fontWeight="semibold">英語</Text>
+    <Format.DateTime value={value} locale="en-US" />
 
-  <Text fontWeight="semibold">ドイツ語</Text>
-  <Format.DateTime value={new Date()} locale="de-DE" />
+    <Text fontWeight="semibold">日本語</Text>
+    <Format.DateTime value={value} locale="ja-JP" />
 
-  <Text fontWeight="semibold">フランス語</Text>
-  <Format.DateTime value={new Date()} locale="fr-FR" />
+    <Text fontWeight="semibold">ドイツ語</Text>
+    <Format.DateTime value={value} locale="de-DE" />
 
-  <Text fontWeight="semibold">中国語</Text>
-  <Format.DateTime value={new Date()} locale="zh-CN" />
-</Grid>
+    <Text fontWeight="semibold">フランス語</Text>
+    <Format.DateTime value={value} locale="fr-FR" />
+
+    <Text fontWeight="semibold">中国語</Text>
+    <Format.DateTime value={value} locale="zh-CN" />
+  </Grid>
+)
 ```
 
 #### 年に変換する
 
 年に変換する場合は、[year](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#year)に値を設定します。
 
-```tsx preview
-<Format.DateTime value={new Date()} year="numeric" />
+```tsx preview functional client
+const [value] = useState<Date>(() => new Date())
+
+return <Format.DateTime value={value} year="numeric" />
 ```
 
 #### 月に変換する
 
 月に変換する場合は、[month](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#month)に値を設定します。
 
-```tsx preview
-<Format.DateTime value={new Date()} month="long" />
+```tsx preview functional client
+const [value] = useState<Date>(() => new Date())
+
+return <Format.DateTime value={value} month="long" />
 ```
 
 #### 日に変換する
 
 日に変換する場合は、[day](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#day)に値を設定します。
 
-```tsx preview
-<Format.DateTime value={new Date()} day="2-digit" />
+```tsx preview functional client
+const [value] = useState<Date>(() => new Date())
+
+return <Format.DateTime value={value} day="2-digit" />
 ```
 
 #### 曜日に変換する
 
 曜日に変換する場合は、[weekday](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#weekday)に値を設定します。
 
-```tsx preview
-<Format.DateTime value={new Date()} weekday="long" />
+```tsx preview functional client
+const [value] = useState<Date>(() => new Date())
+
+return <Format.DateTime value={value} weekday="long" />
 ```
 
 ### 数値

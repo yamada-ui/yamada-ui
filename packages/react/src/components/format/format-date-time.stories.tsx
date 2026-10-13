@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { useState } from "react"
 import { LOCALES } from "../../providers/i18n-provider"
 import { For } from "../for"
 import { Grid } from "../grid"
@@ -16,17 +17,21 @@ const meta: Meta<typeof Format.DateTime> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <Format.DateTime value={new Date()} />
+  const [value] = useState<Date>(() => new Date())
+
+  return <Format.DateTime value={value} />
 }
 
 export const Locale: Story = () => {
+  const [value] = useState<Date>(() => new Date())
+
   return (
     <Grid gapX="sm" templateColumns="auto 1fr">
       <For each={LOCALES}>
         {(locale) => (
           <>
             <Text color="fg.muted">{locale}</Text>
-            <Format.DateTime key={locale} locale={locale} value={new Date()} />
+            <Format.DateTime key={locale} locale={locale} value={value} />
           </>
         )}
       </For>
@@ -35,12 +40,14 @@ export const Locale: Story = () => {
 }
 
 export const Long: Story = () => {
+  const [value] = useState<Date>(() => new Date())
+
   return (
     <VStack gap="0">
       <Format.DateTime
         day="numeric"
         month="long"
-        value={new Date()}
+        value={value}
         weekday="long"
         year="numeric"
       />
@@ -51,7 +58,7 @@ export const Long: Story = () => {
         minute="numeric"
         month="long"
         second="numeric"
-        value={new Date()}
+        value={value}
         weekday="long"
         year="numeric"
       />
@@ -60,13 +67,15 @@ export const Long: Story = () => {
 }
 
 export const Year: Story = () => {
+  const [value] = useState<Date>(() => new Date())
+
   return (
     <Grid gapX="sm" templateColumns="auto 1fr">
       <For each={["numeric", "2-digit"] as const}>
         {(year) => (
           <>
             <Text color="fg.muted">{year}</Text>
-            <Format.DateTime key={year} value={new Date()} year={year} />
+            <Format.DateTime key={year} value={value} year={year} />
           </>
         )}
       </For>
@@ -75,13 +84,15 @@ export const Year: Story = () => {
 }
 
 export const Month: Story = () => {
+  const [value] = useState<Date>(() => new Date())
+
   return (
     <Grid gapX="sm" templateColumns="auto 1fr">
       <For each={["short", "long", "numeric", "2-digit", "narrow"] as const}>
         {(month) => (
           <>
             <Text color="fg.muted">{month}</Text>
-            <Format.DateTime key={month} month={month} value={new Date()} />
+            <Format.DateTime key={month} month={month} value={value} />
           </>
         )}
       </For>
@@ -90,13 +101,15 @@ export const Month: Story = () => {
 }
 
 export const Day: Story = () => {
+  const [value] = useState<Date>(() => new Date())
+
   return (
     <Grid gapX="sm" templateColumns="auto 1fr">
       <For each={["numeric", "2-digit"] as const}>
         {(day) => (
           <>
             <Text color="fg.muted">{day}</Text>
-            <Format.DateTime key={day} day={day} value={new Date()} />
+            <Format.DateTime key={day} day={day} value={value} />
           </>
         )}
       </For>
@@ -105,17 +118,15 @@ export const Day: Story = () => {
 }
 
 export const Weekday: Story = () => {
+  const [value] = useState<Date>(() => new Date())
+
   return (
     <Grid gapX="sm" templateColumns="auto 1fr">
       <For each={["short", "long", "narrow"] as const}>
         {(weekday) => (
           <>
             <Text color="fg.muted">{weekday}</Text>
-            <Format.DateTime
-              key={weekday}
-              value={new Date()}
-              weekday={weekday}
-            />
+            <Format.DateTime key={weekday} value={value} weekday={weekday} />
           </>
         )}
       </For>

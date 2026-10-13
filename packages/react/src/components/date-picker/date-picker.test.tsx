@@ -10,6 +10,10 @@ const ControlledDatePicker = ({ defaultValue, ...props }: DatePickerProps) => {
 }
 
 describe("<DatePicker />", () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   test("renders component correctly", async () => {
     await a11y(<DatePicker />)
   })
@@ -18,6 +22,53 @@ describe("<DatePicker />", () => {
     render(<DatePicker defaultValue={new Date(2024, 0, 15)} />)
 
     expect(screen.getAllByRole("textbox")[0]).toHaveValue("January 15, 2024")
+  })
+
+  test("initializes range value and month from functions only once", () => {
+    const defaultValue = vi.fn(() => ({
+      end: new Date(2024, 8, 20),
+      start: new Date(2024, 8, 15),
+    }))
+    const defaultMonth = vi.fn(() => new Date(2024, 5, 1))
+    const { rerender } = render(
+      <DatePicker
+        defaultMonth={defaultMonth}
+        defaultOpen
+        defaultValue={defaultValue}
+        range
+      />,
+    )
+
+    expect(screen.getAllByRole("textbox")[0]).toHaveValue("September 15, 2024")
+    expect(screen.getAllByRole("textbox")[1]).toHaveValue("September 20, 2024")
+    expect(screen.getByRole("grid")).toHaveAttribute(
+      "aria-label",
+      "September 2024",
+    )
+
+    defaultValue.mockReturnValue({
+      end: new Date(2024, 9, 25),
+      start: new Date(2024, 9, 20),
+    })
+    defaultMonth.mockReturnValue(new Date(2024, 9, 1))
+
+    rerender(
+      <DatePicker
+        defaultMonth={defaultMonth}
+        defaultOpen
+        defaultValue={defaultValue}
+        range
+      />,
+    )
+
+    expect(defaultValue).toHaveBeenCalledTimes(1)
+    expect(defaultMonth).toHaveBeenCalledTimes(1)
+    expect(screen.getAllByRole("textbox")[0]).toHaveValue("September 15, 2024")
+    expect(screen.getAllByRole("textbox")[1]).toHaveValue("September 20, 2024")
+    expect(screen.getByRole("grid")).toHaveAttribute(
+      "aria-label",
+      "September 2024",
+    )
   })
 
   test("renders with range mode", () => {
@@ -250,6 +301,42 @@ describe("<DatePicker />", () => {
     const inputs = screen.getAllByRole("textbox")
     expect(inputs[0]).toHaveAttribute("placeholder", "Custom")
     expect(inputs[1]).toHaveAttribute("placeholder", "Custom")
+  })
+
+  test("keeps the initial range placeholders when the date and format change", () => {
+    vi.useFakeTimers({ toFake: ["Date"] })
+    vi.setSystemTime(new Date(2024, 0, 31, 12))
+
+    const { rerender } = render(<DatePicker range />)
+
+    expect(screen.getAllByRole("textbox")[0]).toHaveAttribute(
+      "placeholder",
+      "January 31, 2024",
+    )
+    expect(screen.getAllByRole("textbox")[1]).toHaveAttribute(
+      "placeholder",
+      "February 1, 2024",
+    )
+
+    vi.setSystemTime(new Date(2024, 1, 2, 12))
+
+    rerender(
+      <DatePicker
+        format={{
+          input: { day: "2-digit", month: "2-digit", year: "numeric" },
+        }}
+        range
+      />,
+    )
+
+    expect(screen.getAllByRole("textbox")[0]).toHaveAttribute(
+      "placeholder",
+      "01/31/2024",
+    )
+    expect(screen.getAllByRole("textbox")[1]).toHaveAttribute(
+      "placeholder",
+      "02/01/2024",
+    )
   })
 
   test("handles defaultMonth with minDate", () => {

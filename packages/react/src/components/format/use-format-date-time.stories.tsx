@@ -1,4 +1,5 @@
 import type { Meta } from "@storybook/react-vite"
+import { useState } from "react"
 import { VStack } from "../stack"
 import { Text } from "../text"
 import { useFormatDateTime } from "./use-format-date-time"
@@ -10,14 +11,16 @@ const meta: Meta = {
 export default meta
 
 export const Basic = () => {
-  const formattedDate = useFormatDateTime(new Date())
+  const [value] = useState<Date>(() => new Date())
+  const formattedDate = useFormatDateTime(value)
 
   return <Text>{formattedDate}</Text>
 }
 
 export const Locale = () => {
-  const formattedDateDE = useFormatDateTime(new Date(), { locale: "de-DE" })
-  const formattedDateCN = useFormatDateTime(new Date(), { locale: "zh-CN" })
+  const [value] = useState<Date>(() => new Date())
+  const formattedDateDE = useFormatDateTime(value, { locale: "de-DE" })
+  const formattedDateCN = useFormatDateTime(value, { locale: "zh-CN" })
 
   return (
     <VStack gap="0">
@@ -28,13 +31,14 @@ export const Locale = () => {
 }
 
 export const Long = () => {
-  const formattedDate = useFormatDateTime(new Date(), {
+  const [value] = useState<Date>(() => new Date())
+  const formattedDate = useFormatDateTime(value, {
     day: "numeric",
     month: "long",
     weekday: "long",
     year: "numeric",
   })
-  const formattedDateTime = useFormatDateTime(new Date(), {
+  const formattedDateTime = useFormatDateTime(value, {
     day: "numeric",
     hour: "numeric",
     hour12: true,
@@ -54,7 +58,8 @@ export const Long = () => {
 }
 
 export const Year = () => {
-  const formattedDate = useFormatDateTime(new Date(), {
+  const [value] = useState<Date>(() => new Date())
+  const formattedDate = useFormatDateTime(value, {
     year: "numeric",
   })
 
@@ -62,7 +67,8 @@ export const Year = () => {
 }
 
 export const Month = () => {
-  const formattedDate = useFormatDateTime(new Date(), {
+  const [value] = useState<Date>(() => new Date())
+  const formattedDate = useFormatDateTime(value, {
     month: "long",
   })
 
@@ -70,7 +76,8 @@ export const Month = () => {
 }
 
 export const Day = () => {
-  const formattedDate = useFormatDateTime(new Date(), {
+  const [value] = useState<Date>(() => new Date())
+  const formattedDate = useFormatDateTime(value, {
     day: "2-digit",
   })
 
@@ -78,7 +85,8 @@ export const Day = () => {
 }
 
 export const Weekday = () => {
-  const formattedDate = useFormatDateTime(new Date(), {
+  const [value] = useState<Date>(() => new Date())
+  const formattedDate = useFormatDateTime(value, {
     weekday: "long",
   })
 

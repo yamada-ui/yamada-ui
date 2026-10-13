@@ -167,6 +167,7 @@ export const CalendarRoot = withProvider(
     ...props
   }: CalendarRootProps<Multiple, Range>) => {
     const {
+      currentDate,
       descendants,
       disabled,
       endOfMonth,
@@ -204,6 +205,7 @@ export const CalendarRoot = withProvider(
     } = useCalendar(props)
     const calendarContext = useMemo(
       () => ({
+        currentDate,
         disabled,
         endOfMonth,
         excludeDate,
@@ -226,6 +228,7 @@ export const CalendarRoot = withProvider(
         onPrevMonth,
       }),
       [
+        currentDate,
         disabled,
         endOfMonth,
         excludeDate,

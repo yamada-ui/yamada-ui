@@ -38,6 +38,10 @@ import { VisuallyHidden } from "@workspaces/ui"
 
 視覚的に要素を隠すために使用されますが、スクリーンリーダーではアクセス可能にします。デフォルトでは、`span`要素をレンダリングします。
 
+:::tip
+アクセシブルな名前や説明を提供するだけであれば、対象の要素に`aria-label`、`aria-labelledby`、または`aria-describedby`を設定することを検討します。視覚的に要素を隠す必要があり、どうしても他の方法で対応できない場合の最終手段として`VisuallyHidden`を使用します。
+:::
+
 ## Props
 
 <PropsTable name="visually-hidden" />

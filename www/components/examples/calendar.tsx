@@ -13,10 +13,10 @@ export function Calendar() {
       <OriginalCalendar.Root
         colorScheme="primary"
         size="lg"
-        defaultValue={{
+        defaultValue={() => ({
           end: new Date(new Date().setDate(18)),
           start: new Date(new Date().setDate(8)),
-        }}
+        })}
         fixed={false}
         range
       />

@@ -38,11 +38,11 @@ import { Calendar } from "@workspaces/ui"
 
 ### サイズを変更する
 
-```tsx preview
+```tsx preview client
 <Wrap gap="md">
   <For each={["xs", "sm", "md", "lg", "xl"]}>
     {(size, index) => (
-      <Calendar.Root key={index} size={size} defaultValue={new Date()} />
+      <Calendar.Root key={index} size={size} defaultValue={() => new Date()} />
     )}
   </For>
 </Wrap>
@@ -50,14 +50,14 @@ import { Calendar } from "@workspaces/ui"
 
 ### カラースキームを変更する
 
-```tsx preview
+```tsx preview client
 <Wrap gap="md">
   <For each={["success", "warning"]}>
     {(colorScheme, index) => (
       <Calendar.Root
         key={index}
         colorScheme={colorScheme}
-        defaultValue={new Date(new Date().setDate(1))}
+        defaultValue={() => new Date(new Date().setDate(1))}
       />
     )}
   </For>
@@ -66,7 +66,7 @@ import { Calendar } from "@workspaces/ui"
 
 ### 形を変える
 
-```tsx preview
+```tsx preview client
 <Wrap gap="md">
   <For each={["rounded", "circle", "square"]}>
     {(shape, index) => (
@@ -74,10 +74,10 @@ import { Calendar } from "@workspaces/ui"
         key={index}
         shape={shape}
         range
-        defaultValue={{
+        defaultValue={() => ({
           start: new Date(),
           end: new Date(new Date().setDate(new Date().getDate() + 4)),
-        }}
+        })}
       />
     )}
   </For>
@@ -105,32 +105,36 @@ return <Calendar.Root format={format} />
 
 デフォルトの日付を設定する場合は、`defaultValue`に`Date`を設定します。
 
-```tsx preview
-<Calendar.Root defaultValue={new Date()} />
+```tsx preview client
+<Calendar.Root defaultValue={() => new Date()} />
 ```
 
 ### デフォルトの月を設定する
 
 デフォルトの月を設定する場合は、`defaultMonth`に`Date`を設定します。
 
-```tsx preview
-<Calendar.Root defaultMonth={new Date("2025-10-01")} />
+```tsx preview client
+<Calendar.Root defaultMonth={() => new Date("2025-10-01")} />
 ```
 
 ### 最小日付を設定する
 
 最小日付を設定する場合は、`minDate`に`Date`を設定します。
 
-```tsx preview
-<Calendar.Root minDate={new Date(new Date().setDate(1))} />
+```tsx preview functional client
+const [minDate] = useState(() => new Date(new Date().setDate(1)))
+
+return <Calendar.Root minDate={minDate} />
 ```
 
 ### 最大日付を設定する
 
 最大日付を設定する場合は、`maxDate`に`Date`を設定します。
 
-```tsx preview
-<Calendar.Root maxDate={new Date(new Date().setDate(18))} />
+```tsx preview functional client
+const [maxDate] = useState(() => new Date(new Date().setDate(18)))
+
+return <Calendar.Root maxDate={maxDate} />
 ```
 
 ### 無効にする
@@ -284,7 +288,7 @@ return <Calendar.Root holidays={holidays} />
 ### 制御する
 
 ```tsx preview functional client
-const [value, setValue] = useState<Date | undefined>(new Date())
+const [value, setValue] = useState<Date | undefined>(() => new Date())
 
 return <Calendar.Root value={value} onChange={setValue} />
 ```

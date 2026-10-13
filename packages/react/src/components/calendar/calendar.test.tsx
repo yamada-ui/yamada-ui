@@ -22,6 +22,10 @@ const assertRangeResult = (
 }
 
 describe("<Calendar />", () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   test("passes a11y checks", async () => {
     await a11y(<Calendar.Root />)
   })
@@ -38,6 +42,39 @@ describe("<Calendar />", () => {
 
     const selectedDay = screen.getByText("15").closest("td")
     expect(selectedDay).toHaveAttribute("data-selected")
+  })
+
+  test("initializes value and month from functions only once", () => {
+    const defaultValue = vi.fn(() => new Date(2024, 8, 15))
+    const defaultMonth = vi.fn(() => new Date(2024, 5, 1))
+    const { rerender } = render(
+      <Calendar.Root defaultMonth={defaultMonth} defaultValue={defaultValue} />,
+    )
+
+    expect(screen.getByRole("grid")).toHaveAttribute(
+      "aria-label",
+      "September 2024",
+    )
+    expect(screen.getByText("15").closest("td")).toHaveAttribute(
+      "data-selected",
+    )
+
+    defaultValue.mockReturnValue(new Date(2024, 9, 20))
+    defaultMonth.mockReturnValue(new Date(2024, 9, 1))
+
+    rerender(
+      <Calendar.Root defaultMonth={defaultMonth} defaultValue={defaultValue} />,
+    )
+
+    expect(defaultValue).toHaveBeenCalledTimes(1)
+    expect(defaultMonth).toHaveBeenCalledTimes(1)
+    expect(screen.getByRole("grid")).toHaveAttribute(
+      "aria-label",
+      "September 2024",
+    )
+    expect(screen.getByText("15").closest("td")).toHaveAttribute(
+      "data-selected",
+    )
   })
 
   test("renders with multiple selection", () => {
@@ -187,6 +224,28 @@ describe("<Calendar />", () => {
       })
       ?.closest("td")
     expect(todayCell).toHaveAttribute("data-today")
+  })
+
+  test("keeps the initial today when the date and displayed month change", () => {
+    vi.useFakeTimers({ toFake: ["Date"] })
+    vi.setSystemTime(new Date(2024, 0, 31, 12))
+
+    const { rerender } = render(<Calendar.Root month={new Date(2024, 0, 1)} />)
+
+    expect(
+      screen.getByRole("grid").querySelector("td[data-today]"),
+    ).toHaveAttribute("data-value", "2024-01-31")
+
+    vi.setSystemTime(new Date(2024, 1, 1, 12))
+
+    rerender(<Calendar.Root month={new Date(2024, 1, 1)} />)
+
+    expect(
+      screen.getByRole("grid").querySelector("td[data-today]"),
+    ).toHaveAttribute("data-value", "2024-01-31")
+    expect(
+      screen.getByRole("grid").querySelector('td[data-value="2024-02-01"]'),
+    ).not.toHaveAttribute("data-today")
   })
 
   test("today is not highlighted when today=false", () => {

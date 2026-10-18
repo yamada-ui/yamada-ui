@@ -8,26 +8,27 @@ import type * as React from "react"
 import type {
   ComponentArgs,
   DOMElement,
-  OmitProps,
   StyledProps,
   WithoutAs,
-  WithoutRef,
 } from "../../core"
 import type { Dict, Merge } from "../../utils"
+
+type OverrideProps<Y extends object, M extends object> = M &
+  Omit<Y, "as" | keyof M>
 
 type ComponentConditionalProps<
   Y extends DOMElement,
   M extends DOMElement,
   D extends object = {},
 > = Y extends M
-  ? OmitProps<React.ComponentProps<Y>, D>
-  : OmitProps<React.ComponentProps<M>, D>
+  ? OverrideProps<React.ComponentProps<Y>, D>
+  : OverrideProps<React.ComponentProps<M>, D>
 
 type ComponentProps<
   Y extends DOMElement,
   M extends DOMElement,
   D extends object = {},
-> = ComponentConditionalProps<Y, M, WithoutRef<D>> & {
+> = ComponentConditionalProps<Y, M, Omit<D, "as" | "ref">> & {
   as?: M
 }
 

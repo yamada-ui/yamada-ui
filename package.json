@@ -78,7 +78,7 @@
     "picocolors": "catalog:",
     "rimraf": "catalog:",
     "storybook": "^10.6.1",
-    "tsdown": "^0.23.0",
+    "tsdown": "^0.23.1",
     "tsx": "catalog:",
     "turbo": "^2.11.7",
     "typescript": "catalog:",

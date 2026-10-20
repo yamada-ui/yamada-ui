@@ -35,19 +35,22 @@ export type OmitProps<Y extends object = {}, M extends object = {}> = Omit<
 > &
   WithoutAs<M>
 
+type OverrideProps<Y extends object, M extends object> = M &
+  Omit<Y, "as" | keyof M>
+
 type ComponentConditionalProps<
   Y extends As,
   M extends As,
   D extends object = {},
 > = Y extends M
-  ? OmitProps<React.ComponentProps<Y>, D>
-  : OmitProps<React.ComponentProps<M>, D>
+  ? OverrideProps<React.ComponentProps<Y>, D>
+  : OverrideProps<React.ComponentProps<M>, D>
 
 type ComponentProps<
   Y extends As,
   M extends As,
   D extends object = {},
-> = ComponentConditionalProps<Y, M, WithoutRef<D>> & {
+> = ComponentConditionalProps<Y, M, Omit<D, "as" | "ref">> & {
   as?: M
 }
 

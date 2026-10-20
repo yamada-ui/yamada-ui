@@ -110,7 +110,7 @@
     "file-selector": "^2.1.2",
     "framesync": "6.1.2",
     "intl-messageformat": "^11.2.15",
-    "lucide-react": "1.52.0",
+    "lucide-react": "1.55.0",
     "motion": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
@@ -126,7 +126,7 @@
   },
   "devDependencies": {
     "@babel/parser": "^7.29.9",
-    "@babel/traverse": "^7.29.8",
+    "@babel/traverse": "^7.29.10",
     "@faker-js/faker": "catalog:",
     "@lucide/lab": "catalog:",
     "@mdn/browser-compat-data": "7.3.17",
@@ -139,7 +139,7 @@
     "@vitest/browser": "catalog:",
     "@vitest/browser-playwright": "catalog:",
     "@yamada-ui/workspace": "workspace:*",
-    "axe-core": "^4.13.0",
+    "axe-core": "^4.14.0",
     "axe-playwright": "^2.2.2",
     "jsdom": "^29.1.1",
     "playwright": "catalog:",
@@ -148,7 +148,7 @@
     "use-mask-input": "^3.14.2",
     "vitest-axe": "catalog:",
     "vitest-browser-react": "2.3.0",
-    "web-features": "3.40.1",
+    "web-features": "3.42.0",
     "yamljs": "catalog:"
   },
   "peerDependencies": {

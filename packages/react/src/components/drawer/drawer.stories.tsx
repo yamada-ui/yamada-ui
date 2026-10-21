@@ -240,6 +240,64 @@ export const CloseOnDrag: Story = () => {
   )
 }
 
+export const DragBarOnly: Story = () => {
+  return (
+    <Drawer.Root closeOnDrag dragHandleOnly>
+      <Drawer.OpenTrigger>
+        <Button>Open Drawer</Button>
+      </Drawer.OpenTrigger>
+
+      <Drawer.Content>
+        <Drawer.Header>
+          <Drawer.Title>ドラゴンボール</Drawer.Title>
+        </Drawer.Header>
+
+        <Drawer.Body>
+          『ドラゴンボール』（DRAGON
+          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+        </Drawer.Body>
+
+        <Drawer.Footer>
+          <Drawer.CloseTrigger>
+            <Button variant="ghost">とじる</Button>
+          </Drawer.CloseTrigger>
+          <Button>Wikipedia</Button>
+        </Drawer.Footer>
+      </Drawer.Content>
+    </Drawer.Root>
+  )
+}
+
+export const DragTrigger: Story = () => {
+  return (
+    <Drawer.Root closeOnDrag dragHandleOnly withDragBar={false}>
+      <Drawer.OpenTrigger>
+        <Button>Open Drawer</Button>
+      </Drawer.OpenTrigger>
+
+      <Drawer.Content>
+        <Drawer.DragTrigger>
+          <Drawer.Header>
+            <Drawer.Title>ドラゴンボール</Drawer.Title>
+          </Drawer.Header>
+        </Drawer.DragTrigger>
+
+        <Drawer.Body>
+          『ドラゴンボール』（DRAGON
+          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+        </Drawer.Body>
+
+        <Drawer.Footer>
+          <Drawer.CloseTrigger>
+            <Button variant="ghost">とじる</Button>
+          </Drawer.CloseTrigger>
+          <Button>Wikipedia</Button>
+        </Drawer.Footer>
+      </Drawer.Content>
+    </Drawer.Root>
+  )
+}
+
 export const HiddenDragBar: Story = () => {
   return (
     <Drawer.Root closeOnDrag withCloseButton withDragBar={false}>

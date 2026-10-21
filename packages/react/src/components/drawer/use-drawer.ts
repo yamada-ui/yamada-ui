@@ -3,7 +3,9 @@
 import type { HTMLProps, PropGetter, SimplePlacement } from "../../core"
 import type { UseModalProps } from "../modal"
 import type { HTMLMotionProps } from "../motion"
+import { useDragControls } from "motion/react"
 import { useCallback, useMemo } from "react"
+import { mergeProps } from "../../core"
 import { cast, handlerAll } from "../../utils"
 import { useModal } from "../modal"
 
@@ -28,6 +30,12 @@ export interface UseDrawerProps extends UseModalProps {
    * @default 0.1
    */
   dragElastic?: number
+  /**
+   * If `true`, only the drag bar and drag triggers can start dragging when `closeOnDrag` is `true`.
+   *
+   * @default false
+   */
+  dragHandleOnly?: boolean
   /**
    * Offset from being dragged to closing.
    *
@@ -54,12 +62,14 @@ export const useDrawer = ({
   closeOnOverlay,
   dragConstraints = 0,
   dragElastic = 0.1,
+  dragHandleOnly = false,
   dragOffset = 80,
   dragVelocity = 100,
   placement = "inline-end",
   onEsc,
   ...rest
 }: UseDrawerProps = {}) => {
+  const dragControls = useDragControls()
   const {
     getContentProps: getModalContentProps,
     onClose,
@@ -137,7 +147,9 @@ export const useDrawer = ({
     (props = {}) => ({
       drag,
       dragConstraints: getDragRestriction(dragConstraints),
+      dragControls: dragHandleOnly ? dragControls : undefined,
       dragElastic: getDragRestriction(dragElastic),
+      dragListener: !dragHandleOnly,
       dragMomentum: false,
       dragSnapToOrigin: true,
       ...cast<HTMLMotionProps<"section">>(
@@ -150,6 +162,8 @@ export const useDrawer = ({
     }),
     [
       drag,
+      dragControls,
+      dragHandleOnly,
       getDragRestriction,
       dragConstraints,
       dragElastic,
@@ -158,18 +172,30 @@ export const useDrawer = ({
     ],
   )
 
-  const getDragBarProps: PropGetter = useCallback(
-    (props) => ({
-      ...props,
-    }),
-    [],
+  const getDragTriggerProps: PropGetter = useCallback(
+    (props = {}) =>
+      mergeProps(
+        {
+          style: {
+            touchAction: closeOnDrag && dragHandleOnly ? "none" : undefined,
+          },
+        },
+        props,
+        {
+          onPointerDown: (ev) => {
+            if (closeOnDrag && dragHandleOnly) dragControls.start(ev)
+          },
+        },
+      )(),
+    [closeOnDrag, dragHandleOnly, dragControls],
   )
 
   return {
     ...modalProps,
     closeOnDrag,
     getContentProps,
-    getDragBarProps,
+    getDragBarProps: getDragTriggerProps,
+    getDragTriggerProps,
     onClose,
   }
 }

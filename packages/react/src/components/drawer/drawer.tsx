@@ -125,6 +125,7 @@ export const DrawerRoot = withProvider<"div", DrawerRootProps, "placement">(
     closeOnDrag,
     dragConstraints,
     dragElastic,
+    dragHandleOnly,
     dragOffset,
     dragVelocity,
     duration = { enter: 0.4, exit: 0.3 },
@@ -160,6 +161,7 @@ export const DrawerRoot = withProvider<"div", DrawerRootProps, "placement">(
       closeOnDrag,
       dragConstraints,
       dragElastic,
+      dragHandleOnly,
       dragOffset,
       dragVelocity,
       placement,
@@ -421,6 +423,17 @@ export const DrawerDragBar = withContext<"div", DrawerDragBarProps>(
   const { getDragBarProps } = useComponentContext()
 
   return { ...getDragBarProps(props) }
+})
+
+export interface DrawerDragTriggerProps extends HTMLStyledProps {}
+
+export const DrawerDragTrigger = withContext<"div", DrawerDragTriggerProps>(
+  "div",
+  { name: "DragTrigger", slot: ["trigger", "drag"] },
+)(undefined, (props) => {
+  const { getDragTriggerProps } = useComponentContext()
+
+  return { asChild: true, ...getDragTriggerProps(props) }
 })
 
 export interface DrawerHeaderProps extends HTMLStyledProps<"header"> {}

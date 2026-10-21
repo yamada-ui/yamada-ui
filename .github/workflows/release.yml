@@ -164,7 +164,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update branch
-        run: git push
+        run: |
+          git pull --rebase origin ${{ github.ref_name }}
+          git push
 
       - name: Update next branch
         if: github.ref_name == 'main' && needs.release.outputs.published == 'true'

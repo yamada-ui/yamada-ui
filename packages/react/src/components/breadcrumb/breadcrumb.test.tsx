@@ -1,3 +1,4 @@
+import type { ReactElement } from "react"
 import { a11y, render, screen } from "#test"
 import { Breadcrumb } from "./"
 
@@ -86,6 +87,34 @@ describe("<Breadcrumb />", () => {
     render(<Breadcrumb.Root items={items} />)
 
     expect(screen.getAllByRole("listitem")).toHaveLength(7)
+  })
+
+  test("renders generated items with an RSC lazy-wrapped link", () => {
+    const link = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (element: ReactElement) => element,
+      _payload: <Breadcrumb.Link data-testid="custom-link" title="Template" />,
+    } as unknown as ReactElement
+
+    render(
+      <Breadcrumb.Root
+        items={[
+          { href: "/home", label: "Home", title: "Home page" },
+          { href: "/current", currentPage: true, label: "Current" },
+        ]}
+        link={link}
+      />,
+    )
+
+    expect(screen.getAllByTestId("custom-link")).toHaveLength(2)
+    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute(
+      "href",
+      "/home",
+    )
+    expect(screen.getByText("Home")).toHaveAttribute("title", "Home page")
+    expect(screen.getByText("Current")).toHaveAttribute("title", "Template")
+    expect(screen.getByText("Current")).toHaveAttribute("aria-current", "page")
+    expect(screen.getByText("Current")).not.toHaveAttribute("href")
   })
 
   test("is correctly truncated", () => {

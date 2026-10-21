@@ -50,7 +50,7 @@ export const Stack = withContext<"div", StackProps>(
     children,
     direction: flexDirection = "column",
     justify: justifyContent,
-    separator,
+    separator: separatorProp,
     wrap: flexWrap,
     ...rest
   }) => {
@@ -58,6 +58,7 @@ export const Stack = withContext<"div", StackProps>(
       value === "column" || value === "column-reverse"
 
     const validChildren = useValidChildren(children)
+    const [separator] = useValidChildren(separatorProp)
     const cloneChildren = useMemo(
       () =>
         separator

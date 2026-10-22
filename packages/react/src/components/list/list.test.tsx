@@ -1,3 +1,5 @@
+import type { ReactElement } from "react"
+import { createRef } from "react"
 import { a11y, render, screen } from "#test"
 import { BoxIcon } from "../icon"
 import { List } from "./"
@@ -29,6 +31,32 @@ describe("<List />", () => {
     expect(screen.getByText("First")).toBeInTheDocument()
     expect(screen.getByText("Second")).toBeInTheDocument()
   })
+
+  test.each([false, true])(
+    "prioritizes the icon's props and preserves its ref (lazy: %s)",
+    (lazy) => {
+      const ref = createRef<SVGSVGElement>()
+      const icon = (
+        <svg ref={ref} aria-label="Custom icon" role="img" width="12" />
+      )
+      const wrapped = {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: (payload: ReactElement) => payload,
+        _payload: icon,
+      } as unknown as ReactElement
+
+      render(
+        <List.Root iconProps={{ width: "24" }}>
+          <List.Item icon={lazy ? wrapped : icon}>Item</List.Item>
+        </List.Root>,
+      )
+
+      const element = screen.getByRole("img", { name: "Custom icon" })
+      expect(element).toHaveAttribute("width", "12")
+      expect(element).toHaveAttribute("data-list-icon")
+      expect(ref.current).toBe(element)
+    },
+  )
 
   test("renders ol element when styleType is decimal", () => {
     render(

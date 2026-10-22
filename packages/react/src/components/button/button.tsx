@@ -18,7 +18,7 @@ import {
   useRef,
 } from "react"
 import { createComponent, getClassName, mergeCSS, styled } from "../../core"
-import { bem, dataAttr, mergeRefs } from "../../utils"
+import { bem, dataAttr, getResolvedChild, mergeRefs } from "../../utils"
 import { getLoadingComponent, isLoadingScheme } from "../loading"
 import { Ripple, useRipple } from "../ripple"
 import { buttonStyle } from "./button.style"
@@ -214,16 +214,16 @@ interface ButtonLoadingProps extends HTMLStyledProps<"svg"> {}
 const ButtonLoading = component<"svg", ButtonLoadingProps>(
   (props) => {
     const { loadingIcon, loadingMessage } = useComponentContext()
-
     const css = useMemo<CSSObject>(
       () => ({
         position: loadingMessage ? "relative" : "absolute",
       }),
       [loadingMessage],
     )
+    const child = getResolvedChild(loadingIcon)
 
-    if (isLoadingScheme(loadingIcon)) {
-      const Component = getLoadingComponent(loadingIcon)
+    if (isLoadingScheme(child)) {
+      const Component = getLoadingComponent(child)
 
       return (
         <Component
@@ -234,11 +234,11 @@ const ButtonLoading = component<"svg", ButtonLoadingProps>(
       )
     }
 
-    if (isValidElement<HTMLStyledProps<"svg">>(loadingIcon))
-      return cloneElement(loadingIcon, {
+    if (isValidElement<HTMLStyledProps<"svg">>(child))
+      return cloneElement(child, {
         ...props,
-        ...loadingIcon.props,
-        css: mergeCSS(css, props.css, loadingIcon.props.css),
+        ...child.props,
+        css: mergeCSS(css, props.css, child.props.css),
       })
 
     return null
@@ -260,15 +260,17 @@ interface ButtonIconProps extends HTMLStyledProps<"svg"> {}
 
 const ButtonIcon = component<"svg", ButtonIconProps>(
   ({ children, ...rest }) => {
-    if (isValidElement<HTMLProps<"svg">>(children))
-      return cloneElement(children, {
+    const child = getResolvedChild(children)
+
+    if (isValidElement<HTMLProps<"svg">>(child))
+      return cloneElement(child, {
         "aria-hidden": true,
         role: "img",
         ...rest,
-        ...children.props,
+        ...child.props,
       })
 
-    return Children.count(children) > 1 ? Children.only(null) : null
+    return Children.count(child) > 1 ? Children.only(null) : null
   },
   { name: "ButtonIcon", className: getClassName(bem("button", "icon")) },
 )()

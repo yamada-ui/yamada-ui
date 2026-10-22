@@ -3,6 +3,47 @@ import { a11y, render, screen } from "#test"
 import { Slot, Slottable } from "./slot"
 
 describe("<Slot />", () => {
+  test.each([false, true])(
+    "preserves single-element arrays resolved from lazy wrappers (slottable: %s)",
+    (slottable) => {
+      const children = {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: (payload: ReactNode) => payload,
+        _payload: [<button key="child">Child</button>],
+      } as unknown as ReactNode
+
+      render(
+        <Slot>{slottable ? <Slottable>{children}</Slottable> : children}</Slot>,
+      )
+
+      expect(screen.queryByRole("button")).not.toBeInTheDocument()
+    },
+  )
+
+  test.each([false, true])(
+    "rejects multiple children resolved from lazy wrappers (slottable: %s)",
+    (slottable) => {
+      const children = {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: (payload: ReactNode) => payload,
+        _payload: [<span key="a">A</span>, <span key="b">B</span>],
+      } as unknown as ReactNode
+      const spy = vi.spyOn(console, "error").mockImplementation(() => undefined)
+
+      try {
+        expect(() =>
+          render(
+            <Slot>
+              {slottable ? <Slottable>{children}</Slottable> : children}
+            </Slot>,
+          ),
+        ).toThrow(/React.Children.only/)
+      } finally {
+        spy.mockRestore()
+      }
+    },
+  )
+
   test("renders component correctly", async () => {
     await a11y(
       <Slot>

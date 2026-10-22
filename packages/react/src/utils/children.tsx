@@ -1,22 +1,25 @@
 import {
   isArray,
   isEmpty,
+  isNull,
   isNumber,
+  isObject,
   isString,
   isUndefined,
 } from "@yamada-ui/utils"
 import * as React from "react"
 
-export function getValidChildren(
-  children: React.ReactNode,
-): React.ReactElement<any>[] {
-  return React.Children.toArray(children).filter((child) =>
-    React.isValidElement(child),
+export function isLazy(value: unknown): value is {
+  $$typeof: symbol
+  _payload: unknown
+  _init: (payload: unknown) => unknown
+} {
+  return (
+    !isNull(value) &&
+    isObject(value) &&
+    "$$typeof" in value &&
+    value.$$typeof === Symbol.for("react.lazy")
   )
-}
-
-export function useValidChildren(children: React.ReactNode) {
-  return React.useMemo(() => getValidChildren(children), [children])
 }
 
 export function isValidElement(child: any): child is React.ReactNode {
@@ -53,6 +56,32 @@ export function isSomeElement(a: any, b: any): boolean {
   if (isSomeDisplayName(a, b)) return true
 
   return false
+}
+
+export function getResolvedChild(value: React.ReactNode): React.ReactNode
+export function getResolvedChild<Y>(
+  value: Y,
+): Y extends { $$typeof: symbol } ? unknown : Y
+export function getResolvedChild(value: unknown): unknown {
+  while (isLazy(value)) {
+    const { _init, _payload } = value
+
+    value = _init(_payload)
+  }
+
+  return value
+}
+
+export function getValidChildren(
+  children: React.ReactNode,
+): React.ReactElement<any>[] {
+  return React.Children.toArray(children).filter((child) =>
+    React.isValidElement(child),
+  )
+}
+
+export function useValidChildren(children: React.ReactNode) {
+  return React.useMemo(() => getValidChildren(children), [children])
 }
 
 export function findChild<Y = any>(

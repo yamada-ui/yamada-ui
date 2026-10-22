@@ -1,7 +1,11 @@
-import { renderHook } from "#test"
+import type { ReactNode } from "react"
+import { createRef, lazy, Suspense } from "react"
+import { expectTypeOf } from "vitest"
+import { act, render, renderHook, screen } from "#test"
 import {
   findChild,
   findChildren,
+  getResolvedChild,
   getValidChildren,
   includesChildren,
   isSomeDisplayName,
@@ -19,6 +23,140 @@ import {
   useValidChildren,
   wrapOrPassProps,
 } from "./children"
+
+describe("getResolvedChild", () => {
+  test("preserves props types without treating lazy wrappers as resolved values", () => {
+    const props = { title: "Title" }
+    const resolved = getResolvedChild(props)
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (payload: unknown) => payload,
+      _payload: props,
+    }
+    const resolvedWrapper = getResolvedChild(wrapped)
+
+    expectTypeOf(resolved).toEqualTypeOf<typeof props>()
+    expectTypeOf(resolvedWrapper).toBeUnknown()
+    expect(resolved).toBe(props)
+    expect(resolvedWrapper).toBe(props)
+  })
+
+  test.each([
+    {
+      name: "element",
+      value: <div key="item" ref={createRef<HTMLDivElement>()} />,
+    },
+    { name: "string", value: "Required" },
+    { name: "number", value: 0 },
+    { name: "boolean", value: false },
+    { name: "null", value: null },
+    { name: "undefined", value: undefined },
+    { name: "array", value: [<span key="item" />, [null, "text"]] },
+    { name: "props", value: { children: <span />, title: "Title" } },
+  ])("preserves $name values with and without a lazy wrapper", ({ value }) => {
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (payload: unknown) => payload,
+      _payload: value,
+    }
+
+    expect(getResolvedChild(value)).toBe(value)
+    expect(getResolvedChild(wrapped)).toBe(value)
+  })
+
+  test("resolves nested lazy wrappers", () => {
+    const element = <span />
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (payload: unknown) => payload,
+      _payload: {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: (payload: unknown) => payload,
+        _payload: element,
+      },
+    }
+
+    expect(getResolvedChild(wrapped)).toBe(element)
+  })
+
+  test("does not initialize a lazy component used as an element type", () => {
+    const load = vi.fn(() => Promise.resolve({ default: () => <span /> }))
+    const Component = lazy(load)
+    const element = <Component />
+
+    expect(getResolvedChild(element)).toBe(element)
+    expect(load).not.toHaveBeenCalled()
+  })
+
+  test("does not traverse arrays or element children", () => {
+    const init = vi.fn(() => <span />)
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: init,
+      _payload: { status: "pending" },
+    }
+    const children = [wrapped]
+    const element = <div>{wrapped as unknown as ReactNode}</div>
+
+    expect(getResolvedChild(children)).toBe(children)
+    expect(getResolvedChild(element)).toBe(element)
+    expect(init).not.toHaveBeenCalled()
+  })
+
+  test.each([
+    { name: "suspension", value: Promise.resolve() },
+    { name: "error", value: new Error("Failed to resolve element") },
+  ])("propagates $name from the initializer unchanged", ({ value }) => {
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: () => {
+        throw value
+      },
+      _payload: null,
+    }
+    let thrown: unknown
+
+    try {
+      getResolvedChild(wrapped)
+    } catch (error) {
+      thrown = error
+    }
+
+    expect(thrown).toBe(value)
+  })
+
+  test("renders resolved content after suspending", async () => {
+    const { promise, resolve } = Promise.withResolvers<void>()
+    let ready = false
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: () => {
+        if (!ready) throw promise
+
+        return <span>Ready</span>
+      },
+      _payload: null,
+    }
+    const Component = () => getResolvedChild(wrapped) as ReactNode
+
+    render(
+      <Suspense fallback={<span>Loading</span>}>
+        <Component />
+      </Suspense>,
+    )
+
+    expect(screen.getByText("Loading")).toBeInTheDocument()
+
+    await act(async () => {
+      ready = true
+      resolve()
+      await promise
+    })
+
+    expect(screen.getByText("Ready")).toBeInTheDocument()
+    expect(screen.queryByText("Loading")).not.toBeInTheDocument()
+  })
+})
 
 describe("getValidChildren", () => {
   test("should filter out non-valid React elements", () => {

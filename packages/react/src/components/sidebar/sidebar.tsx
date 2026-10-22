@@ -36,6 +36,7 @@ import {
   cast,
   createContext,
   dataAttr,
+  getResolvedChild,
   isObject,
   isString,
   runIfFn,
@@ -1430,10 +1431,12 @@ export const SidebarItemIndicator = withContext<
 
   if (indicatorHidden) return null
 
-  if (isValidElement<HTMLProps<"svg">>(children))
-    return cloneElement(children, { ...rest, ...children.props })
+  const child = getResolvedChild(children)
 
-  return Children.count(children) > 1 ? Children.only(null) : null
+  if (isValidElement<HTMLProps<"svg">>(child))
+    return cloneElement(child, { ...rest, ...child.props })
+
+  return Children.count(child) > 1 ? Children.only(null) : null
 }, "itemIndicator")(undefined, (props) => {
   const { indicatorProps } = useItemComponentContext()
 

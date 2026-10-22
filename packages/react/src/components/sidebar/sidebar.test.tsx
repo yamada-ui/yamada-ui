@@ -1,4 +1,5 @@
-import { useRef } from "react"
+import type { ReactElement } from "react"
+import { createRef, useRef } from "react"
 import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { Sidebar } from "."
 import { Button } from "../button"
@@ -341,6 +342,80 @@ describe("<Sidebar />", () => {
       container.querySelector(".ui-sidebar__item-indicator"),
     ).not.toBeInTheDocument()
   })
+
+  test.each([false, true])(
+    "renders a lazy-wrapped indicator with callback=%s",
+    (callback) => {
+      const ref = createRef<SVGSVGElement>()
+      const indicator = {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: (payload: ReactElement) => payload,
+        _payload: <svg ref={ref} data-testid="lazy-indicator" width="12" />,
+      } as unknown as ReactElement
+
+      render(
+        <Sidebar.Root breakpoint={false}>
+          <Sidebar.SidePanel
+            indicator={callback ? () => indicator : indicator}
+            items={[
+              {
+                children: [{ label: "Child", value: "/child" }],
+                label: "Parent",
+                value: "/parent",
+              },
+            ]}
+            indicatorProps={{ width: "24" }}
+          />
+        </Sidebar.Root>,
+      )
+
+      expect(screen.getByTestId("lazy-indicator")).toHaveAttribute(
+        "width",
+        "12",
+      )
+      expect(screen.getByTestId("lazy-indicator")).toHaveAttribute(
+        "aria-hidden",
+        "true",
+      )
+      expect(ref.current).toBe(screen.getByTestId("lazy-indicator"))
+    },
+  )
+
+  test.each(["hidden", "leaf"])(
+    "does not resolve an unused lazy indicator for %s items",
+    (mode) => {
+      const init = vi.fn(() => {
+        throw new Error("Unused indicator")
+      })
+      const indicator = {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: init,
+        _payload: {},
+      } as unknown as ReactElement
+
+      render(
+        <Sidebar.Root breakpoint={false}>
+          <Sidebar.SidePanel
+            indicator={indicator}
+            indicatorHidden={mode === "hidden"}
+            items={[
+              {
+                children:
+                  mode === "hidden"
+                    ? [{ label: "Child", value: "/child" }]
+                    : undefined,
+                label: "Parent",
+                value: "/parent",
+              },
+            ]}
+          />
+        </Sidebar.Root>,
+      )
+
+      expect(init).not.toHaveBeenCalled()
+      expect(screen.getByText("Parent")).toBeInTheDocument()
+    },
+  )
 
   test("should render group items with labels", () => {
     render(

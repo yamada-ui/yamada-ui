@@ -4,7 +4,7 @@ import type { HTMLStyledProps, StyleValue } from "../../core"
 import type { AspectRatioStyle } from "./aspect-ratio.style"
 import { Children } from "react"
 import { createComponent } from "../../core"
-import { replaceObject } from "../../utils"
+import { getResolvedChild, replaceObject } from "../../utils"
 import { aspectRatioStyle } from "./aspect-ratio.style"
 
 export interface AspectRatioProps extends HTMLStyledProps {
@@ -35,11 +35,9 @@ export { AspectRatioPropsContext, useAspectRatioPropsContext }
 export const AspectRatio = withContext("div")(
   undefined,
   ({ children, ratio = 4 / 3, ...rest }) => {
-    const child = Children.only(children)
-
     return {
       ...rest,
-      children: child,
+      children: Children.only(getResolvedChild(children)),
       _before: {
         display: "block",
         h: 0,

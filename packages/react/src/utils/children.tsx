@@ -255,14 +255,16 @@ export const wrapOrPassProps = <Y extends React.PropsWithChildren>(
   nodeOrProps: React.ReactNode | Y,
   additionalProps?: Y,
 ) => {
-  if (isUndefined(nodeOrProps)) {
+  const resolved = getResolvedChild(nodeOrProps)
+
+  if (isUndefined(resolved)) {
     return null
-  } else if (isValidElement(nodeOrProps)) {
+  } else if (isValidElement(resolved)) {
     additionalProps ??= {} as Y
-    additionalProps.children = nodeOrProps
+    additionalProps.children = resolved
 
     return <Component {...additionalProps} />
   } else {
-    return <Component {...additionalProps} {...nodeOrProps} />
+    return <Component {...additionalProps} {...(resolved as Y)} />
   }
 }

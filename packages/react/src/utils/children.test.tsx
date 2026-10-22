@@ -347,6 +347,62 @@ describe("splitChildren", () => {
 })
 
 describe("wrapOrPassProps", () => {
+  test.each([
+    { name: "element", content: "Content", value: <span>Content</span> },
+    { name: "string", content: "Content", value: "Content" },
+    { name: "number", content: "0", value: 0 },
+  ])("wraps lazy-resolved $name values as children", ({ content, value }) => {
+    const Component = ({
+      children,
+      title,
+    }: {
+      children?: ReactNode
+      title?: string
+    }) => <div title={title}>{children}</div>
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (payload: unknown) => payload,
+      _payload: value,
+    } as unknown as ReactNode
+
+    render(wrapOrPassProps(Component, wrapped, { title: "Wrapper" }))
+
+    expect(screen.getByTitle("Wrapper")).toHaveTextContent(content)
+  })
+
+  test("passes lazy-resolved props with their original precedence", () => {
+    const Component = ({
+      children,
+      title,
+    }: {
+      children?: ReactNode
+      title?: string
+    }) => <div title={title}>{children}</div>
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (payload: unknown) => payload,
+      _payload: { children: "Content", title: "Custom" },
+    } as unknown as ReactNode
+
+    render(wrapOrPassProps(Component, wrapped, { title: "Default" }))
+
+    expect(screen.getByTitle("Custom")).toHaveTextContent("Content")
+    expect(screen.queryByTitle("Default")).not.toBeInTheDocument()
+  })
+
+  test("returns null when a lazy wrapper resolves to undefined", () => {
+    const Component = ({ children }: { children?: ReactNode }) => (
+      <div>{children}</div>
+    )
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: () => undefined,
+      _payload: { status: "fulfilled" },
+    } as unknown as ReactNode
+
+    expect(wrapOrPassProps(Component, wrapped)).toBeNull()
+  })
+
   test("should return null for undefined", () => {
     const Component = ({ children }: { children?: React.ReactNode }) => (
       <div>{children}</div>

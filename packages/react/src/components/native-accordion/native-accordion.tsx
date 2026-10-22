@@ -10,7 +10,7 @@ import type {
 } from "./use-native-accordion"
 import { Children, cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { createContext, useSplitChildren } from "../../utils"
+import { createContext, getResolvedChild, useSplitChildren } from "../../utils"
 import { ChevronDownIcon } from "../icon"
 import { nativeAccordionStyle } from "./native-accordion.style"
 import {
@@ -188,16 +188,12 @@ export const NativeAccordionIcon = withContext<"svg", NativeAccordionIconProps>(
 
     if (iconHidden) return null
 
-    if (isValidElement<HTMLProps<"svg">>(children))
-      return cloneElement(
-        children,
-        getIconProps({
-          ...rest,
-          ...children.props,
-        }),
-      )
+    const child = getResolvedChild(children)
 
-    return Children.count(children) > 1 ? Children.only(null) : null
+    if (isValidElement<HTMLProps<"svg">>(child))
+      return cloneElement(child, getIconProps({ ...rest, ...child.props }))
+
+    return Children.count(child) > 1 ? Children.only(null) : null
   },
   "icon",
 )()

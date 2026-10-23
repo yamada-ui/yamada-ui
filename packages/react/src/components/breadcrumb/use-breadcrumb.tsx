@@ -45,11 +45,12 @@ export const useBreadcrumb = ({
   ellipsis,
   endBoundaries = 0,
   items = [],
-  link,
+  link: linkProp,
   startBoundaries = 0,
   ...rest
 }: UseBreadcrumbProps = {}) => {
   const validChildren = useValidChildren(children)
+  const [link] = useValidChildren(linkProp)
   const length = validChildren.length || items.length
   const { t } = useI18n("breadcrumb")
 

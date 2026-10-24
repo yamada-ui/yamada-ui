@@ -8,7 +8,13 @@ import type { AccordionStyle } from "./accordion.style"
 import type { UseAccordionItemProps, UseAccordionProps } from "./use-accordion"
 import { Children, cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { createContext, isString, runIfFn, useSplitChildren } from "../../utils"
+import {
+  createContext,
+  getResolvedChild,
+  isString,
+  runIfFn,
+  useSplitChildren,
+} from "../../utils"
 import { Collapse } from "../collapse"
 import { ChevronDownIcon } from "../icon"
 import { accordionStyle } from "./accordion.style"
@@ -239,16 +245,12 @@ export const AccordionIcon = withContext<"svg", AccordionIconProps>(
 
     if (iconHidden) return null
 
-    if (isValidElement<HTMLProps<"svg">>(children))
-      return cloneElement(
-        children,
-        getIconProps({
-          ...rest,
-          ...children.props,
-        }),
-      )
+    const child = getResolvedChild(children)
 
-    return Children.count(children) > 1 ? Children.only(null) : null
+    if (isValidElement<HTMLProps<"svg">>(child))
+      return cloneElement(child, getIconProps({ ...rest, ...child.props }))
+
+    return Children.count(child) > 1 ? Children.only(null) : null
   },
   "icon",
 )()

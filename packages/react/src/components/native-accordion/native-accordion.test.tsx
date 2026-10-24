@@ -1,4 +1,6 @@
-import { a11y, render } from "#test"
+import type { ReactNode } from "react"
+import { createRef } from "react"
+import { a11y, render, screen } from "#test"
 import { NativeAccordion } from "./"
 
 const items = [
@@ -17,6 +19,58 @@ const items = [
 ]
 
 describe("<NativeAccordion />", () => {
+  test.each(["root", "item", "button"] as const)(
+    "resolves lazy icons supplied through the %s",
+    (source) => {
+      const ref = createRef<SVGSVGElement>()
+      const icon = {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: (payload: ReactNode) => payload,
+        _payload: <svg ref={ref} data-testid="icon" />,
+      } as unknown as ReactNode
+
+      render(
+        <NativeAccordion.Root icon={source === "root" ? icon : undefined}>
+          <NativeAccordion.Item
+            disabled
+            icon={source === "item" ? icon : undefined}
+          >
+            <NativeAccordion.Button
+              icon={source === "button" ? icon : undefined}
+            >
+              Accordion Label
+            </NativeAccordion.Button>
+            <NativeAccordion.Panel>Panel</NativeAccordion.Panel>
+          </NativeAccordion.Item>
+        </NativeAccordion.Root>,
+      )
+
+      const element = screen.getByTestId("icon")
+
+      expect(element).toHaveAttribute("aria-hidden", "true")
+      expect(element).toHaveAttribute("aria-disabled", "true")
+      expect(element).toHaveAttribute("role", "presentation")
+      expect(element).toHaveClass("ui-native-accordion__icon")
+      expect(ref.current).toBe(element)
+    },
+  )
+
+  test("does not resolve hidden lazy icons", () => {
+    const init = vi.fn(() => {
+      throw new Error("Hidden icon")
+    })
+    const icon = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: init,
+      _payload: {},
+    } as unknown as ReactNode
+
+    render(<NativeAccordion.Root icon={icon} iconHidden items={items} />)
+
+    expect(init).not.toHaveBeenCalled()
+    expect(screen.getByText("Accordion Label 1")).toBeInTheDocument()
+  })
+
   test("renders component correctly", async () => {
     await a11y(
       <NativeAccordion.Root>

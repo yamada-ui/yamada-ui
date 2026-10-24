@@ -8,6 +8,7 @@ import { createSlotComponent, styled } from "../../core"
 import {
   createContext,
   dataAttr,
+  getResolvedChild,
   isObject,
   useSplitChildren,
 } from "../../utils"
@@ -320,13 +321,15 @@ interface FieldRequiredIndicatorProps extends HTMLStyledProps<"span"> {}
 
 const FieldRequiredIndicator = withContext<"span", FieldRequiredIndicatorProps>(
   ({ children, ...rest }) => {
-    if (!isValidElement(children))
+    const child = getResolvedChild(children)
+
+    if (!isValidElement(child))
       return (
         <styled.span aria-hidden role="presentation" {...rest}>
-          {children ?? <>*</>}
+          {child || <>*</>}
         </styled.span>
       )
-    else return children
+    else return child
   },
   "requiredIndicator",
 )()

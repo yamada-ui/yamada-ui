@@ -10,6 +10,7 @@ import type {
 import type { ListStyle } from "./list.style"
 import { cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
+import { getResolvedChild } from "../../utils"
 import { listStyle } from "./list.style"
 
 interface ComponentContext extends Pick<
@@ -140,11 +141,13 @@ export interface ListIconProps extends HTMLStyledProps<"svg"> {}
 
 export const ListItemIcon = withContext<"svg", ListIconProps>(
   ({ children, ...rest }) => {
-    if (isValidElement<HTMLProps<"svg">>(children))
-      return cloneElement(children, {
-        ...children.props,
-        ...rest,
+    const child = getResolvedChild(children)
+
+    if (isValidElement<HTMLProps<"svg">>(child))
+      return cloneElement(child, {
         role: "presentation",
+        ...rest,
+        ...child.props,
       })
     else return null
   },

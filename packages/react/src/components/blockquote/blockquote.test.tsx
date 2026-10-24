@@ -1,6 +1,7 @@
 import { a11y, render, screen } from "#test"
 import { QuoteIcon } from "../icon"
 import { Blockquote } from "./"
+import { blockquoteStyle } from "./blockquote.style"
 
 describe("<Blockquote />", () => {
   test("renders component correctly", async () => {
@@ -35,5 +36,9 @@ describe("<Blockquote />", () => {
     expect(screen.getByTestId("caption")).toHaveClass("ui-blockquote__caption")
     expect(screen.getByTestId("cite")).toHaveClass("ui-blockquote__cite")
     expect(screen.getByText("Wikipedia")).toBeInTheDocument()
+  })
+
+  test("uses the muted foreground color token for captions", () => {
+    expect(blockquoteStyle.base?.caption?.color).toBe("fg.muted")
   })
 })

@@ -19,7 +19,7 @@ env:
 
 jobs:
   prepare:
-    name: Utils - Prepare
+    name: Utils - setup
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     outputs:

@@ -19,7 +19,7 @@ env:
 
 jobs:
   prepare:
-    name: React - Prepare
+    name: React - setup
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     outputs:

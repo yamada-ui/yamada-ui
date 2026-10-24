@@ -1,5 +1,70 @@
 # @yamada-ui/react
 
+## 2.3.0
+
+### Minor Changes
+
+- [#7919](https://github.com/yamada-ui/yamada-ui/pull/7919) [`b52de2b`](https://github.com/yamada-ui/yamada-ui/commit/b52de2b658ce86513a2dcfd89a8967d088526ef8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add `isLazy` and `getResolvedChild` utilities to detect and resolve RSC lazy-wrapped values while preserving their original structure.
+
+- [#7918](https://github.com/yamada-ui/yamada-ui/pull/7918) [`a6539c1`](https://github.com/yamada-ui/yamada-ui/commit/a6539c1c04c3d8f80db517350db1bf8bea4575e4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add `dragHandleOnly` and `Drawer.DragTrigger` to restrict drag-to-close gestures to the drag bar and custom handles while preserving content scrolling.
+
+### Patch Changes
+
+- [#7914](https://github.com/yamada-ui/yamada-ui/pull/7914) [`c3af11d`](https://github.com/yamada-ui/yamada-ui/commit/c3af11d29a4425fbff4ed506f76b5cec49858d94) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix `Stack` rendering when its separator is an RSC lazy-wrapped element.
+
+- [#7894](https://github.com/yamada-ui/yamada-ui/pull/7894) [`74d3758`](https://github.com/yamada-ui/yamada-ui/commit/74d3758135841da737635bce77bd27136a4a3178) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7900](https://github.com/yamada-ui/yamada-ui/pull/7900) [`94513f7`](https://github.com/yamada-ui/yamada-ui/commit/94513f79c5a141583c48dff70dbcc0e1f690a314) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7894](https://github.com/yamada-ui/yamada-ui/pull/7894) [`74d3758`](https://github.com/yamada-ui/yamada-ui/commit/74d3758135841da737635bce77bd27136a4a3178) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7900](https://github.com/yamada-ui/yamada-ui/pull/7900) [`94513f7`](https://github.com/yamada-ui/yamada-ui/commit/94513f79c5a141583c48dff70dbcc0e1f690a314) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7894](https://github.com/yamada-ui/yamada-ui/pull/7894) [`74d3758`](https://github.com/yamada-ui/yamada-ui/commit/74d3758135841da737635bce77bd27136a4a3178) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7900](https://github.com/yamada-ui/yamada-ui/pull/7900) [`94513f7`](https://github.com/yamada-ui/yamada-ui/commit/94513f79c5a141583c48dff70dbcc0e1f690a314) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7919](https://github.com/yamada-ui/yamada-ui/pull/7919) [`b52de2b`](https://github.com/yamada-ui/yamada-ui/commit/b52de2b658ce86513a2dcfd89a8967d088526ef8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix `wrapOrPassProps` to resolve RSC lazy-wrapped content before distinguishing children from props.
+
+- [#7925](https://github.com/yamada-ui/yamada-ui/pull/7925) [`eee5201`](https://github.com/yamada-ui/yamada-ui/commit/eee5201705ba9cbfaefb550b746a85dfb1656c09) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use the correct muted foreground color token for the Blockquote caption.
+
+- [#7916](https://github.com/yamada-ui/yamada-ui/pull/7916) [`3acc7e2`](https://github.com/yamada-ui/yamada-ui/commit/3acc7e2a38afd4bf4c8981cd1a4f3a0c70eaa51f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix `Breadcrumb` rendering when its custom link is an RSC lazy-wrapped element.
+
+- [#7919](https://github.com/yamada-ui/yamada-ui/pull/7919) [`b52de2b`](https://github.com/yamada-ui/yamada-ui/commit/b52de2b658ce86513a2dcfd89a8967d088526ef8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix `Slot` to resolve RSC lazy-wrapped children before merging props, including children inside `Slottable`.
+
+- [#7919](https://github.com/yamada-ui/yamada-ui/pull/7919) [`b52de2b`](https://github.com/yamada-ui/yamada-ui/commit/b52de2b658ce86513a2dcfd89a8967d088526ef8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix Sidebar indicators disappearing when passed as RSC lazy-wrapped elements.
+
+- [#7915](https://github.com/yamada-ui/yamada-ui/pull/7915) [`1d6bae5`](https://github.com/yamada-ui/yamada-ui/commit/1d6bae5e397761ee79754e93fee583fe1e5f855e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix `useReorder` rendering when its item template is an RSC lazy-wrapped element.
+
+- [#7918](https://github.com/yamada-ui/yamada-ui/pull/7918) [`a6539c1`](https://github.com/yamada-ui/yamada-ui/commit/a6539c1c04c3d8f80db517350db1bf8bea4575e4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Prioritize nested horizontal and vertical scrolling over Drawer dismissal gestures, and only begin dismissal at the relevant scroll boundary on a new gesture.
+
+- [#7919](https://github.com/yamada-ui/yamada-ui/pull/7919) [`b52de2b`](https://github.com/yamada-ui/yamada-ui/commit/b52de2b658ce86513a2dcfd89a8967d088526ef8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Prioritize explicitly supplied List icon child props over `iconProps` and the default `presentation` role.
+
+  If you relied on `iconProps` or the default role overriding explicit child props, set the desired values directly on the icon itself instead.
+
+- [#7919](https://github.com/yamada-ui/yamada-ui/pull/7919) [`b52de2b`](https://github.com/yamada-ui/yamada-ui/commit/b52de2b658ce86513a2dcfd89a8967d088526ef8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed Button custom icons wrapped in React Server Component lazy elements not rendering.
+
+- [#7919](https://github.com/yamada-ui/yamada-ui/pull/7919) [`b52de2b`](https://github.com/yamada-ui/yamada-ui/commit/b52de2b658ce86513a2dcfd89a8967d088526ef8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed Accordion custom icons wrapped in React Server Component lazy elements not rendering.
+
+- [#7895](https://github.com/yamada-ui/yamada-ui/pull/7895) [`8f82f01`](https://github.com/yamada-ui/yamada-ui/commit/8f82f01aa27305bbd2506440217c8e9b2e7e73f4) Thanks [@dependabot](https://github.com/apps/dependabot)! - Add lazy initializer support for `Calendar` and `DatePicker` default values and months, and preserve initial dates for today highlighting and placeholders.
+
+- [#7919](https://github.com/yamada-ui/yamada-ui/pull/7919) [`b52de2b`](https://github.com/yamada-ui/yamada-ui/commit/b52de2b658ce86513a2dcfd89a8967d088526ef8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix `AspectRatio` to resolve RSC lazy-wrapped children before validating its single child.
+
+- [#7919](https://github.com/yamada-ui/yamada-ui/pull/7919) [`b52de2b`](https://github.com/yamada-ui/yamada-ui/commit/b52de2b658ce86513a2dcfd89a8967d088526ef8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix Tree indicators disappearing when passed as RSC lazy-wrapped elements.
+
+- [#7898](https://github.com/yamada-ui/yamada-ui/pull/7898) [`5418488`](https://github.com/yamada-ui/yamada-ui/commit/541848897716f52148fae604f5c4d2f8509c4fe8) Thanks [@taroj1205](https://github.com/taroj1205)! - Improved TypeScript performance of component props types.
+
+- [#7927](https://github.com/yamada-ui/yamada-ui/pull/7927) [`726fdfe`](https://github.com/yamada-ui/yamada-ui/commit/726fdfe5de82d394199939cd5bb58f1a9997f0d6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix vertical alignment of inline `Code` and `Kbd` components with surrounding text.
+
+- [#7919](https://github.com/yamada-ui/yamada-ui/pull/7919) [`b52de2b`](https://github.com/yamada-ui/yamada-ui/commit/b52de2b658ce86513a2dcfd89a8967d088526ef8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed NativeAccordion custom icons wrapped in React Server Component lazy elements not rendering.
+
+- [#7919](https://github.com/yamada-ui/yamada-ui/pull/7919) [`b52de2b`](https://github.com/yamada-ui/yamada-ui/commit/b52de2b658ce86513a2dcfd89a8967d088526ef8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix `Field` to preserve the accessibility of custom required indicators wrapped by RSC lazy values.
+
+- [#7919](https://github.com/yamada-ui/yamada-ui/pull/7919) [`b52de2b`](https://github.com/yamada-ui/yamada-ui/commit/b52de2b658ce86513a2dcfd89a8967d088526ef8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix List icons disappearing when passed as RSC lazy-wrapped elements.
+
+- Updated dependencies [[`8f82f01`](https://github.com/yamada-ui/yamada-ui/commit/8f82f01aa27305bbd2506440217c8e9b2e7e73f4)]:
+  - @yamada-ui/utils@2.1.8
+
 ## 2.2.10
 
 ### Patch Changes

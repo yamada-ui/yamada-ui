@@ -107,6 +107,7 @@
     },
     "test:coverage:chromium": {
       "dependsOn": ["transit:test"],
+      "passThroughEnv": ["PLAYWRIGHT_BROWSERS_PATH"],
       "inputs": [
         "package.json",
         "**/*.{ts,tsx,mts}",
@@ -119,6 +120,7 @@
     },
     "test:coverage:firefox": {
       "dependsOn": ["transit:test"],
+      "passThroughEnv": ["PLAYWRIGHT_BROWSERS_PATH"],
       "inputs": [
         "package.json",
         "**/*.{ts,tsx,mts}",
@@ -131,6 +133,7 @@
     },
     "test:coverage:webkit": {
       "dependsOn": ["transit:test"],
+      "passThroughEnv": ["PLAYWRIGHT_BROWSERS_PATH"],
       "inputs": [
         "package.json",
         "**/*.{ts,tsx,mts}",

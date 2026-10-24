@@ -19,7 +19,7 @@ env:
 
 jobs:
   prepare:
-    name: Prepare
+    name: React - Prepare
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     outputs:
@@ -78,9 +78,7 @@ jobs:
     runs-on: ubuntu-24.04
     container:
       image: ${{ matrix.env != 'jsdom' && (inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true' || needs.prepare.outputs[matrix.env] == 'true') && needs.prepare.outputs.image || '' }}
-      options: --init --ipc=host
-      env:
-        HOME: /root
+      options: --user 1001 --init --ipc=host
     timeout-minutes: 10
     strategy:
       fail-fast: false

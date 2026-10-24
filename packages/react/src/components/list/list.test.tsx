@@ -33,7 +33,7 @@ describe("<List />", () => {
   })
 
   test.each([false, true])(
-    "preserves iconProps precedence, presentation role, and the icon's ref (lazy: %s)",
+    "prioritizes explicit icon props and preserves the icon's ref (lazy: %s)",
     (lazy) => {
       const ref = createRef<SVGSVGElement>()
       const icon = (
@@ -46,18 +46,31 @@ describe("<List />", () => {
       } as unknown as ReactElement
 
       render(
-        <List.Root iconProps={{ width: "24" }}>
+        <List.Root iconProps={{ role: "none", width: "24" }}>
           <List.Item icon={lazy ? wrapped : icon}>Item</List.Item>
         </List.Root>,
       )
 
       const element = screen.getByLabelText("Custom icon")
-      expect(element).toHaveAttribute("width", "24")
-      expect(element).toHaveAttribute("role", "presentation")
+      expect(element).toHaveAttribute("width", "12")
+      expect(element).toHaveAttribute("role", "img")
       expect(element).toHaveAttribute("data-list-icon")
       expect(ref.current).toBe(element)
     },
   )
+
+  test.each([
+    { role: "img", iconProps: { role: "img" } },
+    { role: "presentation", iconProps: {} },
+  ])("uses $role when the icon omits its role", ({ role, iconProps }) => {
+    render(
+      <List.Root iconProps={iconProps}>
+        <List.Item icon={<svg data-testid="icon" />}>Item</List.Item>
+      </List.Root>,
+    )
+
+    expect(screen.getByTestId("icon")).toHaveAttribute("role", role)
+  })
 
   test("renders ol element when styleType is decimal", () => {
     render(

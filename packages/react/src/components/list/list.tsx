@@ -145,9 +145,9 @@ export const ListItemIcon = withContext<"svg", ListIconProps>(
 
     if (isValidElement<HTMLProps<"svg">>(child))
       return cloneElement(child, {
-        role: "presentation",
-        ...rest,
         ...child.props,
+        ...rest,
+        role: "presentation",
       })
     else return null
   },

@@ -3,6 +3,16 @@ import { a11y, render, screen } from "#test"
 import { Slot, Slottable } from "./slot"
 
 describe("<Slot />", () => {
+  test("passes a11y checks with a lazy-wrapped child", async () => {
+    const child = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (payload: ReactNode) => payload,
+      _payload: <button>Save</button>,
+    } as unknown as ReactNode
+
+    await a11y(<Slot>{child}</Slot>)
+  })
+
   test.each([false, true])(
     "preserves single-element arrays resolved from lazy wrappers (slottable: %s)",
     (slottable) => {

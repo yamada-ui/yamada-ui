@@ -214,6 +214,7 @@ interface ButtonLoadingProps extends HTMLStyledProps<"svg"> {}
 const ButtonLoading = component<"svg", ButtonLoadingProps>(
   (props) => {
     const { loadingIcon, loadingMessage } = useComponentContext()
+
     const css = useMemo<CSSObject>(
       () => ({
         position: loadingMessage ? "relative" : "absolute",

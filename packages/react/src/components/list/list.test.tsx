@@ -33,7 +33,7 @@ describe("<List />", () => {
   })
 
   test.each([false, true])(
-    "prioritizes the icon's props and preserves its ref (lazy: %s)",
+    "preserves iconProps precedence, presentation role, and the icon's ref (lazy: %s)",
     (lazy) => {
       const ref = createRef<SVGSVGElement>()
       const icon = (
@@ -51,8 +51,9 @@ describe("<List />", () => {
         </List.Root>,
       )
 
-      const element = screen.getByRole("img", { name: "Custom icon" })
-      expect(element).toHaveAttribute("width", "12")
+      const element = screen.getByLabelText("Custom icon")
+      expect(element).toHaveAttribute("width", "24")
+      expect(element).toHaveAttribute("role", "presentation")
       expect(element).toHaveAttribute("data-list-icon")
       expect(ref.current).toBe(element)
     },

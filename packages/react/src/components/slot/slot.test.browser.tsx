@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import { createRef } from "react"
 import { page } from "vitest/browser"
-import { a11y, render } from "#test/browser"
+import { render } from "#test/browser"
 import { Slot, Slottable } from "./slot"
 
 function wrapLazy(child: ReactNode): ReactNode {
@@ -77,8 +77,4 @@ describe("<Slot />", () => {
       expect(childRef.current).toBeNull()
     },
   )
-
-  test("passes a11y checks with a lazy-wrapped child", async () => {
-    await a11y(<Slot>{wrapLazy(<button>Save</button>)}</Slot>)
-  })
 })

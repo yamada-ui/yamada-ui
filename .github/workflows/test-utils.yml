@@ -18,9 +18,68 @@ env:
   TURBO_SCM_BASE: ${{ inputs.TURBO_SCM_BASE }}
 
 jobs:
+  prepare:
+    name: Prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      full: ${{ steps.changed-files.outputs.full_any_changed }}
+      jsdom: ${{ steps.changed-files.outputs.jsdom_any_changed }}
+      chromium: ${{ steps.changed-files.outputs.chromium_any_changed }}
+      firefox: ${{ steps.changed-files.outputs.firefox_any_changed }}
+      webkit: ${{ steps.changed-files.outputs.webkit_any_changed }}
+      image: ${{ steps.image.outputs.image }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 0
+
+      - name: Check modified files
+        id: changed-files
+        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96
+        with:
+          files_yaml: |
+            full:
+              - .github/workflows/quality.yml
+              - .github/workflows/test-utils.yml
+              - pnpm-workspace.yaml
+              - '{turbo.json,package.json}'
+              - packages/workspace/package.json
+              - packages/workspace/src/vitest/**
+              - packages/utils/{package.json,vitest.config.ts}
+            jsdom:
+              - packages/utils/src/**/*.{ts,tsx,mts}
+              - '!packages/utils/src/**/*.stories.{ts,tsx}'
+              - '!packages/utils/src/**/*.@(test.browser|test.chromium|test.firefox|test.webkit).{ts,tsx,mts}'
+            chromium:
+              - packages/utils/src/**/*.{ts,tsx,mts}
+              - '!packages/utils/src/**/*.stories.{ts,tsx}'
+              - '!packages/utils/src/**/*.@(test|test.firefox|test.webkit).{ts,tsx,mts}'
+            firefox:
+              - packages/utils/src/**/*.{ts,tsx,mts}
+              - '!packages/utils/src/**/*.stories.{ts,tsx}'
+              - '!packages/utils/src/**/*.@(test|test.chromium|test.webkit).{ts,tsx,mts}'
+            webkit:
+              - packages/utils/src/**/*.{ts,tsx,mts}
+              - '!packages/utils/src/**/*.stories.{ts,tsx}'
+              - '!packages/utils/src/**/*.@(test|test.chromium|test.firefox).{ts,tsx,mts}'
+
+      - name: Resolve browser image
+        id: image
+        run: |
+          version=$(sed -n 's/^  playwright: //p' pnpm-workspace.yaml)
+          echo "image=mcr.microsoft.com/playwright:v${version}-noble" >> "$GITHUB_OUTPUT"
+
   test_utils:
     name: Utils - ${{ matrix.name }}
+    needs: prepare
     runs-on: ubuntu-24.04
+    container:
+      image: ${{ matrix.env != 'jsdom' && (inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true' || needs.prepare.outputs[matrix.env] == 'true') && needs.prepare.outputs.image || '' }}
+      options: --init --ipc=host
+      env:
+        HOME: /root
     timeout-minutes: 10
     strategy:
       fail-fast: false
@@ -29,56 +88,32 @@ jobs:
         include:
           - env: jsdom
             name: JSDOM
-            diff: "!packages/utils/src/**/*.@(test.browser|test.chromium|test.firefox|test.webkit).{ts,tsx,mts}"
           - env: chromium
             name: Chromium
-            diff: "!packages/utils/src/**/*.@(test|test.firefox|test.webkit).{ts,tsx,mts}"
           - env: firefox
             name: Firefox
-            diff: "!packages/utils/src/**/*.@(test|test.chromium|test.webkit).{ts,tsx,mts}"
           - env: webkit
             name: Webkit
-            diff: "!packages/utils/src/**/*.@(test|test.chromium|test.firefox).{ts,tsx,mts}"
     steps:
       - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           fetch-depth: 0
 
-      - name: Check modified files
-        id: changed-files
-        uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
-        with:
-          files_yaml: |
-            full:
-              - .github/workflows/quality.yml
-              - '{turbo.json,package.json}'
-              - packages/workspace/package.json
-              - packages/workspace/src/vitest/**
-              - packages/utils/{package.json,vitest.config.ts}
-            diff:
-              - packages/utils/src/**/*.{ts,tsx,mts}
-              - '!packages/utils/src/**/*.stories.{ts,tsx}'
-              - '${{ matrix.diff }}'
-
       - name: Install
-        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''
+        if: inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true' || needs.prepare.outputs[matrix.env] == 'true'
         uses: ./.github/composite-actions/install
 
-      - name: Setup Browser
-        if: matrix.env != 'jsdom' && (inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != '')
-        run: pnpm utils exec playwright install ${{ matrix.env }} --with-deps ${{ matrix.env == 'chromium' && '--only-shell' || '' }}
-
       - name: Run test (full)
-        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.full_any_changed == 'true'
+        if: inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true'
         run: pnpm turbo run test:coverage:${{ matrix.env }} --filter=./packages/utils -- --retry=3
 
       - name: Run test (diff)
-        if: inputs.TURBO_SCM_BASE != '' && steps.changed-files.outputs.full_any_changed != 'true' && steps.changed-files.outputs.diff_any_changed == 'true'
+        if: inputs.TURBO_SCM_BASE != '' && needs.prepare.outputs.full != 'true' && needs.prepare.outputs[matrix.env] == 'true'
         run: pnpm turbo run test:coverage:${{ matrix.env }} --filter=./packages/utils -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }}
 
       - name: Upload coverage
-        if: inputs.TURBO_SCM_BASE == '' || steps.changed-files.outputs.changed_keys != ''
+        if: inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true' || needs.prepare.outputs[matrix.env] == 'true'
         uses: codecov/codecov-action@0fb7174895f61a3b6b78fc075e0cd60383518dac # v5.5.5
         with:
           disable_search: true

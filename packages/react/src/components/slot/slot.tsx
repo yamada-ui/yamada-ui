@@ -24,23 +24,22 @@ export const Slot: FC<SlotProps> = ({ children, ...rest }) => {
   const slottable = useFindChild(validChildren, Slottable)
 
   if (slottable) {
-    const newElement = getResolvedChild(slottable.props.children)
-
-    const newChildren = validChildren.map((child) => {
-      if (child === slottable) {
-        if (Children.count(newElement) > 1) return Children.only(null)
-        return isValidElement<PropsWithChildren>(newElement)
-          ? newElement.props.children
+    const child = getResolvedChild(slottable.props.children)
+    const children = validChildren.map((validChild) => {
+      if (validChild === slottable) {
+        if (Children.count(child) > 1) return Children.only(null)
+        return isValidElement<PropsWithChildren>(child)
+          ? child.props.children
           : null
       } else {
-        return child
+        return validChild
       }
     })
 
     return (
       <SlotClone {...rest}>
-        {isValidElement(newElement)
-          ? cloneElement(newElement, undefined, newChildren)
+        {isValidElement(child)
+          ? cloneElement(child, undefined, children)
           : null}
       </SlotClone>
     )

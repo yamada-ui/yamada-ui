@@ -8,18 +8,6 @@ import {
 } from "@yamada-ui/utils"
 import * as React from "react"
 
-export function getValidChildren(
-  children: React.ReactNode,
-): React.ReactElement<any>[] {
-  return React.Children.toArray(children).filter((child) =>
-    React.isValidElement(child),
-  )
-}
-
-export function useValidChildren(children: React.ReactNode) {
-  return React.useMemo(() => getValidChildren(children), [children])
-}
-
 export function isLazy(value: unknown): value is {
   $$typeof: symbol
   _payload: unknown
@@ -68,10 +56,6 @@ export function isSomeElement(a: any, b: any): boolean {
   return false
 }
 
-/**
- * Resolves whole-element lazy wrappers without traversing arrays or descendants.
- * Other values retain their identity, and suspensions and errors propagate unchanged.
- */
 export function getResolvedChild(value: React.ReactNode): React.ReactNode
 export function getResolvedChild<Y>(
   value: Y,
@@ -84,6 +68,18 @@ export function getResolvedChild(value: unknown): unknown {
   }
 
   return value
+}
+
+export function getValidChildren(
+  children: React.ReactNode,
+): React.ReactElement<any>[] {
+  return React.Children.toArray(children).filter((child) =>
+    React.isValidElement(child),
+  )
+}
+
+export function useValidChildren(children: React.ReactNode) {
+  return React.useMemo(() => getValidChildren(children), [children])
 }
 
 export function findChild<Y = any>(

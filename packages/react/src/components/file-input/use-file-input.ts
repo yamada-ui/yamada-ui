@@ -1,10 +1,11 @@
 "use client"
 
 import type { ChangeEvent, RefObject } from "react"
+import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict } from "../../utils"
 import type { FieldProps } from "../field"
 import { useCallback, useRef } from "react"
-import { type HTMLProps, mergeProps, type PropGetter } from "../../core"
+import { mergeProps } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {

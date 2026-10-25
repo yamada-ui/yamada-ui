@@ -3055,7 +3055,9 @@ export interface StyleProps {
   /**
    * ### animation-trigger
    *
-   * The CSS `animation-trigger` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-animation-trigger
    *
@@ -6362,9 +6364,7 @@ export interface StyleProps {
   /**
    * ### flow-tolerance
    *
-   * The <code>display: grid-lanes</code> and <code>display: inline-grid-lanes</code> CSS declarations create a layout where items are tightly packed in parallel lanes. Items are placed one by one in the lane that has the most available space. Also known as masonry.
-   *
-   * @baseline `Limited available`
+   * The CSS `flow-tolerance` property.
    *
    * @see https://drafts.csswg.org/css-grid-3/#propdef-flow-tolerance
    *
@@ -6432,8 +6432,8 @@ export interface StyleProps {
    * The <code>font-feature-settings</code> CSS property sets low-level OpenType feature tags for a font. When possible, use <code>font-variant</code> instead.
    *
    * @baseline `Widely available`
-   * @widely_available_date 2019-10-05
-   * @newly_available_date 2017-04-05
+   * @widely_available_date 2018-09-21
+   * @newly_available_date 2016-03-21
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-feature-settings
    */
@@ -11962,7 +11962,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger
    *
-   * The CSS `timeline-trigger` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger
    *
@@ -11972,7 +11974,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-activation-range
    *
-   * The CSS `timeline-trigger-activation-range` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range
    *
@@ -11982,7 +11986,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-activation-range-end
    *
-   * The CSS `timeline-trigger-activation-range-end` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range-end
    *
@@ -11992,7 +11998,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-activation-range-start
    *
-   * The CSS `timeline-trigger-activation-range-start` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range-start
    *
@@ -12002,7 +12010,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-active-range
    *
-   * The CSS `timeline-trigger-active-range` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range
    *
@@ -12012,7 +12022,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-active-range-end
    *
-   * The CSS `timeline-trigger-active-range-end` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range-end
    *
@@ -12022,7 +12034,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-active-range-start
    *
-   * The CSS `timeline-trigger-active-range-start` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range-start
    *
@@ -12032,7 +12046,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-name
    *
-   * The CSS `timeline-trigger-name` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-name
    *
@@ -12042,7 +12058,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-source
    *
-   * The CSS `timeline-trigger-source` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-source
    *
@@ -12255,7 +12273,9 @@ export interface StyleProps {
   /**
    * ### trigger-scope
    *
-   * The CSS `trigger-scope` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-trigger-scope
    *

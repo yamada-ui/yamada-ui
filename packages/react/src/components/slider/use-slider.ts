@@ -17,9 +17,7 @@ import { usePanEvent } from "../../hooks/use-pan-event"
 import { useI18n } from "../../providers/i18n-provider"
 import {
   clampNumber,
-  cx,
   dataAttr,
-  handlerAll,
   isArray,
   isNumber,
   mergeRefs,
@@ -394,38 +392,39 @@ export const useSlider = <Y extends [number, number] | number = number>(
     ({ index = 0, ...rest } = {}) => {
       const { max, min } = getMinMax(index)
 
-      const props: HTMLProps = {
-        ...dataProps,
-        ...ariaProps,
-        "aria-label": t("Slider thumb"),
-        "aria-orientation": orientation,
-        "aria-valuemax": max,
-        "aria-valuemin": min,
-        role: "slider",
-        tabIndex: interactive ? 0 : -1,
-        ...rest,
-        "aria-labelledby": cx(rest["aria-labelledby"], ariaLabelledBy),
-        onKeyDown: handlerAll(rest.onKeyDown, onKeyDown(index)),
-      }
-
-      if (range) {
-        const currentValue = value[index]!
-
-        props["data-start"] = dataAttr(index === 0)
-        props["data-end"] = dataAttr(index === 1)
-        props["aria-valuenow"] = currentValue
-        props["aria-valuetext"] =
-          ariaValueText ??
-          getAriaValueText?.(currentValue, index) ??
-          currentValue.toString()
-      } else {
-        props["data-end"] = dataAttr(index === 0)
-        props["aria-valuenow"] = value
-        props["aria-valuetext"] =
-          ariaValueText ?? getAriaValueText?.(value, index) ?? value.toString()
-      }
-
-      return props
+      return mergeProps(
+        {
+          ...dataProps,
+          ...ariaProps,
+          "aria-label": t("Slider thumb"),
+          "aria-labelledby": ariaLabelledBy,
+          "aria-orientation": orientation,
+          "aria-valuemax": max,
+          "aria-valuemin": min,
+          role: "slider",
+          tabIndex: interactive ? 0 : -1,
+        },
+        range
+          ? {
+              "aria-valuenow": value[index]!,
+              "aria-valuetext":
+                ariaValueText ??
+                getAriaValueText?.(value[index]!, index) ??
+                value[index]!.toString(),
+              "data-end": dataAttr(index === 1),
+              "data-start": dataAttr(index === 0),
+            }
+          : {
+              "aria-valuenow": value,
+              "aria-valuetext":
+                ariaValueText ??
+                getAriaValueText?.(value, index) ??
+                value.toString(),
+              "data-end": dataAttr(index === 0),
+            },
+        rest,
+        { onKeyDown: onKeyDown(index) },
+      )()
     },
     [
       t,

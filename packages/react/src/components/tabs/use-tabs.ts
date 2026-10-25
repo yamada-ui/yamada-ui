@@ -8,7 +8,6 @@ import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
 import {
   createContext,
-  cx,
   handlerAll,
   isUndefined,
   mergeRefs,
@@ -262,12 +261,7 @@ export interface UseTabPanelProps extends HTMLProps {
   index: number
 }
 
-export const useTabPanel = ({
-  id,
-  "aria-labelledby": ariaLabelledbyProp,
-  index,
-  ...rest
-}: UseTabPanelProps) => {
+export const useTabPanel = ({ id, index, ...rest }: UseTabPanelProps) => {
   const { id: rootId, index: selectedIndex, orientation } = useTabsContext()
   const { register } = useTabPanelDescendant()
   const tabId = `${rootId}-tab-${index}`
@@ -276,11 +270,12 @@ export const useTabPanel = ({
   id ??= `${rootId}-panel-${index}`
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) =>
+    (props = {}) =>
       mergeProps(
         {
           id,
-          "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby, tabId),
+          ref: register,
+          "aria-labelledby": tabId,
           "data-orientation": orientation,
           hidden: !selected,
           role: "tabpanel",
@@ -288,9 +283,8 @@ export const useTabPanel = ({
         },
         rest,
         props,
-        { ref: mergeRefs(ref, register) },
       )(),
-    [id, ariaLabelledbyProp, orientation, register, rest, selected, tabId],
+    [id, orientation, register, rest, selected, tabId],
   )
 
   return { index, selected, getRootProps }

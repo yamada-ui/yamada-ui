@@ -15,7 +15,6 @@ import {
   ariaAttr,
   assignRef,
   createContext,
-  cx,
   dataAttr,
   handlerAll,
   mergeRefs,
@@ -449,30 +448,21 @@ export const useSidebarItem = ({
   }, [defaultExpanded])
 
   const getItemProps: PropGetter<"li"> = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => {
-      const merged = mergeProps(
+    (props = {}) =>
+      mergeProps(
         {
           id: itemId,
+          ref: register,
           "aria-current": selected ? "page" : undefined,
           "aria-disabled": ariaAttr(disabled),
-          "aria-labelledby": cx(ariaLabelledby, labelId),
+          "aria-labelledby": labelId,
           "data-disabled": dataAttr(disabled),
           "data-selected": dataAttr(selected),
         },
         rest,
         props,
-        { ref },
-        { ref: register },
-      )()
-
-      return {
-        ...merged,
-        onClick: handlerAll(
-          merged.onClick,
-          !group ? () => onSelectedChange(value) : undefined,
-        ),
-      }
-    },
+        { onClick: !group ? () => onSelectedChange(value) : undefined },
+      )(),
     [
       itemId,
       register,
@@ -535,13 +525,16 @@ export const useSidebarItem = ({
   )
 
   const getContentProps: PropGetter<"ul"> = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id: contentId,
-      "aria-busy": ariaAttr(groupLoading),
-      "aria-labelledby": cx(ariaLabelledby, labelId),
-      "data-disabled": dataAttr(disabled),
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          id: contentId,
+          "aria-busy": ariaAttr(groupLoading),
+          "aria-labelledby": labelId,
+          "data-disabled": dataAttr(disabled),
+        },
+        props,
+      )(),
     [contentId, labelId, disabled, groupLoading],
   )
 

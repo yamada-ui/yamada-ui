@@ -6,14 +6,7 @@ import type { FieldProps } from "../field"
 import { useCallback, useId } from "react"
 import { mergeProps } from "../../core"
 import { useControllableEventState } from "../../hooks/use-controllable-state"
-import {
-  cx,
-  dataAttr,
-  handlerAll,
-  isUndefined,
-  mergeRefs,
-  visuallyHiddenAttributes,
-} from "../../utils"
+import { dataAttr, isUndefined, visuallyHiddenAttributes } from "../../utils"
 import { useFieldProps } from "../field"
 import { useRadioGroupContext } from "./use-radio-group"
 
@@ -75,8 +68,8 @@ export const useRadio = <Y extends string = string>({
       id,
       ref,
       name = groupName,
-      "aria-controls": ariaControlsProp,
-      "aria-labelledby": ariaLabelledbyProp,
+      "aria-controls": ariaControls,
+      "aria-labelledby": ariaLabelledby,
       checked: checkedProp,
       defaultChecked = false,
       disabled,
@@ -131,36 +124,31 @@ export const useRadio = <Y extends string = string>({
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    ({
-      "aria-controls": ariaControls,
-      "aria-describedby": ariaDescribedby,
-      "aria-labelledby": ariaLabelledby,
-      ...props
-    } = {}) => {
-      const sharedProps = {
-        ...dataProps,
-        ...ariaProps,
-        id,
-        type: "radio",
-        name,
-        style: visuallyHiddenAttributes.style,
-        "aria-checked": checked,
-        "aria-controls": cx(ariaControls, ariaControlsProp),
-        "aria-describedby": cx(resolvedAriaDescribedby, ariaDescribedby),
-        "aria-labelledby": cx(ariaLabelledby, ariaLabelledbyProp),
-        "data-checked": dataAttr(checked),
-        checked,
-        disabled,
-        readOnly,
-        required,
-        tabIndex,
-        value,
-        ...props,
-        ref: mergeRefs(props.ref, ref),
-        onBlur: handlerAll(props.onBlur, eventProps.onBlur),
-        onChange: handlerAll(props.onChange, onChange),
-        onFocus: handlerAll(props.onFocus, eventProps.onFocus),
-      }
+    (props = {}) => {
+      const sharedProps = mergeProps(
+        {
+          ...dataProps,
+          ...ariaProps,
+          id,
+          ref,
+          type: "radio",
+          name,
+          style: visuallyHiddenAttributes.style,
+          "aria-checked": checked,
+          "aria-controls": ariaControls,
+          "aria-describedby": resolvedAriaDescribedby,
+          "aria-labelledby": ariaLabelledby,
+          "data-checked": dataAttr(checked),
+          checked,
+          disabled,
+          readOnly,
+          required,
+          tabIndex,
+          value,
+        },
+        props,
+        { ...eventProps, onChange },
+      )()
 
       return getGroupInputProps?.(sharedProps) ?? sharedProps
     },
@@ -170,17 +158,16 @@ export const useRadio = <Y extends string = string>({
       id,
       name,
       checked,
-      ariaControlsProp,
+      ariaControls,
       resolvedAriaDescribedby,
-      ariaLabelledbyProp,
+      ariaLabelledby,
       disabled,
       readOnly,
       required,
       tabIndex,
       value,
       ref,
-      eventProps.onBlur,
-      eventProps.onFocus,
+      eventProps,
       onChange,
       getGroupInputProps,
     ],

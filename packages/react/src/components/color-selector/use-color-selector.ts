@@ -13,7 +13,6 @@ import {
   ariaAttr,
   calcFormat,
   convertColor,
-  cx,
   dataAttr,
   handlerAll,
   hsvTo,
@@ -284,13 +283,16 @@ export const useColorSelector = ({
   )
 
   const getColorSwatchGroupProps: PropGetter = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      "aria-labelledby": cx(ariaLabelledby, swatchGroupLabelId),
-      "data-disabled": dataAttr(disabled),
-      "data-readonly": dataAttr(readOnly),
-      role: "listbox",
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          "aria-labelledby": swatchGroupLabelId,
+          "data-disabled": dataAttr(disabled),
+          "data-readonly": dataAttr(readOnly),
+          role: "listbox",
+        },
+        props,
+      )(),
     [swatchGroupLabelId, disabled, readOnly],
   )
 

@@ -91,9 +91,20 @@ describe("mergeProps", () => {
     const fn1 = vi.fn()
     const fn2 = vi.fn()
     const result = mergeProps(
-      { className: "a", style: { color: "red" }, onClick: fn1 },
-      { className: "b", style: { color: "blue" }, onClick: fn2 },
+      {
+        className: "a",
+        style: { color: "red" },
+        "aria-describedby": "a",
+        onClick: fn1,
+      },
+      {
+        className: "b",
+        style: { color: "blue" },
+        "aria-describedby": "b",
+        onClick: fn2,
+      },
     )({
+      mergeAria: false,
       mergeClassName: false,
       mergeCSS: false,
       mergeEvent: false,
@@ -102,6 +113,38 @@ describe("mergeProps", () => {
     })
     expect(result.className).toBe("b")
     expect(result.onClick).toBe(fn2)
+    expect(result["aria-describedby"]).toBe("b")
+  })
+
+  test("merges space-separated ARIA lists", () => {
+    const result = mergeProps(
+      { "aria-describedby": "error-id" },
+      { "aria-describedby": "helper-id" },
+    )()
+    expect(result["aria-describedby"]).toBe("error-id helper-id")
+  })
+
+  test("mergeAria: one side undefined passes through", () => {
+    expect(
+      mergeProps(
+        { "aria-labelledby": "a" },
+        { "aria-labelledby": undefined },
+      )()["aria-labelledby"],
+    ).toBe("a")
+    expect(
+      mergeProps(
+        { "aria-labelledby": undefined },
+        { "aria-labelledby": "b" },
+      )()["aria-labelledby"],
+    ).toBe("b")
+  })
+
+  test("non-list ARIA attributes keep last wins", () => {
+    const result = mergeProps(
+      { "aria-activedescendant": "x" },
+      { "aria-activedescendant": "y" },
+    )()
+    expect(result["aria-activedescendant"]).toBe("y")
   })
 })
 

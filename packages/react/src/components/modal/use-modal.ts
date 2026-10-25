@@ -5,7 +5,7 @@ import { useCallback } from "react"
 import { mergeProps } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { useI18n } from "../../providers/i18n-provider"
-import { cx, handlerAll, useIds } from "../../utils"
+import { handlerAll, useIds } from "../../utils"
 
 export interface UseModalProps
   extends HTMLProps, Omit<UseDisclosureProps, "timing"> {
@@ -109,19 +109,18 @@ export const useModal = ({
   )
 
   const getContentProps: PropGetter<"section"> = useCallback(
-    ({
-      "aria-describedby": ariaDescribedby,
-      "aria-labelledby": ariaLabelledby,
-      ...props
-    } = {}) => ({
-      id: contentId,
-      "aria-describedby": cx(ariaDescribedby, bodyId),
-      "aria-labelledby": cx(ariaLabelledby, titleId),
-      "aria-modal": "true",
-      role: "dialog",
-      ...props,
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          id: contentId,
+          "aria-describedby": bodyId,
+          "aria-labelledby": titleId,
+          "aria-modal": "true",
+          role: "dialog",
+        },
+        props,
+        { onKeyDown },
+      )(),
     [bodyId, contentId, onKeyDown, titleId],
   )
 

@@ -9,39 +9,25 @@
         "id": "Melchior",
         "account": "melchior-magi",
         "model": [
-          {
-            "id": "opencode-go/minimax-m3",
-            "variant": "high"
-          }
+          { "id": "opencode-go/muse-spark-1.3-contributor", "variant": "high" }
         ]
       },
       "balthasar": {
         "id": "Balthasar",
         "account": "balthasar-magi",
         "model": [
-          {
-            "id": "opencode-go/mimo-v2.5-pro"
-          }
+          { "id": "opencode/glm-5.3-flash-free", "variant": "high" },
+          { "id": "opencode-go/glm-5.3-flash", "variant": "high" }
         ]
       },
       "caspar": {
         "id": "Caspar",
         "account": "caspar-magi",
-        "model": [
-          {
-            "id": "opencode-go/qwen3.7-plus",
-            "variant": "high"
-          }
-        ]
+        "model": [{ "id": "opencode-go/claude-haiku-5-5", "variant": "high" }]
       },
       "hirotomoyamada": {
         "account": "hirotomoyamada",
-        "model": [
-          {
-            "id": "openai/gpt-5.6-terra-fast",
-            "variant": "high"
-          }
-        ],
+        "model": [{ "id": "openai/gpt-6.1-sol-fast", "variant": "high" }],
         "author": {
           "name": "hirotomoyamada",
           "email": "hirotomo.yamada@avap.co.jp"
@@ -66,6 +52,6 @@
     "prompts": {
       "editGuidelines": ".agents/references/pr-edit-guidelines.md"
     },
-    "automation": { "conflict": true, "merge": false }
+    "automation": { "conflict": true, "merge": [[false, { "edited": true }]] }
   }
 }

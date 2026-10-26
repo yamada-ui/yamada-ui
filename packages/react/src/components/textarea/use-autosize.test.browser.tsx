@@ -1,7 +1,7 @@
 import type { ChangeEventHandler, CSSProperties, RefCallback } from "react"
 import type { UseAutosizeProps } from "./use-autosize"
 import { createPortal } from "react-dom"
-import { a11y, page, render, renderHook } from "#test/browser"
+import { page, render, renderHook } from "#test/browser"
 import { useAutosize } from "./use-autosize"
 import { useTextarea } from "./use-textarea"
 
@@ -92,10 +92,6 @@ const HookTextarea = ({
 }
 
 describe("useAutosize", () => {
-  test("passes a11y", async () => {
-    await a11y(<AutoSizeTextarea />, { withProvider: false })
-  })
-
   test("measures the textarea in the shadow root", async () => {
     const host = document.createElement("div")
     const shadowRoot = host.attachShadow({ mode: "open" })

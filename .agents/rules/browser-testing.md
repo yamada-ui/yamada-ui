@@ -283,19 +283,25 @@ Keep side effects outside, and put exactly one assertion inside `waitFor`. Use `
 
 ## Accessibility
 
-### New or modified browser component test files call `a11y()`
+### Run static `a11y()` checks in jsdom
 
 #### DO NOT
 
 ```ts
-// no a11y(...) call anywhere in the file
+import { a11y } from "#test/browser"
+
+test("passes a11y checks", async () => {
+  await a11y(<Foo />)
+})
 ```
 
-Omitting `a11y` lets ARIA contract breakage through — missing labels, invalid roles, contrast regressions — that role-based queries cannot catch on their own. Add `a11y(...)` for new browser component test files and for modified browser component test files when the edited coverage renders a component. Existing browser component tests without `a11y(...)` do not need unrelated migration in the same change, and `renderHook`-only tests are outside this requirement unless they render component DOM.
+Static accessibility checks for labels, roles, and ARIA relationships belong in `*.test.{ts,tsx}` files using `a11y` from `#test`. Rendering a component in a browser test does not require another `a11y(...)` case. Reuse existing jsdom coverage instead of duplicating the same component state across environments.
 
 #### DO
 
 ```ts
+import { a11y } from "#test"
+
 test("passes a11y checks", async () => {
   await a11y(<Foo />)
 })
@@ -305,4 +311,6 @@ test("passes a11y checks when open", async () => {
 })
 ```
 
-At minimum, cover the default state. For components whose accessible tree changes with state (dialogs, menus, disclosures), add a case for each meaningful state. Accessibility is a project-level requirement (`CLAUDE.md` → Critical Rules).
+At minimum, cover the default state in jsdom. For components whose accessible tree changes with state (dialogs, menus, disclosures), cover each meaningful state without duplicating existing coverage. Keep real keyboard interactions, focus movement, and layout-dependent assertions in browser tests.
+
+Use browser-mode `a11y(...)` only when the audited DOM depends on real layout, events, observers, focus operations, browser-only APIs, or engine-specific behavior that jsdom cannot reproduce, as described in [Test Categorization](./test-categorization.md). Make that dependency clear in the test name and setup. Accessibility remains a project-level requirement (`AGENTS.md` → Critical Rules).

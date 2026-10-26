@@ -1,4 +1,4 @@
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { AreaChart, ComposedChart, LineChart, RadarChart } from "."
 
 const data = [
@@ -19,14 +19,6 @@ const charts = [
 ] as const
 
 describe.each(charts)("%s chart dots", (_name, Root, Series) => {
-  test("passes a11y checks", async () => {
-    await a11y(
-      <Root data={data} responsiveContainerProps={responsiveContainerProps}>
-        <Series dataKey="value" isAnimationActive={false} />
-      </Root>,
-    )
-  })
-
   test.each([
     [undefined, "4px"],
     ["6", "6px"],

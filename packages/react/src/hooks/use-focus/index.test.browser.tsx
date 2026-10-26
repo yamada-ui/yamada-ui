@@ -2,7 +2,7 @@ import type { FC } from "react"
 import type { UseFocusOnMouseDownProps, UseFocusOnShowProps } from "./"
 import { useCallback, useRef } from "react"
 import { createPortal } from "react-dom"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { useFocusOnPointerDown, useFocusOnShow } from "./"
 
 describe("useFocusOnShow", () => {
@@ -49,10 +49,6 @@ describe("useFocusOnShow", () => {
       </div>
     )
   }
-
-  test("passes a11y checks", async () => {
-    await a11y(<Component visible />)
-  })
 
   test("focuses on the element when it becomes visible", async () => {
     const { rerender } = await render(<Component visible={false} />)

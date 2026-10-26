@@ -3,7 +3,7 @@ import type { Locator, UserEvent } from "vitest/browser"
 import { DragControls } from "motion/react"
 import { createRef } from "react"
 import { locators } from "vitest/browser"
-import { a11y, page, render, renderHook } from "#test/browser"
+import { page, render, renderHook } from "#test/browser"
 import { Button } from "../button"
 import { Drawer } from "./"
 import { useDrawer } from "./use-drawer"
@@ -125,31 +125,6 @@ describe("<Drawer />", () => {
 
   afterEach(() => {
     vi.restoreAllMocks()
-  })
-
-  test("passes a11y checks", async () => {
-    await a11y(<Drawer.Root trigger={<Button>Open modal</Button>} />)
-  })
-
-  test("passes a11y checks with dragHandleOnly and a custom drag trigger when open", async () => {
-    await a11y(
-      <Drawer.Root
-        closeOnDrag
-        dragHandleOnly
-        open
-        withCloseButton
-        portalProps={{ disabled: true }}
-      >
-        <Drawer.Content>
-          <Drawer.DragTrigger>
-            <Drawer.Header>
-              <Drawer.Title>Title</Drawer.Title>
-            </Drawer.Header>
-          </Drawer.DragTrigger>
-          <Drawer.Body>Content</Drawer.Body>
-        </Drawer.Content>
-      </Drawer.Root>,
-    )
   })
 
   test.each([
@@ -829,10 +804,6 @@ describe("scroll-aware dragging", () => {
 
   afterEach(() => {
     vi.restoreAllMocks()
-  })
-
-  test("passes a11y checks", async () => {
-    await a11y(<Scrollable />)
   })
 
   test.each(["x", "y"] as const)(

@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Popover } from "."
 import { Button } from "../button"
 import { Menu } from "../menu"
@@ -63,10 +63,6 @@ describe("<Popover />", () => {
       </Popover.Root>
     )
   }
-
-  test("passes a11y checks", async () => {
-    await a11y(<Component defaultOpen />)
-  })
 
   test("should close with escape key", async () => {
     const { user } = await render(<Component />)

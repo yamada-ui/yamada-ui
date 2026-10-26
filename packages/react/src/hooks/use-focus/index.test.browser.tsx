@@ -1,4 +1,4 @@
-import type { FC } from "react"
+import type { FC, RefObject } from "react"
 import type { UseFocusOnMouseDownProps, UseFocusOnShowProps } from "./"
 import { useCallback, useRef } from "react"
 import { createPortal } from "react-dom"
@@ -6,6 +6,123 @@ import { page, render } from "#test/browser"
 import { useFocusOnPointerDown, useFocusOnShow } from "./"
 
 describe("useFocusOnShow", () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  const FocusOnShow = ({
+    focusTarget,
+    targetRef,
+    ...props
+  }: UseFocusOnShowProps & {
+    targetRef: RefObject<HTMLDivElement | null>
+  }) => {
+    useFocusOnShow(targetRef, { focusTarget, ...props })
+
+    return null
+  }
+
+  const PendingFocus = ({
+    mounted = true,
+    ...props
+  }: UseFocusOnShowProps & { mounted?: boolean }) => {
+    const targetRef = useRef<HTMLDivElement>(null)
+    const focusTarget = useRef<HTMLButtonElement>(null)
+
+    return (
+      <>
+        <button>Outside</button>
+        <div ref={targetRef}>
+          <button ref={focusTarget}>Focus target</button>
+        </div>
+        {mounted ? (
+          <FocusOnShow
+            focusTarget={focusTarget}
+            shouldFocus
+            targetRef={targetRef}
+            {...props}
+          />
+        ) : null}
+      </>
+    )
+  }
+
+  const controlAnimationFrames = () => {
+    let id = 0
+    const callbacks = new Map<number, FrameRequestCallback>()
+    vi.spyOn(window, "requestAnimationFrame").mockImplementation((callback) => {
+      callbacks.set(++id, callback)
+
+      return id
+    })
+    vi.spyOn(window, "cancelAnimationFrame").mockImplementation((id) => {
+      callbacks.delete(id)
+    })
+
+    return () => {
+      const frame = [...callbacks.values()]
+      callbacks.clear()
+      frame.forEach((callback) => callback(performance.now()))
+    }
+  }
+
+  test.each([
+    ["hidden", { visible: false }],
+    ["disabled", { shouldFocus: false, visible: true }],
+    ["unmounted", { mounted: false, visible: true }],
+  ])("does not run pending focus after being %s", async (_, props) => {
+    const { rerender, user } = await render(<PendingFocus visible={false} />)
+    await user.tab()
+    await expect
+      .element(page.getByRole("button", { name: "Outside" }))
+      .toHaveFocus()
+
+    const advanceFrame = controlAnimationFrames()
+    await rerender(<PendingFocus visible />)
+    advanceFrame()
+    await rerender(<PendingFocus {...props} />)
+    advanceFrame()
+    advanceFrame()
+
+    await expect
+      .element(page.getByRole("button", { name: "Outside" }))
+      .toHaveFocus()
+  })
+
+  test("does not run the initial pending frame after unmount", async () => {
+    const { rerender, user } = await render(<PendingFocus visible={false} />)
+    await user.tab()
+    await expect
+      .element(page.getByRole("button", { name: "Outside" }))
+      .toHaveFocus()
+
+    const advanceFrame = controlAnimationFrames()
+    await rerender(<PendingFocus visible />)
+    await rerender(<PendingFocus mounted={false} visible />)
+    advanceFrame()
+    advanceFrame()
+
+    await expect
+      .element(page.getByRole("button", { name: "Outside" }))
+      .toHaveFocus()
+  })
+
+  test("focuses after reopening when pending focus was cancelled", async () => {
+    const { rerender } = await render(<PendingFocus visible={false} />)
+    const advanceFrame = controlAnimationFrames()
+
+    await rerender(<PendingFocus visible />)
+    advanceFrame()
+    await rerender(<PendingFocus visible={false} />)
+    await rerender(<PendingFocus visible />)
+    advanceFrame()
+    advanceFrame()
+
+    await expect
+      .element(page.getByRole("button", { name: "Focus target" }))
+      .toHaveFocus()
+  })
+
   const Component: FC<Omit<UseFocusOnShowProps, "focusTarget">> = (props) => {
     const ref = useRef<HTMLDivElement>(null)
     const focusRef = useRef<HTMLButtonElement>(null)

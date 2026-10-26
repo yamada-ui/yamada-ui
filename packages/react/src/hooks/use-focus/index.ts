@@ -1,7 +1,7 @@
 "use client"
 
 import type { RefObject } from "react"
-import { useCallback, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import {
   contains,
   getActiveElement,
@@ -40,6 +40,7 @@ export const useFocusOnShow = <Y extends HTMLElement>(
 ) => {
   const trulyShouldFocus = shouldFocus && visible
   const focused = useRef(false)
+  const focusFrame = useRef(0)
 
   const getTarget = useCallback(() => {
     return isRefObject(refOrEl) ? refOrEl.current : refOrEl
@@ -57,30 +58,15 @@ export const useFocusOnShow = <Y extends HTMLElement>(
     const root = isShadowRoot(rootNode) ? rootNode : getDocument(target)
     if (contains(target, getActiveElement(root))) return
 
-    const focusTarget = getFocusTarget()
+    const focusTarget =
+      getFocusTarget() ?? getFirstFocusableElement(target) ?? target
 
-    if (focusTarget) {
-      requestAnimationFrame(() => {
-        focusTarget.focus({ preventScroll })
+    cancelAnimationFrame(focusFrame.current)
+    focusFrame.current = requestAnimationFrame(() => {
+      focusTarget.focus({ preventScroll })
 
-        focused.current = true
-      })
-    } else {
-      const firstFocusable = getFirstFocusableElement(target)
-
-      if (firstFocusable)
-        requestAnimationFrame(() => {
-          firstFocusable.focus({ preventScroll })
-
-          focused.current = true
-        })
-      else
-        requestAnimationFrame(() => {
-          target.focus({ preventScroll })
-
-          focused.current = true
-        })
-    }
+      focused.current = true
+    })
   }, [getTarget, trulyShouldFocus, getFocusTarget, preventScroll])
 
   useUpdateEffect(() => {
@@ -88,8 +74,12 @@ export const useFocusOnShow = <Y extends HTMLElement>(
   }, [trulyShouldFocus])
 
   useUpdateEffect(() => {
-    requestAnimationFrame(onFocus)
+    const frame = requestAnimationFrame(onFocus)
+
+    return () => cancelAnimationFrame(frame)
   }, [onFocus])
+
+  useEffect(() => () => cancelAnimationFrame(focusFrame.current), [onFocus])
 
   useEventListener(getTarget, "transitionend", onFocus)
 }

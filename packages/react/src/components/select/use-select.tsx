@@ -1,6 +1,7 @@
 "use client"
 
 import type { MouseEvent, ReactNode } from "react"
+import type { HTMLProps, PropGetter } from "../../core"
 import type {
   ComboboxItem,
   ComboboxItemWithValue,
@@ -16,7 +17,7 @@ import {
   useMemo,
   useRef,
 } from "react"
-import { type HTMLProps, mergeProps, type PropGetter } from "../../core"
+import { mergeProps } from "../../core"
 import { useCombobox, useComboboxItem } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"

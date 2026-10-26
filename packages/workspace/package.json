@@ -25,7 +25,7 @@
     "./discord": "./src/discord/index.ts"
   },
   "dependencies": {
-    "@cspell/eslint-plugin": "^10.3.6",
+    "@cspell/eslint-plugin": "^10.4.0",
     "@limegrass/eslint-plugin-import-alias": "^1.6.1",
     "@octokit/request-error": "^7.1.2",
     "@octokit/rest": "^22.0.1",

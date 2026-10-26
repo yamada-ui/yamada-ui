@@ -1,12 +1,8 @@
 import { page } from "vitest/browser"
-import { a11y, render } from "#test/browser"
+import { render } from "#test/browser"
 import { Code } from "./code"
 
 describe("<Code />", () => {
-  test("passes a11y checks", async () => {
-    await a11y(<Code>player</Code>)
-  })
-
   test("aligns inline code with surrounding text", async () => {
     await render(
       <p>

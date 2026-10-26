@@ -55,6 +55,7 @@ export default mergeConfig(sharedConfig, {
               instances: [{ browser: browser }],
               provider: playwright(options),
             },
+            fileParallelism: browser !== "firefox",
             globals: true,
             include: [
               "src/**/*.test.browser.{ts,tsx}",

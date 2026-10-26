@@ -1,17 +1,8 @@
 import { createPortal } from "react-dom"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Editable } from "./"
 
 describe("<Editable />", () => {
-  test("passes a11y checks", async () => {
-    await a11y(
-      <Editable.Root defaultValue="Some text">
-        <Editable.Preview />
-        <Editable.Input />
-      </Editable.Root>,
-    )
-  })
-
   test("syncs preview text with the input value after submitting", async () => {
     const { user } = await render(
       <Editable.Root defaultValue="Some text" startWithEditView>

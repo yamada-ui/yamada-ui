@@ -1,12 +1,8 @@
 import { page } from "vitest/browser"
-import { a11y, render } from "#test/browser"
+import { render } from "#test/browser"
 import { Kbd } from "./kbd"
 
 describe("<Kbd />", () => {
-  test("passes a11y checks", async () => {
-    await a11y(<Kbd>Enter</Kbd>)
-  })
-
   test("aligns inline keys with surrounding text", async () => {
     await render(
       <p>

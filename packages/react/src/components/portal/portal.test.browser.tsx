@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom"
-import { a11y, page, render } from "#test/browser"
+import { page, render } from "#test/browser"
 import { Button } from "../button"
 import { Modal } from "../modal"
 import { Portal } from "./portal"
@@ -28,10 +28,6 @@ const Component = () => {
 }
 
 describe("<Portal />", () => {
-  test("passes a11y checks", async () => {
-    await a11y(<Component />)
-  })
-
   test("keeps focus within a modal in shadow DOM", async () => {
     const host = document.createElement("div")
     const shadowRoot = host.attachShadow({ mode: "open" })

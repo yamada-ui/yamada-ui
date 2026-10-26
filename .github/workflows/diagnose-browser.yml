@@ -1,0 +1,116 @@
+name: Diagnose browser lifecycle
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/diagnose-browser.yml
+  workflow_dispatch:
+    inputs:
+      shard:
+        description: Chromium shard
+        type: choice
+        options: ["1/4", "2/4", "3/4", "4/4"]
+        default: "3/4"
+      repetitions:
+        description: Independent runs per configuration
+        type: choice
+        options: ["1", "3", "5"]
+        default: "3"
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      image: ${{ steps.image.outputs.image }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+
+      - name: Resolve browser image
+        id: image
+        run: |
+          version=$(sed -n 's/^  playwright: //p' pnpm-workspace.yaml)
+          echo "image=mcr.microsoft.com/playwright:v${version}-noble" >> "$GITHUB_OUTPUT"
+
+  diagnose:
+    name: Chromium - ${{ matrix.collection }}
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    container:
+      image: ${{ needs.prepare.outputs.image }}
+      options: --user 1001 --init --ipc=host
+    strategy:
+      fail-fast: false
+      matrix:
+        collection: [default, per-file]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Repeat uncached browser tests
+        shell: bash
+        env:
+          COLLECTION: ${{ matrix.collection }}
+          REPETITIONS: ${{ inputs.repetitions || '5' }}
+          SHARD: ${{ inputs.shard || '3/4' }}
+          DEBUG: vitest:browser:*,pw:browser*
+        run: |
+          mkdir -p diagnostics
+          node -p 'JSON.stringify({node: process.version, cpus: require("node:os").availableParallelism(), memory: require("node:os").totalmem()})' > diagnostics/environment.log
+          pnpm react exec playwright --version >> diagnostics/environment.log
+          if [ "$COLLECTION" = per-file ]; then
+            export VITEST_CHROMIUM_GC_DISK_THRESHOLD_GB=1000000
+          fi
+          failed=0
+          for iteration in $(seq 1 "$REPETITIONS"); do
+            output="$PWD/diagnostics/run-$iteration"
+            mkdir -p "$output"
+            pnpm exec rimraf packages/react/node_modules/.vite
+            (
+              while true; do
+                date -u +%FT%TZ
+                df -B1 /tmp /dev/shm
+                grep -E 'MemAvailable|SwapFree' /proc/meminfo
+                for metric in memory.current memory.peak memory.events memory.max; do
+                  if [ -r "/sys/fs/cgroup/$metric" ]; then
+                    printf '%s\n' "$metric"
+                    cat "/sys/fs/cgroup/$metric"
+                  fi
+                done
+                ps -eo pid,ppid,rss,comm --sort=-rss | sed -n '1,20p'
+                sleep 2
+              done
+            ) > "$output/resources.log" 2>&1 &
+            monitor=$!
+            trap 'kill "$monitor" 2>/dev/null || true; wait "$monitor" 2>/dev/null || true' EXIT
+            touch "$output/started"
+            set +e
+            timeout --signal=TERM --kill-after=30s 6m pnpm react test:coverage:chromium --retry=0 --cache=false --shard="$SHARD" --browser.trace=retain-on-failure 2>&1 | tee "$output/tests.log"
+            status=${PIPESTATUS[0]}
+            set -e
+            kill "$monitor" 2>/dev/null || true
+            wait "$monitor" 2>/dev/null || true
+            trap - EXIT
+            printf '%s\n' "$status" > "$output/exit-code"
+            find packages/react/src -type f -newer "$output/started" \( -path '*/__traces__/*' -o -path '*/__screenshots__/*' \) -print0 | tar --null -T - -cf "$output/browser-artifacts.tar"
+            if [ "$status" -ne 0 ]; then
+              failed=1
+            fi
+          done
+          exit "$failed"
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: browser-lifecycle-${{ matrix.collection }}
+          path: diagnostics
+          retention-days: 7

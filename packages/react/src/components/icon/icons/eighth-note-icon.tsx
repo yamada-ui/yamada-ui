@@ -2,14 +2,14 @@
 
 import type { Component } from "../../../core"
 import type { IconProps } from "../icon"
-import { Music3 as OriginalMusic3Icon } from "lucide-react"
+import { EighthNote as OriginalEighthNoteIcon } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
- * `Music3Icon` is [Lucide](https://lucide.dev) SVG icon component.
+ * `EighthNoteIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
  * @see https://yamada-ui.com/docs/components/icon
  */
-export const Music3Icon = component(Icon)({
-  as: OriginalMusic3Icon,
+export const EighthNoteIcon = component(Icon)({
+  as: OriginalEighthNoteIcon,
 }) as Component<"svg", IconProps>

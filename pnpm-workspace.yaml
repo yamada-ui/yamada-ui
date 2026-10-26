@@ -14,7 +14,7 @@ catalog:
   "@emotion/react": ^11.14.0
   "@faker-js/faker": ^10.6.0
   "@lucide/lab": ^0.7.0
-  "@tanstack/react-router": ^1.170.42
+  "@tanstack/react-router": ^1.170.45
   "@types/yamljs": ^0.2.34
   "@typescript/native-preview": 7.0.0-dev.20260707.2
   "@vitest/browser": ^4.1.12
@@ -27,11 +27,11 @@ catalog:
   eslint: ^10.13.0
   "eslint-plugin-unused-imports": ^4.4.1
   motion: ^12.43.0
-  next: ^16.3.8
+  next: ^16.4.2
   oxlint: ^1.88.0
   oxlint-tsgolint: ^0.25.0
   ora: ^9.4.0
-  oxfmt: ^0.72.0
+  oxfmt: ^0.73.0
   playwright: 1.63.0
   picocolors: ^1.1.1
   prettier: ^3.9.10

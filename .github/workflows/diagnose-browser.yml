@@ -9,13 +9,13 @@ on:
       shard:
         description: Chromium shard
         type: choice
-        options: ["1/4", "2/4", "3/4", "4/4"]
-        default: "3/4"
+        options: ["all", "1/4", "2/4", "3/4", "4/4"]
+        default: "all"
       repetitions:
         description: Independent runs per configuration
         type: choice
-        options: ["1", "3", "5"]
-        default: "3"
+        options: ["1", "2", "3", "5"]
+        default: "2"
 
 permissions:
   contents: read
@@ -40,7 +40,7 @@ jobs:
     name: Chromium - ${{ matrix.collection }}
     needs: prepare
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 50
     container:
       image: ${{ needs.prepare.outputs.image }}
       options: --user 1001 --init --ipc=host
@@ -59,8 +59,8 @@ jobs:
         shell: bash
         env:
           COLLECTION: ${{ matrix.collection }}
-          REPETITIONS: ${{ inputs.repetitions || '5' }}
-          SHARD: ${{ inputs.shard || '3/4' }}
+          REPETITIONS: ${{ inputs.repetitions || '2' }}
+          SHARD: ${{ inputs.shard || 'all' }}
           DEBUG: vitest:browser:*,pw:browser*
         run: |
           mkdir -p diagnostics
@@ -68,6 +68,10 @@ jobs:
           pnpm react exec playwright --version >> diagnostics/environment.log
           if [ "$COLLECTION" = per-file ]; then
             export VITEST_CHROMIUM_GC_DISK_THRESHOLD_GB=1000000
+          fi
+          args=()
+          if [ "$SHARD" != all ]; then
+            args+=(--shard="$SHARD")
           fi
           failed=0
           for iteration in $(seq 1 "$REPETITIONS"); do
@@ -93,13 +97,24 @@ jobs:
             trap 'kill "$monitor" 2>/dev/null || true; wait "$monitor" 2>/dev/null || true' EXIT
             touch "$output/started"
             set +e
-            timeout --signal=TERM --kill-after=30s 6m pnpm react test:coverage:chromium --retry=0 --cache=false --shard="$SHARD" --browser.trace=retain-on-failure 2>&1 | tee "$output/tests.log"
+            timeout --signal=TERM --kill-after=30s 15m pnpm react test:coverage:chromium --retry=0 --cache=false "${args[@]}" --browser.trace=retain-on-failure 2>&1 | tee "$output/tests.log"
             status=${PIPESTATUS[0]}
             set -e
             kill "$monitor" 2>/dev/null || true
             wait "$monitor" 2>/dev/null || true
             trap - EXIT
             printf '%s\n' "$status" > "$output/exit-code"
+            node --input-type=module - "$output/tests.log" > "$output/classification.json" <<'NODE'
+          import { readFileSync } from "node:fs"
+          const log = readFileSync(process.argv[2], "utf8").replace(/\x1b\[[0-9;]*m/g, "")
+          const failures = log.match(/^.*\bFAIL\b.*$/gm) ?? []
+          console.log(JSON.stringify({
+            connectionClosed: log.includes("Browser connection was closed"),
+            snacksFailures: failures.filter((line) => line.includes("src/components/snacks/")).length,
+            otherFailures: failures.filter((line) => !line.includes("src/components/snacks/")),
+            gcTriggered: (log.match(/triggered: true/g) ?? []).length,
+          }, null, 2))
+          NODE
             find packages/react/src -type f -newer "$output/started" \( -path '*/__traces__/*' -o -path '*/__screenshots__/*' \) -print0 | tar --null -T - -cf "$output/browser-artifacts.tar"
             if [ "$status" -ne 0 ]; then
               failed=1

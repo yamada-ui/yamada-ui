@@ -238,11 +238,11 @@ export function useMarquee({
       mergeProps(
         {
           style: {
-            "--marquee-delay": `${Number.isFinite(delay) ? delay : 0}s`,
-            "--marquee-direction": animationDirection,
-            "--marquee-distance": `${size.content}px`,
-            "--marquee-duration": `${ready ? duration : 0}s`,
-            "--marquee-loop-count": iterations || "infinite",
+            "--delay": `${Number.isFinite(delay) ? delay : 0}s`,
+            "--direction": animationDirection,
+            "--distance": `${size.content}px`,
+            "--duration": `${ready ? duration : 0}s`,
+            "--loop-count": iterations || "infinite",
           },
           "aria-keyshortcuts": "Space",
           "aria-live": "off",
@@ -346,7 +346,7 @@ export function useMarquee({
 
   const getGroupProps: PropGetter<"div", { index?: number }> = useCallback(
     ({ id, ref, index = 0, ...props } = {}) =>
-      mergeProps({ style: { "--marquee-index": index } }, props, {
+      mergeProps({ style: { "--index": index } }, props, {
         id: index ? undefined : id,
         ref: index ? undefined : mergeRefs(ref, contentRef),
         "aria-hidden": index ? true : undefined,

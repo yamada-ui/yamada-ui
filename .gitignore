@@ -1,49 +1,56 @@
-# pnpm
-.pnpm-store
-
 # dependencies
+.pnpm-store
 node_modules
 
-# compiled
-storybook-static
-coverage
-__screenshots__
-report.json
-trace
-dist
-build
-.vercel
+# build and generated files
+.next
+.react-router
+.tanstack
 .velite
+build
+dist
+storybook-static
 
-# misc
-.DS_Store
-*.pem
-.vscode
-.idea
-.node-version
+# cache
+.turbo
 
-# debug
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# testing
+__screenshots__
+.vitest-attachments
+coverage
+report.json
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+trace
 
-# cache
-.turbo
-.next
-.vitest-attachments
-.react-router
-.tanstack
+# logs
+*.log
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# deployment
+.vercel
+
+# local development tools
 .magi
+.playwright-mcp
 .worktrees
 
-# dotenv environment variables file
+# editors
+.idea
+.vscode
+
+# local environment and secrets
 .env
 .env.*
 !.env.example
+.node-version
 *.local.*
+*.pem
+
+# operating system
+.DS_Store

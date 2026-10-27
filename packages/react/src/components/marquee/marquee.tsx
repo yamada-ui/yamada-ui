@@ -90,9 +90,9 @@ export const MarqueeRoot = withProvider<"div", MarqueeRootProps>(
   "root",
 )(undefined, ({ edgeColor, edgeSize, gap, ...rest }) => ({
   ...rest,
-  "--marquee-edge-color": varAttr(edgeColor, "colors"),
-  "--marquee-edge-size": varAttr(edgeSize, "sizes"),
-  "--marquee-gap": varAttr(gap, "spaces"),
+  "--edge-color": varAttr(edgeColor, "colors"),
+  "--edge-size": varAttr(edgeSize, "sizes"),
+  "--gap": varAttr(gap, "spaces"),
 }))
 
 export interface MarqueeContentProps extends HTMLStyledProps {}

@@ -61,7 +61,7 @@ describe("<Marquee />", () => {
       .poll(() =>
         getComputedStyle(
           page.getByRole("region", { name: "Brands" }).element(),
-        ).getPropertyValue("--marquee-distance"),
+        ).getPropertyValue("--distance"),
       )
       .toBe("240px")
   })
@@ -165,7 +165,7 @@ describe("<Marquee />", () => {
       .poll(() =>
         getComputedStyle(
           page.getByRole("region", { name: "Brands" }).element(),
-        ).getPropertyValue("--marquee-distance"),
+        ).getPropertyValue("--distance"),
       )
       .toBe("120px")
   })
@@ -430,7 +430,7 @@ describe("<Marquee />", () => {
       .poll(() =>
         getComputedStyle(
           page.getByRole("region", { name: "Brands" }).element(),
-        ).getPropertyValue("--marquee-translate-x"),
+        ).getPropertyValue("--translate-x"),
       )
       .toBe("240px")
   })

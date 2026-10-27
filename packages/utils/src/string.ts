@@ -1,14 +1,18 @@
 import type { AnyString } from "./index.type"
 import { isString } from "./assertion"
 
+/**
+ * Joins whitespace-separated tokens, keeping the last occurrence of each token.
+ * Returns `undefined` when no tokens remain.
+ */
 export function cx(
   ...classNames: (null | string | undefined)[]
 ): string | undefined {
-  const result = classNames.filter((className) => !!className)
+  const result = classNames.join(" ").trim()
 
-  if (!result.length) return undefined
+  if (!result) return undefined
 
-  return result.map((className) => className!.trim()).join(" ")
+  return [...new Set(result.split(/\s+/).reverse())].reverse().join(" ")
 }
 
 export function escape(value: string, replaceValue = ""): string {

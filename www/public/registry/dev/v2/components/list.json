@@ -6,6 +6,7 @@
     "hooks": [],
     "providers": []
   },
+  "dependents": { "components": ["prose"], "hooks": [], "providers": [] },
   "section": "components",
   "sources": [
     {

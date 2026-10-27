@@ -160,7 +160,7 @@ export function createComponent<
     const system = useSystem()
 
     className = runIfFn(className, system)
-    className ??= getClassName(name, defaultClassName)(system)
+    className ??= defaultClassName ?? getClassName(name)(system)
 
     return className
   }

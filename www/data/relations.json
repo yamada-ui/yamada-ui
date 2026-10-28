@@ -171,6 +171,19 @@
       "list"
     ]
   },
+  "bubble": {
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "data-list",
+      "list",
+      "timeline",
+      "tree",
+      "native-table",
+      "stat",
+      "table",
+      "area-chart"
+    ]
+  },
   "button": {
     "dependencies": {
       "components": ["group", "loading", "ripple"],

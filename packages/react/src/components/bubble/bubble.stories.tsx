@@ -20,7 +20,7 @@ export const Basic: Story = () => {
 
       <Bubble.Item direction="end">
         <Bubble.Content>趣味でヒーローをやっている者だ</Bubble.Content>
-        <Bubble.Reactions aria-label="リアクション: いいね" role="img">
+        <Bubble.Reactions aria-label="Reactions: thumbs up" role="img">
           👍
         </Bubble.Reactions>
       </Bubble.Item>
@@ -41,7 +41,7 @@ export const Items: Story = () => {
         children: "趣味でヒーローをやっている者だ",
         direction: "end",
         reactions: "👍",
-        reactionsProps: { "aria-label": "リアクション: いいね", role: "img" },
+        reactionsProps: { "aria-label": "Reactions: thumbs up", role: "img" },
       },
       { items: [{ children: "…" }, { children: "なんだ、その適当な設定は…" }] },
     ],
@@ -76,7 +76,7 @@ export const Size: Story = () => {
               退屈な人生に刺激がほしくて他の星を襲うなんてOLでも考えねえぞ
             </Bubble.Content>
             <Bubble.Reactions
-              aria-label="リアクション: いいね、炎、ほか2件"
+              aria-label="Reactions: thumbs up, fire, and 2 more"
               role="img"
             >
               <span>👍</span>
@@ -146,7 +146,7 @@ export const Reactions: Story = () => {
               ここで俺はお前に立ち向かわなくちゃいけないんだ！
             </Bubble.Content>
             <Bubble.Reactions
-              aria-label="リアクション: いいね、炎、ほか2件"
+              aria-label="Reactions: thumbs up, fire, and 2 more"
               placement={row}
               role="img"
             >

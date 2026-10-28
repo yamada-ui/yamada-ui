@@ -1,3 +1,5 @@
+"use client"
+
 import { Center, Calendar as OriginalCalendar } from "@yamada-ui/react"
 
 export function Calendar() {

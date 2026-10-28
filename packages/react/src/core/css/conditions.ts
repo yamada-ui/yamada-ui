@@ -79,9 +79,9 @@ export const attributes = {
   _dark:
     ":host([data-mode=dark]) &, .dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]",
   /**
-   * The CSS `&:is([data-end], [data-group-end])` attribute selector.
+   * The CSS `&:is([data-end], [data-group-end], [data-direction=end])` attribute selector.
    */
-  _end: "&:is([data-end], [data-group-end])",
+  _end: "&:is([data-end], [data-group-end], [data-direction=end])",
   /**
    * The CSS `&:is([data-expanded], [aria-expanded=true])` attribute selector.
    */
@@ -189,9 +189,9 @@ export const attributes = {
    */
   _rtl: "[dir=rtl] &",
   /**
-   * The CSS `&:is([data-start], [data-group-start])` attribute selector.
+   * The CSS `&:is([data-start], [data-group-start], [data-direction=start])` attribute selector.
    */
-  _start: "&:is([data-start], [data-group-start])",
+  _start: "&:is([data-start], [data-group-start], [data-direction=start])",
   /**
    * The CSS `&:is([data-selected], [aria-selected=true])` attribute selector.
    */

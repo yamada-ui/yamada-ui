@@ -17,7 +17,7 @@ const {
 export { ProsePropsContext, useProsePropsContext }
 
 /**
- * `Prose` is a component that styles HTML content. By default, it renders a `div` element.
+ * `Prose` is a component that styles HTML content.
  *
  * @see https://yamada-ui.com/docs/components/prose
  */

@@ -1410,8 +1410,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "animation-trigger": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `animation-trigger` property.",
+          "description": "Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.",
           "experimental": true,
           "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-animation-trigger"
         }
@@ -4471,9 +4472,8 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "flow-tolerance": {
-          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The <code>display: grid-lanes</code> and <code>display: inline-grid-lanes</code> CSS declarations create a layout where items are tightly packed in parallel lanes. Items are placed one by one in the lane that has the most available space. Also known as masonry.",
+          "description": "The CSS `flow-tolerance` property.",
           "experimental": true,
           "see": "https://drafts.csswg.org/css-grid-3/#propdef-flow-tolerance"
         }
@@ -4521,8 +4521,8 @@
         "font-feature-settings": {
           "baseline": {
             "status": "Widely available",
-            "widely_available_date": "2019-10-05",
-            "newly_available_date": "2017-04-05"
+            "widely_available_date": "2018-09-21",
+            "newly_available_date": "2016-03-21"
           },
           "deprecated": false,
           "description": "The <code>font-feature-settings</code> CSS property sets low-level OpenType feature tags for a font. When possible, use <code>font-variant</code> instead.",
@@ -9592,8 +9592,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "timeline-trigger": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `timeline-trigger` property.",
+          "description": "Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.",
           "experimental": true,
           "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger"
         }
@@ -9604,8 +9605,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "timeline-trigger-activation-range": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `timeline-trigger-activation-range` property.",
+          "description": "Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.",
           "experimental": true,
           "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range"
         }
@@ -9616,8 +9618,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "timeline-trigger-activation-range-end": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `timeline-trigger-activation-range-end` property.",
+          "description": "Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.",
           "experimental": true,
           "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range-end"
         }
@@ -9628,8 +9631,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "timeline-trigger-activation-range-start": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `timeline-trigger-activation-range-start` property.",
+          "description": "Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.",
           "experimental": true,
           "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range-start"
         }
@@ -9640,8 +9644,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "timeline-trigger-active-range": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `timeline-trigger-active-range` property.",
+          "description": "Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.",
           "experimental": true,
           "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range"
         }
@@ -9652,8 +9657,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "timeline-trigger-active-range-end": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `timeline-trigger-active-range-end` property.",
+          "description": "Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.",
           "experimental": true,
           "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range-end"
         }
@@ -9664,8 +9670,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "timeline-trigger-active-range-start": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `timeline-trigger-active-range-start` property.",
+          "description": "Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.",
           "experimental": true,
           "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range-start"
         }
@@ -9676,8 +9683,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "timeline-trigger-name": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `timeline-trigger-name` property.",
+          "description": "Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.",
           "experimental": true,
           "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-name"
         }
@@ -9688,8 +9696,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "timeline-trigger-source": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `timeline-trigger-source` property.",
+          "description": "Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.",
           "experimental": true,
           "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-source"
         }
@@ -9871,8 +9880,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "trigger-scope": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `trigger-scope` property.",
+          "description": "Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.",
           "experimental": true,
           "see": "https://drafts.csswg.org/animation-triggers-1/#propdef-trigger-scope"
         }

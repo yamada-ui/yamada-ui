@@ -481,7 +481,8 @@
             {
               "title": "Prose",
               "segment": "prose",
-              "pathname": "/docs/components/prose"
+              "pathname": "/docs/components/prose",
+              "status": "new"
             },
             {
               "title": "QrCode",

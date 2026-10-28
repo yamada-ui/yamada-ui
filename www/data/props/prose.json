@@ -1,0 +1,65 @@
+{
+  "Prose": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "defaultValue": "\"md\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "blockquote": {
+      "type": "\"solid\" | \"subtle\" | \"plain\"",
+      "defaultValue": "\"subtle\"",
+      "description": "The variant of blockquotes.",
+      "required": false
+    },
+    "code": {
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
+      "defaultValue": "\"subtle\"",
+      "description": "The variant of inline code.",
+      "required": false
+    },
+    "hr": {
+      "type": "\"dashed\" | \"dotted\" | \"solid\"",
+      "description": "The variant of separators.",
+      "required": false
+    },
+    "kbd": {
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
+      "defaultValue": "\"outline\"",
+      "description": "The variant of keyboard keys.",
+      "required": false
+    },
+    "link": {
+      "type": "\"plain\" | \"underline\"",
+      "defaultValue": "\"plain\"",
+      "description": "The variant of links.",
+      "required": false
+    },
+    "table": {
+      "type": "\"line\" | \"outline\"",
+      "defaultValue": "\"line\"",
+      "description": "The variant of tables.",
+      "required": false
+    }
+  }
+}

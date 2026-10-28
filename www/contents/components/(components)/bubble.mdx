@@ -1,0 +1,224 @@
+---
+title: Bubble
+description: "`Bubble` is a component that displays conversational content in a message bubble."
+tags: ["data-display", "list"]
+status: new
+storybook: components-bubble--basic
+source: components/bubble
+style: components/bubble/bubble.style.ts
+---
+
+```tsx preview
+<Bubble.Root endItemProps={{ variant: "solid" }}>
+  <Bubble.Item>何者だ、お前は</Bubble.Item>
+
+  <Bubble.Item direction="end">
+    <Bubble.Content>趣味でヒーローをやっている者だ</Bubble.Content>
+    <Bubble.Reactions aria-label="Reactions: thumbs up" role="img">
+      👍
+    </Bubble.Reactions>
+  </Bubble.Item>
+
+  <Bubble.Group>
+    <Bubble.Item>…</Bubble.Item>
+    <Bubble.Item>なんだ、その適当な設定は…</Bubble.Item>
+  </Bubble.Group>
+</Bubble.Root>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { Bubble } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Bubble } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Bubble } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Bubble.Root>
+  <Bubble.Group>
+    <Bubble.Item>
+      <Bubble.Content />
+      <Bubble.Reactions />
+    </Bubble.Item>
+  </Bubble.Group>
+</Bubble.Root>
+```
+
+:::note
+`Bubble.Content` can be omitted.
+:::
+
+### Use items
+
+```tsx preview functional
+const items = useMemo<Bubble.ItemType[]>(
+  () => [
+    { children: "何者だ、お前は" },
+    {
+      children: "趣味でヒーローをやっている者だ",
+      direction: "end",
+      reactions: "👍",
+      reactionsProps: { "aria-label": "Reactions: thumbs up", role: "img" },
+    },
+    { items: [{ children: "…" }, { children: "なんだ、その適当な設定は…" }] },
+  ],
+  [],
+)
+
+return <Bubble.Root items={items} endItemProps={{ variant: "solid" }} />
+```
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["solid", "subtle", "surface", "outline", "panel", "ghost"]}>
+    {(variant, index) => (
+      <Bubble.Root key={index} variant={variant}>
+        <Bubble.Item>ヒーローが逃げたら誰が戦うんだよ</Bubble.Item>
+      </Bubble.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <Bubble.Root key={index} size={size} variant="solid" py="md">
+        <Bubble.Item>
+          <Bubble.Content>
+            退屈な人生に刺激がほしくて他の星を襲うなんてOLでも考えねえぞ
+          </Bubble.Content>
+          <Bubble.Reactions
+            aria-label="Reactions: thumbs up, fire, and 2 more"
+            role="img"
+          >
+            <span>👍</span>
+            <span>🔥</span>
+            <span>+2</span>
+          </Bubble.Reactions>
+        </Bubble.Item>
+      </Bubble.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <Bubble.Root key={index} colorScheme={colorScheme} variant="solid">
+        <Bubble.Item>地球がヤバい!!!</Bubble.Item>
+      </Bubble.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Grouping
+
+To group, use `Bubble.Group`.
+
+```tsx preview
+<Bubble.Root endItemProps={{ variant: "solid" }}>
+  <Bubble.Item>ここに住んでもいいですか？</Bubble.Item>
+
+  <Bubble.Group direction="end">
+    <Bubble.Item>うん</Bubble.Item>
+    <Bubble.Item>絶対ダメ</Bubble.Item>
+  </Bubble.Group>
+
+  <Bubble.Group>
+    <Bubble.Item>ドサッ</Bubble.Item>
+    <Bubble.Item>部屋代払います</Bubble.Item>
+  </Bubble.Group>
+
+  <Bubble.Item direction="end">ちゃんと歯ブラシ持ってきたか？</Bubble.Item>
+</Bubble.Root>
+```
+
+### Display Reactions
+
+To display reactions, use `Bubble.Reactions`. To change the display position, set `placement`. The default is `"end-end"` is set.
+
+```tsx preview
+<VStack>
+  <For
+    each={[
+      "start-start",
+      "start-center",
+      "start-end",
+      "end-start",
+      "end-center",
+      "end-end",
+    ]}
+  >
+    {(placement, index) => (
+      <Bubble.Root key={index} variant="solid" py="md">
+        <Bubble.Item>
+          <Bubble.Content>
+            ここで俺はお前に立ち向かわなくちゃいけないんだ！
+          </Bubble.Content>
+          <Bubble.Reactions
+            aria-label="Reactions: thumbs up, fire, and 2 more"
+            placement={placement}
+            role="img"
+          >
+            <span>👍</span>
+            <span>🔥</span>
+            <span>+2</span>
+          </Bubble.Reactions>
+        </Bubble.Item>
+      </Bubble.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## Props
+
+<PropsTable name="bubble" />
+
+## Accessibility
+
+When displaying non-interactive emoji reactions, set `role="img"` and `aria-label` on `Bubble.Reactions` to describe the reactions.
+
+```tsx
+<Bubble.Root>
+  <Bubble.Item>
+    <Bubble.Content>
+      ここで俺はお前に立ち向かわなくちゃいけないんだ！
+    </Bubble.Content>
+    <Bubble.Reactions
+      aria-label="Reactions: thumbs up, fire, and 2 more"
+      role="img"
+    >
+      <span>👍</span>
+      <span>🔥</span>
+      <span>+2</span>
+    </Bubble.Reactions>
+  </Bubble.Item>
+</Bubble.Root>
+```
+
+## Similar Components
+
+<Similar name="bubble" />

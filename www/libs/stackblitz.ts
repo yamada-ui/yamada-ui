@@ -67,6 +67,18 @@ import {
   Text,
 } from "@yamada-ui/react"
 import dayjs from "dayjs"
+import {
+  SiFigma,
+  SiGithub,
+  SiGitlab,
+  SiJavascript,
+  SiNextdotjs,
+  SiReact,
+  SiStorybook,
+  SiTypescript,
+  SiVercel,
+  SiX,
+} from "react-icons/si"
 import { faker } from "@faker-js/faker"
 
 export interface TableData {
@@ -299,6 +311,69 @@ export const sidebarItems: Sidebar.ItemType[] = [
   },
 ]
 
+export const marqueeItems = [
+  {
+    href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    color: "#f7df1e",
+    icon: SiJavascript,
+    label: "JavaScript",
+  },
+  {
+    href: "https://www.typescriptlang.org",
+    color: "#3178c6",
+    icon: SiTypescript,
+    label: "TypeScript",
+  },
+  {
+    href: "https://github.com",
+    color: "currentColor",
+    icon: SiGithub,
+    label: "GitHub",
+  },
+  {
+    href: "https://gitlab.com",
+    color: "#fc6d26",
+    icon: SiGitlab,
+    label: "GitLab",
+  },
+  {
+    href: "https://vercel.com",
+    color: "currentColor",
+    icon: SiVercel,
+    label: "Vercel",
+  },
+  {
+    href: "https://react.dev",
+    color: "#61dafb",
+    icon: SiReact,
+    label: "React",
+  },
+  {
+    href: "https://nextjs.org",
+    color: "currentColor",
+    icon: SiNextdotjs,
+    label: "Next.js",
+  },
+  {
+    href: "https://storybook.js.org",
+    color: "#ff4785",
+    icon: SiStorybook,
+    label: "Storybook",
+  },
+  {
+    href: "https://www.figma.com",
+    color: "#F24E1E",
+    icon: SiFigma,
+    label: "Figma",
+  },
+  {
+    href: "https://x.com",
+    color: "currentColor",
+    icon: SiX,
+    label: "X",
+  },
+]
+
 export function SidebarDocumentMenuButton() {
   return (
     <Menu.Root
@@ -411,6 +486,7 @@ const PACKAGE = {
     "@yamada-ui/react": "^2",
     react: "^19",
     "react-dom": "^19",
+    "react-icons": "^5",
     dayjs: "^1",
     "@faker-js/faker": "^10",
   },
@@ -522,9 +598,22 @@ const IMPORTS = [
     "createPolarChartData",
     "treeItems",
     "sidebarItems",
+    "marqueeItems",
     "SidebarDocumentMenuButton",
     "SidebarUserMenuButton",
   ].join(", ")} } from "@/misc"`,
+  `import { ${[
+    "SiFigma",
+    "SiGithub",
+    "SiGitlab",
+    "SiJavascript",
+    "SiNextdotjs",
+    "SiReact",
+    "SiStorybook",
+    "SiTypescript",
+    "SiVercel",
+    "SiX",
+  ].join(", ")} } from "react-icons/si"`,
   ...Object.entries(EXTERNAL_MODULES).map(([source, value]) => {
     if (Array.isArray(value))
       return `import { ${value.join(", ")} } from "${source}"`

@@ -171,6 +171,19 @@
       "list"
     ]
   },
+  "bubble": {
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "data-list",
+      "list",
+      "timeline",
+      "tree",
+      "native-table",
+      "stat",
+      "table",
+      "area-chart"
+    ]
+  },
   "button": {
     "dependencies": {
       "components": ["group", "loading", "ripple"],
@@ -965,6 +978,9 @@
       "link"
     ]
   },
+  "marquee": {
+    "resembles": ["carousel", "scroll-area"]
+  },
   "menu": {
     "dependencies": {
       "components": ["popover", "icon"],
@@ -1242,6 +1258,30 @@
       "skeleton",
       "snacks",
       "status"
+    ]
+  },
+  "prose": {
+    "dependencies": {
+      "components": [
+        "blockquote",
+        "code",
+        "heading",
+        "link",
+        "list",
+        "native-table",
+        "separator"
+      ],
+      "hooks": []
+    },
+    "resembles": [
+      "blockquote",
+      "code",
+      "em",
+      "heading",
+      "highlight",
+      "kbd",
+      "mark",
+      "text"
     ]
   },
   "qr-code": {

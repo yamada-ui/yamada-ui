@@ -9,68 +9,71 @@ style: components/marquee/marquee.style.ts
 ---
 
 ```tsx preview functional
-const items = [
-  {
-    href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-    color: "#f7df1e",
-    icon: SiJavascript,
-    label: "JavaScript",
-  },
-  {
-    href: "https://www.typescriptlang.org",
-    color: "#3178c6",
-    icon: SiTypescript,
-    label: "TypeScript",
-  },
-  {
-    href: "https://github.com",
-    color: "currentColor",
-    icon: SiGithub,
-    label: "GitHub",
-  },
-  {
-    href: "https://gitlab.com",
-    color: "#fc6d26",
-    icon: SiGitlab,
-    label: "GitLab",
-  },
-  {
-    href: "https://vercel.com",
-    color: "currentColor",
-    icon: SiVercel,
-    label: "Vercel",
-  },
-  {
-    href: "https://react.dev",
-    color: "#61dafb",
-    icon: SiReact,
-    label: "React",
-  },
-  {
-    href: "https://nextjs.org",
-    color: "currentColor",
-    icon: SiNextdotjs,
-    label: "Next.js",
-  },
-  {
-    href: "https://storybook.js.org",
-    color: "#ff4785",
-    icon: SiStorybook,
-    label: "Storybook",
-  },
-  {
-    href: "https://www.figma.com",
-    color: "#F24E1E",
-    icon: SiFigma,
-    label: "Figma",
-  },
-  {
-    href: "https://x.com",
-    color: "currentColor",
-    icon: SiX,
-    label: "X",
-  },
-]
+const items = useMemo(
+  () => [
+    {
+      href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+      color: "#f7df1e",
+      icon: SiJavascript,
+      label: "JavaScript",
+    },
+    {
+      href: "https://www.typescriptlang.org",
+      color: "#3178c6",
+      icon: SiTypescript,
+      label: "TypeScript",
+    },
+    {
+      href: "https://github.com",
+      color: "currentColor",
+      icon: SiGithub,
+      label: "GitHub",
+    },
+    {
+      href: "https://gitlab.com",
+      color: "#fc6d26",
+      icon: SiGitlab,
+      label: "GitLab",
+    },
+    {
+      href: "https://vercel.com",
+      color: "currentColor",
+      icon: SiVercel,
+      label: "Vercel",
+    },
+    {
+      href: "https://react.dev",
+      color: "#61dafb",
+      icon: SiReact,
+      label: "React",
+    },
+    {
+      href: "https://nextjs.org",
+      color: "currentColor",
+      icon: SiNextdotjs,
+      label: "Next.js",
+    },
+    {
+      href: "https://storybook.js.org",
+      color: "#ff4785",
+      icon: SiStorybook,
+      label: "Storybook",
+    },
+    {
+      href: "https://www.figma.com",
+      color: "#F24E1E",
+      icon: SiFigma,
+      label: "Figma",
+    },
+    {
+      href: "https://x.com",
+      color: "currentColor",
+      icon: SiX,
+      label: "X",
+    },
+  ],
+  [],
+)
 
 return (
   <Marquee.Root aria-label="Brand logos" gap="xl">

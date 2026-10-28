@@ -479,6 +479,11 @@
               "pathname": "/docs/components/progress"
             },
             {
+              "title": "Prose",
+              "segment": "prose",
+              "pathname": "/docs/components/prose"
+            },
+            {
               "title": "QrCode",
               "segment": "qr-code",
               "pathname": "/docs/components/qr-code"

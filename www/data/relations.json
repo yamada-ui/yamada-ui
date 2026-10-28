@@ -1244,6 +1244,30 @@
       "status"
     ]
   },
+  "prose": {
+    "dependencies": {
+      "components": [
+        "blockquote",
+        "code",
+        "heading",
+        "link",
+        "list",
+        "native-table",
+        "separator"
+      ],
+      "hooks": []
+    },
+    "resembles": [
+      "blockquote",
+      "code",
+      "em",
+      "heading",
+      "highlight",
+      "kbd",
+      "mark",
+      "text"
+    ]
+  },
   "qr-code": {
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [

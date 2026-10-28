@@ -20,6 +20,8 @@ import dayjs from "dayjs"
 import { AnimatePresence } from "motion/react"
 import React, { isValidElement } from "react"
 import { useForm } from "react-hook-form"
+import Markdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 import { transform as originalTransform } from "sucrase"
 
 interface TableData {
@@ -354,7 +356,9 @@ const components = {
   createTableData,
   dayjs,
   faker,
+  Markdown,
   React,
+  remarkGfm,
   SidebarDocumentMenuButton,
   sidebarItems,
   SidebarUserMenuButton,

@@ -20,6 +20,18 @@ import dayjs from "dayjs"
 import { AnimatePresence } from "motion/react"
 import React, { isValidElement } from "react"
 import { useForm } from "react-hook-form"
+import {
+  SiFigma,
+  SiGithub,
+  SiGitlab,
+  SiJavascript,
+  SiNextdotjs,
+  SiReact,
+  SiStorybook,
+  SiTypescript,
+  SiVercel,
+  SiX,
+} from "react-icons/si"
 import { transform as originalTransform } from "sucrase"
 
 interface TableData {
@@ -252,6 +264,69 @@ const sidebarItems: Sidebar.ItemType[] = [
   },
 ]
 
+const marqueeItems = [
+  {
+    href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    color: "#f7df1e",
+    icon: SiJavascript,
+    label: "JavaScript",
+  },
+  {
+    href: "https://www.typescriptlang.org",
+    color: "#3178c6",
+    icon: SiTypescript,
+    label: "TypeScript",
+  },
+  {
+    href: "https://github.com",
+    color: "currentColor",
+    icon: SiGithub,
+    label: "GitHub",
+  },
+  {
+    href: "https://gitlab.com",
+    color: "#fc6d26",
+    icon: SiGitlab,
+    label: "GitLab",
+  },
+  {
+    href: "https://vercel.com",
+    color: "currentColor",
+    icon: SiVercel,
+    label: "Vercel",
+  },
+  {
+    href: "https://react.dev",
+    color: "#61dafb",
+    icon: SiReact,
+    label: "React",
+  },
+  {
+    href: "https://nextjs.org",
+    color: "currentColor",
+    icon: SiNextdotjs,
+    label: "Next.js",
+  },
+  {
+    href: "https://storybook.js.org",
+    color: "#ff4785",
+    icon: SiStorybook,
+    label: "Storybook",
+  },
+  {
+    href: "https://www.figma.com",
+    color: "#F24E1E",
+    icon: SiFigma,
+    label: "Figma",
+  },
+  {
+    href: "https://x.com",
+    color: "currentColor",
+    icon: SiX,
+    label: "X",
+  },
+]
+
 function SidebarDocumentMenuButton() {
   return (
     <Menu.Root
@@ -354,10 +429,21 @@ const components = {
   createTableData,
   dayjs,
   faker,
+  marqueeItems,
   React,
   SidebarDocumentMenuButton,
   sidebarItems,
   SidebarUserMenuButton,
+  SiFigma,
+  SiGithub,
+  SiGitlab,
+  SiJavascript,
+  SiNextdotjs,
+  SiReact,
+  SiStorybook,
+  SiTypescript,
+  SiVercel,
+  SiX,
   treeItems,
   useForm,
   ...React,

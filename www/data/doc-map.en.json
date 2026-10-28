@@ -751,6 +751,12 @@
               "pathname": "/docs/components/loading"
             },
             {
+              "title": "Marquee",
+              "segment": "marquee",
+              "pathname": "/docs/components/marquee",
+              "status": "new"
+            },
+            {
               "title": "Motion",
               "segment": "motion",
               "pathname": "/docs/components/motion"

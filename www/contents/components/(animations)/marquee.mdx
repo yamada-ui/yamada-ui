@@ -1,0 +1,491 @@
+---
+title: Marquee
+description: "`Marquee` is a component that continuously scrolls content horizontally or vertically."
+tags: ["animation", "scrollable", "list"]
+status: new
+storybook: components-marquee--basic
+source: components/marquee
+style: components/marquee/marquee.style.ts
+---
+
+```tsx preview functional
+const items = [
+  {
+    href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    color: "#f7df1e",
+    icon: SiJavascript,
+    label: "JavaScript",
+  },
+  {
+    href: "https://www.typescriptlang.org",
+    color: "#3178c6",
+    icon: SiTypescript,
+    label: "TypeScript",
+  },
+  {
+    href: "https://github.com",
+    color: "currentColor",
+    icon: SiGithub,
+    label: "GitHub",
+  },
+  {
+    href: "https://gitlab.com",
+    color: "#fc6d26",
+    icon: SiGitlab,
+    label: "GitLab",
+  },
+  {
+    href: "https://vercel.com",
+    color: "currentColor",
+    icon: SiVercel,
+    label: "Vercel",
+  },
+  {
+    href: "https://react.dev",
+    color: "#61dafb",
+    icon: SiReact,
+    label: "React",
+  },
+  {
+    href: "https://nextjs.org",
+    color: "currentColor",
+    icon: SiNextdotjs,
+    label: "Next.js",
+  },
+  {
+    href: "https://storybook.js.org",
+    color: "#ff4785",
+    icon: SiStorybook,
+    label: "Storybook",
+  },
+  {
+    href: "https://www.figma.com",
+    color: "#F24E1E",
+    icon: SiFigma,
+    label: "Figma",
+  },
+  {
+    href: "https://x.com",
+    color: "currentColor",
+    icon: SiX,
+    label: "X",
+  },
+]
+
+return (
+  <Marquee.Root aria-label="Brand logos" gap="xl">
+    {items.map(({ color, icon, label }) => (
+      <Marquee.Item key={label} px="xl" py="sm">
+        <Icon
+          as={icon}
+          aria-hidden={false}
+          aria-label={label}
+          color={color}
+          fontSize="6xl"
+        />
+      </Marquee.Item>
+    ))}
+  </Marquee.Root>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { Marquee } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Marquee } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Marquee } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Marquee.Root>
+  <Marquee.Edge direction="start" />
+  <Marquee.Content>
+    <Marquee.Item />
+  </Marquee.Content>
+  <Marquee.Edge direction="end" />
+</Marquee.Root>
+```
+
+:::note
+`Marquee.Content` can be omitted.
+:::
+
+### Change Direction
+
+To change the direction, set `orientation` to `"horizontal"` or `"vertical"`. By default, `"horizontal"` is set.
+
+```tsx preview
+<VStack>
+  <For each={["horizontal", "vertical"]}>
+    {(orientation, key) => (
+      <Marquee.Root
+        key={key}
+        aria-label={`${orientation} brand logos`}
+        contain="inline-size"
+        gap="xl"
+        h={orientation === "vertical" ? "xl" : undefined}
+        orientation={orientation}
+      >
+        {marqueeItems.map(({ color, icon, label }) => (
+          <Marquee.Item
+            key={label}
+            px={orientation === "vertical" ? "sm" : "xl"}
+            py={orientation === "vertical" ? "xl" : "sm"}
+          >
+            <Icon
+              as={icon}
+              aria-hidden={false}
+              aria-label={label}
+              color={color}
+              fontSize="6xl"
+            />
+          </Marquee.Item>
+        ))}
+      </Marquee.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Scroll Direction
+
+To change the scrolling direction, set `direction` to `"start"` or `"end"`. By default, `"start"` is set.
+
+```tsx preview
+<VStack>
+  <For each={["start", "end"]}>
+    {(direction, key) => (
+      <Marquee.Root
+        key={key}
+        aria-label={`Brand logos moving toward ${direction}`}
+        contain="inline-size"
+        direction={direction}
+        gap="xl"
+      >
+        {marqueeItems.map(({ color, icon, label }) => (
+          <Marquee.Item key={label} px="xl" py="sm">
+            <Icon
+              as={icon}
+              aria-hidden={false}
+              aria-label={label}
+              color={color}
+              fontSize="6xl"
+            />
+          </Marquee.Item>
+        ))}
+      </Marquee.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Reverse Scroll Direction
+
+To reverse the scrolling direction, set `reverse` to `true`.
+
+```tsx preview
+<Marquee.Root aria-label="Brand logos" gap="xl" reverse>
+  {marqueeItems.map(({ color, icon, label }) => (
+    <Marquee.Item key={label} px="xl" py="sm">
+      <Icon
+        as={icon}
+        aria-hidden={false}
+        aria-label={label}
+        color={color}
+        fontSize="6xl"
+      />
+    </Marquee.Item>
+  ))}
+</Marquee.Root>
+```
+
+### Change Speed
+
+To change the scrolling speed, set a numerical value (pixels per second) to `speed`. By default, `50` is set.
+
+```tsx preview
+<VStack>
+  <For each={[25, 50, 100]}>
+    {(speed, key) => (
+      <Marquee.Root
+        key={key}
+        aria-label={`Brand logos at ${speed} pixels per second`}
+        contain="inline-size"
+        gap="xl"
+        speed={speed}
+      >
+        {marqueeItems.map(({ color, icon, label }) => (
+          <Marquee.Item key={label} px="xl" py="sm">
+            <Icon
+              as={icon}
+              aria-hidden={false}
+              aria-label={label}
+              color={color}
+              fontSize="6xl"
+            />
+          </Marquee.Item>
+        ))}
+      </Marquee.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Duration
+
+To change the duration, set a numerical value (seconds) to `duration`. When set, `duration` takes precedence over `speed`.
+
+```tsx preview
+<Marquee.Root aria-label="Brand logos" duration={10} gap="xl">
+  {marqueeItems.map(({ color, icon, label }) => (
+    <Marquee.Item key={label} px="xl" py="sm">
+      <Icon
+        as={icon}
+        aria-hidden={false}
+        aria-label={label}
+        color={color}
+        fontSize="6xl"
+      />
+    </Marquee.Item>
+  ))}
+</Marquee.Root>
+```
+
+### Delay
+
+To delay the start of the animation, set a numerical value (seconds) to `delay`.
+
+```tsx preview
+<Marquee.Root aria-label="Brand logos" delay={2} gap="xl">
+  {marqueeItems.map(({ color, icon, label }) => (
+    <Marquee.Item key={label} px="xl" py="sm">
+      <Icon
+        as={icon}
+        aria-hidden={false}
+        aria-label={label}
+        color={color}
+        fontSize="6xl"
+      />
+    </Marquee.Item>
+  ))}
+</Marquee.Root>
+```
+
+### Change Loop Count
+
+To change the loop count, set `loopCount` to a numerical value.
+
+```tsx preview
+<Marquee.Root
+  aria-label="Brand logos scrolling three times"
+  gap="xl"
+  loopCount={3}
+>
+  {marqueeItems.map(({ color, icon, label }) => (
+    <Marquee.Item key={label} px="xl" py="sm">
+      <Icon
+        as={icon}
+        aria-hidden={false}
+        aria-label={label}
+        color={color}
+        fontSize="6xl"
+      />
+    </Marquee.Item>
+  ))}
+</Marquee.Root>
+```
+
+### Pause on Hover
+
+To pause on hover, set `pauseOnHover` to `true`.
+
+```tsx preview
+<Marquee.Root aria-label="Brand links" gap="xl" pauseOnHover>
+  {marqueeItems.map(({ href, color, icon, label }) => (
+    <Marquee.Item key={label} px="xl" py="sm">
+      <Button
+        as="a"
+        href={href}
+        variant="ghost"
+        aria-label={label}
+        color={color}
+        h="auto"
+        px="2rem"
+        py="2"
+      >
+        <Icon as={icon} fontSize="6xl" />
+      </Button>
+    </Marquee.Item>
+  ))}
+</Marquee.Root>
+```
+
+### Pause on Focus
+
+To pause on focus, set `pauseOnFocus` to `true`.
+
+```tsx preview
+<Marquee.Root aria-label="Brand links" gap="xl" pauseOnFocus>
+  {marqueeItems.map(({ href, color, icon, label }) => (
+    <Marquee.Item key={label} px="xl" py="sm">
+      <Button
+        as="a"
+        href={href}
+        variant="ghost"
+        aria-label={label}
+        color={color}
+        h="auto"
+        px="2rem"
+        py="2"
+      >
+        <Icon as={icon} fontSize="6xl" />
+      </Button>
+    </Marquee.Item>
+  ))}
+</Marquee.Root>
+```
+
+### Add Edge Gradients
+
+To add edge gradients, use `Marquee.Edge`.
+
+```tsx preview
+<Marquee.Root
+  aria-label="Brand logos with gradient edges"
+  gap="xl"
+  rounded="l2"
+>
+  <Marquee.Edge direction="start" />
+  <Marquee.Content>
+    {marqueeItems.map(({ color, icon, label }) => (
+      <Marquee.Item key={label} px="xl" py="sm">
+        <Icon
+          as={icon}
+          aria-hidden={false}
+          aria-label={label}
+          color={color}
+          fontSize="6xl"
+        />
+      </Marquee.Item>
+    ))}
+  </Marquee.Content>
+  <Marquee.Edge direction="end" />
+</Marquee.Root>
+```
+
+### Control
+
+```tsx preview functional client
+const [paused, setPaused] = useState(false)
+
+return (
+  <VStack alignItems="start">
+    <Marquee.Root aria-label="Controlled brand logos" gap="xl" paused={paused}>
+      {marqueeItems.map(({ color, icon, label }) => (
+        <Marquee.Item key={label} px="xl" py="sm">
+          <Icon
+            as={icon}
+            aria-hidden={false}
+            aria-label={label}
+            color={color}
+            fontSize="6xl"
+          />
+        </Marquee.Item>
+      ))}
+    </Marquee.Root>
+
+    <Button
+      startIcon={paused ? <PlayIcon /> : <PauseIcon />}
+      onClick={() => setPaused((prev) => !prev)}
+    >
+      {paused ? "Resume" : "Pause"}
+    </Button>
+  </VStack>
+)
+```
+
+```tsx preview functional client
+const controlRef = useRef<Marquee.Control>(null)
+
+return (
+  <VStack>
+    <Marquee.Root
+      aria-label="Brand logos with imperative controls"
+      controlRef={controlRef}
+      gap="xl"
+    >
+      {marqueeItems.map(({ color, icon, label }) => (
+        <Marquee.Item key={label} px="xl" py="sm">
+          <Icon
+            as={icon}
+            aria-hidden={false}
+            aria-label={label}
+            color={color}
+            fontSize="6xl"
+          />
+        </Marquee.Item>
+      ))}
+    </Marquee.Root>
+
+    <Wrap gap="md">
+      <Button onClick={() => controlRef.current?.pause()}>Pause</Button>
+      <Button onClick={() => controlRef.current?.resume()}>Resume</Button>
+      <Button onClick={() => controlRef.current?.togglePause()}>
+        Toggle pause
+      </Button>
+      <Button onClick={() => controlRef.current?.restart()}>Restart</Button>
+    </Wrap>
+  </VStack>
+)
+```
+
+## Props
+
+<PropsTable name="marquee" />
+
+## Accessibility
+
+When `aria-label` or `aria-labelledby` is set, it will be read aloud by screen readers.
+
+```tsx
+<Marquee.Root aria-label="Technologies">
+  <Marquee.Item>Yamada UI</Marquee.Item>
+  <Marquee.Item>React</Marquee.Item>
+  <Marquee.Item>TypeScript</Marquee.Item>
+</Marquee.Root>
+```
+
+For interactive content, set `pauseOnFocus` to `true` so keyboard users can access each item.
+
+### Keyboard Navigation
+
+| Key     | Description                                          | State |
+| ------- | ---------------------------------------------------- | ----- |
+| `Space` | Toggles pause and resume when the element has focus. | -     |
+
+### ARIA Roles and Attributes
+
+| Element                             | Roles and Attributes             | Usage                                                 |
+| ----------------------------------- | -------------------------------- | ----------------------------------------------------- |
+| `div.ui-marquee__root`              | `role="region"`                  | Indicates that this is a region.                      |
+|                                     | `aria-roledescription="marquee"` | Indicates that this is a marquee.                     |
+|                                     | `aria-live="off"`                | Prevents repeated announcements of scrolling content. |
+|                                     | `aria-keyshortcuts="Space"`      | Indicates the keyboard shortcut to toggle pause.      |
+| `div.ui-marquee__group[data-clone]` | `aria-hidden="true"`             | Hides duplicated content from screen readers.         |
+|                                     | `inert`                          | Excludes duplicated content from keyboard navigation. |
+| `div.ui-marquee__edge`              | `aria-hidden="true"`             | Hides decorative gradients from screen readers.       |
+
+## Similar Components
+
+<Similar name="marquee" />

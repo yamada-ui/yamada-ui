@@ -965,6 +965,9 @@
       "link"
     ]
   },
+  "marquee": {
+    "resembles": ["carousel", "scroll-area"]
+  },
   "menu": {
     "dependencies": {
       "components": ["popover", "icon"],

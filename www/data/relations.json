@@ -134,6 +134,7 @@
   },
   "blockquote": {
     "dependencies": { "components": ["icon"], "hooks": [] },
+    "dependents": { "components": [], "hooks": [] },
     "resembles": [
       "code",
       "em",
@@ -321,6 +322,7 @@
   },
   "code": {
     "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": [], "hooks": [] },
     "resembles": [
       "blockquote",
       "em",
@@ -759,6 +761,7 @@
   },
   "heading": {
     "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": [], "hooks": [] },
     "resembles": [
       "blockquote",
       "code",
@@ -929,6 +932,7 @@
   },
   "link": {
     "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": [], "hooks": [] },
     "resembles": [
       "blockquote",
       "code",
@@ -942,6 +946,7 @@
   },
   "list": {
     "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": [], "hooks": [] },
     "resembles": [
       "data-list",
       "timeline",
@@ -979,6 +984,7 @@
     ]
   },
   "marquee": {
+    "dependencies": { "components": [], "hooks": [] },
     "resembles": ["carousel", "scroll-area"]
   },
   "menu": {
@@ -1452,6 +1458,7 @@
   },
   "separator": {
     "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": [], "hooks": [] },
     "resembles": [
       "bleed",
       "box",

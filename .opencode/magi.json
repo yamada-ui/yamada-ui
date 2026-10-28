@@ -15,10 +15,7 @@
       "balthasar": {
         "id": "Balthasar",
         "account": "balthasar-magi",
-        "model": [
-          { "id": "opencode/glm-5.3-flash-free", "variant": "high" },
-          { "id": "opencode-go/glm-5.3-flash", "variant": "high" }
-        ]
+        "model": [{ "id": "opencode-go/glm-5.3-flash", "variant": "high" }]
       },
       "caspar": {
         "id": "Caspar",

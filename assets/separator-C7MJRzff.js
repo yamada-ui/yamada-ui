@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{r as t,t as n}from"./create-component-DGpn5MdW.js";import{n as r,t as i}from"./separator.style-BU28haH1.js";var a,o,s,c;function l(){return(l=e((()=>{t(),i(),{PropsContext:a,usePropsContext:o,withContext:s}=n(`separator`,r),c=s(`hr`)()})))()}export{l as n,c as t};

@@ -569,6 +569,8 @@ const TSCONFIG_NODE = {
 const EXTERNAL_MODULES: ExternalModules = {
   "motion/react": ["AnimatePresence"],
   "react-hook-form": ["useForm", "SubmitHandler"],
+  "react-markdown": "Markdown",
+  "remark-gfm": "remarkGfm",
   dayjs: "dayjs",
   "@faker-js/faker": ["faker"],
   "@lucide/lab": ["burger"],

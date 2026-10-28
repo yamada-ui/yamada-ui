@@ -134,6 +134,7 @@
   },
   "blockquote": {
     "dependencies": { "components": ["icon"], "hooks": [] },
+    "dependents": { "components": [], "hooks": [] },
     "resembles": [
       "code",
       "em",
@@ -171,6 +172,7 @@
       "list"
     ]
   },
+  "bubble": { "dependencies": { "components": [], "hooks": [] } },
   "button": {
     "dependencies": {
       "components": ["group", "loading", "ripple"],
@@ -308,6 +310,7 @@
   },
   "code": {
     "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": [], "hooks": [] },
     "resembles": [
       "blockquote",
       "em",
@@ -746,6 +749,7 @@
   },
   "heading": {
     "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": [], "hooks": [] },
     "resembles": [
       "blockquote",
       "code",
@@ -916,6 +920,7 @@
   },
   "link": {
     "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": [], "hooks": [] },
     "resembles": [
       "blockquote",
       "code",
@@ -929,6 +934,7 @@
   },
   "list": {
     "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": [], "hooks": [] },
     "resembles": [
       "data-list",
       "timeline",
@@ -965,6 +971,7 @@
       "link"
     ]
   },
+  "marquee": { "dependencies": { "components": [], "hooks": [] } },
   "menu": {
     "dependencies": {
       "components": ["popover", "icon"],
@@ -1244,6 +1251,20 @@
       "status"
     ]
   },
+  "prose": {
+    "dependencies": {
+      "components": [
+        "blockquote",
+        "code",
+        "heading",
+        "link",
+        "list",
+        "native-table",
+        "separator"
+      ],
+      "hooks": []
+    }
+  },
   "qr-code": {
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
@@ -1412,6 +1433,7 @@
   },
   "separator": {
     "dependencies": { "components": [], "hooks": [] },
+    "dependents": { "components": [], "hooks": [] },
     "resembles": [
       "bleed",
       "box",

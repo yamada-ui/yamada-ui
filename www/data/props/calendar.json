@@ -514,13 +514,13 @@
         "required": false
       },
       "defaultMonth": {
-        "type": "Date",
+        "type": "(() => Date) | Date",
         "defaultValue": "new Date()",
         "description": "The initial month of the calendar.",
         "required": false
       },
       "defaultValue": {
-        "type": "MaybeDateValue<Multiple, Range>",
+        "type": "| MaybeDateValue<Multiple, Range>\n    | ToFunction<Exclude<MaybeDateValue<Multiple, Range>, undefined>>",
         "description": "The initial value of the calendar.",
         "required": false
       },
@@ -1536,13 +1536,13 @@
       "required": false
     },
     "defaultMonth": {
-      "type": "Date",
+      "type": "(() => Date) | Date",
       "defaultValue": "new Date()",
       "description": "The initial month of the calendar.",
       "required": false
     },
     "defaultValue": {
-      "type": "MaybeDateValue<Multiple, Range>",
+      "type": "| MaybeDateValue<Multiple, Range>\n    | ToFunction<Exclude<MaybeDateValue<Multiple, Range>, undefined>>",
       "description": "The initial value of the calendar.",
       "required": false
     },

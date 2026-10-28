@@ -117,8 +117,7 @@
             {
               "title": "ActionBar",
               "segment": "action-bar",
-              "pathname": "/docs/components/action-bar",
-              "status": "new"
+              "pathname": "/docs/components/action-bar"
             },
             {
               "title": "Alert",
@@ -536,8 +535,7 @@
             {
               "title": "Sidebar",
               "segment": "sidebar",
-              "pathname": "/docs/components/sidebar",
-              "status": "new"
+              "pathname": "/docs/components/sidebar"
             },
             {
               "title": "SimpleGrid",
@@ -650,8 +648,7 @@
             {
               "title": "Tree",
               "segment": "tree",
-              "pathname": "/docs/components/tree",
-              "status": "new"
+              "pathname": "/docs/components/tree"
             },
             {
               "title": "VStack",

@@ -172,7 +172,19 @@
       "list"
     ]
   },
-  "bubble": { "dependencies": { "components": [], "hooks": [] } },
+  "bubble": {
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": [
+      "data-list",
+      "list",
+      "timeline",
+      "tree",
+      "native-table",
+      "stat",
+      "table",
+      "area-chart"
+    ]
+  },
   "button": {
     "dependencies": {
       "components": ["group", "loading", "ripple"],
@@ -971,7 +983,10 @@
       "link"
     ]
   },
-  "marquee": { "dependencies": { "components": [], "hooks": [] } },
+  "marquee": {
+    "dependencies": { "components": [], "hooks": [] },
+    "resembles": ["carousel", "scroll-area"]
+  },
   "menu": {
     "dependencies": {
       "components": ["popover", "icon"],
@@ -1263,7 +1278,17 @@
         "separator"
       ],
       "hooks": []
-    }
+    },
+    "resembles": [
+      "blockquote",
+      "code",
+      "em",
+      "heading",
+      "highlight",
+      "kbd",
+      "mark",
+      "text"
+    ]
   },
   "qr-code": {
     "dependencies": { "components": [], "hooks": [] },

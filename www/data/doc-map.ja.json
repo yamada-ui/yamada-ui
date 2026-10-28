@@ -170,6 +170,12 @@
               "pathname": "/docs/components/breadcrumb"
             },
             {
+              "title": "Bubble",
+              "segment": "bubble",
+              "pathname": "/docs/components/bubble",
+              "status": "new"
+            },
+            {
               "title": "Button",
               "segment": "button",
               "pathname": "/docs/components/button"
@@ -478,6 +484,12 @@
               "pathname": "/docs/components/progress"
             },
             {
+              "title": "Prose",
+              "segment": "prose",
+              "pathname": "/docs/components/prose",
+              "status": "new"
+            },
+            {
               "title": "QrCode",
               "segment": "qr-code",
               "pathname": "/docs/components/qr-code"
@@ -746,6 +758,12 @@
               "title": "Loading",
               "segment": "loading",
               "pathname": "/docs/components/loading"
+            },
+            {
+              "title": "Marquee",
+              "segment": "marquee",
+              "pathname": "/docs/components/marquee",
+              "status": "new"
             },
             {
               "title": "Motion",

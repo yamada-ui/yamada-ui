@@ -1,0 +1,494 @@
+---
+title: Marquee
+description: "`Marquee`は、コンテンツを水平方向または垂直方向に連続してスクロールさせるコンポーネントです。"
+tags: ["animation", "scrollable", "list"]
+status: new
+storybook: components-marquee--basic
+source: components/marquee
+style: components/marquee/marquee.style.ts
+---
+
+```tsx preview functional
+const items = useMemo(
+  () => [
+    {
+      href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+      color: "#f7df1e",
+      icon: SiJavascript,
+      label: "JavaScript",
+    },
+    {
+      href: "https://www.typescriptlang.org",
+      color: "#3178c6",
+      icon: SiTypescript,
+      label: "TypeScript",
+    },
+    {
+      href: "https://github.com",
+      color: "currentColor",
+      icon: SiGithub,
+      label: "GitHub",
+    },
+    {
+      href: "https://gitlab.com",
+      color: "#fc6d26",
+      icon: SiGitlab,
+      label: "GitLab",
+    },
+    {
+      href: "https://vercel.com",
+      color: "currentColor",
+      icon: SiVercel,
+      label: "Vercel",
+    },
+    {
+      href: "https://react.dev",
+      color: "#61dafb",
+      icon: SiReact,
+      label: "React",
+    },
+    {
+      href: "https://nextjs.org",
+      color: "currentColor",
+      icon: SiNextdotjs,
+      label: "Next.js",
+    },
+    {
+      href: "https://storybook.js.org",
+      color: "#ff4785",
+      icon: SiStorybook,
+      label: "Storybook",
+    },
+    {
+      href: "https://www.figma.com",
+      color: "#F24E1E",
+      icon: SiFigma,
+      label: "Figma",
+    },
+    {
+      href: "https://x.com",
+      color: "currentColor",
+      icon: SiX,
+      label: "X",
+    },
+  ],
+  [],
+)
+
+return (
+  <Marquee.Root aria-label="Brand logos" gap="xl">
+    {items.map(({ color, icon, label }) => (
+      <Marquee.Item key={label} px="xl" py="sm">
+        <Icon
+          as={icon}
+          aria-hidden={false}
+          aria-label={label}
+          color={color}
+          fontSize="6xl"
+        />
+      </Marquee.Item>
+    ))}
+  </Marquee.Root>
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Marquee } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Marquee } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Marquee } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Marquee.Root>
+  <Marquee.Edge direction="start" />
+  <Marquee.Content>
+    <Marquee.Item />
+  </Marquee.Content>
+  <Marquee.Edge direction="end" />
+</Marquee.Root>
+```
+
+:::note
+`Marquee.Content`は、省略することができます。
+:::
+
+### 方向を変更する
+
+方向を変更する場合は、`orientation`に`"horizontal"`または`"vertical"`を設定します。デフォルトでは、`"horizontal"`が設定されています。
+
+```tsx preview
+<VStack>
+  <For each={["horizontal", "vertical"]}>
+    {(orientation, key) => (
+      <Marquee.Root
+        key={key}
+        aria-label={`${orientation} brand logos`}
+        contain="inline-size"
+        gap="xl"
+        h={orientation === "vertical" ? "xl" : undefined}
+        orientation={orientation}
+      >
+        {marqueeItems.map(({ color, icon, label }) => (
+          <Marquee.Item
+            key={label}
+            px={orientation === "vertical" ? "sm" : "xl"}
+            py={orientation === "vertical" ? "xl" : "sm"}
+          >
+            <Icon
+              as={icon}
+              aria-hidden={false}
+              aria-label={label}
+              color={color}
+              fontSize="6xl"
+            />
+          </Marquee.Item>
+        ))}
+      </Marquee.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### スクロール方向を変更する
+
+スクロール方向を変更する場合は、`direction`に`"start"`または`"end"`を設定します。デフォルトでは、`"start"`が設定されています。
+
+```tsx preview
+<VStack>
+  <For each={["start", "end"]}>
+    {(direction, key) => (
+      <Marquee.Root
+        key={key}
+        aria-label={`Brand logos moving toward ${direction}`}
+        contain="inline-size"
+        direction={direction}
+        gap="xl"
+      >
+        {marqueeItems.map(({ color, icon, label }) => (
+          <Marquee.Item key={label} px="xl" py="sm">
+            <Icon
+              as={icon}
+              aria-hidden={false}
+              aria-label={label}
+              color={color}
+              fontSize="6xl"
+            />
+          </Marquee.Item>
+        ))}
+      </Marquee.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### スクロール方向を反転する
+
+スクロール方向を反転する場合は、`reverse`を`true`にします。
+
+```tsx preview
+<Marquee.Root aria-label="Brand logos" gap="xl" reverse>
+  {marqueeItems.map(({ color, icon, label }) => (
+    <Marquee.Item key={label} px="xl" py="sm">
+      <Icon
+        as={icon}
+        aria-hidden={false}
+        aria-label={label}
+        color={color}
+        fontSize="6xl"
+      />
+    </Marquee.Item>
+  ))}
+</Marquee.Root>
+```
+
+### 速度を変更する
+
+スクロール速度を変更する場合は、`speed`に数値(ピクセル/秒)を設定します。デフォルトでは、`50`が設定されています。
+
+```tsx preview
+<VStack>
+  <For each={[25, 50, 100]}>
+    {(speed, key) => (
+      <Marquee.Root
+        key={key}
+        aria-label={`Brand logos at ${speed} pixels per second`}
+        contain="inline-size"
+        gap="xl"
+        speed={speed}
+      >
+        {marqueeItems.map(({ color, icon, label }) => (
+          <Marquee.Item key={label} px="xl" py="sm">
+            <Icon
+              as={icon}
+              aria-hidden={false}
+              aria-label={label}
+              color={color}
+              fontSize="6xl"
+            />
+          </Marquee.Item>
+        ))}
+      </Marquee.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### 所要時間を変更する
+
+所要時間を変更する場合は、`duration`に数値(秒)を設定します。`duration`を設定すると、`speed`より優先されます。
+
+```tsx preview
+<Marquee.Root aria-label="Brand logos" duration={10} gap="xl">
+  {marqueeItems.map(({ color, icon, label }) => (
+    <Marquee.Item key={label} px="xl" py="sm">
+      <Icon
+        as={icon}
+        aria-hidden={false}
+        aria-label={label}
+        color={color}
+        fontSize="6xl"
+      />
+    </Marquee.Item>
+  ))}
+</Marquee.Root>
+```
+
+### 遅延させる
+
+遅延させる場合は、`delay`に数値(秒)を設定します。
+
+```tsx preview
+<Marquee.Root aria-label="Brand logos" delay={2} gap="xl">
+  {marqueeItems.map(({ color, icon, label }) => (
+    <Marquee.Item key={label} px="xl" py="sm">
+      <Icon
+        as={icon}
+        aria-hidden={false}
+        aria-label={label}
+        color={color}
+        fontSize="6xl"
+      />
+    </Marquee.Item>
+  ))}
+</Marquee.Root>
+```
+
+### ループ回数を変更する
+
+ループ回数を変更する場合は、`loopCount`に数値を設定します。
+
+```tsx preview
+<Marquee.Root
+  aria-label="Brand logos scrolling three times"
+  gap="xl"
+  loopCount={3}
+>
+  {marqueeItems.map(({ color, icon, label }) => (
+    <Marquee.Item key={label} px="xl" py="sm">
+      <Icon
+        as={icon}
+        aria-hidden={false}
+        aria-label={label}
+        color={color}
+        fontSize="6xl"
+      />
+    </Marquee.Item>
+  ))}
+</Marquee.Root>
+```
+
+### ホバー時に一時停止する
+
+ホバー時に一時停止する場合は、`pauseOnHover`を`true`にします。
+
+```tsx preview
+<Marquee.Root aria-label="Brand links" gap="xl" pauseOnHover>
+  {marqueeItems.map(({ href, color, icon, label }) => (
+    <Marquee.Item key={label} px="xl" py="sm">
+      <Button
+        as="a"
+        href={href}
+        variant="ghost"
+        aria-label={label}
+        color={color}
+        h="auto"
+        px="2rem"
+        py="2"
+      >
+        <Icon as={icon} fontSize="6xl" />
+      </Button>
+    </Marquee.Item>
+  ))}
+</Marquee.Root>
+```
+
+### フォーカス時に一時停止する
+
+フォーカス時に一時停止する場合は、`pauseOnFocus`を`true`にします。
+
+```tsx preview
+<Marquee.Root aria-label="Brand links" gap="xl" pauseOnFocus>
+  {marqueeItems.map(({ href, color, icon, label }) => (
+    <Marquee.Item key={label} px="xl" py="sm">
+      <Button
+        as="a"
+        href={href}
+        variant="ghost"
+        aria-label={label}
+        color={color}
+        h="auto"
+        px="2rem"
+        py="2"
+      >
+        <Icon as={icon} fontSize="6xl" />
+      </Button>
+    </Marquee.Item>
+  ))}
+</Marquee.Root>
+```
+
+### 端にグラデーションを追加する
+
+端にグラデーションを追加する場合は、`Marquee.Edge`を使用します。
+
+```tsx preview
+<Marquee.Root
+  aria-label="Brand logos with gradient edges"
+  gap="xl"
+  rounded="l2"
+>
+  <Marquee.Edge direction="start" />
+  <Marquee.Content>
+    {marqueeItems.map(({ color, icon, label }) => (
+      <Marquee.Item key={label} px="xl" py="sm">
+        <Icon
+          as={icon}
+          aria-hidden={false}
+          aria-label={label}
+          color={color}
+          fontSize="6xl"
+        />
+      </Marquee.Item>
+    ))}
+  </Marquee.Content>
+  <Marquee.Edge direction="end" />
+</Marquee.Root>
+```
+
+### 制御する
+
+```tsx preview functional client
+const [paused, setPaused] = useState(false)
+
+return (
+  <VStack alignItems="start">
+    <Marquee.Root aria-label="Controlled brand logos" gap="xl" paused={paused}>
+      {marqueeItems.map(({ color, icon, label }) => (
+        <Marquee.Item key={label} px="xl" py="sm">
+          <Icon
+            as={icon}
+            aria-hidden={false}
+            aria-label={label}
+            color={color}
+            fontSize="6xl"
+          />
+        </Marquee.Item>
+      ))}
+    </Marquee.Root>
+
+    <Button
+      startIcon={paused ? <PlayIcon /> : <PauseIcon />}
+      onClick={() => setPaused((prev) => !prev)}
+    >
+      {paused ? "Resume" : "Pause"}
+    </Button>
+  </VStack>
+)
+```
+
+```tsx preview functional client
+const controlRef = useRef<Marquee.Control>(null)
+
+return (
+  <VStack>
+    <Marquee.Root
+      aria-label="Brand logos with imperative controls"
+      controlRef={controlRef}
+      gap="xl"
+    >
+      {marqueeItems.map(({ color, icon, label }) => (
+        <Marquee.Item key={label} px="xl" py="sm">
+          <Icon
+            as={icon}
+            aria-hidden={false}
+            aria-label={label}
+            color={color}
+            fontSize="6xl"
+          />
+        </Marquee.Item>
+      ))}
+    </Marquee.Root>
+
+    <Wrap gap="md">
+      <Button onClick={() => controlRef.current?.pause()}>Pause</Button>
+      <Button onClick={() => controlRef.current?.resume()}>Resume</Button>
+      <Button onClick={() => controlRef.current?.togglePause()}>
+        Toggle pause
+      </Button>
+      <Button onClick={() => controlRef.current?.restart()}>Restart</Button>
+    </Wrap>
+  </VStack>
+)
+```
+
+## Props
+
+<PropsTable name="marquee" />
+
+## アクセシビリティ
+
+`aria-label`または`aria-labelledby`を設定すると、スクリーンリーダーによって読み上げられます。
+
+```tsx
+<Marquee.Root aria-label="Technologies">
+  <Marquee.Item>Yamada UI</Marquee.Item>
+  <Marquee.Item>React</Marquee.Item>
+  <Marquee.Item>TypeScript</Marquee.Item>
+</Marquee.Root>
+```
+
+操作可能なコンテンツでは、キーボードユーザーが各アイテムにアクセスできるように`pauseOnFocus`を`true`にします。
+
+### キーボード操作
+
+| キー    | 説明                                                 | 状態 |
+| ------- | ---------------------------------------------------- | ---- |
+| `Space` | フォーカスがあるとき、一時停止と再開を切り替えます。 | -    |
+
+### ARIAロールと属性
+
+| 要素                                | ロールと属性                     | 使い方                                                     |
+| ----------------------------------- | -------------------------------- | ---------------------------------------------------------- |
+| `div.ui-marquee__root`              | `role="region"`                  | リージョンであることを示します。                           |
+|                                     | `aria-roledescription="marquee"` | マーキーであることを示します。                             |
+|                                     | `aria-live="off"`                | スクロールするコンテンツの繰り返しの読み上げを防ぎます。   |
+|                                     | `aria-keyshortcuts="Space"`      | 一時停止を切り替えるキーボードショートカットを示します。   |
+| `div.ui-marquee__group[data-clone]` | `aria-hidden="true"`             | 複製されたコンテンツをスクリーンリーダーから隠します。     |
+|                                     | `inert`                          | 複製されたコンテンツをキーボード操作の対象から除外します。 |
+| `div.ui-marquee__edge`              | `aria-hidden="true"`             | 装飾用のグラデーションをスクリーンリーダーから隠します。   |
+
+## 類似のコンポーネント
+
+<Similar name="marquee" />

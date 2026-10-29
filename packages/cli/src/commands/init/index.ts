@@ -58,27 +58,28 @@ interface Options {
 }
 
 export const init = new Command("init")
-  .description("initialize your project and install dependencies.")
-  .option("--cwd <path>", "current working directory.", cwd)
-  .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
-  .option("-o, --overwrite", "overwrite existing files.", false)
-  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
-  .option("-j, --jsx", "use jsx instead of tsx.", false)
-  .option("-y, --yes", "skip all confirmation prompts.", false)
-  .option("-m, --monorepo", "enable monorepo mode.")
-  .option("--no-monorepo", "disable monorepo mode.")
-  .option("-p, --package-name <name>", "package name.")
-  .option("-s, --src", "use `src/` directory when choice is monorepo.")
-  .option("-i, --install", "install dependencies when choice is monorepo.")
+  .description("Initialize your project and install dependencies.")
+  .helpOption("-h, --help", "Display help for command.")
+  .option("--cwd <path>", "Current working directory.", cwd)
+  .option("-c, --config <path>", "Path to the config file.", CONFIG_FILE_NAME)
+  .option("-o, --overwrite", "Overwrite existing files.", false)
+  .option("-t, --tag <name>", "Tag for the registries (e.g. dev, next).")
+  .option("-j, --jsx", "Use jsx instead of tsx.", false)
+  .option("-y, --yes", "Skip all confirmation prompts.", false)
+  .option("-m, --monorepo", "Enable monorepo mode.")
+  .option("--no-monorepo", "Disable monorepo mode.")
+  .option("-p, --package-name <name>", "Package name.")
+  .option("-s, --src", "Use `src/` directory when choice is monorepo.")
+  .option("-i, --install", "Install dependencies when choice is monorepo.")
   .option(
     "--no-install",
-    "do not install dependencies when choice is monorepo.",
+    "Do not install dependencies when choice is monorepo.",
   )
-  .option("-f, --format", "use Prettier.")
-  .option("--no-format", "do not use Prettier.")
-  .option("-l, --lint", "use ESLint.")
-  .option("--no-lint", "do not use ESLint.")
-  .option("--outdir <path>", "output directory path.")
+  .option("-f, --format", "Use Prettier.")
+  .option("--no-format", "Do not use Prettier.")
+  .option("-l, --lint", "Use ESLint.")
+  .option("--no-lint", "Do not use ESLint.")
+  .option("--outdir <path>", "Output directory path.")
   .action(async function ({
     src,
     config: configPath,

@@ -1,5 +1,13 @@
 # @yamada-ui/react
 
+## 2.3.1
+
+### Patch Changes
+
+- [#7960](https://github.com/yamada-ui/yamada-ui/pull/7960) [`1d2c985`](https://github.com/yamada-ui/yamada-ui/commit/1d2c985324b6aa1f536d97cbf0a42cfc164c0656) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix layout shifts when toggling the ghost and surface Toggle variants.
+
+- [#7964](https://github.com/yamada-ui/yamada-ui/pull/7964) [`296ef94`](https://github.com/yamada-ui/yamada-ui/commit/296ef945bf4f560f293d1f85f3550356fe1156ab) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Merge shared and individual SegmentedControl item and indicator props without losing classes, styles, refs, or event handlers.
+
 ## 2.3.0
 
 ### Minor Changes

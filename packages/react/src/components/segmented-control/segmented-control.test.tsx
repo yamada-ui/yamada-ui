@@ -26,6 +26,80 @@ describe("<SegmentedControl />", () => {
     expect(screen.getByText("One").closest("label")?.tagName).toBe("LABEL")
   })
 
+  test("merges shared and individual item props", () => {
+    render(
+      <SegmentedControl.Root
+        itemProps={{
+          className: "shared-item",
+          style: { color: "red", marginTop: 4 },
+          title: "Shared item",
+        }}
+      >
+        <SegmentedControl.Item
+          className="individual-item"
+          style={{ color: "blue", marginBottom: 8 }}
+          title="Individual item"
+          value="one"
+        >
+          One
+        </SegmentedControl.Item>
+      </SegmentedControl.Root>,
+    )
+
+    const item = screen.getByTitle("Individual item")
+
+    expect(item).toHaveClass("shared-item", "individual-item")
+    expect(item).toHaveStyle({
+      color: "rgb(0, 0, 255)",
+      marginBottom: "8px",
+      marginTop: "4px",
+    })
+  })
+
+  test("merges indicator props from all three sources", () => {
+    render(
+      <SegmentedControl.Root
+        defaultValue="one"
+        indicatorProps={{
+          className: "root-indicator",
+          style: { marginTop: 4, opacity: 0.2 },
+          title: "Root indicator",
+        }}
+        itemProps={{
+          indicatorProps: {
+            className: "shared-indicator",
+            style: { marginBottom: 8, opacity: 0.4 },
+            title: "Shared indicator",
+          },
+        }}
+      >
+        <SegmentedControl.Item
+          value="one"
+          indicatorProps={{
+            className: "individual-indicator",
+            style: { opacity: 0.6 },
+            title: "Individual indicator",
+          }}
+        >
+          One
+        </SegmentedControl.Item>
+      </SegmentedControl.Root>,
+    )
+
+    const indicator = screen.getByTitle("Individual indicator")
+
+    expect(indicator).toHaveClass(
+      "root-indicator",
+      "shared-indicator",
+      "individual-indicator",
+    )
+    expect(indicator).toHaveStyle({
+      marginBottom: "8px",
+      marginTop: "4px",
+      opacity: "0.6",
+    })
+  })
+
   test("should disable segmented control", () => {
     render(<TestComponent disabled />)
 

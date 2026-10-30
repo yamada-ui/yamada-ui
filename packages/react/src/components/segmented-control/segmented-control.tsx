@@ -10,7 +10,7 @@ import type {
 } from "./use-segmented-control"
 import { LayoutGroup } from "motion/react"
 import { useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { motion } from "../motion"
 import { segmentedControlStyle } from "./segmented-control.style"
@@ -156,13 +156,12 @@ export const SegmentedControlItem = withContext<
   const { indicatorProps, itemProps } = useComponentContext()
 
   return {
-    ...itemProps,
-    ...props,
-    indicatorProps: {
-      ...indicatorProps,
-      ...itemProps?.indicatorProps,
-      ...props.indicatorProps,
-    },
+    ...mergeProps(itemProps, props)(),
+    indicatorProps: mergeProps(
+      indicatorProps,
+      itemProps?.indicatorProps,
+      props.indicatorProps,
+    )(),
   }
 }) as GenericsComponent<{
   <Y extends string = string>(props: SegmentedControlItemProps<Y>): ReactElement

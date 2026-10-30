@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-DPMg_Ci1.js";e();

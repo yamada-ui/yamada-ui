@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { PropsTable } from "#storybook"
 import { ToggleGroup } from "."
 import { COLOR_SCHEMES } from "../../utils"
@@ -37,7 +37,53 @@ export const Basic: Story = () => {
   )
 }
 
+export const Items: Story = () => {
+  const items = useMemo<ToggleGroup.Item[]>(
+    () => [
+      {
+        icon: <BoldIcon />,
+        label: "Toggle bold",
+        value: "bold",
+      },
+      {
+        icon: <ItalicIcon />,
+        label: "Toggle italic",
+        value: "italic",
+      },
+      {
+        icon: <UnderlineIcon />,
+        label: "Toggle underline",
+        value: "underline",
+      },
+    ],
+    [],
+  )
+
+  return <ToggleGroup.Root items={items} />
+}
+
 export const Variant: Story = () => {
+  const items = useMemo<ToggleGroup.Item[]>(
+    () => [
+      {
+        icon: <BoldIcon />,
+        label: "Toggle bold",
+        value: "bold",
+      },
+      {
+        icon: <ItalicIcon />,
+        label: "Toggle italic",
+        value: "italic",
+      },
+      {
+        icon: <UnderlineIcon />,
+        label: "Toggle underline",
+        value: "underline",
+      },
+    ],
+    [],
+  )
+
   return (
     <PropsTable
       columns={["ghost", "subtle", "surface", "outline", "solid"]}
@@ -50,23 +96,8 @@ export const Variant: Story = () => {
             colorScheme={row}
             variant={column}
             attached
-          >
-            <ToggleGroup.Item
-              aria-label="Toggle bold"
-              icon={<BoldIcon />}
-              value="bold"
-            />
-            <ToggleGroup.Item
-              aria-label="Toggle italic"
-              icon={<ItalicIcon />}
-              value="italic"
-            />
-            <ToggleGroup.Item
-              aria-label="Toggle underline"
-              icon={<UnderlineIcon />}
-              value="underline"
-            />
-          </ToggleGroup.Root>
+            items={items}
+          />
         )
       }}
     </PropsTable>
@@ -74,27 +105,38 @@ export const Variant: Story = () => {
 }
 
 export const Size: Story = () => {
+  const items = useMemo<ToggleGroup.Item[]>(
+    () => [
+      {
+        icon: <BoldIcon />,
+        label: "Toggle bold",
+        value: "bold",
+      },
+      {
+        icon: <ItalicIcon />,
+        label: "Toggle italic",
+        value: "italic",
+      },
+      {
+        icon: <UnderlineIcon />,
+        label: "Toggle underline",
+        value: "underline",
+      },
+    ],
+    [],
+  )
+
   return (
     <PropsTable columns={["xs", "sm", "md", "lg", "xl"]} rows={COLOR_SCHEMES}>
       {(column, row, key) => {
         return (
-          <ToggleGroup.Root key={key} colorScheme={row} size={column} attached>
-            <ToggleGroup.Item
-              aria-label="Toggle bold"
-              icon={<BoldIcon />}
-              value="bold"
-            />
-            <ToggleGroup.Item
-              aria-label="Toggle italic"
-              icon={<ItalicIcon />}
-              value="italic"
-            />
-            <ToggleGroup.Item
-              aria-label="Toggle underline"
-              icon={<UnderlineIcon />}
-              value="underline"
-            />
-          </ToggleGroup.Root>
+          <ToggleGroup.Root
+            key={key}
+            colorScheme={row}
+            size={column}
+            attached
+            items={items}
+          />
         )
       }}
     </PropsTable>
@@ -102,98 +144,116 @@ export const Size: Story = () => {
 }
 
 export const Disabled: Story = () => {
+  const items = useMemo<ToggleGroup.Item[]>(
+    () => [
+      {
+        icon: <BoldIcon />,
+        label: "Toggle bold",
+        value: "bold",
+      },
+      {
+        icon: <ItalicIcon />,
+        label: "Toggle italic",
+        value: "italic",
+      },
+      {
+        icon: <UnderlineIcon />,
+        label: "Toggle underline",
+        value: "underline",
+      },
+    ],
+    [],
+  )
+
   return (
     <For each={["ghost", "subtle", "surface", "outline", "solid"] as const}>
       {(variant, index) => (
-        <ToggleGroup.Root key={index} variant={variant} attached disabled>
-          <ToggleGroup.Item
-            aria-label="Toggle bold"
-            icon={<BoldIcon />}
-            value="bold"
-          />
-          <ToggleGroup.Item
-            aria-label="Toggle italic"
-            icon={<ItalicIcon />}
-            value="italic"
-          />
-          <ToggleGroup.Item
-            aria-label="Toggle underline"
-            icon={<UnderlineIcon />}
-            value="underline"
-          />
-        </ToggleGroup.Root>
+        <ToggleGroup.Root
+          key={index}
+          variant={variant}
+          attached
+          disabled
+          items={items}
+        />
       )}
     </For>
   )
 }
 
 export const ReadOnly: Story = () => {
+  const items = useMemo<ToggleGroup.Item[]>(
+    () => [
+      {
+        icon: <BoldIcon />,
+        label: "Toggle bold",
+        value: "bold",
+      },
+      {
+        icon: <ItalicIcon />,
+        label: "Toggle italic",
+        value: "italic",
+      },
+      {
+        icon: <UnderlineIcon />,
+        label: "Toggle underline",
+        value: "underline",
+      },
+    ],
+    [],
+  )
+
   return (
     <For each={["ghost", "subtle", "surface", "outline", "solid"] as const}>
       {(variant, index) => (
-        <ToggleGroup.Root key={index} variant={variant} attached readOnly>
-          <ToggleGroup.Item
-            aria-label="Toggle bold"
-            icon={<BoldIcon />}
-            value="bold"
-          />
-          <ToggleGroup.Item
-            aria-label="Toggle italic"
-            icon={<ItalicIcon />}
-            value="italic"
-          />
-          <ToggleGroup.Item
-            aria-label="Toggle underline"
-            icon={<UnderlineIcon />}
-            value="underline"
-          />
-        </ToggleGroup.Root>
+        <ToggleGroup.Root
+          key={index}
+          variant={variant}
+          attached
+          items={items}
+          readOnly
+        />
       )}
     </For>
   )
 }
 
 export const CustomControl: Story = () => {
+  const items = useMemo<ToggleGroup.Item[]>(
+    () => [
+      {
+        icon: <BoldIcon />,
+        label: "Toggle bold",
+        value: "bold",
+      },
+      {
+        icon: <ItalicIcon />,
+        label: "Toggle italic",
+        value: "italic",
+      },
+      {
+        icon: <UnderlineIcon />,
+        label: "Toggle underline",
+        value: "underline",
+      },
+    ],
+    [],
+  )
   const [singleValue, setSingleValue] = useState<string | undefined>(undefined)
   const [multiValue, setMultiValue] = useState<string[]>([])
 
   return (
     <>
-      <ToggleGroup.Root value={singleValue} onChange={setSingleValue}>
-        <ToggleGroup.Item
-          aria-label="Toggle bold"
-          icon={<BoldIcon />}
-          value="bold"
-        />
-        <ToggleGroup.Item
-          aria-label="Toggle italic"
-          icon={<ItalicIcon />}
-          value="italic"
-        />
-        <ToggleGroup.Item
-          aria-label="Toggle underline"
-          icon={<UnderlineIcon />}
-          value="underline"
-        />
-      </ToggleGroup.Root>
+      <ToggleGroup.Root
+        items={items}
+        value={singleValue}
+        onChange={setSingleValue}
+      />
 
-      <ToggleGroup.Root value={multiValue} onChange={setMultiValue}>
-        <ToggleGroup.Item
-          aria-label="Toggle bold"
-          icon={<BoldIcon />}
-          value="bold"
-        />
-        <ToggleGroup.Item
-          aria-label="Toggle italic"
-          icon={<ItalicIcon />}
-          value="italic"
-        />
-        <ToggleGroup.Item
-          aria-label="Toggle underline"
-          icon={<UnderlineIcon />}
-          value="underline"
-        />
-      </ToggleGroup.Root>
+      <ToggleGroup.Root
+        items={items}
+        value={multiValue}
+        onChange={setMultiValue}
+      />
     </>
   )
 }

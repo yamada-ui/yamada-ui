@@ -12,7 +12,12 @@ import type { ToggleStyle } from "./toggle.style"
 import type { UseToggleGroupProps } from "./use-toggle-group"
 import { useMemo } from "react"
 import { Group } from "../group"
-import { component, TogglePropsContext, useRootComponentProps } from "./toggle"
+import {
+  component,
+  Toggle,
+  TogglePropsContext,
+  useRootComponentProps,
+} from "./toggle"
 import { ToggleGroupContext, useToggleGroup } from "./use-toggle-group"
 
 /**
@@ -27,14 +32,23 @@ export interface ToggleGroupRootProps<Y extends string | string[] = string>
       "defaultValue" | "onChange" | "value"
     >,
     UseToggleGroupProps<Y>,
-    ThemeProps<ToggleStyle> {}
+    ThemeProps<ToggleStyle> {
+  /**
+   * If provided, generate options based on items.
+   *
+   * @default []
+   */
+  items?: Toggle<Y extends any[] ? Y[number] : Y>[]
+}
 
 export const ToggleGroupRoot = component<"div", ToggleGroupRootProps>(
   (props: ToggleGroupRootProps) => {
-    const [, { colorScheme, size, variant, attached, ...rest }] =
-      useRootComponentProps(props, "group", {
-        transferProps: ["size", "variant", "colorScheme"],
-      })
+    const [
+      ,
+      { colorScheme, size, variant, attached, children, items = [], ...rest },
+    ] = useRootComponentProps(props, "group", {
+      transferProps: ["size", "variant", "colorScheme"],
+    })
     const {
       disabled,
       readOnly,
@@ -43,6 +57,20 @@ export const ToggleGroupRoot = component<"div", ToggleGroupRootProps>(
       onChange,
       onChangeMapRef,
     } = useToggleGroup(rest)
+    const computedChildren = useMemo(() => {
+      if (children) return children
+
+      return items.map(
+        ({ "aria-label": ariaLabel, label, value, ...rest }, index) => (
+          <Toggle
+            key={value ?? index}
+            aria-label={ariaLabel ?? label}
+            value={value}
+            {...rest}
+          />
+        ),
+      )
+    }, [items, children])
     const context = useMemo<ToggleProps>(
       () => ({
         colorScheme,
@@ -66,7 +94,9 @@ export const ToggleGroupRoot = component<"div", ToggleGroupRootProps>(
     return (
       <TogglePropsContext value={context}>
         <ToggleGroupContext value={groupContext}>
-          <Group attached={attached} {...getGroupProps()} />
+          <Group attached={attached} {...getGroupProps()}>
+            {computedChildren}
+          </Group>
         </ToggleGroupContext>
       </TogglePropsContext>
     )

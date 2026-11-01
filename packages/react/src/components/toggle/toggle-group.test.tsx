@@ -47,6 +47,84 @@ describe("<ToggleGroup />", () => {
     expect(screen.getByText("Option 2")).not.toHaveAttribute("data-checked")
   })
 
+  test.each([{ defaultValue: "opt1" }, { defaultValue: ["opt1", "opt2"] }])(
+    "should generate items with defaultValue $defaultValue",
+    ({ defaultValue }) => {
+      render(
+        <ToggleGroup.Root<string | string[]>
+          defaultValue={defaultValue}
+          items={[
+            {
+              "aria-label": "Option 1",
+              children: "Option 1",
+              value: "opt1",
+            },
+            {
+              "aria-label": "Option 2",
+              children: <span>Option 2</span>,
+              value: "opt2",
+            },
+          ]}
+        />,
+      )
+
+      expect(screen.getAllByRole("button")).toHaveLength(2)
+      expect(screen.getByText("Option 1")).toHaveAttribute(
+        "aria-pressed",
+        "true",
+      )
+      expect(screen.getByRole("button", { name: "Option 2" })).toHaveAttribute(
+        "aria-pressed",
+        String(Array.isArray(defaultValue)),
+      )
+      expect(screen.getByText("Option 2")).toBeInTheDocument()
+      expect(screen.getByRole("group")).not.toHaveAttribute("items")
+    },
+  )
+
+  test("should pass individual props to generated toggles", () => {
+    render(
+      <ToggleGroup.Root
+        items={[
+          {
+            "aria-label": "Disabled option",
+            disabled: true,
+            icon: <span>Icon</span>,
+            label: "Fallback name",
+            value: "opt1",
+          },
+          {
+            label: "Option 2",
+            readOnly: true,
+            value: "opt2",
+          },
+        ]}
+      />,
+    )
+
+    expect(
+      screen.getByRole("button", { name: "Disabled option" }),
+    ).toBeDisabled()
+    expect(screen.getByText("Icon")).toBeInTheDocument()
+    expect(screen.queryByText("Fallback name")).not.toBeInTheDocument()
+    expect(screen.queryByText("Option 2")).not.toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Option 2" })).toHaveAttribute(
+      "data-readonly",
+    )
+  })
+
+  test("should prefer children over items", () => {
+    render(
+      <ToggleGroup.Root items={[{ children: "Option 1", value: "opt1" }]}>
+        <ToggleGroup.Item value="opt2">Option 2</ToggleGroup.Item>
+      </ToggleGroup.Root>,
+    )
+
+    expect(screen.queryByText("Option 1")).not.toBeInTheDocument()
+    expect(screen.getByText("Option 2")).toBeInTheDocument()
+    expect(screen.getAllByRole("button")).toHaveLength(1)
+  })
+
   test("should update checked toggles when controlled array value prop changes", () => {
     const { rerender } = render(
       <ToggleGroup.Root value={[]}>

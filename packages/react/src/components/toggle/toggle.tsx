@@ -17,6 +17,13 @@ import { Portal } from "../portal"
 import { toggleStyle } from "./toggle.style"
 import { useToggle } from "./use-toggle"
 
+export interface Toggle<Y extends string = string> extends ToggleProps<Y> {
+  /**
+   * The accessible name of the toggle button, unless `aria-label` is provided.
+   */
+  label?: string
+}
+
 export interface ToggleProps<Y extends string = string>
   extends
     Omit<

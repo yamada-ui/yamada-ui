@@ -44,7 +44,7 @@ const meta: Meta<typeof Sidebar.Root> = {
 
 export default meta
 
-const navItems: Sidebar.ItemType[] = [
+const navItems: Sidebar.Item[] = [
   {
     children: [
       { label: "Installation", value: "/get-started/installation" },
@@ -98,7 +98,7 @@ const navItems: Sidebar.ItemType[] = [
   },
 ]
 
-const navItemsWithAsync: Sidebar.ItemType[] = [
+const navItemsWithAsync: Sidebar.Item[] = [
   {
     asyncChildren: async () => {
       await wait(1000)
@@ -168,7 +168,7 @@ const navItemsWithAsync: Sidebar.ItemType[] = [
   },
 ]
 
-const navItemsWithDisabled: Sidebar.ItemType[] = [
+const navItemsWithDisabled: Sidebar.Item[] = [
   {
     children: [
       { label: "Installation", value: "/get-started/installation" },
@@ -223,7 +223,7 @@ const navItemsWithDisabled: Sidebar.ItemType[] = [
   },
 ]
 
-const navItemsWithIcon: Sidebar.ItemType[] = [
+const navItemsWithIcon: Sidebar.Item[] = [
   {
     children: [
       {
@@ -277,7 +277,7 @@ const navItemsWithIcon: Sidebar.ItemType[] = [
   },
 ]
 
-const navItemsWithGroup: Sidebar.ItemType[] = [
+const navItemsWithGroup: Sidebar.Item[] = [
   {
     children: [
       { label: "Installation", value: "/get-started/installation" },

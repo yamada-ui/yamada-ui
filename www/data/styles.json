@@ -3356,8 +3356,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-height": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-height` property.",
+          "description": "The <code>column-wrap</code> and <code>column-height</code> CSS properties control when columns in a multicolumn layout wrap or overflow. You can use this to constrain the height of columns within a taller box or to create two-dimensional column layouts.",
           "experimental": true,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-height"
         }
@@ -3632,8 +3633,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "column-wrap": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `column-wrap` property.",
+          "description": "The <code>column-wrap</code> and <code>column-height</code> CSS properties control when columns in a multicolumn layout wrap or overflow. You can use this to constrain the height of columns within a taller box or to create two-dimensional column layouts.",
           "experimental": true,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-wrap"
         }
@@ -9762,7 +9764,8 @@
       "docs": {
         "transform-box": {
           "baseline": {
-            "status": "Newly available",
+            "status": "Widely available",
+            "widely_available_date": "2026-10-16",
             "newly_available_date": "2024-04-16"
           },
           "deprecated": false,

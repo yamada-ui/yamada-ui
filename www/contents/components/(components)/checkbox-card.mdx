@@ -60,7 +60,7 @@ import { CheckboxCard, CheckboxCardGroup } from "@workspaces/ui"
 ### Use Items
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       description:
@@ -90,7 +90,7 @@ return <CheckboxCardGroup.Root items={items} />
 ### Change Variant
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "Unchecked", value: "2" },
@@ -117,7 +117,7 @@ return (
 ### Change Size
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "Unchecked", value: "2" },
@@ -144,7 +144,7 @@ return (
 ### Change Color Scheme
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "Unchecked", value: "2" },
@@ -173,7 +173,7 @@ return (
 To set a default value, set the value to `defaultValue`.
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       description:
@@ -205,7 +205,7 @@ return <CheckboxCardGroup.Root defaultValue={["1", "2"]} items={items} />
 To limit the number of selections, set a number to `max`.
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       description:
@@ -237,7 +237,7 @@ return <CheckboxCardGroup.Root items={items} max={2} />
 To change the orientation, set `orientation` to `"horizontal"` or `"vertical"`. By default, `"horizontal"` is set.
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       description:
@@ -267,7 +267,7 @@ return <CheckboxCardGroup.Root items={items} orientation="vertical" />
 ### Change Shape
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       description:
@@ -312,7 +312,7 @@ return (
 To change the alignment, set `justify` to `"start"` or `"end"`, etc. By default, `"start"` is set.
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       description:
@@ -357,7 +357,7 @@ return (
 To add an addon, set `ReactNode` to `addon`.
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       addon: "ドラゴンクエストV 天空の花嫁",
@@ -413,7 +413,7 @@ To hide the indicator, set `withIndicator` to `false`.
 To disable, set `disabled` to `true`.
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       description:
@@ -459,7 +459,7 @@ return (
 To make read-only, set `readOnly` to `true`.
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       description:
@@ -505,7 +505,7 @@ return (
 To make the input invalid, set `invalid` to `true`.
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       description:
@@ -551,7 +551,7 @@ return (
 To customize the border color, set a value to `focusBorderColor` or `errorBorderColor`.
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       description:
@@ -593,7 +593,7 @@ return (
 To customize the icon, set `ReactNode` to `checkedIcon`.
 
 ```tsx preview functional
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       description:
@@ -624,7 +624,7 @@ return <CheckboxCardGroup.Root checkedIcon={<PlusIcon />} items={items} />
 
 ```tsx preview functional client
 const [value, setValue] = useState(["1"])
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     {
       description:
@@ -664,7 +664,7 @@ The `CheckboxCard` follows the [WAI-ARIA - Checkbox Pattern](https://www.w3.org/
 If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `CheckboxCardGroup.Root`.
 
 ```tsx
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     { label: "ビアンカ", value: "1" },
     { label: "フローラ", value: "2" },
@@ -677,7 +677,7 @@ return <CheckboxCardGroup.Root aria-label="キャラクター" items={items} />
 ```
 
 ```tsx
-const items = useMemo<CheckboxCardGroup.ItemType[]>(
+const items = useMemo<CheckboxCardGroup.Item[]>(
   () => [
     { label: "ビアンカ", value: "1" },
     { label: "フローラ", value: "2" },

@@ -10,7 +10,7 @@
   "sources": [
     {
       "name": "checkbox-card-group.namespace.ts",
-      "content": "import type { CheckboxCardGroupItem } from \"./checkbox-card-group\"\n\nexport { CheckboxCardGroupRoot as Root } from \"./checkbox-card-group\"\nexport type {\n  CheckboxCardGroupItem as ItemType,\n  CheckboxCardGroupRootProps as RootProps,\n} from \"./checkbox-card-group\"\nexport * as Item from \"./checkbox-card.namespace\"\n\nexport type Item<Y extends string = string> = CheckboxCardGroupItem<Y>\n"
+      "content": "import type { CheckboxCardGroupItem } from \"./checkbox-card-group\"\n\nexport { CheckboxCardGroupRoot as Root } from \"./checkbox-card-group\"\nexport type { CheckboxCardGroupRootProps as RootProps } from \"./checkbox-card-group\"\nexport * as Item from \"./checkbox-card.namespace\"\n\nexport type Item<Y extends string = string> = CheckboxCardGroupItem<Y>\n\n/**\n * @deprecated Use `Item` instead. Will be removed in the next major release.\n */\nexport type ItemType<Y extends string = string> = CheckboxCardGroupItem<Y>\n"
     },
     {
       "name": "checkbox-card-group.tsx",

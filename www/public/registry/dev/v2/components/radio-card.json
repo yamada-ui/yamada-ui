@@ -14,7 +14,7 @@
     },
     {
       "name": "radio-card-group.namespace.ts",
-      "content": "import type { RadioCardGroupItem } from \"./radio-card-group\"\n\nexport { RadioCardGroupRoot as Root } from \"./radio-card-group\"\nexport type {\n  RadioCardGroupItem as ItemType,\n  RadioCardGroupRootProps as RootProps,\n} from \"./radio-card-group\"\nexport * as Item from \"./radio-card.namespace\"\n\nexport type Item<Y extends string = string> = RadioCardGroupItem<Y>\n"
+      "content": "import type { RadioCardGroupItem } from \"./radio-card-group\"\n\nexport { RadioCardGroupRoot as Root } from \"./radio-card-group\"\nexport type { RadioCardGroupRootProps as RootProps } from \"./radio-card-group\"\nexport * as Item from \"./radio-card.namespace\"\n\nexport type Item<Y extends string = string> = RadioCardGroupItem<Y>\n\n/**\n * @deprecated Use `Item` instead. Will be removed in the next major release.\n */\nexport type ItemType<Y extends string = string> = RadioCardGroupItem<Y>\n"
     },
     {
       "name": "radio-card-group.tsx",

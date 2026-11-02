@@ -815,6 +815,40 @@ describe("<Menu />", () => {
     })
   })
 
+  test("onMouseLeave on menu item deactivates it", async () => {
+    await render(
+      <Menu.Root defaultOpen>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Item value="item-1">Item 1</Menu.Item>
+          <Menu.Item value="item-2">Item 2</Menu.Item>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    const menu = page.getByRole("menu").element() as HTMLElement
+    const item2 = page
+      .getByRole("menuitem", { name: /Item 2/i })
+      .element() as HTMLElement
+
+    item2.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }))
+
+    await waitFor(() => {
+      expect(menu.getAttribute("aria-activedescendant")).toBe(item2.id)
+      expect(item2.dataset.activedescendant).toBe("")
+    })
+
+    item2.dispatchEvent(new MouseEvent("mouseleave", { bubbles: true }))
+
+    await waitFor(() => {
+      expect(menu.getAttribute("aria-activedescendant")).toBeNull()
+      expect(item2.dataset.activedescendant).toBeUndefined()
+    })
+  })
+
   test("renders items with value prop directly", async () => {
     await render(
       <Menu.Root defaultOpen>

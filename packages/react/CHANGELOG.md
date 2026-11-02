@@ -1,5 +1,23 @@
 # @yamada-ui/react
 
+## 2.3.1
+
+### Patch Changes
+
+- [#7960](https://github.com/yamada-ui/yamada-ui/pull/7960) [`1d2c985`](https://github.com/yamada-ui/yamada-ui/commit/1d2c985324b6aa1f536d97cbf0a42cfc164c0656) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix layout shifts when toggling the ghost and surface Toggle variants.
+
+- [#7969](https://github.com/yamada-ui/yamada-ui/pull/7969) [`c5827a1`](https://github.com/yamada-ui/yamada-ui/commit/c5827a10670d8abc29f264962ba464c6af237547) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#7969](https://github.com/yamada-ui/yamada-ui/pull/7969) [`c5827a1`](https://github.com/yamada-ui/yamada-ui/commit/c5827a10670d8abc29f264962ba464c6af237547) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7969](https://github.com/yamada-ui/yamada-ui/pull/7969) [`c5827a1`](https://github.com/yamada-ui/yamada-ui/commit/c5827a10670d8abc29f264962ba464c6af237547) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#7964](https://github.com/yamada-ui/yamada-ui/pull/7964) [`296ef94`](https://github.com/yamada-ui/yamada-ui/commit/296ef945bf4f560f293d1f85f3550356fe1156ab) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Merge shared and individual SegmentedControl item and indicator props without losing classes, styles, refs, or event handlers.
+
+- [#7975](https://github.com/yamada-ui/yamada-ui/pull/7975) [`6dd132e`](https://github.com/yamada-ui/yamada-ui/commit/6dd132e2853e8039f60c49a31ed57229aadf71be) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Deprecate ItemType aliases in favor of Item before their removal in v3.
+
+- [#7972](https://github.com/yamada-ui/yamada-ui/pull/7972) [`c06cee2`](https://github.com/yamada-ui/yamada-ui/commit/c06cee2d175b230cc6d43950bd16e6d97f9027d4) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Expose Item types for CheckboxCardGroup and RadioCardGroup while preserving existing namespace APIs.
+
 ## 2.3.0
 
 ### Minor Changes

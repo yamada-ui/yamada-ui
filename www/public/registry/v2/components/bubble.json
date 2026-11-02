@@ -22,7 +22,7 @@
     },
     {
       "name": "namespace.ts",
-      "content": "export type {\n  BubbleContentProps as ContentProps,\n  BubbleGroupProps as GroupProps,\n  BubbleItemProps as ItemProps,\n  BubbleItem as ItemType,\n  BubbleReactionsProps as ReactionsProps,\n  BubbleRootProps as RootProps,\n} from \"./bubble\"\nexport {\n  BubbleContent as Content,\n  BubbleGroup as Group,\n  BubbleItem as Item,\n  BubblePropsContext as PropsContext,\n  BubbleReactions as Reactions,\n  BubbleRoot as Root,\n  useBubblePropsContext as usePropsContext,\n} from \"./bubble\"\n"
+      "content": "import type { BubbleItem } from \"./bubble\"\n\nexport type {\n  BubbleContentProps as ContentProps,\n  BubbleGroupProps as GroupProps,\n  BubbleItemProps as ItemProps,\n  BubbleReactionsProps as ReactionsProps,\n  BubbleRootProps as RootProps,\n} from \"./bubble\"\nexport {\n  BubbleContent as Content,\n  BubbleGroup as Group,\n  BubbleItem as Item,\n  BubblePropsContext as PropsContext,\n  BubbleReactions as Reactions,\n  BubbleRoot as Root,\n  useBubblePropsContext as usePropsContext,\n} from \"./bubble\"\n\n/**\n * @deprecated Use `Item` instead. Will be removed in the next major release.\n */\nexport type ItemType = BubbleItem\n"
     }
   ]
 }

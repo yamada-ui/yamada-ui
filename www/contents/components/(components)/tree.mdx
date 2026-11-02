@@ -72,7 +72,7 @@ If the `label` of `Tree.Item` is a string, you can omit the `value`.
 ### Use items
 
 ```tsx preview functional
-const items = useMemo<Tree.ItemType[]>(
+const items = useMemo<Tree.Item[]>(
   () => [
     {
       children: [
@@ -225,7 +225,7 @@ To have specific items checked by default, set the item values to `defaultChecke
 To disable a specific item, set `disabled`.
 
 ```tsx preview functional
-const items = useMemo<Tree.ItemType[]>(
+const items = useMemo<Tree.Item[]>(
   () => [
     {
       children: [
@@ -273,7 +273,7 @@ return <Tree.Root maxW="2xs" items={items} />
 ### Use as Link
 
 ```tsx preview functional
-const items = useMemo<Tree.ItemType[]>(
+const items = useMemo<Tree.Item[]>(
   () => [
     {
       children: [
@@ -351,10 +351,10 @@ To add animation when expanding and collapsing, set `animated` to `true`.
 ### Filtering
 
 ```tsx preview functional client
-const [items, setItems] = useState<Tree.ItemType[]>(treeItems)
+const [items, setItems] = useState<Tree.Item[]>(treeItems)
 
 const searchItems = useCallback(
-  (value: string, items: Tree.ItemType[]): Tree.ItemType[] => {
+  (value: string, items: Tree.Item[]): Tree.Item[] => {
     if (!value.length) return items
 
     return items
@@ -394,7 +394,7 @@ return (
 To load child items asynchronously, use `asyncChildren` instead of `children`.
 
 ```tsx preview functional client
-const items = useMemo<Tree.ItemType[]>(
+const items = useMemo<Tree.Item[]>(
   () => [
     {
       asyncChildren: async () => {
@@ -445,7 +445,7 @@ return <Tree.Root maxW="2xs" items={items} />
 ### Change Loading Scheme
 
 ```tsx preview functional client
-const items = useMemo<Tree.ItemType[]>(
+const items = useMemo<Tree.Item[]>(
   () => [
     {
       asyncChildren: async () => {

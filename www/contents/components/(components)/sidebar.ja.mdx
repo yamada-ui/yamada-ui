@@ -417,7 +417,7 @@ return (
 ```
 
 ```tsx preview functional iframe
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -768,7 +768,7 @@ return (
 項目を無効にする場合は、`disabled`を設定します。
 
 ```tsx preview functional iframe
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -983,7 +983,7 @@ return (
 ### セパレーターを追加する
 
 ```tsx preview functional iframe
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -1165,7 +1165,7 @@ return (
 項目の子要素を非同期で読み込む場合は、`children`の代わりに`asyncChildren`を使用します。
 
 ```tsx preview functional iframe client
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       asyncChildren: async () => {
@@ -1264,7 +1264,7 @@ return (
 ### ローディングスキームを変更する
 
 ```tsx preview functional iframe client
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       asyncChildren: async () => {
@@ -1336,7 +1336,7 @@ return (
 
 ```tsx preview functional iframe
 const controlRef = useRef<Sidebar.Control>(null)
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [

@@ -1,3 +1,5 @@
+import type { AccordionItem } from "./accordion"
+
 export {
   AccordionButton as Button,
   AccordionItem as Item,
@@ -9,7 +11,6 @@ export {
 export type {
   AccordionButtonProps as ButtonProps,
   AccordionItemProps as ItemProps,
-  AccordionItem as ItemType,
   AccordionPanelProps as PanelProps,
   AccordionRootProps as RootProps,
 } from "./accordion"
@@ -22,3 +23,8 @@ export {
   useAccordionDescendants as useDescendants,
   useAccordionItemContext as useItemContext,
 } from "./use-accordion"
+
+/**
+ * @deprecated Use `Item` instead. Will be removed in the next major release.
+ */
+export type ItemType = AccordionItem

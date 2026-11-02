@@ -60,7 +60,7 @@ export const Basic: Story = () => {
 }
 
 export const Items: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -105,7 +105,7 @@ export const Items: Story = () => {
 }
 
 export const Variant: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -168,7 +168,7 @@ export const Variant: Story = () => {
 }
 
 export const Size: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -227,7 +227,7 @@ export const Size: Story = () => {
 }
 
 export const Shape: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -285,7 +285,7 @@ export const Shape: Story = () => {
 }
 
 export const DisabledItem: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -331,7 +331,7 @@ export const DisabledItem: Story = () => {
 }
 
 export const LinkedItem: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -385,7 +385,7 @@ export const LinkedItem: Story = () => {
 }
 
 export const Filtering: Story = () => {
-  const defaultItems = useMemo<Tree.ItemType[]>(
+  const defaultItems = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -425,10 +425,10 @@ export const Filtering: Story = () => {
     ],
     [],
   )
-  const [items, setItems] = useState<Tree.ItemType[]>(defaultItems)
+  const [items, setItems] = useState<Tree.Item[]>(defaultItems)
 
   const searchItems = useCallback(
-    (value: string, items: Tree.ItemType[]): Tree.ItemType[] => {
+    (value: string, items: Tree.Item[]): Tree.Item[] => {
       if (!value.length) return items
 
       return items
@@ -462,7 +462,7 @@ export const Filtering: Story = () => {
 }
 
 export const GuideLine: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -507,7 +507,7 @@ export const GuideLine: Story = () => {
 }
 
 export const IndicatorHidden: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -552,7 +552,7 @@ export const IndicatorHidden: Story = () => {
 }
 
 export const Animated: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -597,7 +597,7 @@ export const Animated: Story = () => {
 }
 
 export const Multiple: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -642,7 +642,7 @@ export const Multiple: Story = () => {
 }
 
 export const DefaultSelected: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -687,7 +687,7 @@ export const DefaultSelected: Story = () => {
 }
 
 export const Checkable: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -732,7 +732,7 @@ export const Checkable: Story = () => {
 }
 
 export const DefaultChecked: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -779,7 +779,7 @@ export const DefaultChecked: Story = () => {
 }
 
 export const DefaultExpanded: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -827,7 +827,7 @@ export const DefaultExpanded: Story = () => {
 
 export const ExpandCollapseAll: Story = () => {
   const controlRef = useRef<Tree.Control>(null)
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -885,7 +885,7 @@ export const ExpandCollapseAll: Story = () => {
 }
 
 export const Async: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         asyncChildren: async () => {
@@ -934,7 +934,7 @@ export const Async: Story = () => {
 }
 
 export const LoadingScheme: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         asyncChildren: async () => {
@@ -983,7 +983,7 @@ export const LoadingScheme: Story = () => {
 }
 
 export const StartElement: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -1037,7 +1037,7 @@ export const StartElement: Story = () => {
 }
 
 export const EndElement: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -1082,7 +1082,7 @@ export const EndElement: Story = () => {
 }
 
 export const CustomIndicator: Story = () => {
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [
@@ -1138,7 +1138,7 @@ export const CustomControl: Story = () => {
   const [selectedValue, setSelectedValue] = useState<string>("package.json")
   const [checkedValue, setCheckedValue] = useState<string[]>(["README.md"])
   const [expandedValue, setExpandedValue] = useState<string[]>(["node_modules"])
-  const items = useMemo<Tree.ItemType[]>(
+  const items = useMemo<Tree.Item[]>(
     () => [
       {
         children: [

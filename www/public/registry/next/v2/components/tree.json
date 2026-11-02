@@ -19,7 +19,7 @@
     },
     {
       "name": "namespace.ts",
-      "content": "export {\n  TreeItem as Item,\n  TreePropsContext as PropsContext,\n  TreeRoot as Root,\n  useTreePropsContext as usePropsContext,\n} from \"./tree\"\nexport type {\n  TreeItemProps as ItemProps,\n  TreeItem as ItemType,\n  TreeRootProps as RootProps,\n} from \"./tree\"\nexport {\n  TreeContext as Context,\n  TreeDescendantsContext as DescendantsContext,\n  useTreeContext as useContext,\n  useTreeDescendant as useDescendant,\n  useTreeDescendants as useDescendants,\n  useTreeItemContext as useItemContext,\n} from \"./use-tree\"\nexport type { TreeControl as Control } from \"./use-tree\"\n"
+      "content": "import type { TreeItem } from \"./tree\"\n\nexport {\n  TreeItem as Item,\n  TreePropsContext as PropsContext,\n  TreeRoot as Root,\n  useTreePropsContext as usePropsContext,\n} from \"./tree\"\nexport type {\n  TreeItemProps as ItemProps,\n  TreeRootProps as RootProps,\n} from \"./tree\"\nexport {\n  TreeContext as Context,\n  TreeDescendantsContext as DescendantsContext,\n  useTreeContext as useContext,\n  useTreeDescendant as useDescendant,\n  useTreeDescendants as useDescendants,\n  useTreeItemContext as useItemContext,\n} from \"./use-tree\"\nexport type { TreeControl as Control } from \"./use-tree\"\n\n/**\n * @deprecated Use `Item` instead. Will be removed in the next major release.\n */\nexport type ItemType = TreeItem\n"
     },
     {
       "name": "tree.style.ts",

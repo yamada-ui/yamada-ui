@@ -27,7 +27,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       </CheckboxCardGroup.Item.Root>
     </CheckboxCardGroup.Root>;
 }`,...P.parameters?.docs?.source}}},F.parameters={...F.parameters,docs:{...F.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -42,7 +42,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <CheckboxCardGroup.Root items={items} />;
 }`,...F.parameters?.docs?.source}}},I.parameters={...I.parameters,docs:{...I.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     label: "Checked",
     value: "1"
   }, {
@@ -55,7 +55,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
     }}
     </PropsTable>;
 }`,...I.parameters?.docs?.source}}},L.parameters={...L.parameters,docs:{...L.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     label: "Checked",
     value: "1"
   }, {
@@ -68,7 +68,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
     }}
     </PropsTable>;
 }`,...L.parameters?.docs?.source}}},R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -90,7 +90,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       </CheckboxCard.Description>
     </CheckboxCard.Root>;
 }`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -105,7 +105,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <CheckboxCardGroup.Root items={items} max={2} />;
 }`,...B.parameters?.docs?.source}}},V.parameters={...V.parameters,docs:{...V.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -120,7 +120,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <CheckboxCardGroup.Root items={items} orientation="vertical" />;
 }`,...V.parameters?.docs?.source}}},H.parameters={...H.parameters,docs:{...H.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     addon: "藤子・F・不二雄",
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
@@ -138,7 +138,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <CheckboxCardGroup.Root items={items} orientation="vertical" />;
 }`,...H.parameters?.docs?.source}}},U.parameters={...U.parameters,docs:{...U.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -155,7 +155,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       {(_, row, key) => <CheckboxCardGroup.Root key={key} defaultValue={["1"]} items={items} shape={row} />}
     </PropsTable>;
 }`,...U.parameters?.docs?.source}}},W.parameters={...W.parameters,docs:{...W.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -187,7 +187,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       </CheckboxCardGroup.Item.Root>
     </CheckboxCardGroup.Root>;
 }`,...G.parameters?.docs?.source}}},K.parameters={...K.parameters,docs:{...K.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -210,7 +210,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       </Field.Root>
     </>;
 }`,...K.parameters?.docs?.source}}},q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -233,7 +233,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       </Field.Root>
     </>;
 }`,...q.parameters?.docs?.source}}},J.parameters={...J.parameters,docs:{...J.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -256,7 +256,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       </Field.Root>
     </>;
 }`,...J.parameters?.docs?.source}}},Y.parameters={...Y.parameters,docs:{...Y.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -275,7 +275,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
     </>;
 }`,...Y.parameters?.docs?.source}}},X.parameters={...X.parameters,docs:{...X.parameters?.docs,source:{originalSource:`() => {
   const [value, setValue] = useState(["1"]);
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -290,7 +290,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <CheckboxCardGroup.Root items={items} value={value} onChange={setValue} />;
 }`,...X.parameters?.docs?.source}}},Z.parameters={...Z.parameters,docs:{...Z.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -315,7 +315,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
     },
     handleSubmit
   } = useForm<Data>();
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"
@@ -361,7 +361,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   } = useForm<Data>({
     defaultValues
   });
-  const items = useMemo<CheckboxCardGroup.ItemType[]>(() => [{
+  const items = useMemo<CheckboxCardGroup.Item[]>(() => [{
     description: "22世紀の未来から来たネコ型ロボット。",
     label: "ドラえもん",
     value: "1"

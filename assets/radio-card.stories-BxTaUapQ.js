@@ -20,7 +20,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       </RadioCardGroup.Item.Root>
     </RadioCardGroup.Root>;
 }`,...I.parameters?.docs?.source}}},L.parameters={...L.parameters,docs:{...L.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"
@@ -35,7 +35,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <RadioCardGroup.Root items={items} />;
 }`,...L.parameters?.docs?.source}}},R.parameters={...R.parameters,docs:{...R.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     label: "Checked",
     value: "1"
   }, {
@@ -48,7 +48,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
     }}
     </PropsTable>;
 }`,...R.parameters?.docs?.source}}},z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     label: "Checked",
     value: "1"
   }, {
@@ -61,7 +61,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
     }}
     </PropsTable>;
 }`,...z.parameters?.docs?.source}}},B.parameters={...B.parameters,docs:{...B.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"
@@ -76,7 +76,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <RadioCardGroup.Root defaultValue="2" items={items} />;
 }`,...B.parameters?.docs?.source}}},V.parameters={...V.parameters,docs:{...V.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"
@@ -92,7 +92,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <RadioCardGroup.Root items={items} />;
 }`,...V.parameters?.docs?.source}}},H.parameters={...H.parameters,docs:{...H.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"
@@ -107,7 +107,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <RadioCardGroup.Root items={items} orientation="vertical" />;
 }`,...H.parameters?.docs?.source}}},U.parameters={...U.parameters,docs:{...U.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     addon: "ドラゴンクエストV 天空の花嫁",
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
@@ -125,7 +125,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <RadioCardGroup.Root items={items} orientation="vertical" />;
 }`,...U.parameters?.docs?.source}}},W.parameters={...W.parameters,docs:{...W.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"
@@ -142,7 +142,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       {(_, row, key) => <RadioCardGroup.Root key={key} defaultValue="2" items={items} shape={row} />}
     </PropsTable>;
 }`,...W.parameters?.docs?.source}}},G.parameters={...G.parameters,docs:{...G.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"
@@ -174,7 +174,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       </RadioCardGroup.Item.Root>
     </RadioCardGroup.Root>;
 }`,...K.parameters?.docs?.source}}},q.parameters={...q.parameters,docs:{...q.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"
@@ -197,7 +197,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       </Field.Root>
     </>;
 }`,...q.parameters?.docs?.source}}},J.parameters={...J.parameters,docs:{...J.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"
@@ -220,7 +220,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       </Field.Root>
     </>;
 }`,...J.parameters?.docs?.source}}},Y.parameters={...Y.parameters,docs:{...Y.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"
@@ -243,7 +243,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       </Field.Root>
     </>;
 }`,...Y.parameters?.docs?.source}}},X.parameters={...X.parameters,docs:{...X.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"
@@ -262,7 +262,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
     </>;
 }`,...X.parameters?.docs?.source}}},Z.parameters={...Z.parameters,docs:{...Z.parameters?.docs,source:{originalSource:`() => {
   const [value, setValue] = useState("2");
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"
@@ -287,7 +287,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
     },
     handleSubmit
   } = useForm<Data>();
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"
@@ -333,7 +333,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   } = useForm<Data>({
     defaultValues
   });
-  const items = useMemo<RadioCardGroup.ItemType[]>(() => [{
+  const items = useMemo<RadioCardGroup.Item[]>(() => [{
     description: "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
     label: "ビアンカ",
     value: "1"

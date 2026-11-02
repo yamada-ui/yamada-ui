@@ -72,7 +72,7 @@ import { Tree } from "@workspaces/ui"
 ### itemsを使う
 
 ```tsx preview functional
-const items = useMemo<Tree.ItemType[]>(
+const items = useMemo<Tree.Item[]>(
   () => [
     {
       children: [
@@ -225,7 +225,7 @@ return <Tree.Root maxW="2xs" items={items} />
 項目を無効にする場合は、`disabled`を設定します。
 
 ```tsx preview functional
-const items = useMemo<Tree.ItemType[]>(
+const items = useMemo<Tree.Item[]>(
   () => [
     {
       children: [
@@ -273,7 +273,7 @@ return <Tree.Root maxW="2xs" items={items} />
 ### リンクとして使う
 
 ```tsx preview functional
-const items = useMemo<Tree.ItemType[]>(
+const items = useMemo<Tree.Item[]>(
   () => [
     {
       children: [
@@ -351,10 +351,10 @@ return <Tree.Root maxW="2xs" items={items} />
 ### フィルタリング
 
 ```tsx preview functional client
-const [items, setItems] = useState<Tree.ItemType[]>(treeItems)
+const [items, setItems] = useState<Tree.Item[]>(treeItems)
 
 const searchItems = useCallback(
-  (value: string, items: Tree.ItemType[]): Tree.ItemType[] => {
+  (value: string, items: Tree.Item[]): Tree.Item[] => {
     if (!value.length) return items
 
     return items
@@ -394,7 +394,7 @@ return (
 項目の子要素を非同期で読み込む場合は、`children`の代わりに`asyncChildren`を使用します。
 
 ```tsx preview functional client
-const items = useMemo<Tree.ItemType[]>(
+const items = useMemo<Tree.Item[]>(
   () => [
     {
       asyncChildren: async () => {
@@ -445,7 +445,7 @@ return <Tree.Root maxW="2xs" items={items} />
 ### ローディングスキームを変更する
 
 ```tsx preview functional client
-const items = useMemo<Tree.ItemType[]>(
+const items = useMemo<Tree.Item[]>(
   () => [
     {
       asyncChildren: async () => {

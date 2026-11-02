@@ -417,7 +417,7 @@ To change the mode, set `mode` to `"offcanvas"` or `"icon"`. The default is `"of
 ```
 
 ```tsx preview functional iframe
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -768,7 +768,7 @@ To have specific items expanded by default, set `defaultExpandedValue`.
 To disable specific items, set `disabled`.
 
 ```tsx preview functional iframe
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -983,7 +983,7 @@ To show guide lines, set `withGuideLine` to `true`.
 ### Add Separator
 
 ```tsx preview functional iframe
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -1165,7 +1165,7 @@ To disable the resize handle, set `withHandle` to `false`. The default is `true`
 To load child items asynchronously, use `asyncChildren` instead of `children`.
 
 ```tsx preview functional iframe client
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       asyncChildren: async () => {
@@ -1264,7 +1264,7 @@ return (
 ### Change Loading Scheme
 
 ```tsx preview functional iframe client
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       asyncChildren: async () => {
@@ -1336,7 +1336,7 @@ To expand or collapse all items, use `controlRef`.
 
 ```tsx preview functional iframe
 const controlRef = useRef<Sidebar.Control>(null)
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [

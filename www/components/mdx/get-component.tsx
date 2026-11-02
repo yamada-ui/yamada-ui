@@ -174,7 +174,7 @@ function createPolarChartData(min = 1000, max = 5000): PolarChartData[] {
   ]
 }
 
-const treeItems: Tree.ItemType[] = [
+const treeItems: Tree.Item[] = [
   {
     children: [
       { label: "react" },
@@ -212,7 +212,7 @@ const treeItems: Tree.ItemType[] = [
   { label: "README.md" },
 ]
 
-const sidebarItems: Sidebar.ItemType[] = [
+const sidebarItems: Sidebar.Item[] = [
   {
     children: [
       { label: "Installation", value: "/get-started/installation" },

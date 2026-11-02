@@ -219,7 +219,7 @@ export function createPolarChartData(min = 1000, max = 5000): PolarChartData[] {
   ]
 }
 
-export const treeItems: Tree.ItemType[] = [
+export const treeItems: Tree.Item[] = [
   {
     children: [
       { label: "react" },
@@ -257,7 +257,7 @@ export const treeItems: Tree.ItemType[] = [
   { label: "README.md" },
 ]
 
-export const sidebarItems: Sidebar.ItemType[] = [
+export const sidebarItems: Sidebar.Item[] = [
   {
     children: [
       { label: "Installation", value: "/get-started/installation" },

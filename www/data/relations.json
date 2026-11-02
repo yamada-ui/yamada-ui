@@ -12,7 +12,7 @@
       "slide",
       "slide-fade",
       "carousel",
-      "tree"
+      "marquee"
     ]
   },
   "action-bar": {
@@ -115,8 +115,8 @@
       "table",
       "area-chart",
       "bar-chart",
-      "card",
-      "composed-chart"
+      "bubble",
+      "card"
     ]
   },
   "bleed": {
@@ -134,7 +134,7 @@
   },
   "blockquote": {
     "dependencies": { "components": ["icon"], "hooks": [] },
-    "dependents": { "components": [], "hooks": [] },
+    "dependents": { "components": ["prose"], "hooks": [] },
     "resembles": [
       "code",
       "em",
@@ -142,8 +142,8 @@
       "highlight",
       "kbd",
       "mark",
-      "text",
-      "link"
+      "prose",
+      "text"
     ]
   },
   "box": {
@@ -165,11 +165,11 @@
       "steps",
       "tabs",
       "sidebar",
+      "bubble",
       "data-list",
       "infinite-scroll-area",
       "link",
-      "link-box",
-      "list"
+      "link-box"
     ]
   },
   "bubble": {
@@ -226,8 +226,8 @@
       "area-chart",
       "badge",
       "bar-chart",
-      "composed-chart",
-      "data-list"
+      "bubble",
+      "composed-chart"
     ]
   },
   "carousel": {
@@ -236,14 +236,14 @@
       "hooks": ["use-boolean"]
     },
     "resembles": [
+      "marquee",
       "infinite-scroll-area",
       "accordion",
       "airy",
       "flip",
       "motion",
       "ripple",
-      "rotate",
-      "scroll-area"
+      "rotate"
     ]
   },
   "center": {
@@ -322,7 +322,7 @@
   },
   "code": {
     "dependencies": { "components": [], "hooks": [] },
-    "dependents": { "components": [], "hooks": [] },
+    "dependents": { "components": ["prose"], "hooks": [] },
     "resembles": [
       "blockquote",
       "em",
@@ -330,8 +330,8 @@
       "highlight",
       "kbd",
       "mark",
-      "text",
-      "link"
+      "prose",
+      "text"
     ]
   },
   "collapse": {
@@ -424,14 +424,14 @@
   "data-list": {
     "dependencies": { "components": [], "hooks": [] },
     "resembles": [
+      "bubble",
       "list",
       "timeline",
       "tree",
       "native-table",
       "stat",
       "table",
-      "area-chart",
-      "badge"
+      "area-chart"
     ]
   },
   "date-picker": {
@@ -516,8 +516,8 @@
       "highlight",
       "kbd",
       "mark",
-      "text",
-      "link"
+      "prose",
+      "text"
     ]
   },
   "empty-state": {
@@ -761,7 +761,7 @@
   },
   "heading": {
     "dependencies": { "components": [], "hooks": [] },
-    "dependents": { "components": [], "hooks": [] },
+    "dependents": { "components": ["prose"], "hooks": [] },
     "resembles": [
       "blockquote",
       "code",
@@ -769,8 +769,8 @@
       "highlight",
       "kbd",
       "mark",
-      "text",
-      "link"
+      "prose",
+      "text"
     ]
   },
   "highlight": {
@@ -782,8 +782,8 @@
       "heading",
       "kbd",
       "mark",
-      "text",
-      "link"
+      "prose",
+      "text"
     ]
   },
   "hue-slider": {
@@ -860,12 +860,13 @@
     "dependencies": { "components": [], "hooks": ["use-value"] },
     "resembles": [
       "carousel",
+      "marquee",
       "scroll-area",
       "breadcrumb",
+      "bubble",
       "data-list",
       "list",
-      "native-accordion",
-      "reorder"
+      "native-accordion"
     ]
   },
   "input": {
@@ -913,8 +914,8 @@
       "heading",
       "highlight",
       "mark",
-      "text",
-      "link"
+      "prose",
+      "text"
     ]
   },
   "link-box": {
@@ -932,7 +933,7 @@
   },
   "link": {
     "dependencies": { "components": [], "hooks": [] },
-    "dependents": { "components": [], "hooks": [] },
+    "dependents": { "components": ["prose"], "hooks": [] },
     "resembles": [
       "blockquote",
       "code",
@@ -941,21 +942,21 @@
       "highlight",
       "kbd",
       "mark",
-      "text"
+      "prose"
     ]
   },
   "list": {
     "dependencies": { "components": [], "hooks": [] },
-    "dependents": { "components": [], "hooks": [] },
+    "dependents": { "components": ["prose"], "hooks": [] },
     "resembles": [
+      "bubble",
       "data-list",
       "timeline",
       "tree",
       "native-table",
       "stat",
       "table",
-      "area-chart",
-      "badge"
+      "area-chart"
     ]
   },
   "loading": {
@@ -979,13 +980,22 @@
       "heading",
       "highlight",
       "kbd",
-      "text",
-      "link"
+      "prose",
+      "text"
     ]
   },
   "marquee": {
     "dependencies": { "components": [], "hooks": [] },
-    "resembles": ["carousel", "scroll-area"]
+    "resembles": [
+      "carousel",
+      "infinite-scroll-area",
+      "accordion",
+      "airy",
+      "flip",
+      "motion",
+      "ripple",
+      "rotate"
+    ]
   },
   "menu": {
     "dependencies": {
@@ -1077,9 +1087,9 @@
       "tabs",
       "sidebar",
       "breadcrumb",
+      "bubble",
       "collapse",
-      "data-list",
-      "fade"
+      "data-list"
     ]
   },
   "native-popover": {
@@ -1117,16 +1127,16 @@
   },
   "native-table": {
     "dependencies": { "components": [], "hooks": [] },
-    "dependents": { "components": ["table"], "hooks": [] },
+    "dependents": { "components": ["prose", "table"], "hooks": [] },
     "resembles": [
       "stat",
       "table",
       "area-chart",
       "badge",
       "bar-chart",
+      "bubble",
       "card",
-      "composed-chart",
-      "data-list"
+      "composed-chart"
     ]
   },
   "notice": {
@@ -1350,6 +1360,7 @@
     },
     "resembles": [
       "breadcrumb",
+      "bubble",
       "data-list",
       "infinite-scroll-area",
       "list",
@@ -1413,7 +1424,7 @@
   },
   "scroll-area": {
     "dependencies": { "components": [], "hooks": [] },
-    "resembles": ["infinite-scroll-area", "carousel"]
+    "resembles": ["infinite-scroll-area", "carousel", "marquee"]
   },
   "segmented-control": {
     "dependencies": {
@@ -1458,7 +1469,7 @@
   },
   "separator": {
     "dependencies": { "components": [], "hooks": [] },
-    "dependents": { "components": [], "hooks": [] },
+    "dependents": { "components": ["prose"], "hooks": [] },
     "resembles": [
       "bleed",
       "box",
@@ -1616,9 +1627,9 @@
       "area-chart",
       "badge",
       "bar-chart",
+      "bubble",
       "card",
-      "composed-chart",
-      "data-list"
+      "composed-chart"
     ]
   },
   "status": {
@@ -1666,9 +1677,9 @@
       "area-chart",
       "badge",
       "bar-chart",
+      "bubble",
       "card",
-      "composed-chart",
-      "data-list"
+      "composed-chart"
     ]
   },
   "tabs": {
@@ -1696,8 +1707,8 @@
       "table",
       "area-chart",
       "bar-chart",
-      "card",
-      "composed-chart"
+      "bubble",
+      "card"
     ]
   },
   "text": {
@@ -1711,7 +1722,7 @@
       "highlight",
       "kbd",
       "mark",
-      "link"
+      "prose"
     ]
   },
   "textarea": {
@@ -1730,6 +1741,7 @@
   "timeline": {
     "dependencies": { "components": [], "hooks": ["use-value"] },
     "resembles": [
+      "bubble",
       "data-list",
       "list",
       "steps",
@@ -1783,14 +1795,14 @@
       "hooks": ["use-descendants", "use-disclosure", "use-async-callback"]
     },
     "resembles": [
+      "bubble",
       "data-list",
       "list",
       "native-accordion",
       "accordion",
       "timeline",
       "tabs",
-      "native-table",
-      "sidebar"
+      "native-table"
     ]
   },
   "visually-hidden": {
@@ -1855,6 +1867,7 @@
         "editable",
         "file-input",
         "flip",
+        "marquee",
         "menu",
         "pagination",
         "password-input",

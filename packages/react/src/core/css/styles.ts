@@ -5419,7 +5419,9 @@ export interface StyleProps {
   /**
    * ### column-height
    *
-   * The CSS `column-height` property.
+   * The <code>column-wrap</code> and <code>column-height</code> CSS properties control when columns in a multicolumn layout wrap or overflow. You can use this to constrain the height of columns within a taller box or to create two-dimensional column layouts.
+   *
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-height
    *
@@ -5657,7 +5659,9 @@ export interface StyleProps {
   /**
    * ### column-wrap
    *
-   * The CSS `column-wrap` property.
+   * The <code>column-wrap</code> and <code>column-height</code> CSS properties control when columns in a multicolumn layout wrap or overflow. You can use this to constrain the height of columns within a taller box or to create two-dimensional column layouts.
+   *
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-wrap
    *
@@ -12123,7 +12127,8 @@ export interface StyleProps {
    *
    * The <code>transform-box</code> CSS property sets the position and dimensions of the reference box relative to which an element's transformations are calculated.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-10-16
    * @newly_available_date 2024-04-16
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-box

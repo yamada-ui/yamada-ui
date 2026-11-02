@@ -57,10 +57,18 @@ import { RadioCard, RadioCardGroup } from "@workspaces/ui"
 </RadioCardGroup.Root>
 ```
 
+:::tip
+選択肢をカードとして表示する必要がない場合は、[Radio](/docs/components/radio)を使用します。
+:::
+
+:::tip
+ユーザーが複数の選択肢の中から複数の値を選択する場合は、[CheckboxCard](/docs/components/checkbox-card)を使用します。
+:::
+
 ### itemsを使う
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     {
       description:
@@ -90,7 +98,7 @@ return <RadioCardGroup.Root items={items} />
 ### バリアントを変更する
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "Unchecked", value: "2" },
@@ -117,7 +125,7 @@ return (
 ### サイズを変更する
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "Unchecked", value: "2" },
@@ -144,7 +152,7 @@ return (
 ### カラースキームを変更する
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     { label: "Checked", value: "1" },
     { label: "Unchecked", value: "2" },
@@ -173,7 +181,7 @@ return (
 デフォルトの値を設定する場合は、`defaultValue`に値を設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     {
       description:
@@ -205,7 +213,7 @@ return <RadioCardGroup.Root defaultValue="2" items={items} />
 方向を変更する場合は、`orientation`に`"horizontal"`または`"vertical"`を設定します。デフォルトでは、`"horizontal"`が設定されています。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     {
       description:
@@ -235,7 +243,7 @@ return <RadioCardGroup.Root items={items} orientation="vertical" />
 ### 形を変更する
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     {
       description:
@@ -280,7 +288,7 @@ return (
 配置を変更する場合は、`justify`に`"start"`または`"end"`などを設定します。デフォルトでは、`"start"`が設定されています。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     {
       description:
@@ -325,7 +333,7 @@ return (
 アドオンを追加する場合は、`addon`に`ReactNode`を設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     {
       addon: "ドラゴンクエストV 天空の花嫁",
@@ -381,7 +389,7 @@ return <RadioCardGroup.Root items={items} orientation="vertical" />
 無効にする場合は、`disabled`を`true`に設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     {
       description:
@@ -431,7 +439,7 @@ return (
 読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     {
       description:
@@ -481,7 +489,7 @@ return (
 無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     {
       description:
@@ -531,7 +539,7 @@ return (
 ボーダーの色を変更する場合は、`focusBorderColor`または`errorBorderColor`に値を設定します。
 
 ```tsx preview functional
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     {
       description:
@@ -572,7 +580,7 @@ return (
 
 ```tsx preview functional client
 const [value, setValue] = useState("2")
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     {
       description:
@@ -610,7 +618,7 @@ return <RadioCardGroup.Root items={items} value={value} onChange={setValue} />
 `Field.Root`を使用しない場合は、`RadioCardGroup.Root`に`aria-label`または`aria-labelledby`を設定します。
 
 ```tsx
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     { label: "ビアンカ", value: "1" },
     { label: "フローラ", value: "2" },
@@ -623,7 +631,7 @@ return <RadioCardGroup.Root aria-label="キャラクター" items={items} />
 ```
 
 ```tsx
-const items = useMemo<RadioCardGroup.ItemType[]>(
+const items = useMemo<RadioCardGroup.Item[]>(
   () => [
     { label: "ビアンカ", value: "1" },
     { label: "フローラ", value: "2" },

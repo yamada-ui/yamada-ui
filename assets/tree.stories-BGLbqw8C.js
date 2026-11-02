@@ -28,7 +28,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       <Tree.Item label="README.md" />
     </Tree.Root>;
 }`,...Bt.parameters?.docs?.source}}},Vt.parameters={...Vt.parameters,docs:{...Vt.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -77,7 +77,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root items={items} />;
 }`,...Vt.parameters?.docs?.source}}},Ht.parameters={...Ht.parameters,docs:{...Ht.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -130,7 +130,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
     }}
     </PropsTable>;
 }`,...Ht.parameters?.docs?.source}}},Ut.parameters={...Ut.parameters,docs:{...Ut.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -183,7 +183,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
     }}
     </PropsTable>;
 }`,...Ut.parameters?.docs?.source}}},Wt.parameters={...Wt.parameters,docs:{...Wt.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -236,7 +236,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
     }}
     </PropsTable>;
 }`,...Wt.parameters?.docs?.source}}},Gt.parameters={...Gt.parameters,docs:{...Gt.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -287,7 +287,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root items={items} />;
 }`,...Gt.parameters?.docs?.source}}},Kt.parameters={...Kt.parameters,docs:{...Kt.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -341,7 +341,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root items={items} />;
 }`,...Kt.parameters?.docs?.source}}},qt.parameters={...qt.parameters,docs:{...qt.parameters?.docs,source:{originalSource:`() => {
-  const defaultItems = useMemo<Tree.ItemType[]>(() => [{
+  const defaultItems = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -388,8 +388,8 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }, {
     label: "README.md"
   }], []);
-  const [items, setItems] = useState<Tree.ItemType[]>(defaultItems);
-  const searchItems = useCallback((value: string, items: Tree.ItemType[]): Tree.ItemType[] => {
+  const [items, setItems] = useState<Tree.Item[]>(defaultItems);
+  const searchItems = useCallback((value: string, items: Tree.Item[]): Tree.Item[] => {
     if (!value.length) return items;
     return items.map(item => {
       if ("children" in item) {
@@ -412,7 +412,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       <Tree.Root items={items} />
     </VStack>;
 }`,...qt.parameters?.docs?.source}}},Jt.parameters={...Jt.parameters,docs:{...Jt.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -461,7 +461,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root items={items} withGuideLine />;
 }`,...Jt.parameters?.docs?.source}}},Yt.parameters={...Yt.parameters,docs:{...Yt.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -510,7 +510,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root indicatorHidden items={items} />;
 }`,...Yt.parameters?.docs?.source}}},Xt.parameters={...Xt.parameters,docs:{...Xt.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -559,7 +559,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root animated items={items} />;
 }`,...Xt.parameters?.docs?.source}}},Zt.parameters={...Zt.parameters,docs:{...Zt.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -608,7 +608,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root items={items} multiple />;
 }`,...Zt.parameters?.docs?.source}}},Qt.parameters={...Qt.parameters,docs:{...Qt.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -657,7 +657,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root defaultSelectedValue="node_modules" items={items} />;
 }`,...Qt.parameters?.docs?.source}}},$t.parameters={...$t.parameters,docs:{...$t.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -706,7 +706,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root checkable items={items} />;
 }`,...$t.parameters?.docs?.source}}},en.parameters={...en.parameters,docs:{...en.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -755,7 +755,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root checkable defaultCheckedValue={["package.json"]} items={items} />;
 }`,...en.parameters?.docs?.source}}},tn.parameters={...tn.parameters,docs:{...tn.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -805,7 +805,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   return <Tree.Root defaultExpandedValue={["src", "src/components"]} items={items} />;
 }`,...tn.parameters?.docs?.source}}},nn.parameters={...nn.parameters,docs:{...nn.parameters?.docs,source:{originalSource:`() => {
   const controlRef = useRef<Tree.Control>(null);
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -865,7 +865,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
       <Tree.Root controlRef={controlRef} items={items} />
     </>;
 }`,...nn.parameters?.docs?.source}}},rn.parameters={...rn.parameters,docs:{...rn.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     asyncChildren: async () => {
       await wait(1000);
       return [{
@@ -917,7 +917,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root defaultExpandedValue={["node_modules"]} items={items} />;
 }`,...rn.parameters?.docs?.source}}},an.parameters={...an.parameters,docs:{...an.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     asyncChildren: async () => {
       await wait(1000);
       return [{
@@ -969,7 +969,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root items={items} loadingScheme="dots" />;
 }`,...an.parameters?.docs?.source}}},on.parameters={...on.parameters,docs:{...on.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -1023,7 +1023,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
     item: <FileIcon />
   }} />;
 }`,...on.parameters?.docs?.source}}},sn.parameters={...sn.parameters,docs:{...sn.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -1072,7 +1072,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   }], []);
   return <Tree.Root endElement={<LockKeyholeIcon />} items={items} />;
 }`,...sn.parameters?.docs?.source}}},cn.parameters={...cn.parameters,docs:{...cn.parameters?.docs,source:{originalSource:`() => {
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {
@@ -1130,7 +1130,7 @@ import{n as e}from"./rolldown-runtime-C0FnF6B9.js";import{t}from"./react-eq8zrF0
   const [selectedValue, setSelectedValue] = useState<string>("package.json");
   const [checkedValue, setCheckedValue] = useState<string[]>(["README.md"]);
   const [expandedValue, setExpandedValue] = useState<string[]>(["node_modules"]);
-  const items = useMemo<Tree.ItemType[]>(() => [{
+  const items = useMemo<Tree.Item[]>(() => [{
     children: [{
       label: "react"
     }, {

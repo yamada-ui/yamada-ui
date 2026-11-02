@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-Di_p-GmR.js";e();

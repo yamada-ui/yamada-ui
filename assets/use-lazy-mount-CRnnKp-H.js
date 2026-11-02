@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-BCiCTKAo.js";import{t}from"./react-BWPDF9mI.js";var n,r;function i(){return(i=e((()=>{n=t(),r=({children:e,lazy:t,lazyBehavior:r=`unmount`,mounted:i})=>{let a=(0,n.useRef)(!1);return t?i?(a.current=!0,e):r===`keepMounted`&&a.current?e:null:(a.current=!1,e)}})))()}export{r as n,i as t};

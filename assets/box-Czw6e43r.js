@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-BCiCTKAo.js";import{d as t,f as n}from"./utils-DoceOquG.js";var r;function i(){return(i=e((()=>{t(),r=n(`div`)})))()}export{i as n,r as t};

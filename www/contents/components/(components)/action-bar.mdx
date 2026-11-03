@@ -10,7 +10,7 @@ style: components/action-bar/action-bar.style.ts
 ```tsx preview
 <ActionBar.Root>
   <ActionBar.OpenTrigger>
-    <Button>Open ActionBar</Button>
+    <Button>Open Action Bar</Button>
   </ActionBar.OpenTrigger>
 
   <ActionBar.Content>
@@ -74,7 +74,7 @@ import { ActionBar } from "@workspaces/ui"
       </ActionBar.CloseTrigger>
     </>
   }
-  trigger={<Button>Open ActionBar</Button>}
+  trigger={<Button>Open Action Bar</Button>}
 />
 ```
 
@@ -85,7 +85,7 @@ To change the duration, set `duration` to a numerical value (seconds).
 ```tsx preview
 <ActionBar.Root duration={0.4}>
   <ActionBar.OpenTrigger>
-    <Button>Open ActionBar</Button>
+    <Button>Open Action Bar</Button>
   </ActionBar.OpenTrigger>
 
   <ActionBar.Content>
@@ -110,7 +110,7 @@ To change the display position, set `placement` to `"start-center"`, `"end-start
 ```tsx preview
 <ActionBar.Root placement="start-center">
   <ActionBar.OpenTrigger>
-    <Button>Open ActionBar</Button>
+    <Button>Open Action Bar</Button>
   </ActionBar.OpenTrigger>
 
   <ActionBar.Content>
@@ -135,7 +135,7 @@ To change the show or hide animation, set `animationScheme` to `"block-start"`, 
 ```tsx preview
 <ActionBar.Root animationScheme="inline-end" placement="start-end">
   <ActionBar.OpenTrigger>
-    <Button>Open ActionBar</Button>
+    <Button>Open Action Bar</Button>
   </ActionBar.OpenTrigger>
 
   <ActionBar.Content>
@@ -160,7 +160,7 @@ const { open, onClose, onOpen } = useDisclosure()
 
 return (
   <>
-    <Button onClick={onOpen}>Open ActionBar</Button>
+    <Button onClick={onOpen}>Open Action Bar</Button>
 
     <ActionBar.Root
       content={

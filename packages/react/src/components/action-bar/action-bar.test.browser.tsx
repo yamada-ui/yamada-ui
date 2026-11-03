@@ -8,7 +8,7 @@ const TestComponent: FC<ActionBar.RootProps> = (props) => {
   return (
     <ActionBar.Root data-testid="root" {...props}>
       <ActionBar.OpenTrigger>
-        <Button data-testid="openTrigger">Open ActionBar</Button>
+        <Button data-testid="openTrigger">Open Action Bar</Button>
       </ActionBar.OpenTrigger>
 
       <ActionBar.Content data-testid="content">

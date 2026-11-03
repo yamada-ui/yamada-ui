@@ -18,7 +18,7 @@ export const Basic: Story = () => {
   return (
     <ActionBar.Root>
       <ActionBar.OpenTrigger>
-        <Button>Open ActionBar</Button>
+        <Button>Open Action Bar</Button>
       </ActionBar.OpenTrigger>
 
       <ActionBar.Content>
@@ -54,7 +54,7 @@ export const PropsPattern: Story = () => {
           </ActionBar.CloseTrigger>
         </>
       }
-      trigger={<Button>Open ActionBar</Button>}
+      trigger={<Button>Open Action Bar</Button>}
     />
   )
 }
@@ -63,7 +63,7 @@ export const Duration: Story = () => {
   return (
     <ActionBar.Root duration={0.4}>
       <ActionBar.OpenTrigger>
-        <Button>Open ActionBar</Button>
+        <Button>Open Action Bar</Button>
       </ActionBar.OpenTrigger>
 
       <ActionBar.Content>
@@ -86,7 +86,7 @@ export const Placement: Story = () => {
   return (
     <ActionBar.Root placement="start-center">
       <ActionBar.OpenTrigger>
-        <Button>Open ActionBar</Button>
+        <Button>Open Action Bar</Button>
       </ActionBar.OpenTrigger>
 
       <ActionBar.Content>
@@ -109,7 +109,7 @@ export const AnimationScheme: Story = () => {
   return (
     <ActionBar.Root animationScheme="inline-end" placement="start-end">
       <ActionBar.OpenTrigger>
-        <Button>Open ActionBar</Button>
+        <Button>Open Action Bar</Button>
       </ActionBar.OpenTrigger>
 
       <ActionBar.Content>
@@ -133,7 +133,7 @@ export const CustomControl: Story = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Open ActionBar</Button>
+      <Button onClick={onOpen}>Open Action Bar</Button>
 
       <ActionBar.Root
         content={

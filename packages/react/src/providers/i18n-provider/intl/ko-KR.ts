@@ -1,10 +1,6 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
-  actionBar: {
-    "Close action bar": "액션 바 닫기",
-    "Open action bar": "액션 바 열기",
-  },
   autocomplete: {
     "Clear value": "값 지우기",
     "No results found": "결과를 찾을 수 없습니다",
@@ -52,10 +48,6 @@ const data: IntlData = {
     Magenta: "마젠타",
     Red: "빨강",
     Yellow: "노랑",
-  },
-  modal: {
-    "Close modal": "모달 닫기",
-    "Open modal": "모달 열기",
   },
   numberInput: {
     Decrease: "감소",

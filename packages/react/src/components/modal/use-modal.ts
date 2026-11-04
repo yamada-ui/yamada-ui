@@ -4,8 +4,7 @@ import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback } from "react"
 import { mergeProps } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
-import { useI18n } from "../../providers/i18n-provider"
-import { handlerAll, useIds } from "../../utils"
+import { useIds } from "../../utils"
 
 export interface UseModalProps
   extends HTMLProps, Omit<UseDisclosureProps, "timing"> {
@@ -44,7 +43,6 @@ export const useModal = ({
     onOpen: onOpenProp,
   })
   const [contentId, titleId, bodyId] = useIds()
-  const { t } = useI18n("modal")
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent) => {
@@ -66,46 +64,34 @@ export const useModal = ({
   )
 
   const getOverlayProps: PropGetter = useCallback(
-    (props = {}) => ({
-      "aria-hidden": "true",
-      ...props,
-      onClick: handlerAll(props.onClick, (ev) => {
-        ev.stopPropagation()
+    (props = {}) =>
+      mergeProps({ "aria-hidden": "true" }, props, {
+        onClick: (ev) => {
+          ev.stopPropagation()
 
-        if (closeOnOverlay) onClose()
-      }),
-    }),
+          if (closeOnOverlay) onClose()
+        },
+      })(),
     [closeOnOverlay, onClose],
   )
 
   const getOpenTriggerProps: PropGetter<"button"> = useCallback(
-    (props = {}) => ({
-      "aria-controls": open ? contentId : undefined,
-      "aria-expanded": open,
-      "aria-haspopup": "dialog",
-      "aria-label": t("Open modal"),
-      ...props,
-      onClick: handlerAll(props.onClick, onOpen),
-    }),
-    [contentId, onOpen, open, t],
+    (props = {}) =>
+      mergeProps(
+        {
+          "aria-controls": open ? contentId : undefined,
+          "aria-expanded": open,
+          "aria-haspopup": "dialog",
+        },
+        props,
+        { onClick: onOpen },
+      )(),
+    [contentId, onOpen, open],
   )
 
   const getCloseTriggerProps: PropGetter<"button"> = useCallback(
-    (props = {}) => ({
-      "aria-label": t("Close modal"),
-      ...props,
-      onClick: handlerAll(props.onClick, onClose),
-    }),
-    [onClose, t],
-  )
-
-  const getCloseButtonProps: PropGetter<"button"> = useCallback(
-    (props = {}) => ({
-      "aria-label": t("Close modal"),
-      ...props,
-      onClick: handlerAll(props.onClick, onClose),
-    }),
-    [onClose, t],
+    (props = {}) => mergeProps(props, { onClick: onClose })(),
+    [onClose],
   )
 
   const getContentProps: PropGetter<"section"> = useCallback(
@@ -125,39 +111,28 @@ export const useModal = ({
   )
 
   const getHeaderProps: PropGetter<"header"> = useCallback(
-    (props) => ({
-      ...props,
-    }),
+    (props) => ({ ...props }),
     [],
   )
 
   const getTitleProps: PropGetter<"h2"> = useCallback(
-    (props) => ({
-      id: titleId,
-      ...props,
-    }),
+    (props) => ({ id: titleId, ...props }),
     [titleId],
   )
 
   const getBodyProps: PropGetter = useCallback(
-    (props) => ({
-      id: bodyId,
-      ...props,
-    }),
+    (props) => ({ id: bodyId, ...props }),
     [bodyId],
   )
 
   const getFooterProps: PropGetter<"footer"> = useCallback(
-    (props) => ({
-      ...props,
-    }),
+    (props) => ({ ...props }),
     [],
   )
 
   return {
     open,
     getBodyProps,
-    getCloseButtonProps,
     getCloseTriggerProps,
     getContentProps,
     getFooterProps,

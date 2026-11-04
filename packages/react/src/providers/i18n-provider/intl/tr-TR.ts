@@ -1,10 +1,6 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
-  actionBar: {
-    "Close action bar": "Eylem çubuğunu kapat",
-    "Open action bar": "Eylem çubuğunu aç",
-  },
   autocomplete: {
     "Clear value": "Değeri temizle",
     "No results found": "Sonuç bulunamadı",
@@ -52,10 +48,6 @@ const data: IntlData = {
     Magenta: "Macenta",
     Red: "Kırmızı",
     Yellow: "Sarı",
-  },
-  modal: {
-    "Close modal": "Modali kapat",
-    "Open modal": "Modali aç",
   },
   numberInput: {
     Decrease: "Azalt",

@@ -262,13 +262,15 @@ export const DrawerCloseTrigger = withContext<
 export interface DrawerCloseButtonProps extends CloseButtonProps {}
 
 export const DrawerCloseButton = withContext<"button", DrawerCloseButtonProps>(
-  CloseButton,
+  (props) => {
+    return (
+      <DrawerCloseTrigger>
+        <CloseButton {...props} />
+      </DrawerCloseTrigger>
+    )
+  },
   "closeButton",
-)(undefined, (props) => {
-  const { getCloseButtonProps } = useComponentContext()
-
-  return { ...getCloseButtonProps(props) }
-})
+)()
 
 export interface DrawerOverlayProps extends HTMLMotionProps {}
 

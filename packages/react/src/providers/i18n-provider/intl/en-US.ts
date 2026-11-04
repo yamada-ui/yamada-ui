@@ -1,8 +1,4 @@
 const data = {
-  actionBar: {
-    "Close action bar": "Close action bar",
-    "Open action bar": "Open action bar",
-  },
   autocomplete: {
     "Clear value": "Clear value",
     "No results found": "No results found",
@@ -50,10 +46,6 @@ const data = {
     Magenta: "Magenta",
     Red: "Red",
     Yellow: "Yellow",
-  },
-  modal: {
-    "Close modal": "Close modal",
-    "Open modal": "Open modal",
   },
   numberInput: {
     Decrease: "Decrease",

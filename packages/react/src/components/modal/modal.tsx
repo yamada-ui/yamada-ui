@@ -316,13 +316,17 @@ export const ModalCloseTrigger = withContext<"button", ModalCloseTriggerProps>(
 export interface ModalCloseButtonProps extends CloseButtonProps {}
 
 export const ModalCloseButton = withContext<"button", ModalCloseButtonProps>(
-  CloseButton,
-  "closeButton",
-)(undefined, (props) => {
-  const { closeButtonProps, getCloseButtonProps } = useComponentContext()
+  (props) => {
+    const { closeButtonProps } = useComponentContext()
 
-  return { ...getCloseButtonProps(mergeProps(closeButtonProps, props)()) }
-})
+    return (
+      <ModalCloseTrigger>
+        <CloseButton {...mergeProps(closeButtonProps, props)()} />
+      </ModalCloseTrigger>
+    )
+  },
+  "closeButton",
+)()
 
 export interface ModalOverlayProps extends HTMLMotionProps {}
 

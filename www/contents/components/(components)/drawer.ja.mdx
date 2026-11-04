@@ -385,6 +385,18 @@ return (
 
 `Drawer`は、アクセシビリティに関して[WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)に従います。
 
+`Drawer.OpenTrigger`または`Drawer.CloseTrigger`にアイコンのみを使用する場合は、子要素に`aria-label`を設定します。
+
+```tsx
+<Drawer.OpenTrigger>
+  <IconButton aria-label="Open drawer" icon={<PlusIcon />} />
+</Drawer.OpenTrigger>
+
+<Drawer.CloseTrigger>
+  <IconButton aria-label="Close drawer" icon={<XIcon />} />
+</Drawer.CloseTrigger>
+```
+
 ### キーボード操作
 
 モーダルが開くと、フォーカスはモーダル内にロックされます。つまり、モーダルを閉じない限り、モーダル外の要素をフォーカスすることはできません。
@@ -406,9 +418,7 @@ return (
 | `.ui-drawer__trigger--open`      | `aria-expanded`          | モーダルが開いている場合は`"true"`を設定し、閉じている場合は`"false"`を設定します。                  |
 |                                  | `aria-controls`          | モーダルが開いている場合は`section.ui-drawer__content`の`id`を設定し、閉じている場合は設定しません。 |
 |                                  | `aria-haspopup="dialog"` | ダイアログが存在することを示します。                                                                 |
-|                                  | `aria-label`             | `"モーダルを開く"`を設定します。                                                                     |
-| `button.ui-drawer__close-button` | `aria-label`             | `"モーダルを閉じる"`を設定します。                                                                   |
-| `.ui-drawer__trigger--close`     | `aria-label`             | `"モーダルを閉じる"`を設定します。                                                                   |
+| `button.ui-drawer__close-button` | `aria-label`             | `"閉じる"`を設定します。                                                                             |
 | `div.ui-drawer__overlay`         | `aria-hidden`            | 要素をアクセシビリティツリーから除外します。                                                         |
 
 ## 類似のコンポーネント

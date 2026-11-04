@@ -1,10 +1,6 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
-  actionBar: {
-    "Close action bar": "Zatvori traku sa radnjama",
-    "Open action bar": "Otvori traku sa radnjama",
-  },
   autocomplete: {
     "Clear value": "Obriši vrednost",
     "No results found": "Nema pronađenih rezultata",
@@ -52,10 +48,6 @@ const data: IntlData = {
     Magenta: "Magenta",
     Red: "Crvena",
     Yellow: "Žuta",
-  },
-  modal: {
-    "Close modal": "Zatvori modal",
-    "Open modal": "Otvori modal",
   },
   numberInput: {
     Decrease: "Smanji",

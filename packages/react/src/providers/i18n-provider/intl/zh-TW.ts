@@ -1,10 +1,6 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
-  actionBar: {
-    "Close action bar": "關閉操作列",
-    "Open action bar": "打開操作列",
-  },
   autocomplete: {
     "Clear value": "清除值",
     "No results found": "未找到結果",
@@ -52,10 +48,6 @@ const data: IntlData = {
     Magenta: "洋紅",
     Red: "紅色",
     Yellow: "黃色",
-  },
-  modal: {
-    "Close modal": "關閉模態框",
-    "Open modal": "打開模態框",
   },
   numberInput: {
     Decrease: "減少",

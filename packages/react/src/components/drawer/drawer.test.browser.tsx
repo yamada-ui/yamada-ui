@@ -290,25 +290,16 @@ describe("<Drawer />", () => {
     const closeButton = page.getByTestId("closeButton")
     const title = page.getByTestId("title")
     const body = page.getByTestId("body")
-    const closeTrigger = page.getByTestId("closeTrigger")
 
     await expect.element(openTrigger).toHaveAttribute("aria-controls")
     await expect.element(openTrigger).toHaveAttribute("aria-expanded", "true")
     await expect.element(openTrigger).toHaveAttribute("aria-haspopup", "dialog")
-    await expect
-      .element(openTrigger)
-      .toHaveAttribute("aria-label", "Open modal")
     await expect.element(overlay).toHaveAttribute("aria-hidden", "true")
     await expect.element(content).toHaveAttribute("aria-describedby")
     await expect.element(content).toHaveAttribute("aria-labelledby")
     await expect.element(content).toHaveAttribute("aria-modal", "true")
     await expect.element(content).toHaveAttribute("role", "dialog")
-    await expect
-      .element(closeButton)
-      .toHaveAttribute("aria-label", "Close modal")
-    await expect
-      .element(closeTrigger)
-      .toHaveAttribute("aria-label", "Close modal")
+    await expect.element(closeButton).toHaveAttribute("aria-label", "Close")
     await expect.element(title).toHaveAttribute("id")
     await expect.element(body).toHaveAttribute("id")
   })

@@ -131,7 +131,7 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
   const [styleContext, mergedProps] = useRootComponentProps(props)
   const [
     { animationScheme, initialFocusRef, offset, placement, ...popoverProps },
-    { children, disabled, ...rest },
+    { children, ...rest },
   ] = usePopoverProps(mergedProps, [
     "disabled",
     "open",
@@ -142,6 +142,7 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
   const {
     closeOnSelect,
     descendants,
+    disabled,
     open,
     subMenu,
     subMenuDirection,
@@ -156,7 +157,7 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
     onCloseSubMenu,
     onOpen,
     onSelect,
-  } = useMenu({ disabled, ...rest })
+  } = useMenu(rest)
   const mergedPopoverProps = useMemo<Popover.RootProps>(
     () => ({
       ...popoverProps,
@@ -190,6 +191,7 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
   )
   const menuContext = useMemo(
     () => ({
+      disabled,
       subMenu,
       subMenuDirection,
       onActiveDescendant,
@@ -199,6 +201,7 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
       onSelect,
     }),
     [
+      disabled,
       onClose,
       onOpen,
       onSelect,
@@ -551,7 +554,8 @@ export const MenuOptionGroup = withContext<"div", MenuOptionGroupProps>(
   ): ReactElement
 }>
 
-export interface MenuItemProps extends HTMLStyledProps, UseMenuItemProps {}
+export interface MenuItemProps
+  extends Omit<HTMLStyledProps, "onSelect">, UseMenuItemProps {}
 
 export const MenuItem = withContext<"div", MenuItemProps>(
   ({ children, ...rest }) => {
@@ -571,7 +575,7 @@ export const MenuItem = withContext<"div", MenuItemProps>(
 )()
 
 export interface MenuOptionItemProps
-  extends HTMLStyledProps, UseMenuOptionItemProps {
+  extends Omit<HTMLStyledProps, "onSelect">, UseMenuOptionItemProps {
   /**
    * The icon to be used in the menu option item.
    */

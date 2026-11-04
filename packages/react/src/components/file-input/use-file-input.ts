@@ -4,7 +4,7 @@ import type { ChangeEvent, RefObject } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict } from "../../utils"
 import type { FieldProps } from "../field"
-import { useCallback, useRef } from "react"
+import { useCallback, useId, useRef } from "react"
 import { mergeProps } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
 import { useControllableState } from "../../hooks/use-controllable-state"
@@ -73,6 +73,7 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
   })
   const interactive = !(readOnly || disabled)
   const inputRef = useRef<HTMLInputElement>(null)
+  const fieldId = useId()
   const [values, setValues] = useControllableState<File[] | undefined>({
     defaultValue,
     value,
@@ -152,17 +153,22 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
   )
 
   const getFieldProps: PropGetter = useCallback(
-    (props = {}) =>
-      mergeProps(
+    (props = {}) => {
+      const id = props.id ?? fieldId
+      const labelledby = clickableProps["aria-labelledby"]
+
+      return mergeProps(
         {
+          id,
           "data-placeholder": dataAttr(!count),
           ...clickableProps,
-          "aria-labelledby": clickableProps["aria-labelledby"],
+          "aria-labelledby": labelledby ? cx(labelledby, id) : undefined,
           tabIndex: interactive ? 0 : clickableProps.tabIndex,
         },
         props,
-      )(),
-    [clickableProps, count, interactive],
+      )()
+    },
+    [clickableProps, count, fieldId, interactive],
   )
 
   return {

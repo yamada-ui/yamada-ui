@@ -260,7 +260,7 @@ export const proseStyle = defineComponentStyle({
     blockquote: "subtle",
     code: "subtle",
     kbd: "outline",
-    link: "plain",
+    link: "underline",
     table: "line",
   },
 })

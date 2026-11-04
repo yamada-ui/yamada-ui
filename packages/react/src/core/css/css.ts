@@ -135,6 +135,23 @@ export function transformConditionalValue({ breakpoints }: System) {
   }
 }
 
+function sortBreakpointQueries({ queries }: Breakpoints) {
+  return function (css: Dict): Dict {
+    const queryMap = new Map(
+      queries.flatMap(({ query }) =>
+        !isUndefined(query) && query in css ? [[query, css[query]]] : [],
+      ),
+    )
+    const entries = queryMap.entries()
+
+    return Object.fromEntries(
+      Object.entries(css).map(([key, value]) =>
+        queryMap.has(key) ? entries.next().value! : [key, value],
+      ),
+    )
+  }
+}
+
 function expandCSS(system: System) {
   return function (css: Dict): Dict {
     let computedCSS: Dict = {}
@@ -150,7 +167,7 @@ function expandCSS(system: System) {
       else computedCSS = merge(computedCSS, { [key]: value })
     }
 
-    return computedCSS
+    return sortBreakpointQueries(system.breakpoints)(computedCSS)
   }
 }
 

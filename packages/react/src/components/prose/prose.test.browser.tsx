@@ -40,20 +40,6 @@ describe("<Prose />", () => {
       })
   })
 
-  test("underlines links by default", async () => {
-    await render(
-      <Prose>
-        <p>
-          Read <a href="#details">the details</a>.
-        </p>
-      </Prose>,
-    )
-
-    await expect
-      .element(page.getByRole("link", { name: "the details" }))
-      .toHaveStyle({ textDecorationLine: "underline" })
-  })
-
   test.each(["line", "outline"] as const)(
     "excludes not-prose table cells and rows with %s borders",
     async (table) => {

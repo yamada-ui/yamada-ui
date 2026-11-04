@@ -107,7 +107,7 @@
     },
     "test:coverage:chromium": {
       "dependsOn": ["transit:test"],
-      "passThroughEnv": ["PLAYWRIGHT_BROWSERS_PATH"],
+      "passThroughEnv": ["DEBUG", "PLAYWRIGHT_BROWSERS_PATH"],
       "inputs": [
         "package.json",
         "**/*.{ts,tsx,mts}",

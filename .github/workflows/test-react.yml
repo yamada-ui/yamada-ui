@@ -80,6 +80,8 @@ jobs:
       image: ${{ matrix.env != 'jsdom' && (inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true' || needs.prepare.outputs[matrix.env] == 'true') && needs.prepare.outputs.image || '' }}
       options: --user 1001 --init --ipc=host
     timeout-minutes: 10
+    env:
+      DEBUG: ${{ matrix.env == 'chromium' && matrix.shard_index == 1 && 'pw:browser,vitest:browser:gc,vitest:browser:api' || '' }}
     strategy:
       fail-fast: false
       matrix:
@@ -106,11 +108,11 @@ jobs:
 
       - name: Run test (full)
         if: inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true'
-        run: pnpm turbo run test:coverage:${{ matrix.env }} --filter=./packages/react -- --retry=3 --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:coverage:${{ matrix.env }} --filter=./packages/react ${{ matrix.env == 'chromium' && matrix.shard_index == 1 && '--force --log-order=stream' || '' }} -- --retry=3 --shard=${{ matrix.shard_index }}/4 ${{ matrix.env == 'chromium' && matrix.shard_index == 1 && '--reporter=default --reporter=../../.github/scripts/browser-diagnostics.mjs' || '' }}
 
       - name: Run test (diff)
         if: inputs.TURBO_SCM_BASE != '' && needs.prepare.outputs.full != 'true' && needs.prepare.outputs[matrix.env] == 'true'
-        run: pnpm turbo run test:coverage:${{ matrix.env }} --filter=./packages/react -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }} --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:coverage:${{ matrix.env }} --filter=./packages/react ${{ matrix.env == 'chromium' && matrix.shard_index == 1 && '--force --log-order=stream' || '' }} -- --retry=3 --changed ${{ inputs.TURBO_SCM_BASE }} --shard=${{ matrix.shard_index }}/4 ${{ matrix.env == 'chromium' && matrix.shard_index == 1 && '--reporter=default --reporter=../../.github/scripts/browser-diagnostics.mjs' || '' }}
 
       - name: Upload coverage
         if: inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true' || needs.prepare.outputs[matrix.env] == 'true'

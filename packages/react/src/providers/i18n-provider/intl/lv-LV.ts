@@ -1,10 +1,6 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
-  actionBar: {
-    "Close action bar": "Aizvērt darbību joslu",
-    "Open action bar": "Atvērt darbību joslu",
-  },
   autocomplete: {
     "Clear value": "Notīrīt vērtību",
     "No results found": "Rezultāti netika atrasti",
@@ -52,10 +48,6 @@ const data: IntlData = {
     Magenta: "Magenta",
     Red: "Sarkans",
     Yellow: "Dzeltens",
-  },
-  modal: {
-    "Close modal": "Aizvērt modālo logu",
-    "Open modal": "Atvērt modālo logu",
   },
   numberInput: {
     Decrease: "Samazināt",

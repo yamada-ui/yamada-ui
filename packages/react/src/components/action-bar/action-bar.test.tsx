@@ -41,14 +41,6 @@ describe("<ActionBar />", () => {
       "aria-haspopup",
       "dialog",
     )
-    expect(screen.getByTestId("openTrigger")).toHaveAttribute(
-      "aria-label",
-      "Open action bar",
-    )
-    expect(screen.getByTestId("closeTrigger")).toHaveAttribute(
-      "aria-label",
-      "Close action bar",
-    )
     expect(screen.getByTestId("content")).toHaveAttribute("role", "dialog")
     expect(screen.getByTestId("content")).toHaveAttribute("id")
   })

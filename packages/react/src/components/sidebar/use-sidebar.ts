@@ -214,13 +214,23 @@ export const useSidebar = ({
   )
 
   const getTriggerProps: PropGetter<"button"> = useCallback(
-    (props = {}) => ({
-      "aria-expanded": open,
-      "aria-label": t(open ? "Close sidebar" : "Open sidebar"),
-      ...props,
-      onClick: handlerAll(props.onClick, onToggle),
-    }),
-    [open, t, onToggle],
+    (props = {}) =>
+      mergeProps({ "aria-expanded": open }, props, { onClick: onToggle })(),
+    [open, onToggle],
+  )
+
+  const getHandleProps: PropGetter<"button"> = useCallback(
+    (props = {}) =>
+      getTriggerProps(
+        mergeProps(
+          {
+            "aria-label": t(open ? "Close sidebar" : "Open sidebar"),
+            tabIndex: -1,
+          },
+          props,
+        )(),
+      ),
+    [getTriggerProps, t, open],
   )
 
   const getSidePanelProps: PropGetter<"aside"> = useCallback(
@@ -251,6 +261,7 @@ export const useSidebar = ({
     selectedValue,
     getContentProps,
     getFooterProps,
+    getHandleProps,
     getHeaderProps,
     getRootProps,
     getSidePanelProps,

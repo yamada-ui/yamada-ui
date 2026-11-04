@@ -1,10 +1,6 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
-  actionBar: {
-    "Close action bar": "סגור סרגל פעולות",
-    "Open action bar": "פתח סרגל פעולות",
-  },
   autocomplete: {
     "Clear value": "נקה ערך",
     "No results found": "לא נמצאו תוצאות",
@@ -52,10 +48,6 @@ const data: IntlData = {
     Magenta: "מג'נטה",
     Red: "אדום",
     Yellow: "צהוב",
-  },
-  modal: {
-    "Close modal": "סגור מודאלי",
-    "Open modal": "פתח מודאלי",
   },
   numberInput: {
     Decrease: "הקטן",

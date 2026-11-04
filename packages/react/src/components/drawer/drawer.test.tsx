@@ -5,7 +5,7 @@ import { useDrawer } from "./use-drawer"
 
 describe("<Drawer />", () => {
   test("passes a11y checks", async () => {
-    await a11y(<Drawer.Root trigger={<Button>Open modal</Button>} />)
+    await a11y(<Drawer.Root trigger={<Button>Open Drawer</Button>} />)
   })
 
   test("passes a11y checks with dragHandleOnly and a custom drag trigger when open", async () => {

@@ -385,6 +385,18 @@ return (
 
 The `Drawer` follows the [WAI-ARIA - Dialog (Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) for accessibility.
 
+If you use only an icon for `Drawer.OpenTrigger` or `Drawer.CloseTrigger`, set `aria-label` on the child element.
+
+```tsx
+<Drawer.OpenTrigger>
+  <IconButton aria-label="Open drawer" icon={<PlusIcon />} />
+</Drawer.OpenTrigger>
+
+<Drawer.CloseTrigger>
+  <IconButton aria-label="Close drawer" icon={<XIcon />} />
+</Drawer.CloseTrigger>
+```
+
 ### Keyboard Navigation
 
 When the `Drawer` opens, focus is trapped within it. That is, you cannot focus on elements outside the modal unless the modal is closed.
@@ -406,9 +418,7 @@ When the `Drawer` opens, focus is trapped within it. That is, you cannot focus o
 | `.ui-drawer__trigger--open`      | `aria-expanded`          | Sets to `"true"` when modal is opened, and `"false"` when it is closed.              |
 |                                  | `aria-controls`          | Sets the `id` of `section.ui-drawer__content` when open, and is not set when closed. |
 |                                  | `aria-haspopup="dialog"` | Indicates that a dialog exists.                                                      |
-|                                  | `aria-label`             | Sets to `"Open modal"`.                                                              |
-| `button.ui-drawer__close-button` | `aria-label`             | Sets to `"Close modal"`.                                                             |
-| `.ui-drawer__trigger--close`     | `aria-label`             | Sets to `"Close modal"`.                                                             |
+| `button.ui-drawer__close-button` | `aria-label`             | Sets to `"Close"`.                                                                   |
 | `div.ui-drawer__overlay`         | `aria-hidden`            | Excludes the element from the accessibility tree.                                    |
 
 ## Similar Components

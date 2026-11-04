@@ -1,10 +1,6 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
-  actionBar: {
-    "Close action bar": "Uždaryti veiksmų juostą",
-    "Open action bar": "Atidaryti veiksmų juostą",
-  },
   autocomplete: {
     "Clear value": "Išvalyti reikšmę",
     "No results found": "Rezultatų nerasta",
@@ -52,10 +48,6 @@ const data: IntlData = {
     Magenta: "Purpurinė",
     Red: "Raudona",
     Yellow: "Geltona",
-  },
-  modal: {
-    "Close modal": "Uždaryti modalą",
-    "Open modal": "Atidaryti modalą",
   },
   numberInput: {
     Decrease: "Sumažinti",

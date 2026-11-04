@@ -1,10 +1,6 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
-  actionBar: {
-    "Close action bar": "Zavřít panel akcí",
-    "Open action bar": "Otevřít panel akcí",
-  },
   autocomplete: {
     "Clear value": "Vymazat hodnotu",
     "No results found": "Nebyly nalezeny žádné výsledky",
@@ -52,10 +48,6 @@ const data: IntlData = {
     Magenta: "Purpurová",
     Red: "Červená",
     Yellow: "Žlutá",
-  },
-  modal: {
-    "Close modal": "Zavřít modální okno",
-    "Open modal": "Otevřít modální okno",
   },
   numberInput: {
     Decrease: "Snížit",

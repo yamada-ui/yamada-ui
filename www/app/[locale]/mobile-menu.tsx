@@ -115,10 +115,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
             flexDirection="column"
             items={items}
             w="full"
-            itemProps={{
-              variant: { base: "ghost", _current: "solid" },
-              justifyContent: "flex-start",
-            }}
+            itemProps={{ justifyContent: "flex-start" }}
             onClose={onClose}
           />
 
@@ -227,7 +224,7 @@ function DocsMenuGroup({
 
       <Collapse as="nav" open={open} ps="md" w="full" _lastChild={{ mb: "0" }}>
         {items.map(({ items, pathname: href, segment, status, title }) => {
-          if (items) {
+          if (items)
             return (
               <Box key={segment} my="lg" _lastChild={{ mb: "0" }}>
                 <Text
@@ -258,7 +255,7 @@ function DocsMenuGroup({
                 })}
               </Box>
             )
-          } else {
+          else
             return (
               <DocsMenuItem
                 key={segment}
@@ -272,7 +269,6 @@ function DocsMenuGroup({
                 {status ? <Status status={status} /> : null}
               </DocsMenuItem>
             )
-          }
         })}
       </Collapse>
     </VStack>

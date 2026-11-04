@@ -1,0 +1,400 @@
+---
+title: Prose
+description: "`Prose` is a component that styles HTML content."
+tags: ["typography"]
+status: new
+storybook: components-prose--basic
+source: components/prose
+style: components/prose/prose.style.ts
+---
+
+```tsx preview
+<Prose>
+  <h1>俺だけレベルアップな件</h1>
+
+  <p>
+    人類最弱兵器と呼ばれるE級ハンター、水篠旬。二重ダンジョンから生還した彼にだけ、
+    <a href="https://sololeveling-anime.net/">新たな物語</a>
+    の幕が開く。
+  </p>
+
+  <h2>あらすじ</h2>
+
+  <p>
+    死の淵で謎のシステムに選ばれた旬は、<em>唯一のプレイヤー</em>
+    として成長する力を手に入れる。クエストと戦いを重ねながら、 ゲートに
+    <strong>隠された秘密</strong>へと近づいていく。
+  </p>
+
+  <h3>登場人物</h3>
+
+  <ul>
+    <li>水篠 旬</li>
+    <li>
+      ハンタースギルド
+      <ol>
+        <li>最上 真</li>
+        <li>向坂 雫</li>
+      </ol>
+    </li>
+    <li>
+      白虎ギルド
+      <ol>
+        <li>白川 大虎</li>
+      </ol>
+    </li>
+    <li>
+      ハンター協会
+      <ol>
+        <li>後藤 清臣</li>
+        <li>犬飼 晃</li>
+      </ol>
+    </li>
+  </ul>
+
+  <h3>セリフ</h3>
+
+  <figure>
+    <blockquote>
+      <p>起きろ。</p>
+    </blockquote>
+    <figcaption>
+      水篠旬 - <cite>俺だけレベルアップな件</cite>
+    </figcaption>
+  </figure>
+
+  <hr />
+
+  <figure>
+    <blockquote>
+      <p>兄貴！</p>
+    </blockquote>
+    <figcaption>
+      諸菱賢太 - <cite>俺だけレベルアップな件</cite>
+    </figcaption>
+  </figure>
+
+  <h3>影の軍団</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">名前</th>
+        <th scope="col">役割</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>イグリット</td>
+        <td>先陣を切る騎士</td>
+      </tr>
+      <tr>
+        <td>ベル</td>
+        <td>圧倒的な力で敵を制圧する兵士</td>
+      </tr>
+      <tr>
+        <td>アイアン</td>
+        <td>仲間を守る重装兵</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>ステータス</h3>
+
+  <p>
+    <code>プレイヤー情報</code>を確認するには、
+    <kbd>Enter</kbd>を押してください。
+  </p>
+
+  <pre>
+    <code>
+      {
+        'const player = {\n  name: "水篠旬",\n  role: "影の君主",\n  skills: ["影の抽出", "影の保存"],\n}'
+      }
+    </code>
+  </pre>
+</Prose>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { Prose } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Prose } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Prose } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Prose />
+```
+
+### Change Variant
+
+#### Code
+
+```tsx preview
+<VStack>
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(code, index) => (
+      <Prose key={index} code={code}>
+        <p>
+          <code>プレイヤー情報</code>を確認するには、
+          <kbd>Enter</kbd>を押してください。
+        </p>
+      </Prose>
+    )}
+  </For>
+</VStack>
+```
+
+#### Keyboard
+
+```tsx preview
+<VStack>
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(kbd, index) => (
+      <Prose key={index} kbd={kbd}>
+        <p>
+          <code>プレイヤー情報</code>を確認するには、
+          <kbd>Enter</kbd>を押してください。
+        </p>
+      </Prose>
+    )}
+  </For>
+</VStack>
+```
+
+#### Blockquote
+
+```tsx preview
+<VStack>
+  <For each={["solid", "subtle"]}>
+    {(blockquote, index) => (
+      <Prose key={index} blockquote={blockquote}>
+        <figure>
+          <blockquote>
+            <p>起きろ。</p>
+          </blockquote>
+          <figcaption>
+            水篠旬 - <cite>俺だけレベルアップな件</cite>
+          </figcaption>
+        </figure>
+
+        <hr />
+
+        <figure>
+          <blockquote>
+            <p>兄貴！</p>
+          </blockquote>
+          <figcaption>
+            諸菱賢太 - <cite>俺だけレベルアップな件</cite>
+          </figcaption>
+        </figure>
+      </Prose>
+    )}
+  </For>
+</VStack>
+```
+
+#### Table
+
+```tsx preview
+<VStack>
+  <For each={["line", "outline"]}>
+    {(table, index) => (
+      <Prose key={index} table={table}>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">名前</th>
+              <th scope="col">役割</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>イグリット</td>
+              <td>先陣を切る騎士</td>
+            </tr>
+            <tr>
+              <td>ベル</td>
+              <td>圧倒的な力で敵を制圧する兵士</td>
+            </tr>
+            <tr>
+              <td>アイアン</td>
+              <td>仲間を守る重装兵</td>
+            </tr>
+          </tbody>
+        </table>
+      </Prose>
+    )}
+  </For>
+</VStack>
+```
+
+#### Link
+
+```tsx preview
+<VStack>
+  <For each={["plain", "underline"]}>
+    {(link, index) => (
+      <Prose key={index} link={link}>
+        <p>
+          人類最弱兵器と呼ばれるE級ハンター、水篠旬。二重ダンジョンから生還した彼にだけ、
+          <a href="https://sololeveling-anime.net/">新たな物語</a>
+          の幕が開く。
+        </p>
+      </Prose>
+    )}
+  </For>
+</VStack>
+```
+
+#### Separator
+
+```tsx preview
+<VStack>
+  <For each={["solid", "dashed", "dotted"]}>
+    {(hr, index) => (
+      <Prose key={index} hr={hr}>
+        <figure>
+          <blockquote>
+            <p>起きろ。</p>
+          </blockquote>
+          <figcaption>
+            水篠旬 - <cite>俺だけレベルアップな件</cite>
+          </figcaption>
+        </figure>
+
+        <hr />
+
+        <figure>
+          <blockquote>
+            <p>兄貴！</p>
+          </blockquote>
+          <figcaption>
+            諸菱賢太 - <cite>俺だけレベルアップな件</cite>
+          </figcaption>
+        </figure>
+      </Prose>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <Prose key={index} size={size}>
+        <h1>俺だけレベルアップな件</h1>
+
+        <p>
+          人類最弱兵器と呼ばれるE級ハンター、水篠旬。二重ダンジョンから生還した彼にだけ、
+          <a href="https://sololeveling-anime.net/">新たな物語</a>
+          の幕が開く。
+        </p>
+
+        <h2>あらすじ</h2>
+
+        <p>
+          死の淵で謎のシステムに選ばれた旬は、<em>唯一のプレイヤー</em>
+          として成長する力を手に入れる。クエストと戦いを重ねながら、 ゲートに
+          <strong>隠された秘密</strong>へと近づいていく。
+        </p>
+      </Prose>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <Prose key={index} colorScheme={colorScheme}>
+        <p>
+          <code>プレイヤー情報</code>を確認するには、
+          <kbd>Enter</kbd>を押してください。
+        </p>
+      </Prose>
+    )}
+  </For>
+</VStack>
+```
+
+### React Markdown
+
+```ts
+import Markdown from "react-markdown"
+import remarkGfm from "remark-gfm"
+```
+
+```tsx preview
+<Prose>
+  <Markdown remarkPlugins={[remarkGfm]}>
+    {`### 影の軍団
+
+| 名前 | 役割 |
+| --- | --- |
+| イグリット | 先陣を切る騎士 |
+| ベル | 圧倒的な力で敵を制圧する兵士 |
+| アイアン | 仲間を守る重装兵 |
+`}
+  </Markdown>
+</Prose>
+```
+
+### Render HTML
+
+```tsx preview
+<Prose
+  dangerouslySetInnerHTML={{
+    __html:
+      "<h2>影の軍団</h2><p>影の君主のもとに、新たな仲間が集う。</p><ul><li>イグリット</li><li>ベル</li><li>アイアン</li></ul>",
+  }}
+/>
+```
+
+### Exclude
+
+```tsx preview
+<Prose>
+  <h2>ダンジョン攻略記録</h2>
+  <p>任務を終えた水篠旬は、ハンター協会に報告へ向かう。</p>
+  <div className="not-prose">
+    <h2>ハンター協会の掲示板</h2>
+    <p>
+      本日の任務は<code>E級ダンジョン</code>の調査です。
+    </p>
+  </div>
+  <p>報告を終えた旬は、次のゲートへと向かった。</p>
+</Prose>
+```
+
+## Props
+
+<PropsTable name="prose" />
+
+## Similar Components
+
+<Similar name="prose" />
+
+## Uses Components & Hooks
+
+<Uses name="prose" />

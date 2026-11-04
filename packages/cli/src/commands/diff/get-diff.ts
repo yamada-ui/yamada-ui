@@ -142,7 +142,7 @@ export async function getDiff(
 
                   const targetPath = path.join(dirPath, name)
 
-                  if (content) {
+                  if (content)
                     if (source) {
                       const [remote, local] = await Promise.all([
                         transformContentWithFormatAndLint(
@@ -195,7 +195,7 @@ export async function getDiff(
                       changeMap[componentName] ??= {}
                       changeMap[componentName][name] = { diff, remote }
                     }
-                  } else if (template && data) {
+                  else if (template && data)
                     await Promise.all(
                       data.map(async ({ name: fileName, ...remoteRest }) => {
                         const localData = source?.data?.find(
@@ -267,7 +267,6 @@ export async function getDiff(
                         }
                       }),
                     )
-                  }
                 }),
               )
 

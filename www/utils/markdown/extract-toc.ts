@@ -23,15 +23,11 @@ export function extractToc(content: string): TocEntry[] {
       url: `#${slugger.slug(title)}`,
     }
 
-    while (stack.length > 0 && stack[stack.length - 1]!.level >= level) {
+    while (stack.length > 0 && stack[stack.length - 1]!.level >= level)
       stack.pop()
-    }
 
-    if (stack.length === 0) {
-      result.push(entry)
-    } else {
-      stack[stack.length - 1]!.entry.items.push(entry)
-    }
+    if (stack.length === 0) result.push(entry)
+    else stack[stack.length - 1]!.entry.items.push(entry)
 
     stack.push({ entry, level })
   }

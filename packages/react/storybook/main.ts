@@ -17,12 +17,12 @@ export const config: StorybookConfig = {
   stories: ["../src/**/*.@(mdx|stories.@(tsx))"],
   typescript: { reactDocgen: false },
   viteFinal: (config) => {
-    if (config.resolve) {
+    if (config.resolve)
       config.resolve.alias = {
         ...config.resolve.alias,
         "@": path.resolve(dirname, "../src"),
       }
-    }
+
     return config
   },
 }

@@ -6,6 +6,7 @@ export const codeStyle = defineComponentStyle({
     display: "inline-flex",
     fontFamily: "mono",
     rounded: "l1",
+    verticalAlign: "middle",
   },
 
   variants: {

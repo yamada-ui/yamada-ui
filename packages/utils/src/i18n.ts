@@ -39,9 +39,6 @@ export function isRtl(_locale: string) {
 
   if ("textInfo" in locale) return (locale.textInfo as any).direction === "rtl"
 
-  if (locale.script) {
-    return RTL_SCRIPTS.has(locale.script)
-  } else {
-    return RTL_LANGS.has(_locale.split("-")[0]!)
-  }
+  if (locale.script) return RTL_SCRIPTS.has(locale.script)
+  else return RTL_LANGS.has(_locale.split("-")[0]!)
 }

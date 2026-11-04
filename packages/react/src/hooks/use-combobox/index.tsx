@@ -18,7 +18,6 @@ import { mergeProps, useEnvironment } from "../../core"
 import {
   ariaAttr,
   createContext,
-  cx,
   dataAttr,
   findChild,
   getValidChildren,
@@ -243,8 +242,8 @@ export const useCombobox = (props: UseComboboxProps = {}) => {
   const [
     { matchWidth = true, ...popoverProps },
     {
-      "aria-label": ariaLabelProp,
-      "aria-labelledby": ariaLabelledbyProp,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledby,
       closeOnSelect: closeOnSelectProp = true,
       defaultOpen,
       disabled,
@@ -541,11 +540,7 @@ export const useCombobox = (props: UseComboboxProps = {}) => {
   }, [open])
 
   const getTriggerProps: PropGetter = useCallback(
-    ({
-      "aria-label": ariaLabel,
-      "aria-labelledby": ariaLabelledby,
-      ...props
-    } = {}) => ({
+    (props = {}) => ({
       ...mergeProps(
         {
           ref: triggerRef,
@@ -553,8 +548,8 @@ export const useCombobox = (props: UseComboboxProps = {}) => {
           "aria-disabled": ariaAttr(!interactive),
           "aria-expanded": open,
           "aria-haspopup": "listbox",
-          "aria-label": ariaLabel || ariaLabelProp,
-          "aria-labelledby": cx(ariaLabelledby, ariaLabelledbyProp),
+          "aria-label": ariaLabel,
+          "aria-labelledby": ariaLabelledby,
           "data-disabled": dataAttr(disabled),
           "data-readonly": dataAttr(readOnly),
           role: "combobox",
@@ -562,18 +557,17 @@ export const useCombobox = (props: UseComboboxProps = {}) => {
         },
         rest,
         props,
-      )({ mergeEvent: false }),
-      onClick: handlerAll(props.onClick, rest.onClick, onClick),
-      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
+        { onClick, onKeyDown },
+      )(),
     }),
     [
       open,
       contentId,
       interactive,
-      ariaLabelledbyProp,
       disabled,
       readOnly,
-      ariaLabelProp,
+      ariaLabelledby,
+      ariaLabel,
       rest,
       onClick,
       onKeyDown,
@@ -618,23 +612,13 @@ export type UseComboboxReturn = ReturnType<typeof useCombobox>
 
 export interface UseComboboxGroupProps extends HTMLProps {}
 
-export const useComboboxGroup = ({
-  "aria-labelledby": ariaLabelledbyProp,
-  ...rest
-}: UseComboboxGroupProps = {}) => {
+export const useComboboxGroup = ({ ...rest }: UseComboboxGroupProps = {}) => {
   const labelId = useId()
 
   const getGroupProps: PropGetter = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) =>
-      mergeProps(
-        {
-          "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby, labelId),
-          role: "group",
-        },
-        rest,
-        props,
-      )(),
-    [ariaLabelledbyProp, labelId, rest],
+    (props = {}) =>
+      mergeProps({ "aria-labelledby": labelId, role: "group" }, rest, props)(),
+    [labelId, rest],
   )
 
   const getLabelProps: PropGetter<"span"> = useCallback(

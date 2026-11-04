@@ -3,7 +3,7 @@ import { defineComponentSlotStyle } from "../../core"
 export const blockquoteStyle = defineComponentSlotStyle({
   base: {
     caption: {
-      color: "muted",
+      color: "fg.muted",
       fontSize: "sm",
     },
     cite: {},

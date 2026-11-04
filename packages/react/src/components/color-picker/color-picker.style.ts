@@ -6,7 +6,7 @@ export const colorPickerStyle = defineComponentSlotStyle({
   base: {
     ...nativeSelectStyle.base,
     colorSwatch: { w: "1.5em" },
-    content: { maxW: "sm", p: "1" },
+    content: { p: "1", w: "sm" },
     eyeDropper: datePickerStyle.base?.icon,
     field: datePickerStyle.base?.field,
     input: datePickerStyle.base?.input,

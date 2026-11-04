@@ -15,7 +15,7 @@ import type {
   DOMElement,
   HTMLStyledProps,
   Component as OriginalComponent,
-} from "./index.types"
+} from "./index.type"
 import { Fragment } from "react"
 import {
   createContext,
@@ -127,23 +127,18 @@ function withDisplayName<
 function getSlotKey<Y extends string>(slot?: ComponentSlot<Y>) {
   if (!slot) return "unknown"
 
-  if (isArray(slot) || !isObject(slot)) {
+  if (isArray(slot) || !isObject(slot))
     return toCamelCase(toArray(slot).join("-"))
-  } else {
-    return toCamelCase(slot.name)
-  }
+  else return toCamelCase(slot.name)
 }
 
 function getSlotName<Y extends string>(slot?: ComponentSlot<Y>) {
   if (!slot) return ""
 
-  if (isArray(slot)) {
+  if (isArray(slot))
     return slot.map((value) => toPascalCase(value as string)).join("")
-  } else if (isObject(slot)) {
-    return toPascalCase(slot.name)
-  } else {
-    return toPascalCase(slot as string)
-  }
+  else if (isObject(slot)) return toPascalCase(slot.name)
+  else return toPascalCase(slot)
 }
 
 export function createComponent<
@@ -165,7 +160,7 @@ export function createComponent<
     const system = useSystem()
 
     className = runIfFn(className, system)
-    className ??= getClassName(name, defaultClassName)(system)
+    className ??= defaultClassName ?? getClassName(name)(system)
 
     return className
   }
@@ -418,9 +413,7 @@ export function createSlotComponent<
     T extends keyof R = keyof R,
   >(
     el: FC<WithoutThemeProps<R, M, T>> | H,
-    slot: ComponentSlot<ComponentSlotName<M>> = "root" as ComponentSlot<
-      ComponentSlotName<M>
-    >,
+    slot: ComponentSlot<ComponentSlotName<M>> = "root",
     {
       name,
       className,

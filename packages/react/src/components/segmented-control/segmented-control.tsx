@@ -10,7 +10,7 @@ import type {
 } from "./use-segmented-control"
 import { LayoutGroup } from "motion/react"
 import { useMemo } from "react"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { motion } from "../motion"
 import { segmentedControlStyle } from "./segmented-control.style"
@@ -48,7 +48,7 @@ export interface SegmentedControlRootProps<Y extends string = string>
   /**
    * Props for the item component.
    */
-  itemProps?: SegmentedControlItemProps
+  itemProps?: Omit<SegmentedControlItemProps, "value">
 }
 
 const {
@@ -93,15 +93,13 @@ export const SegmentedControlRoot = withProvider(
       getRootProps,
     } = useSegmentedControl({ orientation: computedOrientation, ...rest })
     const cloneChildren = useMemo(() => {
-      if (children) {
-        return children
-      } else {
+      if (children) return children
+      else
         return items.map(({ label, ...rest }, index) => (
           <SegmentedControlItem key={index} {...rest}>
             {label}
           </SegmentedControlItem>
         ))
-      }
     }, [children, items])
     const context = useMemo(
       () => ({ id, name, disabled, orientation, readOnly, setValue, value }),
@@ -158,13 +156,12 @@ export const SegmentedControlItem = withContext<
   const { indicatorProps, itemProps } = useComponentContext()
 
   return {
-    ...itemProps,
-    ...props,
-    indicatorProps: {
-      ...indicatorProps,
-      ...itemProps?.indicatorProps,
-      ...props.indicatorProps,
-    },
+    ...mergeProps(itemProps, props)(),
+    indicatorProps: mergeProps(
+      indicatorProps,
+      itemProps?.indicatorProps,
+      props.indicatorProps,
+    )(),
   }
 }) as GenericsComponent<{
   <Y extends string = string>(props: SegmentedControlItemProps<Y>): ReactElement

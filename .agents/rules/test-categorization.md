@@ -41,3 +41,4 @@ Unlike `packages/react`, utils tests do not use `#test` or `#test/browser` alias
   - Logic that uses browser APIs. For example, `drag`, `clipboard`, `canvas`, `FileReader`, etc.
 - When the component or hook logic branches on `isWebKit`, `isSafari`, `isFirefox`, or `isChrome`, or the assertion differs by engine, choose `*.test.{webkit,firefox,chromium}.{ts,tsx}`.
 - Otherwise, when the assertion just checks element attributes (`displayName`, `className`, `role`, `aria-*`) and similar, choose jsdom (`*.test.{ts,tsx}`).
+- Static `a11y(...)` checks belong in jsdom using `#test`, including when the component also has browser tests. Do not duplicate the same accessibility coverage in browser mode merely because the file renders a component. Use browser-mode `a11y(...)` only when the audited DOM requires one of the browser-mode criteria above and cannot be reproduced in jsdom.

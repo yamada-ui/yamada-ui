@@ -217,7 +217,7 @@ describe("useAttributeObserver", () => {
       observe = vi.fn()
       disconnect = vi.fn()
       takeRecords = vi.fn(() => [])
-    } as any
+    }
 
     renderHook(() => useAttributeObserver(ref, ["data-test"], true, func))
 
@@ -242,7 +242,7 @@ describe("useAttributeObserver", () => {
       observe = vi.fn()
       disconnect = vi.fn()
       takeRecords = vi.fn(() => [])
-    } as any
+    }
 
     renderHook(() => useAttributeObserver(ref, ["data-test"], true, func))
 

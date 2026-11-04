@@ -19,7 +19,7 @@ vi.mock("../../utils", async (importOriginal) => {
 
 vi.mock("node-fetch", () => ({
   default: vi.fn().mockImplementation((url: string) => {
-    if (url.includes("theme.json")) {
+    if (url.includes("theme.json"))
       return Promise.resolve({
         json: () =>
           Promise.resolve({
@@ -31,7 +31,7 @@ vi.mock("node-fetch", () => ({
           }),
         ok: true,
       })
-    }
+
     return Promise.resolve({ ok: false, status: 404 })
   }),
 }))
@@ -274,6 +274,35 @@ describe("theme", () => {
     expect(spinner.succeed).toHaveBeenCalledWith(
       expect.stringContaining("Installed dependencies"),
     )
+  })
+
+  test("should declare the same react peer dependencies as the ui package", async () => {
+    setupProject(tempDir)
+
+    await theme.parseAsync(
+      [
+        "./workspaces/theme",
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+    const themeDir = path.join(tempDir, "workspaces", "theme")
+    const pkgJson = JSON.parse(
+      readFileSync(path.join(themeDir, "package.json"), "utf-8"),
+    )
+    expect(pkgJson.dependencies).toMatchObject({
+      react: "^19",
+      "react-dom": "^19",
+    })
+    expect(pkgJson.devDependencies).toMatchObject({
+      "@types/react": "^19",
+      "@types/react-dom": "^19",
+    })
   })
 
   test("should generate devDependencies in monorepo package.json", async () => {

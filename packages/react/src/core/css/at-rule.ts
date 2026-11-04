@@ -40,7 +40,7 @@ export const generateAtRule =
         minHeight ??= minH
         maxHeight ??= maxH
 
-        if (!query) {
+        if (!query)
           if (style) {
             query = toArray(style)
               .map((style) => `style(${style})`)
@@ -65,7 +65,6 @@ export const generateAtRule =
               })
               .join(" and ")
           }
-        }
 
         const conditions = [`@${identifier}`]
 

@@ -25,7 +25,7 @@ function createMockConfig(): Config {
         root: "/project/workspaces/ui",
       },
     },
-  } as Config
+  }
 }
 
 describe("printConflicts", () => {

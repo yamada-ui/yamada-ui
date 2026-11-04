@@ -56,11 +56,8 @@ describe("<ScrollArea />", () => {
     await user.hover(scrollArea)
     await expect.element(scrollArea).not.toHaveAttribute("data-hidden")
     await user.hover(outside)
-    if (isWebKit) {
-      await expect.element(scrollArea).toBeInTheDocument()
-    } else {
-      await expect.element(scrollArea).toHaveAttribute("data-hidden")
-    }
+    if (isWebKit) await expect.element(scrollArea).toBeInTheDocument()
+    else await expect.element(scrollArea).toHaveAttribute("data-hidden")
   })
 
   test("shows scroll indicators on scroll type and hides them after delay", async () => {
@@ -80,9 +77,8 @@ describe("<ScrollArea />", () => {
 
     const scrollArea = page.getByTestId("scroll-area")
     const scrollAreaElement = scrollArea.element()
-    if (!(scrollAreaElement instanceof HTMLDivElement)) {
+    if (!(scrollAreaElement instanceof HTMLDivElement))
       throw new Error("scroll-area is not an HTMLDivElement")
-    }
 
     await expect.element(scrollArea).toHaveAttribute("data-hidden")
     await expect.element(scrollArea).not.toHaveAttribute("data-scroll")

@@ -20,6 +20,20 @@ import dayjs from "dayjs"
 import { AnimatePresence } from "motion/react"
 import React, { isValidElement } from "react"
 import { useForm } from "react-hook-form"
+import {
+  SiFigma,
+  SiGithub,
+  SiGitlab,
+  SiJavascript,
+  SiNextdotjs,
+  SiReact,
+  SiStorybook,
+  SiTypescript,
+  SiVercel,
+  SiX,
+} from "react-icons/si"
+import Markdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 import { transform as originalTransform } from "sucrase"
 
 interface TableData {
@@ -160,7 +174,7 @@ function createPolarChartData(min = 1000, max = 5000): PolarChartData[] {
   ]
 }
 
-const treeItems: Tree.ItemType[] = [
+const treeItems: Tree.Item[] = [
   {
     children: [
       { label: "react" },
@@ -198,7 +212,7 @@ const treeItems: Tree.ItemType[] = [
   { label: "README.md" },
 ]
 
-const sidebarItems: Sidebar.ItemType[] = [
+const sidebarItems: Sidebar.Item[] = [
   {
     children: [
       { label: "Installation", value: "/get-started/installation" },
@@ -249,6 +263,69 @@ const sidebarItems: Sidebar.ItemType[] = [
     ],
     group: true,
     label: "Theming",
+  },
+]
+
+const marqueeItems = [
+  {
+    href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    color: "#f7df1e",
+    icon: SiJavascript,
+    label: "JavaScript",
+  },
+  {
+    href: "https://www.typescriptlang.org",
+    color: "#3178c6",
+    icon: SiTypescript,
+    label: "TypeScript",
+  },
+  {
+    href: "https://github.com",
+    color: "currentColor",
+    icon: SiGithub,
+    label: "GitHub",
+  },
+  {
+    href: "https://gitlab.com",
+    color: "#fc6d26",
+    icon: SiGitlab,
+    label: "GitLab",
+  },
+  {
+    href: "https://vercel.com",
+    color: "currentColor",
+    icon: SiVercel,
+    label: "Vercel",
+  },
+  {
+    href: "https://react.dev",
+    color: "#61dafb",
+    icon: SiReact,
+    label: "React",
+  },
+  {
+    href: "https://nextjs.org",
+    color: "currentColor",
+    icon: SiNextdotjs,
+    label: "Next.js",
+  },
+  {
+    href: "https://storybook.js.org",
+    color: "#ff4785",
+    icon: SiStorybook,
+    label: "Storybook",
+  },
+  {
+    href: "https://www.figma.com",
+    color: "#F24E1E",
+    icon: SiFigma,
+    label: "Figma",
+  },
+  {
+    href: "https://x.com",
+    color: "currentColor",
+    icon: SiX,
+    label: "X",
   },
 ]
 
@@ -354,10 +431,23 @@ const components = {
   createTableData,
   dayjs,
   faker,
+  Markdown,
+  marqueeItems,
   React,
+  remarkGfm,
   SidebarDocumentMenuButton,
   sidebarItems,
   SidebarUserMenuButton,
+  SiFigma,
+  SiGithub,
+  SiGitlab,
+  SiJavascript,
+  SiNextdotjs,
+  SiReact,
+  SiStorybook,
+  SiTypescript,
+  SiVercel,
+  SiX,
   treeItems,
   useForm,
   ...React,
@@ -421,22 +511,13 @@ export function getComponent(
 
     const Component = evalCode(transformedCode, components)
 
-    if (isFunction(Component)) {
-      return <Component />
-    } else if (isValidElement(Component)) {
-      return Component
-    } else {
-      return null
-    }
+    if (isFunction(Component)) return <Component />
+    else if (isValidElement(Component)) return Component
+    else return null
   } catch (e) {
-    if (process.env.NODE_ENV === "development") {
-      if (e instanceof Error) {
-        return <Text color="error">{e.toString()}</Text>
-      } else {
-        return null
-      }
-    } else {
-      throw e
-    }
+    if (process.env.NODE_ENV === "development")
+      if (e instanceof Error) return <Text color="error">{e.toString()}</Text>
+      else return null
+    else throw e
   }
 }

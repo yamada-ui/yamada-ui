@@ -19,7 +19,7 @@ vi.mock("../../utils", async (importOriginal) => {
 
 vi.mock("node-fetch", () => ({
   default: vi.fn().mockImplementation((url: string) => {
-    if (url.includes("index.json")) {
+    if (url.includes("index.json"))
       return Promise.resolve({
         json: () =>
           Promise.resolve({
@@ -33,8 +33,8 @@ vi.mock("node-fetch", () => ({
           }),
         ok: true,
       })
-    }
-    if (url.includes("components/button.json")) {
+
+    if (url.includes("components/button.json"))
       return Promise.resolve({
         json: () =>
           Promise.resolve({
@@ -55,8 +55,8 @@ vi.mock("node-fetch", () => ({
           }),
         ok: true,
       })
-    }
-    if (url.includes("components/card.json")) {
+
+    if (url.includes("components/card.json"))
       return Promise.resolve({
         json: () =>
           Promise.resolve({
@@ -77,13 +77,13 @@ vi.mock("node-fetch", () => ({
           }),
         ok: true,
       })
-    }
-    if (url.includes("names.json")) {
+
+    if (url.includes("names.json"))
       return Promise.resolve({
         json: () => Promise.resolve(["button", "card"]),
         ok: true,
       })
-    }
+
     return Promise.resolve({ ok: false, status: 404 })
   }),
 }))
@@ -195,6 +195,7 @@ describe("add", () => {
     )
     mkdirSync(buttonDir, { recursive: true })
     writeFileSync(path.join(buttonDir, "index.ts"), "existing")
+    writeFileSync(path.join(buttonDir, "registry.json"), "{}")
 
     const ora = await import("ora")
     const spinner = ora.default()
@@ -358,6 +359,7 @@ describe("add", () => {
       "card",
     )
     mkdirSync(cardDir, { recursive: true })
+    writeFileSync(path.join(cardDir, "registry.json"), "{}")
     writeFileSync(
       path.join(cardDir, "index.ts"),
       `export const Card = () => {}\n`,
@@ -415,6 +417,7 @@ describe("add", () => {
     )
     mkdirSync(buttonDir, { recursive: true })
     writeFileSync(path.join(buttonDir, "index.ts"), "existing")
+    writeFileSync(path.join(buttonDir, "registry.json"), "{}")
 
     const prompts = await import("prompts")
     const exitSpy = vi.spyOn(process, "exit").mockImplementation(() => {
@@ -460,6 +463,7 @@ describe("add", () => {
     )
     const cardSubDir = path.join(cardDir, "card")
     mkdirSync(cardSubDir, { recursive: true })
+    writeFileSync(path.join(cardDir, "registry.json"), "{}")
     writeFileSync(
       path.join(cardDir, "index.ts"),
       `export const Card = () => {}\n`,
@@ -509,6 +513,7 @@ describe("add", () => {
       "card",
     )
     mkdirSync(cardDir, { recursive: true })
+    writeFileSync(path.join(cardDir, "registry.json"), "{}")
     writeFileSync(
       path.join(cardDir, "index.ts"),
       `export const Card = () => {}\n`,
@@ -553,6 +558,7 @@ describe("add", () => {
       "card",
     )
     mkdirSync(cardDir, { recursive: true })
+    writeFileSync(path.join(cardDir, "registry.json"), "{}")
     writeFileSync(
       path.join(cardDir, "index.ts"),
       `export const Card = () => {}\n`,

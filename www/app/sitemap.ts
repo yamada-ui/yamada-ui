@@ -98,7 +98,7 @@ async function createSitemap(appData: DataMap, docData: DataMap) {
 
     let timestamp = ""
 
-    for (const line of lines) {
+    for (const line of lines)
       if (line.startsWith("COMMIT:")) {
         timestamp = line.slice(7)
       } else if (line && timestamp) {
@@ -108,7 +108,6 @@ async function createSitemap(appData: DataMap, docData: DataMap) {
 
         lastModifiedMap.set(path, new Date(timestamp))
       }
-    }
   } catch {}
 
   return [

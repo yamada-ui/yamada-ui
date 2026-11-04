@@ -7,7 +7,11 @@ import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { Button } from "../button"
 import { Field } from "../field"
 import { For } from "../for"
-import { FrownIcon, KeyIcon, SmileIcon } from "../icon"
+import {
+  FaceSlightlyFrowningIcon,
+  FaceSlightlySmilingIcon,
+  KeyIcon,
+} from "../icon"
 import { InputGroup } from "../input"
 import { VStack } from "../stack"
 import { Text } from "../text"
@@ -276,7 +280,10 @@ export const CustomIcon: Story = () => {
   return (
     <PasswordInput
       placeholder="Your password"
-      visibilityIcon={{ off: <SmileIcon />, on: <FrownIcon /> }}
+      visibilityIcon={{
+        off: <FaceSlightlySmilingIcon />,
+        on: <FaceSlightlyFrowningIcon />,
+      }}
     />
   )
 }

@@ -148,7 +148,7 @@ export async function updateFiles(
                   Object.entries(changes).map(async ([name, { ...data }]) => {
                     const currentPath = path.join(dirPath, name)
 
-                    if ("local" in data && "remote" in data) {
+                    if ("local" in data && "remote" in data)
                       if (force) {
                         await writeFileSafe(currentPath, data.remote, config)
                       } else {
@@ -195,11 +195,9 @@ export async function updateFiles(
                           conflictMap[componentName][name] = currentPath
                         }
                       }
-                    } else if ("remote" in data) {
+                    else if ("remote" in data)
                       await writeFileSafe(currentPath, data.remote, config)
-                    } else {
-                      await rimraf(currentPath)
-                    }
+                    else await rimraf(currentPath)
                   }),
                 )
               }

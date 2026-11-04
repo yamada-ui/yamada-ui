@@ -1,28 +1,14 @@
-import type { Dict } from "@yamada-ui/utils"
-import {
-  getContent,
-  octokit,
-  retryOnRateLimit,
-} from "@yamada-ui/workspace/octokit"
+import { octokit, retryOnRateLimit } from "@yamada-ui/workspace/octokit"
 import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
 import path from "node:path"
 import ora from "ora"
 import c from "picocolors"
+import emeriti from "@/data/emeriti.json"
+import maintainers from "@/data/maintainers.json"
 
 type Contributor = Awaited<
   ReturnType<typeof octokit.repos.listContributors>
 >["data"][number]
-
-async function getCollaborators() {
-  return Object.fromEntries(
-    await Promise.all(
-      ["maintainers.json", "emeriti.json"].map(async (path) => [
-        path.split(".")[0]!,
-        await getContent<Dict>({ path, repo: "yamada-data" }),
-      ]),
-    ),
-  )
-}
 
 async function getContributors() {
   let contributors: Contributor[] = []
@@ -55,16 +41,10 @@ async function main() {
 
   const start = process.hrtime.bigint()
 
-  spinner.start(`Getting maintainers`)
-
-  const { emeriti, maintainers } = await getCollaborators()
-
-  spinner.succeed(`Got maintainers`)
-
   spinner.start(`Getting contributors`)
 
   const contributors = await getContributors()
-  const collaboratorIds: string[] = [...maintainers!, ...emeriti!].map(
+  const collaboratorIds: string[] = [...maintainers, ...emeriti].map(
     ({ github }) => github.id,
   )
   const omittedContributors = contributors
@@ -83,11 +63,6 @@ async function main() {
 
   spinner.start("Write data")
 
-  await writeFileWithFormat(
-    path.resolve("data", "maintainers.json"),
-    maintainers,
-  )
-  await writeFileWithFormat(path.resolve("data", "emeriti.json"), emeriti)
   await writeFileWithFormat(
     path.resolve("data", "contributors.json"),
     omittedContributors,

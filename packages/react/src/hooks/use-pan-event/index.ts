@@ -19,22 +19,22 @@ import {
   useUnmountEffect,
 } from "../../utils"
 
-export interface PanEventProps {
+export interface UsePanEventProps {
   threshold?: number
   onEnd?: (ev: PointerEvent, point: Point, rect: DOMRect) => void
   onMove?: (ev: PointerEvent, point: Point, rect: DOMRect) => void
   onStart?: (ev: PointerEvent, point: Point, rect: DOMRect) => void
 }
 
-interface Props<Y extends HTMLElement>
+export interface UsePanEventElementProps<Y extends HTMLElement>
   extends DataAttributes, HTMLAttributes<Y>, RefAttributes<Y> {}
 
 export const usePanEvent = <Y extends HTMLElement>({
   threshold = 3,
   ...rest
-}: PanEventProps = {}): [
+}: UsePanEventProps = {}): [
   RefObject<null | Y>,
-  (props?: Props<Y>) => Props<Y>,
+  (props?: UsePanEventElementProps<Y>) => UsePanEventElementProps<Y>,
 ] => {
   const { getWindow } = useEnvironment()
   const onStart = useCallbackRef(rest.onStart)
@@ -71,7 +71,7 @@ export const usePanEvent = <Y extends HTMLElement>({
   })
 
   const getProps = useCallback(
-    (props: Props<Y> = {}) => {
+    (props: UsePanEventElementProps<Y> = {}) => {
       return {
         ...props,
         ref: mergeRefs(ref, props.ref),

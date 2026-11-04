@@ -102,11 +102,9 @@ export const Collapse = withContext<"div", CollapseProps>(
     const open = unmountOnExit ? openProp : true
 
     const transition = useMemo(() => {
-      if (!mounted) {
-        return { enter: { duration: 0 } }
-      } else if (transitionProp) {
-        return transitionProp
-      } else {
+      if (!mounted) return { enter: { duration: 0 } }
+      else if (transitionProp) return transitionProp
+      else
         return {
           enter: {
             height: {
@@ -129,7 +127,6 @@ export const Collapse = withContext<"div", CollapseProps>(
             },
           },
         }
-      }
     }, [mounted, duration, transitionProp])
 
     const custom = useMemo(

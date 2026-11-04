@@ -14,7 +14,7 @@ The following steps will get you up and running to contribute to Yamada UI:
 
 2. Clone your fork locally.
 
-```sh
+```bash
 git clone https://github.com/<your_github_username>/yamada-ui.git
 
 cd yamada-ui
@@ -112,6 +112,6 @@ the following types:
 
 ## License
 
-By contributing code to the `Yamada UI` GitHub repository, you agree that your contributed code will be licensed under the MIT license.
+By contributing code to the Yamada UI GitHub repository, you agree that your contributed code will be licensed under the MIT license.
 
 ### Thank you for reading till the end. I love you too. 💖

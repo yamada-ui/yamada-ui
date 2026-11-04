@@ -65,7 +65,7 @@ export const ReorderRoot = withProvider<"ul", ReorderRootProps>(
     return (
       <ReorderContext value={{ orientation }}>
         <styled.ul
-          as={OriginalReorder.Group<Y>}
+          as={OriginalReorder.Group<Y[]>}
           {...(getRootProps() as HTMLStyledProps<"ul">)}
         >
           {children}

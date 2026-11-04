@@ -7,6 +7,7 @@ import type { ColorFormat } from "../../utils"
 import type { UseColorSelectorProps } from "../color-selector"
 import type { FieldProps } from "../field"
 import { useCallback, useEffect, useRef } from "react"
+import { mergeProps } from "../../core"
 import { useCombobox } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useEyeDropper } from "../../hooks/use-eye-dropper"
@@ -16,7 +17,6 @@ import {
   calcFormat,
   contains,
   convertColor,
-  cx,
   focusTransfer,
   handlerAll,
   mergeRefs,
@@ -121,7 +121,7 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       ref,
       name,
       "aria-label": ariaLabel,
-      "aria-labelledby": ariaLabelledbyProp,
+      "aria-labelledby": ariaLabelledby,
       allowInput = true,
       closeOnChange = false,
       defaultValue,
@@ -228,9 +228,9 @@ export const useColorPicker = (props: UseColorPickerProps) => {
       if (
         contains(fieldRef.current, ev.relatedTarget) ||
         contains(contentRef.current, ev.relatedTarget)
-      ) {
+      )
         ev.preventDefault()
-      } else {
+      else
         setValue((prev) => {
           if (!prev) return prev
 
@@ -244,7 +244,6 @@ export const useColorPicker = (props: UseColorPickerProps) => {
 
           return value
         })
-      }
     },
     [format, formatInput, pattern, setValue],
   )
@@ -255,11 +254,8 @@ export const useColorPicker = (props: UseColorPickerProps) => {
 
       onInputChangeProp?.(ev)
 
-      if (runIfFn(closeOnChange, ev)) {
-        onClose()
-      } else if (runIfFn(openOnChange, ev)) {
-        onOpen()
-      }
+      if (runIfFn(closeOnChange, ev)) onClose()
+      else if (runIfFn(openOnChange, ev)) onOpen()
 
       let inputValue = ev.target.value
 
@@ -323,34 +319,31 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id,
-      ref: mergeRefs(props.ref, ref, inputRef),
-      name,
-      style: {
-        ...(!allowInput ? { pointerEvents: "none" } : {}),
-        ...props.style,
-      },
-      "aria-label": ariaLabel,
-      "aria-labelledby": cx(ariaLabelledby, ariaLabelledbyProp),
-      autoComplete: "off",
-      disabled,
-      placeholder,
-      readOnly,
-      required,
-      tabIndex: allowInput ? 0 : -1,
-      value,
-      ...dataProps,
-      ...props,
-      onBlur: handlerAll(props.onBlur, onBlur),
-      onChange: handlerAll(props.onChange, onInputChange),
-      onFocus: handlerAll(props.onFocus, onInputFocus),
-      onMouseDown: handlerAll(props.onMouseDown, onMouseDown),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          id,
+          ref: mergeRefs(ref, inputRef),
+          name,
+          style: !allowInput ? { pointerEvents: "none" } : {},
+          "aria-label": ariaLabel,
+          "aria-labelledby": ariaLabelledby,
+          autoComplete: "off",
+          disabled,
+          placeholder,
+          readOnly,
+          required,
+          tabIndex: allowInput ? 0 : -1,
+          value,
+          ...dataProps,
+        },
+        props,
+        { onBlur, onChange: onInputChange, onFocus: onInputFocus, onMouseDown },
+      )(),
     [
       allowInput,
       ariaLabel,
-      ariaLabelledbyProp,
+      ariaLabelledby,
       dataProps,
       disabled,
       id,

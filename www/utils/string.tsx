@@ -17,11 +17,8 @@ function transformCode(
     .replace(/\*\*([^`]+)\*\*/g, "$1")
     .split(/`([^`]+)`/)
     .map((children, index) => {
-      if (index % 2 === 1) {
-        return code({ key: index, children })
-      } else {
-        return children
-      }
+      if (index % 2 === 1) return code({ key: index, children })
+      else return children
     })
 }
 

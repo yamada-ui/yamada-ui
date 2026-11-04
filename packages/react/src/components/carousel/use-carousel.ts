@@ -6,15 +6,16 @@ import type {
   EmblaPluginType,
 } from "embla-carousel"
 import type { KeyboardEvent, RefObject } from "react"
+import type {
+  HTMLProps,
+  Orientation,
+  PropGetter,
+  RequiredPropGetter,
+} from "../../core"
+import type { FunctionOf } from "../../utils"
 import useEmblaCarousel from "embla-carousel-react"
 import { useCallback, useEffect, useRef, useState } from "react"
-import {
-  type HTMLProps,
-  mergeProps,
-  type Orientation,
-  type PropGetter,
-  type RequiredPropGetter,
-} from "../../core"
+import { mergeProps } from "../../core"
 import { useBoolean } from "../../hooks/use-boolean"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
@@ -230,7 +231,7 @@ export const useCarousel = ({
   const axis = horizontal ? "x" : "y"
   const [snapCount, setSnapCount] = useState(0)
   const [total, setTotal] = useState(0)
-  const watchResize = useCallback<Extract<CarouselWatchResize, Function>>(
+  const watchResize = useCallback<FunctionOf<CarouselWatchResize>>(
     (methods, entries) => {
       const result = isFunction(watchResizeProp)
         ? watchResizeProp(methods, entries)

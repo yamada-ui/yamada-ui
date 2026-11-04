@@ -122,13 +122,9 @@ export const CheckboxCardRoot = withProvider<"label", CheckboxCardRootProps>(
     } = useCheckbox(rest)
     const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
     const icon = useMemo(() => {
-      if (indeterminate) {
-        return indeterminateIcon || <MinusIcon />
-      } else if (checked) {
-        return checkedIcon || <CheckIcon />
-      } else {
-        return null
-      }
+      if (indeterminate) return indeterminateIcon || <MinusIcon />
+      else if (checked) return checkedIcon || <CheckIcon />
+      else return null
     }, [indeterminate, indeterminateIcon, checked, checkedIcon])
     const computedChildren = useMemo(() => {
       if (children) return children

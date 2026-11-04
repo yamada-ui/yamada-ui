@@ -8,11 +8,8 @@ import { themes } from "./themes"
 try {
   const cachedTheme = window.localStorage.getItem("theme")
 
-  if (cachedTheme) {
-    addons.setConfig({ theme: JSON.parse(cachedTheme) })
-  } else {
-    addons.setConfig({ theme: themes.light })
-  }
+  if (cachedTheme) addons.setConfig({ theme: JSON.parse(cachedTheme) })
+  else addons.setConfig({ theme: themes.light })
 } catch {
   addons.setConfig({ theme: themes.light })
 }

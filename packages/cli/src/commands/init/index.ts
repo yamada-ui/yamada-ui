@@ -203,11 +203,10 @@ export const init = new Command("init")
       }
 
       if (!overwrite && existsSync(configPath)) {
-        if (yes) {
+        if (yes)
           throw new Error(
             `The config file already exists. Use ${c.cyan("--overwrite")} to overwrite it.`,
           )
-        }
 
         const { overwrite } = await prompts({
           type: "confirm",
@@ -234,11 +233,10 @@ export const init = new Command("init")
       const outdirPath = path.resolve(cwd, outdir)
 
       if (!overwrite && existsSync(outdirPath)) {
-        if (yes) {
+        if (yes)
           throw new Error(
             `The ${c.yellow(outdir)} directory already exists. Use ${c.cyan("--overwrite")} to overwrite it.`,
           )
-        }
 
         const { overwrite } = await prompts({
           type: "confirm",
@@ -363,17 +361,16 @@ export const init = new Command("init")
           { concurrent: true },
         )
 
-        if (!jsx) {
+        if (!jsx)
           tasks.add({
             task: async (_, task) => {
               const targetPath = path.resolve(outdirPath, "tsconfig.json")
               const tsconfig = { ...TSCONFIG_JSON }
 
-              if (!src) {
+              if (!src)
                 tsconfig.include = tsconfig.include.map((value) =>
                   value.replace(/src\//, ""),
                 )
-              }
 
               const content = JSON.stringify(tsconfig)
 
@@ -387,7 +384,6 @@ export const init = new Command("init")
             },
             title: `Generating ${c.cyan("tsconfig.json")}`,
           })
-        }
 
         await tasks.run()
 
@@ -550,10 +546,7 @@ export const init = new Command("init")
 
       end()
     } catch (e) {
-      if (e instanceof Error) {
-        spinner.fail(e.message)
-      } else {
-        spinner.fail("An unknown error occurred")
-      }
+      if (e instanceof Error) spinner.fail(e.message)
+      else spinner.fail("An unknown error occurred")
     }
   })

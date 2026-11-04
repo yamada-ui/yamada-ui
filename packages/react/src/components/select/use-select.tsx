@@ -17,20 +17,19 @@ import {
   useMemo,
   useRef,
 } from "react"
+import { mergeProps } from "../../core"
 import { useCombobox, useComboboxItem } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import {
   ariaAttr,
   createContext,
-  cx,
   dataAttr,
   handlerAll,
   isArray,
   isNumber,
   isString,
   isUndefined,
-  mergeRefs,
   runKeyAction,
   toArray,
   visuallyHiddenAttributes,
@@ -189,17 +188,13 @@ export const useSelect = <Multiple extends boolean = false>(
   const onChange = useCallback(
     (value: string) => {
       setValue((prev) => {
-        if (isArray(prev)) {
-          if (prev.includes(value)) {
+        if (isArray(prev))
+          if (prev.includes(value))
             return prev.filter((prevValue) => prevValue !== value) as MaybeValue
-          } else if (!isNumber(max) || prev.length < max) {
+          else if (!isNumber(max) || prev.length < max)
             return [...prev, value] as MaybeValue
-          } else {
-            return prev
-          }
-        } else {
-          return value as MaybeValue
-        }
+          else return prev
+        else return value as MaybeValue
       })
     },
     [max, setValue],
@@ -263,15 +258,10 @@ export const useSelect = <Multiple extends boolean = false>(
     return valueMap
   }, [items])
   const selectedItems = useMemo<ComboboxItemWithValue[]>(() => {
-    if (isArray(value)) {
-      if (value.length) {
-        return toArray(value.map((value) => valueMap[value]))
-      } else {
-        return placeholder ? [{ label: placeholder, value: "" }] : []
-      }
-    } else {
-      return isString(value) ? toArray(valueMap[value]) : []
-    }
+    if (isArray(value))
+      if (value.length) return toArray(value.map((value) => valueMap[value]))
+      else return placeholder ? [{ label: placeholder, value: "" }] : []
+    else return isString(value) ? toArray(valueMap[value]) : []
   }, [placeholder, value, valueMap])
   const children = useMemo<ReactNode>(() => {
     const count = selectedItems.length
@@ -292,11 +282,9 @@ export const useSelect = <Multiple extends boolean = false>(
         ...item,
       })
 
-      if (isValidElement<Dict>(component)) {
+      if (isValidElement<Dict>(component))
         return cloneElement(component, { ...component.props, key: index })
-      } else {
-        return component
-      }
+      else return component
     })
   }, [onChange, render, selectedItems, separator])
 
@@ -322,14 +310,18 @@ export const useSelect = <Multiple extends boolean = false>(
   )
 
   const getFieldProps: PropGetter = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) =>
-      getTriggerProps({
-        ref: mergeRefs(ref, fieldRef),
-        "aria-label": placeholder,
-        "aria-labelledby": cx(ariaLabelledby, labelId),
-        ...props,
-        children,
-      }),
+    (props = {}) =>
+      getTriggerProps(
+        mergeProps(
+          {
+            ref: fieldRef,
+            "aria-label": placeholder,
+            "aria-labelledby": labelId,
+            children,
+          },
+          props,
+        )(),
+      ),
     [children, getTriggerProps, labelId, placeholder],
   )
 

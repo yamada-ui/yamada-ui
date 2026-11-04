@@ -1,3 +1,5 @@
+import type { TreeItem } from "./tree"
+
 export {
   TreeItem as Item,
   TreePropsContext as PropsContext,
@@ -6,7 +8,6 @@ export {
 } from "./tree"
 export type {
   TreeItemProps as ItemProps,
-  TreeItem as ItemType,
   TreeRootProps as RootProps,
 } from "./tree"
 export {
@@ -18,3 +19,8 @@ export {
   useTreeItemContext as useItemContext,
 } from "./use-tree"
 export type { TreeControl as Control } from "./use-tree"
+
+/**
+ * @deprecated Use `Item` instead. Will be removed in the next major release.
+ */
+export type ItemType = TreeItem

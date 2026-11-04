@@ -56,13 +56,12 @@ export const useBreakpoint = () => {
           if (mql?.matches) return breakpoint
         }
       } else {
-        for (const { breakpoint, maxW, minW } of queries) {
+        for (const { breakpoint, maxW, minW } of queries)
           if (direction !== "up") {
             if ((minW ?? 0) <= width) return breakpoint
           } else {
             if (width <= (maxW ?? Infinity)) return breakpoint
           }
-        }
       }
 
       return "base"

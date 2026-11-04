@@ -6,7 +6,7 @@ import type {
 } from "react"
 import { Children, cloneElement, isValidElement } from "react"
 import { mergeProps } from "../../core"
-import { useFindChild, useValidChildren } from "../../utils"
+import { getResolvedChild, useFindChild, useValidChildren } from "../../utils"
 
 export interface SlotProps
   extends
@@ -24,23 +24,22 @@ export const Slot: FC<SlotProps> = ({ children, ...rest }) => {
   const slottable = useFindChild(validChildren, Slottable)
 
   if (slottable) {
-    const newElement = slottable.props.children
-
-    const newChildren = validChildren.map((child) => {
-      if (child === slottable) {
-        if (Children.count(newElement) > 1) return Children.only(null)
-        return isValidElement<PropsWithChildren>(newElement)
-          ? newElement.props.children
+    const child = getResolvedChild(slottable.props.children)
+    const children = validChildren.map((validChild) => {
+      if (validChild === slottable) {
+        if (Children.count(child) > 1) return Children.only(null)
+        return isValidElement<PropsWithChildren>(child)
+          ? child.props.children
           : null
       } else {
-        return child
+        return validChild
       }
     })
 
     return (
       <SlotClone {...rest}>
-        {isValidElement(newElement)
-          ? cloneElement(newElement, undefined, newChildren)
+        {isValidElement(child)
+          ? cloneElement(child, undefined, children)
           : null}
       </SlotClone>
     )
@@ -53,10 +52,12 @@ interface SlotCloneProps
   extends RefAttributes<HTMLElement>, PropsWithChildren {}
 
 const SlotClone: FC<SlotCloneProps> = ({ children, ...rest }) => {
-  if (isValidElement<RefAttributes<HTMLElement>>(children))
-    return cloneElement(children, mergeProps(rest, children.props)())
+  const child = getResolvedChild(children)
 
-  return Children.count(children) > 1 ? Children.only(null) : null
+  if (isValidElement<RefAttributes<HTMLElement>>(child))
+    return cloneElement(child, mergeProps(rest, child.props)())
+
+  return Children.count(child) > 1 ? Children.only(null) : null
 }
 
 export const Slottable: FC<PropsWithChildren> = ({ children }) => {

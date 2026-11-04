@@ -104,11 +104,15 @@ export const DefaultMonth: Story = () => {
 }
 
 export const MinDate: Story = () => {
-  return <DatePicker minDate={new Date(new Date().setDate(1))} />
+  const [minDate] = useState(() => new Date(new Date().setDate(1)))
+
+  return <DatePicker minDate={minDate} />
 }
 
 export const MaxDate: Story = () => {
-  return <DatePicker maxDate={new Date(new Date().setDate(18))} />
+  const [maxDate] = useState(() => new Date(new Date().setDate(18)))
+
+  return <DatePicker maxDate={maxDate} />
 }
 
 export const DisabledToday: Story = () => {
@@ -302,10 +306,10 @@ export const Shape: Story = () => {
       {(_, row, key) => (
         <DatePicker
           key={key}
-          defaultValue={{
+          defaultValue={() => ({
             end: new Date(new Date().setDate(new Date().getDate() + 4)),
             start: new Date(),
-          }}
+          })}
           range
           calendarProps={{ shape: row }}
         />
@@ -536,7 +540,7 @@ export const CustomCalendar: Story = () => {
 }
 
 export const CustomControl: Story = () => {
-  const [value, setValue] = useState<Date | undefined>(new Date())
+  const [value, setValue] = useState<Date | undefined>(() => new Date())
 
   return <DatePicker value={value} onChange={setValue} />
 }

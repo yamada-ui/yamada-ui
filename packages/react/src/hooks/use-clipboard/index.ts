@@ -30,11 +30,8 @@ export const useClipboard = (
 
   const onCopy = useCallback(
     (newValue?: any) => {
-      if (!isString(newValue)) {
-        newValue = value
-      } else {
-        setValue(newValue)
-      }
+      if (!isString(newValue)) newValue = value
+      else setValue(newValue)
 
       const copied = copy(newValue, copyOptions)
 

@@ -67,6 +67,18 @@ import {
   Text,
 } from "@yamada-ui/react"
 import dayjs from "dayjs"
+import {
+  SiFigma,
+  SiGithub,
+  SiGitlab,
+  SiJavascript,
+  SiNextdotjs,
+  SiReact,
+  SiStorybook,
+  SiTypescript,
+  SiVercel,
+  SiX,
+} from "react-icons/si"
 import { faker } from "@faker-js/faker"
 
 export interface TableData {
@@ -207,7 +219,7 @@ export function createPolarChartData(min = 1000, max = 5000): PolarChartData[] {
   ]
 }
 
-export const treeItems: Tree.ItemType[] = [
+export const treeItems: Tree.Item[] = [
   {
     children: [
       { label: "react" },
@@ -245,7 +257,7 @@ export const treeItems: Tree.ItemType[] = [
   { label: "README.md" },
 ]
 
-export const sidebarItems: Sidebar.ItemType[] = [
+export const sidebarItems: Sidebar.Item[] = [
   {
     children: [
       { label: "Installation", value: "/get-started/installation" },
@@ -296,6 +308,69 @@ export const sidebarItems: Sidebar.ItemType[] = [
     ],
     group: true,
     label: "Theming",
+  },
+]
+
+export const marqueeItems = [
+  {
+    href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    color: "#f7df1e",
+    icon: SiJavascript,
+    label: "JavaScript",
+  },
+  {
+    href: "https://www.typescriptlang.org",
+    color: "#3178c6",
+    icon: SiTypescript,
+    label: "TypeScript",
+  },
+  {
+    href: "https://github.com",
+    color: "currentColor",
+    icon: SiGithub,
+    label: "GitHub",
+  },
+  {
+    href: "https://gitlab.com",
+    color: "#fc6d26",
+    icon: SiGitlab,
+    label: "GitLab",
+  },
+  {
+    href: "https://vercel.com",
+    color: "currentColor",
+    icon: SiVercel,
+    label: "Vercel",
+  },
+  {
+    href: "https://react.dev",
+    color: "#61dafb",
+    icon: SiReact,
+    label: "React",
+  },
+  {
+    href: "https://nextjs.org",
+    color: "currentColor",
+    icon: SiNextdotjs,
+    label: "Next.js",
+  },
+  {
+    href: "https://storybook.js.org",
+    color: "#ff4785",
+    icon: SiStorybook,
+    label: "Storybook",
+  },
+  {
+    href: "https://www.figma.com",
+    color: "#F24E1E",
+    icon: SiFigma,
+    label: "Figma",
+  },
+  {
+    href: "https://x.com",
+    color: "currentColor",
+    icon: SiX,
+    label: "X",
   },
 ]
 
@@ -411,6 +486,7 @@ const PACKAGE = {
     "@yamada-ui/react": "^2",
     react: "^19",
     "react-dom": "^19",
+    "react-icons": "^5",
     dayjs: "^1",
     "@faker-js/faker": "^10",
   },
@@ -419,8 +495,8 @@ const PACKAGE = {
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^4",
-    typescript: "^6",
-    vite: "^8",
+    typescript: "^5",
+    vite: "^7",
     "vite-tsconfig-paths": "^6",
   },
 }
@@ -493,6 +569,8 @@ const TSCONFIG_NODE = {
 const EXTERNAL_MODULES: ExternalModules = {
   "motion/react": ["AnimatePresence"],
   "react-hook-form": ["useForm", "SubmitHandler"],
+  "react-markdown": "Markdown",
+  "remark-gfm": "remarkGfm",
   dayjs: "dayjs",
   "@faker-js/faker": ["faker"],
   "@lucide/lab": ["burger"],
@@ -522,24 +600,34 @@ const IMPORTS = [
     "createPolarChartData",
     "treeItems",
     "sidebarItems",
+    "marqueeItems",
     "SidebarDocumentMenuButton",
     "SidebarUserMenuButton",
   ].join(", ")} } from "@/misc"`,
+  `import { ${[
+    "SiFigma",
+    "SiGithub",
+    "SiGitlab",
+    "SiJavascript",
+    "SiNextdotjs",
+    "SiReact",
+    "SiStorybook",
+    "SiTypescript",
+    "SiVercel",
+    "SiX",
+  ].join(", ")} } from "react-icons/si"`,
   ...Object.entries(EXTERNAL_MODULES).map(([source, value]) => {
-    if (Array.isArray(value)) {
+    if (Array.isArray(value))
       return `import { ${value.join(", ")} } from "${source}"`
-    } else {
-      return `import ${value} from "${source}"`
-    }
+    else return `import ${value} from "${source}"`
   }),
 ]
 
 function generateDependencies(code: string) {
   const dependencies: { [key: string]: string } = {}
 
-  for (const name of Object.keys(EXTERNAL_MODULES)) {
+  for (const name of Object.keys(EXTERNAL_MODULES))
     if (code.includes(` from "${name}"`)) dependencies[name] = "latest"
-  }
 
   return dependencies
 }
@@ -568,11 +656,8 @@ async function generateCode(
 ) {
   let code = `${IMPORTS.join("\n")}\n\nfunction App() { {{content}} }`
 
-  if (functional) {
-    code = code.replace("{{content}}", content)
-  } else {
-    code = code.replace("{{content}}", `return ( ${content} )`)
-  }
+  if (functional) code = code.replace("{{content}}", content)
+  else code = code.replace("{{content}}", `return ( ${content} )`)
 
   if (client) code = `"use client"\n\n` + code
 

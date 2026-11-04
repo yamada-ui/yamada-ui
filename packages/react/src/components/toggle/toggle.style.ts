@@ -30,6 +30,7 @@ export const toggleStyle = defineComponentSlotStyle({
       root: {
         _checked: {
           layerStyle: "solid",
+          borderWidth: "1px",
           _invalid: {
             borderColor: "{error-border-color}",
             borderWidth: "1px",
@@ -114,6 +115,7 @@ export const toggleStyle = defineComponentSlotStyle({
       root: {
         _checked: {
           layerStyle: "solid",
+          borderWidth: "1px",
           _invalid: {
             borderColor: "{error-border-color}",
           },

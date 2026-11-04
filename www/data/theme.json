@@ -12,7 +12,7 @@
       "*::placeholder, *[data-placeholder]": {
         "color": "fg.subtle"
       },
-      "body": {
+      ":host, body": {
         "colorScheme": "mono",
         "bg": "bg",
         "color": "fg",
@@ -167,7 +167,7 @@
         "color": "inherit",
         "overflow": "visible"
       },
-      "html": {
+      ":host, html": {
         "fontFamily": "system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
         "lineHeight": 1.5,
         "WebkitTapHighlightColor": "transparent",
@@ -216,11 +216,11 @@
         "listStyle": "none"
       },
       "@media (prefers-reduced-motion: no-preference)": {
-        ":where(html:focus-within)": {
+        ":host(:focus-within), :where(html:focus-within)": {
           "scrollBehavior": "smooth"
         }
       },
-      ":where(html:has(dialog:modal[open]))": {
+      ":host(:has(dialog:modal[open])), :where(html:has(dialog:modal[open]))": {
         "overflow": "clip"
       },
       ":where(dialog, [popover])": {
@@ -1061,7 +1061,8 @@
     "freeza": 9996,
     "vegeta": 9997,
     "sonGoku": 9998,
-    "beerus": 9999
+    "beerus": 9999,
+    "infinity": 2147483647
   },
   "semanticTokens": {
     "colors": {

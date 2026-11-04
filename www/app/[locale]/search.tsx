@@ -85,11 +85,8 @@ export function Search() {
 
     ev.preventDefault()
 
-    if (open) {
-      onClose()
-    } else {
-      onOpen()
-    }
+    if (open) onClose()
+    else onOpen()
   })
 
   return (
@@ -455,14 +452,12 @@ function SearchContentBody({
   const getContents = useCallback(() => {
     const recentContents = getRecentSearches()
 
-    if (recentContents.length) {
+    if (recentContents.length)
       return recentContents.map((hit) => ({
         ...hit,
         ...contentMap.get(hit.pathname),
       }))
-    } else {
-      return defaultContents
-    }
+    else return defaultContents
   }, [contentMap, defaultContents])
   const [hits, setHits] = useState<(Hit | LocalStorageHit)[]>(getContents())
   const maxIndex = Math.ceil(hits.length / PER_PAGE) - 1
@@ -590,14 +585,12 @@ const Item = function Item({
     [hit],
   )
   const description = useMemo(() => {
-    if (hit.type === "fragment") {
+    if (hit.type === "fragment")
       return (
         (hit.group ? `${hit.group} / ` : "") +
         Object.values(hit.hierarchy).slice(0, -1).join(" / ")
       )
-    } else {
-      return hit.group
-    }
+    else return hit.group
   }, [hit])
 
   const onMouseMove = useCallback(() => {

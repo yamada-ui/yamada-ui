@@ -7,7 +7,7 @@ import type {
   CSSMediaObject,
   CSSObject,
   StyleValueWithCondition,
-} from "./index.types"
+} from "./index.type"
 import { transforms } from "./config"
 import { pipe } from "./utils"
 
@@ -2057,6 +2057,261 @@ export type StyleProperty = keyof typeof styles
 
 export const styleProperties = Object.keys(styles) as StyleProperty[]
 
+export type VendorProperty = (typeof vendorProperties)[number]
+
+export const vendorProperties = [
+  "MozAnimationDelay",
+  "MozAnimationDirection",
+  "MozAnimationDuration",
+  "MozAnimationFillMode",
+  "MozAnimationIterationCount",
+  "MozAnimationName",
+  "MozAnimationPlayState",
+  "MozAnimationTimingFunction",
+  "MozAppearance",
+  "MozBackfaceVisibility",
+  "MozBinding",
+  "MozBorderBottomColors",
+  "MozBorderEndColor",
+  "MozBorderEndStyle",
+  "MozBorderEndWidth",
+  "MozBorderLeftColors",
+  "MozBorderRightColors",
+  "MozBorderStartColor",
+  "MozBorderStartStyle",
+  "MozBorderTopColors",
+  "MozBoxSizing",
+  "MozColumnRuleColor",
+  "MozColumnRuleStyle",
+  "MozColumnRuleWidth",
+  "MozColumnWidth",
+  "MozContextProperties",
+  "MozFontFeatureSettings",
+  "MozFontLanguageOverride",
+  "MozHyphens",
+  "MozMarginEnd",
+  "MozMarginStart",
+  "MozOrient",
+  "MozOsxFontSmoothing",
+  "MozOutlineRadiusBottomleft",
+  "MozOutlineRadiusBottomright",
+  "MozOutlineRadiusTopleft",
+  "MozOutlineRadiusTopright",
+  "MozPaddingEnd",
+  "MozPaddingStart",
+  "MozPerspective",
+  "MozPerspectiveOrigin",
+  "MozStackSizing",
+  "MozTabSize",
+  "MozTextBlink",
+  "MozTextSizeAdjust",
+  "MozTransform",
+  "MozTransformOrigin",
+  "MozTransformStyle",
+  "MozUserModify",
+  "MozUserSelect",
+  "MozWindowDragging",
+  "MozWindowShadow",
+  "msAccelerator",
+  "msBlockProgression",
+  "msContentZoomChaining",
+  "msContentZoomLimitMax",
+  "msContentZoomLimitMin",
+  "msContentZoomSnapPoints",
+  "msContentZoomSnapType",
+  "msContentZooming",
+  "msFilter",
+  "msFlexDirection",
+  "msFlexPositive",
+  "msFlowFrom",
+  "msFlowInto",
+  "msGridColumns",
+  "msGridRows",
+  "msHighContrastAdjust",
+  "msHyphenateLimitChars",
+  "msHyphenateLimitLines",
+  "msHyphenateLimitZone",
+  "msHyphens",
+  "msImeAlign",
+  "msLineBreak",
+  "msOrder",
+  "msOverflowStyle",
+  "msOverflowX",
+  "msOverflowY",
+  "msScrollChaining",
+  "msScrollLimitXMax",
+  "msScrollLimitXMin",
+  "msScrollLimitYMax",
+  "msScrollLimitYMin",
+  "msScrollRails",
+  "msScrollSnapPointsX",
+  "msScrollSnapPointsY",
+  "msScrollSnapType",
+  "msScrollTranslation",
+  "msScrollbar3dlightColor",
+  "msScrollbarArrowColor",
+  "msScrollbarBaseColor",
+  "msScrollbarDarkshadowColor",
+  "msScrollbarFaceColor",
+  "msScrollbarHighlightColor",
+  "msScrollbarShadowColor",
+  "msScrollbarTrackColor",
+  "msTextAutospace",
+  "msTextCombineHorizontal",
+  "msTextOverflow",
+  "msTouchAction",
+  "msTouchSelect",
+  "msTransform",
+  "msTransformOrigin",
+  "msTransitionDelay",
+  "msTransitionDuration",
+  "msTransitionProperty",
+  "msTransitionTimingFunction",
+  "msUserSelect",
+  "msWordBreak",
+  "msWrapFlow",
+  "msWrapMargin",
+  "msWrapThrough",
+  "msWritingMode",
+  "WebkitAlignContent",
+  "WebkitAlignItems",
+  "WebkitAlignSelf",
+  "WebkitAnimationDelay",
+  "WebkitAnimationDirection",
+  "WebkitAnimationDuration",
+  "WebkitAnimationFillMode",
+  "WebkitAnimationIterationCount",
+  "WebkitAnimationName",
+  "WebkitAnimationPlayState",
+  "WebkitAnimationTimingFunction",
+  "WebkitAppearance",
+  "WebkitBackdropFilter",
+  "WebkitBackfaceVisibility",
+  "WebkitBackgroundClip",
+  "WebkitBackgroundOrigin",
+  "WebkitBackgroundSize",
+  "WebkitBorderBeforeColor",
+  "WebkitBorderBeforeStyle",
+  "WebkitBorderBeforeWidth",
+  "WebkitBorderBottomLeftRadius",
+  "WebkitBorderBottomRightRadius",
+  "WebkitBorderImageSlice",
+  "WebkitBorderTopLeftRadius",
+  "WebkitBorderTopRightRadius",
+  "WebkitBoxDecorationBreak",
+  "WebkitBoxReflect",
+  "WebkitBoxShadow",
+  "WebkitBoxSizing",
+  "WebkitClipPath",
+  "WebkitColumnCount",
+  "WebkitColumnFill",
+  "WebkitColumnRuleColor",
+  "WebkitColumnRuleStyle",
+  "WebkitColumnRuleWidth",
+  "WebkitColumnSpan",
+  "WebkitColumnWidth",
+  "WebkitFilter",
+  "WebkitFlexBasis",
+  "WebkitFlexDirection",
+  "WebkitFlexGrow",
+  "WebkitFlexShrink",
+  "WebkitFlexWrap",
+  "WebkitFontFeatureSettings",
+  "WebkitFontKerning",
+  "WebkitFontSmoothing",
+  "WebkitFontVariantLigatures",
+  "WebkitHyphenateCharacter",
+  "WebkitHyphens",
+  "WebkitInitialLetter",
+  "WebkitJustifyContent",
+  "WebkitLineBreak",
+  "WebkitLineClamp",
+  "WebkitLogicalHeight",
+  "WebkitLogicalWidth",
+  "WebkitMarginEnd",
+  "WebkitMarginStart",
+  "WebkitMaskAttachment",
+  "WebkitMaskBoxImageOutset",
+  "WebkitMaskBoxImageRepeat",
+  "WebkitMaskBoxImageSlice",
+  "WebkitMaskBoxImageSource",
+  "WebkitMaskBoxImageWidth",
+  "WebkitMaskClip",
+  "WebkitMaskComposite",
+  "WebkitMaskImage",
+  "WebkitMaskOrigin",
+  "WebkitMaskPosition",
+  "WebkitMaskPositionX",
+  "WebkitMaskPositionY",
+  "WebkitMaskRepeat",
+  "WebkitMaskRepeatX",
+  "WebkitMaskRepeatY",
+  "WebkitMaskSize",
+  "WebkitMaxInlineSize",
+  "WebkitOrder",
+  "WebkitOverflowScrolling",
+  "WebkitPaddingEnd",
+  "WebkitPaddingStart",
+  "WebkitPerspective",
+  "WebkitPerspectiveOrigin",
+  "WebkitPrintColorAdjust",
+  "WebkitRubyPosition",
+  "WebkitScrollSnapType",
+  "WebkitShapeMargin",
+  "WebkitTapHighlightColor",
+  "WebkitTextCombine",
+  "WebkitTextDecorationColor",
+  "WebkitTextDecorationLine",
+  "WebkitTextDecorationSkip",
+  "WebkitTextDecorationStyle",
+  "WebkitTextEmphasisColor",
+  "WebkitTextEmphasisPosition",
+  "WebkitTextEmphasisStyle",
+  "WebkitTextFillColor",
+  "WebkitTextOrientation",
+  "WebkitTextSizeAdjust",
+  "WebkitTextStrokeColor",
+  "WebkitTextStrokeWidth",
+  "WebkitTextUnderlinePosition",
+  "WebkitTouchCallout",
+  "WebkitTransform",
+  "WebkitTransformOrigin",
+  "WebkitTransformStyle",
+  "WebkitTransitionDelay",
+  "WebkitTransitionDuration",
+  "WebkitTransitionProperty",
+  "WebkitTransitionTimingFunction",
+  "WebkitUserModify",
+  "WebkitUserSelect",
+  "WebkitWritingMode",
+  "MozAnimation",
+  "MozBorderImage",
+  "MozColumnRule",
+  "MozColumns",
+  "MozOutlineRadius",
+  "MozTransition",
+  "msContentZoomLimit",
+  "msContentZoomSnap",
+  "msFlex",
+  "msScrollLimit",
+  "msScrollSnapX",
+  "msScrollSnapY",
+  "msTransition",
+  "WebkitAnimation",
+  "WebkitBorderBefore",
+  "WebkitBorderImage",
+  "WebkitBorderRadius",
+  "WebkitColumnRule",
+  "WebkitColumns",
+  "WebkitFlex",
+  "WebkitFlexFlow",
+  "WebkitMask",
+  "WebkitMaskBoxImage",
+  "WebkitTextEmphasis",
+  "WebkitTextStroke",
+  "WebkitTransition",
+] as const
+
 export type VariableLengthProperty = (typeof variableLengthProperties)[number]
 
 export const variableLengthProperties = [
@@ -2368,7 +2623,7 @@ export interface StyleProps {
   /**
    * ### container
    *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   * Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2025-08-14
@@ -2800,7 +3055,9 @@ export interface StyleProps {
   /**
    * ### animation-trigger
    *
-   * The CSS `animation-trigger` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-animation-trigger
    *
@@ -3096,7 +3353,8 @@ export interface StyleProps {
    *
    * The <code>baseline-shift</code> CSS property sets the position of an element relative to its dominant baseline.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2026-03-24
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/baseline-shift
    */
@@ -5161,7 +5419,9 @@ export interface StyleProps {
   /**
    * ### column-height
    *
-   * The CSS `column-height` property.
+   * The <code>column-wrap</code> and <code>column-height</code> CSS properties control when columns in a multicolumn layout wrap or overflow. You can use this to constrain the height of columns within a taller box or to create two-dimensional column layouts.
+   *
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-height
    *
@@ -5185,7 +5445,9 @@ export interface StyleProps {
   /**
    * ### column-rule-break
    *
-   * The CSS `column-rule-break` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-break
    *
@@ -5210,7 +5472,9 @@ export interface StyleProps {
   /**
    * ### column-rule-inset
    *
-   * The CSS `column-rule-inset` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset
    *
@@ -5220,7 +5484,9 @@ export interface StyleProps {
   /**
    * ### column-rule-inset-cap
    *
-   * The CSS `column-rule-inset-cap` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap
    *
@@ -5230,7 +5496,9 @@ export interface StyleProps {
   /**
    * ### column-rule-inset-cap-end
    *
-   * The CSS `column-rule-inset-cap-end` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-end
    *
@@ -5240,7 +5508,9 @@ export interface StyleProps {
   /**
    * ### column-rule-inset-cap-start
    *
-   * The CSS `column-rule-inset-cap-start` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-start
    *
@@ -5250,7 +5520,9 @@ export interface StyleProps {
   /**
    * ### column-rule-inset-end
    *
-   * The CSS `column-rule-inset-end` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-end
    *
@@ -5260,7 +5532,9 @@ export interface StyleProps {
   /**
    * ### column-rule-inset-junction
    *
-   * The CSS `column-rule-inset-junction` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction
    *
@@ -5270,7 +5544,9 @@ export interface StyleProps {
   /**
    * ### column-rule-inset-junction-end
    *
-   * The CSS `column-rule-inset-junction-end` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction-end
    *
@@ -5280,7 +5556,9 @@ export interface StyleProps {
   /**
    * ### column-rule-inset-junction-start
    *
-   * The CSS `column-rule-inset-junction-start` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-junction-start
    *
@@ -5290,7 +5568,9 @@ export interface StyleProps {
   /**
    * ### column-rule-inset-start
    *
-   * The CSS `column-rule-inset-start` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-start
    *
@@ -5314,7 +5594,9 @@ export interface StyleProps {
   /**
    * ### column-rule-visibility-items
    *
-   * The CSS `column-rule-visibility-items` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-visibility-items
    *
@@ -5377,7 +5659,9 @@ export interface StyleProps {
   /**
    * ### column-wrap
    *
-   * The CSS `column-wrap` property.
+   * The <code>column-wrap</code> and <code>column-height</code> CSS properties control when columns in a multicolumn layout wrap or overflow. You can use this to constrain the height of columns within a taller box or to create two-dimensional column layouts.
+   *
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-wrap
    *
@@ -5399,7 +5683,7 @@ export interface StyleProps {
   /**
    * ### container
    *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   * Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2025-08-14
@@ -5411,7 +5695,7 @@ export interface StyleProps {
   /**
    * ### container-name
    *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   * Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2025-08-14
@@ -5425,7 +5709,7 @@ export interface StyleProps {
   /**
    * ### container-type
    *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   * Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2025-08-14
@@ -5771,7 +6055,8 @@ export interface StyleProps {
    *
    * The <code>counter-set</code> CSS property creates (and optionally sets a value for) a counter, the numbers for a series of headings or ordered list items.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-06-11
    * @newly_available_date 2023-12-11
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/counter-set
@@ -5886,7 +6171,8 @@ export interface StyleProps {
    *
    * The <code>field-sizing</code> CSS property allows form controls such as <code>&#x3C;textarea></code> to be sized based on their content.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2026-06-16
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/field-sizing
    */
@@ -6150,8 +6436,8 @@ export interface StyleProps {
    * The <code>font-feature-settings</code> CSS property sets low-level OpenType feature tags for a font. When possible, use <code>font-variant</code> instead.
    *
    * @baseline `Widely available`
-   * @widely_available_date 2019-10-05
-   * @newly_available_date 2017-04-05
+   * @widely_available_date 2018-09-21
+   * @newly_available_date 2016-03-21
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-feature-settings
    */
@@ -7763,7 +8049,8 @@ export interface StyleProps {
    *
    * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-06-07
    * @newly_available_date 2023-12-07
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask
@@ -7844,7 +8131,8 @@ export interface StyleProps {
    *
    * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-06-07
    * @newly_available_date 2023-12-07
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-clip
@@ -7855,7 +8143,8 @@ export interface StyleProps {
    *
    * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-06-07
    * @newly_available_date 2023-12-07
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-composite
@@ -7868,7 +8157,8 @@ export interface StyleProps {
    *
    * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-06-07
    * @newly_available_date 2023-12-07
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-image
@@ -7882,7 +8172,8 @@ export interface StyleProps {
    *
    * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-06-07
    * @newly_available_date 2023-12-07
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-mode
@@ -7893,7 +8184,8 @@ export interface StyleProps {
    *
    * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-06-07
    * @newly_available_date 2023-12-07
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-origin
@@ -7904,7 +8196,8 @@ export interface StyleProps {
    *
    * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-06-07
    * @newly_available_date 2023-12-07
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-position
@@ -7915,7 +8208,8 @@ export interface StyleProps {
    *
    * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-06-07
    * @newly_available_date 2023-12-07
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-repeat
@@ -7926,7 +8220,8 @@ export interface StyleProps {
    *
    * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-06-07
    * @newly_available_date 2023-12-07
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/mask-size
@@ -8607,7 +8902,8 @@ export interface StyleProps {
    *
    * The <code>overflow-anchor</code> CSS property sets an element as a possible scroll anchor, reducing unintended scrolling when document changes occur above the current scrollport. This is enabled by default where supported.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2026-09-14
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-anchor
    */
@@ -9117,7 +9413,8 @@ export interface StyleProps {
    *
    * The <code>paint-order</code> CSS property sets the z-order of strokes, fills, and (in SVG content) markers. For example, <code>paint-order: markers stroke fill;</code> draws the markers, then stroke on top of markers, then fill on top of both markers and stroke.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-09-22
    * @newly_available_date 2024-03-22
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/paint-order
@@ -9881,7 +10178,9 @@ export interface StyleProps {
   /**
    * ### row-rule
    *
-   * The CSS `row-rule` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule
    *
@@ -9891,7 +10190,9 @@ export interface StyleProps {
   /**
    * ### row-rule-break
    *
-   * The CSS `row-rule-break` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-break
    *
@@ -9901,7 +10202,9 @@ export interface StyleProps {
   /**
    * ### row-rule-color
    *
-   * The CSS `row-rule-color` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-color
    *
@@ -9911,7 +10214,9 @@ export interface StyleProps {
   /**
    * ### row-rule-inset
    *
-   * The CSS `row-rule-inset` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset
    *
@@ -9921,7 +10226,9 @@ export interface StyleProps {
   /**
    * ### row-rule-inset-cap
    *
-   * The CSS `row-rule-inset-cap` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-cap
    *
@@ -9931,7 +10238,9 @@ export interface StyleProps {
   /**
    * ### row-rule-inset-cap-end
    *
-   * The CSS `row-rule-inset-cap-end` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-cap-end
    *
@@ -9941,7 +10250,9 @@ export interface StyleProps {
   /**
    * ### row-rule-inset-cap-start
    *
-   * The CSS `row-rule-inset-cap-start` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-column-rule-inset-cap-start
    *
@@ -9951,7 +10262,9 @@ export interface StyleProps {
   /**
    * ### row-rule-inset-end
    *
-   * The CSS `row-rule-inset-end` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-end
    *
@@ -9961,7 +10274,9 @@ export interface StyleProps {
   /**
    * ### row-rule-inset-junction
    *
-   * The CSS `row-rule-inset-junction` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction
    *
@@ -9971,7 +10286,9 @@ export interface StyleProps {
   /**
    * ### row-rule-inset-junction-end
    *
-   * The CSS `row-rule-inset-junction-end` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction-end
    *
@@ -9981,7 +10298,9 @@ export interface StyleProps {
   /**
    * ### row-rule-inset-junction-start
    *
-   * The CSS `row-rule-inset-junction-start` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-junction-start
    *
@@ -9991,7 +10310,9 @@ export interface StyleProps {
   /**
    * ### row-rule-inset-start
    *
-   * The CSS `row-rule-inset-start` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-inset-start
    *
@@ -10001,7 +10322,9 @@ export interface StyleProps {
   /**
    * ### row-rule-style
    *
-   * The CSS `row-rule-style` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-style
    *
@@ -10011,7 +10334,9 @@ export interface StyleProps {
   /**
    * ### row-rule-visibility-items
    *
-   * The CSS `row-rule-visibility-items` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-visibility-items
    *
@@ -10021,7 +10346,9 @@ export interface StyleProps {
   /**
    * ### row-rule-width
    *
-   * The CSS `row-rule-width` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-row-rule-width
    *
@@ -10063,7 +10390,9 @@ export interface StyleProps {
   /**
    * ### rule
    *
-   * The CSS `rule` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule
    *
@@ -10073,7 +10402,9 @@ export interface StyleProps {
   /**
    * ### rule-break
    *
-   * The CSS `rule-break` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-break
    *
@@ -10083,7 +10414,9 @@ export interface StyleProps {
   /**
    * ### rule-color
    *
-   * The CSS `rule-color` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-color
    *
@@ -10093,7 +10426,9 @@ export interface StyleProps {
   /**
    * ### rule-inset
    *
-   * The CSS `rule-inset` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset
    *
@@ -10103,7 +10438,9 @@ export interface StyleProps {
   /**
    * ### rule-inset-cap
    *
-   * The CSS `rule-inset-cap` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-cap
    *
@@ -10113,7 +10450,9 @@ export interface StyleProps {
   /**
    * ### rule-inset-end
    *
-   * The CSS `rule-inset-end` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-end
    *
@@ -10123,7 +10462,9 @@ export interface StyleProps {
   /**
    * ### rule-inset-junction
    *
-   * The CSS `rule-inset-junction` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-junction
    *
@@ -10133,7 +10474,9 @@ export interface StyleProps {
   /**
    * ### rule-inset-start
    *
-   * The CSS `rule-inset-start` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-inset-start
    *
@@ -10143,7 +10486,9 @@ export interface StyleProps {
   /**
    * ### rule-overlap
    *
-   * The CSS `rule-overlap` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-overlap
    *
@@ -10153,7 +10498,9 @@ export interface StyleProps {
   /**
    * ### rule-style
    *
-   * The CSS `rule-style` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-style
    *
@@ -10163,7 +10510,9 @@ export interface StyleProps {
   /**
    * ### rule-visibility-items
    *
-   * The CSS `rule-visibility-items` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-visibility-items
    *
@@ -10173,7 +10522,9 @@ export interface StyleProps {
   /**
    * ### rule-width
    *
-   * The CSS `rule-width` property.
+   * The <code>column-rule</code> and <code>row-rule</code> CSS properties display decorative lines between columns and rows of a flex, grid, or multi-column layout. The <code>rule-break</code>, <code>rule-outset</code>, and <code>rule-paint-order</code> properties control the appearance of these lines.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-gaps-1/#propdef-rule-width
    *
@@ -11615,7 +11966,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger
    *
-   * The CSS `timeline-trigger` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger
    *
@@ -11625,7 +11978,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-activation-range
    *
-   * The CSS `timeline-trigger-activation-range` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range
    *
@@ -11635,7 +11990,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-activation-range-end
    *
-   * The CSS `timeline-trigger-activation-range-end` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range-end
    *
@@ -11645,7 +12002,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-activation-range-start
    *
-   * The CSS `timeline-trigger-activation-range-start` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range-start
    *
@@ -11655,7 +12014,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-active-range
    *
-   * The CSS `timeline-trigger-active-range` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range
    *
@@ -11665,7 +12026,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-active-range-end
    *
-   * The CSS `timeline-trigger-active-range-end` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range-end
    *
@@ -11675,7 +12038,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-active-range-start
    *
-   * The CSS `timeline-trigger-active-range-start` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range-start
    *
@@ -11685,7 +12050,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-name
    *
-   * The CSS `timeline-trigger-name` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-name
    *
@@ -11695,7 +12062,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-source
    *
-   * The CSS `timeline-trigger-source` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-source
    *
@@ -11758,7 +12127,8 @@ export interface StyleProps {
    *
    * The <code>transform-box</code> CSS property sets the position and dimensions of the reference box relative to which an element's transformations are calculated.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-10-16
    * @newly_available_date 2024-04-16
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-box
@@ -11908,7 +12278,9 @@ export interface StyleProps {
   /**
    * ### trigger-scope
    *
-   * The CSS `trigger-scope` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-trigger-scope
    *
@@ -12112,7 +12484,8 @@ export interface StyleProps {
    *
    * The <code>white-space-collapse</code> CSS property sets whether new line characters are shown as line breaks, and whether multiple consecutive spaces are all displayed or combined.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-09-19
    * @newly_available_date 2024-03-19
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space-collapse

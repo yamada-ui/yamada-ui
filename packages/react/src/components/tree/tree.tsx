@@ -7,6 +7,7 @@ import type {
   HTMLStyledProps,
   ThemeProps,
 } from "../../core"
+import type { ReactNodeOrFunction } from "../../utils"
 import type { CheckboxProps } from "../checkbox"
 import type { CollapseProps } from "../collapse"
 import type { Loading } from "../loading"
@@ -25,9 +26,9 @@ import {
   cast,
   createContext,
   dataAttr,
+  getResolvedChild,
   isObject,
   isString,
-  type ReactNodeOrFunction,
   runIfFn,
 } from "../../utils"
 import { Checkbox } from "../checkbox"
@@ -92,15 +93,12 @@ const getReactNodeOrFunction = (
   custom?: TreeItemReactNode,
   root?: TreeItemReactNode,
 ): ReactNodeOrFunction<TreeCallBackProps> => {
-  if (isObject(custom) && ("group" in custom || "item" in custom)) {
+  if (isObject(custom) && ("group" in custom || "item" in custom))
     return custom[type]
-  } else if (custom) {
-    return custom
-  } else if (isObject(root) && ("group" in root || "item" in root)) {
+  else if (custom) return custom
+  else if (isObject(root) && ("group" in root || "item" in root))
     return root[type]
-  } else {
-    return root
-  }
+  else return root
 }
 
 interface ComponentContext extends Pick<
@@ -618,10 +616,12 @@ const TreeIndicator = withContext<"svg", TreeIndicatorProps>(
 
     if (indicatorHidden) return null
 
-    if (isValidElement<HTMLProps<"svg">>(children))
-      return cloneElement(children, { ...rest, ...children.props })
+    const child = getResolvedChild(children)
 
-    return Children.count(children) > 1 ? Children.only(null) : null
+    if (isValidElement<HTMLProps<"svg">>(child))
+      return cloneElement(child, { ...rest, ...child.props })
+
+    return Children.count(child) > 1 ? Children.only(null) : null
   },
   "indicator",
 )(undefined, (props) => {

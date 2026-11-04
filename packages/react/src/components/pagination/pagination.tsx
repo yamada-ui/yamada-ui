@@ -302,13 +302,11 @@ export const PaginationItems: FC<PaginationItemsProps> = ({
       range.map((page, index) => {
         const component = children?.(page) ?? render?.(page)
 
-        if (isValidElement<HTMLProps<"button">>(component)) {
+        if (isValidElement<HTMLProps<"button">>(component))
           return cloneElement(component, {
             ...getItemProps({ key: index, page, ...component.props }),
           })
-        } else {
-          return component
-        }
+        else return component
       }),
     [children, getItemProps, range, render],
   )
@@ -345,19 +343,17 @@ export const PaginationText = withContext<"span", PaginationTextProps>(
   const { currentPage, total } = usePaginationContext()
   const { t } = useI18n("pagination")
   const computedChildren = useMemo(() => {
-    if (children) {
-      return runIfFn(children, { page: currentPage, total })
-    } else if (format === "short") {
+    if (children) return runIfFn(children, { page: currentPage, total })
+    else if (format === "short")
       return t("{value} / {total}", {
         total,
         value: currentPage,
       })
-    } else {
+    else
       return t("{value} of {total}", {
         total,
         value: currentPage,
       })
-    }
   }, [children, currentPage, format, total, t])
 
   return {

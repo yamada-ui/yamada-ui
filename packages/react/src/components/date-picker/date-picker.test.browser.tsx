@@ -236,12 +236,15 @@ describe("<DatePicker />", () => {
 
   test("handles blur on single date", async () => {
     const { user } = await render(
-      <DatePicker
-        openOnChange={false}
-        openOnClick={false}
-        openOnFocus={false}
-        placeholder="Select date"
-      />,
+      <>
+        <DatePicker
+          openOnChange={false}
+          openOnClick={false}
+          openOnFocus={false}
+          placeholder="Select date"
+        />
+        <button>Next field</button>
+      </>,
     )
 
     const input = page.getByRole("textbox").first()
@@ -250,9 +253,10 @@ describe("<DatePicker />", () => {
     await user.type(input, "invalid")
     await user.tab()
 
-    await vi.waitFor(async () => {
-      await expect.element(input).toHaveValue("")
-    })
+    await expect
+      .element(page.getByRole("button", { name: "Next field" }))
+      .toHaveFocus()
+    await expect.element(input).toHaveValue("")
   })
 
   test("handles blur on range date resets input value", async () => {
@@ -976,13 +980,13 @@ describe("<DatePicker />", () => {
   test("handles parseDate", async () => {
     const parseDate = vi.fn((value: string) => {
       const parts = value.split("/")
-      if (parts.length === 3) {
+      if (parts.length === 3)
         return new Date(
           Number(parts[0]),
           Number(parts[1]) - 1,
           Number(parts[2]),
         )
-      }
+
       return undefined
     })
 

@@ -1,3 +1,5 @@
+import type { ReactNode } from "react"
+import { createRef } from "react"
 import { a11y, render, screen } from "#test"
 import { noop } from "../../utils"
 import { Accordion } from "./"
@@ -18,6 +20,78 @@ const items = [
 ]
 
 describe("<Accordion />", () => {
+  test.each(["root", "item", "button", "callback"] as const)(
+    "resolves lazy icons supplied through the %s",
+    (source) => {
+      const ref = createRef<SVGSVGElement>()
+      const icon = {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: (payload: ReactNode) => payload,
+        _payload: <svg ref={ref} data-testid="icon" />,
+      } as unknown as ReactNode
+      const callback = vi.fn(() => icon)
+
+      render(
+        <Accordion.Root
+          defaultIndex={0}
+          icon={source === "root" ? icon : undefined}
+        >
+          <Accordion.Item
+            disabled
+            icon={source === "item" ? icon : undefined}
+            index={0}
+          >
+            <Accordion.Button
+              icon={
+                source === "callback"
+                  ? callback
+                  : source === "button"
+                    ? icon
+                    : undefined
+              }
+            >
+              Accordion Label
+            </Accordion.Button>
+            <Accordion.Panel>Panel</Accordion.Panel>
+          </Accordion.Item>
+        </Accordion.Root>,
+      )
+
+      const element = screen.getByTestId("icon")
+
+      expect(element).toHaveAttribute("aria-hidden", "true")
+      expect(element).toHaveAttribute("aria-expanded", "true")
+      expect(element).toHaveAttribute("aria-disabled", "true")
+      expect(element).toHaveAttribute("role", "presentation")
+      expect(element).toHaveClass("ui-accordion__icon")
+      expect(ref.current).toBe(element)
+      const expectedCalls = expect.arrayContaining([
+        [{ disabled: true, expanded: true }],
+      ])
+      expect(callback.mock.calls).toStrictEqual(
+        source === "callback" ? expectedCalls : [],
+      )
+    },
+  )
+
+  test("does not resolve hidden lazy icons", () => {
+    const init = vi.fn(() => {
+      throw new Error("Hidden icon")
+    })
+    const icon = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: init,
+      _payload: {},
+    } as unknown as ReactNode
+
+    render(<Accordion.Root icon={icon} iconHidden items={items} />)
+
+    expect(init).not.toHaveBeenCalled()
+    expect(
+      screen.getByRole("button", { name: "Accordion Label 1" }),
+    ).toBeEnabled()
+  })
+
   test("renders component correctly", async () => {
     await a11y(
       <Accordion.Root>

@@ -41,9 +41,8 @@ describe("<Rating />", () => {
     const { rating, rect } = getRatingRect("rating")
     const items = container.querySelectorAll(".ui-rating__item")
 
-    for (let i = 1; i < items.length; i++) {
+    for (let i = 1; i < items.length; i++)
       expect(items[i]).not.toHaveAttribute("data-filled")
-    }
 
     const itemWidth = rect.width / 5
 

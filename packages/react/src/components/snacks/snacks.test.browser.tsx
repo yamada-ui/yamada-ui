@@ -27,6 +27,10 @@ const TestComponent: FC<{
 }
 
 describe("<Snacks />", () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   test("renders with direction end", async () => {
     const { user } = await render(
       <TestComponent options={{ direction: "end" }} />,
@@ -150,6 +154,8 @@ describe("<Snacks />", () => {
   })
 
   test("pauses duration on mouse enter and resumes on mouse leave", async () => {
+    vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout"] })
+
     const TestHover: FC = () => {
       const { snack, snacks } = useSnacks()
 
@@ -174,7 +180,7 @@ describe("<Snacks />", () => {
 
     const { user } = await render(<TestHover />)
 
-    await user.click(page.getByTestId("add"))
+    await user.click(page.getByRole("button", { name: "Add", exact: true }))
 
     const snackItem = page.getByRole("listitem")
     const snackTitle = page.getByText(/^Hover test$/)
@@ -183,11 +189,13 @@ describe("<Snacks />", () => {
 
     await user.hover(snackItem)
 
-    await new Promise<void>((resolve) => setTimeout(resolve, 350))
+    await vi.advanceTimersByTimeAsync(350)
 
     await expect.element(snackTitle).toBeInTheDocument()
 
     await user.unhover(snackItem)
+
+    await vi.advanceTimersByTimeAsync(200)
 
     await expect.element(snackTitle.query()).not.toBeInTheDocument()
   })

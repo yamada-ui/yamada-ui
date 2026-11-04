@@ -1,3 +1,5 @@
+import type { ReactElement } from "react"
+import { createRef } from "react"
 import { a11y, render, screen } from "#test"
 import { Tree } from "."
 import { BoxIcon, FileIcon, FolderIcon } from "../icon"
@@ -45,6 +47,65 @@ describe("<Tree />", () => {
       screen.getAllByRole("treeitem")[0]?.querySelector(".ui-tree__indicator"),
     ).toBeNull()
   })
+
+  test.each([false, true])(
+    "renders a lazy-wrapped indicator with callback=%s",
+    (callback) => {
+      const ref = createRef<SVGSVGElement>()
+      const indicator = {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: (payload: ReactElement) => payload,
+        _payload: <svg ref={ref} data-testid="lazy-indicator" width="12" />,
+      } as unknown as ReactElement
+
+      render(
+        <Tree.Root
+          indicator={callback ? () => indicator : indicator}
+          items={[{ children: [{ label: "Child" }], label: "Parent" }]}
+          indicatorProps={{ width: "24" }}
+        />,
+      )
+
+      expect(screen.getByTestId("lazy-indicator")).toHaveAttribute(
+        "width",
+        "12",
+      )
+      expect(screen.getByTestId("lazy-indicator")).toHaveAttribute(
+        "aria-hidden",
+        "true",
+      )
+      expect(ref.current).toBe(screen.getByTestId("lazy-indicator"))
+    },
+  )
+
+  test.each(["hidden", "leaf"])(
+    "does not resolve an unused lazy indicator for %s items",
+    (mode) => {
+      const init = vi.fn(() => {
+        throw new Error("Unused indicator")
+      })
+      const indicator = {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: init,
+        _payload: {},
+      } as unknown as ReactElement
+
+      render(
+        <Tree.Root
+          indicator={indicator}
+          indicatorHidden={mode === "hidden"}
+          items={
+            mode === "hidden"
+              ? [{ children: [{ label: "Child" }], label: "Parent" }]
+              : [{ label: "Parent" }]
+          }
+        />,
+      )
+
+      expect(init).not.toHaveBeenCalled()
+      expect(screen.getByText("Parent")).toBeInTheDocument()
+    },
+  )
 
   test("should support controlled selectedValue", () => {
     render(

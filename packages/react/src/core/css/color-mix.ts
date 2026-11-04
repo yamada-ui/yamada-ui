@@ -30,11 +30,8 @@ function getColor(system: System) {
 
     if (color?.startsWith("colors.")) color = color.replace("colors.", "")
 
-    if (isColorScheme(color)) {
-      color = getColorSchemeVar(system)(color)
-    } else {
-      color = tokenToVar(system)("colors", color, fallbackColor)
-    }
+    if (isColorScheme(color)) color = getColorSchemeVar(system)(color)
+    else color = tokenToVar(system)("colors", color, fallbackColor)
 
     if (percent && !percent.startsWith("var") && !percent.endsWith("%"))
       percent = `${percent}%`
@@ -97,11 +94,8 @@ export function colorMix(
     case "color-mix": {
       let [color2, color1, method] = splitValues(values).reverse()
 
-      if (method) {
-        method = method in methods ? methods[method] : method
-      } else {
-        method = DEFAULT_METHOD
-      }
+      if (method) method = method in methods ? methods[method] : method
+      else method = DEFAULT_METHOD
 
       color1 = getColor(system)(color1, fallback)
       color2 = getColor(system)(color2, fallback)

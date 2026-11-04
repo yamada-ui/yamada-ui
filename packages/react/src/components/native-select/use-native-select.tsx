@@ -66,9 +66,8 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
   const computedChildren = useMemo(() => {
     let computedChildren: ReactNode = null
 
-    if (children) {
-      computedChildren = children
-    } else if (items.length) {
+    if (children) computedChildren = children
+    else if (items.length)
       computedChildren = items.map((item, index) => {
         if ("items" in item) {
           const { items, label, ...rest } = item
@@ -76,7 +75,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
           return cloneElement(<optgroup />, {
             key: index,
             children: items.map(({ label, ...rest }, index) =>
-              cloneElement(<option />, {
+              cloneElement(<option aria-label={label} />, {
                 key: index,
                 children: label,
                 ...rest,
@@ -88,14 +87,13 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
         } else {
           const { label, ...rest } = item
 
-          return cloneElement(<option />, {
+          return cloneElement(<option aria-label={label} />, {
             key: index,
             children: label,
             ...rest,
           })
         }
       })
-    }
 
     return (
       <>

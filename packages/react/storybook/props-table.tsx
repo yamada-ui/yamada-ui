@@ -21,7 +21,7 @@ export const PropsTable = <Y extends string, M extends string>({
   columns = [],
   rows,
 }: PropsTableProps<Y, M>) => {
-  if (variant === "grid") {
+  if (variant === "grid")
     return (
       <Grid templateColumns={`auto repeat(${columns.length}, 1fr)`} w="full">
         <GridItem />
@@ -94,7 +94,7 @@ export const PropsTable = <Y extends string, M extends string>({
         </For>
       </Grid>
     )
-  } else if (columns.length) {
+  else if (columns.length)
     return (
       <For each={columns}>
         {(column, colIndex) => (
@@ -147,7 +147,7 @@ export const PropsTable = <Y extends string, M extends string>({
         )}
       </For>
     )
-  } else {
+  else
     return (
       <Grid
         borderColor="purple.ghost"
@@ -190,5 +190,4 @@ export const PropsTable = <Y extends string, M extends string>({
         </For>
       </Grid>
     )
-  }
 }

@@ -145,9 +145,8 @@ export const TabsList = withContext<"div", TabsListProps>(
     const { items } = useComponentContext()
     const { getListProps } = useTabsContext()
     const computedChildren = useMemo(() => {
-      if (children) {
-        return children
-      } else {
+      if (children) return children
+      else
         return items?.map(
           (
             { id, panel: _panel, tab, panelProps: _panelProps, ...rest },
@@ -159,7 +158,6 @@ export const TabsList = withContext<"div", TabsListProps>(
               </TabsTab>
             ),
         )
-      }
     }, [children, items])
 
     return <styled.div {...getListProps(rest)}>{computedChildren}</styled.div>
@@ -184,9 +182,8 @@ export const TabsPanels: FC<TabsPanelsProps> = ({ children }) => {
   const { items } = useComponentContext()
 
   return useMemo(() => {
-    if (children) {
-      return children
-    } else {
+    if (children) return children
+    else
       return items?.map(({ id, panel, panelProps }, index) =>
         isUndefined(panel) || isNull(panel) ? null : (
           <TabsPanel key={id ?? index} index={index} {...panelProps}>
@@ -194,7 +191,6 @@ export const TabsPanels: FC<TabsPanelsProps> = ({ children }) => {
           </TabsPanel>
         ),
       )
-    }
   }, [children, items])
 }
 

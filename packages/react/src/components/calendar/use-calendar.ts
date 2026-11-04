@@ -4,9 +4,9 @@ import type { FocusEvent, KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import type { Descendant } from "../../hooks/use-descendants"
 import type { Locale } from "../../providers/i18n-provider"
-import type { AnyString, Dict } from "../../utils"
+import type { AnyString, Dict, ToFunction } from "../../utils"
 import dayjs from "dayjs"
-import { useCallback, useMemo, useRef } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 import { mergeProps, useSplitProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
@@ -22,6 +22,7 @@ import {
   isNumber,
   isObject,
   mergeRefs,
+  runIfFn,
   runKeyAction,
   useUpdateEffect,
   visuallyHiddenAttributes,
@@ -204,44 +205,30 @@ export const isInRange = (date: Date, minDate?: Date, maxDate?: Date) => {
 }
 
 export const sortDates = (dates: Date[], type: "asc" | "desc" = "asc") => {
-  if (type === "asc") {
+  if (type === "asc")
     return dates.sort((a, b) => (dayjs(a).isAfter(b, "date") ? 1 : -1))
-  } else {
-    return dates.sort((a, b) => (dayjs(a).isBefore(b, "date") ? 1 : -1))
-  }
+  else return dates.sort((a, b) => (dayjs(a).isBefore(b, "date") ? 1 : -1))
 }
 
 export const updateMaybeDateValue =
   (value: Date, max?: number) =>
   (prev: MaybeDate): MaybeDate => {
     if (isArray(prev)) {
-      if (isIncludeDates(value, prev)) {
+      if (isIncludeDates(value, prev))
         return prev.filter((prevValue) => !isSameDate(prevValue, value))
-      } else if (!isNumber(max) || prev.length < max) {
-        return [...prev, value]
-      } else {
-        return prev
-      }
+      else if (!isNumber(max) || prev.length < max) return [...prev, value]
+      else return prev
     } else if (isObject(prev) && !isDate(prev)) {
       const { end, start } = prev
 
-      if ((start && end) || !start) {
-        return { end: undefined, start: value }
-      } else {
-        if (isSameDate(start, value)) {
-          return { end: undefined, start: undefined }
-        } else if (isBeforeDate(value, start)) {
-          return { end: start, start: value }
-        } else {
-          return { end: value, start }
-        }
-      }
+      if ((start && end) || !start) return { end: undefined, start: value }
+      else if (isSameDate(start, value))
+        return { end: undefined, start: undefined }
+      else if (isBeforeDate(value, start)) return { end: start, start: value }
+      else return { end: value, start }
     } else {
-      if (isSameDate(prev, value)) {
-        return undefined
-      } else {
-        return value
-      }
+      if (isSameDate(prev, value)) return undefined
+      else return value
     }
   }
 
@@ -254,11 +241,8 @@ export const getAdjustedMonth = (value: MaybeDate, month: Date) => {
     if (lastValue && !isSameMonth(lastValue, month))
       month = dayjs(lastValue).set("date", 1).toDate()
   } else if (isObject(value)) {
-    if (value.end) {
-      month = dayjs(value.end).set("date", 1).toDate()
-    } else if (value.start) {
-      month = dayjs(value.start).set("date", 1).toDate()
-    }
+    if (value.end) month = dayjs(value.end).set("date", 1).toDate()
+    else if (value.start) month = dayjs(value.start).set("date", 1).toDate()
   }
 
   return month
@@ -309,11 +293,13 @@ export interface UseCalendarProps<
    *
    * @default new Date()
    */
-  defaultMonth?: Date
+  defaultMonth?: (() => Date) | Date
   /**
    * The initial value of the calendar.
    */
-  defaultValue?: MaybeDateValue<Multiple, Range>
+  defaultValue?:
+    | MaybeDateValue<Multiple, Range>
+    | ToFunction<Exclude<MaybeDateValue<Multiple, Range>, undefined>>
   /**
    * If `true`, disables the calendar.
    *
@@ -409,7 +395,7 @@ export const useCalendar = <
   Multiple extends boolean = false,
   Range extends boolean = false,
 >({
-  defaultMonth = new Date(),
+  defaultMonth = () => new Date(),
   multiple = false as Multiple,
   range = false as Range,
   defaultValue = (range
@@ -473,18 +459,17 @@ export const useCalendar = <
   )
   const dayFormat = useCallback(
     (value: Date) => {
-      if (format.day) {
+      if (format.day)
         return dateTimeFormat(value, {
           day: format.day,
         })
-      } else {
-        return value.getDate().toString()
-      }
+      else return value.getDate().toString()
     },
     [dateTimeFormat, format.day],
   )
   const descendants = useCalendarDescendants()
   const monthRef = useRef<HTMLTableElement>(null)
+  const [currentDate] = useState<Date>(() => new Date())
   const [value, setValue] = useControllableState({
     defaultValue,
     value: valueProp,
@@ -492,16 +477,12 @@ export const useCalendar = <
   })
   const [month, setMonth] = useControllableState({
     defaultValue: () => {
+      defaultMonth = runIfFn(defaultMonth)
+
       if (dayjs(minDate).isAfter(dayjs(defaultMonth)))
         defaultMonth = dayjs(minDate).set("date", 1).toDate()
 
-      if (valueProp) {
-        defaultMonth = getAdjustedMonth(valueProp, defaultMonth)
-      } else if (defaultValue) {
-        defaultMonth = getAdjustedMonth(defaultValue, defaultMonth)
-      }
-
-      return defaultMonth
+      return getAdjustedMonth(value, defaultMonth)
     },
     value: monthProp,
     onChange: onChangeMonthProp,
@@ -571,17 +552,16 @@ export const useCalendar = <
 
   const onMonthChange = useCallback(
     (month: Date) => {
-      if (isAfterMonth(month, maxDate)) {
+      if (isAfterMonth(month, maxDate))
         setMonth(dayjs(maxDate).set("date", 1).toDate())
-      } else if (isBeforeMonth(month, minDate)) {
+      else if (isBeforeMonth(month, minDate))
         setMonth(dayjs(minDate).set("date", 1).toDate())
-      } else {
+      else
         setMonth((prev) => {
           if (isSameMonth(prev, month)) return prev
 
           return month
         })
-      }
     },
     [maxDate, minDate, setMonth],
   )
@@ -615,11 +595,10 @@ export const useCalendar = <
         if (firstValue && isSameMonth(month, firstValue))
           index = firstValue.getDate() - 1
       } else if (isObject(value)) {
-        if (value.start && isSameMonth(month, value.start)) {
+        if (value.start && isSameMonth(month, value.start))
           index = value.start.getDate() - 1
-        } else if (value.end && isSameMonth(month, value.end)) {
+        else if (value.end && isSameMonth(month, value.end))
           index = value.end.getDate() - 1
-        }
       }
     } else if (isSameMonth(month, new Date())) {
       index = new Date().getDate() - 1
@@ -769,6 +748,7 @@ export const useCalendar = <
   )
 
   return {
+    currentDate,
     descendants,
     disabled,
     endOfMonth,
@@ -815,6 +795,7 @@ export interface UseCalendarDayProps extends Omit<HTMLProps<"td">, "value"> {
 export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
   const { t } = useI18n("calendar")
   const {
+    currentDate,
     disabled: rootDisabled,
     excludeDate,
     holidays,
@@ -844,22 +825,20 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
     [weekendDays, value],
   )
   const today = useMemo(
-    () => highlightToday && isSameDate(value, new Date()),
-    [highlightToday, value],
+    () => highlightToday && isSameDate(value, currentDate),
+    [highlightToday, value, currentDate],
   )
   const selected = useMemo(() => {
-    if (isDate(selectedValue)) {
-      return isSameDate(selectedValue, value)
-    } else if (isArray(selectedValue)) {
+    if (isDate(selectedValue)) return isSameDate(selectedValue, value)
+    else if (isArray(selectedValue))
       return selectedValue.some((selectedValue) =>
         isSameDate(selectedValue, value),
       )
-    } else if (isObject(selectedValue)) {
+    else if (isObject(selectedValue))
       return (
         isSameDate(selectedValue.start, value) ||
         isSameDate(selectedValue.end, value)
       )
-    }
   }, [selectedValue, value])
   const disabled = useMemo(() => {
     if (rootDisabled) return true
@@ -954,11 +933,9 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
 
         if (!descendant) return
 
-        if (descendant.disabled) {
+        if (descendant.disabled)
           onFocusDescendant(descendants.enabledNextValue(descendant, false))
-        } else {
-          onFocusDescendant(descendant)
-        }
+        else onFocusDescendant(descendant)
       })
     },
     [descendants, minDate, onFocusDescendant, onMonthChange],
@@ -975,11 +952,9 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
 
         if (!descendant) return
 
-        if (descendant.disabled) {
+        if (descendant.disabled)
           onFocusDescendant(descendants.enabledPrevValue(descendant, false))
-        } else {
-          onFocusDescendant(descendant)
-        }
+        else onFocusDescendant(descendant)
       })
     },
     [descendants, maxDate, onFocusDescendant, onMonthChange],
@@ -998,18 +973,14 @@ export const useCalendarDay = ({ value, ...rest }: UseCalendarDayProps) => {
         Enter: onClick,
         Home: () => onPrevTraverseDate(getStartOfWeek(value, startDayOfWeek)),
         PageDown: (ev) => {
-          if (ev.shiftKey) {
+          if (ev.shiftKey)
             onNextTraverseDate(dayjs(value).add(1, "year").toDate())
-          } else {
-            onNextTraverseDate(dayjs(value).add(1, "month").toDate())
-          }
+          else onNextTraverseDate(dayjs(value).add(1, "month").toDate())
         },
         PageUp: (ev) => {
-          if (ev.shiftKey) {
+          if (ev.shiftKey)
             onPrevTraverseDate(dayjs(value).subtract(1, "year").toDate())
-          } else {
-            onPrevTraverseDate(dayjs(value).subtract(1, "month").toDate())
-          }
+          else onPrevTraverseDate(dayjs(value).subtract(1, "month").toDate())
         },
         Space: onClick,
       })

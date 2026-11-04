@@ -57,11 +57,8 @@ export function Toc({ md, locale, path, pathname, toc }: TocProps) {
     scrollIntoView(ref.current, {
       behavior: (actions) =>
         actions.forEach(({ el, top }) => {
-          if (directionRef.current === "down") {
-            el.scrollTop = top + 16
-          } else {
-            el.scrollTop = top - 16
-          }
+          if (directionRef.current === "down") el.scrollTop = top + 16
+          else el.scrollTop = top - 16
         }),
       block: "nearest",
       boundary: containerRef.current,

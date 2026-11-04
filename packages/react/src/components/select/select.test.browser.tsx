@@ -851,15 +851,14 @@ describe("<Select />", () => {
         defaultOpen
         items={items}
         placeholder="Choose a option"
-        optionProps={{ "data-custom": "true" } as any}
+        optionProps={{ "data-custom": "true" }}
       />,
     )
 
     const options = page.getByRole("option").elements()
 
-    for (const option of options) {
+    for (const option of options)
       expect(option).toHaveAttribute("data-custom", "true")
-    }
   })
 
   test("renders with groupProps on the root", async () => {
@@ -878,7 +877,7 @@ describe("<Select />", () => {
         defaultOpen
         items={groupedItems}
         placeholder="Choose a option"
-        groupProps={{ "data-custom": "group" } as any}
+        groupProps={{ "data-custom": "group" }}
       />,
     )
 
@@ -1051,7 +1050,7 @@ describe("<Select />", () => {
       <Select.Root
         defaultOpen
         placeholder="Choose a option"
-        placeholderProps={{ "data-testid": "placeholder-opt" } as any}
+        placeholderProps={{ "data-testid": "placeholder-opt" }}
       >
         <Select.Option value="one">Option 1</Select.Option>
       </Select.Root>,

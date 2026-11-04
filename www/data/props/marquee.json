@@ -1,0 +1,396 @@
+{
+  "Marquee": {
+    "Content": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Edge": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "direction": {
+        "type": "SimpleDirection",
+        "defaultValue": "\"start\"",
+        "description": "The edge to fade, relative to the marquee orientation.",
+        "required": false
+      }
+    },
+    "Item": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "contentProps": {
+        "type": "MarqueeContentProps",
+        "description": "Props for content component.",
+        "required": false
+      },
+      "controlRef": {
+        "type": "RefObject<MarqueeControl | null>",
+        "description": "Ref of the marquee controls.",
+        "required": false
+      },
+      "defaultPaused": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "Whether the marquee is initially paused.",
+        "required": false
+      },
+      "delay": {
+        "type": "number",
+        "defaultValue": "0",
+        "description": "The delay before the animation starts, in seconds.",
+        "required": false
+      },
+      "direction": {
+        "type": "SimpleDirection",
+        "defaultValue": "\"start\"",
+        "description": "The direction the content scrolls towards.",
+        "required": false
+      },
+      "duration": {
+        "type": "number",
+        "description": "The duration of one loop in seconds. Overrides `speed`.",
+        "required": false
+      },
+      "edgeColor": {
+        "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
+        "defaultValue": "\"bg\"",
+        "description": "The color of the edge gradient.",
+        "required": false
+      },
+      "edgeSize": {
+        "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
+        "defaultValue": "\"20%\"",
+        "description": "The size of the edge gradient.",
+        "required": false
+      },
+      "loopCount": {
+        "type": "number",
+        "defaultValue": "0",
+        "description": "The number of animation loops. Set to `0` for infinite loops.",
+        "required": false
+      },
+      "onComplete": {
+        "type": "() => void",
+        "description": "The callback invoked when all finite loops finish.",
+        "required": false
+      },
+      "onLoopComplete": {
+        "type": "() => void",
+        "description": "The callback invoked after each animation iteration, except the final one.",
+        "required": false
+      },
+      "onPauseChange": {
+        "type": "(paused: boolean) => void",
+        "description": "The callback invoked when the persistent pause state changes.",
+        "required": false
+      },
+      "orientation": {
+        "type": "Orientation",
+        "defaultValue": "\"horizontal\"",
+        "description": "The orientation of the marquee.",
+        "required": false
+      },
+      "paused": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the animation is paused.",
+        "required": false
+      },
+      "pauseOnFocus": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the animation pauses while an item is focused.",
+        "required": false
+      },
+      "pauseOnHover": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the animation pauses on hover.",
+        "required": false
+      },
+      "reverse": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the scrolling direction is reversed.",
+        "required": false
+      },
+      "speed": {
+        "type": "number",
+        "defaultValue": "50",
+        "description": "The scrolling speed in pixels per second.",
+        "required": false
+      }
+    }
+  },
+  "MarqueeContent": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "MarqueeEdge": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "direction": {
+      "type": "SimpleDirection",
+      "defaultValue": "\"start\"",
+      "description": "The edge to fade, relative to the marquee orientation.",
+      "required": false
+    }
+  },
+  "MarqueeItem": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "MarqueeRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "contentProps": {
+      "type": "MarqueeContentProps",
+      "description": "Props for content component.",
+      "required": false
+    },
+    "controlRef": {
+      "type": "RefObject<MarqueeControl | null>",
+      "description": "Ref of the marquee controls.",
+      "required": false
+    },
+    "defaultPaused": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "Whether the marquee is initially paused.",
+      "required": false
+    },
+    "delay": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The delay before the animation starts, in seconds.",
+      "required": false
+    },
+    "direction": {
+      "type": "SimpleDirection",
+      "defaultValue": "\"start\"",
+      "description": "The direction the content scrolls towards.",
+      "required": false
+    },
+    "duration": {
+      "type": "number",
+      "description": "The duration of one loop in seconds. Overrides `speed`.",
+      "required": false
+    },
+    "edgeColor": {
+      "type": "\"-moz-initial\" | \"AccentColor\" | \"AccentColorText\" | \"ActiveBorder\" | \"ActiveCaption\" | \"ActiveText\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" ...",
+      "defaultValue": "\"bg\"",
+      "description": "The color of the edge gradient.",
+      "required": false
+    },
+    "edgeSize": {
+      "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-fit-content\" | \"-webkit-max-content\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" ...",
+      "defaultValue": "\"20%\"",
+      "description": "The size of the edge gradient.",
+      "required": false
+    },
+    "loopCount": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The number of animation loops. Set to `0` for infinite loops.",
+      "required": false
+    },
+    "onComplete": {
+      "type": "() => void",
+      "description": "The callback invoked when all finite loops finish.",
+      "required": false
+    },
+    "onLoopComplete": {
+      "type": "() => void",
+      "description": "The callback invoked after each animation iteration, except the final one.",
+      "required": false
+    },
+    "onPauseChange": {
+      "type": "(paused: boolean) => void",
+      "description": "The callback invoked when the persistent pause state changes.",
+      "required": false
+    },
+    "orientation": {
+      "type": "Orientation",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the marquee.",
+      "required": false
+    },
+    "paused": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the animation is paused.",
+      "required": false
+    },
+    "pauseOnFocus": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the animation pauses while an item is focused.",
+      "required": false
+    },
+    "pauseOnHover": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the animation pauses on hover.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the scrolling direction is reversed.",
+      "required": false
+    },
+    "speed": {
+      "type": "number",
+      "defaultValue": "50",
+      "description": "The scrolling speed in pixels per second.",
+      "required": false
+    }
+  }
+}

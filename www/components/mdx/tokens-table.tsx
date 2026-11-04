@@ -43,15 +43,13 @@ export function TokensTable({ token }: TokensTableProps) {
 
         <NativeTable.Tbody>
           {Object.entries(tokens).map(([token, value], index) => {
-            if (isObject(value) && !keyframes) {
+            if (isObject(value) && !keyframes)
               return Object.entries(value).map(([key, value], index) => {
                 return (
                   <Row key={index} token={`${token}.${key}`} value={value} />
                 )
               })
-            } else {
-              return <Row key={index} token={token} value={value} />
-            }
+            else return <Row key={index} token={token} value={value} />
           })}
         </NativeTable.Tbody>
       </NativeTable.Root>

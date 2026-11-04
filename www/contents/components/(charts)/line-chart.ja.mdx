@@ -71,7 +71,7 @@ return (
     data={data}
     series={series}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -121,7 +121,9 @@ const data = useMemo<CartesianChartData[]>(() => createCartesianChartData(), [])
 
 return (
   <LineChart.Root data={data}>
-    <LineChart.Tooltip labelFormatter={(value) => dayjs(value).format("MMM")} />
+    <LineChart.Tooltip
+      labelFormatter={(value) => dayjs(value as string).format("MMM")}
+    />
     <LineChart.XAxis
       dataKey="date"
       tickFormatter={(value) => dayjs(value).format("MMM")}
@@ -159,7 +161,7 @@ return (
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -192,7 +194,7 @@ return (
     data={data}
     series={series}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -220,7 +222,7 @@ return (
     data={data}
     series={series}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -266,7 +268,7 @@ return (
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -302,7 +304,7 @@ return (
     withYAxis
     chartProps={{ margin: { right: 16 } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -333,7 +335,7 @@ return (
     withYAxis
     chartProps={{ margin: { left: 16 } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -365,7 +367,7 @@ return (
     series={series}
     withLegend
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -396,7 +398,7 @@ return (
     series={series}
     withLegend
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -435,7 +437,7 @@ return (
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -465,7 +467,7 @@ return (
     series={series}
     lineProps={{ dot: true }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -492,7 +494,7 @@ return (
     series={series}
     lineProps={{ dot: true, label: true }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -527,7 +529,7 @@ return (
     }}
     tooltipProps={{
       formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -566,7 +568,7 @@ return (
       series={series}
       syncId="chart"
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -578,7 +580,7 @@ return (
       series={series}
       syncId="chart"
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -616,7 +618,7 @@ return (
         Number(value).toLocaleString(),
         toTitleCase(name),
       ],
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -648,7 +650,7 @@ return (
     data={data}
     series={series}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -694,7 +696,7 @@ return (
     withYAxis
     chartProps={{ margin: { right: 16 } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -729,7 +731,7 @@ return (
     withYAxis
     chartProps={{ margin: { right: 16 } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -764,7 +766,7 @@ return (
     withYAxis
     chartProps={{ margin: { right: 16 } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -800,7 +802,7 @@ return (
     series={series}
     tooltipProps={{
       cursor: true,
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -859,7 +861,7 @@ return (
     series={series}
     lineProps={{ activeDot: false }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -919,7 +921,7 @@ return (
     withYAxis
     chartProps={{ margin: { right: 16 } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -960,7 +962,7 @@ return (
     series={series}
     lineProps={{ activeDot: false }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
       contentProps: { withSwatch: false },
     }}
     xAxisProps={{
@@ -991,7 +993,7 @@ return (
     series={series}
     lineProps={{ activeDot: { fill: ["red", "blue"] } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
       contentProps: { withSwatch: false },
     }}
     xAxisProps={{
@@ -1021,7 +1023,7 @@ return (
       label: { color: "red" },
     }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
       contentProps: { withSwatch: false },
     }}
     xAxisProps={{
@@ -1056,7 +1058,7 @@ return (
     series={series}
     gridProps={{ strokeDasharray: "15 15" }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
       contentProps: { withSwatch: false },
     }}
     xAxisProps={{
@@ -1087,7 +1089,7 @@ return (
     series={series}
     tooltipProps={{
       cursor: { stroke: ["red", "blue"] },
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",

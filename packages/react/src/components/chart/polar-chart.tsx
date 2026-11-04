@@ -11,6 +11,7 @@ import type {
   LabelProps,
   PieLabelRenderProps,
   PieSectorShapeProps,
+  RadialBarSectorProps,
   SectorProps,
 } from "recharts"
 import type { PolarChartProps as OriginalPolarChartProps } from "recharts/types/util/types"
@@ -22,7 +23,7 @@ import type {
   HTMLStyledProps,
   ThemeProps,
 } from "../../core"
-import type { Dict, Merge } from "../../utils"
+import type { Dict, FunctionOf, Merge } from "../../utils"
 import type {
   ChartActiveDot,
   ChartDot,
@@ -69,6 +70,7 @@ import {
   getCSS,
   mergeProps,
   styled,
+  transforms,
   useSystem,
   useTheme,
   varAttr,
@@ -79,6 +81,7 @@ import {
   isFunction,
   isNumber,
   isObject,
+  replaceObject,
   runIfFn,
   splitObject,
 } from "../../utils"
@@ -455,7 +458,7 @@ export const PolarChart = withProvider(
     ...rest
   }) => ({
     "--active-dot-fill": varAttr(activeDotFill, "colors"),
-    "--active-dot-r": activeDotRadius,
+    "--active-dot-r": replaceObject(activeDotRadius, transforms.px),
     "--active-dot-stroke": varAttr(activeDotStroke, "colors"),
     "--active-dot-stroke-width": activeDotStrokeWidth,
     "--angle-axis-line-stroke": varAttr(angleAxisLineStroke, "colors"),
@@ -463,7 +466,7 @@ export const PolarChart = withProvider(
     "--angle-axis-text-color": varAttr(angleAxisTextColor, "colors"),
     "--angle-axis-text-fill": varAttr(angleAxisTextFill, "colors"),
     "--dot-fill": varAttr(dotFill, "colors"),
-    "--dot-r": dotRadius,
+    "--dot-r": replaceObject(dotRadius, transforms.px),
     "--dot-stroke": varAttr(dotStroke, "colors"),
     "--dot-stroke-width": dotStrokeWidth,
     "--grid-stroke": varAttr(gridStroke, "colors"),
@@ -549,7 +552,10 @@ export interface ChartPieProps<Y extends Dict = Dict> extends Merge<
    * Props for the sector component.
    */
   sectorProps?:
-    | ((props: PieSectorShapeProps, index: number) => ChartSectorProps)
+    | ((
+        props: PieSectorShapeProps,
+        index: number | string | undefined,
+      ) => ChartSectorProps)
     | ChartSectorProps
 }
 
@@ -565,8 +571,8 @@ export const ChartPie = withContext<"svg", ChartPieProps>((props) => {
     sectorProps,
     ...rest
   } = mergeProps(pieProps, props)()
-  const shape = useCallback(
-    (props: any, index: number) => {
+  const shape = useCallback<FunctionOf<UseChartPieProps["shape"]>>(
+    (props, index) => {
       if (isNumber(activeIndex)) props.isActive = index === activeIndex
 
       return (
@@ -1207,9 +1213,9 @@ export const ChartPolarGrid = withContext<"line", ChartPolarGridProps>(
 )()
 
 export type ChartRadialBackground =
-  | ((props: SectorProps) => null | ReactElement | undefined)
+  | ((props: SectorProps) => ReactNode)
   | boolean
-  | HTMLStyledProps<"svg">
+  | HTMLStyledProps<"path">
   | ReactElement
 
 export interface ChartRadialProps<Y extends Dict = Dict> extends Merge<
@@ -1240,7 +1246,7 @@ export interface ChartRadialProps<Y extends Dict = Dict> extends Merge<
    * Props for the sector component.
    */
   sectorProps?:
-    | ((props: PieSectorShapeProps) => ChartSectorProps)
+    | ((props: RadialBarSectorProps) => ChartSectorProps)
     | ChartSectorProps
 }
 
@@ -1263,8 +1269,8 @@ export const ChartRadial = withContext<"svg", ChartRadialProps>(
     const labelProps = useSlotComponentProps({}, "labelList")
     const backgroundProps = useSlotComponentProps({}, "radialBackground")
     const css = useMemo(() => getCSS(system, theme), [system, theme])
-    const shape = useCallback(
-      (props: any) => {
+    const shape = useCallback<FunctionOf<UseChartRadialProps<Y>["shape"]>>(
+      (props) => {
         const color = rest.fill ?? rest.color
 
         return (
@@ -1315,7 +1321,7 @@ export const ChartRadial = withContext<"svg", ChartRadialProps>(
         return cloneElement<any>(backgroundProp, { className })
       } else if (isObject(backgroundProp)) {
         const [omittedProps, styleProps] = splitObject<
-          HTMLProps<"svg">,
+          HTMLProps<"path">,
           CSSObject
         >(backgroundProp, shouldForwardProp)
         return {

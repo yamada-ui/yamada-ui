@@ -48,9 +48,8 @@ describe("<DonutChart />", () => {
 
     expect(root).toHaveClass("ui-donut-chart")
 
-    for (const { browser } of rootData) {
+    for (const { browser } of rootData)
       expect(screen.getByText(browser)).toBeInTheDocument()
-    }
   })
 
   test("renders composition components instead of fallback `series`", () => {

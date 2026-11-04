@@ -97,11 +97,10 @@ const defaultFilter: AutocompleteFilter = (inputValue, items, match) => {
     .map((item) => {
       if ("items" in item) {
         const items = item.items.filter((item) => {
-          if ("query" in item) {
+          if ("query" in item)
             return isString(item.query) && match(item.query, inputValue)
-          } else if (isString(item.label)) {
+          else if (isString(item.label))
             return isString(item.label) && match(item.label, inputValue)
-          }
         })
 
         if (items.length) return { ...item, items }
@@ -326,19 +325,15 @@ export const useAutocomplete = <Multiple extends boolean = false>(
   const onChange = useCallback(
     (selectedValue: string) => {
       setValue((prev) => {
-        if (isArray(prev)) {
-          if (prev.includes(selectedValue)) {
+        if (isArray(prev))
+          if (prev.includes(selectedValue))
             return prev.filter(
               (prevValue) => prevValue !== selectedValue,
             ) as MaybeValue
-          } else if (!isNumber(max) || prev.length < max) {
+          else if (!isNumber(max) || prev.length < max)
             return [...prev, selectedValue] as MaybeValue
-          } else {
-            return prev
-          }
-        } else {
-          return selectedValue as MaybeValue
-        }
+          else return prev
+        else return selectedValue as MaybeValue
       })
 
       if (isArray(value)) {
@@ -420,11 +415,9 @@ export const useAutocomplete = <Multiple extends boolean = false>(
         ...item,
       })
 
-      if (isValidElement<Dict>(component)) {
+      if (isValidElement<Dict>(component))
         return cloneElement(component, { ...component.props, key: index })
-      } else {
-        return component
-      }
+      else return component
     })
   }, [focused, max, onChange, render, separator, value, valueMap])
   const hasValues = isArray(value) && !!value.length
@@ -433,11 +426,8 @@ export const useAutocomplete = <Multiple extends boolean = false>(
     (ev: ChangeEvent<HTMLInputElement>) => {
       if (isArray(value) && value.length === max) return
 
-      if (runIfFn(closeOnChange, ev)) {
-        onClose()
-      } else if (runIfFn(openOnChange, ev)) {
-        onOpen()
-      }
+      if (runIfFn(closeOnChange, ev)) onClose()
+      else if (runIfFn(openOnChange, ev)) onOpen()
 
       activeDescendant.current = null
 
@@ -493,11 +483,8 @@ export const useAutocomplete = <Multiple extends boolean = false>(
             } else {
               ev.preventDefault()
 
-              if ("items" in item) {
-                onSelect(item.items[0]?.value)
-              } else {
-                onSelect(item.value)
-              }
+              if ("items" in item) onSelect(item.items[0]?.value)
+              else onSelect(item.value)
             }
           },
         },
@@ -563,14 +550,12 @@ export const useAutocomplete = <Multiple extends boolean = false>(
 
         if (isArray(value)) {
           setInputValue("")
+        } else if (allowCustomValue) {
+          if (inputValue) setValue(inputValue as MaybeValue)
         } else {
-          if (allowCustomValue) {
-            if (inputValue) setValue(inputValue as MaybeValue)
-          } else {
-            const item = isString(value) ? valueMap[value] : undefined
+          const item = isString(value) ? valueMap[value] : undefined
 
-            setInputValue(getInputValue(item))
-          }
+          setInputValue(getInputValue(item))
         }
       }
     },

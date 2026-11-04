@@ -1,3 +1,5 @@
+import type { SidebarItem } from "./sidebar"
+
 export type {
   SidebarContentProps as ContentProps,
   SidebarFooterProps as FooterProps,
@@ -14,7 +16,6 @@ export type {
   SidebarItemProps as ItemProps,
   SidebarItemStartElementProps as ItemStartElementProps,
   SidebarItemTriggerProps as ItemTriggerProps,
-  SidebarItem as ItemType,
   SidebarMainPanelProps as MainPanelProps,
   SidebarMenuButtonProps as MenuButtonProps,
   SidebarMenuProps as MenuProps,
@@ -57,3 +58,8 @@ export {
   useSidebarDescendants as useDescendants,
   useSidebarItemContext as useItemContext,
 } from "./use-sidebar"
+
+/**
+ * @deprecated Use `Item` instead. Will be removed in the next major release.
+ */
+export type ItemType = SidebarItem

@@ -43,11 +43,11 @@ export const useGroup = (children?: ReactNode) => {
 
 export type UseGroupReturn = ReturnType<typeof useGroup>
 
-interface Props extends DataAttributes {
+export interface UseGroupItemProps extends DataAttributes {
   style?: CSSProperties
 }
 
-export const useGroupItemProps = <Y extends Props>({
+export const useGroupItemProps = <Y extends UseGroupItemProps>({
   style: {
     "--group-count": groupCount,
     "--group-index": groupIndex,

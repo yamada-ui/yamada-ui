@@ -14,7 +14,7 @@ import {
   omitObject,
   splitObject,
 } from "../../utils"
-import { conditionProperties, styleProperties } from "../css"
+import { conditionProperties, styleProperties, vendorProperties } from "../css"
 
 type Optionalize<Y> = [Extract<Y, undefined>] extends [never]
   ? Y
@@ -35,6 +35,15 @@ function isEvent(key: string) {
 export const cssProps = new Set<string>([
   ...conditionProperties,
   ...styleProperties,
+  ...vendorProperties,
+])
+
+const ariaSpaceSeparatedProps = new Set<string>([
+  "aria-controls",
+  "aria-describedby",
+  "aria-flowto",
+  "aria-labelledby",
+  "aria-owns",
 ])
 
 export type ShouldForwardProp = (prop: string) => boolean
@@ -51,7 +60,8 @@ export function createShouldForwardProp(
   }
 }
 
-interface MergePropsOptions {
+export interface MergePropsOptions {
+  mergeAria?: boolean
   mergeClassName?: boolean
   mergeCSS?: boolean
   mergeEvent?: boolean
@@ -67,6 +77,7 @@ export function mergeProps<Y extends (Dict | undefined)[]>(
 ): (options?: MergePropsOptions) => MergeAll<Y>
 export function mergeProps(...args: (Dict | undefined)[]) {
   return function ({
+    mergeAria = true,
     mergeClassName = true,
     mergeCSS = true,
     mergeEvent = true,
@@ -102,6 +113,12 @@ export function mergeProps(...args: (Dict | undefined)[]) {
           continue
         }
 
+        if (mergeAria && ariaSpaceSeparatedProps.has(key)) {
+          result[key] = cx(result[key], props[key])
+
+          continue
+        }
+
         if (mergeStyle && key === "style") {
           result[key] = merge(result[key] ?? {}, props[key] ?? {})
 
@@ -123,9 +140,8 @@ export function mergeProps(...args: (Dict | undefined)[]) {
         result[key] = !isUndefined(props[key]) ? props[key] : result[key]
       }
 
-      for (const key in props) {
+      for (const key in props)
         if (isUndefined(result[key])) result[key] = props[key]
-      }
     }
 
     return result as any

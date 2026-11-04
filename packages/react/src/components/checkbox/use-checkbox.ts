@@ -8,9 +8,7 @@ import { mergeProps } from "../../core"
 import { useControllableEventState } from "../../hooks/use-controllable-state"
 import {
   ariaAttr,
-  cx,
   dataAttr,
-  handlerAll,
   isNumber,
   isUndefined,
   mergeRefs,
@@ -83,8 +81,8 @@ export const useCheckbox = <Y extends string = string>({
       id,
       ref,
       name,
-      "aria-controls": ariaControlsProp,
-      "aria-labelledby": ariaLabelledbyProp,
+      "aria-controls": ariaControls,
+      "aria-labelledby": ariaLabelledby,
       checked: checkedProp,
       defaultChecked = false,
       disabled,
@@ -138,8 +136,8 @@ export const useCheckbox = <Y extends string = string>({
   const getRootProps: PropGetter<"label"> = useCallback(
     (props = {}) => {
       const merged = mergeProps(
-        dataProps,
         {
+          ...dataProps,
           "data-checked": dataAttr(checked),
           "data-indeterminate": dataAttr(indeterminate),
         },
@@ -153,38 +151,33 @@ export const useCheckbox = <Y extends string = string>({
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    ({
-      "aria-controls": ariaControls,
-      "aria-describedby": ariaDescribedby,
-      "aria-labelledby": ariaLabelledby,
-      ...props
-    } = {}) => {
-      const sharedProps = {
-        ...dataProps,
-        ...ariaProps,
-        id,
-        type: "checkbox",
-        name,
-        style: visuallyHiddenAttributes.style,
-        "aria-checked": indeterminate ? ("mixed" as const) : checked,
-        "aria-controls": cx(ariaControls, ariaControlsProp),
-        "aria-describedby": cx(resolvedAriaDescribedby, ariaDescribedby),
-        "aria-disabled": ariaAttr(!interactive),
-        "aria-labelledby": cx(ariaLabelledby, ariaLabelledbyProp),
-        "data-checked": dataAttr(checked),
-        "data-indeterminate": dataAttr(indeterminate),
-        checked,
-        disabled,
-        readOnly,
-        required,
-        tabIndex,
-        value,
-        ...props,
-        ref: mergeRefs(props.ref, ref, indeterminateRef),
-        onBlur: handlerAll(props.onBlur, eventProps.onBlur),
-        onChange: handlerAll(props.onChange, onChange),
-        onFocus: handlerAll(props.onFocus, eventProps.onFocus),
-      }
+    (props = {}) => {
+      const sharedProps = mergeProps(
+        {
+          ...dataProps,
+          ...ariaProps,
+          id,
+          ref: mergeRefs(ref, indeterminateRef),
+          type: "checkbox",
+          name,
+          style: visuallyHiddenAttributes.style,
+          "aria-checked": indeterminate ? ("mixed" as const) : checked,
+          "aria-controls": ariaControls,
+          "aria-describedby": resolvedAriaDescribedby,
+          "aria-disabled": ariaAttr(!interactive),
+          "aria-labelledby": ariaLabelledby,
+          "data-checked": dataAttr(checked),
+          "data-indeterminate": dataAttr(indeterminate),
+          checked,
+          disabled,
+          readOnly,
+          required,
+          tabIndex,
+          value,
+        },
+        props,
+        { ...eventProps, onChange },
+      )()
 
       return getGroupInputProps?.(sharedProps) ?? sharedProps
     },
@@ -195,10 +188,10 @@ export const useCheckbox = <Y extends string = string>({
       name,
       indeterminate,
       checked,
-      ariaControlsProp,
+      ariaControls,
       resolvedAriaDescribedby,
       interactive,
-      ariaLabelledbyProp,
+      ariaLabelledby,
       disabled,
       readOnly,
       required,
@@ -206,8 +199,7 @@ export const useCheckbox = <Y extends string = string>({
       value,
       ref,
       indeterminateRef,
-      eventProps.onBlur,
-      eventProps.onFocus,
+      eventProps,
       onChange,
       getGroupInputProps,
     ],

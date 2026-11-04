@@ -234,6 +234,7 @@ function NotFound({ onReset, ...rest }: NotFoundProps) {
   const t = useTranslations("icons")
 
   const Icon = [RabbitIcon, SnailIcon, SquirrelIcon, BirdIcon, FishIcon][
+    // oxlint-disable-next-line react/purity
     Math.floor(Math.random() * 5)
   ]!
 

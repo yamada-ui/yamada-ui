@@ -226,7 +226,7 @@ export const useDatePicker = <
       multiple = false,
       closeOnSelect = !multiple,
       defaultInputValue,
-      defaultMonth = new Date(),
+      defaultMonth = () => new Date(),
       range = false,
       defaultValue = (range
         ? { end: undefined, start: undefined }
@@ -283,6 +283,7 @@ export const useDatePicker = <
   const startInputRef = useRef<HTMLInputElement>(null)
   const endInputRef = useRef<HTMLInputElement>(null)
   const focusByClickRef = useRef<boolean>(false)
+  const [currentDate] = useState<Date>(() => new Date())
   const [focused, setFocused] = useState(false)
   const [value, setValue] = useControllableState({
     defaultValue: defaultValue as MaybeDateValue<Multiple, Range>,
@@ -291,18 +292,12 @@ export const useDatePicker = <
   })
   const [month, setMonth] = useControllableState({
     defaultValue: () => {
-      let value = defaultMonth
+      let defaultValue = runIfFn(defaultMonth)
 
-      if (dayjs(minDate).isAfter(dayjs(defaultMonth)))
-        value = dayjs(minDate).set("date", 1).toDate()
+      if (dayjs(minDate).isAfter(dayjs(defaultValue)))
+        defaultValue = dayjs(minDate).set("date", 1).toDate()
 
-      if (valueProp) {
-        value = getAdjustedMonth(valueProp, value)
-      } else if (defaultValue) {
-        value = getAdjustedMonth(defaultValue, value)
-      }
-
-      return value
+      return getAdjustedMonth(value, defaultValue)
     },
     value: monthProp,
     onChange: onChangeMonthProp,
@@ -336,7 +331,7 @@ export const useDatePicker = <
   )
   const [inputValue, setInputValue] = useControllableState({
     defaultValue: () => {
-      if (defaultInputValue) {
+      if (defaultInputValue)
         if (isObject(defaultInputValue)) {
           if (dayjs(defaultInputValue.start).isValid())
             defaultInputValue.start = dateTimeFormat(
@@ -352,25 +347,21 @@ export const useDatePicker = <
 
           return defaultInputValue
         } else {
-          if (dayjs(defaultInputValue).isValid()) {
+          if (dayjs(defaultInputValue).isValid())
             return dateTimeFormat(
               dayjs(defaultInputValue).toDate(),
               inputFormat,
             ) as MaybeInputValue<Range>
-          } else {
-            return defaultInputValue as MaybeInputValue<Range>
-          }
+          else return defaultInputValue
         }
-      } else if (isDate(value)) {
+      else if (isDate(value))
         return dateToString(value) as MaybeInputValue<Range>
-      } else if (isObject(value) && !isArray(value)) {
+      else if (isObject(value) && !isArray(value))
         return {
           end: dateToString(value.end),
           start: dateToString(value.start),
         } as MaybeInputValue<Range>
-      } else {
-        return "" as MaybeInputValue<Range>
-      }
+      else return "" as MaybeInputValue<Range>
     },
     value: inputValueProp,
     onChange: onInputChangeProp,
@@ -429,44 +420,39 @@ export const useDatePicker = <
         onClear,
       })
 
-      if (isValidElement<Dict>(component)) {
+      if (isValidElement<Dict>(component))
         return cloneElement(component, { ...component.props, key: index })
-      } else {
-        return component
-      }
+      else return component
     })
   }, [dateToString, focused, max, render, separator, setValue, value])
   const { endPlaceholder, startPlaceholder } = useMemo(() => {
     if (range) {
       const startPlaceholder =
-        placeholderProp ?? dateTimeFormat(new Date(), inputFormat)
+        placeholderProp ?? dateTimeFormat(currentDate, inputFormat)
       const endPlaceholder =
         placeholderProp ??
-        dateTimeFormat(dayjs().add(1, "day").toDate(), inputFormat)
+        dateTimeFormat(dayjs(currentDate).add(1, "day").toDate(), inputFormat)
 
       return { endPlaceholder, startPlaceholder }
     } else {
       const placeholder =
-        placeholderProp ?? dateTimeFormat(new Date(), inputFormat)
+        placeholderProp ?? dateTimeFormat(currentDate, inputFormat)
 
       return { endPlaceholder: placeholder, startPlaceholder: placeholder }
     }
-  }, [dateTimeFormat, inputFormat, placeholderProp, range])
+  }, [dateTimeFormat, inputFormat, placeholderProp, range, currentDate])
 
   const onChange = useCallback(
     (value: MaybeDateValue<Multiple, Range>) => {
       setValue(value)
 
-      if (isArray(value)) {
-        setInputValue("" as MaybeInputValue<Range>)
-      } else if (isObject(value) && !isDate(value)) {
+      if (isArray(value)) setInputValue("" as MaybeInputValue<Range>)
+      else if (isObject(value) && !isDate(value))
         setInputValue({
           end: dateToString(value.end),
           start: dateToString(value.start),
         } as MaybeInputValue<Range>)
-      } else {
-        setInputValue(dateToString(value) as MaybeInputValue<Range>)
-      }
+      else setInputValue(dateToString(value) as MaybeInputValue<Range>)
 
       if (!closeOnSelect) return
 
@@ -484,11 +470,8 @@ export const useDatePicker = <
       if (!allowInput) return
       if (isArray(value) && value.length === max) return
 
-      if (runIfFn(closeOnChange, ev)) {
-        onClose()
-      } else if (runIfFn(openOnChange, ev)) {
-        onOpen()
-      }
+      if (runIfFn(closeOnChange, ev)) onClose()
+      else if (runIfFn(openOnChange, ev)) onOpen()
 
       let inputValue = ev.target.value
 
@@ -656,8 +639,8 @@ export const useDatePicker = <
 
       focusByClickRef.current = true
 
-      if (allowInput) {
-        if (isObject(value) && !isArray(value) && !isDate(value)) {
+      if (allowInput)
+        if (isObject(value) && !isArray(value) && !isDate(value))
           if (
             startInputRef.current &&
             contains(startInputRef.current, ev.target)
@@ -677,10 +660,7 @@ export const useDatePicker = <
           } else {
             startInputRef.current?.focus()
           }
-        } else {
-          startInputRef.current?.focus()
-        }
-      }
+        else startInputRef.current?.focus()
 
       if (openOnClick) onOpen()
     },
@@ -726,24 +706,19 @@ export const useDatePicker = <
       if (
         contains(fieldRef.current, ev.relatedTarget) ||
         contains(contentRef.current, ev.relatedTarget)
-      ) {
+      )
         ev.preventDefault()
-      } else {
-        if (isArray(value)) {
-          setInputValue("" as MaybeInputValue<Range>)
-        } else if (isObject(value) && !isDate(value)) {
-          setInputValue((prev) =>
-            isObject(prev)
-              ? ({
-                  end: dateToString(value.end),
-                  start: dateToString(value.start),
-                } as MaybeInputValue<Range>)
-              : prev,
-          )
-        } else {
-          setInputValue(dateToString(value) as MaybeInputValue<Range>)
-        }
-      }
+      else if (isArray(value)) setInputValue("" as MaybeInputValue<Range>)
+      else if (isObject(value) && !isDate(value))
+        setInputValue((prev) =>
+          isObject(prev)
+            ? ({
+                end: dateToString(value.end),
+                start: dateToString(value.start),
+              } as MaybeInputValue<Range>)
+            : prev,
+        )
+      else setInputValue(dateToString(value) as MaybeInputValue<Range>)
     },
     [dateToString, setInputValue, value],
   )
@@ -752,31 +727,24 @@ export const useDatePicker = <
     if (!interactive) return
 
     setValue((prev) => {
-      if (isDate(prev)) {
-        return undefined as MaybeDateValue<Multiple, Range>
-      } else if (isArray(prev)) {
+      if (isDate(prev)) return undefined as MaybeDateValue<Multiple, Range>
+      else if (isArray(prev))
         return [] as unknown as MaybeDateValue<Multiple, Range>
-      } else if (isObject(prev)) {
+      else if (isObject(prev))
         return { end: undefined, start: undefined } as MaybeDateValue<
           Multiple,
           Range
         >
-      } else {
-        return prev
-      }
+      else return prev
     })
 
     setInputValue(
       (range ? { end: "", start: "" } : "") as MaybeInputValue<Range>,
     )
 
-    if (focusOnClear) {
-      if (allowInput) {
-        startInputRef.current?.focus()
-      } else {
-        fieldRef.current?.focus()
-      }
-    }
+    if (focusOnClear)
+      if (allowInput) startInputRef.current?.focus()
+      else fieldRef.current?.focus()
   }, [allowInput, focusOnClear, interactive, range, setInputValue, setValue])
 
   useEffect(() => {
@@ -795,14 +763,12 @@ export const useDatePicker = <
   useUpdateEffect(() => {
     if (isArray(valueProp)) return
 
-    if (isObject(valueProp) && !isDate(valueProp)) {
+    if (isObject(valueProp) && !isDate(valueProp))
       setInputValue({
         end: dateToString(valueProp.end),
         start: dateToString(valueProp.start),
       } as MaybeInputValue<Range>)
-    } else {
-      setInputValue(dateToString(valueProp) as MaybeInputValue<Range>)
-    }
+    else setInputValue(dateToString(valueProp) as MaybeInputValue<Range>)
   }, [valueProp])
 
   const getRootProps: PropGetter = useCallback(

@@ -33,7 +33,10 @@ const serializeValue = (value: any) =>
 
 type ReorderGroupProps<Y = string> = Merge<
   HTMLMotionProps<"ul">,
-  Pick<Parameters<typeof Reorder.Group<Y>>[0], "axis" | "onReorder" | "values">
+  Pick<
+    Parameters<typeof Reorder.Group<Y[]>>[0],
+    "axis" | "onReorder" | "values"
+  >
 >
 type ReorderItemProps<Y = string> = Merge<
   HTMLMotionProps<"li">,
@@ -91,7 +94,7 @@ export interface UseReorderProps<Y = string>
 export const useReorder = <Y = string>({
   ref,
   children,
-  item,
+  item: itemProp,
   items = [],
   orientation = "vertical",
   onChange,
@@ -100,6 +103,7 @@ export const useReorder = <Y = string>({
 }: UseReorderProps<Y> = {}) => {
   const axis = orientation === "vertical" ? "y" : "x"
   const validChildren = useValidChildren(children)
+  const [item] = useValidChildren(itemProp)
   const hasChildren = !!validChildren.length
   const defaultValues = useMemo(() => {
     const values = hasChildren

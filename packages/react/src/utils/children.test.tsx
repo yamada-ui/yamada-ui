@@ -1,7 +1,11 @@
-import { renderHook } from "#test"
+import type { ReactNode } from "react"
+import { createRef, lazy, Suspense } from "react"
+import { expectTypeOf } from "vitest"
+import { act, render, renderHook, screen } from "#test"
 import {
   findChild,
   findChildren,
+  getResolvedChild,
   getValidChildren,
   includesChildren,
   isSomeDisplayName,
@@ -19,6 +23,140 @@ import {
   useValidChildren,
   wrapOrPassProps,
 } from "./children"
+
+describe("getResolvedChild", () => {
+  test("preserves props types without treating lazy wrappers as resolved values", () => {
+    const props = { title: "Title" }
+    const resolved = getResolvedChild(props)
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (payload: unknown) => payload,
+      _payload: props,
+    }
+    const resolvedWrapper = getResolvedChild(wrapped)
+
+    expectTypeOf(resolved).toEqualTypeOf<typeof props>()
+    expectTypeOf(resolvedWrapper).toBeUnknown()
+    expect(resolved).toBe(props)
+    expect(resolvedWrapper).toBe(props)
+  })
+
+  test.each([
+    {
+      name: "element",
+      value: <div key="item" ref={createRef<HTMLDivElement>()} />,
+    },
+    { name: "string", value: "Required" },
+    { name: "number", value: 0 },
+    { name: "boolean", value: false },
+    { name: "null", value: null },
+    { name: "undefined", value: undefined },
+    { name: "array", value: [<span key="item" />, [null, "text"]] },
+    { name: "props", value: { children: <span />, title: "Title" } },
+  ])("preserves $name values with and without a lazy wrapper", ({ value }) => {
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (payload: unknown) => payload,
+      _payload: value,
+    }
+
+    expect(getResolvedChild(value)).toBe(value)
+    expect(getResolvedChild(wrapped)).toBe(value)
+  })
+
+  test("resolves nested lazy wrappers", () => {
+    const element = <span />
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (payload: unknown) => payload,
+      _payload: {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: (payload: unknown) => payload,
+        _payload: element,
+      },
+    }
+
+    expect(getResolvedChild(wrapped)).toBe(element)
+  })
+
+  test("does not initialize a lazy component used as an element type", () => {
+    const load = vi.fn(() => Promise.resolve({ default: () => <span /> }))
+    const Component = lazy(load)
+    const element = <Component />
+
+    expect(getResolvedChild(element)).toBe(element)
+    expect(load).not.toHaveBeenCalled()
+  })
+
+  test("does not traverse arrays or element children", () => {
+    const init = vi.fn(() => <span />)
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: init,
+      _payload: { status: "pending" },
+    }
+    const children = [wrapped]
+    const element = <div>{wrapped as unknown as ReactNode}</div>
+
+    expect(getResolvedChild(children)).toBe(children)
+    expect(getResolvedChild(element)).toBe(element)
+    expect(init).not.toHaveBeenCalled()
+  })
+
+  test.each([
+    { name: "suspension", value: Promise.resolve() },
+    { name: "error", value: new Error("Failed to resolve element") },
+  ])("propagates $name from the initializer unchanged", ({ value }) => {
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: () => {
+        throw value
+      },
+      _payload: null,
+    }
+    let thrown: unknown
+
+    try {
+      getResolvedChild(wrapped)
+    } catch (error) {
+      thrown = error
+    }
+
+    expect(thrown).toBe(value)
+  })
+
+  test("renders resolved content after suspending", async () => {
+    const { promise, resolve } = Promise.withResolvers<void>()
+    let ready = false
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: () => {
+        if (!ready) throw promise
+
+        return <span>Ready</span>
+      },
+      _payload: null,
+    }
+    const Component = () => getResolvedChild(wrapped) as ReactNode
+
+    render(
+      <Suspense fallback={<span>Loading</span>}>
+        <Component />
+      </Suspense>,
+    )
+
+    expect(screen.getByText("Loading")).toBeInTheDocument()
+
+    await act(async () => {
+      ready = true
+      resolve()
+      await promise
+    })
+
+    expect(screen.getByText("Ready")).toBeInTheDocument()
+    expect(screen.queryByText("Loading")).not.toBeInTheDocument()
+  })
+})
 
 describe("getValidChildren", () => {
   test("should filter out non-valid React elements", () => {
@@ -209,6 +347,62 @@ describe("splitChildren", () => {
 })
 
 describe("wrapOrPassProps", () => {
+  test.each([
+    { name: "element", content: "Content", value: <span>Content</span> },
+    { name: "string", content: "Content", value: "Content" },
+    { name: "number", content: "0", value: 0 },
+  ])("wraps lazy-resolved $name values as children", ({ content, value }) => {
+    const Component = ({
+      children,
+      title,
+    }: {
+      children?: ReactNode
+      title?: string
+    }) => <div title={title}>{children}</div>
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (payload: unknown) => payload,
+      _payload: value,
+    } as unknown as ReactNode
+
+    render(wrapOrPassProps(Component, wrapped, { title: "Wrapper" }))
+
+    expect(screen.getByTitle("Wrapper")).toHaveTextContent(content)
+  })
+
+  test("passes lazy-resolved props with their original precedence", () => {
+    const Component = ({
+      children,
+      title,
+    }: {
+      children?: ReactNode
+      title?: string
+    }) => <div title={title}>{children}</div>
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (payload: unknown) => payload,
+      _payload: { children: "Content", title: "Custom" },
+    } as unknown as ReactNode
+
+    render(wrapOrPassProps(Component, wrapped, { title: "Default" }))
+
+    expect(screen.getByTitle("Custom")).toHaveTextContent("Content")
+    expect(screen.queryByTitle("Default")).not.toBeInTheDocument()
+  })
+
+  test("returns null when a lazy wrapper resolves to undefined", () => {
+    const Component = ({ children }: { children?: ReactNode }) => (
+      <div>{children}</div>
+    )
+    const wrapped = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: () => undefined,
+      _payload: { status: "fulfilled" },
+    } as unknown as ReactNode
+
+    expect(wrapOrPassProps(Component, wrapped)).toBeNull()
+  })
+
   test("should return null for undefined", () => {
     const Component = ({ children }: { children?: React.ReactNode }) => (
       <div>{children}</div>

@@ -133,6 +133,28 @@
         "required": false
       }
     },
+    "DragTrigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
     "Footer": {
       "as": {
         "type": "As",
@@ -283,6 +305,12 @@
         "type": "number",
         "defaultValue": "0.1",
         "description": "The degree of movement allowed outside constraints. 0 = no movement, 1 = full movement.",
+        "required": false
+      },
+      "dragHandleOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, only the drag bar and drag triggers can start dragging when `closeOnDrag` is `true`.",
         "required": false
       },
       "dragOffset": {
@@ -596,6 +624,28 @@
       "required": false
     }
   },
+  "DrawerDragTrigger": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
   "DrawerFooter": {
     "as": {
       "type": "As",
@@ -746,6 +796,12 @@
       "type": "number",
       "defaultValue": "0.1",
       "description": "The degree of movement allowed outside constraints. 0 = no movement, 1 = full movement.",
+      "required": false
+    },
+    "dragHandleOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, only the drag bar and drag triggers can start dragging when `closeOnDrag` is `true`.",
       "required": false
     },
     "dragOffset": {

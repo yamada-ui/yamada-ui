@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom"
 import { page, render } from "#test/browser"
 import { NumberInput } from "."
 
@@ -138,6 +139,37 @@ describe("<NumberInput />", () => {
       .element()
       .dispatchEvent(new WheelEvent("wheel", { bubbles: true, deltaY: 100 }))
     await expect.element(numberInput).toHaveValue("10")
+  })
+
+  test("changes value on wheel when focused inside Shadow DOM", async () => {
+    const host = document.createElement("div")
+    const shadowRoot = host.attachShadow({ mode: "open" })
+    document.body.appendChild(host)
+
+    try {
+      const { user } = await render(
+        createPortal(
+          <NumberInput allowMouseWheel defaultValue={10} />,
+          shadowRoot,
+        ),
+        { providerProps: { rootNode: shadowRoot } },
+      )
+      const numberInput = page.getByRole("spinbutton")
+      await expect.element(numberInput).toHaveValue("10")
+
+      await user.click(numberInput)
+
+      numberInput.element().dispatchEvent(
+        new WheelEvent("wheel", {
+          bubbles: true,
+          composed: true,
+          deltaY: -100,
+        }),
+      )
+      await expect.element(numberInput).toHaveValue("11")
+    } finally {
+      host.remove()
+    }
   })
 
   test("prevents invalid character input via keyboard", async () => {

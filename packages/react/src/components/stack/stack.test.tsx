@@ -1,3 +1,4 @@
+import type { ReactElement } from "react"
 import { useEffect, useState } from "react"
 import { a11y, fireEvent, render, screen } from "#test"
 import { Box } from "../box"
@@ -60,6 +61,30 @@ describe("<Stack />", () => {
 
     expect(screen.getAllByTestId("sep")).toHaveLength(1)
   })
+
+  test.each([1, 2, 3])(
+    "renders an RSC lazy-wrapped separator with %i children",
+    (count) => {
+      const separator = {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: (element: ReactElement) => element,
+        _payload: <Separator data-testid="sep" />,
+      } as unknown as ReactElement
+
+      render(
+        <Stack separator={separator}>
+          {Array.from({ length: count }, (_, index) => (
+            <Box key={index} data-testid="item">
+              Item {index + 1}
+            </Box>
+          ))}
+        </Stack>,
+      )
+
+      expect(screen.getAllByTestId("item")).toHaveLength(count)
+      expect(screen.queryAllByTestId("sep")).toHaveLength(count - 1)
+    },
+  )
 
   test("renders list of items with provided keys when cloning children", () => {
     const unmountMock = vi.fn()

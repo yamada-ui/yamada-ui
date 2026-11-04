@@ -59,7 +59,7 @@ export const cartesianChartStyle = defineComponentSlotStyle({
     },
     root: {
       "--active-dot-fill": "{line-color}",
-      "--active-dot-r": "4",
+      "--active-dot-r": "4px",
       "--active-dot-stroke": "{line-color}",
       "--active-dot-stroke-width": "0",
       "--area-end-fill-opacity": "0.1",
@@ -71,7 +71,7 @@ export const cartesianChartStyle = defineComponentSlotStyle({
       "--bar-stroke": "currentColor",
       "--bar-stroke-width": "2",
       "--dot-fill": "{line-stroke}",
-      "--dot-r": "4",
+      "--dot-r": "4px",
       "--dot-stroke": "{line-stroke}",
       "--dot-stroke-width": "0",
       "--grid-stroke": "colors.border",

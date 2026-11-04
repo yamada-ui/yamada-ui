@@ -41,6 +41,22 @@ describe("css", () => {
     })
   })
 
+  test("should order responsive queries by breakpoint across properties", () => {
+    const result = css(
+      system,
+      styledTheme,
+    )({
+      bg: { base: "red", md: "blue" },
+      color: { base: "red", lg: "blue" },
+    })
+    expect(Object.keys(result)).toStrictEqual([
+      "background",
+      system.breakpoints.getQuery("lg"),
+      "color",
+      system.breakpoints.getQuery("md"),
+    ])
+  })
+
   test("should return the correct color mode values", () => {
     const result = css(system, styledTheme)({ color: ["red", "blue"] })
     expect(result).toStrictEqual({

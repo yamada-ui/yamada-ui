@@ -1,1 +1,0 @@
-import{n as e}from"./rolldown-runtime-BCiCTKAo.js";import{a as t,d as n}from"./create-component-BGWMfpkL.js";var r;function i(){return(i=e((()=>{n(),r=t({base:{"--legend-swatch-color":`{line-stroke}`,"--tooltip-swatch-color":`{line-stroke}`}})})))()}export{r as n,i as t};

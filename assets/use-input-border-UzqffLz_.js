@@ -1,1 +1,0 @@
-import{n as e}from"./rolldown-runtime-BCiCTKAo.js";import{t}from"./react-BWPDF9mI.js";import{F as n,N as r}from"./props-BOrE8-AT.js";var i,a;function o(){return(o=e((()=>{i=t(),r(),a=({errorBorderColor:e,focusBorderColor:t}={})=>(0,i.useMemo)(()=>({"--error-border-color":n(e,`colors`),"--focus-border-color":n(t,`colors`)}),[e,t])})))()}export{a as n,o as t};

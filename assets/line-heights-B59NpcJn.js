@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-BCiCTKAo.js";import{d as t,u as n}from"./create-component-BDXZtL2-.js";var r;function i(){return(i=e((()=>{t(),r=n.lineHeights({shorter:1.25,short:1.375,moderate:1.5,tall:1.625,taller:2})})))()}export{r as n,i as t};

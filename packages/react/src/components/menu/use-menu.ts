@@ -42,6 +42,7 @@ export { MenuDescendantsContext, useMenuDescendant, useMenuDescendants }
 
 interface MenuContext extends Pick<
   UseMenuReturn,
+  | "disabled"
   | "onActiveDescendant"
   | "onClose"
   | "onCloseSubMenu"
@@ -317,6 +318,7 @@ export const useMenu = ({
   return {
     closeOnSelect,
     descendants,
+    disabled,
     open,
     subMenu,
     subMenuDirection,
@@ -570,7 +572,7 @@ export const useMenuGroup = ({ ...rest }: UseMenuGroupProps) => {
 
 export type UseMenuGroupReturn = ReturnType<typeof useMenuGroup>
 
-export interface UseMenuItemProps extends HTMLProps {
+export interface UseMenuItemProps extends Omit<HTMLProps, "onSelect"> {
   /**
    * If `true`, the menu item will be closed when selected.
    */
@@ -585,6 +587,10 @@ export interface UseMenuItemProps extends HTMLProps {
    * The value of the menu item.
    */
   value?: string
+  /**
+   * Callback invoked when the menu item is selected.
+   */
+  onSelect?: (value?: string) => void
 }
 
 export const useMenuItem = ({
@@ -595,16 +601,18 @@ export const useMenuItem = ({
   closeOnSelect,
   disabled = false,
   value,
+  onSelect: onSelectProp,
   ...rest
 }: UseMenuItemProps) => {
   const trigger = isTruthyDataAttr(dataTrigger)
   const {
+    disabled: rootDisabled,
     subMenu,
     subMenuDirection,
     onActiveDescendant,
     onClose,
     onCloseSubMenu,
-    onSelect,
+    onSelect: onRootSelect,
   } = useMenuContext()
   const uuid = useId()
   const itemRef = useRef<HTMLDivElement>(null)
@@ -616,6 +624,16 @@ export const useMenuItem = ({
     id,
     disabled: disabled || subMenuTrigger,
   })
+
+  const onSelect = useCallback(
+    (value?: string) => {
+      if (disabled || rootDisabled) return
+
+      onSelectProp?.(value)
+      onRootSelect(value, closeOnSelect)
+    },
+    [closeOnSelect, disabled, onRootSelect, onSelectProp, rootDisabled],
+  )
 
   const onActive = useCallback(() => {
     if (disabled) return
@@ -649,13 +667,13 @@ export const useMenuItem = ({
 
           onActiveDescendant(descendant)
         },
-        Enter: () => onSelect(value, closeOnSelect),
+        Enter: () => onSelect(value),
         Home: () => {
           const descendant = descendants.enabledFirstValue()
 
           onActiveDescendant(descendant)
         },
-        Space: () => onSelect(value, closeOnSelect),
+        Space: () => onSelect(value),
         [subMenuDirection === "end" ? "ArrowLeft" : "ArrowRight"]: () => {
           if (!subMenu) return
 
@@ -668,7 +686,6 @@ export const useMenuItem = ({
       })
     },
     [
-      closeOnSelect,
       descendants,
       onActiveDescendant,
       onClose,
@@ -693,7 +710,7 @@ export const useMenuItem = ({
         rest,
         props,
         {
-          onClick: () => onSelect(value, closeOnSelect),
+          onClick: () => onSelect(value),
           onFocus: onActive,
           onKeyDown: onKeyDown,
           onMouseLeave,
@@ -714,7 +731,6 @@ export const useMenuItem = ({
       onKeyDown,
       onSelect,
       value,
-      closeOnSelect,
       onCloseSubMenu,
       onMouseLeave,
     ],

@@ -1,10 +1,6 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
-  actionBar: {
-    "Close action bar": "Sulge tegevusriba",
-    "Open action bar": "Ava tegevusriba",
-  },
   autocomplete: {
     "Clear value": "Tühjenda väärtus",
     "No results found": "Tulemusi ei leitud",
@@ -52,10 +48,6 @@ const data: IntlData = {
     Magenta: "Magenta",
     Red: "Punane",
     Yellow: "Kollane",
-  },
-  modal: {
-    "Close modal": "Sulge modaal",
-    "Open modal": "Ava modaal",
   },
   numberInput: {
     Decrease: "Vähenda",

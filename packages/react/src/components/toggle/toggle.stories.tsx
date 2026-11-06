@@ -24,7 +24,7 @@ export const Basic: Story = () => {
 
 export const WithText: Story = () => {
   return (
-    <Toggle px="4">
+    <Toggle aria-label="Toggle italic" px="4">
       <ItalicIcon />
       <Text as="span" fontSize="md">
         Italic

@@ -1,10 +1,6 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
-  actionBar: {
-    "Close action bar": "Затвори лентата с действия",
-    "Open action bar": "Отвори лентата с действия",
-  },
   autocomplete: {
     "Clear value": "Изчисти стойността",
     "No results found": "Няма намерени резултати",
@@ -52,10 +48,6 @@ const data: IntlData = {
     Magenta: "Магента",
     Red: "Червен",
     Yellow: "Жълт",
-  },
-  modal: {
-    "Close modal": "Затвори модала",
-    "Open modal": "Отвори модала",
   },
   numberInput: {
     Decrease: "Намали",

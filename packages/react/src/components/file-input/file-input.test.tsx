@@ -1,4 +1,5 @@
 import { a11y, fireEvent, render, screen } from "#test"
+import { Field } from "../field"
 import { FileInput } from "./"
 
 const getInput = (): HTMLInputElement => {
@@ -35,6 +36,80 @@ describe("<FileInput />", () => {
     expect(el.tagName).toBe("SPAN")
     expect(el.parentElement?.tagName).toBe("DIV")
     expect(el.parentElement).toHaveClass("ui-file-input__root")
+  })
+
+  test.each([{}, { disabled: true }, { readOnly: true }, { invalid: true }])(
+    "uses the placeholder as its name inside a labeled field with %j",
+    async (props) => {
+      await a11y(
+        <Field.Root label="Upload file" {...props}>
+          <FileInput placeholder="your file" />
+        </Field.Root>,
+      )
+
+      expect(
+        screen.getByRole("button", { name: "your file" }),
+      ).toBeInTheDocument()
+    },
+  )
+
+  test.each([undefined, "   "])(
+    "falls back to the field label with placeholder %j",
+    async (placeholder) => {
+      await a11y(
+        <Field.Root label="Upload file">
+          <FileInput placeholder={placeholder} />
+        </Field.Root>,
+      )
+
+      expect(
+        screen.getByRole("button", { name: "Upload file" }),
+      ).toBeInTheDocument()
+    },
+  )
+
+  test("updates the fallback name when the value changes", () => {
+    const file = new File(["report"], "report.pdf", { type: "application/pdf" })
+    const ui = (value: File[]) => (
+      <Field.Root label="Upload file">
+        <FileInput value={value} />
+      </Field.Root>
+    )
+    const { rerender } = render(ui([]))
+
+    expect(
+      screen.getByRole("button", { name: "Upload file" }),
+    ).toBeInTheDocument()
+
+    rerender(ui([file]))
+
+    expect(
+      screen.getByRole("button", { name: "report.pdf" }),
+    ).toBeInTheDocument()
+
+    rerender(ui([]))
+
+    expect(
+      screen.getByRole("button", { name: "Upload file" }),
+    ).toBeInTheDocument()
+  })
+
+  test.each([
+    { "aria-label": "Choose file" },
+    { "aria-labelledby": "custom-label" },
+  ])("preserves an explicit name with %j", (props) => {
+    render(
+      <>
+        <span id="custom-label">Choose file</span>
+        <Field.Root label="Upload file">
+          <FileInput {...props} />
+        </Field.Root>
+      </>,
+    )
+
+    expect(
+      screen.getByRole("button", { name: "Choose file" }),
+    ).toBeInTheDocument()
   })
 
   test("forwards `multiple` and `accept` to the inner input", () => {

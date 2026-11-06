@@ -176,6 +176,7 @@ interface ComponentContext extends Pick<
   UseSidebarReturn,
   | "getContentProps"
   | "getFooterProps"
+  | "getHandleProps"
   | "getHeaderProps"
   | "getSidePanelProps"
   | "getTriggerProps"
@@ -294,6 +295,7 @@ export const SidebarRoot = withProvider<
       selectedValue,
       getContentProps,
       getFooterProps,
+      getHandleProps,
       getHeaderProps,
       getRootProps,
       getSidePanelProps,
@@ -335,6 +337,7 @@ export const SidebarRoot = withProvider<
         placement,
         getContentProps,
         getFooterProps,
+        getHandleProps,
         getHeaderProps,
         getSidePanelProps,
         getTriggerProps,
@@ -346,6 +349,7 @@ export const SidebarRoot = withProvider<
         getContentProps,
         getFooterProps,
         getHeaderProps,
+        getHandleProps,
         getSidePanelProps,
         getTriggerProps,
       ],
@@ -732,17 +736,14 @@ export const SidebarContent = withContext<"ul", SidebarContentProps>(
 export interface SidebarHandleProps extends HTMLStyledProps<"button"> {}
 
 export const SidebarHandle = withContext<"button", SidebarHandleProps>(
-  (props) => {
-    const { handleProps } = useSidePanelComponentContext()
-
-    return (
-      <SidebarTrigger {...mergeProps(handleProps, props)()}>
-        <styled.button tabIndex={-1} />
-      </SidebarTrigger>
-    )
-  },
+  "button",
   "handle",
-)()
+)(undefined, (props) => {
+  const { getHandleProps } = useComponentContext()
+  const { handleProps } = useSidePanelComponentContext()
+
+  return getHandleProps(mergeProps(handleProps, props)())
+})
 
 export interface SidebarGroupProps
   extends

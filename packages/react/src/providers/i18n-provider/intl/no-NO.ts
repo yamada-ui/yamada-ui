@@ -1,10 +1,6 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
-  actionBar: {
-    "Close action bar": "Lukk handlingslinje",
-    "Open action bar": "Åpne handlingslinje",
-  },
   autocomplete: {
     "Clear value": "Tøm verdi",
     "No results found": "Ingen resultater funnet",
@@ -52,10 +48,6 @@ const data: IntlData = {
     Magenta: "Magenta",
     Red: "Rød",
     Yellow: "Gul",
-  },
-  modal: {
-    "Close modal": "Lukk modal",
-    "Open modal": "Åpne modal",
   },
   numberInput: {
     Decrease: "Reduser",

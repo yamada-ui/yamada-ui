@@ -10,6 +10,7 @@ export const switchStyle = defineComponentSlotStyle({
       cursor: "pointer",
       display: "inline-flex",
       gap: "2",
+      position: "relative",
       _readOnly: {
         layerStyle: "readOnly",
         pointerEvents: "none",

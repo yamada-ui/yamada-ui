@@ -74,7 +74,10 @@ export const FileInput = withProvider<"input", FileInputProps>(
     ...props
   }) => {
     const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
-    const { values, getFieldProps, getInputProps } = useFileInput(props)
+    const { values, getFieldProps, getInputProps } = useFileInput({
+      placeholder,
+      ...props,
+    })
 
     const cloneChildren = useMemo(() => {
       if (!values?.length)

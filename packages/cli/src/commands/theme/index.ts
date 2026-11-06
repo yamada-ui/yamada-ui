@@ -55,26 +55,27 @@ interface Options {
 }
 
 export const theme = new Command("theme")
-  .description("generate theme to your project.")
-  .argument("[path]", "path to the theme directory.")
-  .option("--cwd <path>", "current working directory.", cwd)
-  .option("-c, --config <path>", "path to the config file.", CONFIG_FILE_NAME)
-  .option("-o, --overwrite", "overwrite existing directory.", false)
-  .option("-j, --js", "use js instead of ts.")
-  .option("-y, --yes", "skip all confirmation prompts.", false)
-  .option("-p, --package-name <name>", "package name (for monorepo).")
-  .option("-s, --src", "use src/ directory.")
-  .option("--no-src", "do not use src/ directory.")
-  .option("-i, --install", "install dependencies when choice is monorepo.")
+  .description("Generate theme to your project.")
+  .helpOption("-h, --help", "Display help for command.")
+  .argument("[path]", "Path to the theme directory.")
+  .option("--cwd <path>", "Current working directory.", cwd)
+  .option("-c, --config <path>", "Path to the config file.", CONFIG_FILE_NAME)
+  .option("-o, --overwrite", "Overwrite existing directory.", false)
+  .option("-j, --js", "Use js instead of ts.")
+  .option("-y, --yes", "Skip all confirmation prompts.", false)
+  .option("-p, --package-name <name>", "Package name (for monorepo).")
+  .option("-s, --src", "Use src/ directory.")
+  .option("--no-src", "Do not use src/ directory.")
+  .option("-i, --install", "Install dependencies when choice is monorepo.")
   .option(
     "--no-install",
-    "do not install dependencies when choice is monorepo.",
+    "Do not install dependencies when choice is monorepo.",
   )
-  .option("-f, --format", "format the output files.")
-  .option("--no-format", "do not format the output files.")
-  .option("-l, --lint", "lint the output files.")
-  .option("--no-lint", "do not lint the output files.")
-  .option("-t, --tag <name>", "tag for the registries (e.g. dev, next).")
+  .option("-f, --format", "Format the output files.")
+  .option("--no-format", "Do not format the output files.")
+  .option("-l, --lint", "Lint the output files.")
+  .option("--no-lint", "Do not lint the output files.")
+  .option("-t, --tag <name>", "Tag for the registries (e.g. dev, next).")
   .action(async function (
     themePath: string | undefined,
     {

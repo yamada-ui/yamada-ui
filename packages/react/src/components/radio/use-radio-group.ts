@@ -60,7 +60,10 @@ export const useRadioGroup = <Y extends string = string>(
     ariaProps: { "aria-describedby": ariaDescribedby, ...ariaProps },
     dataProps,
     eventProps,
-  } = useFieldProps(props)
+  } = useFieldProps({
+    ...props,
+    notSupportReadOnly: true,
+  })
   const interactive = !(readOnly || disabled)
   const [value, setValue] = useControllableState({
     defaultValue,

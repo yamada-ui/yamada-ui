@@ -19,6 +19,7 @@ export type {
   FlattenObjectOptions,
   FunctionOf,
   FunctionOrValue,
+  HasOptions,
   Length,
   Merge,
   MergeOptions,

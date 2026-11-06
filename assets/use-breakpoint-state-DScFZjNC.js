@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-BCiCTKAo.js";import{t}from"./react-BWPDF9mI.js";import{n,r}from"./use-breakpoint-value-DTBkmPio.js";var i,a;function o(){return(o=e((()=>{i=t(),n(),a=e=>{let t=r(e);return(0,i.useState)(t)}})))()}export{a as n,o as t};

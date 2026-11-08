@@ -231,6 +231,11 @@
         "description": "If `true`, the menu item will be disabled.",
         "required": false
       },
+      "onSelect": {
+        "type": "(value?: string) => void",
+        "description": "Callback invoked when the menu item is selected.",
+        "required": false
+      },
       "value": {
         "type": "string",
         "description": "The value of the menu item.",
@@ -351,6 +356,11 @@
       "icon": {
         "type": "ReactNode",
         "description": "The icon to be used in the menu option item.",
+        "required": false
+      },
+      "onSelect": {
+        "type": "(value?: string) => void",
+        "description": "Callback invoked when the menu item is selected.",
         "required": false
       }
     },
@@ -872,6 +882,11 @@
       "description": "If `true`, the menu item will be disabled.",
       "required": false
     },
+    "onSelect": {
+      "type": "(value?: string) => void",
+      "description": "Callback invoked when the menu item is selected.",
+      "required": false
+    },
     "value": {
       "type": "string",
       "description": "The value of the menu item.",
@@ -992,6 +1007,11 @@
     "icon": {
       "type": "ReactNode",
       "description": "The icon to be used in the menu option item.",
+      "required": false
+    },
+    "onSelect": {
+      "type": "(value?: string) => void",
+      "description": "Callback invoked when the menu item is selected.",
       "required": false
     }
   },

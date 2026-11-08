@@ -6,6 +6,7 @@ import {
   flattenObject,
   getMemoizedObject,
   getObject,
+  has,
   memoizeObject,
   merge,
   objectKeys,
@@ -17,6 +18,63 @@ import {
 } from "./object"
 
 describe("Object", () => {
+  test.each([
+    [undefined, false],
+    [null, false],
+    ["", false],
+    [false, false],
+    [0, false],
+    [NaN, false],
+    ["label", true],
+    [1, true],
+    [{}, true],
+    [[], true],
+  ])("has checks the existence and truthiness of %j", (value, expected) => {
+    const obj = { value }
+
+    expect(has(obj, ["value"])).toBeTruthy()
+    expect(has(obj, ["value"], { truthy: true })).toBe(expected)
+  })
+
+  test.each([false, true])(
+    "has returns false for missing or empty keys with truthy %j",
+    (truthy) => {
+      const obj: { value?: string } = {}
+
+      expect(has(obj, ["value"], { truthy })).toBeFalsy()
+      expect(has({ value: "label" }, [], { truthy })).toBeFalsy()
+    },
+  )
+
+  test.each([false, true])(
+    "has returns true if any key matches with truthy %j",
+    (truthy) => {
+      const obj: { first?: string; second?: string } = { second: "label" }
+
+      expect(has(obj, ["first", "second"], { truthy })).toBeTruthy()
+    },
+  )
+
+  test.each([false, true])(
+    "has includes inherited properties with truthy %j",
+    (truthy) => {
+      const obj = Object.create({ value: "label" })
+
+      expect(has(obj, ["value"], { truthy })).toBeTruthy()
+    },
+  )
+
+  test.each([false, true])(
+    "has supports numeric and symbol keys with truthy %j",
+    (truthy) => {
+      const key = Symbol("label")
+      const obj = { [key]: "label", 0: "label" }
+
+      expect(has(obj, [0], { truthy })).toBeTruthy()
+      expect(has(obj, [key], { truthy })).toBeTruthy()
+    },
+  )
+
   describe("omitObject", () => {
     test("should omit specified keys from an object", () => {
       const obj = { a: 1, b: 2, c: 3 }

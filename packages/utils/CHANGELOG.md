@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 2.3.0
+
+### Minor Changes
+
+- [#8006](https://github.com/yamada-ui/yamada-ui/pull/8006) [`7346221`](https://github.com/yamada-ui/yamada-ui/commit/73462214865f9dcfd2543ffbdb371415e41e2ae1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add `has` to check whether any specified object key exists or has a truthy value.
+
 ## 2.2.0
 
 ### Minor Changes

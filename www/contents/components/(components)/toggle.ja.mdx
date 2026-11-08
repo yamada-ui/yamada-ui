@@ -50,7 +50,7 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 ### テキストと組み合わせる
 
 ```tsx preview
-<Toggle px="4">
+<Toggle aria-label="Toggle italic" px="4">
   <ItalicIcon />
   <Text as="span" fontSize="md">
     Italic
@@ -268,13 +268,11 @@ return (
 
 ## アクセシビリティ
 
-`Toggle`にアイコンのみを使用する場合は、`Toggle`に`aria-label`を設定します。
+`Toggle`または`ToggleGroup.Root`に`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。これにより、操作やグループの目的や機能をユーザーに伝えることができます。
 
 ```tsx
 <Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
 ```
-
-`ToggleGroup.Root`に`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。これにより、グループの目的や機能をユーザーに伝えることができます。
 
 ```tsx
 <ToggleGroup.Root aria-label="Text formatting options">
@@ -290,6 +288,17 @@ return (
     aria-label="Toggle underline"
   />
 </ToggleGroup.Root>
+```
+
+テキストと組み合わせる場合は、表示されるテキストを含む`aria-label`を設定してください。未設定の場合はデフォルトの`aria-label`が使用され、テキストとアクセシブル名が一致しなくなることがあります。
+
+```tsx preview
+<Toggle aria-label="Toggle italic" px="4">
+  <ItalicIcon />
+  <Text as="span" fontSize="md">
+    Italic
+  </Text>
+</Toggle>
 ```
 
 ### キーボード操作

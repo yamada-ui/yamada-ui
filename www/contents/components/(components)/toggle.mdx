@@ -50,7 +50,7 @@ If there are multiple `Toggle` components that can be grouped together, use [Tog
 ### With Text
 
 ```tsx preview
-<Toggle px="4">
+<Toggle aria-label="Toggle italic" px="4">
   <ItalicIcon />
   <Text as="span" fontSize="md">
     Italic
@@ -268,13 +268,11 @@ return (
 
 ## Accessibility
 
-When using only icons in `Toggle`, set `aria-label` for the `Toggle`.
+Setting an `aria-label` on `Toggle` or `ToggleGroup.Root` allows screen readers to announce it, helping users understand the purpose and functionality of the control or group.
 
 ```tsx
 <Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
 ```
-
-Setting an `aria-label` on `ToggleGroup.Root` allows screen readers to announce the group, helping users understand its purpose.
 
 ```tsx
 <ToggleGroup.Root aria-label="Text formatting options">
@@ -290,6 +288,17 @@ Setting an `aria-label` on `ToggleGroup.Root` allows screen readers to announce 
     aria-label="Toggle underline"
   />
 </ToggleGroup.Root>
+```
+
+When combining `Toggle` with text, set an `aria-label` that includes the visible text. If omitted, the default `aria-label` is used, which may cause a mismatch between the text and the accessible name.
+
+```tsx preview
+<Toggle aria-label="Toggle italic" px="4">
+  <ItalicIcon />
+  <Text as="span" fontSize="md">
+    Italic
+  </Text>
+</Toggle>
 ```
 
 ### Keyboard Navigation

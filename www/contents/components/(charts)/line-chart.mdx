@@ -18,9 +18,9 @@ interface Data {
 const series = useMemo<LineChart.LineProps<Data>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -128,11 +128,11 @@ return (
       dataKey="date"
       tickFormatter={(value) => dayjs(value).format("MMM")}
     />
-    <LineChart.Line dataKey="desktop" dot>
+    <LineChart.Line dataKey="desktop" name="Desktop" dot>
       <LineChart.LabelList />
     </LineChart.Line>
-    <LineChart.Line dataKey="tablet" />
-    <LineChart.Line dataKey="mobile" />
+    <LineChart.Line dataKey="tablet" name="Tablet" />
+    <LineChart.Line dataKey="mobile" name="Mobile" />
   </LineChart.Root>
 )
 ```
@@ -143,9 +143,9 @@ return (
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -180,9 +180,9 @@ return (
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -209,9 +209,9 @@ return (
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () => [
-    { dataKey: "desktop", color: "red" },
-    { dataKey: "tablet", color: "blue" },
-    { dataKey: "mobile", color: "green" },
+    { dataKey: "desktop", name: "Desktop", color: "red" },
+    { dataKey: "tablet", name: "Tablet", color: "blue" },
+    { dataKey: "mobile", name: "Mobile", color: "green" },
   ],
   [],
 )
@@ -240,9 +240,9 @@ To change the type, set `type` in `series` or `lineProps.type` to `"monotone"`, 
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -289,9 +289,9 @@ To add the Y axis, set `withYAxis` to `true`. The default is `false`.
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -320,9 +320,9 @@ To change the orientation of the Y axis, set `yAxisProps.orientation` to `"start
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -353,9 +353,9 @@ To add the legend, set `withLegend` to `true`. The default is `false`. To change
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () => [
-    { dataKey: "desktop", color: "red" },
-    { dataKey: "tablet", color: "blue" },
-    { dataKey: "mobile", color: "green" },
+    { dataKey: "desktop", name: "Desktop", color: "red" },
+    { dataKey: "tablet", name: "Tablet", color: "blue" },
+    { dataKey: "mobile", name: "Mobile", color: "green" },
   ],
   [],
 )
@@ -416,9 +416,9 @@ To change the grid, set booleans in `gridProps.horizontal` and `gridProps.vertic
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -456,7 +456,7 @@ To add dots, set `dot` of `series` or `lineProps.dot` to `true`. The default is 
 
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
-  () => LineChart.mergeSeries([{ dataKey: "desktop" }]),
+  () => LineChart.mergeSeries([{ dataKey: "desktop", name: "Desktop" }]),
   [],
 )
 const data = useMemo(() => createCartesianChartData(), [])
@@ -483,7 +483,7 @@ To add labels, set `label` of `series` or `lineProps.label` to `true`. The defau
 
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
-  () => LineChart.mergeSeries([{ dataKey: "desktop" }]),
+  () => LineChart.mergeSeries([{ dataKey: "desktop", name: "Desktop" }]),
   [],
 )
 const data = useMemo(() => createCartesianChartData(), [])
@@ -510,7 +510,7 @@ To add units, use `formatter`, `tickFormatter`, or set a string in `unit`.
 
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
-  () => LineChart.mergeSeries([{ dataKey: "desktop" }]),
+  () => LineChart.mergeSeries([{ dataKey: "desktop", name: "Desktop" }]),
   [],
 )
 const data = useMemo(() => createCartesianChartData(), [])
@@ -553,9 +553,9 @@ To sync charts, set `syncId` to a string.
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -599,9 +599,9 @@ To format values, use `formatter`, `tickFormatter`, etc.
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -637,9 +637,9 @@ return (
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -681,9 +681,9 @@ To add tick lines, set `xAxisProps.tickLine` or `yAxisProps.tickLine` to `true`.
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -716,9 +716,9 @@ To add axis labels, set a string in `xAxisProps.label` or `yAxisProps.label`. Th
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -751,9 +751,9 @@ To set the range, set `yAxisProps.domain` to `[min, max]`. To set the interval, 
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -788,9 +788,9 @@ To add a tooltip cursor, set `tooltipProps.cursor` to `true`. The default is `fa
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -820,9 +820,9 @@ To hide the X axis, set `withXAxis` to `false`. The default is `true`.
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -847,9 +847,9 @@ To hide active dots, set `activeDot` in `series` or `lineProps.activeDot` to `fa
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -879,9 +879,9 @@ To hide the tooltip, set `withTooltip` to `false`. The default is `true`.
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -906,9 +906,9 @@ return (
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -945,10 +945,11 @@ return (
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet", dot: { fill: "blue" } },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet", dot: { fill: "blue" } },
       {
         dataKey: "mobile",
+        name: "Mobile",
         dot: { fill: ["white", "black"], stroke: "red", strokeWidth: 1 },
       },
     ]),
@@ -979,9 +980,9 @@ return (
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -1008,7 +1009,7 @@ return (
 
 ```tsx preview functional
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
-  () => [{ color: "blue", dataKey: "desktop" }],
+  () => [{ color: "blue", dataKey: "desktop", name: "Desktop" }],
   [],
 )
 const data = useMemo(() => createCartesianChartData(), [])
@@ -1044,9 +1045,9 @@ return (
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -1075,9 +1076,9 @@ return (
 const series = useMemo<LineChart.LineProps<CartesianChartData>[]>(
   () =>
     LineChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )

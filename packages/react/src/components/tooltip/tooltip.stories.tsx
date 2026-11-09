@@ -1,6 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useDisclosure } from "../../hooks/use-disclosure"
-import { toTitleCase } from "../../utils"
 import { Button } from "../button"
 import { For } from "../for"
 import { Tooltip } from "./tooltip"
@@ -119,7 +118,7 @@ export const Placement: Story = () => {
           content="へっ！きたねぇ花火だ"
           placement={placement}
         >
-          <Button minW="xs">Open "{toTitleCase(placement)}" Tooltip</Button>
+          <Button minW="xs">Open "{placement}" Tooltip</Button>
         </Tooltip>
       )}
     </For>

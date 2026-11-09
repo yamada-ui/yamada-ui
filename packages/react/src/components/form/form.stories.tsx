@@ -72,7 +72,10 @@ export const Basic: Story = () => {
             helperMessage="If not set, a password will be automatically generated."
             label="Password"
           >
-            <PasswordInput placeholder="password" {...register("password")} />
+            <PasswordInput
+              placeholder="Your password"
+              {...register("password")}
+            />
           </Field.Root>
         </Form.Group>
       </Form.Body>
@@ -133,7 +136,10 @@ export const PropsPattern: Story = () => {
           helperMessage="If not set, a password will be automatically generated."
           label="Password"
         >
-          <PasswordInput placeholder="password" {...register("password")} />
+          <PasswordInput
+            placeholder="Your password"
+            {...register("password")}
+          />
         </Field.Root>
       </Form.Group>
     </Form.Root>
@@ -189,7 +195,10 @@ export const Variant: Story = () => {
               helperMessage="If not set, a password will be automatically generated."
               label="Password"
             >
-              <PasswordInput placeholder="password" {...register("password")} />
+              <PasswordInput
+                placeholder="Your password"
+                {...register("password")}
+              />
             </Field.Root>
           </Fieldset.Root>
 
@@ -267,7 +276,10 @@ export const Size: Story = () => {
               helperMessage="If not set, a password will be automatically generated."
               label="Password"
             >
-              <PasswordInput placeholder="password" {...register("password")} />
+              <PasswordInput
+                placeholder="Your password"
+                {...register("password")}
+              />
             </Field.Root>
           </Fieldset.Root>
 
@@ -348,7 +360,10 @@ export const Disabled: Story = () => {
           helperMessage="If not set, a password will be automatically generated."
           label="Password"
         >
-          <PasswordInput placeholder="password" {...register("password")} />
+          <PasswordInput
+            placeholder="Your password"
+            {...register("password")}
+          />
         </Field.Root>
       </Form.Group>
     </Form.Root>
@@ -405,7 +420,10 @@ export const ReadOnly: Story = () => {
           helperMessage="If not set, a password will be automatically generated."
           label="Password"
         >
-          <PasswordInput placeholder="password" {...register("password")} />
+          <PasswordInput
+            placeholder="Your password"
+            {...register("password")}
+          />
         </Field.Root>
       </Form.Group>
     </Form.Root>
@@ -435,7 +453,7 @@ export const RequiredIndicator: Story = () => {
       required={{ name: true, email: true }}
       requiredIndicator={
         <Tag colorScheme="red" size="sm">
-          required
+          Required
         </Tag>
       }
       submitButton="Submit"
@@ -466,7 +484,10 @@ export const RequiredIndicator: Story = () => {
           helperMessage="If not set, a password will be automatically generated."
           label="Password"
         >
-          <PasswordInput placeholder="password" {...register("password")} />
+          <PasswordInput
+            placeholder="Your password"
+            {...register("password")}
+          />
         </Field.Root>
       </Form.Group>
     </Form.Root>
@@ -495,13 +516,13 @@ export const OptionalIndicator: Story = () => {
       invalid={extractObject(errors, (value) => !!value)}
       optionalIndicator={
         <Tag colorScheme="mono" size="sm">
-          optional
+          Optional
         </Tag>
       }
       required={{ name: true, email: true }}
       requiredIndicator={
         <Tag colorScheme="red" size="sm">
-          required
+          Required
         </Tag>
       }
       submitButton="Submit"
@@ -532,7 +553,10 @@ export const OptionalIndicator: Story = () => {
           helperMessage="If not set, a password will be automatically generated."
           label="Password"
         >
-          <PasswordInput placeholder="password" {...register("password")} />
+          <PasswordInput
+            placeholder="Your password"
+            {...register("password")}
+          />
         </Field.Root>
       </Form.Group>
     </Form.Root>

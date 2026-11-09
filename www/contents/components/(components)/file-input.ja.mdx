@@ -8,7 +8,7 @@ style: components/file-input/file-input.style.ts
 ---
 
 ```tsx preview
-<FileInput placeholder="Please upload file" />
+<FileInput placeholder="Upload file" />
 ```
 
 ## 使い方
@@ -82,7 +82,7 @@ import { FileInput } from "@workspaces/ui"
 複数選択を許容する場合は、`multiple`を`true`に設定します。
 
 ```tsx preview
-<FileInput placeholder="multiple" multiple />
+<FileInput placeholder="Upload files" multiple />
 ```
 
 ### 拡張子を指定する
@@ -90,7 +90,10 @@ import { FileInput } from "@workspaces/ui"
 拡張子を指定する場合は、`accept`に文字列(タイプ)を設定します。
 
 ```tsx preview
-<FileInput accept="image/png,image/jpeg" placeholder="only png, jpeg" />
+<FileInput
+  accept="image/png,image/jpeg"
+  placeholder="Upload a PNG or JPEG file"
+/>
 ```
 
 ### 区切りをカスタマイズする
@@ -98,7 +101,7 @@ import { FileInput } from "@workspaces/ui"
 区切りをカスタマイズする場合は、`separator`に文字列を設定します。
 
 ```tsx preview
-<FileInput placeholder="Please upload file" multiple separator=";" />
+<FileInput placeholder="Upload files" multiple separator=";" />
 ```
 
 ### カスタムコンポーネントを使う
@@ -110,7 +113,7 @@ import { FileInput } from "@workspaces/ui"
   component={({ value: { name } }) => <Tag>{name}</Tag>}
   gapY="xs"
   multiple
-  placeholder="Please upload file"
+  placeholder="Upload files"
 />
 ```
 
@@ -122,7 +125,7 @@ import { FileInput } from "@workspaces/ui"
 <FileInput
   format={({ name }) => name.substring(0, name.indexOf("."))}
   multiple
-  placeholder="Please upload file"
+  placeholder="Upload files"
 />
 ```
 
@@ -145,7 +148,7 @@ import { FileInput } from "@workspaces/ui"
   <InputGroup.Addon>
     <FileIcon />
   </InputGroup.Addon>
-  <FileInput placeholder="Please upload file" />
+  <FileInput placeholder="Upload file" />
 </InputGroup.Root>
 ```
 
@@ -158,7 +161,7 @@ import { FileInput } from "@workspaces/ui"
   <InputGroup.Element>
     <FileIcon />
   </InputGroup.Element>
-  <FileInput placeholder="Please upload file" />
+  <FileInput placeholder="Upload file" />
 </InputGroup.Root>
 ```
 
@@ -168,17 +171,17 @@ import { FileInput } from "@workspaces/ui"
 
 ```tsx preview
 <VStack>
-  <FileInput placeholder="Please upload file" disabled />
+  <FileInput placeholder="Upload file" disabled />
 
   <InputGroup.Root disabled>
     <InputGroup.Addon>
       <FileIcon />
     </InputGroup.Addon>
-    <FileInput placeholder="Please upload file" />
+    <FileInput placeholder="Upload file" />
   </InputGroup.Root>
 
   <Field.Root disabled label="Upload file">
-    <FileInput placeholder="Please upload file" />
+    <FileInput placeholder="Upload file" />
   </Field.Root>
 </VStack>
 ```
@@ -189,17 +192,17 @@ import { FileInput } from "@workspaces/ui"
 
 ```tsx preview
 <VStack>
-  <FileInput placeholder="Please upload file" readOnly />
+  <FileInput placeholder="Upload file" readOnly />
 
   <InputGroup.Root readOnly>
     <InputGroup.Addon>
       <FileIcon />
     </InputGroup.Addon>
-    <FileInput placeholder="Please upload file" />
+    <FileInput placeholder="Upload file" />
   </InputGroup.Root>
 
   <Field.Root readOnly label="Upload file">
-    <FileInput placeholder="Please upload file" />
+    <FileInput placeholder="Upload file" />
   </Field.Root>
 </VStack>
 ```
@@ -210,17 +213,17 @@ import { FileInput } from "@workspaces/ui"
 
 ```tsx preview
 <VStack>
-  <FileInput placeholder="Please upload file" invalid />
+  <FileInput placeholder="Upload file" invalid />
 
   <InputGroup.Root invalid>
     <InputGroup.Addon>
       <FileIcon />
     </InputGroup.Addon>
-    <FileInput placeholder="Please upload file" />
+    <FileInput placeholder="Upload file" />
   </InputGroup.Root>
 
   <Field.Root errorMessage="File is required." invalid label="Upload file">
-    <FileInput placeholder="Please upload file" />
+    <FileInput placeholder="Upload file" />
   </Field.Root>
 </VStack>
 ```
@@ -272,12 +275,12 @@ const onReset = () => {
 
 return (
   <VStack>
-    <Text>files: {value?.length ?? 0}</Text>
+    <Text>Files: {value?.length ?? 0}</Text>
 
     <InputGroup.Root>
       <FileInput
         multiple
-        placeholder="placeholder"
+        placeholder="Upload files"
         resetRef={resetRef}
         value={value}
         onChange={onChange}
@@ -304,7 +307,7 @@ return (
 `Field.Root`を使用しない場合は、`FileInput`に`aria-label`または`aria-labelledby`を設定します。
 
 ```tsx
-<FileInput aria-label="Upload file" placeholder="Please upload file" />
+<FileInput aria-label="Upload file" placeholder="Upload file" />
 ```
 
 ```tsx
@@ -313,7 +316,7 @@ return (
     Upload file
   </Text>
 
-  <FileInput aria-labelledby="label" placeholder="Please upload file" />
+  <FileInput aria-labelledby="label" placeholder="Upload file" />
 </VStack>
 ```
 

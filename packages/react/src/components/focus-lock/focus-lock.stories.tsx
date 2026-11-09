@@ -26,7 +26,7 @@ export const Basic: Story = () => {
       <Collapse open={open}>
         <FocusLock>
           <VStack bg="bg.panel" mt="lg" p="lg" rounded="l2">
-            <Input bg="bg" placeholder="This is Input" />
+            <Input bg="bg" placeholder="Your name" />
             <Button alignSelf="flex-end">Button</Button>
           </VStack>
         </FocusLock>

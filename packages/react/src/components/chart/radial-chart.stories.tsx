@@ -25,11 +25,11 @@ const randomValue = (min = 1000, max = 5000) =>
   Math.floor(Math.random() * (max - min + 1)) + min
 
 const createData = (): Data[] => [
-  { browser: "chrome", visits: randomValue() },
-  { browser: "edge", visits: randomValue() },
-  { browser: "firefox", visits: randomValue() },
-  { browser: "opera", visits: randomValue() },
-  { browser: "safari", visits: randomValue() },
+  { browser: "Chrome", visits: randomValue() },
+  { browser: "Edge", visits: randomValue() },
+  { browser: "Firefox", visits: randomValue() },
+  { browser: "Opera", visits: randomValue() },
+  { browser: "Safari", visits: randomValue() },
 ]
 
 export const Basic: Story = () => {
@@ -93,11 +93,11 @@ export const SectorColors: Story = () => {
   )
   const data = useMemo<Data[]>(
     () => [
-      { browser: "chrome", fill: "cyan", visits: randomValue() },
-      { browser: "edge", fill: "green", visits: randomValue() },
-      { browser: "firefox", fill: "orange", visits: randomValue() },
-      { browser: "opera", fill: "red", visits: randomValue() },
-      { browser: "safari", fill: "blue", visits: randomValue() },
+      { browser: "Chrome", fill: "cyan", visits: randomValue() },
+      { browser: "Edge", fill: "green", visits: randomValue() },
+      { browser: "Firefox", fill: "orange", visits: randomValue() },
+      { browser: "Opera", fill: "red", visits: randomValue() },
+      { browser: "Safari", fill: "blue", visits: randomValue() },
     ],
     [],
   )
@@ -112,11 +112,11 @@ export const Legend: Story = () => {
   )
   const data = useMemo<Data[]>(
     () => [
-      { browser: "chrome", fill: "cyan", visits: randomValue() },
-      { browser: "edge", fill: "green", visits: randomValue() },
-      { browser: "firefox", fill: "orange", visits: randomValue() },
-      { browser: "opera", fill: "red", visits: randomValue() },
-      { browser: "safari", fill: "blue", visits: randomValue() },
+      { browser: "Chrome", fill: "cyan", visits: randomValue() },
+      { browser: "Edge", fill: "green", visits: randomValue() },
+      { browser: "Firefox", fill: "orange", visits: randomValue() },
+      { browser: "Opera", fill: "red", visits: randomValue() },
+      { browser: "Safari", fill: "blue", visits: randomValue() },
     ],
     [],
   )
@@ -192,9 +192,9 @@ export const CenterLabel: Story = () => {
   const data = useMemo(
     () =>
       RadialChart.mergeData([
-        { browser: "chrome", visits: randomValue() },
-        { browser: "edge", visits: randomValue() },
-        { browser: "safari", visits: randomValue() },
+        { browser: "Chrome", visits: randomValue() },
+        { browser: "Edge", visits: randomValue() },
+        { browser: "Safari", visits: randomValue() },
       ]),
     [],
   )
@@ -339,7 +339,7 @@ export const Stacked: Story = () => {
   const data = useMemo(
     () => [
       {
-        browser: "chrome",
+        browser: "Chrome",
         desktop: randomValue(2000, 3000),
         mobile: randomValue(4000, 5000),
       },

@@ -22,27 +22,27 @@ const data = useMemo<Data[]>(
   () =>
     RadialChart.mergeData([
       {
-        browser: "chrome",
+        browser: "Chrome",
         visits: faker.number.int({ max: 5000, min: 1000 }),
       },
       {
-        browser: "edge",
+        browser: "Edge",
         visits: faker.number.int({ max: 5000, min: 1000 }),
       },
       {
-        browser: "firefox",
+        browser: "Firefox",
         visits: faker.number.int({ max: 5000, min: 1000 }),
       },
       {
-        browser: "opera",
+        browser: "Opera",
         visits: faker.number.int({ max: 5000, min: 1000 }),
       },
       {
-        browser: "safari",
+        browser: "Safari",
         visits: faker.number.int({ max: 5000, min: 1000 }),
       },
       {
-        browser: "other",
+        browser: "Other",
         visits: faker.number.int({ max: 5000, min: 1000 }),
       },
     ]),
@@ -228,9 +228,9 @@ const series = useMemo<RadialChart.RadialProps<PolarChartData>[]>(
 const data = useMemo(
   () =>
     RadialChart.mergeData([
-      { browser: "chrome", visits: faker.number.int({ max: 5000, min: 1000 }) },
-      { browser: "edge", visits: faker.number.int({ max: 5000, min: 1000 }) },
-      { browser: "safari", visits: faker.number.int({ max: 5000, min: 1000 }) },
+      { browser: "Chrome", visits: faker.number.int({ max: 5000, min: 1000 }) },
+      { browser: "Edge", visits: faker.number.int({ max: 5000, min: 1000 }) },
+      { browser: "Safari", visits: faker.number.int({ max: 5000, min: 1000 }) },
     ]),
   [],
 )
@@ -387,7 +387,7 @@ const series = useMemo(
 const data = useMemo(
   () => [
     {
-      browser: "chrome",
+      browser: "Chrome",
       desktop: faker.number.int({ max: 3000, min: 2000 }),
       mobile: faker.number.int({ max: 5000, min: 4000 }),
     },

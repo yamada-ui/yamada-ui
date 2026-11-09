@@ -49,8 +49,8 @@ const createData = (length = 10): Data[] =>
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
     phone: faker.phone.number(),
-    role: faker.helpers.arrayElement(["admin", "user"]),
-    status: faker.helpers.arrayElement(["active", "inactive"]),
+    role: faker.helpers.arrayElement(["Admin", "User"]),
+    status: faker.helpers.arrayElement(["Active", "Inactive"]),
     updatedAt: faker.date.past(),
   }))
 
@@ -58,21 +58,26 @@ const columnHelper = createColumnHelper<Data>()
 
 const columns = [
   columnHelper.accessor("id", {
-    footer: (info) => info.column.id,
+    footer: "ID",
+    header: "ID",
     cellProps: { numeric: true },
   }),
   columnHelper.accessor("firstName", {
-    footer: (info) => info.column.id,
+    footer: "First name",
+    header: "First name",
   }),
   columnHelper.accessor("lastName", {
-    footer: (info) => info.column.id,
+    footer: "Last name",
+    header: "Last name",
   }),
   columnHelper.accessor("age", {
-    footer: (info) => info.column.id,
+    footer: "Age",
+    header: "Age",
     cellProps: { numeric: true },
   }),
   columnHelper.accessor("email", {
-    footer: (info) => info.column.id,
+    footer: "Email",
+    header: "Email",
     lineClamp: 1,
   }),
 ]
@@ -80,21 +85,26 @@ const columns = [
 const columnsFull = [
   ...columns,
   columnHelper.accessor("phone", {
-    footer: (info) => info.column.id,
+    footer: "Phone",
+    header: "Phone",
   }),
   columnHelper.accessor("role", {
-    footer: (info) => info.column.id,
+    footer: "Role",
+    header: "Role",
   }),
   columnHelper.accessor("status", {
-    footer: (info) => info.column.id,
+    footer: "Status",
+    header: "Status",
   }),
   columnHelper.accessor("createdAt", {
     cell: (info) => info.getValue().toLocaleDateString(),
-    footer: (info) => info.column.id,
+    footer: "Created at",
+    header: "Created at",
   }),
   columnHelper.accessor("updatedAt", {
     cell: (info) => info.getValue().toLocaleDateString(),
-    footer: (info) => info.column.id,
+    footer: "Updated at",
+    header: "Updated at",
   }),
 ]
 
@@ -221,7 +231,8 @@ export const HeaderGroups: Story = () => {
   const columns = useMemo(
     () => [
       columnHelper.accessor("id", {
-        footer: (info) => info.column.id,
+        footer: "ID",
+        header: "ID",
         cellProps: { numeric: true },
       }),
       columnHelper.group({
@@ -231,25 +242,29 @@ export const HeaderGroups: Story = () => {
             id: "name",
             columns: [
               columnHelper.accessor("firstName", {
-                footer: (info) => info.column.id,
+                footer: "First name",
+                header: "First name",
               }),
               columnHelper.accessor("lastName", {
-                footer: (info) => info.column.id,
+                footer: "Last name",
+                header: "Last name",
               }),
             ],
-            footer: (info) => info.column.id,
-            header: (info) => info.column.id,
+            footer: "Name",
+            header: "Name",
           }),
           columnHelper.accessor("age", {
-            footer: (info) => info.column.id,
+            footer: "Age",
+            header: "Age",
             cellProps: { numeric: true },
           }),
           columnHelper.accessor("email", {
-            footer: (info) => info.column.id,
+            footer: "Email",
+            header: "Email",
           }),
         ],
-        footer: (info) => info.column.id,
-        header: (info) => info.column.id,
+        footer: "User",
+        header: "User",
       }),
     ],
     [],
@@ -263,7 +278,8 @@ export const FooterGroups: Story = () => {
   const columns = useMemo(
     () => [
       columnHelper.accessor("id", {
-        footer: (info) => info.column.id,
+        footer: "ID",
+        header: "ID",
         cellProps: { numeric: true },
       }),
       columnHelper.group({
@@ -273,25 +289,29 @@ export const FooterGroups: Story = () => {
             id: "name",
             columns: [
               columnHelper.accessor("firstName", {
-                footer: (info) => info.column.id,
+                footer: "First name",
+                header: "First name",
               }),
               columnHelper.accessor("lastName", {
-                footer: (info) => info.column.id,
+                footer: "Last name",
+                header: "Last name",
               }),
             ],
-            footer: (info) => info.column.id,
-            header: (info) => info.column.id,
+            footer: "Name",
+            header: "Name",
           }),
           columnHelper.accessor("age", {
-            footer: (info) => info.column.id,
+            footer: "Age",
+            header: "Age",
             cellProps: { numeric: true },
           }),
           columnHelper.accessor("email", {
-            footer: (info) => info.column.id,
+            footer: "Email",
+            header: "Email",
           }),
         ],
-        footer: (info) => info.column.id,
-        header: (info) => info.column.id,
+        footer: "User",
+        header: "User",
       }),
     ],
     [],

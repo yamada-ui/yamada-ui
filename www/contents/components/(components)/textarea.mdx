@@ -8,7 +8,7 @@ style: components/textarea/textarea.style.ts
 ---
 
 ```tsx preview
-<Textarea placeholder="Placeholder" />
+<Textarea placeholder="Enter a comment" />
 ```
 
 ## Usage
@@ -154,10 +154,7 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
 To change the placeholder color, set `_placeholder` to the props.
 
 ```tsx preview
-<Textarea
-  placeholder="Custom placeholder"
-  _placeholder={{ color: "green.500" }}
-/>
+<Textarea placeholder="Enter a comment" _placeholder={{ color: "green.500" }} />
 ```
 
 ### Change Resize Behavior
@@ -183,7 +180,7 @@ To change the resize behavior, set `resize` to one of `"block"`, `"horizontal"`,
 To enable auto-resizing, set `autosize` to `true`.
 
 ```tsx preview
-<Textarea autosize placeholder="Autosize" />
+<Textarea autosize placeholder="Enter a multi-line comment" />
 ```
 
 ### Control Resize
@@ -196,7 +193,7 @@ const onResize = () => {
 
 return (
   <VStack>
-    <Textarea placeholder="Use resize" resizeRef={resizeRef} />
+    <Textarea placeholder="Enter a comment" resizeRef={resizeRef} />
     <Button alignSelf="flex-end" onClick={onResize}>
       Resize
     </Button>

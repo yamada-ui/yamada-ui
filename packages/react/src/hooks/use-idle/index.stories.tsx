@@ -20,7 +20,7 @@ export const Basic = () => {
       transitionDuration="moderate"
       transitionProperty="all"
     >
-      Current state: {idle ? "idle" : "not idle"}
+      Current state: {idle ? "Idle" : "Not idle"}
     </Box>
   )
 }

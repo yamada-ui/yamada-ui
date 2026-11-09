@@ -20,15 +20,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<Data>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<Data>,
     ]),
   [],
@@ -140,9 +140,9 @@ return (
       dataKey="date"
       tickFormatter={(value) => dayjs(value).format("MMM")}
     />
-    <ComposedChart.Bar color="blue" dataKey="desktop" />
-    <ComposedChart.Area color="green" dataKey="tablet" dot />
-    <ComposedChart.Line color="red" dataKey="mobile" dot>
+    <ComposedChart.Bar color="blue" dataKey="desktop" name="Desktop" />
+    <ComposedChart.Area color="green" dataKey="tablet" name="Tablet" dot />
+    <ComposedChart.Line color="red" dataKey="mobile" name="Mobile" dot>
       <ComposedChart.LabelList />
     </ComposedChart.Line>
   </ComposedChart.Root>
@@ -157,15 +157,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -204,15 +204,15 @@ const series = useMemo(
       [
         [
           "bar",
-          { dataKey: "desktop" },
+          { dataKey: "desktop", name: "Desktop" },
         ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
         [
           "area",
-          { dataKey: "tablet" },
+          { dataKey: "tablet", name: "Tablet" },
         ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
         [
           "line",
-          { dataKey: "mobile" },
+          { dataKey: "mobile", name: "Mobile" },
         ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       ],
       "blue",
@@ -242,9 +242,9 @@ return (
 ```tsx preview functional
 const series = useMemo<ComposedChart.ComposedProps<CartesianChartData>[]>(
   () => [
-    ["bar", { color: "blue", dataKey: "desktop" }],
-    ["area", { color: "green", dataKey: "tablet" }],
-    ["line", { color: "red", dataKey: "mobile" }],
+    ["bar", { color: "blue", dataKey: "desktop", name: "Desktop" }],
+    ["area", { color: "green", dataKey: "tablet", name: "Tablet" }],
+    ["line", { color: "red", dataKey: "mobile", name: "Mobile" }],
   ],
   [],
 )
@@ -275,15 +275,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -315,15 +315,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -355,9 +355,9 @@ To add a legend, set `withLegend` to `true`. The default is `false`. To change t
 ```tsx preview functional
 const series = useMemo<ComposedChart.ComposedProps<CartesianChartData>[]>(
   () => [
-    ["bar", { color: "blue", dataKey: "desktop" }],
-    ["area", { color: "green", dataKey: "tablet" }],
-    ["line", { color: "red", dataKey: "mobile" }],
+    ["bar", { color: "blue", dataKey: "desktop", name: "Desktop" }],
+    ["area", { color: "green", dataKey: "tablet", name: "Tablet" }],
+    ["line", { color: "red", dataKey: "mobile", name: "Mobile" }],
   ],
   [],
 )
@@ -420,15 +420,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -468,15 +468,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -527,15 +527,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -569,15 +569,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -619,9 +619,9 @@ To stack the bars, set `stackId` in `series` or `barProps.stackId` to a string.
 const series = useMemo(
   () =>
     ComposedChart.mergeSeries<CartesianChartData>([
-      ["bar", { dataKey: "desktop", radius: [0, 0, 4, 4] }],
-      ["bar", { dataKey: "tablet", radius: [4, 4, 0, 0] }],
-      ["line", { dataKey: "mobile" }],
+      ["bar", { dataKey: "desktop", name: "Desktop", radius: [0, 0, 4, 4] }],
+      ["bar", { dataKey: "tablet", name: "Tablet", radius: [4, 4, 0, 0] }],
+      ["line", { dataKey: "mobile", name: "Mobile" }],
     ]),
   [],
 )
@@ -653,15 +653,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -694,15 +694,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -733,9 +733,9 @@ To change the bar gap, set `barGap` in `chartProps` and `barSize` in `barProps` 
 const series = useMemo(
   () =>
     ComposedChart.mergeSeries<CartesianChartData>([
-      ["bar", { dataKey: "desktop" }],
-      ["bar", { dataKey: "tablet" }],
-      ["line", { dataKey: "mobile" }],
+      ["bar", { dataKey: "desktop", name: "Desktop" }],
+      ["bar", { dataKey: "tablet", name: "Tablet" }],
+      ["line", { dataKey: "mobile", name: "Mobile" }],
     ]),
   [],
 )
@@ -768,15 +768,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -810,15 +810,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -863,15 +863,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -918,15 +918,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -963,15 +963,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1016,15 +1016,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1060,15 +1060,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1104,15 +1104,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1147,15 +1147,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1188,15 +1188,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1224,15 +1224,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1266,15 +1266,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],

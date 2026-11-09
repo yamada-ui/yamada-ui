@@ -229,7 +229,7 @@ export const Reset: Story = () => {
 
   return (
     <VStack>
-      <Text>files: {files?.length ?? 0}</Text>
+      <Text>Files: {files?.length ?? 0}</Text>
 
       <HStack>
         <FileButton multiple resetRef={resetRef} onChange={onChange}>

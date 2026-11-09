@@ -35,9 +35,9 @@ const createData = (length = 6): Data[] =>
 export const Basic: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -70,11 +70,11 @@ export const Composition: Story = () => {
         dataKey="date"
         tickFormatter={(value) => dayjs(value).format("MMM")}
       />
-      <LineChart.Line dataKey="desktop" dot>
+      <LineChart.Line name="Desktop" dataKey="desktop" dot>
         <LineChart.LabelList />
       </LineChart.Line>
-      <LineChart.Line dataKey="tablet" />
-      <LineChart.Line dataKey="mobile" />
+      <LineChart.Line name="Tablet" dataKey="tablet" />
+      <LineChart.Line name="Mobile" dataKey="mobile" />
     </LineChart.Root>
   )
 }
@@ -82,9 +82,9 @@ export const Composition: Story = () => {
 export const Size: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -114,9 +114,9 @@ export const Size: Story = () => {
 export const ColorScheme: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -146,9 +146,9 @@ export const ColorScheme: Story = () => {
 export const Color: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "blue", dataKey: "tablet" },
-      { color: "green", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "blue", dataKey: "tablet" },
+      { name: "Mobile", color: "green", dataKey: "mobile" },
     ],
     [],
   )
@@ -172,9 +172,9 @@ export const Color: Story = () => {
 export const Type: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -215,9 +215,9 @@ export const Type: Story = () => {
 export const YAxis: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -243,9 +243,9 @@ export const YAxis: Story = () => {
 export const Legend: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "blue", dataKey: "tablet" },
-      { color: "green", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "blue", dataKey: "tablet" },
+      { name: "Mobile", color: "green", dataKey: "mobile" },
     ],
     [],
   )
@@ -316,9 +316,9 @@ export const Name: Story = () => {
 export const Grid: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -347,7 +347,7 @@ export const Grid: Story = () => {
 
 export const Dot: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
-    () => [{ dataKey: "desktop" }],
+    () => [{ name: "Desktop", dataKey: "desktop" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -370,7 +370,7 @@ export const Dot: Story = () => {
 
 export const Unit: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
-    () => [{ dataKey: "desktop" }],
+    () => [{ name: "Desktop", dataKey: "desktop" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -407,7 +407,7 @@ export const Unit: Story = () => {
 
 export const LabelList: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
-    () => [{ dataKey: "desktop" }],
+    () => [{ name: "Desktop", dataKey: "desktop" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -458,9 +458,9 @@ export const LabelList: Story = () => {
 export const Orientation: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -497,9 +497,9 @@ export const Orientation: Story = () => {
 export const Synced: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -539,9 +539,9 @@ export const Synced: Story = () => {
 export const ConnectNull: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -575,9 +575,9 @@ export const ConnectNull: Story = () => {
 export const Formatter: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -610,9 +610,9 @@ export const Formatter: Story = () => {
 export const ReferenceLine: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -649,9 +649,9 @@ export const ReferenceLine: Story = () => {
 export const AxisTickLine: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -679,9 +679,9 @@ export const AxisTickLine: Story = () => {
 export const AxisLabel: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -709,9 +709,9 @@ export const AxisLabel: Story = () => {
 export const Domain: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -741,9 +741,9 @@ export const Domain: Story = () => {
 export const TooltipCursor: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -768,9 +768,9 @@ export const TooltipCursor: Story = () => {
 export const DisabledXAxis: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -790,9 +790,9 @@ export const DisabledXAxis: Story = () => {
 export const DisabledActiveDot: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -817,9 +817,9 @@ export const DisabledActiveDot: Story = () => {
 export const DisabledTooltip: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -841,9 +841,9 @@ export const DisabledTooltip: Story = () => {
 export const CustomAxis: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -877,9 +877,9 @@ export const CustomAxis: Story = () => {
 export const CustomLine: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { color: ["red", "blue"], dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", color: ["red", "blue"], dataKey: "mobile" },
     ],
     [],
   )
@@ -904,9 +904,9 @@ export const CustomLine: Story = () => {
 export const CustomReferenceLine: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -941,9 +941,10 @@ export const CustomReferenceLine: Story = () => {
 export const CustomDot: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet", dot: { fill: "blue" } },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet", dot: { fill: "blue" } },
       {
+        name: "Mobile",
         dataKey: "mobile",
         dot: { fill: ["white", "black"], stroke: "red", strokeWidth: 1 },
       },
@@ -972,9 +973,9 @@ export const CustomDot: Story = () => {
 export const CustomActiveDot: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -999,7 +1000,7 @@ export const CustomActiveDot: Story = () => {
 
 export const CustomLabelList: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
-    () => [{ color: "blue", dataKey: "desktop" }],
+    () => [{ name: "Desktop", color: "blue", dataKey: "desktop" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -1032,9 +1033,9 @@ export const CustomLabelList: Story = () => {
 export const CustomGrid: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -1060,9 +1061,9 @@ export const CustomGrid: Story = () => {
 export const CustomTooltipCursor: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )

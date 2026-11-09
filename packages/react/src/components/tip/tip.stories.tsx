@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Tip } from "."
-import { HStack, MessageCircleWarningIcon, Text, toTitleCase } from "../.."
+import { HStack, MessageCircleWarningIcon, Text } from "../.."
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { For } from "../for"
 
@@ -31,7 +31,7 @@ export const Status: Story = () => {
       {(status) => (
         <HStack key={status} alignSelf="center" gap="xs">
           <Text as="span" whiteSpace="nowrap">
-            Open "{toTitleCase(status)}" Tip
+            Open "{status}" Tip
           </Text>
           <Tip content="俺は俺の責務を全うする!!" status={status} />
         </HStack>
@@ -46,7 +46,7 @@ export const ColorScheme: Story = () => {
       {(status) => (
         <HStack key={status} alignSelf="center" gap="xs">
           <Text as="span" whiteSpace="nowrap">
-            Open "{toTitleCase(status)}" Tip
+            Open "{status}" Tip
           </Text>
           <Tip
             colorScheme={status === "help" ? "mono" : status}
@@ -173,7 +173,7 @@ export const Placement: Story = () => {
       {(placement) => (
         <HStack key={placement} alignSelf="center" gap="xs">
           <Text as="span" whiteSpace="nowrap">
-            Open "{toTitleCase(placement)}" Tip
+            Open "{placement}" Tip
           </Text>
           <Tip content="俺は俺の責務を全うする!!" placement={placement} />
         </HStack>

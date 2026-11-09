@@ -18,9 +18,9 @@ interface Data {
 const series = useMemo<AreaChart.AreaProps<Data>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -121,11 +121,16 @@ const data = useMemo<CartesianChartData[]>(() => createCartesianChartData(), [])
 
 return (
   <AreaChart.Root data={data} chartProps={{ margin: { right: 16 } }}>
-    <AreaChart.Area dataKey="desktop" dot stroke="colorScheme.900">
+    <AreaChart.Area
+      dataKey="desktop"
+      name="Desktop"
+      dot
+      stroke="colorScheme.900"
+    >
       <AreaChart.LabelList />
     </AreaChart.Area>
-    <AreaChart.Area dataKey="tablet" stroke="colorScheme.600" />
-    <AreaChart.Area dataKey="mobile" stroke="colorScheme.300" />
+    <AreaChart.Area dataKey="tablet" name="Tablet" stroke="colorScheme.600" />
+    <AreaChart.Area dataKey="mobile" name="Mobile" stroke="colorScheme.300" />
     <AreaChart.XAxis
       dataKey="date"
       tickFormatter={(value) => dayjs(value).format("MMM")}
@@ -145,9 +150,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -182,7 +187,11 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries(
-      [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
+      [
+        { dataKey: "desktop", name: "Desktop" },
+        { dataKey: "tablet", name: "Tablet" },
+        { dataKey: "mobile", name: "Mobile" },
+      ],
       "blue",
     ),
   [],
@@ -209,9 +218,9 @@ return (
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
-    { dataKey: "desktop", color: "blue" },
-    { dataKey: "tablet", color: "green" },
-    { dataKey: "mobile", color: "red" },
+    { dataKey: "desktop", name: "Desktop", color: "blue" },
+    { dataKey: "tablet", name: "Tablet", color: "green" },
+    { dataKey: "mobile", name: "Mobile", color: "red" },
   ],
   [],
 )
@@ -240,7 +249,11 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries(
-      [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
+      [
+        { dataKey: "desktop", name: "Desktop" },
+        { dataKey: "tablet", name: "Tablet" },
+        { dataKey: "mobile", name: "Mobile" },
+      ],
       "blue",
     ),
   [],
@@ -271,9 +284,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -319,9 +332,9 @@ return (
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
-    { dataKey: "desktop", color: "blue" },
-    { dataKey: "tablet", color: "green" },
-    { dataKey: "mobile", color: "red" },
+    { dataKey: "desktop", name: "Desktop", color: "blue" },
+    { dataKey: "tablet", name: "Tablet", color: "green" },
+    { dataKey: "mobile", name: "Mobile", color: "red" },
   ],
   [],
 )
@@ -350,9 +363,9 @@ return (
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
-    { dataKey: "desktop", color: "blue" },
-    { dataKey: "tablet", color: "green" },
-    { dataKey: "mobile", color: "red" },
+    { dataKey: "desktop", name: "Desktop", color: "blue" },
+    { dataKey: "tablet", name: "Tablet", color: "green" },
+    { dataKey: "mobile", name: "Mobile", color: "red" },
   ],
   [],
 )
@@ -383,9 +396,9 @@ Y軸を表示する場合は、`withYAxis`を`true`に設定します。デフ�
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -414,9 +427,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -447,9 +460,9 @@ return (
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
-    { dataKey: "desktop", color: "blue" },
-    { dataKey: "tablet", color: "green" },
-    { dataKey: "mobile", color: "red" },
+    { dataKey: "desktop", name: "Desktop", color: "blue" },
+    { dataKey: "tablet", name: "Tablet", color: "green" },
+    { dataKey: "mobile", name: "Mobile", color: "red" },
   ],
   [],
 )
@@ -510,9 +523,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -550,7 +563,7 @@ return (
 
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
-  () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  () => AreaChart.mergeSeries([{ dataKey: "desktop", name: "Desktop" }]),
   [],
 )
 const data = useMemo(() => createCartesianChartData(), [])
@@ -577,7 +590,7 @@ return (
 
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
-  () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  () => AreaChart.mergeSeries([{ dataKey: "desktop", name: "Desktop" }]),
   [],
 )
 const data = useMemo(() => createCartesianChartData(), [])
@@ -604,7 +617,7 @@ return (
 
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
-  () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  () => AreaChart.mergeSeries([{ dataKey: "desktop", name: "Desktop" }]),
   [],
 )
 const data = useMemo(() => createCartesianChartData(), [])
@@ -647,9 +660,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -693,9 +706,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -731,9 +744,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -775,9 +788,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -813,9 +826,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -848,9 +861,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -885,9 +898,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -914,9 +927,9 @@ X軸を非表示にする場合は、`withXAxis`を`false`に設定します。�
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -941,9 +954,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -973,9 +986,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -1000,9 +1013,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -1039,10 +1052,11 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet", dot: { fill: "blue" } },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet", dot: { fill: "blue" } },
       {
         dataKey: "mobile",
+        name: "Mobile",
         dot: { fill: ["white", "black"], stroke: "red", strokeWidth: 1 },
       },
     ]),
@@ -1073,9 +1087,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -1102,7 +1116,7 @@ return (
 
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
-  () => [{ color: "blue", dataKey: "desktop" }],
+  () => [{ color: "blue", dataKey: "desktop", name: "Desktop" }],
   [],
 )
 const data = useMemo(() => createCartesianChartData(), [])
@@ -1138,9 +1152,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -1169,9 +1183,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )

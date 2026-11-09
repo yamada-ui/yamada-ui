@@ -23,18 +23,21 @@ const randomValue = (min = 1000, max = 5000) =>
   Math.floor(Math.random() * (max - min + 1)) + min
 
 const createData = (): Data[] => [
-  { browser: "chrome", downloads: randomValue(), visits: randomValue() },
-  { browser: "edge", downloads: randomValue(), visits: randomValue() },
-  { browser: "firefox", downloads: randomValue(), visits: randomValue() },
-  { browser: "opera", downloads: randomValue(), visits: randomValue() },
-  { browser: "safari", downloads: randomValue(), visits: randomValue() },
-  { browser: "other", downloads: randomValue(), visits: randomValue() },
+  { browser: "Chrome", downloads: randomValue(), visits: randomValue() },
+  { browser: "Edge", downloads: randomValue(), visits: randomValue() },
+  { browser: "Firefox", downloads: randomValue(), visits: randomValue() },
+  { browser: "Opera", downloads: randomValue(), visits: randomValue() },
+  { browser: "Safari", downloads: randomValue(), visits: randomValue() },
+  { browser: "Other", downloads: randomValue(), visits: randomValue() },
 ]
 
 export const Basic: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -48,8 +51,8 @@ export const Composition: Story = () => {
   return (
     <RadarChart.Root data={data}>
       <RadarChart.Tooltip />
-      <RadarChart.Radar color="blue" dataKey="visits" />
-      <RadarChart.Radar color="green" dataKey="downloads" />
+      <RadarChart.Radar name="Visits" color="blue" dataKey="visits" />
+      <RadarChart.Radar name="Downloads" color="green" dataKey="downloads" />
       <RadarChart.RadiusAxis />
       <RadarChart.AngleAxis dataKey="browser" />
     </RadarChart.Root>
@@ -59,7 +62,10 @@ export const Composition: Story = () => {
 export const Size: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -90,7 +96,10 @@ export const ColorScheme: Story = () => {
           data={data}
           series={
             RadarChart.mergeSeries(
-              [{ dataKey: "visits" }, { dataKey: "downloads" }],
+              [
+                { name: "Visits", dataKey: "visits" },
+                { name: "Downloads", dataKey: "downloads" },
+              ],
               row,
             ) as RadarChart.RadarProps<Data>[]
           }
@@ -104,7 +113,10 @@ export const Gradient: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
       RadarChart.mergeSeries(
-        [{ dataKey: "visits" }, { dataKey: "downloads" }],
+        [
+          { name: "Visits", dataKey: "visits" },
+          { name: "Downloads", dataKey: "downloads" },
+        ],
         "blue",
       ),
     [],
@@ -117,8 +129,8 @@ export const Gradient: Story = () => {
 export const Color: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "visits" },
-      { color: "green", dataKey: "downloads" },
+      { name: "Visits", color: "red", dataKey: "visits" },
+      { name: "Downloads", color: "green", dataKey: "downloads" },
     ],
     [],
   )
@@ -130,8 +142,8 @@ export const Color: Story = () => {
 export const Filled: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "visits" },
-      { color: "green", dataKey: "downloads" },
+      { name: "Visits", color: "red", dataKey: "visits" },
+      { name: "Downloads", color: "green", dataKey: "downloads" },
     ],
     [],
   )
@@ -151,7 +163,10 @@ export const RadiusAxis: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
       RadarChart.mergeSeries(
-        [{ dataKey: "visits" }, { dataKey: "downloads" }],
+        [
+          { name: "Visits", dataKey: "visits" },
+          { name: "Downloads", dataKey: "downloads" },
+        ],
         "blue",
       ),
     [],
@@ -171,8 +186,8 @@ export const RadiusAxis: Story = () => {
 export const Legend: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "visits" },
-      { color: "green", dataKey: "downloads" },
+      { name: "Visits", color: "red", dataKey: "visits" },
+      { name: "Downloads", color: "green", dataKey: "downloads" },
     ],
     [],
   )
@@ -212,7 +227,7 @@ export const Legend: Story = () => {
 
 export const Label: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
-    () => [{ color: "blue", dataKey: "visits" }],
+    () => [{ name: "Visits", color: "blue", dataKey: "visits" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -230,7 +245,10 @@ export const Label: Story = () => {
 export const GridType: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -253,7 +271,10 @@ export const GridType: Story = () => {
 export const GridFilled: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -276,8 +297,8 @@ export const GridFilled: Story = () => {
 export const Line: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "visits" },
-      { color: "green", dataKey: "downloads" },
+      { name: "Visits", color: "red", dataKey: "visits" },
+      { name: "Downloads", color: "green", dataKey: "downloads" },
     ],
     [],
   )
@@ -296,7 +317,10 @@ export const Line: Story = () => {
 export const Dot: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -314,7 +338,10 @@ export const Dot: Story = () => {
 export const Synced: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -339,7 +366,7 @@ export const Synced: Story = () => {
 
 export const Formatter: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
-    () => [{ color: "blue", dataKey: "visits" }],
+    () => [{ name: "Visits", color: "blue", dataKey: "visits" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -368,7 +395,10 @@ export const Formatter: Story = () => {
 export const AngleAxisLine: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -386,7 +416,10 @@ export const AngleAxisLine: Story = () => {
 export const AngleAxisTickLine: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -404,7 +437,10 @@ export const AngleAxisTickLine: Story = () => {
 export const Domain: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -428,7 +464,10 @@ export const Domain: Story = () => {
 export const TooltipCursor: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -446,7 +485,10 @@ export const TooltipCursor: Story = () => {
 export const DisabledAngleAxis: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -467,7 +509,10 @@ export const DisabledAngleAxis: Story = () => {
 export const DisabledGrid: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -485,7 +530,10 @@ export const DisabledGrid: Story = () => {
 export const DisabledActiveDot: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -503,7 +551,10 @@ export const DisabledActiveDot: Story = () => {
 export const DisabledTooltip: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -521,7 +572,10 @@ export const DisabledTooltip: Story = () => {
 export const CustomRadar: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -540,8 +594,8 @@ export const CustomDot: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
       RadarChart.mergeSeries([
-        { dataKey: "visits", dot: { fill: "blue" } },
-        { dataKey: "downloads" },
+        { name: "Visits", dataKey: "visits", dot: { fill: "blue" } },
+        { name: "Downloads", dataKey: "downloads" },
       ]),
     [],
   )
@@ -561,7 +615,10 @@ export const CustomDot: Story = () => {
 export const CustomActiveDot: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -579,7 +636,7 @@ export const CustomActiveDot: Story = () => {
 
 export const CustomLabel: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
-    () => [{ color: "blue", dataKey: "visits" }],
+    () => [{ name: "Visits", color: "blue", dataKey: "visits" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -602,7 +659,10 @@ export const CustomLabel: Story = () => {
 export const CustomTooltipCursor: Story = () => {
   const series = useMemo<RadarChart.RadarProps<Data>[]>(
     () =>
-      RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+      RadarChart.mergeSeries([
+        { name: "Visits", dataKey: "visits" },
+        { name: "Downloads", dataKey: "downloads" },
+      ]),
     [],
   )
   const data = useMemo(() => createData(), [])

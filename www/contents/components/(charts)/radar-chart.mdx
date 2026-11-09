@@ -17,38 +17,41 @@ interface Data {
 
 const series = useMemo<RadarChart.RadarProps<Data>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<Data[]>(
   () => [
     {
-      browser: "chrome",
+      browser: "Chrome",
       visits: faker.number.int({ max: 5000, min: 1000 }),
       downloads: faker.number.int({ max: 5000, min: 1000 }),
     },
     {
-      browser: "edge",
+      browser: "Edge",
       visits: faker.number.int({ max: 5000, min: 1000 }),
       downloads: faker.number.int({ max: 5000, min: 1000 }),
     },
     {
-      browser: "firefox",
+      browser: "Firefox",
       visits: faker.number.int({ max: 5000, min: 1000 }),
       downloads: faker.number.int({ max: 5000, min: 1000 }),
     },
     {
-      browser: "opera",
+      browser: "Opera",
       visits: faker.number.int({ max: 5000, min: 1000 }),
       downloads: faker.number.int({ max: 5000, min: 1000 }),
     },
     {
-      browser: "safari",
+      browser: "Safari",
       visits: faker.number.int({ max: 5000, min: 1000 }),
       downloads: faker.number.int({ max: 5000, min: 1000 }),
     },
     {
-      browser: "other",
+      browser: "Other",
       visits: faker.number.int({ max: 5000, min: 1000 }),
       downloads: faker.number.int({ max: 5000, min: 1000 }),
     },
@@ -99,8 +102,8 @@ const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
 return (
   <RadarChart.Root data={data}>
     <RadarChart.Tooltip />
-    <RadarChart.Radar color="blue" dataKey="visits" />
-    <RadarChart.Radar color="green" dataKey="downloads" />
+    <RadarChart.Radar color="blue" dataKey="visits" name="Visits" />
+    <RadarChart.Radar color="green" dataKey="downloads" name="Downloads" />
     <RadarChart.RadiusAxis />
     <RadarChart.AngleAxis dataKey="browser" />
   </RadarChart.Root>
@@ -112,7 +115,10 @@ return (
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -140,7 +146,10 @@ return (
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
     RadarChart.mergeSeries(
-      [{ dataKey: "visits" }, { dataKey: "downloads" }],
+      [
+        { dataKey: "visits", name: "Visits" },
+        { dataKey: "downloads", name: "Downloads" },
+      ],
       "blue",
     ),
   [],
@@ -155,8 +164,8 @@ return <RadarChart.Root data={data} nameKey="browser" series={series} />
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () => [
-    { color: "red", dataKey: "visits" },
-    { color: "green", dataKey: "downloads" },
+    { color: "red", dataKey: "visits", name: "Visits" },
+    { color: "green", dataKey: "downloads", name: "Downloads" },
   ],
   [],
 )
@@ -173,7 +182,10 @@ To add the radius axis, set `withRadiusAxis` to `true`. The default is `false`.
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
     RadarChart.mergeSeries(
-      [{ dataKey: "visits" }, { dataKey: "downloads" }],
+      [
+        { dataKey: "visits", name: "Visits" },
+        { dataKey: "downloads", name: "Downloads" },
+      ],
       "blue",
     ),
   [],
@@ -198,7 +210,10 @@ To change the radius axis angle, set `radiusAxisProps.angle` to the desired angl
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
     RadarChart.mergeSeries(
-      [{ dataKey: "visits" }, { dataKey: "downloads" }],
+      [
+        { dataKey: "visits", name: "Visits" },
+        { dataKey: "downloads", name: "Downloads" },
+      ],
       "blue",
     ),
   [],
@@ -223,8 +238,8 @@ To add the legend, set `withLegend` to `true`. To change the placement, set `leg
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () => [
-    { color: "red", dataKey: "visits" },
-    { color: "green", dataKey: "downloads" },
+    { color: "red", dataKey: "visits", name: "Visits" },
+    { color: "green", dataKey: "downloads", name: "Downloads" },
   ],
   [],
 )
@@ -241,7 +256,7 @@ To display labels, set `label` or `radarProps.label` to `true`. The default is `
 
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
-  () => [{ color: "blue", dataKey: "visits" }],
+  () => [{ color: "blue", dataKey: "visits", name: "Visits" }],
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -263,7 +278,10 @@ To change the grid type, set `gridProps.gridType` to `"polygon"` or `"circle"`.
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -290,7 +308,10 @@ return (
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -317,8 +338,8 @@ return (
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () => [
-    { color: "red", dataKey: "visits" },
-    { color: "green", dataKey: "downloads" },
+    { color: "red", dataKey: "visits", name: "Visits" },
+    { color: "green", dataKey: "downloads", name: "Downloads" },
   ],
   [],
 )
@@ -341,7 +362,10 @@ To display dots, set `dot` or `radarProps.dot` to `true`.
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -363,7 +387,10 @@ To sync charts, set `syncId` to a string.
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -392,7 +419,7 @@ To format the chart, use `formatter` or `tickFormatter` etc.
 
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
-  () => [{ color: "blue", dataKey: "visits" }],
+  () => [{ color: "blue", dataKey: "visits", name: "Visits" }],
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -425,7 +452,10 @@ To display the axis line of the angle axis, set `angleAxisProps.axisLine` to `tr
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -447,7 +477,10 @@ To display tick lines of the angle axis, set `angleAxisProps.tickLine` to `true`
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -469,7 +502,10 @@ To set the value range, set `radiusAxisProps.domain` to an array in `radiusAxisP
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -497,7 +533,10 @@ To display the tooltip cursor, set `tooltipProps.cursor` to `true`.
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -519,7 +558,10 @@ To hide the angle axis, set `withAngleAxis` to `false`. The default is `true`.
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -541,7 +583,10 @@ To hide the grid, set `withGrid` to `false`. The default is `true`.
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -563,7 +608,10 @@ To hide active dots, set `activeDot` or `radarProps.activeDot` to `false`.
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -585,7 +633,10 @@ To hide the tooltip, set `withTooltip` to `false`. The default is `true`.
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -606,8 +657,8 @@ return (
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
     RadarChart.mergeSeries([
-      { dataKey: "visits", dot: { fill: "blue" } },
-      { dataKey: "downloads" },
+      { dataKey: "visits", name: "Visits", dot: { fill: "blue" } },
+      { dataKey: "downloads", name: "Downloads" },
     ]),
   [],
 )
@@ -629,7 +680,10 @@ return (
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -649,7 +703,7 @@ return (
 
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
-  () => [{ color: "blue", dataKey: "visits" }],
+  () => [{ color: "blue", dataKey: "visits", name: "Visits" }],
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])
@@ -674,7 +728,10 @@ return (
 ```tsx preview functional
 const series = useMemo<RadarChart.RadarProps<PolarChartData>[]>(
   () =>
-    RadarChart.mergeSeries([{ dataKey: "visits" }, { dataKey: "downloads" }]),
+    RadarChart.mergeSeries([
+      { dataKey: "visits", name: "Visits" },
+      { dataKey: "downloads", name: "Downloads" },
+    ]),
   [],
 )
 const data = useMemo<PolarChartData[]>(() => createPolarChartData(), [])

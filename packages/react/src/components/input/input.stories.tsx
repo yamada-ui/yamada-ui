@@ -22,7 +22,7 @@ const meta: Meta<typeof Input> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <Input placeholder="Placeholder" />
+  return <Input placeholder="Your name" />
 }
 
 export const Variant: Story = () => {

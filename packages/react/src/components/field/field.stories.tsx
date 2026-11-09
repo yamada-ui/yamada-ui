@@ -16,7 +16,7 @@ export default meta
 export const Basic: Story = () => {
   return (
     <Field.Root label="Email address">
-      <Input type="email" placeholder="your email address" />
+      <Input type="email" placeholder="Your email address" />
     </Field.Root>
   )
 }
@@ -27,7 +27,7 @@ export const HelperMessage: Story = () => {
       helperMessage="We'll never share your email."
       label="Email address"
     >
-      <Input type="email" placeholder="your email address" />
+      <Input type="email" placeholder="Your email address" />
     </Field.Root>
   )
 }
@@ -35,7 +35,7 @@ export const HelperMessage: Story = () => {
 export const ErrorMessage: Story = () => {
   return (
     <Field.Root errorMessage="Email is required." invalid label="Email address">
-      <Input type="email" placeholder="your email address" />
+      <Input type="email" placeholder="Your email address" />
     </Field.Root>
   )
 }
@@ -50,7 +50,7 @@ export const Replace: Story = () => {
         label="Email address"
         replace
       >
-        <Input type="email" placeholder="your email address" />
+        <Input type="email" placeholder="Your email address" />
       </Field.Root>
 
       <Field.Root
@@ -60,7 +60,7 @@ export const Replace: Story = () => {
         label="Email address"
         replace={false}
       >
-        <Input type="email" placeholder="your email address" />
+        <Input type="email" placeholder="Your email address" />
       </Field.Root>
     </>
   )
@@ -78,7 +78,7 @@ export const Orientation: Story = () => {
           orientation={row}
           required
         >
-          <Input type="email" placeholder="your email address" />
+          <Input type="email" placeholder="Your email address" />
         </Field.Root>
       )}
     </PropsTable>
@@ -93,7 +93,7 @@ export const Required: Story = () => {
       label="Email address"
       required
     >
-      <Input type="email" placeholder="your email address" />
+      <Input type="email" placeholder="Your email address" />
     </Field.Root>
   )
 }
@@ -106,7 +106,7 @@ export const Disabled: Story = () => {
       helperMessage="We'll never share your email."
       label="Email address"
     >
-      <Input type="email" placeholder="your email address" />
+      <Input type="email" placeholder="Your email address" />
     </Field.Root>
   )
 }
@@ -119,7 +119,7 @@ export const ReadOnly: Story = () => {
       label="Email address"
       readOnly
     >
-      <Input type="email" placeholder="your email address" />
+      <Input type="email" placeholder="Your email address" />
     </Field.Root>
   )
 }
@@ -128,7 +128,7 @@ export const CustomField: Story = () => {
   return (
     <Field.Root helperMessage="We'll never share your email.">
       <Field.Label color="blue">Email address</Field.Label>
-      <Input type="email" placeholder="your email address" />
+      <Input type="email" placeholder="Your email address" />
     </Field.Root>
   )
 }
@@ -136,7 +136,7 @@ export const CustomField: Story = () => {
 export const CustomHelperMessage: Story = () => {
   return (
     <Field.Root label="Email address">
-      <Input type="email" placeholder="your email address" />
+      <Input type="email" placeholder="Your email address" />
       <Field.HelperMessage color="red">
         We'll never share your email.
       </Field.HelperMessage>
@@ -147,7 +147,7 @@ export const CustomHelperMessage: Story = () => {
 export const CustomErrorMessage: Story = () => {
   return (
     <Field.Root invalid label="Email address">
-      <Input type="email" placeholder="your email address" />
+      <Input type="email" placeholder="Your email address" />
       <Field.ErrorMessage color="green">Email is required.</Field.ErrorMessage>
     </Field.Root>
   )
@@ -161,24 +161,24 @@ export const CustomRequiredIndicator: Story = () => {
         required
         requiredIndicator={
           <Tag colorScheme="red" size="sm">
-            required
+            Required
           </Tag>
         }
       >
-        <Input type="email" placeholder="your email address" />
+        <Input type="email" placeholder="Your email address" />
       </Field.Root>
 
       <Field.Root required>
         <Field.Label
           requiredIndicator={
             <Tag colorScheme="red" size="sm">
-              required
+              Required
             </Tag>
           }
         >
           Email address
         </Field.Label>
-        <Input type="email" placeholder="your email address" />
+        <Input type="email" placeholder="Your email address" />
       </Field.Root>
     </>
   )
@@ -191,24 +191,24 @@ export const CustomOptionalIndicator: Story = () => {
         label="Email address"
         optionalIndicator={
           <Tag colorScheme="mono" size="sm">
-            optional
+            Optional
           </Tag>
         }
       >
-        <Input type="email" placeholder="your email address" />
+        <Input type="email" placeholder="Your email address" />
       </Field.Root>
 
       <Field.Root>
         <Field.Label
           optionalIndicator={
             <Tag colorScheme="mono" size="sm">
-              optional
+              Optional
             </Tag>
           }
         >
           Email address
         </Field.Label>
-        <Input type="email" placeholder="your email address" />
+        <Input type="email" placeholder="Your email address" />
       </Field.Root>
     </>
   )

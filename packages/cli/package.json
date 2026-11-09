@@ -73,7 +73,7 @@
   "devDependencies": {
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.8.0",
-    "@types/update-notifier": "6.0.8",
+    "@types/update-notifier": "6.0.9",
     "@types/validate-npm-package-name": "^4.0.2",
     "@types/yamljs": "catalog:",
     "@yamada-ui/workspace": "workspace:*",

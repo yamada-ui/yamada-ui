@@ -37,7 +37,7 @@
     "eslint-plugin-perfectionist": "^5.13.0",
     "eslint-plugin-testing-library": "^7.16.2",
     "eslint-plugin-unused-imports": "catalog:",
-    "globals": "^17.13.0",
+    "globals": "^17.14.0",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
     "oxlint-tsgolint": "catalog:",

@@ -15,17 +15,18 @@ import {
   HStack,
   Icon,
   IconButton,
-  icons,
   LinkIcon,
   Separator,
   Tooltip,
+  toPascalCase,
   useClipboard,
   useDisclosure,
   VStack,
 } from "@yamada-ui/react"
+import { DynamicIcon } from "@yamada-ui/react/components/icon/dynamic"
 import { useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
-import { Fragment, memo, useState } from "react"
+import { memo, useState } from "react"
 import { CodePreview } from "@/components"
 import data from "@/data/icons.json"
 
@@ -43,17 +44,16 @@ export const PreviewDrawer = memo(function PreviewDrawer({
 }: PreviewDrawerProps) {
   const searchParams = useSearchParams()
   const defaultName = searchParams.get("name")
-  const defaultOpen = !!defaultName && defaultName in icons
+  const defaultOpen = !!defaultName && defaultName in data
   const [item, setItem] = useState<Item | null>(() => {
     if (!defaultOpen) return null
 
     return {
       name: defaultName,
-      Icon: icons[defaultName as keyof typeof icons],
       ...data[defaultName as keyof typeof data],
-    }
+    } as Item
   })
-  const { name, Icon: PreviewIcon = Fragment, related } = item ?? {}
+  const component = `${toPascalCase(item?.name ?? "")}Icon`
   const t = useTranslations("icons")
   const { open, onClose, onOpen } = useDisclosure({
     defaultOpen,
@@ -96,7 +96,9 @@ export const PreviewDrawer = memo(function PreviewDrawer({
           position="relative"
           rounded="l4"
         >
-          <PreviewIcon fontSize="12rem" zIndex="1" />
+          {item?.name ? (
+            <DynamicIcon name={item.name} fontSize="12rem" zIndex="1" />
+          ) : null}
 
           <Icon
             boxSize="full"
@@ -129,11 +131,11 @@ export const PreviewDrawer = memo(function PreviewDrawer({
         >
           <Flex flex="1" minW="0">
             <Heading as="h3" lineClamp={1}>
-              {name}
+              {component}
             </Heading>
           </Flex>
 
-          <CopyButton value={name} />
+          <CopyButton value={component} />
           <CopyUrlButton />
 
           <Drawer.CloseTrigger>
@@ -144,14 +146,14 @@ export const PreviewDrawer = memo(function PreviewDrawer({
         <VStack minW="0">
           <CodePreview
             lang="tsx"
-            code={`import { ${name} } from "@yamada-ui/react"`}
+            code={`import { ${component} } from "@yamada-ui/react"`}
             tabIndex={-1}
           />
 
-          <CodePreview lang="tsx" code={`<${name} />`} tabIndex={-1} />
+          <CodePreview lang="tsx" code={`<${component} />`} tabIndex={-1} />
         </VStack>
 
-        {related ? (
+        {item?.related ? (
           <>
             <Separator gridColumn={{ base: "1 / 3", lg: "1 / 2" }} />
             <Grid
@@ -161,12 +163,12 @@ export const PreviewDrawer = memo(function PreviewDrawer({
               overflowY="auto"
               templateColumns="repeat(auto-fill, minmax(3.5rem, 1fr))"
             >
-              {related.map((name, index) => {
-                const Icon = icons[name as keyof typeof icons]
+              {item.related.map((name) => {
+                const component = `${toPascalCase(name)}Icon`
                 const rest = data[name as keyof typeof data]
 
                 return (
-                  <Tooltip key={index} content={name}>
+                  <Tooltip key={name} content={component}>
                     <IconButton
                       size="2xl"
                       variant="subtle"
@@ -175,9 +177,9 @@ export const PreviewDrawer = memo(function PreviewDrawer({
                         base: "bg.panel",
                         _hover: "bg.subtle",
                       }}
-                      icon={<Icon fontSize="2xl" />}
+                      icon={<DynamicIcon name={name} fontSize="2xl" />}
                       onClick={() => {
-                        setItem({ name, Icon, ...rest })
+                        setItem({ name, ...rest } as Item)
                         replaceQuery({ name })
                       }}
                     />

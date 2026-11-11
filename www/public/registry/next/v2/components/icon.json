@@ -46,6 +46,14 @@
   "section": "components",
   "sources": [
     {
+      "name": "dynamic/dynamic-icon.tsx",
+      "content": "\"use client\"\n\nimport type { IconName } from \"lucide-react/dynamic\"\nimport type { ComponentProps } from \"react\"\nimport type { IconProps } from \"../icon\"\nimport { DynamicIcon as OriginalDynamicIcon } from \"lucide-react/dynamic\"\nimport { Icon, withContext } from \"../icon\"\n\nexport interface DynamicIconProps extends IconProps {\n  /**\n   * The name of the Lucide icon to load.\n   */\n  name: IconName\n  /**\n   * The component rendered while the icon is loading.\n   */\n  fallback?: ComponentProps<typeof OriginalDynamicIcon>[\"fallback\"]\n}\n\n/**\n * `DynamicIcon` dynamically loads a Lucide icon by name.\n *\n * @see https://yamada-ui.com/docs/components/icon\n */\nexport const DynamicIcon = withContext<\"svg\", DynamicIconProps>((props) => (\n  <Icon as={OriginalDynamicIcon} {...props} />\n))()\n"
+    },
+    {
+      "name": "dynamic/index.ts",
+      "content": "export { DynamicIcon } from \"./dynamic-icon\"\nexport type { DynamicIconProps } from \"./dynamic-icon\"\nexport { iconNames } from \"lucide-react/dynamic\"\nexport type { IconName } from \"lucide-react/dynamic\"\n"
+    },
+    {
       "name": "icon.style.ts",
       "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const iconStyle = defineComponentStyle({\n  base: {\n    \"--size\": \"1em\",\n    color: \"currentColor\",\n    display: \"inline-block\",\n    flexShrink: 0,\n    lineHeight: \"1em\",\n  },\n})\n\nexport type IconStyle = typeof iconStyle\n"
     },
@@ -2767,7 +2775,7 @@
     },
     {
       "name": "index.ts",
-      "content": "export * from \"./icon.style\"\nexport { Icon, IconPropsContext, useIconPropsContext } from \"./icon\"\nexport type { IconProps } from \"./icon\"\nexport * from \"./icons\"\nexport * as icons from \"./icons\"\nexport { LucideIcon } from \"./lucide-icon\"\nexport type { LucideIconProps } from \"./lucide-icon\"\n"
+      "content": "export * from \"./icon.style\"\nexport { Icon, IconPropsContext, useIconPropsContext } from \"./icon\"\nexport type { IconProps } from \"./icon\"\nexport * from \"./icons\"\nexport { LucideIcon } from \"./lucide-icon\"\nexport type { LucideIconProps } from \"./lucide-icon\"\n"
     },
     {
       "name": "lucide-icon.tsx",

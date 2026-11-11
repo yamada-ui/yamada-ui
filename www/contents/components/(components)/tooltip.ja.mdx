@@ -35,6 +35,10 @@ import { Tooltip } from "@workspaces/ui"
 <Tooltip />
 ```
 
+:::tip
+`Tooltip`の子要素がアイコンのみの場合は、[Tip](/docs/components/tip)を使用します。
+:::
+
 ### 配置を変更する
 
 配置を変更する場合は、`placement`に`"end"`や`"center-start"`などを設定します。デフォルトでは、`"start"`が設定されています。
@@ -62,7 +66,7 @@ import { Tooltip } from "@workspaces/ui"
     {(placement, index) => (
       <Tooltip key={index} content="へっ！きたねぇ花火だ" placement={placement}>
         <Button minW="xs" w="fit-content">
-          Open "{toTitleCase(placement)}" Tooltip
+          Open "{placement}" Tooltip
         </Button>
       </Tooltip>
     )}

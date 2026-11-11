@@ -1,4 +1,4 @@
-import type { CSSObject } from "./index.types"
+import type { CSSObject } from "./index.type"
 import type { Transform } from "./utils"
 
 export const focusRingStyle = {
@@ -21,6 +21,7 @@ export const focusRingStyle = {
     outlineWidth: "{focus-ring-width, 2px}",
   },
   none: {
+    boxShadow: "none",
     outline: "none",
   },
   outline: {

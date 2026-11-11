@@ -38,6 +38,14 @@ export const cssProps = new Set<string>([
   ...vendorProperties,
 ])
 
+const ariaSpaceSeparatedProps = new Set<string>([
+  "aria-controls",
+  "aria-describedby",
+  "aria-flowto",
+  "aria-labelledby",
+  "aria-owns",
+])
+
 export type ShouldForwardProp = (prop: string) => boolean
 
 export function createShouldForwardProp(
@@ -52,7 +60,8 @@ export function createShouldForwardProp(
   }
 }
 
-interface MergePropsOptions {
+export interface MergePropsOptions {
+  mergeAria?: boolean
   mergeClassName?: boolean
   mergeCSS?: boolean
   mergeEvent?: boolean
@@ -68,6 +77,7 @@ export function mergeProps<Y extends (Dict | undefined)[]>(
 ): (options?: MergePropsOptions) => MergeAll<Y>
 export function mergeProps(...args: (Dict | undefined)[]) {
   return function ({
+    mergeAria = true,
     mergeClassName = true,
     mergeCSS = true,
     mergeEvent = true,
@@ -98,6 +108,12 @@ export function mergeProps(...args: (Dict | undefined)[]) {
         }
 
         if (mergeClassName && (key === "className" || key === "class")) {
+          result[key] = cx(result[key], props[key])
+
+          continue
+        }
+
+        if (mergeAria && ariaSpaceSeparatedProps.has(key)) {
           result[key] = cx(result[key], props[key])
 
           continue

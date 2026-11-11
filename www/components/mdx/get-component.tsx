@@ -20,6 +20,20 @@ import dayjs from "dayjs"
 import { AnimatePresence } from "motion/react"
 import React, { isValidElement } from "react"
 import { useForm } from "react-hook-form"
+import {
+  SiFigma,
+  SiGithub,
+  SiGitlab,
+  SiJavascript,
+  SiNextdotjs,
+  SiReact,
+  SiStorybook,
+  SiTypescript,
+  SiVercel,
+  SiX,
+} from "react-icons/si"
+import Markdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 import { transform as originalTransform } from "sucrase"
 
 interface TableData {
@@ -39,23 +53,28 @@ const columnHelper = createColumnHelper<TableData>()
 
 const columns = [
   columnHelper.accessor("id", {
-    footer: (info) => info.column.id,
+    footer: "ID",
+    header: "ID",
     cellProps: { numeric: true },
   }),
   columnHelper.accessor("firstName", {
-    footer: (info) => info.column.id,
+    footer: "First name",
+    header: "First name",
     lineClamp: 1,
   }),
   columnHelper.accessor("lastName", {
-    footer: (info) => info.column.id,
+    footer: "Last name",
+    header: "Last name",
     lineClamp: 1,
   }),
   columnHelper.accessor("age", {
-    footer: (info) => info.column.id,
+    footer: "Age",
+    header: "Age",
     cellProps: { numeric: true },
   }),
   columnHelper.accessor("email", {
-    footer: (info) => info.column.id,
+    footer: "Email",
+    header: "Email",
     lineClamp: 1,
   }),
 ]
@@ -63,21 +82,26 @@ const columns = [
 const columnsFull = [
   ...columns,
   columnHelper.accessor("phone", {
-    footer: (info) => info.column.id,
+    footer: "Phone",
+    header: "Phone",
   }),
   columnHelper.accessor("role", {
-    footer: (info) => info.column.id,
+    footer: "Role",
+    header: "Role",
   }),
   columnHelper.accessor("status", {
-    footer: (info) => info.column.id,
+    footer: "Status",
+    header: "Status",
   }),
   columnHelper.accessor("createdAt", {
     cell: (info) => info.getValue().toLocaleDateString(),
-    footer: (info) => info.column.id,
+    footer: "Created at",
+    header: "Created at",
   }),
   columnHelper.accessor("updatedAt", {
     cell: (info) => info.getValue().toLocaleDateString(),
-    footer: (info) => info.column.id,
+    footer: "Updated at",
+    header: "Updated at",
   }),
 ]
 
@@ -91,8 +115,8 @@ function createTableData(length = 10): TableData[] {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
       phone: faker.phone.number(),
-      role: faker.helpers.arrayElement(["admin", "user"]),
-      status: faker.helpers.arrayElement(["active", "inactive"]),
+      role: faker.helpers.arrayElement(["Admin", "User"]),
+      status: faker.helpers.arrayElement(["Active", "Inactive"]),
       updatedAt: faker.date.past(),
     }
   })
@@ -128,39 +152,39 @@ interface PolarChartData {
 function createPolarChartData(min = 1000, max = 5000): PolarChartData[] {
   return [
     {
-      browser: "chrome",
+      browser: "Chrome",
       downloads: faker.number.int({ max, min }),
       visits: faker.number.int({ max, min }),
     },
     {
-      browser: "edge",
+      browser: "Edge",
       downloads: faker.number.int({ max, min }),
       visits: faker.number.int({ max, min }),
     },
     {
-      browser: "firefox",
+      browser: "Firefox",
       downloads: faker.number.int({ max, min }),
       visits: faker.number.int({ max, min }),
     },
     {
-      browser: "opera",
+      browser: "Opera",
       downloads: faker.number.int({ max, min }),
       visits: faker.number.int({ max, min }),
     },
     {
-      browser: "safari",
+      browser: "Safari",
       downloads: faker.number.int({ max, min }),
       visits: faker.number.int({ max, min }),
     },
     {
-      browser: "other",
+      browser: "Other",
       downloads: faker.number.int({ max, min }),
       visits: faker.number.int({ max, min }),
     },
   ]
 }
 
-const treeItems: Tree.ItemType[] = [
+const treeItems: Tree.Item[] = [
   {
     children: [
       { label: "react" },
@@ -198,7 +222,7 @@ const treeItems: Tree.ItemType[] = [
   { label: "README.md" },
 ]
 
-const sidebarItems: Sidebar.ItemType[] = [
+const sidebarItems: Sidebar.Item[] = [
   {
     children: [
       { label: "Installation", value: "/get-started/installation" },
@@ -249,6 +273,69 @@ const sidebarItems: Sidebar.ItemType[] = [
     ],
     group: true,
     label: "Theming",
+  },
+]
+
+const marqueeItems = [
+  {
+    href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    color: "#f7df1e",
+    icon: SiJavascript,
+    label: "JavaScript",
+  },
+  {
+    href: "https://www.typescriptlang.org",
+    color: "#3178c6",
+    icon: SiTypescript,
+    label: "TypeScript",
+  },
+  {
+    href: "https://github.com",
+    color: "currentColor",
+    icon: SiGithub,
+    label: "GitHub",
+  },
+  {
+    href: "https://gitlab.com",
+    color: "#fc6d26",
+    icon: SiGitlab,
+    label: "GitLab",
+  },
+  {
+    href: "https://vercel.com",
+    color: "currentColor",
+    icon: SiVercel,
+    label: "Vercel",
+  },
+  {
+    href: "https://react.dev",
+    color: "#61dafb",
+    icon: SiReact,
+    label: "React",
+  },
+  {
+    href: "https://nextjs.org",
+    color: "currentColor",
+    icon: SiNextdotjs,
+    label: "Next.js",
+  },
+  {
+    href: "https://storybook.js.org",
+    color: "#ff4785",
+    icon: SiStorybook,
+    label: "Storybook",
+  },
+  {
+    href: "https://www.figma.com",
+    color: "#F24E1E",
+    icon: SiFigma,
+    label: "Figma",
+  },
+  {
+    href: "https://x.com",
+    color: "currentColor",
+    icon: SiX,
+    label: "X",
   },
 ]
 
@@ -354,10 +441,23 @@ const components = {
   createTableData,
   dayjs,
   faker,
+  Markdown,
+  marqueeItems,
   React,
+  remarkGfm,
   SidebarDocumentMenuButton,
   sidebarItems,
   SidebarUserMenuButton,
+  SiFigma,
+  SiGithub,
+  SiGitlab,
+  SiJavascript,
+  SiNextdotjs,
+  SiReact,
+  SiStorybook,
+  SiTypescript,
+  SiVercel,
+  SiX,
   treeItems,
   useForm,
   ...React,

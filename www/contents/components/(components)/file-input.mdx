@@ -8,7 +8,7 @@ style: components/file-input/file-input.style.ts
 ---
 
 ```tsx preview
-<FileInput placeholder="Please upload file" />
+<FileInput placeholder="Upload file" />
 ```
 
 ## Usage
@@ -82,7 +82,7 @@ import { FileInput } from "@workspaces/ui"
 To allow multiple selection, set `multiple` to `true`.
 
 ```tsx preview
-<FileInput placeholder="multiple" multiple />
+<FileInput placeholder="Upload files" multiple />
 ```
 
 ### Specify File Extensions
@@ -90,7 +90,10 @@ To allow multiple selection, set `multiple` to `true`.
 To specify file extensions, set `accept` to a string(type).
 
 ```tsx preview
-<FileInput accept="image/png,image/jpeg" placeholder="only png, jpeg" />
+<FileInput
+  accept="image/png,image/jpeg"
+  placeholder="Upload a PNG or JPEG file"
+/>
 ```
 
 ### Customize Separator
@@ -98,7 +101,7 @@ To specify file extensions, set `accept` to a string(type).
 To customize the separator, set `separator` to a string.
 
 ```tsx preview
-<FileInput placeholder="Please upload file" multiple separator=";" />
+<FileInput placeholder="Upload files" multiple separator=";" />
 ```
 
 ### Use Custom Component
@@ -110,7 +113,7 @@ To use a custom component, set `component` to a `ReactNode`. `component` provide
   component={({ value: { name } }) => <Tag>{name}</Tag>}
   gapY="xs"
   multiple
-  placeholder="Please upload file"
+  placeholder="Upload files"
 />
 ```
 
@@ -122,7 +125,7 @@ To format file names, use `format`. `format` provides `File`.
 <FileInput
   format={({ name }) => name.substring(0, name.indexOf("."))}
   multiple
-  placeholder="Please upload file"
+  placeholder="Upload files"
 />
 ```
 
@@ -145,7 +148,7 @@ To add an addon, wrap `FileInput` with `InputGroup.Root` and use `InputGroup.Add
   <InputGroup.Addon>
     <FileIcon />
   </InputGroup.Addon>
-  <FileInput placeholder="Please upload file" />
+  <FileInput placeholder="Upload file" />
 </InputGroup.Root>
 ```
 
@@ -158,7 +161,7 @@ To add an element, wrap `FileInput` with `InputGroup.Root` and use `InputGroup.E
   <InputGroup.Element>
     <FileIcon />
   </InputGroup.Element>
-  <FileInput placeholder="Please upload file" />
+  <FileInput placeholder="Upload file" />
 </InputGroup.Root>
 ```
 
@@ -168,17 +171,17 @@ To disable, set `disabled` to `true`.
 
 ```tsx preview
 <VStack>
-  <FileInput placeholder="Please upload file" disabled />
+  <FileInput placeholder="Upload file" disabled />
 
   <InputGroup.Root disabled>
     <InputGroup.Addon>
       <FileIcon />
     </InputGroup.Addon>
-    <FileInput placeholder="Please upload file" />
+    <FileInput placeholder="Upload file" />
   </InputGroup.Root>
 
   <Field.Root disabled label="Upload file">
-    <FileInput placeholder="Please upload file" />
+    <FileInput placeholder="Upload file" />
   </Field.Root>
 </VStack>
 ```
@@ -189,17 +192,17 @@ To make it read-only, set `readOnly` to `true`.
 
 ```tsx preview
 <VStack>
-  <FileInput placeholder="Please upload file" readOnly />
+  <FileInput placeholder="Upload file" readOnly />
 
   <InputGroup.Root readOnly>
     <InputGroup.Addon>
       <FileIcon />
     </InputGroup.Addon>
-    <FileInput placeholder="Please upload file" />
+    <FileInput placeholder="Upload file" />
   </InputGroup.Root>
 
   <Field.Root readOnly label="Upload file">
-    <FileInput placeholder="Please upload file" />
+    <FileInput placeholder="Upload file" />
   </Field.Root>
 </VStack>
 ```
@@ -210,17 +213,17 @@ To make the input invalid, set `invalid` to `true`.
 
 ```tsx preview
 <VStack>
-  <FileInput placeholder="Please upload file" invalid />
+  <FileInput placeholder="Upload file" invalid />
 
   <InputGroup.Root invalid>
     <InputGroup.Addon>
       <FileIcon />
     </InputGroup.Addon>
-    <FileInput placeholder="Please upload file" />
+    <FileInput placeholder="Upload file" />
   </InputGroup.Root>
 
   <Field.Root errorMessage="File is required." invalid label="Upload file">
-    <FileInput placeholder="Please upload file" />
+    <FileInput placeholder="Upload file" />
   </Field.Root>
 </VStack>
 ```
@@ -272,12 +275,12 @@ const onReset = () => {
 
 return (
   <VStack>
-    <Text>files: {value?.length ?? 0}</Text>
+    <Text>Files: {value?.length ?? 0}</Text>
 
     <InputGroup.Root>
       <FileInput
         multiple
-        placeholder="placeholder"
+        placeholder="Upload files"
         resetRef={resetRef}
         value={value}
         onChange={onChange}
@@ -304,7 +307,7 @@ return (
 If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `FileInput`.
 
 ```tsx
-<FileInput aria-label="Upload file" placeholder="Please upload file" />
+<FileInput aria-label="Upload file" placeholder="Upload file" />
 ```
 
 ```tsx
@@ -313,7 +316,7 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Fil
     Upload file
   </Text>
 
-  <FileInput aria-labelledby="label" placeholder="Please upload file" />
+  <FileInput aria-labelledby="label" placeholder="Upload file" />
 </VStack>
 ```
 
@@ -330,7 +333,7 @@ If you are not using `Field.Root`, set `aria-label` or `aria-labelledby` to `Fil
 | ------------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `div.ui-file-input__root` | `role="button"`      | Indicates that this is a button.                                                                                                                                |
 |                           | `aria-disabled`      | Sets to `"true"` if `disabled` or `readOnly` is set.                                                                                                            |
-|                           | `aria-labelledby`    | If `FileInput` is within a `Field.Root` and `Field.Root` has a `label`, sets its `id`.                                                                          |
+|                           | `aria-labelledby`    | If `FileInput` is within a `Field.Root` with a `label` and no placeholder, value, or explicit accessible name is provided, sets the label's `id`.               |
 |                           | `aria-describedby`   | If `FileInput` is within a `Field.Root` and `Field.Root` has an `errorMessage`, `helperMessage`, `Field.ErrorMessage`, or `Field.HelperMessage`, sets its `id`. |
 |                           | `aria-invalid`       | Sets to `"true"` if `invalid` is set.                                                                                                                           |
 |                           | `aria-required`      | Sets to `"true"` if `required` is set.                                                                                                                          |

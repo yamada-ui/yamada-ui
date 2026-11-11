@@ -20,15 +20,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<Data>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<Data>,
     ]),
   [],
@@ -79,7 +79,9 @@ return (
   <ComposedChart.Root
     data={data}
     series={series}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -132,15 +134,15 @@ return (
   <ComposedChart.Root data={data}>
     <ComposedChart.Legend />
     <ComposedChart.Tooltip
-      labelFormatter={(value) => dayjs(value).format("MMM")}
+      labelFormatter={(value) => dayjs(value as string).format("MMM")}
     />
     <ComposedChart.XAxis
       dataKey="date"
       tickFormatter={(value) => dayjs(value).format("MMM")}
     />
-    <ComposedChart.Bar color="blue" dataKey="desktop" />
-    <ComposedChart.Area color="green" dataKey="tablet" dot />
-    <ComposedChart.Line color="red" dataKey="mobile" dot>
+    <ComposedChart.Bar color="blue" dataKey="desktop" name="Desktop" />
+    <ComposedChart.Area color="green" dataKey="tablet" name="Tablet" dot />
+    <ComposedChart.Line color="red" dataKey="mobile" name="Mobile" dot>
       <ComposedChart.LabelList />
     </ComposedChart.Line>
   </ComposedChart.Root>
@@ -155,15 +157,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -180,7 +182,7 @@ return (
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -202,15 +204,15 @@ const series = useMemo(
       [
         [
           "bar",
-          { dataKey: "desktop" },
+          { dataKey: "desktop", name: "Desktop" },
         ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
         [
           "area",
-          { dataKey: "tablet" },
+          { dataKey: "tablet", name: "Tablet" },
         ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
         [
           "line",
-          { dataKey: "mobile" },
+          { dataKey: "mobile", name: "Mobile" },
         ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       ],
       "blue",
@@ -224,7 +226,9 @@ return (
     colorScheme="blue"
     data={data}
     series={series}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -238,9 +242,9 @@ return (
 ```tsx preview functional
 const series = useMemo<ComposedChart.ComposedProps<CartesianChartData>[]>(
   () => [
-    ["bar", { color: "blue", dataKey: "desktop" }],
-    ["area", { color: "green", dataKey: "tablet" }],
-    ["line", { color: "red", dataKey: "mobile" }],
+    ["bar", { color: "blue", dataKey: "desktop", name: "Desktop" }],
+    ["area", { color: "green", dataKey: "tablet", name: "Tablet" }],
+    ["line", { color: "red", dataKey: "mobile", name: "Mobile" }],
   ],
   [],
 )
@@ -250,7 +254,9 @@ return (
   <ComposedChart.Root
     data={data}
     series={series}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -269,15 +275,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -290,7 +296,9 @@ return (
     series={series}
     withYAxis
     chartProps={{ margin: { right: 16 } }}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -307,15 +315,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -328,7 +336,9 @@ return (
     series={series}
     withYAxis
     chartProps={{ margin: { right: 16 } }}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -345,9 +355,9 @@ To add a legend, set `withLegend` to `true`. The default is `false`. To change t
 ```tsx preview functional
 const series = useMemo<ComposedChart.ComposedProps<CartesianChartData>[]>(
   () => [
-    ["bar", { color: "blue", dataKey: "desktop" }],
-    ["area", { color: "green", dataKey: "tablet" }],
-    ["line", { color: "red", dataKey: "mobile" }],
+    ["bar", { color: "blue", dataKey: "desktop", name: "Desktop" }],
+    ["area", { color: "green", dataKey: "tablet", name: "Tablet" }],
+    ["line", { color: "red", dataKey: "mobile", name: "Mobile" }],
   ],
   [],
 )
@@ -358,7 +368,9 @@ return (
     data={data}
     series={series}
     withLegend
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -387,7 +399,9 @@ return (
     data={data}
     series={series}
     withLegend
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -406,15 +420,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -454,15 +468,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -490,7 +504,7 @@ return (
           areaProps={{ type }}
           lineProps={{ type }}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -513,15 +527,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -534,7 +548,9 @@ return (
     series={series}
     areaProps={{ dot: true }}
     lineProps={{ dot: true }}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -553,15 +569,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -584,7 +600,9 @@ return (
   <ComposedChart.Root
     data={data}
     series={series}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -601,9 +619,9 @@ To stack the bars, set `stackId` in `series` or `barProps.stackId` to a string.
 const series = useMemo(
   () =>
     ComposedChart.mergeSeries<CartesianChartData>([
-      ["bar", { dataKey: "desktop", radius: [0, 0, 4, 4] }],
-      ["bar", { dataKey: "tablet", radius: [4, 4, 0, 0] }],
-      ["line", { dataKey: "mobile" }],
+      ["bar", { dataKey: "desktop", name: "Desktop", radius: [0, 0, 4, 4] }],
+      ["bar", { dataKey: "tablet", name: "Tablet", radius: [4, 4, 0, 0] }],
+      ["line", { dataKey: "mobile", name: "Mobile" }],
     ]),
   [],
 )
@@ -614,7 +632,9 @@ return (
     data={data}
     series={series}
     barProps={{ stackId: "stack" }}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -633,15 +653,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -653,7 +673,9 @@ return (
     data={data}
     series={series}
     barProps={{ barSize: 50 }}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -672,15 +694,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -692,7 +714,9 @@ return (
     data={data}
     series={series}
     barProps={{ radius: 8 }}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -709,9 +733,9 @@ To change the bar gap, set `barGap` in `chartProps` and `barSize` in `barProps` 
 const series = useMemo(
   () =>
     ComposedChart.mergeSeries<CartesianChartData>([
-      ["bar", { dataKey: "desktop" }],
-      ["bar", { dataKey: "tablet" }],
-      ["line", { dataKey: "mobile" }],
+      ["bar", { dataKey: "desktop", name: "Desktop" }],
+      ["bar", { dataKey: "tablet", name: "Tablet" }],
+      ["line", { dataKey: "mobile", name: "Mobile" }],
     ]),
   [],
 )
@@ -723,7 +747,9 @@ return (
     series={series}
     chartProps={{ barGap: 16 }}
     barProps={{ barSize: 20 }}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -742,15 +768,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -762,7 +788,9 @@ return (
     data={data}
     series={series}
     lineProps={{ dot: true, label: true }}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -782,15 +810,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -809,7 +837,7 @@ return (
     }}
     tooltipProps={{
       formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -835,15 +863,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -856,7 +884,9 @@ return (
       data={data}
       series={series}
       syncId="chart"
-      tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
+      }}
       xAxisProps={{
         dataKey: "date",
         tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -866,7 +896,9 @@ return (
       data={data}
       series={series}
       syncId="chart"
-      tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+      tooltipProps={{
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
+      }}
       xAxisProps={{
         dataKey: "date",
         tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -886,15 +918,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -912,7 +944,7 @@ return (
         Number(value).toLocaleString(),
         toTitleCase(name),
       ],
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -931,15 +963,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -950,7 +982,9 @@ return (
   <ComposedChart.Root
     data={data}
     series={series}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -982,15 +1016,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1003,7 +1037,9 @@ return (
     series={series}
     withYAxis
     chartProps={{ margin: { right: 16 } }}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -1024,15 +1060,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1045,7 +1081,9 @@ return (
     series={series}
     withYAxis
     chartProps={{ margin: { right: 16 } }}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       label: "Date",
@@ -1066,15 +1104,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1087,7 +1125,9 @@ return (
     series={series}
     withYAxis
     chartProps={{ margin: { right: 16 } }}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -1107,15 +1147,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1128,7 +1168,7 @@ return (
     series={series}
     tooltipProps={{
       cursor: true,
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -1148,15 +1188,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1184,15 +1224,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],
@@ -1205,7 +1245,9 @@ return (
     series={series}
     areaProps={{ activeDot: false }}
     lineProps={{ activeDot: false }}
-    tooltipProps={{ labelFormatter: (value) => dayjs(value).format("MMM") }}
+    tooltipProps={{
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
+    }}
     xAxisProps={{
       dataKey: "date",
       tickFormatter: (value) => dayjs(value).format("MMM"),
@@ -1224,15 +1266,15 @@ const series = useMemo(
     ComposedChart.mergeSeries<CartesianChartData>([
       [
         "bar",
-        { dataKey: "desktop" },
+        { dataKey: "desktop", name: "Desktop" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "area",
-        { dataKey: "tablet" },
+        { dataKey: "tablet", name: "Tablet" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
       [
         "line",
-        { dataKey: "mobile" },
+        { dataKey: "mobile", name: "Mobile" },
       ] satisfies ComposedChart.ComposedProps<CartesianChartData>,
     ]),
   [],

@@ -7,6 +7,7 @@ import { Container } from "../container"
 import { For } from "../for"
 import { Heading } from "../heading"
 import { Image } from "../image"
+import { VStack } from "../stack"
 import { Text } from "../text"
 import { Wrap } from "../wrap"
 import { Drawer } from "./"
@@ -237,6 +238,112 @@ export const CloseOnDrag: Story = () => {
         </Drawer.Content>
       </Drawer.Root>
     </>
+  )
+}
+
+export const DragBarOnly: Story = () => {
+  return (
+    <Drawer.Root closeOnDrag dragHandleOnly>
+      <Drawer.OpenTrigger>
+        <Button>Open Drawer</Button>
+      </Drawer.OpenTrigger>
+
+      <Drawer.Content>
+        <Drawer.Header>
+          <Drawer.Title>ドラゴンボール</Drawer.Title>
+        </Drawer.Header>
+
+        <Drawer.Body>
+          『ドラゴンボール』（DRAGON
+          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+        </Drawer.Body>
+
+        <Drawer.Footer>
+          <Drawer.CloseTrigger>
+            <Button variant="ghost">とじる</Button>
+          </Drawer.CloseTrigger>
+          <Button>Wikipedia</Button>
+        </Drawer.Footer>
+      </Drawer.Content>
+    </Drawer.Root>
+  )
+}
+
+export const DragTrigger: Story = () => {
+  return (
+    <Drawer.Root closeOnDrag dragHandleOnly withDragBar={false}>
+      <Drawer.OpenTrigger>
+        <Button>Open Drawer</Button>
+      </Drawer.OpenTrigger>
+
+      <Drawer.Content>
+        <Drawer.DragTrigger>
+          <Drawer.Header>
+            <Drawer.Title>ドラゴンボール</Drawer.Title>
+          </Drawer.Header>
+        </Drawer.DragTrigger>
+
+        <Drawer.Body>
+          『ドラゴンボール』（DRAGON
+          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+        </Drawer.Body>
+
+        <Drawer.Footer>
+          <Drawer.CloseTrigger>
+            <Button variant="ghost">とじる</Button>
+          </Drawer.CloseTrigger>
+          <Button>Wikipedia</Button>
+        </Drawer.Footer>
+      </Drawer.Content>
+    </Drawer.Root>
+  )
+}
+
+export const ScrollAndDrag: Story = () => {
+  return (
+    <Drawer.Root closeOnDrag placement="block-end">
+      <Drawer.OpenTrigger>
+        <Button>Open Drawer</Button>
+      </Drawer.OpenTrigger>
+
+      <Drawer.Content>
+        <Drawer.Header>
+          <Drawer.Title>ドラゴンボール</Drawer.Title>
+        </Drawer.Header>
+
+        <Drawer.Body maxH="2xs">
+          <VStack gap="xs">
+            <Heading as="h3" fontSize="md">
+              孫悟空少年編
+            </Heading>
+
+            <Text>
+              地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
+            </Text>
+          </VStack>
+
+          <VStack gap="xs">
+            <Heading as="h3" fontSize="md">
+              ピッコロ大魔王編
+            </Heading>
+
+            <Text>
+              天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
+            </Text>
+          </VStack>
+
+          <VStack gap="xs">
+            <Heading as="h3" fontSize="md">
+              サイヤ人編
+            </Heading>
+
+            <Text>
+              ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
+            </Text>
+          </VStack>
+        </Drawer.Body>
+      </Drawer.Content>
+    </Drawer.Root>
   )
 }
 

@@ -2,7 +2,6 @@
 title: Sidebar
 description: "`Sidebar`は、サイドバーにアイテムのリストを表示するコンポーネントです。"
 tags: ["navigation", "layout", "selection", "disclosure", "list"]
-status: new
 storybook: components-sidebar--basic
 source: components/sidebar
 style: components/sidebar/sidebar.style.ts
@@ -157,6 +156,7 @@ style: components/sidebar/sidebar.style.ts
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -312,6 +312,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -337,6 +338,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -359,6 +361,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -384,6 +387,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -410,6 +414,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -418,7 +423,7 @@ return (
 ```
 
 ```tsx preview functional iframe
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -490,6 +495,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -519,6 +525,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -545,6 +552,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -571,6 +579,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -598,6 +607,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -624,6 +634,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -650,6 +661,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -676,6 +688,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -702,6 +715,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -731,6 +745,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -757,6 +772,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -769,7 +785,7 @@ return (
 項目を無効にする場合は、`disabled`を設定します。
 
 ```tsx preview functional iframe
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -842,6 +858,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -880,6 +897,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -921,6 +939,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -948,6 +967,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -974,6 +994,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -984,7 +1005,7 @@ return (
 ### セパレーターを追加する
 
 ```tsx preview functional iframe
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -1072,6 +1093,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -1100,6 +1122,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1127,6 +1150,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1154,6 +1178,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1166,7 +1191,7 @@ return (
 項目の子要素を非同期で読み込む場合は、`children`の代わりに`asyncChildren`を使用します。
 
 ```tsx preview functional iframe client
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       asyncChildren: async () => {
@@ -1254,6 +1279,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -1265,7 +1291,7 @@ return (
 ### ローディングスキームを変更する
 
 ```tsx preview functional iframe client
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       asyncChildren: async () => {
@@ -1323,6 +1349,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -1337,7 +1364,7 @@ return (
 
 ```tsx preview functional iframe
 const controlRef = useRef<Sidebar.Control>(null)
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -1410,6 +1437,7 @@ return (
             size="xs"
             variant="ghost"
             fontSize="md"
+            aria-label="Toggle sidebar"
             icon={<PanelLeftIcon />}
           />
         </Sidebar.Trigger>
@@ -1450,6 +1478,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1473,6 +1502,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1607,6 +1637,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1633,6 +1664,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1672,6 +1704,7 @@ return (
             size="xs"
             variant="ghost"
             fontSize="md"
+            aria-label="Toggle sidebar"
             icon={<PanelLeftIcon />}
           />
         </Sidebar.Trigger>
@@ -1691,6 +1724,16 @@ return (
 ## Props
 
 <PropsTable name="sidebar" />
+
+## アクセシビリティ
+
+`Sidebar.Trigger`にアイコンのみを使用する場合は、子要素に`aria-label`を設定します。
+
+```tsx
+<Sidebar.Trigger>
+  <IconButton aria-label="Toggle sidebar" icon={<PanelLeftIcon />} />
+</Sidebar.Trigger>
+```
 
 ## 類似のコンポーネント
 

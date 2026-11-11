@@ -17,7 +17,7 @@ describe("getBreakpointValue", () => {
     }
 
     const getValue = getBreakpointValue({ base: "test" })
-    const result = getValue(emptySystem as any, "md")
+    const result = getValue(emptySystem, "md")
 
     expect(warnSpy).toHaveBeenCalledWith(
       "getBreakpointValue: `breakpoints` is undefined.",

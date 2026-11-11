@@ -94,7 +94,7 @@ export interface UseReorderProps<Y = string>
 export const useReorder = <Y = string>({
   ref,
   children,
-  item,
+  item: itemProp,
   items = [],
   orientation = "vertical",
   onChange,
@@ -103,6 +103,7 @@ export const useReorder = <Y = string>({
 }: UseReorderProps<Y> = {}) => {
   const axis = orientation === "vertical" ? "y" : "x"
   const validChildren = useValidChildren(children)
+  const [item] = useValidChildren(itemProp)
   const hasChildren = !!validChildren.length
   const defaultValues = useMemo(() => {
     const values = hasChildren

@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { type FC, useCallback, useRef, useState } from "react"
+import type { FC } from "react"
+import { useCallback, useRef, useState } from "react"
 import { Sidebar } from "."
 import { styled } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
@@ -43,7 +44,7 @@ const meta: Meta<typeof Sidebar.Root> = {
 
 export default meta
 
-const navItems: Sidebar.ItemType[] = [
+const navItems: Sidebar.Item[] = [
   {
     children: [
       { label: "Installation", value: "/get-started/installation" },
@@ -97,7 +98,7 @@ const navItems: Sidebar.ItemType[] = [
   },
 ]
 
-const navItemsWithAsync: Sidebar.ItemType[] = [
+const navItemsWithAsync: Sidebar.Item[] = [
   {
     asyncChildren: async () => {
       await wait(1000)
@@ -167,7 +168,7 @@ const navItemsWithAsync: Sidebar.ItemType[] = [
   },
 ]
 
-const navItemsWithDisabled: Sidebar.ItemType[] = [
+const navItemsWithDisabled: Sidebar.Item[] = [
   {
     children: [
       { label: "Installation", value: "/get-started/installation" },
@@ -222,7 +223,7 @@ const navItemsWithDisabled: Sidebar.ItemType[] = [
   },
 ]
 
-const navItemsWithIcon: Sidebar.ItemType[] = [
+const navItemsWithIcon: Sidebar.Item[] = [
   {
     children: [
       {
@@ -276,7 +277,7 @@ const navItemsWithIcon: Sidebar.ItemType[] = [
   },
 ]
 
-const navItemsWithGroup: Sidebar.ItemType[] = [
+const navItemsWithGroup: Sidebar.Item[] = [
   {
     children: [
       { label: "Installation", value: "/get-started/installation" },
@@ -497,6 +498,7 @@ export const Basic: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -521,6 +523,7 @@ export const Items: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -545,6 +548,7 @@ export const Offcanvas: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -570,6 +574,7 @@ export const Placement: Story = () => {
             <IconButton
               size="xs"
               variant="ghost"
+              aria-label="Toggle sidebar"
               fontSize="md"
               icon={<PanelLeftIcon />}
             />
@@ -597,6 +602,7 @@ export const DrawerPlacement: Story = () => {
             <IconButton
               size="xs"
               variant="ghost"
+              aria-label="Toggle sidebar"
               fontSize="md"
               icon={<PanelLeftIcon />}
             />
@@ -622,6 +628,7 @@ export const Icon: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -650,6 +657,7 @@ export const Variant: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -674,6 +682,7 @@ export const GroupGuideLine: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -698,6 +707,7 @@ export const GuideLine: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -726,6 +736,7 @@ export const Shape: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -750,6 +761,7 @@ export const Breakpoint: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -774,6 +786,7 @@ export const DefaultClosed: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -801,6 +814,7 @@ export const DefaultSelected: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -825,6 +839,7 @@ export const DefaultExpanded: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -852,6 +867,7 @@ export const ExpandCollapseAll: Story = () => {
             <IconButton
               size="xs"
               variant="ghost"
+              aria-label="Toggle sidebar"
               fontSize="md"
               icon={<PanelLeftIcon />}
             />
@@ -902,6 +918,7 @@ export const Separator: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -927,6 +944,7 @@ export const IndicatorHidden: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -951,6 +969,7 @@ export const DisabledItem: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -976,6 +995,7 @@ export const DisabledAnimated: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -1001,6 +1021,7 @@ export const DisabledHandle: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -1025,6 +1046,7 @@ export const DisabledBreakpoint: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -1049,6 +1071,7 @@ export const Async: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -1074,6 +1097,7 @@ export const LoadingScheme: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -1103,6 +1127,7 @@ export const StartElement: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -1128,6 +1153,7 @@ export const EndElement: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -1164,6 +1190,7 @@ export const LocalStorage: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -1203,6 +1230,7 @@ export const CookieStorage: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -1229,6 +1257,7 @@ export const CustomIndicator: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -1368,6 +1397,7 @@ export const CustomRender: Story = () => {
           <IconButton
             size="xs"
             variant="ghost"
+            aria-label="Toggle sidebar"
             fontSize="md"
             icon={<PanelLeftIcon />}
           />
@@ -1406,6 +1436,7 @@ export const CustomControl: Story = () => {
             <IconButton
               size="xs"
               variant="ghost"
+              aria-label="Toggle sidebar"
               fontSize="md"
               icon={<PanelLeftIcon />}
             />

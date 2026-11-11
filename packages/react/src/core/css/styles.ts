@@ -7,7 +7,7 @@ import type {
   CSSMediaObject,
   CSSObject,
   StyleValueWithCondition,
-} from "./index.types"
+} from "./index.type"
 import { transforms } from "./config"
 import { pipe } from "./utils"
 
@@ -2623,7 +2623,7 @@ export interface StyleProps {
   /**
    * ### container
    *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   * Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2025-08-14
@@ -3055,7 +3055,9 @@ export interface StyleProps {
   /**
    * ### animation-trigger
    *
-   * The CSS `animation-trigger` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-animation-trigger
    *
@@ -5417,7 +5419,9 @@ export interface StyleProps {
   /**
    * ### column-height
    *
-   * The CSS `column-height` property.
+   * The <code>column-wrap</code> and <code>column-height</code> CSS properties control when columns in a multicolumn layout wrap or overflow. You can use this to constrain the height of columns within a taller box or to create two-dimensional column layouts.
+   *
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-height
    *
@@ -5655,7 +5659,9 @@ export interface StyleProps {
   /**
    * ### column-wrap
    *
-   * The CSS `column-wrap` property.
+   * The <code>column-wrap</code> and <code>column-height</code> CSS properties control when columns in a multicolumn layout wrap or overflow. You can use this to constrain the height of columns within a taller box or to create two-dimensional column layouts.
+   *
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/column-wrap
    *
@@ -5677,7 +5683,7 @@ export interface StyleProps {
   /**
    * ### container
    *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   * Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2025-08-14
@@ -5689,7 +5695,7 @@ export interface StyleProps {
   /**
    * ### container-name
    *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   * Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2025-08-14
@@ -5703,7 +5709,7 @@ export interface StyleProps {
   /**
    * ### container-type
    *
-   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   * Container size queries with the <code>@container (…)</code> at-rule apply styles to an element based on a dimension of its container, such as <code>width</code> or <code>height</code>.
    *
    * @baseline `Widely available`
    * @widely_available_date 2025-08-14
@@ -6165,7 +6171,8 @@ export interface StyleProps {
    *
    * The <code>field-sizing</code> CSS property allows form controls such as <code>&#x3C;textarea></code> to be sized based on their content.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2026-06-16
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/field-sizing
    */
@@ -6429,8 +6436,8 @@ export interface StyleProps {
    * The <code>font-feature-settings</code> CSS property sets low-level OpenType feature tags for a font. When possible, use <code>font-variant</code> instead.
    *
    * @baseline `Widely available`
-   * @widely_available_date 2019-10-05
-   * @newly_available_date 2017-04-05
+   * @widely_available_date 2018-09-21
+   * @newly_available_date 2016-03-21
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/font-feature-settings
    */
@@ -8895,7 +8902,8 @@ export interface StyleProps {
    *
    * The <code>overflow-anchor</code> CSS property sets an element as a possible scroll anchor, reducing unintended scrolling when document changes occur above the current scrollport. This is enabled by default where supported.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2026-09-14
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/overflow-anchor
    */
@@ -9405,7 +9413,8 @@ export interface StyleProps {
    *
    * The <code>paint-order</code> CSS property sets the z-order of strokes, fills, and (in SVG content) markers. For example, <code>paint-order: markers stroke fill;</code> draws the markers, then stroke on top of markers, then fill on top of both markers and stroke.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-09-22
    * @newly_available_date 2024-03-22
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/paint-order
@@ -11957,7 +11966,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger
    *
-   * The CSS `timeline-trigger` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger
    *
@@ -11967,7 +11978,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-activation-range
    *
-   * The CSS `timeline-trigger-activation-range` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range
    *
@@ -11977,7 +11990,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-activation-range-end
    *
-   * The CSS `timeline-trigger-activation-range-end` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range-end
    *
@@ -11987,7 +12002,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-activation-range-start
    *
-   * The CSS `timeline-trigger-activation-range-start` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-activation-range-start
    *
@@ -11997,7 +12014,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-active-range
    *
-   * The CSS `timeline-trigger-active-range` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range
    *
@@ -12007,7 +12026,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-active-range-end
    *
-   * The CSS `timeline-trigger-active-range-end` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range-end
    *
@@ -12017,7 +12038,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-active-range-start
    *
-   * The CSS `timeline-trigger-active-range-start` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-active-range-start
    *
@@ -12027,7 +12050,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-name
    *
-   * The CSS `timeline-trigger-name` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-name
    *
@@ -12037,7 +12062,9 @@ export interface StyleProps {
   /**
    * ### timeline-trigger-source
    *
-   * The CSS `timeline-trigger-source` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-timeline-trigger-source
    *
@@ -12100,7 +12127,8 @@ export interface StyleProps {
    *
    * The <code>transform-box</code> CSS property sets the position and dimensions of the reference box relative to which an element's transformations are calculated.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-10-16
    * @newly_available_date 2024-04-16
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/transform-box
@@ -12250,7 +12278,9 @@ export interface StyleProps {
   /**
    * ### trigger-scope
    *
-   * The CSS `trigger-scope` property.
+   * Scroll-triggered animations start and stop CSS animations when an element is within or outside a scrolling range. It's an alternative to applying styles with the <code>IntersectionObserver</code> API. Not to be confused with scroll-driven animations.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/animation-triggers-1/#propdef-trigger-scope
    *
@@ -12454,7 +12484,8 @@ export interface StyleProps {
    *
    * The <code>white-space-collapse</code> CSS property sets whether new line characters are shown as line breaks, and whether multiple consecutive spaces are all displayed or combined.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2026-09-19
    * @newly_available_date 2024-03-19
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/white-space-collapse

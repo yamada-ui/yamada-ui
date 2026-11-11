@@ -1,4 +1,4 @@
-import type { Dict } from "./index.types"
+import type { Dict } from "./index.type"
 import {
   isArray,
   isFunction,
@@ -6,6 +6,18 @@ import {
   isString,
   isUndefined,
 } from "./assertion"
+
+export interface HasOptions {
+  truthy?: boolean
+}
+
+export function has<Y extends object>(
+  obj: Y,
+  keys: readonly (keyof Y)[],
+  { truthy = false }: HasOptions = {},
+): boolean {
+  return keys.some((key) => (truthy ? !!obj[key] : key in obj))
+}
 
 export function omitObject<Y extends Dict, M extends keyof Y>(
   obj: Y,
@@ -107,7 +119,7 @@ export function extractFlatObject<Y extends Dict, M>(
     )
   }
 
-  return Object.fromEntries(flatMap(obj)) as { [key: string]: M }
+  return Object.fromEntries(flatMap(obj))
 }
 
 export interface MergeOptions {

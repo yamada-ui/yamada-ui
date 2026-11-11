@@ -117,8 +117,7 @@
             {
               "title": "ActionBar",
               "segment": "action-bar",
-              "pathname": "/docs/components/action-bar",
-              "status": "new"
+              "pathname": "/docs/components/action-bar"
             },
             {
               "title": "Alert",
@@ -169,6 +168,12 @@
               "title": "Breadcrumb",
               "segment": "breadcrumb",
               "pathname": "/docs/components/breadcrumb"
+            },
+            {
+              "title": "Bubble",
+              "segment": "bubble",
+              "pathname": "/docs/components/bubble",
+              "status": "new"
             },
             {
               "title": "Button",
@@ -479,6 +484,12 @@
               "pathname": "/docs/components/progress"
             },
             {
+              "title": "Prose",
+              "segment": "prose",
+              "pathname": "/docs/components/prose",
+              "status": "new"
+            },
+            {
               "title": "QrCode",
               "segment": "qr-code",
               "pathname": "/docs/components/qr-code"
@@ -536,8 +547,7 @@
             {
               "title": "Sidebar",
               "segment": "sidebar",
-              "pathname": "/docs/components/sidebar",
-              "status": "new"
+              "pathname": "/docs/components/sidebar"
             },
             {
               "title": "SimpleGrid",
@@ -650,8 +660,7 @@
             {
               "title": "Tree",
               "segment": "tree",
-              "pathname": "/docs/components/tree",
-              "status": "new"
+              "pathname": "/docs/components/tree"
             },
             {
               "title": "VStack",
@@ -749,6 +758,12 @@
               "title": "Loading",
               "segment": "loading",
               "pathname": "/docs/components/loading"
+            },
+            {
+              "title": "Marquee",
+              "segment": "marquee",
+              "pathname": "/docs/components/marquee",
+              "status": "new"
             },
             {
               "title": "Motion",
@@ -1342,6 +1357,61 @@
           "segment": "react",
           "items": [
             {
+              "title": "v2.3.3",
+              "segment": "2-3-3",
+              "pathname": "/docs/changelog/react/2-3-3"
+            },
+            {
+              "title": "v2.3.2",
+              "segment": "2-3-2",
+              "pathname": "/docs/changelog/react/2-3-2"
+            },
+            {
+              "title": "v2.3.1",
+              "segment": "2-3-1",
+              "pathname": "/docs/changelog/react/2-3-1"
+            },
+            {
+              "title": "v2.3.0",
+              "segment": "2-3-0",
+              "pathname": "/docs/changelog/react/2-3-0"
+            },
+            {
+              "title": "v2.2.10",
+              "segment": "2-2-10",
+              "pathname": "/docs/changelog/react/2-2-10"
+            },
+            {
+              "title": "v2.2.9",
+              "segment": "2-2-9",
+              "pathname": "/docs/changelog/react/2-2-9"
+            },
+            {
+              "title": "v2.2.8",
+              "segment": "2-2-8",
+              "pathname": "/docs/changelog/react/2-2-8"
+            },
+            {
+              "title": "v2.2.7",
+              "segment": "2-2-7",
+              "pathname": "/docs/changelog/react/2-2-7"
+            },
+            {
+              "title": "v2.2.6",
+              "segment": "2-2-6",
+              "pathname": "/docs/changelog/react/2-2-6"
+            },
+            {
+              "title": "v2.2.5",
+              "segment": "2-2-5",
+              "pathname": "/docs/changelog/react/2-2-5"
+            },
+            {
+              "title": "v2.2.4",
+              "segment": "2-2-4",
+              "pathname": "/docs/changelog/react/2-2-4"
+            },
+            {
               "title": "v2.2.3",
               "segment": "2-2-3",
               "pathname": "/docs/changelog/react/2-2-3"
@@ -1453,6 +1523,56 @@
           "segment": "cli",
           "items": [
             {
+              "title": "v2.1.18",
+              "segment": "2-1-18",
+              "pathname": "/docs/changelog/cli/2-1-18"
+            },
+            {
+              "title": "v2.1.17",
+              "segment": "2-1-17",
+              "pathname": "/docs/changelog/cli/2-1-17"
+            },
+            {
+              "title": "v2.1.16",
+              "segment": "2-1-16",
+              "pathname": "/docs/changelog/cli/2-1-16"
+            },
+            {
+              "title": "v2.1.15",
+              "segment": "2-1-15",
+              "pathname": "/docs/changelog/cli/2-1-15"
+            },
+            {
+              "title": "v2.1.14",
+              "segment": "2-1-14",
+              "pathname": "/docs/changelog/cli/2-1-14"
+            },
+            {
+              "title": "v2.1.13",
+              "segment": "2-1-13",
+              "pathname": "/docs/changelog/cli/2-1-13"
+            },
+            {
+              "title": "v2.1.12",
+              "segment": "2-1-12",
+              "pathname": "/docs/changelog/cli/2-1-12"
+            },
+            {
+              "title": "v2.1.11",
+              "segment": "2-1-11",
+              "pathname": "/docs/changelog/cli/2-1-11"
+            },
+            {
+              "title": "v2.1.10",
+              "segment": "2-1-10",
+              "pathname": "/docs/changelog/cli/2-1-10"
+            },
+            {
+              "title": "v2.1.9",
+              "segment": "2-1-9",
+              "pathname": "/docs/changelog/cli/2-1-9"
+            },
+            {
               "title": "v2.1.8",
               "segment": "2-1-8",
               "pathname": "/docs/changelog/cli/2-1-8"
@@ -1548,6 +1668,31 @@
           "title": "@yamada-ui/utils",
           "segment": "utils",
           "items": [
+            {
+              "title": "v2.3.0",
+              "segment": "2-3-0",
+              "pathname": "/docs/changelog/utils/2-3-0"
+            },
+            {
+              "title": "v2.2.0",
+              "segment": "2-2-0",
+              "pathname": "/docs/changelog/utils/2-2-0"
+            },
+            {
+              "title": "v2.1.7",
+              "segment": "2-1-7",
+              "pathname": "/docs/changelog/utils/2-1-7"
+            },
+            {
+              "title": "v2.1.6",
+              "segment": "2-1-6",
+              "pathname": "/docs/changelog/utils/2-1-6"
+            },
+            {
+              "title": "v2.1.5",
+              "segment": "2-1-5",
+              "pathname": "/docs/changelog/utils/2-1-5"
+            },
             {
               "title": "v2.1.4",
               "segment": "2-1-4",

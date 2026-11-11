@@ -10,6 +10,8 @@ import {
   contains,
   createContext,
   handlerAll,
+  isActiveElement,
+  isShadowRoot,
   mergeRefs,
   useCallbackRef,
   useSafeLayoutEffect,
@@ -182,9 +184,12 @@ export const useEditable = (props: UseEditableProps = {}) => {
     (ev: FocusEvent) => {
       if (!editing) return
 
-      const ownerDocument = ev.currentTarget.ownerDocument
-      const relatedTarget = (ev.relatedTarget ??
-        ownerDocument.activeElement) as HTMLElement
+      const rootNode = ev.currentTarget.getRootNode() as Document | ShadowRoot
+      const relatedTarget = (
+        isShadowRoot(rootNode)
+          ? (rootNode.activeElement ?? ev.relatedTarget)
+          : (ev.relatedTarget ?? rootNode.activeElement)
+      ) as HTMLElement
       const targetIsCancel = contains(cancelRef.current, relatedTarget)
       const targetIsSubmit = contains(submitRef.current, relatedTarget)
       const validBlur = !targetIsCancel && !targetIsSubmit
@@ -226,12 +231,9 @@ export const useEditable = (props: UseEditableProps = {}) => {
   }, [editing, onEditRef, selectAllOnFocus])
 
   useEffect(() => {
-    if (editing) return
-
-    const el = inputRef.current
-    const activeEl = el?.ownerDocument.activeElement
-
-    if (activeEl === el) el?.blur()
+    if (editing || !inputRef.current) return
+    if (isActiveElement(inputRef.current, inputRef.current.getRootNode()))
+      inputRef.current.blur()
   }, [editing])
 
   const getRootProps: PropGetter = useCallback(

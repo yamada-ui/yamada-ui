@@ -8,7 +8,7 @@ style: components/input/input.style.ts
 ---
 
 ```tsx preview
-<Input placeholder="Placeholder" />
+<Input placeholder="Enter your name" />
 ```
 
 ## Usage
@@ -40,6 +40,30 @@ import { Input, InputGroup } from "@workspaces/ui"
   <InputGroup.Element />
 </InputGroup.Root>
 ```
+
+:::tip
+To select a file, use [FileInput](/docs/components/file-input).
+:::
+
+:::tip
+To enter a password, use [PasswordInput](/docs/components/password-input).
+:::
+
+:::tip
+To enter a PIN code or OTP, use [PinInput](/docs/components/pin-input).
+:::
+
+:::tip
+To enter a number, use [NumberInput](/docs/components/number-input).
+:::
+
+:::tip
+To enter multi-line text, use [Textarea](/docs/components/textarea).
+:::
+
+:::tip
+To edit text inline, use [Editable](/docs/components/editable).
+:::
 
 ### Change Variant
 
@@ -205,7 +229,7 @@ To change the border color, set `focusBorderColor` or `errorBorderColor` to the 
 To change the placeholder color, set `_placeholder` to the value.
 
 ```tsx preview
-<Input placeholder="Custom placeholder" _placeholder={{ color: "blue.500" }} />
+<Input placeholder="Enter your name" _placeholder={{ color: "blue.500" }} />
 ```
 
 ### Floating Label

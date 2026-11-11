@@ -7,12 +7,12 @@ import {
   Button,
   ButtonGroup,
   CirclePlayIcon,
+  EighthNoteIcon,
   GlobeIcon,
   Heading,
   Icon,
   ListMusicIcon,
   MicVocalIcon,
-  Music2Icon,
   RadioIcon,
   Separator,
   Text,
@@ -35,7 +35,7 @@ const DISCOVER_MENU_ITEMS: MenuItem[] = [
 
 const LIBRARY_MENU_ITEMS: MenuItem[] = [
   { label: "Playlists" },
-  { icon: Music2Icon, label: "Songs" },
+  { icon: EighthNoteIcon, label: "Songs" },
   { icon: UserIcon, label: "Made for you" },
   { icon: MicVocalIcon, label: "Artists" },
   { icon: CirclePlayIcon, label: "Albums" },

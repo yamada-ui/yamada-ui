@@ -21,7 +21,7 @@ const meta: Meta<typeof NumberInput> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <NumberInput placeholder="Basic" />
+  return <NumberInput placeholder="Order quantity" />
 }
 
 export const Size: Story = () => {

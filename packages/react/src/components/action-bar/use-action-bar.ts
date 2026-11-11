@@ -1,14 +1,11 @@
 "use client"
 
 import type { HTMLProps, PropGetter } from "../../core"
+import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback } from "react"
 import { mergeProps, useEnvironment } from "../../core"
-import {
-  useDisclosure,
-  type UseDisclosureProps,
-} from "../../hooks/use-disclosure"
+import { useDisclosure } from "../../hooks/use-disclosure"
 import { useEventListener } from "../../hooks/use-event-listener"
-import { useI18n } from "../../providers/i18n-provider"
 import { handlerAll, useIds } from "../../utils"
 
 export interface UseActionBarProps
@@ -37,7 +34,6 @@ export const useActionBar = ({
     onOpen: onOpenProp,
   })
   const [contentId] = useIds()
-  const { t } = useI18n("actionBar")
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent) => {
@@ -63,20 +59,18 @@ export const useActionBar = ({
       "aria-controls": open ? contentId : undefined,
       "aria-expanded": open,
       "aria-haspopup": "dialog",
-      "aria-label": t("Open action bar"),
       ...props,
       onClick: handlerAll(props.onClick, onOpen),
     }),
-    [contentId, onOpen, open, t],
+    [contentId, onOpen, open],
   )
 
   const getCloseTriggerProps: PropGetter<"button"> = useCallback(
     (props = {}) => ({
-      "aria-label": t("Close action bar"),
       ...props,
       onClick: handlerAll(props.onClick, onClose),
     }),
-    [onClose, t],
+    [onClose],
   )
 
   const getContentProps: PropGetter<"section"> = useCallback(

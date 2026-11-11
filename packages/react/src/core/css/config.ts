@@ -1,6 +1,6 @@
 import type { CSSObject } from "@emotion/styled"
 import type { ThemeToken } from "../system"
-import type { CSSProperties } from "./index.types"
+import type { CSSProperties } from "./index.type"
 import type { Transform } from "./utils"
 import { isNumber, isObject } from "../../utils"
 import { animation, keyframes } from "./animation"

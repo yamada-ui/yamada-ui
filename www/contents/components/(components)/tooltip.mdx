@@ -35,6 +35,10 @@ import { Tooltip } from "@workspaces/ui"
 <Tooltip />
 ```
 
+:::tip
+If the only child of `Tooltip` is an icon, use [Tip](/docs/components/tip).
+:::
+
 ### Change the Display Position
 
 To change the display position, set `placement` to values like `"end"` or `"center-start"`. By default, `"start"` is set.
@@ -62,7 +66,7 @@ To change the display position, set `placement` to values like `"end"` or `"cent
     {(placement, index) => (
       <Tooltip key={index} content="へっ！きたねぇ花火だ" placement={placement}>
         <Button minW="xs" w="fit-content">
-          Open "{toTitleCase(placement)}" Tooltip
+          Open "{placement}" Tooltip
         </Button>
       </Tooltip>
     )}

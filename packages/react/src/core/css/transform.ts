@@ -1,5 +1,5 @@
 import type { Dict } from "../../utils"
-import type { CSSObject } from "./index.types"
+import type { CSSObject } from "./index.type"
 import type { TransformOptions } from "./utils"
 
 export function transform(value: any, { prev, properties }: TransformOptions) {

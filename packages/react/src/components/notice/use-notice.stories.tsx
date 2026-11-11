@@ -49,7 +49,7 @@ export const Variant = () => {
               })
             }}
           >
-            Add "{toTitleCase(variant)}" Snack
+            Add "{variant}" Snack
           </Button>
         )}
       </For>
@@ -74,7 +74,7 @@ export const Status = () => {
               })
             }}
           >
-            Add "{toTitleCase(status)}" Snack
+            Add "{status}" Snack
           </Button>
         )}
       </For>
@@ -100,7 +100,7 @@ export const ColorScheme = () => {
               })
             }}
           >
-            Add "{toTitleCase(colorScheme)}" Snack
+            Add "{colorScheme}" Snack
           </Button>
         )}
       </For>
@@ -125,7 +125,7 @@ export const Loading = () => {
               })
             }}
           >
-            Add "{toTitleCase(loadingScheme)}" Snack
+            Add "{loadingScheme}" Snack
           </Button>
         )}
       </For>

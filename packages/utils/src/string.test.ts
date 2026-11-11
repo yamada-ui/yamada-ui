@@ -17,6 +17,32 @@ describe("String", () => {
       const classNames = cx("class1", undefined, "class2")
       expect(classNames).toBe("class1 class2")
     })
+
+    test.each([
+      { expected: "b a", values: ["a", "b", "a"] },
+      { expected: "b c a", values: ["a b", "b c", "a"] },
+      { expected: "a b", values: ["a b a b"] },
+      {
+        expected: "custom ui-avatar__group",
+        values: ["ui-avatar__group", "custom ui-avatar__group"],
+      },
+      { expected: "b a", values: ["a", null, "b", undefined, "a"] },
+      { expected: "ab a", values: ["a ab", "a"] },
+    ])("keeps the last occurrence in $values", ({ expected, values }) => {
+      expect(cx(...values)).toBe(expected)
+    })
+
+    test("normalizes whitespace between tokens", () => {
+      expect(cx("  a\tb\n", "a  c \r\f")).toBe("b a c")
+    })
+
+    test.each([
+      { values: [] },
+      { values: [null, undefined, ""] },
+      { values: [" ", "\t\n"] },
+    ])("returns undefined when no tokens remain in $values", ({ values }) => {
+      expect(cx(...values)).toBeUndefined()
+    })
   })
 
   describe("escape", () => {

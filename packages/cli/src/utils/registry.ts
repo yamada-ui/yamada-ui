@@ -10,6 +10,7 @@ import type {
 import { merge } from "@yamada-ui/utils"
 import { HttpsProxyAgent } from "https-proxy-agent"
 import fetch from "node-fetch"
+import { existsSync } from "node:fs"
 import { readdir, readFile } from "node:fs/promises"
 import path from "node:path"
 import c from "picocolors"
@@ -213,7 +214,13 @@ export async function getGeneratedNameMap(
         return [
           section,
           dirents
-            .filter((dirent) => dirent.isDirectory())
+            .filter(
+              (dirent) =>
+                dirent.isDirectory() &&
+                existsSync(
+                  path.join(sectionPath, dirent.name, REGISTRY_FILE_NAME),
+                ),
+            )
             .map((dirent) => dirent.name),
         ]
       } catch {
@@ -255,22 +262,26 @@ export function transformContent(
 
       if (!generated || !section) return
 
-      if (section === targetSection) {
-        replaceValue = `from "${path.join("..", name)}"`
-      } else {
-        const { path: relativePath } = getSection(section) ?? {}
+      const { path: sectionPath } = getSection(section) ?? {}
 
-        if (!relativePath) return
+      if (!sectionPath) return
 
-        replaceValue = `from "${path.join("..", "..", relativePath, name)}"`
-      }
+      const relativePath = path.posix.relative(
+        path.posix.join(
+          getSection(targetSection)?.path ?? targetSection,
+          "dummy",
+        ),
+        path.posix.join(sectionPath, name),
+      )
+
+      replaceValue = `from "${relativePath.startsWith(".") ? relativePath : `./${relativePath}`}"`
     } else {
       const depth = (value.match(/\.\.\//g) || []).length
 
       if (!depth) return
 
       if (depth === 1) {
-        if (generated) replaceValue = `from "${path.join("..", name)}"`
+        if (generated) replaceValue = `from "${path.posix.join("..", name)}"`
         else replaceValue = `from "${PACKAGE_NAME}/${targetSection}/${name}"`
       } else {
         const omittedValue = value.replace(/(\.\.\/|\.\/)/g, "")
@@ -281,12 +292,15 @@ export function transformContent(
         if (!section || !sectionPath) return
 
         if (generated) {
-          const targetDepth = (sectionPath.match(/\.\.\//g) || []).length
-          const neededDepth = depth + targetDepth
-          const omittedTargetPath = sectionPath.replace(/(\.\.\/|\.\/)/g, "")
-          const position = "../".repeat(neededDepth)
+          const relativePath = path.posix.relative(
+            path.posix.join(
+              getSection(targetSection)?.path ?? targetSection,
+              "dummy",
+            ),
+            path.posix.join(sectionPath, name),
+          )
 
-          replaceValue = `from "${position}${omittedTargetPath}/${name}"`
+          replaceValue = `from "${relativePath.startsWith(".") ? relativePath : `./${relativePath}`}"`
         } else {
           replaceValue = `from "${PACKAGE_NAME}/${section}/${name}"`
         }

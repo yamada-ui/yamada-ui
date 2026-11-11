@@ -1,4 +1,4 @@
-import type { ColorMode } from "./index.types"
+import type { ColorMode } from "./index.type"
 import { useColorMode } from "./color-mode-provider"
 
 /**

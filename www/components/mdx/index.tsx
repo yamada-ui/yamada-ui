@@ -49,7 +49,6 @@ const mdxComponents: MDXComponents = {
         [langConditions.ja]: { mx: "px", verticalAlign: "top" },
       }}
       variant="surface"
-      verticalAlign="middle"
       {...props}
     />
   ),

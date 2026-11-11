@@ -22,7 +22,7 @@ const meta: Meta<typeof Textarea> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <Textarea placeholder="basic" />
+  return <Textarea placeholder="Your feedback" />
 }
 
 export const Variant: Story = () => {
@@ -95,7 +95,7 @@ export const Disabled: Story = () => {
         helperMessage="We would like to get your feedback."
         label="Feedback"
       >
-        <Textarea variant="outline" placeholder="your feedback" />
+        <Textarea variant="outline" placeholder="Your feedback" />
       </Field.Root>
     </>
   )
@@ -129,7 +129,7 @@ export const ReadOnly: Story = () => {
         label="Feedback"
         readOnly
       >
-        <Textarea variant="outline" placeholder="your feedback" />
+        <Textarea variant="outline" placeholder="Your feedback" />
       </Field.Root>
     </>
   )
@@ -159,7 +159,7 @@ export const Invalid: Story = () => {
       </For>
 
       <Field.Root errorMessage="Feedback is required." invalid label="Feedback">
-        <Textarea variant="outline" placeholder="your feedback" />
+        <Textarea variant="outline" placeholder="Your feedback" />
       </Field.Root>
     </>
   )
@@ -235,16 +235,16 @@ export const BorderColor: Story = () => {
 export const Placeholder: Story = () => {
   return (
     <>
-      <Textarea placeholder="default placeholder" />
+      <Textarea placeholder="Default placeholder" />
 
       <Textarea
-        placeholder="custom placeholder"
+        placeholder="Custom placeholder"
         _placeholder={{ color: "gray.500", opacity: 1 }}
       />
 
       <Textarea
         color="green.500"
-        placeholder="custom placeholder"
+        placeholder="Custom placeholder"
         _placeholder={{ color: "inherit" }}
       />
     </>
@@ -264,10 +264,18 @@ export const Resize: Story = () => {
 export const Autosize: Story = () => {
   return (
     <>
-      <Textarea autosize placeholder="autosize" />
-      <Textarea autosize minRows={4} placeholder="autosize, min rows 4" />
-      <Textarea autosize maxRows={4} placeholder="autosize, max rows 4" />
-      <Textarea placeholder="rows 4" rows={4} />
+      <Textarea autosize placeholder="Your feedback (automatically resizes)" />
+      <Textarea
+        autosize
+        minRows={4}
+        placeholder="Your feedback (at least 4 rows)"
+      />
+      <Textarea
+        autosize
+        maxRows={4}
+        placeholder="Your feedback (up to 4 rows)"
+      />
+      <Textarea placeholder="Your feedback (4 rows)" rows={4} />
     </>
   )
 }
@@ -280,7 +288,7 @@ export const ControlResize: Story = () => {
 
   return (
     <VStack>
-      <Textarea placeholder="use resize" resizeRef={resizeRef} />
+      <Textarea placeholder="Your feedback" resizeRef={resizeRef} />
 
       <Button alignSelf="flex-end" onClick={onResize}>
         Resize
@@ -310,7 +318,7 @@ export const ReactHookForm: Story = () => {
         label="Feedback"
       >
         <Textarea
-          placeholder="your feedback"
+          placeholder="Your feedback"
           {...register("textarea", {
             required: { message: "This is required.", value: true },
           })}
@@ -349,7 +357,7 @@ export const ReactHookFormDefaultValue: Story = () => {
         label="Feedback"
       >
         <Textarea
-          placeholder="your feedback"
+          placeholder="Your feedback"
           {...register("textarea", {
             required: { message: "This is required.", value: true },
           })}

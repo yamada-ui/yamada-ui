@@ -2,7 +2,7 @@
 
 ## Installation
 
-```sh
+```bash
 pnpm add @yamada-ui/utils
 # or
 yarn add @yamada-ui/utils

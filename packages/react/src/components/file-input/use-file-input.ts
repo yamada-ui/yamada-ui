@@ -5,15 +5,15 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict } from "../../utils"
 import type { FieldProps } from "../field"
 import { useCallback, useRef } from "react"
+import { mergeProps } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   assignRef,
-  cx,
   dataAttr,
   handlerAll,
+  has,
   isNull,
-  mergeRefs,
   visuallyHiddenAttributes,
 } from "../../utils"
 import { useFieldProps } from "../field"
@@ -21,7 +21,7 @@ import { useFieldProps } from "../field"
 export type UseFileInputProps<Y extends "button" | "input" = "input"> =
   FieldProps &
     Omit<HTMLProps<Y>, "defaultValue" | "onChange" | "ref" | "value"> &
-    Pick<HTMLProps<"input">, "accept" | "multiple" | "ref"> & {
+    Pick<HTMLProps<"input">, "accept" | "multiple" | "placeholder" | "ref"> & {
       /**
        * The initial value of the file input.
        */
@@ -50,11 +50,11 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
       ref,
       form,
       name,
-      "aria-labelledby": ariaLabelledby,
       accept,
       defaultValue,
       disabled,
       multiple,
+      placeholder,
       readOnly,
       required,
       resetRef,
@@ -107,7 +107,6 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
     ...dataProps,
     ...eventProps,
     ...rest,
-    "aria-labelledby": cx(ariaLabelledby, labelId),
     disabled: !interactive,
     focusable: readOnly && !disabled,
     focusOnClick: interactive,
@@ -117,23 +116,26 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
   assignRef(resetRef, onReset)
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    (props = {}) => ({
-      ...visuallyHiddenAttributes,
-      ...ariaProps,
-      ...dataProps,
-      id,
-      form,
-      type: "file",
-      name,
-      accept,
-      disabled,
-      multiple,
-      readOnly,
-      required,
-      ...props,
-      ref: mergeRefs(inputRef, props.ref, ref),
-      onChange: handlerAll(props.onChange, onChange),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          ...visuallyHiddenAttributes,
+          ...ariaProps,
+          ...dataProps,
+          id,
+          ref: inputRef,
+          form,
+          type: "file",
+          name,
+          accept,
+          disabled,
+          multiple,
+          readOnly,
+          required,
+        },
+        props,
+        { ref, onChange },
+      )(),
     [
       required,
       ariaProps,
@@ -151,14 +153,26 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
   )
 
   const getFieldProps: PropGetter = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      "data-placeholder": dataAttr(!count),
-      ...clickableProps,
-      "aria-labelledby": cx(ariaLabelledby, clickableProps["aria-labelledby"]),
-      tabIndex: interactive ? 0 : clickableProps.tabIndex,
-      ...props,
-    }),
-    [clickableProps, count, interactive],
+    (props = {}) => {
+      const hasLabel =
+        has(props, ["aria-label", "aria-labelledby"], { truthy: true }) ||
+        has(clickableProps, ["aria-label", "aria-labelledby"], { truthy: true })
+      const hasPlaceholder = !!placeholder?.trim()
+      const hasValues = !!count
+
+      return mergeProps(
+        {
+          "data-placeholder": dataAttr(!count),
+          ...clickableProps,
+          "aria-labelledby":
+            clickableProps["aria-labelledby"] ??
+            (!hasLabel && !hasPlaceholder && !hasValues ? labelId : undefined),
+          tabIndex: interactive ? 0 : clickableProps.tabIndex,
+        },
+        props,
+      )()
+    },
+    [clickableProps, count, interactive, labelId, placeholder],
   )
 
   return {

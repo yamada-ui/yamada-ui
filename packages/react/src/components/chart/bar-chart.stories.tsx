@@ -35,9 +35,9 @@ const createData = (length = 6): Data[] =>
 export const Basic: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -48,7 +48,7 @@ export const Basic: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -64,17 +64,17 @@ export const Composition: Story = () => {
   return (
     <BarChart.Root data={data}>
       <BarChart.Tooltip
-        labelFormatter={(value) => dayjs(value).format("MMM")}
+        labelFormatter={(value) => dayjs(value as string).format("MMM")}
       />
       <BarChart.XAxis
         dataKey="date"
         tickFormatter={(value) => dayjs(value).format("MMM")}
       />
-      <BarChart.Bar dataKey="desktop">
+      <BarChart.Bar name="Desktop" dataKey="desktop">
         <BarChart.LabelList />
       </BarChart.Bar>
-      <BarChart.Bar dataKey="tablet" />
-      <BarChart.Bar dataKey="mobile" />
+      <BarChart.Bar name="Tablet" dataKey="tablet" />
+      <BarChart.Bar name="Mobile" dataKey="mobile" />
     </BarChart.Root>
   )
 }
@@ -82,9 +82,9 @@ export const Composition: Story = () => {
 export const Size: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -99,7 +99,7 @@ export const Size: Story = () => {
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -114,9 +114,9 @@ export const Size: Story = () => {
 export const ColorScheme: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -131,7 +131,7 @@ export const ColorScheme: Story = () => {
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -146,9 +146,9 @@ export const ColorScheme: Story = () => {
 export const Color: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "blue", dataKey: "tablet" },
-      { color: "green", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "blue", dataKey: "tablet" },
+      { name: "Mobile", color: "green", dataKey: "mobile" },
     ],
     [],
   )
@@ -159,7 +159,7 @@ export const Color: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -172,9 +172,9 @@ export const Color: Story = () => {
 export const Range: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -194,7 +194,7 @@ export const Range: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -207,14 +207,16 @@ export const Range: Story = () => {
 export const Stacked: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
       {
+        name: "Tablet",
         color: "blue",
         dataKey: "tablet",
         radius: [0, 0, 4, 4],
         stackId: "stack",
       },
       {
+        name: "Mobile",
         color: "green",
         dataKey: "mobile",
         radius: [4, 4, 0, 0],
@@ -230,7 +232,7 @@ export const Stacked: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -243,9 +245,9 @@ export const Stacked: Story = () => {
 export const Percent: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "blue", dataKey: "tablet" },
-      { color: "green", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "blue", dataKey: "tablet" },
+      { name: "Mobile", color: "green", dataKey: "mobile" },
     ],
     [],
   )
@@ -259,7 +261,7 @@ export const Percent: Story = () => {
       barProps={{ radius: 0, stackId: "stack" }}
       chartProps={{ stackOffset: "expand" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -275,9 +277,9 @@ export const Percent: Story = () => {
 export const YAxis: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -290,7 +292,7 @@ export const YAxis: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -303,9 +305,9 @@ export const YAxis: Story = () => {
 export const Legend: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "blue", dataKey: "tablet" },
-      { color: "green", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "blue", dataKey: "tablet" },
+      { name: "Mobile", color: "green", dataKey: "mobile" },
     ],
     [],
   )
@@ -363,7 +365,7 @@ export const Name: Story = () => {
       series={series}
       withLegend
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -376,9 +378,9 @@ export const Name: Story = () => {
 export const Grid: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -408,9 +410,9 @@ export const Grid: Story = () => {
 export const Unit: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -429,7 +431,7 @@ export const Unit: Story = () => {
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
         formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -448,9 +450,9 @@ export const Unit: Story = () => {
 export const LabelList: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -463,7 +465,7 @@ export const LabelList: Story = () => {
         series={series}
         barProps={{ label: true }}
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -487,7 +489,7 @@ export const LabelList: Story = () => {
           },
         }}
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         yAxisProps={{
           domain: [0, 10000],
@@ -501,9 +503,9 @@ export const LabelList: Story = () => {
 export const Vertical: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -516,7 +518,7 @@ export const Vertical: Story = () => {
       withYAxis
       chartProps={{ layout: "vertical" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         type: "number",
@@ -533,9 +535,9 @@ export const Vertical: Story = () => {
 export const Orientation: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -556,7 +558,7 @@ export const Orientation: Story = () => {
             },
           }}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -572,9 +574,9 @@ export const Orientation: Story = () => {
 export const Synced: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -587,7 +589,7 @@ export const Synced: Story = () => {
         series={series}
         syncId="chart"
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -600,7 +602,7 @@ export const Synced: Story = () => {
         series={series}
         syncId="chart"
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -614,9 +616,9 @@ export const Synced: Story = () => {
 export const Formatter: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -633,7 +635,7 @@ export const Formatter: Story = () => {
           Number(value).toLocaleString(),
           toTitleCase(name),
         ],
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -649,9 +651,9 @@ export const Formatter: Story = () => {
 export const ReferenceLine: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -662,7 +664,7 @@ export const ReferenceLine: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -688,9 +690,9 @@ export const ReferenceLine: Story = () => {
 export const AxisTickLine: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -703,7 +705,7 @@ export const AxisTickLine: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -718,9 +720,9 @@ export const AxisTickLine: Story = () => {
 export const AxisLabel: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -733,7 +735,7 @@ export const AxisLabel: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -748,9 +750,9 @@ export const AxisLabel: Story = () => {
 export const Domain: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -763,7 +765,7 @@ export const Domain: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -780,9 +782,9 @@ export const Domain: Story = () => {
 export const Gap: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -794,7 +796,7 @@ export const Gap: Story = () => {
       series={series}
       chartProps={{ barCategoryGap: 32, barGap: 8 }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -808,17 +810,20 @@ export const Radius: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
       {
+        name: "Desktop",
         color: "red",
         dataKey: "desktop",
         radius: 8,
       },
       {
+        name: "Tablet",
         color: "blue",
         dataKey: "tablet",
         radius: [0, 0, 8, 8],
         stackId: "stack",
       },
       {
+        name: "Mobile",
         color: "green",
         dataKey: "mobile",
         radius: [8, 8, 0, 0],
@@ -834,7 +839,7 @@ export const Radius: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -847,9 +852,9 @@ export const Radius: Story = () => {
 export const TooltipCursor: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -861,7 +866,7 @@ export const TooltipCursor: Story = () => {
       series={series}
       tooltipProps={{
         cursor: true,
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -874,9 +879,9 @@ export const TooltipCursor: Story = () => {
 export const DisabledXAxis: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -896,9 +901,9 @@ export const DisabledXAxis: Story = () => {
 export const DisabledTooltip: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -920,9 +925,9 @@ export const DisabledTooltip: Story = () => {
 export const CustomAxis: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -935,7 +940,7 @@ export const CustomAxis: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -956,9 +961,9 @@ export const CustomAxis: Story = () => {
 export const CustomReferenceLine: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -969,7 +974,7 @@ export const CustomReferenceLine: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -992,7 +997,7 @@ export const CustomReferenceLine: Story = () => {
 
 export const CustomLabelList: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
-    () => [{ color: "blue", dataKey: "desktop" }],
+    () => [{ name: "Desktop", color: "blue", dataKey: "desktop" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -1005,7 +1010,7 @@ export const CustomLabelList: Story = () => {
         label: { color: "red" },
       }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -1023,9 +1028,9 @@ export const CustomLabelList: Story = () => {
 export const CustomGrid: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -1037,7 +1042,7 @@ export const CustomGrid: Story = () => {
       series={series}
       gridProps={{ strokeDasharray: "15 15" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -1051,9 +1056,9 @@ export const CustomGrid: Story = () => {
 export const CustomTooltipCursor: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -1065,7 +1070,7 @@ export const CustomTooltipCursor: Story = () => {
       series={series}
       tooltipProps={{
         cursor: { fill: "red", fillOpacity: 0.2 },
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",

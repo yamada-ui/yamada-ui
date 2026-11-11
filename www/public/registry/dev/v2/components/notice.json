@@ -2,7 +2,7 @@
   "$schema": "https://yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": ["portal", "close-button", "alert", "status"],
-    "externals": ["sonner@^2.0.7"],
+    "externals": ["sonner@^2.0.8"],
     "hooks": [],
     "providers": []
   },
@@ -20,10 +20,6 @@
     {
       "name": "notice.style.ts",
       "content": "import { defineComponentSlotStyle } from \"@yamada-ui/react\"\n\nexport const noticeStyle = defineComponentSlotStyle({\n  base: {\n    closeButton: {\n      \"&:is([data-variant='plain'], [data-variant='island'])\": {\n        colorScheme: \"mono!\",\n      },\n      \"&:is([data-variant='solid'])\": {\n        color: \"colorScheme.contrast!\",\n        _hover: { bg: \"colorScheme.solid!\" },\n      },\n      fontSize: \"md!\",\n      minBoxSize: \"6!\",\n      position: \"absolute\",\n      right: \"3\",\n      top: \"2.5\",\n    },\n    content: {\n      \"&[data-close-button]\": { pe: \"6\" },\n      display: \"flex\",\n      flex: \"1\",\n      flexDirection: \"column\",\n      gap: \"1\",\n    },\n    item: {\n      minW: \"sm\",\n      position: \"relative\",\n    },\n    root: {\n      \"--mobile-offset\": \"{spaces.md}\",\n      \"--offset\": \"{spaces.lg}\",\n    },\n  },\n})\n\nexport type NoticeStyle = typeof noticeStyle\n"
-    },
-    {
-      "name": "notice.test.browser.tsx",
-      "content": "import { userEvent } from \"vitest/browser\"\nimport { page, renderHook } from \"#test/browser\"\nimport { useNotice } from \"./use-notice\"\n\nasync function expectNoticeVisible(text: string) {\n  await expect.element(page.getByText(text)).toBeInTheDocument()\n}\n\nasync function expectNoticeHidden(text: string) {\n  await expect.element(page.getByText(text).query()).not.toBeInTheDocument()\n}\n\ndescribe(\"useNotice\", () => {\n  test(\"creates a notice with closable and button close strategy\", async () => {\n    const user = userEvent.setup()\n    const { result } = await renderHook(() => useNotice())\n\n    result.current({\n      closable: true,\n      closeStrategy: \"button\",\n      duration: null,\n      title: \"Closeable Button Notice\",\n    })\n\n    await expectNoticeVisible(\"Closeable Button Notice\")\n\n    await user.click(page.getByRole(\"button\", { name: /close/i }))\n\n    await expectNoticeHidden(\"Closeable Button Notice\")\n  })\n\n  test(\"creates a notice with click close strategy\", async () => {\n    const user = userEvent.setup()\n    const { result } = await renderHook(() => useNotice())\n\n    result.current({\n      closable: true,\n      closeStrategy: \"click\",\n      duration: null,\n      title: \"Click Close Notice\",\n    })\n\n    await expectNoticeVisible(\"Click Close Notice\")\n\n    await user.click(page.getByText(\"Click Close Notice\"))\n\n    await expectNoticeHidden(\"Click Close Notice\")\n  })\n})\n"
     },
     {
       "name": "notice.tsx",

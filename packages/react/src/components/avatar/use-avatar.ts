@@ -1,8 +1,9 @@
 "use client"
 
 import type { ReactElement, ReactNode } from "react"
+import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { type HTMLProps, mergeProps, type PropGetter } from "../../core"
+import { mergeProps } from "../../core"
 import { useI18n } from "../../providers/i18n-provider"
 import { dataAttr, handlerAll, mergeRefs } from "../../utils"
 

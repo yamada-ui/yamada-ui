@@ -119,7 +119,7 @@
       "required": false
     },
     "defaultMonth": {
-      "type": "Date",
+      "type": "Date | (() => Date)",
       "defaultValue": "new Date()",
       "description": "The initial month of the calendar.",
       "required": false
@@ -130,7 +130,7 @@
       "required": false
     },
     "defaultValue": {
-      "type": "NonNullable<MaybeDateValue<Multiple, Range>>",
+      "type": "NonNullable<MaybeDateValue<Multiple, Range>> | ToFunction<Exclude<MaybeDateValue<Multiple, Range>, undefined>>",
       "description": "The initial value of the calendar.",
       "required": false
     },

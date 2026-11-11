@@ -86,7 +86,7 @@ describe("tokens", () => {
       "workspaces",
       "theme",
       "src",
-      "index.types.ts",
+      "index.type.ts",
     )
     expect(existsSync(outPath)).toBeTruthy()
     const content = readFileSync(outPath, "utf-8")
@@ -104,7 +104,7 @@ describe("tokens", () => {
       { from: "user" },
     )
 
-    const outPath = path.join(tempDir, "index.types.ts")
+    const outPath = path.join(tempDir, "index.type.ts")
     expect(existsSync(outPath)).toBeTruthy()
     const content = readFileSync(outPath, "utf-8")
     expect(content).toContain("GeneratedThemeTokens")
@@ -139,7 +139,7 @@ describe("tokens", () => {
 
     const themeFile = path.join(tempDir, "theme.ts")
     writeFileSync(themeFile, "export default {}")
-    const outPath = path.join(tempDir, "custom.types.ts")
+    const outPath = path.join(tempDir, "custom.type.ts")
 
     await tokens.parseAsync(
       [
@@ -204,7 +204,7 @@ describe("tokens", () => {
       { from: "user" },
     )
 
-    const outPath = path.join(tempDir, "index.types.ts")
+    const outPath = path.join(tempDir, "index.type.ts")
     const content = readFileSync(outPath, "utf-8")
     expect(content).toContain("colorSchemes")
     expect(content).toContain("themeSchemes")
@@ -235,7 +235,7 @@ describe("tokens", () => {
       from: "user",
     })
 
-    const outPath = path.join(themeDir, "index.types.ts")
+    const outPath = path.join(themeDir, "index.type.ts")
     expect(existsSync(outPath)).toBeTruthy()
   })
 
@@ -257,7 +257,7 @@ describe("tokens", () => {
       { from: "user" },
     )
 
-    const outPath = path.join(tempDir, "index.types.ts")
+    const outPath = path.join(tempDir, "index.type.ts")
     expect(existsSync(outPath)).toBeTruthy()
   })
 

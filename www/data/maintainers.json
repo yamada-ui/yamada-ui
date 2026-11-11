@@ -141,19 +141,6 @@
     "x": { "url": "https://x.com/miura_188cm" }
   },
   {
-    "name": { "en": "Banri Kakehi", "ja": "Banri Kakehi" },
-    "description": {
-      "en": "Engineer in the Cloud Native.",
-      "ja": "Cloud Nativeのエンジニア。"
-    },
-    "github": {
-      "id": "Melonps",
-      "icon": "https://avatars.githubusercontent.com/u/95263124?v=4",
-      "url": "https://github.com/Melonps"
-    },
-    "x": { "url": "https://x.com/Melonps_" }
-  },
-  {
     "name": { "en": "NanoNano", "ja": "なのなの" },
     "description": {
       "en": "A frontend engineer who travels between the real world and VRChat.",
@@ -190,18 +177,5 @@
       "icon": "https://avatars.githubusercontent.com/u/134184805?v=4",
       "url": "https://github.com/Jin5555C"
     }
-  },
-  {
-    "name": { "en": "nikoniko", "ja": "にこにこ" },
-    "description": {
-      "en": "Hobbyist engineer.",
-      "ja": "趣味でエンジニアをしています。"
-    },
-    "github": {
-      "id": "2525-engineer",
-      "icon": "https://avatars.githubusercontent.com/u/267330382?v=4",
-      "url": "https://api.github.com/users/2525-engineer"
-    },
-    "x": { "url": "https://x.com/2525_engineer" }
   }
 ]

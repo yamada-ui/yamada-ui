@@ -181,7 +181,7 @@ const onReset = () => {
 
 return (
   <VStack>
-    <Text>files: {files?.length ?? 0}</Text>
+    <Text>Files: {files?.length ?? 0}</Text>
 
     <HStack>
       <FileButton multiple resetRef={resetRef} onChange={onChange}>
@@ -227,7 +227,6 @@ return (
 | `button.ui-file-button` | `aria-describedby` | `FileButton`が`Field.Root`内にあり、`Field.Root`に`errorMessage`、`helperMessage`、`Field.ErrorMessage`、`Field.HelperMessage`が設定されている場合は、その`id`を設定します。                           |
 |                         | `aria-disabled`    | readOnlyのfocusable-disabled経路（`readOnly`が設定され、`disabled`が設定されていない場合）で`"true"`を設定します。`disabled`が設定されている場合、無効状態はネイティブの`disabled`属性で表現されます。 |
 |                         | `aria-invalid`     | `invalid`が設定されている場合は`"true"`を設定します。                                                                                                                                                  |
-|                         | `aria-labelledby`  | `FileButton`が`Field.Root`内にあり、`Field.Root`に`label`が設定されている場合は、その`id`を設定します。                                                                                                |
 |                         | `aria-required`    | `required`が設定されている場合は`"true"`を設定します。                                                                                                                                                 |
 
 ## 類似のコンポーネント

@@ -97,11 +97,15 @@ const isValidEvent = (
   ref: RefObject<HTMLElement | null> | RefObject<HTMLElement | null>[],
 ) => {
   const target = ev.target as HTMLElement | null
+  const path = ev.composedPath()
 
   if ("button" in ev && ev.button > 0) return false
 
   if (target) if (!getDocument(target).contains(target)) return false
 
-  if (isArray(ref)) return !ref.some((ref) => ref.current?.contains(target))
-  else return !ref.current?.contains(target)
+  const contains = (el: HTMLElement | null) =>
+    !!el && (path.includes(el) || el.contains(target))
+
+  if (isArray(ref)) return !ref.some(({ current }) => contains(current))
+  else return !contains(ref.current)
 }

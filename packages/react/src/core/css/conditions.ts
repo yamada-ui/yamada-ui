@@ -1,6 +1,6 @@
 import type { Length } from "../../utils"
 import type { DOMElement } from "../components"
-import type { CSSObject } from "./index.types"
+import type { CSSObject } from "./index.type"
 
 type ReplaceSelector<
   Y extends string[],
@@ -77,11 +77,11 @@ export const attributes = {
    * Styles for when `data-mode` is applied to any parent of this component or element.
    */
   _dark:
-    ".dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]",
+    ":host([data-mode=dark]) &, .dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]",
   /**
-   * The CSS `&:is([data-end], [data-group-end])` attribute selector.
+   * The CSS `&:is([data-end], [data-group-end], [data-direction=end])` attribute selector.
    */
-  _end: "&:is([data-end], [data-group-end])",
+  _end: "&:is([data-end], [data-group-end], [data-direction=end])",
   /**
    * The CSS `&:is([data-expanded], [aria-expanded=true])` attribute selector.
    */
@@ -122,7 +122,7 @@ export const attributes = {
    * Styles for when `data-mode` is applied to any parent of this component or element.
    */
   _light:
-    ".light &:not([data-mode]), [data-mode=light] &:not([data-mode]), &[data-mode=light]",
+    ":host([data-mode=light]) &, .light &:not([data-mode]), [data-mode=light] &:not([data-mode]), &[data-mode=light]",
   /**
    * The CSS `&[data-loaded]` attribute selector.
    */
@@ -189,9 +189,9 @@ export const attributes = {
    */
   _rtl: "[dir=rtl] &",
   /**
-   * The CSS `&:is([data-start], [data-group-start])` attribute selector.
+   * The CSS `&:is([data-start], [data-group-start], [data-direction=start])` attribute selector.
    */
-  _start: "&:is([data-start], [data-group-start])",
+  _start: "&:is([data-start], [data-group-start], [data-direction=start])",
   /**
    * The CSS `&:is([data-selected], [aria-selected=true])` attribute selector.
    */

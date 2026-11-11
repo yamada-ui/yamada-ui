@@ -22,27 +22,27 @@ const data = useMemo<Data[]>(
   () =>
     DonutChart.mergeData([
       {
-        browser: "chrome",
+        browser: "Chrome",
         visits: faker.number.int({ max: 5000, min: 1000 }),
       },
       {
-        browser: "edge",
+        browser: "Edge",
         visits: faker.number.int({ max: 5000, min: 1000 }),
       },
       {
-        browser: "firefox",
+        browser: "Firefox",
         visits: faker.number.int({ max: 5000, min: 1000 }),
       },
       {
-        browser: "opera",
+        browser: "Opera",
         visits: faker.number.int({ max: 5000, min: 1000 }),
       },
       {
-        browser: "safari",
+        browser: "Safari",
         visits: faker.number.int({ max: 5000, min: 1000 }),
       },
       {
-        browser: "other",
+        browser: "Other",
         visits: faker.number.int({ max: 5000, min: 1000 }),
       },
     ]),

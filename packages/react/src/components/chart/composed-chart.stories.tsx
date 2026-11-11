@@ -38,15 +38,15 @@ export const Basic: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -58,7 +58,7 @@ export const Basic: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -75,15 +75,15 @@ export const Composition: Story = () => {
     <ComposedChart.Root data={data}>
       <ComposedChart.Legend />
       <ComposedChart.Tooltip
-        labelFormatter={(value) => dayjs(value).format("MMM")}
+        labelFormatter={(value) => dayjs(value as string).format("MMM")}
       />
       <ComposedChart.XAxis
         dataKey="date"
         tickFormatter={(value) => dayjs(value).format("MMM")}
       />
-      <ComposedChart.Bar color="blue" dataKey="desktop" />
-      <ComposedChart.Area color="green" dataKey="tablet" dot />
-      <ComposedChart.Line color="red" dataKey="mobile" dot>
+      <ComposedChart.Bar name="Desktop" color="blue" dataKey="desktop" />
+      <ComposedChart.Area name="Tablet" color="green" dataKey="tablet" dot />
+      <ComposedChart.Line name="Mobile" color="red" dataKey="mobile" dot>
         <ComposedChart.LabelList />
       </ComposedChart.Line>
     </ComposedChart.Root>
@@ -96,15 +96,15 @@ export const Size: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -120,7 +120,7 @@ export const Size: Story = () => {
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -146,21 +146,21 @@ export const ColorScheme: Story = () => {
             [
               [
                 "bar",
-                { dataKey: "desktop" },
+                { name: "Desktop", dataKey: "desktop" },
               ] satisfies ComposedChart.ComposedProps<Data>,
               [
                 "area",
-                { dataKey: "tablet" },
+                { name: "Tablet", dataKey: "tablet" },
               ] satisfies ComposedChart.ComposedProps<Data>,
               [
                 "line",
-                { dataKey: "mobile" },
+                { name: "Mobile", dataKey: "mobile" },
               ] satisfies ComposedChart.ComposedProps<Data>,
             ],
             row,
           )}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -177,15 +177,15 @@ export const Color: Story = () => {
     () => [
       [
         "bar",
-        { color: "blue", dataKey: "desktop" },
+        { name: "Desktop", color: "blue", dataKey: "desktop" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "area",
-        { color: "green", dataKey: "tablet" },
+        { name: "Tablet", color: "green", dataKey: "tablet" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "line",
-        { color: "red", dataKey: "mobile" },
+        { name: "Mobile", color: "red", dataKey: "mobile" },
       ] satisfies ComposedChart.ComposedProps<Data>,
     ],
     [],
@@ -197,7 +197,7 @@ export const Color: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -213,15 +213,15 @@ export const YAxis: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -235,7 +235,7 @@ export const YAxis: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -250,15 +250,15 @@ export const Legend: Story = () => {
     () => [
       [
         "bar",
-        { color: "blue", dataKey: "desktop" },
+        { name: "Desktop", color: "blue", dataKey: "desktop" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "area",
-        { color: "green", dataKey: "tablet" },
+        { name: "Tablet", color: "green", dataKey: "tablet" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "line",
-        { color: "red", dataKey: "mobile" },
+        { name: "Mobile", color: "red", dataKey: "mobile" },
       ] satisfies ComposedChart.ComposedProps<Data>,
     ],
     [],
@@ -326,7 +326,7 @@ export const Name: Story = () => {
       series={series}
       withLegend
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -342,15 +342,15 @@ export const Grid: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -384,15 +384,15 @@ export const LineType: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -420,7 +420,7 @@ export const LineType: Story = () => {
           areaProps={{ type }}
           lineProps={{ type }}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -438,15 +438,15 @@ export const LineDot: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -460,7 +460,7 @@ export const LineDot: Story = () => {
       areaProps={{ dot: true }}
       lineProps={{ dot: true }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -476,15 +476,15 @@ export const LineConnectNull: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -507,7 +507,7 @@ export const LineConnectNull: Story = () => {
       areaProps={{ connectNulls: true, dot: true }}
       lineProps={{ connectNulls: true, dot: true }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -523,15 +523,15 @@ export const BarRange: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -552,7 +552,7 @@ export const BarRange: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -568,15 +568,15 @@ export const BarStacked: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop", radius: [0, 0, 4, 4] },
+          { name: "Desktop", dataKey: "desktop", radius: [0, 0, 4, 4] },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "bar",
-          { dataKey: "tablet", radius: [4, 4, 0, 0] },
+          { name: "Tablet", dataKey: "tablet", radius: [4, 4, 0, 0] },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -589,7 +589,7 @@ export const BarStacked: Story = () => {
       series={series}
       barProps={{ stackId: "stack" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -605,15 +605,15 @@ export const BarSize: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -626,7 +626,7 @@ export const BarSize: Story = () => {
       series={series}
       barProps={{ barSize: 50 }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -642,15 +642,15 @@ export const BarRadius: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -663,7 +663,7 @@ export const BarRadius: Story = () => {
       series={series}
       barProps={{ radius: 8 }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -679,15 +679,15 @@ export const BarGap: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "bar",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -700,7 +700,7 @@ export const BarGap: Story = () => {
       series={series}
       chartProps={{ barGap: 16 }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -716,15 +716,15 @@ export const Unit: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -745,7 +745,7 @@ export const Unit: Story = () => {
       }}
       tooltipProps={{
         formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -767,15 +767,15 @@ export const LabelList: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -789,7 +789,7 @@ export const LabelList: Story = () => {
         series={series}
         lineProps={{ dot: true, label: true }}
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -814,7 +814,7 @@ export const LabelList: Story = () => {
           },
         }}
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         yAxisProps={{
           domain: [0, 10000],
@@ -831,15 +831,15 @@ export const Orientation: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -861,7 +861,7 @@ export const Orientation: Story = () => {
             },
           }}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -880,15 +880,15 @@ export const Synced: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -902,7 +902,7 @@ export const Synced: Story = () => {
         series={series}
         syncId="chart"
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -915,7 +915,7 @@ export const Synced: Story = () => {
         series={series}
         syncId="chart"
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -932,15 +932,15 @@ export const Formatter: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -958,7 +958,7 @@ export const Formatter: Story = () => {
           Number(value).toLocaleString(),
           toTitleCase(name),
         ],
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -977,15 +977,15 @@ export const ReferenceLine: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -997,7 +997,7 @@ export const ReferenceLine: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1026,15 +1026,15 @@ export const AxisTickLine: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1048,7 +1048,7 @@ export const AxisTickLine: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1066,15 +1066,15 @@ export const AxisLabel: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1088,7 +1088,7 @@ export const AxisLabel: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1106,15 +1106,15 @@ export const Domain: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1128,7 +1128,7 @@ export const Domain: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1148,15 +1148,15 @@ export const TooltipCursor: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1169,7 +1169,7 @@ export const TooltipCursor: Story = () => {
       series={series}
       tooltipProps={{
         cursor: true,
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1185,15 +1185,15 @@ export const DisabledXAxis: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1217,15 +1217,15 @@ export const DisabledLineActiveDot: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1239,7 +1239,7 @@ export const DisabledLineActiveDot: Story = () => {
       areaProps={{ activeDot: false }}
       lineProps={{ activeDot: false }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1255,15 +1255,15 @@ export const DisabledTooltip: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1289,15 +1289,15 @@ export const CustomAxis: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1311,7 +1311,7 @@ export const CustomAxis: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1334,15 +1334,15 @@ export const CustomLine: Story = () => {
     () => [
       [
         "bar",
-        { dataKey: "desktop" },
+        { name: "Desktop", dataKey: "desktop" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "area",
-        { color: ["green", "orange"], dataKey: "tablet" },
+        { name: "Tablet", color: ["green", "orange"], dataKey: "tablet" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "line",
-        { color: ["red", "blue"], dataKey: "mobile" },
+        { name: "Mobile", color: ["red", "blue"], dataKey: "mobile" },
       ] satisfies ComposedChart.ComposedProps<Data>,
     ],
     [],
@@ -1356,7 +1356,7 @@ export const CustomLine: Story = () => {
       areaProps={{ strokeDasharray: "15 15" }}
       lineProps={{ strokeDasharray: "15 15" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1372,15 +1372,15 @@ export const CustomReferenceLine: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1392,7 +1392,7 @@ export const CustomReferenceLine: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -1419,15 +1419,16 @@ export const CustomDot: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet", dot: { fill: "blue!" } },
+          { name: "Tablet", dataKey: "tablet", dot: { fill: "blue!" } },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
           {
+            name: "Mobile",
             dataKey: "mobile",
             dot: { fill: ["white!", "black!"], stroke: "red!", strokeWidth: 1 },
           },
@@ -1444,7 +1445,7 @@ export const CustomDot: Story = () => {
       areaProps={{ activeDot: false }}
       lineProps={{ activeDot: false }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -1461,15 +1462,15 @@ export const CustomActiveDot: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1483,7 +1484,7 @@ export const CustomActiveDot: Story = () => {
       areaProps={{ activeDot: { fill: ["red", "blue"] } }}
       lineProps={{ activeDot: { fill: ["green", "orange"] } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -1500,15 +1501,15 @@ export const CustomLabelList: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1525,7 +1526,7 @@ export const CustomLabelList: Story = () => {
         label: { color: "red" },
       }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -1546,15 +1547,15 @@ export const CustomGrid: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1567,7 +1568,7 @@ export const CustomGrid: Story = () => {
       series={series}
       gridProps={{ strokeDasharray: "15 15" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -1584,15 +1585,15 @@ export const CustomTooltipCursor: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1605,7 +1606,7 @@ export const CustomTooltipCursor: Story = () => {
       series={series}
       tooltipProps={{
         cursor: { stroke: ["red", "blue"] },
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",

@@ -3,22 +3,23 @@
 import type { EmotionCache, SerializedStyles } from "@emotion/utils"
 import type { FC } from "react"
 import type { Dict } from "../../utils"
-import type { As, ShouldForwardProp, StyledComponent } from "../components"
+import type {
+  As,
+  HTMLProps,
+  ShouldForwardProp,
+  StyledComponent,
+} from "../components"
 import type { CSSModifierObject, CSSPropObject } from "../css"
 import type {
   ColorScheme,
   ComponentStyle,
   System,
   UsageTheme,
-} from "./index.types"
+} from "./index.type"
 import { withEmotionCache } from "@emotion/react"
 import { serializeStyles } from "@emotion/serialize"
 import { useInsertionEffectAlwaysWithSyncFallback } from "@emotion/use-insertion-effect-with-fallbacks"
-import {
-  getRegisteredStyles,
-  insertStyles,
-  registerStyles,
-} from "@emotion/utils"
+import { getRegisteredStyles, registerStyles } from "@emotion/utils"
 import { useMemo, useRef } from "react"
 import isEqual from "react-fast-compare"
 import { Slot } from "../../components/slot"
@@ -50,11 +51,57 @@ interface InsertionProps {
   serialized: SerializedStyles
 }
 
+function normalizeHostSelector(rule: string, className: string) {
+  const selector = `.${className}`
+
+  return rule
+    .replaceAll(
+      `${selector}:host([data-mode=dark]) ${selector}`,
+      `:host([data-mode=dark]) ${selector}`,
+    )
+    .replaceAll(
+      `${selector}:host([data-mode=light]) ${selector}`,
+      `:host([data-mode=light]) ${selector}`,
+    )
+}
+
+function insertStyles(cache: EmotionCache, serialized: SerializedStyles) {
+  const className = `${cache.key}-${serialized.name}`
+
+  if (!isUndefined(cache.inserted[serialized.name])) return
+
+  const sheet = Object.create(cache.sheet) as typeof cache.sheet
+
+  sheet.insert = (rule) => {
+    cache.sheet.insert(normalizeHostSelector(rule, className))
+  }
+
+  let styleForSsr = ""
+  let current: SerializedStyles | undefined = serialized
+
+  do {
+    const style =
+      cache.insert(
+        serialized === current ? `.${className}` : "",
+        current,
+        sheet,
+        true,
+      ) || undefined
+
+    if (!createdDom() && !isUndefined(style))
+      styleForSsr += normalizeHostSelector(style, className)
+
+    current = current.next
+  } while (current !== undefined)
+
+  return styleForSsr || undefined
+}
+
 const Insertion: FC<InsertionProps> = ({ cache, htmlTag, serialized }) => {
   registerStyles(cache, serialized, htmlTag)
 
   const style = useInsertionEffectAlwaysWithSyncFallback(() =>
-    insertStyles(cache, serialized, htmlTag),
+    insertStyles(cache, serialized),
   )
 
   if (!createdDom() && !isUndefined(style)) {
@@ -99,6 +146,11 @@ export const [ColorSchemeContext, useColorSchemeContext] =
     name: "ColorSchemeContext",
     strict: false,
   })
+
+export const [HydrationContext, useHydrationContext] = createContext<boolean>({
+  name: "HydrationContext",
+  strict: false,
+})
 
 export interface StyledOptions<
   Y extends CSSPropObject = CSSPropObject,
@@ -175,6 +227,7 @@ export function createStyled<
       omittedProps,
       componentStyleOptions,
     )
+    const suppressHydrationWarning = useHydrationContext()
     const [cssArray, colorScheme, forwardProps] = useMemo(() => {
       const { css, colorScheme, ...forwardProps } = rest
 
@@ -182,6 +235,7 @@ export function createStyled<
     }, [rest])
 
     styleProps.colorScheme ??= colorScheme
+    forwardProps.suppressHydrationWarning ??= suppressHydrationWarning
 
     if (forwardProps.className)
       className = getRegisteredStyles(
@@ -211,17 +265,19 @@ export function createStyled<
 
     if (!className) className = undefined
 
-    const mergedProps = { ...forwardProps, className, children }
+    const mergedProps: HTMLProps = { ...forwardProps, className, children }
 
     return (
       <ColorSchemeContext value={styleProps.colorScheme}>
-        <Insertion cache={cache} htmlTag={htmlTag} serialized={serialized} />
+        <HydrationContext value={mergedProps.suppressHydrationWarning}>
+          <Insertion cache={cache} htmlTag={htmlTag} serialized={serialized} />
 
-        {asChild && !forwardAsChild ? (
-          <Slot ref={ref} {...mergedProps} />
-        ) : (
-          <Component ref={ref} {...mergedProps} />
-        )}
+          {asChild && !forwardAsChild ? (
+            <Slot ref={ref} {...mergedProps} />
+          ) : (
+            <Component ref={ref} {...mergedProps} />
+          )}
+        </HydrationContext>
       </ColorSchemeContext>
     )
   }) as StyledComponent<Y, M>

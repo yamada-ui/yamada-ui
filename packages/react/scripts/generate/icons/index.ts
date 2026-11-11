@@ -65,7 +65,7 @@ async function createIcons(iconNames: string[]) {
 }
 
 async function createTypes(iconNames: string[]) {
-  const fileName = "index.types.ts"
+  const fileName = "index.type.ts"
   let data = [
     `export type IconNames = ${iconNames.map((iconName) => `\"${iconName}Icon\"`).join(" | ")}`,
   ].join("\n")
@@ -101,7 +101,7 @@ async function main() {
     return `export { ${iconName}Icon } from "./${fileName}-icon"`
   })
 
-  let data = [`export type * from "./index.types"`, ...chunks].join("\n")
+  let data = [`export type * from "./index.type"`, ...chunks].join("\n")
 
   await writeFileWithFormat(path.resolve(DIST_PATH, "index.ts"), data)
 
@@ -114,7 +114,7 @@ async function main() {
       "exec",
       "oxlint",
       "src/components/icon/icons/index.ts",
-      "src/components/icon/icons/index.types.ts",
+      "src/components/icon/icons/index.type.ts",
       "--fix",
     ])
   } catch {}

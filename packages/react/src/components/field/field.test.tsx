@@ -1,9 +1,72 @@
+import type { ReactNode } from "react"
 import { a11y, fireEvent, render, screen } from "#test"
 import { Field } from "."
 import { Form } from "../form"
 import { Input } from "../input"
 
 describe("<Field />", () => {
+  test("keeps a lazy-wrapped required indicator accessible", () => {
+    const requiredIndicator = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: (payload: ReactNode) => payload,
+      _payload: <span role="note">Required</span>,
+    } as unknown as ReactNode
+
+    render(
+      <Field.Root label="Email" required requiredIndicator={requiredIndicator}>
+        <Input type="email" />
+      </Field.Root>,
+    )
+
+    expect(screen.getByRole("note")).toHaveTextContent("Required")
+    expect(screen.getByRole("textbox")).toHaveAccessibleName("EmailRequired")
+    expect(screen.getByRole("textbox")).toBeRequired()
+  })
+
+  test.each([undefined, null, false, 0, ""])(
+    "preserves the default indicator when a lazy wrapper resolves to %s",
+    (value) => {
+      const requiredIndicator = {
+        $$typeof: Symbol.for("react.lazy"),
+        _init: () => value,
+        _payload: { status: "fulfilled", value },
+      } as unknown as ReactNode
+
+      render(
+        <Field.Root
+          label="Email"
+          required
+          requiredIndicator={requiredIndicator}
+        >
+          <Input type="email" />
+        </Field.Root>,
+      )
+
+      expect(screen.getByText("*")).toHaveAttribute("aria-hidden", "true")
+      expect(screen.getByRole("textbox")).toHaveAccessibleName("Email")
+    },
+  )
+
+  test("does not initialize an unused required indicator", () => {
+    const init = vi.fn(() => {
+      throw new Error("Unused indicator")
+    })
+    const requiredIndicator = {
+      $$typeof: Symbol.for("react.lazy"),
+      _init: init,
+      _payload: { status: "pending" },
+    } as unknown as ReactNode
+
+    render(
+      <Field.Root label="Email" requiredIndicator={requiredIndicator}>
+        <Input type="email" />
+      </Field.Root>,
+    )
+
+    expect(screen.getByRole("textbox")).toHaveAccessibleName("Email")
+    expect(init).not.toHaveBeenCalled()
+  })
+
   test("renders component correctly", async () => {
     await a11y(<Field.Root />)
   })

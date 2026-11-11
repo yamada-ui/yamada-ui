@@ -15,9 +15,10 @@ import type {
   TextProps,
 } from "recharts"
 import type { PolarChartProps } from "recharts/types/util/types"
+import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict, Merge } from "../../utils"
 import { isValidElement, useCallback, useMemo } from "react"
-import { type HTMLProps, mergeProps, type PropGetter } from "../../core"
+import { mergeProps } from "../../core"
 import { dataAttr, isFunction, isObject, isUndefined } from "../../utils"
 import { useChartContext } from "./use-chart"
 
@@ -1366,7 +1367,7 @@ export const useChartRadial = <Y extends Dict>({
 }: UseChartRadialProps<Y>) => {
   const shape = useMemo<UseChartRadialProps<Y>["shape"]>(() => {
     if (isFunction(shapeProp))
-      return (props: any) => {
+      return (props) => {
         props.className = props.className?.replace(/\s*\bundefined\b/g, "")
 
         const name = props.payload?.[nameKey]

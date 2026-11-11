@@ -1,27 +1,20 @@
 "use client"
 
 import type { ReactNode, RefObject } from "react"
+import type { HTMLProps, PropGetter } from "../../core"
+import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { Children, useCallback, useId, useRef, useState } from "react"
-import {
-  type HTMLProps,
-  mergeProps,
-  type PropGetter,
-  useEnvironment,
-} from "../../core"
+import { mergeProps, useEnvironment } from "../../core"
 import { useAsyncCallback } from "../../hooks/use-async-callback"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
-import {
-  useDisclosure,
-  type UseDisclosureProps,
-} from "../../hooks/use-disclosure"
+import { useDisclosure } from "../../hooks/use-disclosure"
 import { useWindowEvent } from "../../hooks/use-window-event"
 import { useI18n } from "../../providers/i18n-provider"
 import {
   ariaAttr,
   assignRef,
   createContext,
-  cx,
   dataAttr,
   handlerAll,
   mergeRefs,
@@ -221,13 +214,23 @@ export const useSidebar = ({
   )
 
   const getTriggerProps: PropGetter<"button"> = useCallback(
-    (props = {}) => ({
-      "aria-expanded": open,
-      "aria-label": t(open ? "Close sidebar" : "Open sidebar"),
-      ...props,
-      onClick: handlerAll(props.onClick, onToggle),
-    }),
-    [open, t, onToggle],
+    (props = {}) =>
+      mergeProps({ "aria-expanded": open }, props, { onClick: onToggle })(),
+    [open, onToggle],
+  )
+
+  const getHandleProps: PropGetter<"button"> = useCallback(
+    (props = {}) =>
+      getTriggerProps(
+        mergeProps(
+          {
+            "aria-label": t(open ? "Close sidebar" : "Open sidebar"),
+            tabIndex: -1,
+          },
+          props,
+        )(),
+      ),
+    [getTriggerProps, t, open],
   )
 
   const getSidePanelProps: PropGetter<"aside"> = useCallback(
@@ -258,6 +261,7 @@ export const useSidebar = ({
     selectedValue,
     getContentProps,
     getFooterProps,
+    getHandleProps,
     getHeaderProps,
     getRootProps,
     getSidePanelProps,
@@ -455,30 +459,21 @@ export const useSidebarItem = ({
   }, [defaultExpanded])
 
   const getItemProps: PropGetter<"li"> = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => {
-      const merged = mergeProps(
+    (props = {}) =>
+      mergeProps(
         {
           id: itemId,
+          ref: register,
           "aria-current": selected ? "page" : undefined,
           "aria-disabled": ariaAttr(disabled),
-          "aria-labelledby": cx(ariaLabelledby, labelId),
+          "aria-labelledby": labelId,
           "data-disabled": dataAttr(disabled),
           "data-selected": dataAttr(selected),
         },
         rest,
         props,
-        { ref },
-        { ref: register },
-      )()
-
-      return {
-        ...merged,
-        onClick: handlerAll(
-          merged.onClick,
-          !group ? () => onSelectedChange(value) : undefined,
-        ),
-      }
-    },
+        { onClick: !group ? () => onSelectedChange(value) : undefined },
+      )(),
     [
       itemId,
       register,
@@ -541,13 +536,16 @@ export const useSidebarItem = ({
   )
 
   const getContentProps: PropGetter<"ul"> = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id: contentId,
-      "aria-busy": ariaAttr(groupLoading),
-      "aria-labelledby": cx(ariaLabelledby, labelId),
-      "data-disabled": dataAttr(disabled),
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          id: contentId,
+          "aria-busy": ariaAttr(groupLoading),
+          "aria-labelledby": labelId,
+          "data-disabled": dataAttr(disabled),
+        },
+        props,
+      )(),
     [contentId, labelId, disabled, groupLoading],
   )
 

@@ -34,6 +34,7 @@ export const checkboxStyle = defineComponentSlotStyle({
       display: "flex",
       fontSize: "{label-size}",
       gap: "2",
+      position: "relative",
       userSelect: "none",
       _readOnly: { layerStyle: "readOnly" },
       _disabled: { layerStyle: "disabled" },

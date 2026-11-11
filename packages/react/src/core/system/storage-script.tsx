@@ -1,6 +1,6 @@
 "use client"
 
-import type { ColorModeWithSystem, ThemeScheme } from "./index.types"
+import type { ColorModeWithSystem, ThemeScheme } from "./index.type"
 import type { Storage } from "./storage-manager"
 import { createdDom } from "../../utils"
 import { COLOR_MODE_STORAGE_KEY, THEME_SCHEME_STORAGE_KEY } from "../constant"

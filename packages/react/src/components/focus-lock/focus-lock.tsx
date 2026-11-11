@@ -1,9 +1,19 @@
 "use client"
 
 import type { FC, PropsWithChildren, RefObject } from "react"
-import { useCallback } from "react"
+import { useCallback, useState } from "react"
 import ReactFocusLock from "react-focus-lock"
-import { getFocusableElements, interopDefault } from "../../utils"
+import {
+  createContext,
+  getFocusableElements,
+  interopDefault,
+} from "../../utils"
+
+const [FocusLockShardContext, useFocusLockShard] = createContext<
+  ((shard: HTMLElement) => () => void) | undefined
+>({ name: "FocusLockShardContext", strict: false })
+
+export { useFocusLockShard }
 
 const InternalFocusLock = interopDefault(ReactFocusLock)
 
@@ -70,7 +80,16 @@ export const FocusLock: FC<FocusLockProps> = ({
   persistentFocus,
   restoreFocus,
 }) => {
+  const [shards, setShards] = useState<HTMLElement[]>([])
   const returnFocus = restoreFocus && !finalFocusRef
+
+  const registerShard = useCallback((shard: HTMLElement) => {
+    setShards((prev) => (prev.includes(shard) ? prev : [...prev, shard]))
+
+    return () => {
+      setShards((prev) => prev.filter((item) => item !== shard))
+    }
+  }, [])
 
   const onActivation = useCallback(() => {
     if (initialFocusRef?.current) {
@@ -90,16 +109,19 @@ export const FocusLock: FC<FocusLockProps> = ({
   }, [finalFocusRef])
 
   return (
-    <InternalFocusLock
-      autoFocus={autoFocus}
-      crossFrame={lockFocusAcrossFrames}
-      disabled={disabled}
-      persistentFocus={persistentFocus}
-      returnFocus={returnFocus}
-      onActivation={onActivation}
-      onDeactivation={onDeactivation}
-    >
-      {children}
-    </InternalFocusLock>
+    <FocusLockShardContext value={registerShard}>
+      <InternalFocusLock
+        autoFocus={autoFocus}
+        crossFrame={lockFocusAcrossFrames}
+        disabled={disabled}
+        persistentFocus={persistentFocus}
+        returnFocus={returnFocus}
+        shards={shards}
+        onActivation={onActivation}
+        onDeactivation={onDeactivation}
+      >
+        {children}
+      </InternalFocusLock>
+    </FocusLockShardContext>
   )
 }

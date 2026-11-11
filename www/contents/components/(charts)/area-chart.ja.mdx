@@ -18,9 +18,9 @@ interface Data {
 const series = useMemo<AreaChart.AreaProps<Data>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -71,7 +71,7 @@ return (
     data={data}
     series={series}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -121,18 +121,25 @@ const data = useMemo<CartesianChartData[]>(() => createCartesianChartData(), [])
 
 return (
   <AreaChart.Root data={data} chartProps={{ margin: { right: 16 } }}>
-    <AreaChart.Area dataKey="desktop" dot stroke="colorScheme.900">
+    <AreaChart.Area
+      dataKey="desktop"
+      name="Desktop"
+      dot
+      stroke="colorScheme.900"
+    >
       <AreaChart.LabelList />
     </AreaChart.Area>
-    <AreaChart.Area dataKey="tablet" stroke="colorScheme.600" />
-    <AreaChart.Area dataKey="mobile" stroke="colorScheme.300" />
+    <AreaChart.Area dataKey="tablet" name="Tablet" stroke="colorScheme.600" />
+    <AreaChart.Area dataKey="mobile" name="Mobile" stroke="colorScheme.300" />
     <AreaChart.XAxis
       dataKey="date"
       tickFormatter={(value) => dayjs(value).format("MMM")}
     />
     <AreaChart.YAxis />
     <AreaChart.Grid />
-    <AreaChart.Tooltip labelFormatter={(value) => dayjs(value).format("MMM")} />
+    <AreaChart.Tooltip
+      labelFormatter={(value) => dayjs(value as string).format("MMM")}
+    />
   </AreaChart.Root>
 )
 ```
@@ -143,9 +150,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -161,7 +168,7 @@ return (
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -180,7 +187,11 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries(
-      [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
+      [
+        { dataKey: "desktop", name: "Desktop" },
+        { dataKey: "tablet", name: "Tablet" },
+        { dataKey: "mobile", name: "Mobile" },
+      ],
       "blue",
     ),
   [],
@@ -192,7 +203,7 @@ return (
     data={data}
     series={series}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -207,9 +218,9 @@ return (
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
-    { dataKey: "desktop", color: "blue" },
-    { dataKey: "tablet", color: "green" },
-    { dataKey: "mobile", color: "red" },
+    { dataKey: "desktop", name: "Desktop", color: "blue" },
+    { dataKey: "tablet", name: "Tablet", color: "green" },
+    { dataKey: "mobile", name: "Mobile", color: "red" },
   ],
   [],
 )
@@ -220,7 +231,7 @@ return (
     data={data}
     series={series}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -238,7 +249,11 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries(
-      [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
+      [
+        { dataKey: "desktop", name: "Desktop" },
+        { dataKey: "tablet", name: "Tablet" },
+        { dataKey: "mobile", name: "Mobile" },
+      ],
       "blue",
     ),
   [],
@@ -251,7 +266,7 @@ return (
     series={series}
     areaProps={{ withGradient: true }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -269,9 +284,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -297,7 +312,7 @@ return (
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -317,9 +332,9 @@ return (
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
-    { dataKey: "desktop", color: "blue" },
-    { dataKey: "tablet", color: "green" },
-    { dataKey: "mobile", color: "red" },
+    { dataKey: "desktop", name: "Desktop", color: "blue" },
+    { dataKey: "tablet", name: "Tablet", color: "green" },
+    { dataKey: "mobile", name: "Mobile", color: "red" },
   ],
   [],
 )
@@ -331,7 +346,7 @@ return (
     series={series}
     areaProps={{ stackId: "stack" }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -348,9 +363,9 @@ return (
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
-    { dataKey: "desktop", color: "blue" },
-    { dataKey: "tablet", color: "green" },
-    { dataKey: "mobile", color: "red" },
+    { dataKey: "desktop", name: "Desktop", color: "blue" },
+    { dataKey: "tablet", name: "Tablet", color: "green" },
+    { dataKey: "mobile", name: "Mobile", color: "red" },
   ],
   [],
 )
@@ -363,7 +378,7 @@ return (
     areaProps={{ stackId: "stack" }}
     chartProps={{ stackOffset: "expand" }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -381,9 +396,9 @@ Y軸を表示する場合は、`withYAxis`を`true`に設定します。デフ�
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -396,7 +411,7 @@ return (
     withYAxis
     chartProps={{ margin: { right: 16 } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -412,9 +427,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -427,7 +442,7 @@ return (
     withYAxis
     chartProps={{ margin: { left: 16 } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -445,9 +460,9 @@ return (
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () => [
-    { dataKey: "desktop", color: "blue" },
-    { dataKey: "tablet", color: "green" },
-    { dataKey: "mobile", color: "red" },
+    { dataKey: "desktop", name: "Desktop", color: "blue" },
+    { dataKey: "tablet", name: "Tablet", color: "green" },
+    { dataKey: "mobile", name: "Mobile", color: "red" },
   ],
   [],
 )
@@ -459,7 +474,7 @@ return (
     series={series}
     withLegend
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -490,7 +505,7 @@ return (
     series={series}
     withLegend
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -508,9 +523,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -529,7 +544,7 @@ return (
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -548,7 +563,7 @@ return (
 
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
-  () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  () => AreaChart.mergeSeries([{ dataKey: "desktop", name: "Desktop" }]),
   [],
 )
 const data = useMemo(() => createCartesianChartData(), [])
@@ -559,7 +574,7 @@ return (
     series={series}
     areaProps={{ dot: true }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -575,7 +590,7 @@ return (
 
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
-  () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  () => AreaChart.mergeSeries([{ dataKey: "desktop", name: "Desktop" }]),
   [],
 )
 const data = useMemo(() => createCartesianChartData(), [])
@@ -586,7 +601,7 @@ return (
     series={series}
     areaProps={{ dot: true, label: true }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -602,7 +617,7 @@ return (
 
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
-  () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+  () => AreaChart.mergeSeries([{ dataKey: "desktop", name: "Desktop" }]),
   [],
 )
 const data = useMemo(() => createCartesianChartData(), [])
@@ -621,7 +636,7 @@ return (
     chartProps={{ margin: { right: 16 } }}
     tooltipProps={{
       formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -645,9 +660,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -660,7 +675,7 @@ return (
       series={series}
       syncId="chart"
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -672,7 +687,7 @@ return (
       series={series}
       syncId="chart"
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -691,9 +706,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -710,7 +725,7 @@ return (
         Number(value).toLocaleString(),
         toTitleCase(name),
       ],
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -729,9 +744,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -742,7 +757,7 @@ return (
     data={data}
     series={series}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -773,9 +788,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -788,7 +803,7 @@ return (
     withYAxis
     chartProps={{ margin: { right: 16 } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -811,9 +826,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -826,7 +841,7 @@ return (
     withYAxis
     chartProps={{ margin: { right: 16 } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -846,9 +861,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -861,7 +876,7 @@ return (
     withYAxis
     chartProps={{ margin: { right: 16 } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -883,9 +898,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -912,9 +927,9 @@ X軸を非表示にする場合は、`withXAxis`を`false`に設定します。�
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -939,9 +954,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -953,7 +968,7 @@ return (
     series={series}
     areaProps={{ activeDot: false }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -971,9 +986,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -998,9 +1013,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -1013,7 +1028,7 @@ return (
     withYAxis
     chartProps={{ margin: { right: 16 } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",
@@ -1037,10 +1052,11 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet", dot: { fill: "blue" } },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet", dot: { fill: "blue" } },
       {
         dataKey: "mobile",
+        name: "Mobile",
         dot: { fill: ["white", "black"], stroke: "red", strokeWidth: 1 },
       },
     ]),
@@ -1054,7 +1070,7 @@ return (
     series={series}
     areaProps={{ activeDot: false }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
       contentProps: { withSwatch: false },
     }}
     xAxisProps={{
@@ -1071,9 +1087,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -1085,7 +1101,7 @@ return (
     series={series}
     areaProps={{ activeDot: { fill: ["blue", "red"] } }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
       contentProps: { withSwatch: false },
     }}
     xAxisProps={{
@@ -1100,7 +1116,7 @@ return (
 
 ```tsx preview functional
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
-  () => [{ color: "blue", dataKey: "desktop" }],
+  () => [{ color: "blue", dataKey: "desktop", name: "Desktop" }],
   [],
 )
 const data = useMemo(() => createCartesianChartData(), [])
@@ -1115,7 +1131,7 @@ return (
       label: { color: "red" },
     }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
       contentProps: { withSwatch: false },
     }}
     xAxisProps={{
@@ -1136,9 +1152,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -1150,7 +1166,7 @@ return (
     series={series}
     gridProps={{ strokeDasharray: "15 15" }}
     tooltipProps={{
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
       contentProps: { withSwatch: false },
     }}
     xAxisProps={{
@@ -1167,9 +1183,9 @@ return (
 const series = useMemo<AreaChart.AreaProps<CartesianChartData>[]>(
   () =>
     AreaChart.mergeSeries([
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { dataKey: "desktop", name: "Desktop" },
+      { dataKey: "tablet", name: "Tablet" },
+      { dataKey: "mobile", name: "Mobile" },
     ]),
   [],
 )
@@ -1181,7 +1197,7 @@ return (
     series={series}
     tooltipProps={{
       cursor: { stroke: ["red", "blue"] },
-      labelFormatter: (value) => dayjs(value).format("MMM"),
+      labelFormatter: (value) => dayjs(value as string).format("MMM"),
     }}
     xAxisProps={{
       dataKey: "date",

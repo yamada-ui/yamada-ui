@@ -1,7 +1,7 @@
 import type { Dict } from "../../utils"
 import type { ColorMode, System, ThemeToken, UsageTheme } from "../system"
 import type { StyleConfig } from "./config"
-import type { CSSFunction, CSSProperties } from "./index.types"
+import type { CSSFunction, CSSProperties } from "./index.type"
 import { isObject, isString, isUndefined } from "../../utils"
 import { getColorSchemeVar, isColorScheme } from "../system"
 
@@ -139,7 +139,7 @@ export function tokenToVar(system: System) {
 
 export function varToValue(system: System) {
   return function (variable: string): string {
-    const value = system.cssVars[variable]
+    const value = system.cssVars.light[variable]
 
     if (isCSSVar(value))
       return varToValue(system)(value.replace(/^var\(/, "").replace(/\)$/, ""))

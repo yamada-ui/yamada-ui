@@ -56,11 +56,18 @@ import {
   getCSS,
   mergeProps,
   styled,
+  transforms,
   useSystem,
   useTheme,
   varAttr,
 } from "../../core"
-import { cx, isFunction, isObject, splitObject } from "../../utils"
+import {
+  cx,
+  isFunction,
+  isObject,
+  replaceObject,
+  splitObject,
+} from "../../utils"
 import { cartesianChartStyle } from "./cartesian-chart.style"
 import { Chart } from "./chart"
 import {
@@ -409,7 +416,7 @@ export const CartesianChart = withProvider(
     ...rest
   }) => ({
     "--active-dot-fill": varAttr(activeDotFill, "colors"),
-    "--active-dot-r": activeDotRadius,
+    "--active-dot-r": replaceObject(activeDotRadius, transforms.px),
     "--active-dot-stroke": varAttr(activeDotStroke, "colors"),
     "--active-dot-stroke-width": activeDotStrokeWidth,
     "--area-end-fill-opacity": areaEndFillOpacity,
@@ -421,7 +428,7 @@ export const CartesianChart = withProvider(
     "--bar-stroke": varAttr(barStroke, "colors"),
     "--bar-stroke-width": barStrokeWidth,
     "--dot-fill": varAttr(dotFill, "colors"),
-    "--dot-r": dotRadius,
+    "--dot-r": replaceObject(dotRadius, transforms.px),
     "--dot-stroke": varAttr(dotStroke, "colors"),
     "--dot-stroke-width": dotStrokeWidth,
     "--grid-stroke": varAttr(gridStroke, "colors"),

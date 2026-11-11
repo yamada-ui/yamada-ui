@@ -103,9 +103,7 @@ pnpm react test:jsdom --run src/hooks/<name>/
 
 ## Step 6: Create a Changeset (if needed)
 
-Follow the changeset rules in AGENTS.md. Name the file with a randomly-generated phrase (e.g., `purple-foxes-smile.md`), matching the project's existing convention. Check for name collisions.
-
-If changes span multiple packages, list all affected packages in the changeset frontmatter.
+Follow the changeset rules in AGENTS.md. Generate the changeset with `pnpm changeset add` instead of writing the file under `.changeset/` by hand.
 
 ---
 

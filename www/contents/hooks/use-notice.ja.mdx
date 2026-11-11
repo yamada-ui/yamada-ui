@@ -44,6 +44,14 @@ import { useNotice } from "@workspaces/ui"
 const notice = useNotice()
 ```
 
+:::tip
+ユーザーの操作に依らず情報や警告をページに組み込んで表示する場合は、[Alert](/docs/components/alert)を使用します。
+:::
+
+:::tip
+ユーザーの操作やAPIの応答に応じて通知をページに組み込んで表示する場合は、[Snacks](/docs/components/snacks)を使用します。
+:::
+
 ### バリアントを変更する
 
 ```tsx preview functional client
@@ -64,7 +72,7 @@ return (
             })
           }}
         >
-          Add "{toTitleCase(variant)}" Snack
+          Add "{variant}" Snack
         </Button>
       )}
     </For>
@@ -92,7 +100,7 @@ return (
             })
           }}
         >
-          Add "{toTitleCase(colorScheme)}" Snack
+          Add "{colorScheme}" Snack
         </Button>
       )}
     </For>
@@ -119,7 +127,7 @@ return (
             })
           }}
         >
-          Add "{toTitleCase(loadingScheme)}" Snack
+          Add "{loadingScheme}" Snack
         </Button>
       )}
     </For>
@@ -148,7 +156,7 @@ return (
             })
           }}
         >
-          Add "{toTitleCase(status)}" Snack
+          Add "{status}" Snack
         </Button>
       )}
     </For>

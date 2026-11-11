@@ -1,10 +1,6 @@
 import type { IntlData } from "."
 
 const data: IntlData = {
-  actionBar: {
-    "Close action bar": "Műveletsáv bezárása",
-    "Open action bar": "Műveletsáv megnyitása",
-  },
   autocomplete: {
     "Clear value": "Érték törlése",
     "No results found": "Nincs találat",
@@ -52,10 +48,6 @@ const data: IntlData = {
     Magenta: "Magenta",
     Red: "Piros",
     Yellow: "Sárga",
-  },
-  modal: {
-    "Close modal": "Modális ablak bezárása",
-    "Open modal": "Modális ablak megnyitása",
   },
   numberInput: {
     Decrease: "Csökkentés",

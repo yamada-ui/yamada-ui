@@ -1,5 +1,49 @@
 # @yamada-ui/utils
 
+## 2.3.0
+
+### Minor Changes
+
+- [#8006](https://github.com/yamada-ui/yamada-ui/pull/8006) [`7346221`](https://github.com/yamada-ui/yamada-ui/commit/73462214865f9dcfd2543ffbdb371415e41e2ae1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add `has` to check whether any specified object key exists or has a truthy value.
+
+## 2.2.0
+
+### Minor Changes
+
+- [#7946](https://github.com/yamada-ui/yamada-ui/pull/7946) [`a9d09ad`](https://github.com/yamada-ui/yamada-ui/commit/a9d09ad9a4c539065e4e7b7abcd1b5a719ca051f) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add deduplication of whitespace-separated tokens to the `cx` function.
+
+### Patch Changes
+
+- [#7895](https://github.com/yamada-ui/yamada-ui/pull/7895) [`8f82f01`](https://github.com/yamada-ui/yamada-ui/commit/8f82f01aa27305bbd2506440217c8e9b2e7e73f4) Thanks [@dependabot](https://github.com/apps/dependabot)! - Add the `ToFunction` utility type to convert each union member into a zero-argument function type.
+
+## 2.1.7
+
+### Patch Changes
+
+- [#7874](https://github.com/yamada-ui/yamada-ui/pull/7874) [`1917766`](https://github.com/yamada-ui/yamada-ui/commit/1917766c4df9491f8618f62d5637969cf63073b6) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Standardize type definition filenames on `*.type.ts`, including the CLI token generator's default output; rename existing generated files and update references, or pass `--out` with the previous filename to preserve it.
+
+- [#7869](https://github.com/yamada-ui/yamada-ui/pull/7869) [`564930f`](https://github.com/yamada-ui/yamada-ui/commit/564930fcf5a2d1edd3370efeec26ba45ea35ae5c) Thanks [@taroj1205](https://github.com/taroj1205)! - Infer shape callback parameters from the callable arm of ActiveShape and share the extraction helper as FunctionOf so registry-copied chart sources typecheck under TypeScript 5.
+
+## 2.1.6
+
+### Patch Changes
+
+- [#7784](https://github.com/yamada-ui/yamada-ui/pull/7784) [`bbeeecb`](https://github.com/yamada-ui/yamada-ui/commit/bbeeecb9005c82cd4234c90b2219414c6587e8e9) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix Path to include array and object keys.
+
+- [#7787](https://github.com/yamada-ui/yamada-ui/pull/7787) [`c1d56b6`](https://github.com/yamada-ui/yamada-ui/commit/c1d56b6ec94a54575ca527cf336e2116d461d563) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix NumberInput mouse wheel updates for focused inputs inside Shadow DOM.
+
+- [#7786](https://github.com/yamada-ui/yamada-ui/pull/7786) [`018cc36`](https://github.com/yamada-ui/yamada-ui/commit/018cc36de2528c721e7d758e1c5d6fff42ea027b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix focus management inside Shadow DOM.
+
+- [#7788](https://github.com/yamada-ui/yamada-ui/pull/7788) [`546d65e`](https://github.com/yamada-ui/yamada-ui/commit/546d65e5650df827f037d8637c190ce09620e190) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix Editable focus cleanup in Shadow DOM.
+
+## 2.1.5
+
+### Patch Changes
+
+- [#7746](https://github.com/yamada-ui/yamada-ui/pull/7746) [`77354be`](https://github.com/yamada-ui/yamada-ui/commit/77354bec8d9495b40d550b7a84c27fb36a7e239b) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#7747](https://github.com/yamada-ui/yamada-ui/pull/7747) [`29c1dc4`](https://github.com/yamada-ui/yamada-ui/commit/29c1dc44353e6ad9fee2da36c8cddc5fd9df5315) Thanks [@dependabot](https://github.com/apps/dependabot)! - Remove unnecessary type assertions.
+
 ## 2.1.4
 
 ### Patch Changes

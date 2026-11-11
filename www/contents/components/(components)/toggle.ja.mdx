@@ -8,7 +8,7 @@ style: components/toggle/toggle.style.ts
 ---
 
 ```tsx preview
-<Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
+<Toggle icon={<LetterBIcon />} aria-label="Toggle bold" />
 ```
 
 ## 使い方
@@ -39,10 +39,18 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 </ToggleGroup.Root>
 ```
 
+:::tip
+状態の切り替えではなく、アクションを実行する場合は、[IconButton](/docs/components/icon-button)または[Button](/docs/components/button)を使用します。
+:::
+
+:::tip
+`Toggle`が複数存在し、それらの`Toggle`がグルーピングが可能な場合は、[ToggleGroup](#grouping)を使用します。
+:::
+
 ### テキストと組み合わせる
 
 ```tsx preview
-<Toggle px="4">
+<Toggle aria-label="Toggle italic" px="4">
   <ItalicIcon />
   <Text as="span" fontSize="md">
     Italic
@@ -58,7 +66,7 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
     {(variant) => (
       <Toggle
         key={variant}
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         aria-label="Toggle bold"
         variant={variant}
       />
@@ -75,7 +83,7 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
     {(size) => (
       <Toggle
         key={size}
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         aria-label="Toggle bold"
         size={size}
       />
@@ -94,7 +102,7 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
         key={colorScheme}
         colorScheme={colorScheme}
         aria-label="Toggle bold"
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
       />
     )}
   </For>
@@ -111,7 +119,7 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
     {(variant) => (
       <Toggle
         key={variant}
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         aria-label="Toggle bold"
         variant={variant}
         fullRounded
@@ -131,7 +139,7 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
     {(variant) => (
       <Toggle
         key={variant}
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         aria-label="Toggle bold"
         variant={variant}
         disabled
@@ -151,7 +159,7 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
     {(variant) => (
       <Toggle
         key={variant}
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         aria-label="Toggle bold"
         variant={variant}
         readOnly
@@ -171,7 +179,7 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
     {(variant) => (
       <Toggle
         key={variant}
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         aria-label="Toggle bold"
         variant={variant}
         invalid
@@ -189,7 +197,7 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 <Toggle
   aria-label="Toggle bold"
   errorBorderColor="orange.500"
-  icon={<BoldIcon />}
+  icon={<LetterBIcon />}
   defaultChecked
   invalid
 />
@@ -202,7 +210,7 @@ const [checked, setChecked] = useState<boolean>(false)
 
 return (
   <Toggle
-    icon={<BoldIcon />}
+    icon={<LetterBIcon />}
     aria-label="Toggle bold"
     checked={checked}
     onChange={setChecked}
@@ -214,7 +222,11 @@ return (
 
 ```tsx preview
 <ToggleGroup.Root>
-  <ToggleGroup.Item value="bold" icon={<BoldIcon />} aria-label="Toggle bold" />
+  <ToggleGroup.Item
+    value="bold"
+    icon={<LetterBIcon />}
+    aria-label="Toggle bold"
+  />
   <ToggleGroup.Item
     value="italic"
     icon={<ItalicIcon />}
@@ -237,7 +249,7 @@ return (
   <ToggleGroup.Root value={value} onChange={setValue}>
     <ToggleGroup.Item
       value="bold"
-      icon={<BoldIcon />}
+      icon={<LetterBIcon />}
       aria-label="Toggle bold"
     />
     <ToggleGroup.Item
@@ -260,17 +272,19 @@ return (
 
 ## アクセシビリティ
 
-`Toggle`にアイコンのみを使用する場合は、`Toggle`に`aria-label`を設定します。
+`Toggle`または`ToggleGroup.Root`に`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。これにより、操作やグループの目的や機能をユーザーに伝えることができます。
 
 ```tsx
-<Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
+<Toggle icon={<LetterBIcon />} aria-label="Toggle bold" />
 ```
-
-`ToggleGroup.Root`に`aria-label`を設定すると、スクリーンリーダーによって読み上げられます。これにより、グループの目的や機能をユーザーに伝えることができます。
 
 ```tsx
 <ToggleGroup.Root aria-label="Text formatting options">
-  <ToggleGroup.Item value="bold" icon={<BoldIcon />} aria-label="Toggle bold" />
+  <ToggleGroup.Item
+    value="bold"
+    icon={<LetterBIcon />}
+    aria-label="Toggle bold"
+  />
   <ToggleGroup.Item
     value="italic"
     icon={<ItalicIcon />}
@@ -282,6 +296,17 @@ return (
     aria-label="Toggle underline"
   />
 </ToggleGroup.Root>
+```
+
+テキストと組み合わせる場合は、表示されるテキストを含む`aria-label`を設定してください。未設定の場合はデフォルトの`aria-label`が使用され、テキストとアクセシブル名が一致しなくなることがあります。
+
+```tsx preview
+<Toggle aria-label="Toggle italic" px="4">
+  <ItalicIcon />
+  <Text as="span" fontSize="md">
+    Italic
+  </Text>
+</Toggle>
 ```
 
 ### キーボード操作

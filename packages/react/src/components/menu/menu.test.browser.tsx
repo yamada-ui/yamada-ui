@@ -53,7 +53,7 @@ describe("<Menu />", () => {
 
     await user.click(page.getByRole("menuitemcheckbox", { name: /Opt 1/i }))
 
-    expect(calls).toStrictEqual(["getter", "consumer", "internal"])
+    expect(calls).toStrictEqual(["consumer", "getter", "internal"])
     expect(onChange).toHaveBeenCalledWith(["opt-1"])
     expect(onSelect).toHaveBeenCalledWith("opt-1")
   })
@@ -214,6 +214,63 @@ describe("<Menu />", () => {
     await user.click(page.getByRole("menuitem", { name: /Item 1/i }))
 
     expect(onSelect).toHaveBeenCalledWith("item-1")
+  })
+
+  test("calls item onSelect before root onSelect when a menu item is selected", async () => {
+    const calls: string[] = []
+    const onSelect = vi.fn(() => calls.push("root"))
+    const onSelectItem = vi.fn(() => calls.push("item"))
+    const { user } = await render(
+      <Menu.Root closeOnSelect={false} defaultOpen onSelect={onSelect}>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content
+          items={[{ label: "Item 1", value: "item-1", onSelect: onSelectItem }]}
+        />
+      </Menu.Root>,
+    )
+
+    const item1 = page.getByRole("menuitem", { name: /Item 1/i })
+
+    await user.click(item1)
+
+    expect(calls).toStrictEqual(["item", "root"])
+    expect(onSelectItem).toHaveBeenCalledWith("item-1")
+
+    const element = item1.element() as HTMLElement
+    element.focus()
+    element.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Enter",
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+
+    expect(onSelectItem).toHaveBeenCalledTimes(2)
+  })
+
+  test("does not call item onSelect when disabled", async () => {
+    const onSelectItem = vi.fn()
+    const { user } = await render(
+      <Menu.Root defaultOpen disabled>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Item value="item-1" onSelect={onSelectItem}>
+            Item 1
+          </Menu.Item>
+        </Menu.Content>
+      </Menu.Root>,
+    )
+
+    await user.click(page.getByRole("menuitem", { name: /Item 1/i }))
+
+    expect(onSelectItem).not.toHaveBeenCalled()
   })
 
   test("does not call onSelect when disabled", async () => {

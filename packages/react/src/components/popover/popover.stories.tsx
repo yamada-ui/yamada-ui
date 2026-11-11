@@ -3,7 +3,6 @@ import { useRef } from "react"
 import { PropsTable } from "#storybook"
 import { Popover } from "."
 import { useDisclosure } from "../../hooks/use-disclosure"
-import { toTitleCase } from "../../utils"
 import { Box } from "../box"
 import { Button } from "../button"
 import { Center } from "../center"
@@ -35,6 +34,16 @@ export const Basic: Story = () => {
         <Popover.Body>がんばれカカロット……お前がナンバー１だ！！</Popover.Body>
       </Popover.Content>
     </Popover.Root>
+  )
+}
+
+export const PropsPattern: Story = () => {
+  return (
+    <Popover.Root
+      body="がんばれカカロット……お前がナンバー１だ！！"
+      header="ベジータ!"
+      trigger={<Button>Click me</Button>}
+    />
   )
 }
 
@@ -195,7 +204,7 @@ export const AnimationScheme: Story = () => {
       {(animationScheme) => (
         <Popover.Root key={animationScheme} animationScheme={animationScheme}>
           <Popover.Trigger>
-            <Button>Open "{toTitleCase(animationScheme)}" Popover</Button>
+            <Button>Open "{animationScheme}" Popover</Button>
           </Popover.Trigger>
 
           <Popover.Content>
@@ -235,7 +244,7 @@ export const Placement: Story = () => {
       {(placement) => (
         <Popover.Root key={placement} placement={placement}>
           <Popover.Trigger>
-            <Button>Open "{toTitleCase(placement)}" Popover</Button>
+            <Button>Open "{placement}" Popover</Button>
           </Popover.Trigger>
 
           <Popover.Content>

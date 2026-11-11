@@ -248,6 +248,28 @@ describe("Event", () => {
       cleanup()
       document.body.removeChild(container)
     })
+
+    test("should trap focus within shadow DOM", () => {
+      const host = document.createElement("div")
+      const shadowRoot = host.attachShadow({ mode: "open" })
+      const container = document.createElement("div")
+      const firstButton = document.createElement("button")
+      const lastButton = document.createElement("button")
+      container.append(firstButton, lastButton)
+      shadowRoot.appendChild(container)
+      document.body.appendChild(host)
+
+      const cleanup = focusTrap(container)
+      lastButton.focus()
+      lastButton.dispatchEvent(
+        new KeyboardEvent("keydown", { key: "Tab", bubbles: true }),
+      )
+
+      expect(shadowRoot.activeElement).toBe(firstButton)
+
+      cleanup()
+      host.remove()
+    })
   })
 
   describe("focusTransfer", () => {
@@ -706,6 +728,104 @@ describe("Event", () => {
       cleanup()
       document.body.removeChild(target)
       document.body.removeChild(container)
+    })
+
+    test("should transfer focus to the next tabbable element in shadow DOM", () => {
+      const host = document.createElement("div")
+      const shadowRoot = host.attachShadow({ mode: "open" })
+      const target = document.createElement("button")
+      const container = document.createElement("div")
+      const firstButton = document.createElement("button")
+      const lastButton = document.createElement("button")
+      const nextButton = document.createElement("button")
+      nextButton.textContent = "Next Button"
+      container.append(firstButton, lastButton)
+      shadowRoot.append(container, target, nextButton)
+      document.body.appendChild(host)
+
+      const cleanup = focusTransfer(container, target)
+      lastButton.focus()
+      lastButton.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          key: "Tab",
+          bubbles: true,
+          composed: true,
+        }),
+      )
+
+      expect(shadowRoot.activeElement?.textContent).toBe("Next Button")
+
+      cleanup()
+      host.remove()
+    })
+
+    test("should transfer focus between different shadow roots", () => {
+      const triggerHost = document.createElement("div")
+      const triggerShadowRoot = triggerHost.attachShadow({ mode: "open" })
+      const previousButton = document.createElement("button")
+      const trigger = document.createElement("button")
+      const nextButton = document.createElement("button")
+      triggerShadowRoot.append(previousButton, trigger, nextButton)
+
+      const contentHost = document.createElement("div")
+      const contentShadowRoot = contentHost.attachShadow({ mode: "open" })
+      const container = document.createElement("div")
+      const firstButton = document.createElement("button")
+      const lastButton = document.createElement("button")
+      container.append(firstButton, lastButton)
+      contentShadowRoot.appendChild(container)
+      document.body.append(triggerHost, contentHost)
+
+      const cleanup = focusTransfer(container, trigger)
+
+      trigger.focus()
+      trigger.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          key: "Tab",
+          bubbles: true,
+          composed: true,
+        }),
+      )
+
+      expect(contentShadowRoot.activeElement).toBe(firstButton)
+
+      lastButton.focus()
+      lastButton.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          key: "Tab",
+          bubbles: true,
+          composed: true,
+        }),
+      )
+
+      expect(triggerShadowRoot.activeElement).toBe(nextButton)
+
+      nextButton.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          key: "Tab",
+          bubbles: true,
+          composed: true,
+          shiftKey: true,
+        }),
+      )
+
+      expect(contentShadowRoot.activeElement).toBe(lastButton)
+
+      firstButton.focus()
+      firstButton.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          key: "Tab",
+          bubbles: true,
+          composed: true,
+          shiftKey: true,
+        }),
+      )
+
+      expect(triggerShadowRoot.activeElement).toBe(trigger)
+
+      cleanup()
+      triggerHost.remove()
+      contentHost.remove()
     })
   })
 })

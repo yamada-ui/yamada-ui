@@ -8,7 +8,7 @@ style: components/toggle/toggle.style.ts
 ---
 
 ```tsx preview
-<Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
+<Toggle icon={<LetterBIcon />} aria-label="Toggle bold" />
 ```
 
 ## Usage
@@ -39,10 +39,18 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 </ToggleGroup.Root>
 ```
 
+:::tip
+If you want to perform an action rather than toggle a state, use [IconButton](/docs/components/icon-button) or [Button](/docs/components/button).
+:::
+
+:::tip
+If there are multiple `Toggle` components that can be grouped together, use [ToggleGroup](#grouping).
+:::
+
 ### With Text
 
 ```tsx preview
-<Toggle px="4">
+<Toggle aria-label="Toggle italic" px="4">
   <ItalicIcon />
   <Text as="span" fontSize="md">
     Italic
@@ -58,7 +66,7 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
     {(variant) => (
       <Toggle
         key={variant}
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         aria-label="Toggle bold"
         variant={variant}
       />
@@ -75,7 +83,7 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
     {(size) => (
       <Toggle
         key={size}
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         aria-label="Toggle bold"
         size={size}
       />
@@ -94,7 +102,7 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
         key={colorScheme}
         colorScheme={colorScheme}
         aria-label="Toggle bold"
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
       />
     )}
   </For>
@@ -111,7 +119,7 @@ To change the shape, set the `rounded` prop.
     {(variant) => (
       <Toggle
         key={variant}
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         aria-label="Toggle bold"
         variant={variant}
         fullRounded
@@ -131,7 +139,7 @@ To disable, set `disabled` to `true`.
     {(variant) => (
       <Toggle
         key={variant}
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         aria-label="Toggle bold"
         variant={variant}
         disabled
@@ -151,7 +159,7 @@ To read-only, set `readOnly` to `true`.
     {(variant) => (
       <Toggle
         key={variant}
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         aria-label="Toggle bold"
         variant={variant}
         readOnly
@@ -171,7 +179,7 @@ To set invalid state, set `invalid` to `true`.
     {(variant) => (
       <Toggle
         key={variant}
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         aria-label="Toggle bold"
         variant={variant}
         invalid
@@ -189,7 +197,7 @@ To change the border color, set `errorBorderColor` to the color.
 <Toggle
   aria-label="Toggle bold"
   errorBorderColor="orange.500"
-  icon={<BoldIcon />}
+  icon={<LetterBIcon />}
   defaultChecked
   invalid
 />
@@ -202,7 +210,7 @@ const [checked, setChecked] = useState<boolean>(false)
 
 return (
   <Toggle
-    icon={<BoldIcon />}
+    icon={<LetterBIcon />}
     aria-label="Toggle bold"
     checked={checked}
     onChange={setChecked}
@@ -214,7 +222,11 @@ return (
 
 ```tsx preview
 <ToggleGroup.Root>
-  <ToggleGroup.Item value="bold" icon={<BoldIcon />} aria-label="Toggle bold" />
+  <ToggleGroup.Item
+    value="bold"
+    icon={<LetterBIcon />}
+    aria-label="Toggle bold"
+  />
   <ToggleGroup.Item
     value="italic"
     icon={<ItalicIcon />}
@@ -237,7 +249,7 @@ return (
   <ToggleGroup.Root value={value} onChange={setValue}>
     <ToggleGroup.Item
       value="bold"
-      icon={<BoldIcon />}
+      icon={<LetterBIcon />}
       aria-label="Toggle bold"
     />
     <ToggleGroup.Item
@@ -260,17 +272,19 @@ return (
 
 ## Accessibility
 
-When using only icons in `Toggle`, set `aria-label` for the `Toggle`.
+Setting an `aria-label` on `Toggle` or `ToggleGroup.Root` allows screen readers to announce it, helping users understand the purpose and functionality of the control or group.
 
 ```tsx
-<Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
+<Toggle icon={<LetterBIcon />} aria-label="Toggle bold" />
 ```
-
-Setting an `aria-label` on `ToggleGroup.Root` allows screen readers to announce the group, helping users understand its purpose.
 
 ```tsx
 <ToggleGroup.Root aria-label="Text formatting options">
-  <ToggleGroup.Item value="bold" icon={<BoldIcon />} aria-label="Toggle bold" />
+  <ToggleGroup.Item
+    value="bold"
+    icon={<LetterBIcon />}
+    aria-label="Toggle bold"
+  />
   <ToggleGroup.Item
     value="italic"
     icon={<ItalicIcon />}
@@ -282,6 +296,17 @@ Setting an `aria-label` on `ToggleGroup.Root` allows screen readers to announce 
     aria-label="Toggle underline"
   />
 </ToggleGroup.Root>
+```
+
+When combining `Toggle` with text, set an `aria-label` that includes the visible text. If omitted, the default `aria-label` is used, which may cause a mismatch between the text and the accessible name.
+
+```tsx preview
+<Toggle aria-label="Toggle italic" px="4">
+  <ItalicIcon />
+  <Text as="span" fontSize="md">
+    Italic
+  </Text>
+</Toggle>
 ```
 
 ### Keyboard Navigation

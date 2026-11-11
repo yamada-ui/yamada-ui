@@ -6,6 +6,7 @@ export const kbdStyle = defineComponentStyle({
     alignItems: "center",
     display: "inline-flex",
     rounded: "l1",
+    verticalAlign: "middle",
   },
 
   variants: {

@@ -65,6 +65,7 @@ const TARGET_SECTIONS = ["components", "hooks", "providers"]
 const PROVIDE_SECTIONS = ["core", "utils", "theme"]
 const IGNORED_FILE_NAME = [
   ".test.(ts|tsx)",
+  ".test.(browser|chromium|firefox|webkit).(ts|tsx)",
   ".stories.(ts|tsx)",
   "^(?!.*\\.(ts|tsx)$).*",
 ]
@@ -93,7 +94,7 @@ async function getIconsSources() {
     "utf-8",
   )
   const indexTypes = await readFile(
-    path.join(ENTRY_PATH, "components", "icon", "icons", "index.types.ts"),
+    path.join(ENTRY_PATH, "components", "icon", "icons", "index.type.ts"),
     "utf-8",
   )
   const icons =
@@ -103,7 +104,7 @@ async function getIconsSources() {
 
   const sources: Source[] = [
     { name: "icons/index.ts", content: index },
-    { name: "icons/index.types.ts", content: indexTypes },
+    { name: "icons/index.type.ts", content: indexTypes },
     {
       name: "icons",
       data: icons.map((iconName) => ({
@@ -241,6 +242,7 @@ async function getSources() {
                     await Promise.all(
                       dirents.map(async (dirent) => {
                         if (dirent.isDirectory()) return
+                        if (shouldIgnoreFileName(dirent.name)) return
 
                         const targetPath = path.join(
                           dirent.parentPath,

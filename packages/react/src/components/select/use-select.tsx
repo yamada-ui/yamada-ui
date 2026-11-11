@@ -17,20 +17,19 @@ import {
   useMemo,
   useRef,
 } from "react"
+import { mergeProps } from "../../core"
 import { useCombobox, useComboboxItem } from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import {
   ariaAttr,
   createContext,
-  cx,
   dataAttr,
   handlerAll,
   isArray,
   isNumber,
   isString,
   isUndefined,
-  mergeRefs,
   runKeyAction,
   toArray,
   visuallyHiddenAttributes,
@@ -311,14 +310,18 @@ export const useSelect = <Multiple extends boolean = false>(
   )
 
   const getFieldProps: PropGetter = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) =>
-      getTriggerProps({
-        ref: mergeRefs(ref, fieldRef),
-        "aria-label": placeholder,
-        "aria-labelledby": cx(ariaLabelledby, labelId),
-        ...props,
-        children,
-      }),
+    (props = {}) =>
+      getTriggerProps(
+        mergeProps(
+          {
+            ref: fieldRef,
+            "aria-label": placeholder,
+            "aria-labelledby": labelId,
+            children,
+          },
+          props,
+        )(),
+      ),
     [children, getTriggerProps, labelId, placeholder],
   )
 

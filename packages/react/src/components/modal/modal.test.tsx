@@ -50,10 +50,6 @@ describe("<Modal />", () => {
       "aria-haspopup",
       "dialog",
     )
-    expect(screen.getByTestId("openTrigger")).toHaveAttribute(
-      "aria-label",
-      "Open modal",
-    )
     expect(screen.getByTestId("overlay")).toHaveAttribute("aria-hidden", "true")
     expect(screen.getByTestId("content")).toHaveAttribute("aria-describedby")
     expect(screen.getByTestId("content")).toHaveAttribute("aria-labelledby")
@@ -61,11 +57,7 @@ describe("<Modal />", () => {
     expect(screen.getByTestId("content")).toHaveAttribute("role", "dialog")
     expect(screen.getByTestId("closeButton")).toHaveAttribute(
       "aria-label",
-      "Close modal",
-    )
-    expect(screen.getByTestId("closeTrigger")).toHaveAttribute(
-      "aria-label",
-      "Close modal",
+      "Close",
     )
     expect(screen.getByTestId("title")).toHaveAttribute("id")
     expect(screen.getByTestId("body")).toHaveAttribute("id")
@@ -131,7 +123,7 @@ describe("<Modal />", () => {
         </Modal.Content>
       </Modal.Root>,
     )
-    expect(screen.queryByLabelText("Close modal")).not.toBeInTheDocument()
+    expect(screen.queryByLabelText("Close")).not.toBeInTheDocument()
   })
 
   test("renders with custom trigger prop", () => {

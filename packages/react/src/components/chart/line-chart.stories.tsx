@@ -35,9 +35,9 @@ const createData = (length = 6): Data[] =>
 export const Basic: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -48,7 +48,7 @@ export const Basic: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -64,17 +64,17 @@ export const Composition: Story = () => {
   return (
     <LineChart.Root data={data}>
       <LineChart.Tooltip
-        labelFormatter={(value) => dayjs(value).format("MMM")}
+        labelFormatter={(value) => dayjs(value as string).format("MMM")}
       />
       <LineChart.XAxis
         dataKey="date"
         tickFormatter={(value) => dayjs(value).format("MMM")}
       />
-      <LineChart.Line dataKey="desktop" dot>
+      <LineChart.Line name="Desktop" dataKey="desktop" dot>
         <LineChart.LabelList />
       </LineChart.Line>
-      <LineChart.Line dataKey="tablet" />
-      <LineChart.Line dataKey="mobile" />
+      <LineChart.Line name="Tablet" dataKey="tablet" />
+      <LineChart.Line name="Mobile" dataKey="mobile" />
     </LineChart.Root>
   )
 }
@@ -82,9 +82,9 @@ export const Composition: Story = () => {
 export const Size: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -99,7 +99,7 @@ export const Size: Story = () => {
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -114,9 +114,9 @@ export const Size: Story = () => {
 export const ColorScheme: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -131,7 +131,7 @@ export const ColorScheme: Story = () => {
           data={data}
           series={series}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -146,9 +146,9 @@ export const ColorScheme: Story = () => {
 export const Color: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "blue", dataKey: "tablet" },
-      { color: "green", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "blue", dataKey: "tablet" },
+      { name: "Mobile", color: "green", dataKey: "mobile" },
     ],
     [],
   )
@@ -159,7 +159,7 @@ export const Color: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -172,9 +172,9 @@ export const Color: Story = () => {
 export const Type: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -200,7 +200,7 @@ export const Type: Story = () => {
           series={series}
           lineProps={{ type }}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -215,9 +215,9 @@ export const Type: Story = () => {
 export const YAxis: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -230,7 +230,7 @@ export const YAxis: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -243,9 +243,9 @@ export const YAxis: Story = () => {
 export const Legend: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "blue", dataKey: "tablet" },
-      { color: "green", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "blue", dataKey: "tablet" },
+      { name: "Mobile", color: "green", dataKey: "mobile" },
     ],
     [],
   )
@@ -303,7 +303,7 @@ export const Name: Story = () => {
       series={series}
       withLegend
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -316,9 +316,9 @@ export const Name: Story = () => {
 export const Grid: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -347,7 +347,7 @@ export const Grid: Story = () => {
 
 export const Dot: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
-    () => [{ dataKey: "desktop" }],
+    () => [{ name: "Desktop", dataKey: "desktop" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -358,7 +358,7 @@ export const Dot: Story = () => {
       series={series}
       lineProps={{ dot: true, label: true }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -370,7 +370,7 @@ export const Dot: Story = () => {
 
 export const Unit: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
-    () => [{ dataKey: "desktop" }],
+    () => [{ name: "Desktop", dataKey: "desktop" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -389,7 +389,7 @@ export const Unit: Story = () => {
       }}
       tooltipProps={{
         formatter: (value) => `${(Number(value) / 1000).toFixed(1)}k`,
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -407,7 +407,7 @@ export const Unit: Story = () => {
 
 export const LabelList: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
-    () => [{ dataKey: "desktop" }],
+    () => [{ name: "Desktop", dataKey: "desktop" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -419,7 +419,7 @@ export const LabelList: Story = () => {
         series={series}
         lineProps={{ dot: true, label: true }}
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -444,7 +444,7 @@ export const LabelList: Story = () => {
           },
         }}
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         yAxisProps={{
           domain: [0, 10000],
@@ -458,9 +458,9 @@ export const LabelList: Story = () => {
 export const Orientation: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -481,7 +481,7 @@ export const Orientation: Story = () => {
             },
           }}
           tooltipProps={{
-            labelFormatter: (value) => dayjs(value).format("MMM"),
+            labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
           xAxisProps={{
             dataKey: "date",
@@ -497,9 +497,9 @@ export const Orientation: Story = () => {
 export const Synced: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -512,7 +512,7 @@ export const Synced: Story = () => {
         series={series}
         syncId="chart"
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -525,7 +525,7 @@ export const Synced: Story = () => {
         series={series}
         syncId="chart"
         tooltipProps={{
-          labelFormatter: (value) => dayjs(value).format("MMM"),
+          labelFormatter: (value) => dayjs(value as string).format("MMM"),
         }}
         xAxisProps={{
           dataKey: "date",
@@ -539,9 +539,9 @@ export const Synced: Story = () => {
 export const ConnectNull: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -562,7 +562,7 @@ export const ConnectNull: Story = () => {
       series={series}
       lineProps={{ connectNulls: true, dot: true }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -575,9 +575,9 @@ export const ConnectNull: Story = () => {
 export const Formatter: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -594,7 +594,7 @@ export const Formatter: Story = () => {
           Number(value).toLocaleString(),
           toTitleCase(name),
         ],
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -610,9 +610,9 @@ export const Formatter: Story = () => {
 export const ReferenceLine: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -623,7 +623,7 @@ export const ReferenceLine: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -649,9 +649,9 @@ export const ReferenceLine: Story = () => {
 export const AxisTickLine: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -664,7 +664,7 @@ export const AxisTickLine: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -679,9 +679,9 @@ export const AxisTickLine: Story = () => {
 export const AxisLabel: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -694,7 +694,7 @@ export const AxisLabel: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -709,9 +709,9 @@ export const AxisLabel: Story = () => {
 export const Domain: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -724,7 +724,7 @@ export const Domain: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -741,9 +741,9 @@ export const Domain: Story = () => {
 export const TooltipCursor: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -755,7 +755,7 @@ export const TooltipCursor: Story = () => {
       series={series}
       tooltipProps={{
         cursor: true,
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -768,9 +768,9 @@ export const TooltipCursor: Story = () => {
 export const DisabledXAxis: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -790,9 +790,9 @@ export const DisabledXAxis: Story = () => {
 export const DisabledActiveDot: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -804,7 +804,7 @@ export const DisabledActiveDot: Story = () => {
       series={series}
       lineProps={{ activeDot: false }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -817,9 +817,9 @@ export const DisabledActiveDot: Story = () => {
 export const DisabledTooltip: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -841,9 +841,9 @@ export const DisabledTooltip: Story = () => {
 export const CustomAxis: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -856,7 +856,7 @@ export const CustomAxis: Story = () => {
       withYAxis
       chartProps={{ margin: { right: 16 } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -877,9 +877,9 @@ export const CustomAxis: Story = () => {
 export const CustomLine: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { color: ["red", "blue"], dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", color: ["red", "blue"], dataKey: "mobile" },
     ],
     [],
   )
@@ -891,7 +891,7 @@ export const CustomLine: Story = () => {
       series={series}
       lineProps={{ strokeDasharray: "15 15" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -904,9 +904,9 @@ export const CustomLine: Story = () => {
 export const CustomReferenceLine: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -917,7 +917,7 @@ export const CustomReferenceLine: Story = () => {
       data={data}
       series={series}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",
@@ -941,9 +941,10 @@ export const CustomReferenceLine: Story = () => {
 export const CustomDot: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet", dot: { fill: "blue" } },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet", dot: { fill: "blue" } },
       {
+        name: "Mobile",
         dataKey: "mobile",
         dot: { fill: ["white", "black"], stroke: "red", strokeWidth: 1 },
       },
@@ -958,7 +959,7 @@ export const CustomDot: Story = () => {
       series={series}
       lineProps={{ activeDot: false }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -972,9 +973,9 @@ export const CustomDot: Story = () => {
 export const CustomActiveDot: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -986,7 +987,7 @@ export const CustomActiveDot: Story = () => {
       series={series}
       lineProps={{ activeDot: { fill: ["red", "blue"] } }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -999,7 +1000,7 @@ export const CustomActiveDot: Story = () => {
 
 export const CustomLabelList: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
-    () => [{ color: "blue", dataKey: "desktop" }],
+    () => [{ name: "Desktop", color: "blue", dataKey: "desktop" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -1014,7 +1015,7 @@ export const CustomLabelList: Story = () => {
         label: { color: "red" },
       }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -1032,9 +1033,9 @@ export const CustomLabelList: Story = () => {
 export const CustomGrid: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -1046,7 +1047,7 @@ export const CustomGrid: Story = () => {
       series={series}
       gridProps={{ strokeDasharray: "15 15" }}
       tooltipProps={{
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
         contentProps: { withSwatch: false },
       }}
       xAxisProps={{
@@ -1060,9 +1061,9 @@ export const CustomGrid: Story = () => {
 export const CustomTooltipCursor: Story = () => {
   const series = useMemo<LineChart.LineProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -1074,7 +1075,7 @@ export const CustomTooltipCursor: Story = () => {
       series={series}
       tooltipProps={{
         cursor: { stroke: ["red", "blue"] },
-        labelFormatter: (value) => dayjs(value).format("MMM"),
+        labelFormatter: (value) => dayjs(value as string).format("MMM"),
       }}
       xAxisProps={{
         dataKey: "date",

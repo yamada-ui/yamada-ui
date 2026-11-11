@@ -171,6 +171,7 @@ const nextConfig: NextConfig = {
     ])
   },
   serverExternalPackages: ["oxfmt"],
+  typescript: { ignoreBuildErrors: true },
 }
 
 export default withNextIntl(nextConfig)

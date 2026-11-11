@@ -41,7 +41,16 @@ export function LangButton({ ...rest }: LangButtonProps) {
         />
       </Menu.Trigger>
 
-      <Menu.Content items={CONSTANTS.I18N.OPTIONS as unknown as Menu.Item[]} />
+      <Menu.Content
+        items={[
+          {
+            type: "radio" as const,
+            hasSeparator: false,
+            items: [...CONSTANTS.I18N.OPTIONS],
+            value: currentLocale,
+          },
+        ]}
+      />
     </Menu.Root>
   )
 }

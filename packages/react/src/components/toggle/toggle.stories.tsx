@@ -5,7 +5,7 @@ import { Toggle } from "."
 import { COLOR_SCHEMES } from "../../utils"
 import { Field } from "../field"
 import { For } from "../for"
-import { BoldIcon, ItalicIcon } from "../icon"
+import { ItalicIcon, LetterBIcon } from "../icon"
 import { Text } from "../text"
 import { Wrap } from "../wrap"
 
@@ -19,12 +19,12 @@ const meta: Meta<typeof Toggle> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <Toggle aria-label="Toggle bold" icon={<BoldIcon />} />
+  return <Toggle aria-label="Toggle bold" icon={<LetterBIcon />} />
 }
 
 export const WithText: Story = () => {
   return (
-    <Toggle px="4">
+    <Toggle aria-label="Toggle italic" px="4">
       <ItalicIcon />
       <Text as="span" fontSize="md">
         Italic
@@ -46,7 +46,7 @@ export const Variant: Story = () => {
             colorScheme={row}
             variant={column}
             aria-label="Toggle bold"
-            icon={<BoldIcon />}
+            icon={<LetterBIcon />}
           />
         )
       }}
@@ -64,7 +64,7 @@ export const Size: Story = () => {
             colorScheme={row}
             size={column}
             aria-label="Toggle bold"
-            icon={<BoldIcon />}
+            icon={<LetterBIcon />}
           />
         )
       }}
@@ -82,7 +82,7 @@ export const Rounded: Story = () => {
             variant={variant}
             aria-label="Toggle bold"
             fullRounded
-            icon={<BoldIcon />}
+            icon={<LetterBIcon />}
           />
         )}
       </For>
@@ -101,14 +101,14 @@ export const Disabled: Story = () => {
               variant={variant}
               aria-label="Toggle bold"
               disabled
-              icon={<BoldIcon />}
+              icon={<LetterBIcon />}
             />
           )}
         </For>
       </Wrap>
 
       <Field.Root disabled label="Bold">
-        <Toggle icon={<BoldIcon />} justifySelf="flex-start" />
+        <Toggle icon={<LetterBIcon />} justifySelf="flex-start" />
       </Field.Root>
     </>
   )
@@ -124,7 +124,7 @@ export const ReadOnly: Story = () => {
               key={index}
               variant={variant}
               aria-label="Toggle bold"
-              icon={<BoldIcon />}
+              icon={<LetterBIcon />}
               readOnly
             />
           )}
@@ -132,7 +132,7 @@ export const ReadOnly: Story = () => {
       </Wrap>
 
       <Field.Root label="Bold" readOnly>
-        <Toggle icon={<BoldIcon />} justifySelf="flex-start" />
+        <Toggle icon={<LetterBIcon />} justifySelf="flex-start" />
       </Field.Root>
     </>
   )
@@ -148,7 +148,7 @@ export const Invalid: Story = () => {
               key={index}
               variant={variant}
               aria-label="Toggle bold"
-              icon={<BoldIcon />}
+              icon={<LetterBIcon />}
               invalid
             />
           )}
@@ -156,7 +156,7 @@ export const Invalid: Story = () => {
       </Wrap>
 
       <Field.Root invalid label="Bold">
-        <Toggle icon={<BoldIcon />} justifySelf="flex-start" />
+        <Toggle icon={<LetterBIcon />} justifySelf="flex-start" />
       </Field.Root>
     </>
   )
@@ -167,7 +167,7 @@ export const BorderColor: Story = () => {
     <Toggle
       aria-label="Toggle bold"
       errorBorderColor="orange.500"
-      icon={<BoldIcon />}
+      icon={<LetterBIcon />}
       invalid
     />
   )
@@ -180,7 +180,7 @@ export const CustomControl: Story = () => {
     <Toggle
       aria-label="Toggle bold"
       checked={checked}
-      icon={<BoldIcon />}
+      icon={<LetterBIcon />}
       onChange={setChecked}
     />
   )

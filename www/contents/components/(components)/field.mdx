@@ -8,7 +8,7 @@ source: components/field
 
 ```tsx preview
 <Field.Root label="Email address">
-  <Input type="email" placeholder="your email address" />
+  <Input type="email" placeholder="Your email address" />
 </Field.Root>
 ```
 
@@ -38,13 +38,17 @@ import { Field } from "@workspaces/ui"
 </Field.Root>
 ```
 
+:::tip
+To group related `Field` components, use [Fieldset](/docs/components/fieldset).
+:::
+
 ### Displaying a Helper Message
 
 To display a helper message, set a `ReactNode` to `helperMessage`.
 
 ```tsx preview
 <Field.Root helperMessage="We'll never share your email." label="Email address">
-  <Input type="email" placeholder="your email address" />
+  <Input type="email" placeholder="Your email address" />
 </Field.Root>
 ```
 
@@ -52,7 +56,7 @@ Alternatively, you can customize using `Field.HelperMessage`.
 
 ```tsx preview
 <Field.Root label="Email address">
-  <Input type="email" placeholder="your email address" />
+  <Input type="email" placeholder="Your email address" />
   <Field.HelperMessage color="warning">
     We'll never share your email.
   </Field.HelperMessage>
@@ -65,7 +69,7 @@ To display an error message, set `invalid` to `true` and assign a `ReactNode` to
 
 ```tsx preview
 <Field.Root errorMessage="Email is required." invalid label="Email address">
-  <Input type="email" placeholder="your email address" />
+  <Input type="email" placeholder="Your email address" />
 </Field.Root>
 ```
 
@@ -73,7 +77,7 @@ Alternatively, you can customize using `Field.ErrorMessage`.
 
 ```tsx preview
 <Field.Root invalid label="Email address">
-  <Input type="email" placeholder="your email address" />
+  <Input type="email" placeholder="Your email address" />
   <Field.ErrorMessage color="success">Email is required.</Field.ErrorMessage>
 </Field.Root>
 ```
@@ -92,7 +96,7 @@ By default, it is set to `true`.
     label="Email address"
     replace
   >
-    <Input type="email" placeholder="your email address" />
+    <Input type="email" placeholder="Your email address" />
   </Field.Root>
 
   <Field.Root
@@ -102,7 +106,7 @@ By default, it is set to `true`.
     label="Email address"
     replace={false}
   >
-    <Input type="email" placeholder="your email address" />
+    <Input type="email" placeholder="Your email address" />
   </Field.Root>
 </VStack>
 ```
@@ -117,7 +121,7 @@ To make it required, set `required` to `true`.
   label="Email address"
   required
 >
-  <Input type="email" placeholder="your email address" />
+  <Input type="email" placeholder="Your email address" />
 </Field.Root>
 ```
 
@@ -131,7 +135,7 @@ To disable, set `disabled` to `true`.
   helperMessage="We'll never share your email."
   label="Email address"
 >
-  <Input type="email" placeholder="your email address" />
+  <Input type="email" placeholder="Your email address" />
 </Field.Root>
 ```
 
@@ -145,7 +149,7 @@ To make it read-only, set `readOnly` to `true`.
   label="Email address"
   readOnly
 >
-  <Input type="email" placeholder="your email address" />
+  <Input type="email" placeholder="Your email address" />
 </Field.Root>
 ```
 
@@ -163,7 +167,7 @@ To change the direction, set `orientation` to `"horizontal"` or `"vertical"`. By
         label="Email address"
         orientation={orientation}
       >
-        <Input type="email" placeholder="your email address" />
+        <Input type="email" placeholder="Your email address" />
       </Field.Root>
     )}
   </For>
@@ -177,7 +181,7 @@ To customize the label, use `Field.Label`.
 ```tsx preview
 <Field.Root>
   <Field.Label color="success">Email address</Field.Label>
-  <Input type="email" placeholder="your email address" />
+  <Input type="email" placeholder="Your email address" />
 </Field.Root>
 ```
 
@@ -192,24 +196,24 @@ To customize the required indicator, set a `ReactNode` to `requiredIndicator`.
     required
     requiredIndicator={
       <Tag colorScheme="red" size="sm">
-        required
+        Required
       </Tag>
     }
   >
-    <Input type="email" placeholder="your email address" />
+    <Input type="email" placeholder="Your email address" />
   </Field.Root>
 
   <Field.Root required>
     <Field.Label
       requiredIndicator={
         <Tag colorScheme="red" size="sm">
-          required
+          Required
         </Tag>
       }
     >
       Email address
     </Field.Label>
-    <Input type="email" placeholder="your email address" />
+    <Input type="email" placeholder="Your email address" />
   </Field.Root>
 </VStack>
 ```
@@ -222,16 +226,16 @@ To use an optional indicator, set a `ReactNode` to `optionalIndicator`.
 <VStack>
   <Field.Root
     label="Email address"
-    optionalIndicator={<Tag size="sm">optional</Tag>}
+    optionalIndicator={<Tag size="sm">Optional</Tag>}
   >
-    <Input type="email" placeholder="your email address" />
+    <Input type="email" placeholder="Your email address" />
   </Field.Root>
 
   <Field.Root>
-    <Field.Label optionalIndicator={<Tag size="sm">optional</Tag>}>
+    <Field.Label optionalIndicator={<Tag size="sm">Optional</Tag>}>
       Email address
     </Field.Label>
-    <Input type="email" placeholder="your email address" />
+    <Input type="email" placeholder="Your email address" />
   </Field.Root>
 </VStack>
 ```

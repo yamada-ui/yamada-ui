@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import type { UseFocusOnMouseDownProps } from "./"
 import { useRef } from "react"
+import { createPortal } from "react-dom"
 import { page, render } from "#test/browser"
 import { useFocusOnPointerDown } from "./"
 
@@ -95,6 +96,29 @@ describe("useFocusOnPointerDown", () => {
     await user.click(target)
 
     await expect.element(target).toHaveFocus()
+  })
+
+  test("focuses the target inside shadow DOM", async () => {
+    const host = document.createElement("div")
+    const shadowRoot = host.attachShadow({ mode: "open" })
+    document.body.appendChild(host)
+
+    try {
+      const { user } = await render(createPortal(<Component />, shadowRoot), {
+        providerProps: { rootNode: shadowRoot },
+      })
+      const target = page.getByTestId("target")
+
+      await user.click(target)
+
+      expect(
+        (shadowRoot.activeElement as HTMLElement | null)?.getAttribute(
+          "data-testid",
+        ),
+      ).toBe("target")
+    } finally {
+      host.remove()
+    }
   })
 
   test("supports raw HTMLElement in elements and ignores null entries", async () => {

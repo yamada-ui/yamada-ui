@@ -276,6 +276,35 @@ describe("theme", () => {
     )
   })
 
+  test("should declare the same react peer dependencies as the ui package", async () => {
+    setupProject(tempDir)
+
+    await theme.parseAsync(
+      [
+        "./workspaces/theme",
+        "--cwd",
+        tempDir,
+        "--yes",
+        "--no-install",
+        "--no-format",
+        "--no-lint",
+      ],
+      { from: "user" },
+    )
+    const themeDir = path.join(tempDir, "workspaces", "theme")
+    const pkgJson = JSON.parse(
+      readFileSync(path.join(themeDir, "package.json"), "utf-8"),
+    )
+    expect(pkgJson.dependencies).toMatchObject({
+      react: "^19",
+      "react-dom": "^19",
+    })
+    expect(pkgJson.devDependencies).toMatchObject({
+      "@types/react": "^19",
+      "@types/react-dom": "^19",
+    })
+  })
+
   test("should generate devDependencies in monorepo package.json", async () => {
     setupProject(tempDir)
 

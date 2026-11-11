@@ -2,7 +2,6 @@
 title: Sidebar
 description: "`Sidebar` is a component used to display a list of items in a sidebar."
 tags: ["navigation", "layout", "selection", "disclosure", "list"]
-status: new
 storybook: components-sidebar--basic
 source: components/sidebar
 style: components/sidebar/sidebar.style.ts
@@ -157,6 +156,7 @@ style: components/sidebar/sidebar.style.ts
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -312,6 +312,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -337,6 +338,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -359,6 +361,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -384,6 +387,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -410,6 +414,7 @@ To change the mode, set `mode` to `"offcanvas"` or `"icon"`. The default is `"of
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -418,7 +423,7 @@ To change the mode, set `mode` to `"offcanvas"` or `"icon"`. The default is `"of
 ```
 
 ```tsx preview functional iframe
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -490,6 +495,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -519,6 +525,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -545,6 +552,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -571,6 +579,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -598,6 +607,7 @@ To change the placement, set `placement` to `"start"` or `"end"`. The default is
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -624,6 +634,7 @@ To override the placement on mobile, set `drawerProps` to `placement`.
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -650,6 +661,7 @@ To change the breakpoint for mobile, set `breakpoint` to the value. This value r
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -676,6 +688,7 @@ To disable the breakpoint for mobile, set `breakpoint` to `false`.
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -702,6 +715,7 @@ To have the sidebar closed by default, set `disclosure.desktop.defaultOpen` to `
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -731,6 +745,7 @@ To have a specific item selected by default, set `defaultSelectedValue`.
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -757,6 +772,7 @@ To have specific items expanded by default, set `defaultExpandedValue`.
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -769,7 +785,7 @@ To have specific items expanded by default, set `defaultExpandedValue`.
 To disable specific items, set `disabled`.
 
 ```tsx preview functional iframe
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -842,6 +858,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -880,6 +897,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -921,6 +939,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -948,6 +967,7 @@ To show group guide lines, set `withGroupGuideLine` to `true`.
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -974,6 +994,7 @@ To show guide lines, set `withGuideLine` to `true`.
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -984,7 +1005,7 @@ To show guide lines, set `withGuideLine` to `true`.
 ### Add Separator
 
 ```tsx preview functional iframe
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -1072,6 +1093,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -1100,6 +1122,7 @@ To hide the indicator, set `indicatorHidden` to `true`.
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1127,6 +1150,7 @@ To disable animation when expanding and collapsing, set `animated` to `false`.
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1154,6 +1178,7 @@ To disable the resize handle, set `withHandle` to `false`. The default is `true`
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1166,7 +1191,7 @@ To disable the resize handle, set `withHandle` to `false`. The default is `true`
 To load child items asynchronously, use `asyncChildren` instead of `children`.
 
 ```tsx preview functional iframe client
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       asyncChildren: async () => {
@@ -1254,6 +1279,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -1265,7 +1291,7 @@ return (
 ### Change Loading Scheme
 
 ```tsx preview functional iframe client
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       asyncChildren: async () => {
@@ -1323,6 +1349,7 @@ return (
           size="xs"
           variant="ghost"
           fontSize="md"
+          aria-label="Toggle sidebar"
           icon={<PanelLeftIcon />}
         />
       </Sidebar.Trigger>
@@ -1337,7 +1364,7 @@ To expand or collapse all items, use `controlRef`.
 
 ```tsx preview functional iframe
 const controlRef = useRef<Sidebar.Control>(null)
-const items = useMemo<Sidebar.ItemType[]>(
+const items = useMemo<Sidebar.Item[]>(
   () => [
     {
       children: [
@@ -1410,6 +1437,7 @@ return (
             size="xs"
             variant="ghost"
             fontSize="md"
+            aria-label="Toggle sidebar"
             icon={<PanelLeftIcon />}
           />
         </Sidebar.Trigger>
@@ -1450,6 +1478,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1473,6 +1502,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1499,6 +1529,7 @@ return (
         size="xs"
         variant="ghost"
         fontSize="md"
+        aria-label="Toggle sidebar"
         icon={<PanelLeftIcon />}
       />
     </Sidebar.Trigger>
@@ -1538,6 +1569,7 @@ return (
             size="xs"
             variant="ghost"
             fontSize="md"
+            aria-label="Toggle sidebar"
             icon={<PanelLeftIcon />}
           />
         </Sidebar.Trigger>
@@ -1557,6 +1589,16 @@ return (
 ## Props
 
 <PropsTable name="sidebar" />
+
+## Accessibility
+
+If you use only an icon for `Sidebar.Trigger`, set `aria-label` on the child element.
+
+```tsx
+<Sidebar.Trigger>
+  <IconButton aria-label="Toggle sidebar" icon={<PanelLeftIcon />} />
+</Sidebar.Trigger>
+```
 
 ## Similar Components
 

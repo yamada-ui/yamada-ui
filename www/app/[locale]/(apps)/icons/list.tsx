@@ -1,7 +1,7 @@
 "use client"
 
 import type { CenterProps, StackProps } from "@yamada-ui/react"
-import type { ElementType } from "react"
+import type { IconName } from "@yamada-ui/react/components/icon/dynamic"
 import {
   BirdIcon,
   Button,
@@ -9,7 +9,6 @@ import {
   filterUndefined,
   FishIcon,
   Grid,
-  icons,
   InfiniteScrollArea,
   Input,
   InputGroup,
@@ -21,10 +20,10 @@ import {
   SnailIcon,
   SquirrelIcon,
   Text,
-  toKebabCase,
   Tooltip,
   VStack,
 } from "@yamada-ui/react"
+import { DynamicIcon } from "@yamada-ui/react/components/icon/dynamic"
 import { matchSorter } from "match-sorter"
 import { useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
@@ -35,21 +34,20 @@ import { PreviewDrawer } from "./preview-drawer"
 
 export interface Data {
   categories: string[]
-  Icon: ElementType
   keywords: string[]
-  name: string
+  name: IconName
   query: string
-  related: string[]
+  related: IconName[]
 }
 
-const CONTENTS: Data[] = Object.entries(icons).map(([name, Icon]) => ({
-  name,
-  Icon,
-  query: toKebabCase(name)
-    .replace(/-icon$/, "")
-    .replace(/-/g, " "),
-  ...data[name as keyof typeof data],
-}))
+const CONTENTS = Object.entries(data).map(
+  ([name, data]) =>
+    ({
+      name,
+      query: name.replace(/-/g, " "),
+      ...data,
+    }) as Data,
+)
 
 const PER_PAGE = 204
 
@@ -205,21 +203,20 @@ interface IconButtonProps {
 }
 
 const IconButton = memo(function IconButton({ data, onOpen }: IconButtonProps) {
-  const { name, Icon } = data
   const t = useTranslations("icons")
 
   return (
-    <Tooltip content={name}>
+    <Tooltip content={data.name}>
       <OriginalIconButton
         as="button"
         variant="subtle"
-        aria-label={t("openPreview", { name })}
+        aria-label={t("openPreview", { name: data.name })}
         aspectRatio={1}
         bg={{
           base: "bg.panel",
           _hover: "bg.subtle",
         }}
-        icon={<Icon fontSize="2xl" />}
+        icon={<DynamicIcon name={data.name} fontSize="2xl" />}
         onClick={() => onOpen(data)}
       />
     </Tooltip>

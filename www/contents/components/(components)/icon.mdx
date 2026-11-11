@@ -68,13 +68,35 @@ import { LucideIcon } from "@yamada-ui/react"
 <LucideIcon iconNode={burger} />
 ```
 
+### Dynamic rendering
+
+For dynamic rendering, use `DynamicIcon`.
+
+:::warning
+Although you can load icons using `DynamicIcon`, it is not recommended because all icons are imported at build time. Since icons are loaded dynamically, they may flicker while loading.
+:::
+
+```ts
+import { DynamicIcon } from "@yamada-ui/react/components/icon/dynamic"
+```
+
+```tsx
+<DynamicIcon name="ghost" />
+```
+
+Icons load asynchronously, so there may be a delay before they are displayed. To display an element while an icon is loading, use `fallback`. If omitted, nothing is displayed until the icon loads.
+
+```tsx
+<DynamicIcon fallback={() => <Loading.Oval />} name="ghost" />
+```
+
 ## Props
 
 <PropsTable name="icon" />
 
 ## Accessibility
 
-If you set `aria-hidden={false}` and `aria-label` on `Icon` or `LucideIcon`, it will be read by screen readers.
+If you set `aria-hidden={false}` and `aria-label` on `Icon`, `LucideIcon`, or `DynamicIcon`, it will be read by screen readers.
 
 ```tsx
 <Icon as={FaRobot} aria-hidden={false} aria-label="Robot" />

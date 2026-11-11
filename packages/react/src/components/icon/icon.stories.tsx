@@ -1,8 +1,10 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { burger } from "@lucide/lab"
 import { FaRobot } from "react-icons/fa"
+import { Loading } from "../loading"
 import { HStack } from "../stack"
 import { GhostIcon, LucideIcon } from "./"
+import { DynamicIcon } from "./dynamic"
 import { Icon } from "./icon"
 
 type Story = StoryFn<typeof Icon>
@@ -52,4 +54,18 @@ export const As: Story = () => {
 
 export const Lab: Story = () => {
   return <LucideIcon color="fg.muted" fontSize="4xl" iconNode={burger} />
+}
+
+export const Dynamic: Story = () => {
+  return <DynamicIcon name="ghost" color="fg.muted" fontSize="4xl" />
+}
+
+export const Fallback: Story = () => {
+  return (
+    <DynamicIcon
+      name="ghost"
+      fallback={() => <Loading.Oval fontSize="4xl" />}
+      fontSize="4xl"
+    />
+  )
 }

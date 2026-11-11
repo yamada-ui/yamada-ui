@@ -46,7 +46,7 @@ export interface A11yOptions extends RenderOptions {
 }
 
 export async function a11y(
-  ui: ReactNode,
+  ui: HTMLElement | ReactNode,
   { axeOptions, ...options }: A11yOptions = {},
 ): Promise<void> {
   const { axe } = await import("vitest-axe")

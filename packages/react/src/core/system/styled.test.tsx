@@ -1,4 +1,9 @@
+import type { ComponentPropsWithoutRef } from "react"
+import type { ButtonProps } from "../../components/button/button"
+import type { StyledProps } from "../components"
+import { expectTypeOf } from "vitest"
 import { a11y, hasSuppressHydrationWarning, render, screen } from "#test"
+import { Button } from "../../components/button/button"
 import { ScanIcon } from "../../components/icon/icons/scan-icon"
 import { UserIcon } from "../../components/icon/icons/user-icon"
 import { createStyled } from "./styled"
@@ -106,6 +111,34 @@ describe("createStyled", () => {
     expect(el).toHaveAttribute("size", "4")
     expect(el).toHaveAttribute("type", "email")
     expect(el).not.toHaveAttribute("attrs")
+  })
+
+  test("does not require custom component props to be repeated in attributes", () => {
+    const CustomLink = ({
+      href,
+      children,
+      ...props
+    }: ComponentPropsWithoutRef<"a"> & { href: string }) => (
+      <a href={href} {...props}>
+        {children}
+      </a>
+    )
+    const props: Omit<ButtonProps, "as" | "ref"> = {
+      attrs: { title: "Attribute title" },
+    }
+
+    expectTypeOf({}).toMatchTypeOf<
+      NonNullable<StyledProps<typeof CustomLink>["attrs"]>
+    >()
+
+    render(
+      <Button as={CustomLink} href="/docs" {...props}>
+        Documentation
+      </Button>,
+    )
+    const el = screen.getByRole("link", { name: "Documentation" })
+    expect(el).toHaveAttribute("href", "/docs")
+    expect(el).toHaveAttribute("title", "Attribute title")
   })
 
   test("passes attributes to the child with `asChild`", () => {

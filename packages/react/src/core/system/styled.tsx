@@ -39,6 +39,7 @@ import {
 import {
   createShouldForwardProp,
   getDisplayName,
+  mergeProps,
   useComponentStyle,
 } from "../components"
 import { css } from "../css"
@@ -229,9 +230,13 @@ export function createStyled<
     )
     const suppressHydrationWarning = useHydrationContext()
     const [cssArray, colorScheme, forwardProps] = useMemo(() => {
-      const { css, colorScheme, ...forwardProps } = rest
+      const { css, colorScheme, attrs, ...forwardProps } = rest
 
-      return [toArray(css), colorScheme, forwardProps]
+      return [
+        toArray(css),
+        colorScheme,
+        mergeProps(forwardProps, attrs ?? {})(),
+      ]
     }, [rest])
 
     styleProps.colorScheme ??= colorScheme

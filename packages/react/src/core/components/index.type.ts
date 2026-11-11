@@ -26,13 +26,15 @@ export interface StyledProps<Y extends As = As> extends CSSProps {
   /**
    * The HTML or SVG attributes to pass directly to the rendered element, bypassing style prop processing.
    */
-  attrs?: Omit<
-    React.ComponentPropsWithoutRef<Y>,
-    | "defaultChecked"
-    | "defaultValue"
-    | "suppressContentEditableWarning"
-    | "suppressHydrationWarning"
-    | keyof React.DOMAttributes<Y>
+  attrs?: Partial<
+    Omit<
+      React.ComponentPropsWithoutRef<Y>,
+      | "defaultChecked"
+      | "defaultValue"
+      | "suppressContentEditableWarning"
+      | "suppressHydrationWarning"
+      | keyof React.DOMAttributes<Y>
+    >
   > &
     React.DataAttributes
 }

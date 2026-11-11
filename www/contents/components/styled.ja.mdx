@@ -272,3 +272,24 @@ const Button = styled(YourComponent, {
   forwardProps: ["transition"],
 })
 ```
+
+### HTMLまたはSVG属性をバイパスする
+
+[Style Props](/docs/styling/style-props)とHTMLまたはSVG属性のプロパティが競合しており、それらをバイパスする場合は、`attrs`を使用します。
+
+```tsx
+<styled.svg
+  aria-hidden="true"
+  boxSize="48px"
+  focusable="false"
+  viewBox="0 0 24 24"
+>
+  <styled.svg attrs={{ height: 12, width: 12, x: 6, y: 6 }} viewBox="0 0 24 24">
+    <circle cx="12" cy="12" fill="currentColor" r="10" />
+  </styled.svg>
+</styled.svg>
+```
+
+:::warning
+`attrs`は、HTMLまたはSVG属性のプロパティを直接設定するため、コンポーネントのロジックで設定される属性をオーバーライドする可能性があり、使用する際は注意が必要です。
+:::

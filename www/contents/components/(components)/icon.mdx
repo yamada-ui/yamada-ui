@@ -68,6 +68,43 @@ import { LucideIcon } from "@yamada-ui/react"
 <LucideIcon iconNode={burger} />
 ```
 
+### Disabling stroke width scaling
+
+Set `nonScalingStroke` to `true` to disable stroke width scaling.
+
+```tsx preview
+<GhostIcon boxSize="48px" nonScalingStroke />
+```
+
+### Combining icons
+
+```tsx preview
+<ScanIcon boxSize="48px" nonScalingStroke>
+  <UserIcon attrs={{ height: 12, width: 12, x: 6, y: 6 }} nonScalingStroke />
+</ScanIcon>
+```
+
+```tsx preview
+<FileIcon boxSize="48px">
+  <Text
+    as="text"
+    attrs={{
+      fontFamily: "Verdana,sans-serif",
+      fontSize: 8,
+      strokeWidth: 1,
+      x: 7.5,
+      y: 19,
+    }}
+  >
+    JS
+  </Text>
+</FileIcon>
+```
+
+:::note
+These examples use [attrs](/docs/components/styled#bypass-html-or-svg-attributes) to set SVG attributes directly.
+:::
+
 ### Dynamic rendering
 
 For dynamic rendering, use `DynamicIcon`.

@@ -10,7 +10,12 @@ import {
 import { iconStyle } from "./icon.style"
 
 export interface IconProps
-  extends HTMLStyledProps<"svg">, ThemeProps<IconStyle> {}
+  extends HTMLStyledProps<"svg">, ThemeProps<IconStyle> {
+  /**
+   * If `true`, the stroke width remains constant when the element is scaled.
+   */
+  nonScalingStroke?: boolean
+}
 
 const {
   component,

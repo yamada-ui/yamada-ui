@@ -121,7 +121,11 @@ To handle selection event, use `onSelect`.
 ```tsx preview functional
 const items = useMemo<Menu.Item[]>(
   () => [
-    { label: "うずまきナルト", value: "naruto" },
+    {
+      label: "うずまきナルト",
+      value: "naruto",
+      onSelect: (value) => console.log("selected", value),
+    },
     { label: "うちはサスケ", value: "sasuke" },
     { label: "春野サクラ", value: "sakura" },
   ],

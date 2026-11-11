@@ -68,6 +68,43 @@ import { LucideIcon } from "@yamada-ui/react"
 <LucideIcon iconNode={burger} />
 ```
 
+### 線幅のスケーリングを無効にする
+
+線幅のスケーリングを無効にする場合は、`nonScalingStroke`を`true`に設定します。
+
+```tsx preview
+<GhostIcon boxSize="48px" nonScalingStroke />
+```
+
+### アイコンを組み合わせる
+
+```tsx preview
+<ScanIcon boxSize="48px" nonScalingStroke>
+  <UserIcon attrs={{ height: 12, width: 12, x: 6, y: 6 }} nonScalingStroke />
+</ScanIcon>
+```
+
+```tsx preview
+<FileIcon boxSize="48px">
+  <Text
+    as="text"
+    attrs={{
+      fontFamily: "Verdana,sans-serif",
+      fontSize: 8,
+      strokeWidth: 1,
+      x: 7.5,
+      y: 19,
+    }}
+  >
+    JS
+  </Text>
+</FileIcon>
+```
+
+:::note
+これらの例では、[attrs](/docs/components/styled#bypass-html-or-svg-attributes)を使用して、直接SVG属性を設定しています。
+:::
+
 ### 動的に表示する
 
 動的に表示する場合は、`DynamicIcon`を使用します。

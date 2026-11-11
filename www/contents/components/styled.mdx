@@ -272,3 +272,24 @@ const Button = styled(YourComponent, {
   forwardProps: ["transition"],
 })
 ```
+
+### Bypass HTML or SVG attributes
+
+When [Style Props](/docs/styling/style-props) conflict with HTML or SVG attributes, use `attrs` to bypass style prop processing.
+
+```tsx
+<styled.svg
+  aria-hidden="true"
+  boxSize="48px"
+  focusable="false"
+  viewBox="0 0 24 24"
+>
+  <styled.svg attrs={{ height: 12, width: 12, x: 6, y: 6 }} viewBox="0 0 24 24">
+    <circle cx="12" cy="12" fill="currentColor" r="10" />
+  </styled.svg>
+</styled.svg>
+```
+
+:::warning
+`attrs` sets HTML or SVG attributes directly and may override attributes set by the component's logic. Use it with care.
+:::

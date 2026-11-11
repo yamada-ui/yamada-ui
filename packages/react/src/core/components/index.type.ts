@@ -14,7 +14,7 @@ declare module "react" {
 
 export type DOMElement = keyof React.JSX.IntrinsicElements
 
-export interface StyledProps extends CSSProps {
+export interface StyledProps<Y extends As = As> extends CSSProps {
   /**
    * The HTML element to render.
    */
@@ -23,6 +23,18 @@ export interface StyledProps extends CSSProps {
    * Merges its props onto its immediate child.
    */
   asChild?: boolean
+  /**
+   * The HTML or SVG attributes to pass directly to the rendered element, bypassing style prop processing.
+   */
+  attrs?: Omit<
+    React.ComponentPropsWithoutRef<Y>,
+    | "defaultChecked"
+    | "defaultValue"
+    | "suppressContentEditableWarning"
+    | "suppressHydrationWarning"
+    | keyof React.DOMAttributes<Y>
+  > &
+    React.DataAttributes
 }
 
 export type WithoutAs<Y extends object> = Omit<Y, "as">
@@ -50,9 +62,10 @@ type ComponentProps<
   Y extends As,
   M extends As,
   D extends object = {},
-> = ComponentConditionalProps<Y, M, Omit<D, "as" | "ref">> & {
-  as?: M
-}
+> = ComponentConditionalProps<Y, M, Omit<D, "as" | "attrs" | "ref">> &
+  Pick<StyledProps<M>, "attrs"> & {
+    as?: M
+  }
 
 export interface ComponentArgs extends Pick<
   React.FunctionComponent,
@@ -75,7 +88,7 @@ export type As = React.ElementType
 export interface StyledComponent<
   Y extends As = As,
   M extends object = {},
-> extends Component<Y, Merge<StyledProps, M>> {}
+> extends Component<Y, Merge<StyledProps<Y>, M>> {}
 
 export interface HTMLRefAttributes<Y extends DOMElement = "div"> {
   ref?: React.Ref<React.ComponentRef<Y>>
@@ -94,7 +107,7 @@ export type HTMLProps<Y extends DOMElement = "div"> = Omit<
 
 export type HTMLStyledProps<Y extends DOMElement = "div"> = Merge<
   HTMLProps<Y>,
-  StyledProps
+  StyledProps<Y>
 >
 
 export type HTMLStyledPropsWithoutAs<Y extends DOMElement = "div"> = WithoutAs<

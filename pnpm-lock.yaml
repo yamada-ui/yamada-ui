@@ -9254,8 +9254,8 @@ packages:
   undici-types@7.28.0:
     resolution: {integrity: sha512-LJAfY+2w6HGeT8d8J1wNQsUGUEGio6NWWpwdwurQe4f6oojzCFuGLizl1KSve4irsTxyLly1QhEeE6iapdaIvQ==, tarball: https://registry.npmjs.org/undici-types/-/undici-types-7.28.0.tgz}
 
-  undici@7.30.0:
-    resolution: {integrity: sha512-dkrQXeHSaoamnItlYbmzG0wFYrM0ZwDxCIg0A7aKjTyyhh9svRzCNFEzV+Vm05/yehjCzjDZ31KXfGEjYSztDQ==, tarball: https://registry.npmjs.org/undici/-/undici-7.30.0.tgz}
+  undici@7.30.2:
+    resolution: {integrity: sha512-mLyPQnHwUxaM/rideoK/+KL8DaAJLRl4aBCfmX444aCSLnIaomqPLtNRe2jdCYcsk5wZzXrDIQC8ZeYNRAYyIA==, tarball: https://registry.npmjs.org/undici/-/undici-7.30.2.tgz}
     engines: {node: '>=20.18.1'}
 
   unified@11.0.5:
@@ -16088,7 +16088,7 @@ snapshots:
       saxes: 6.0.0
       symbol-tree: 3.2.4
       tough-cookie: 6.0.2
-      undici: 7.30.0
+      undici: 7.30.2
       w3c-xmlserializer: 5.0.0
       webidl-conversions: 8.0.1
       whatwg-mimetype: 5.0.0
@@ -18576,7 +18576,7 @@ snapshots:
 
   undici-types@7.28.0: {}
 
-  undici@7.30.0: {}
+  undici@7.30.2: {}
 
   unified@11.0.5:
     dependencies:

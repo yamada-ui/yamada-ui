@@ -63,6 +63,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.PAT_TOKEN }}
+          persist-credentials: true
 
       - name: Install
         uses: ./.github/composite-actions/install
@@ -85,7 +86,7 @@ jobs:
       - name: Create @dev release
         if: github.ref_name == 'main' && steps.changesets.outputs.published != 'true'
         run: |
-          git checkout ${{ github.ref_name }}
+          git checkout "$GITHUB_REF_NAME"
           pnpm release:dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -93,7 +94,7 @@ jobs:
       - name: Create @next release
         if: github.ref_name != 'main'
         run: |
-          git checkout ${{ github.ref_name }}
+          git checkout "$GITHUB_REF_NAME"
           pnpm release:next
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -110,6 +111,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.PAT_TOKEN }}
+          persist-credentials: true
 
       - name: Install
         uses: ./.github/composite-actions/install
@@ -165,13 +167,13 @@ jobs:
 
       - name: Update branch
         run: |
-          git pull --rebase origin ${{ github.ref_name }}
+          git pull --rebase origin "$GITHUB_REF_NAME"
           git push
 
       - name: Update next branch
         if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
-          PUBLISHED_VERSION=$(echo '${{ needs.release.outputs.published_packages }}' | jq -r '.[] | select(.name == "@yamada-ui/react") | .version')
+          PUBLISHED_VERSION=$(printf '%s\n' "$PUBLISHED_PACKAGES" | jq -r '.[] | select(.name == "@yamada-ui/react") | .version')
 
           if [ -z "$PUBLISHED_VERSION" ]; then
             exit 0
@@ -207,6 +209,8 @@ jobs:
               fi
             fi
           done
+        env:
+          PUBLISHED_PACKAGES: ${{ needs.release.outputs.published_packages }}
 
       - name: Notification release
         if: github.ref_name == 'main' && needs.release.outputs.published == 'true'

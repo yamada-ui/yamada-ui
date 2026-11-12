@@ -38,122 +38,120 @@ export function CodePreview({
   useLayoutEffect(() => {
     if (!children || !lang) return
 
-    codeToHtml(children, { lang, meta: { __raw: highlight ?? "" } }).then(
+    void codeToHtml(children, { lang, meta: { __raw: highlight ?? "" } }).then(
       setHtml,
     )
   }, [children, highlight, html, lang])
 
-  if (!html || !children) return null
-
   return (
     <Grid {...rest} bg="{bg}" position="relative" rounded="l2">
-      <Box
-        maxH={{ base: "lg", md: "md" }}
-        minH={{ base: "16", md: "12" }}
-        overflowY="auto"
-      >
-        <Box
-          as="pre"
-          css={{
-            "& code": {
-              bg: "transparent",
-              border: "none",
-              color: "inherit",
-              display: "grid",
-              fontSize: "inherit",
-              lineHeight: "inherit",
-              minH: "inherit",
-              minW: "full",
-              p: "0",
-              rounded: "inherit",
-              w: "max-content",
-            },
-            "& code .diff, & code .highlighted": {
-              "--space": { base: "{spaces.lg}", md: "{spaces.md}" },
-              position: "relative",
-              zIndex: 0,
-              _after: {
-                content: "''",
-                insetBlock: "0",
-                insetInline: "calc({space} * -1)",
-                position: "absolute",
-                zIndex: -1,
+      <Box maxH={{ base: "lg", md: "md" }} minH="16" overflowY="auto">
+        {html ? (
+          <Box
+            as="pre"
+            css={{
+              "& code": {
+                bg: "transparent",
+                border: "none",
+                color: "inherit",
+                display: "grid",
+                fontSize: "inherit",
+                lineHeight: "inherit",
+                minH: "inherit",
+                minW: "full",
+                p: "0",
+                rounded: "inherit",
+                w: "max-content",
               },
-            },
-            "& code .diff.add": {
-              _after: {
-                bg: ["green.400/15", "green.500/15"],
+              "& code .diff, & code .highlighted": {
+                "--space": { base: "{spaces.lg}", md: "{spaces.md}" },
+                position: "relative",
+                zIndex: 0,
+                _after: {
+                  content: "''",
+                  insetBlock: "0",
+                  insetInline: "calc({space} * -1)",
+                  position: "absolute",
+                  zIndex: -1,
+                },
               },
-              _before: {
-                color: "green",
-                content: "'+'",
-                left: { base: "sm", md: "xs" },
-                position: "absolute",
+              "& code .diff.add": {
+                _after: {
+                  bg: ["green.400/15", "green.500/15"],
+                },
+                _before: {
+                  color: "green",
+                  content: "'+'",
+                  left: { base: "sm", md: "xs" },
+                  position: "absolute",
+                },
               },
-            },
-            "& code .diff.remove": {
-              _after: {
-                bg: ["red.400/15", "red.500/15"],
+              "& code .diff.remove": {
+                _after: {
+                  bg: ["red.400/15", "red.500/15"],
+                },
+                _before: {
+                  color: "red",
+                  content: "'-'",
+                  left: { base: "sm", md: "xs" },
+                  position: "absolute",
+                },
               },
-              _before: {
-                color: "red",
-                content: "'-'",
-                left: { base: "sm", md: "xs" },
-                position: "absolute",
+              "& code .diff > span, & code .highlighted > span": {
+                position: "relative",
               },
-            },
-            "& code .diff > span, & code .highlighted > span": {
-              position: "relative",
-            },
-            "& code .highlighted": {
-              _after: {
-                bg: ["black.400/15", "white.500/15"],
+              "& code .highlighted": {
+                _after: {
+                  bg: ["black.400/15", "white.500/15"],
+                },
               },
-            },
-            "& code .highlighted-word": {
-              bg: ["black.muted", "white.subtle"],
-              borderColor: ["black.emphasized", "white.muted"],
-              borderWidth: "1px",
-              m: "-1px -2px",
-              p: "1px 2px",
-              rounded: "l1",
-            },
-            "& code > .line": {
-              "&:last-of-type:empty": {
-                display: "none",
+              "& code .highlighted-word": {
+                bg: ["black.muted", "white.subtle"],
+                borderColor: ["black.emphasized", "white.muted"],
+                borderWidth: "1px",
+                m: "-1px -2px",
+                p: "1px 2px",
+                rounded: "l1",
               },
-              display: "block",
-              minH: "1lh",
-              minW: "full",
-            },
-            "& span": {
-              _dark: {
-                color: "{shiki-dark}!",
+              "& code > .line": {
+                "&:last-of-type:empty": {
+                  display: "none",
+                },
+                display: "block",
+                minH: "1lh",
+                minW: "full",
               },
-            },
-          }}
-          data-lang={lang}
-          bg="transparent!"
-          dangerouslySetInnerHTML={{ __html: html }}
-          focusVisibleRing="inside"
-          fontFamily="mono"
-          fontSize="sm"
-          lineHeight="1.1"
-          overflowX="auto"
-          pe="{space}"
-          ps="{space}"
-          py="{space}"
-          rounded="l2"
-          tabIndex={tabIndex}
-        />
+              "& span": {
+                _dark: {
+                  color: "{shiki-dark}!",
+                },
+              },
+            }}
+            data-lang={lang}
+            bg="transparent!"
+            dangerouslySetInnerHTML={{ __html: html }}
+            focusVisibleRing="inside"
+            fontFamily="mono"
+            fontSize="sm"
+            lineHeight="1.1"
+            overflowX="auto"
+            pe="{space}"
+            ps="{space}"
+            py="{space}"
+            rounded="l2"
+            tabIndex={tabIndex}
+          />
+        ) : null}
       </Box>
 
-      <CopyButton
-        position="absolute"
-        right={{ base: "3.5", sm: "2", md: "3" }}
-        top={{ base: "3.5", md: "2" }}
-        value={children}
-      />
+      {children ? (
+        <CopyButton
+          position="absolute"
+          right="3.5"
+          top="3.5"
+          value={children}
+        />
+      ) : null}
     </Grid>
   )
 }

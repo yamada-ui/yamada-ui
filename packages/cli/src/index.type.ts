@@ -7,6 +7,10 @@ export interface SectionConfig {
   path?: string
 }
 
+export interface ComponentSectionConfig extends SectionConfig {
+  headless?: boolean
+}
+
 export interface ThemeConfig {
   path?: string
 }
@@ -22,7 +26,7 @@ export interface FormatConfig {
 
 export interface UserConfig {
   $schema?: string
-  components?: SectionConfig
+  components?: ComponentSectionConfig
   format?: FormatConfig
   hooks?: SectionConfig
   jsx?: boolean
@@ -90,6 +94,7 @@ export interface Registry {
   sources: Source[]
   dependencies?: Dependencies
   dependents?: Dependents
+  headless?: boolean
 }
 
 export interface Registries {

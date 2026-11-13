@@ -46,7 +46,7 @@ export function CodePreview({
   return (
     <Grid {...rest} bg="{bg}" position="relative" rounded="l2">
       <Box maxH={{ base: "lg", md: "md" }} minH="16" overflowY="auto">
-        {html ? (
+        {html && children ? (
           <Box
             as="pre"
             css={{

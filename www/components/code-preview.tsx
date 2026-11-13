@@ -41,7 +41,7 @@ export function CodePreview({
     void codeToHtml(children, { lang, meta: { __raw: highlight ?? "" } }).then(
       setHtml,
     )
-  }, [children, highlight, html, lang])
+  }, [children, highlight, lang])
 
   return (
     <Grid {...rest} bg="{bg}" position="relative" rounded="l2">

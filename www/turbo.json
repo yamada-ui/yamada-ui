@@ -18,6 +18,8 @@
         "**/*.{ts,tsx,mts,mdx,json}",
         ".velite/**",
         "public/**",
+        "../packages/workspace/src/typescript/**",
+        "!**/*.test.{ts,tsx,mts}",
         "!.next/**",
         "!.turbo/**",
         "!node_modules/**",

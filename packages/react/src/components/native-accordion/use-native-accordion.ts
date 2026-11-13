@@ -3,13 +3,7 @@
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useId } from "react"
 import { mergeProps } from "../../core"
-import {
-  ariaAttr,
-  createContext,
-  dataAttr,
-  handlerAll,
-  mergeRefs,
-} from "../../utils"
+import { ariaAttr, createContext, dataAttr, handlerAll } from "../../utils"
 
 interface NativeAccordionContext extends Pick<
   UseNativeAccordionReturn,
@@ -42,12 +36,10 @@ export const useNativeAccordion = ({
   ...rest
 }: UseNativeAccordionProps = {}) => {
   const generatedName = useId()
-  const { ref: restRef, ...restProps } = rest
-
-  const getRootProps: PropGetter = ({ ref, ...props } = {}) =>
-    mergeProps(props, restProps, {
-      ref: mergeRefs(ref, restRef),
-    })()
+  const getRootProps: PropGetter = useCallback(
+    (props = {}) => mergeProps(props, rest)(),
+    [rest],
+  )
 
   return {
     name: multiple ? undefined : (name ?? generatedName),
@@ -71,20 +63,14 @@ export const useNativeAccordionItem = ({
   ...rest
 }: UseNativeAccordionItemProps) => {
   const { name } = useNativeAccordionContext()
-  const { ref: restRef, ...restProps } = rest
 
-  const getItemProps: PropGetter<"details"> = ({ ref, ...props } = {}) =>
-    mergeProps(
-      {
-        name: props.name ?? restProps.name ?? name,
-        "data-group": "",
-      },
-      restProps,
-      props,
-      {
-        ref: mergeRefs(ref, restRef),
-      },
-    )()
+  const getItemProps: PropGetter<"details"> = useCallback(
+    ({ ref, ...props } = {}) =>
+      mergeProps({ ref, "data-group": "" }, rest, props, {
+        name: props.name ?? rest.name ?? name,
+      })(),
+    [name, rest],
+  )
 
   const getButtonProps: PropGetter<"summary"> = useCallback(
     (props = {}) => ({

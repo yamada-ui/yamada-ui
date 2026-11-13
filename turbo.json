@@ -8,7 +8,8 @@
       "inputs": [
         "package.json",
         "src/**/*.{ts,tsx,mts}",
-        "!src/**/*.{test,stories}.{ts,tsx,mts}"
+        "!src/**/*.{test,stories}.{ts,tsx,mts}",
+        "!src/**/*.test.*.{ts,tsx,mts}"
       ]
     },
     "transit:test": {
@@ -19,8 +20,12 @@
       "dependsOn": ["^build"],
       "inputs": [
         "package.json",
+        "tsconfig.json",
+        "tsdown.config.ts",
+        "clean-package.config.json",
         "{src,@types}/**/*.{ts,tsx,mts}",
-        "!src/**/*.{test,stories}.{ts,tsx,mts}"
+        "!src/**/*.{test,stories}.{ts,tsx,mts}",
+        "!src/**/*.test.*.{ts,tsx,mts}"
       ],
       "outputs": ["dist/**"]
     },
@@ -163,5 +168,5 @@
       ]
     }
   },
-  "globalDependencies": ["tsconfig.json"]
+  "globalDependencies": ["package.json", "tsconfig.json", "pnpm-workspace.yaml"]
 }

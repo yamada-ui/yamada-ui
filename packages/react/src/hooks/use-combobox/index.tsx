@@ -540,8 +540,8 @@ export const useCombobox = (props: UseComboboxProps = {}) => {
   }, [open])
 
   const getTriggerProps: PropGetter = useCallback(
-    (props = {}) => ({
-      ...mergeProps(
+    (props = {}) =>
+      mergeProps(
         {
           ref: triggerRef,
           "aria-controls": open ? contentId : undefined,
@@ -559,7 +559,6 @@ export const useCombobox = (props: UseComboboxProps = {}) => {
         props,
         { onClick, onKeyDown },
       )(),
-    }),
     [
       open,
       contentId,

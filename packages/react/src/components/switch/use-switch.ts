@@ -11,7 +11,7 @@ import type { FieldProps } from "../field"
 import { useCallback, useId, useRef } from "react"
 import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { dataAttr, mergeRefs, visuallyHiddenAttributes } from "../../utils"
+import { dataAttr, visuallyHiddenAttributes } from "../../utils"
 import { useFieldProps } from "../field"
 
 export interface UseSwitchProps<Y extends number | string = string>
@@ -139,12 +139,14 @@ export const useSwitch = <Y extends number | string = string>(
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    (props = {}) => {
-      const mergedProps = mergeProps(
+    (props = {}) =>
+      mergeProps(
         ariaProps,
         dataProps,
+        eventProps,
         {
           id,
+          ref: inputRef,
           type: "checkbox",
           name,
           style: visuallyHiddenAttributes.style,
@@ -156,16 +158,9 @@ export const useSwitch = <Y extends number | string = string>(
           tabIndex: interactive ? 0 : -1,
           value,
         },
-        { onBlur: eventProps.onBlur, onFocus: eventProps.onFocus },
         props,
-        { onChange, onKeyDown },
-      )({ mergeRef: false })
-
-      return {
-        ...mergedProps,
-        ref: mergeRefs(inputRef, props.ref, ref),
-      }
-    },
+        { ref, onChange, onKeyDown },
+      )(),
     [
       ariaProps,
       dataProps,

@@ -1,5 +1,17 @@
 # @yamada-ui/react
 
+## 2.3.4
+
+### Patch Changes
+
+- [#8020](https://github.com/yamada-ui/yamada-ui/pull/8020) [`828e68e`](https://github.com/yamada-ui/yamada-ui/commit/828e68ee81d8098ae4080021ee24e691ddfde390) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix type inference for item-level `onSelect` callback parameters in `Menu.Item` arrays.
+
+- [#8040](https://github.com/yamada-ui/yamada-ui/pull/8040) [`25ec755`](https://github.com/yamada-ui/yamada-ui/commit/25ec755f8a46ee05fc2e99535b4f1186cc2124a0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify NativeSelect field prop merging while preserving ref and event handler order.
+
+- [#8037](https://github.com/yamada-ui/yamada-ui/pull/8037) [`e7b0617`](https://github.com/yamada-ui/yamada-ui/commit/e7b0617938c9fb2ffc5d0131d740402b9251ddd7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify Switch input prop merging by forwarding field event props directly and preserving ref and event handler order.
+
+- [#8038](https://github.com/yamada-ui/yamada-ui/pull/8038) [`f36031f`](https://github.com/yamada-ui/yamada-ui/commit/f36031ff63e45fb14b6872df88f497157ddb5181) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify Textarea prop merging by passing the internal ref directly to mergeProps.
+
 ## 2.3.3
 
 ### Patch Changes

@@ -152,11 +152,17 @@ export const useMenu = ({
       descendant?: MenuDescendant,
       options: FocusOptions = { preventScroll: true },
     ) => {
-      if (!contentRef.current || !descendant || disabled) return
+      if (!contentRef.current || disabled) return
 
-      contentRef.current.setAttribute("aria-activedescendant", descendant.id)
+      if (descendant) {
+        contentRef.current.setAttribute("aria-activedescendant", descendant.id)
 
-      descendants.active(descendant, options)
+        descendants.active(descendant, options)
+      } else {
+        contentRef.current.removeAttribute("aria-activedescendant")
+
+        descendants.active()
+      }
     },
     [descendants, disabled],
   )
@@ -418,6 +424,19 @@ export const useSubMenu = ({
     ],
   )
 
+  const onMouseLeave = useCallback(() => {
+    if (!subMenu || disabled || dataDisabled() || ariaDisabled() || open) return
+
+    onActiveMainDescendant()
+  }, [
+    ariaDisabled,
+    dataDisabled,
+    disabled,
+    onActiveMainDescendant,
+    open,
+    subMenu,
+  ])
+
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
       if (!subMenu || disabled) return
@@ -503,7 +522,7 @@ export const useSubMenu = ({
           role: subMenu ? "menuitem" : "button",
         },
         props,
-        { onClick, onKeyDown, onMouseEnter, onMouseMove },
+        { onClick, onKeyDown, onMouseEnter, onMouseLeave, onMouseMove },
       )(),
     [
       uuid,
@@ -513,6 +532,7 @@ export const useSubMenu = ({
       onKeyDown,
       onMouseEnter,
       onMouseMove,
+      onMouseLeave,
       disabled,
       dataDisabled,
       ariaDisabled,
@@ -623,6 +643,12 @@ export const useMenuItem = ({
     onActiveDescendant(descendant)
   }, [descendants, disabled, onActiveDescendant])
 
+  const onMouseLeave = useCallback(() => {
+    if (disabled || subMenuTrigger) return
+
+    onActiveDescendant()
+  }, [disabled, onActiveDescendant, subMenuTrigger])
+
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
       runKeyAction(ev, {
@@ -687,6 +713,7 @@ export const useMenuItem = ({
           onClick: () => onSelect(value),
           onFocus: onActive,
           onKeyDown: onKeyDown,
+          onMouseLeave,
           onMouseMove: () => {
             onCloseSubMenu()
             onActive()
@@ -705,6 +732,7 @@ export const useMenuItem = ({
       onSelect,
       value,
       onCloseSubMenu,
+      onMouseLeave,
     ],
   )
 

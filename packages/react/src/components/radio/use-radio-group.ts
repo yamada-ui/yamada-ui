@@ -102,9 +102,9 @@ export const useRadioGroup = <Y extends string = string>(
       const checked = !isUndefined(value) && value === props.value
 
       return mergeProps(
+        dataProps,
+        ariaProps,
         {
-          ...dataProps,
-          ...ariaProps,
           type: "radio",
           name: id,
           style: visuallyHiddenAttributes.style,
@@ -116,7 +116,8 @@ export const useRadioGroup = <Y extends string = string>(
           required,
         },
         props,
-        { onChange, ...eventProps },
+        eventProps,
+        { onChange },
       )()
     },
     [

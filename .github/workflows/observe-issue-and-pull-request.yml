@@ -17,7 +17,7 @@ jobs:
           persist-credentials: false
 
       - name: Install
-        uses: ./.github/composite-actions/install
+        uses: $/.github/composite-actions/install
 
       - name: Create or update test issues
         if: false

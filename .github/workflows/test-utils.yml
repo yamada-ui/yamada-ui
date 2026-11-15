@@ -105,7 +105,7 @@ jobs:
 
       - name: Install
         if: inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true' || needs.prepare.outputs[matrix.env] == 'true'
-        uses: ./.github/composite-actions/install
+        uses: $/.github/composite-actions/install
 
       - name: Run test (full)
         if: inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true'

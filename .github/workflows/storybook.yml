@@ -40,7 +40,7 @@ jobs:
           persist-credentials: true
 
       - name: Install
-        uses: ./.github/composite-actions/install
+        uses: $/.github/composite-actions/install
 
       - name: Build Storybook
         run: pnpm react storybook:build

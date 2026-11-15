@@ -41,7 +41,7 @@ jobs:
     name: Build
     if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     needs: scm_base
-    uses: ./.github/workflows/build.yml
+    uses: $/.github/workflows/build.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     with:
@@ -51,7 +51,7 @@ jobs:
     name: Test
     if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     needs: scm_base
-    uses: ./.github/workflows/test-cli.yml
+    uses: $/.github/workflows/test-cli.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -62,7 +62,7 @@ jobs:
     name: Test
     if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     needs: scm_base
-    uses: ./.github/workflows/test-react.yml
+    uses: $/.github/workflows/test-react.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -73,7 +73,7 @@ jobs:
     name: Test
     if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     needs: scm_base
-    uses: ./.github/workflows/test-utils.yml
+    uses: $/.github/workflows/test-utils.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -93,7 +93,7 @@ jobs:
           persist-credentials: false
 
       - name: Install
-        uses: ./.github/composite-actions/install
+        uses: $/.github/composite-actions/install
 
       - name: Run lint
         run: pnpm turbo run lint --affected
@@ -102,7 +102,7 @@ jobs:
     name: Typecheck
     if: ${{ github.event_name == 'merge_group' || !github.event.pull_request.draft }}
     needs: scm_base
-    uses: ./.github/workflows/typecheck.yml
+    uses: $/.github/workflows/typecheck.yml
     secrets:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     with:
@@ -131,7 +131,7 @@ jobs:
 
       - name: Install
         if: steps.changed-files.outputs.any_changed == 'true'
-        uses: ./.github/composite-actions/install
+        uses: $/.github/composite-actions/install
 
       - name: Run format
         if: steps.changed-files.outputs.any_changed == 'true'

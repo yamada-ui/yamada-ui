@@ -43,7 +43,7 @@ jobs:
 
       - name: Install
         if: ${{ steps.metadata.outputs.package-ecosystem == 'npm_and_yarn' }}
-        uses: ./.github/composite-actions/install
+        uses: $/.github/composite-actions/install
 
       - name: Generate changeset
         if: ${{ steps.metadata.outputs.package-ecosystem == 'npm_and_yarn' }}

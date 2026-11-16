@@ -78,7 +78,7 @@ describe("<Toggle />", () => {
     )
 
     const checkboxes = page.getByRole("checkbox", { includeHidden: true })
-    await user.click(page.getByRole("button", { name: "A" }))
+    await user.click(page.getByRole("button", { name: /^A$/i }))
     expect(onChange).toHaveBeenCalledWith(["a"])
     await expect.element(checkboxes.nth(0)).toBeChecked()
   })

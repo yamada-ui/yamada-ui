@@ -16,7 +16,7 @@ storybook-static
 
 # testing
 __screenshots__
-.vitest-attachments
+.vitest
 coverage
 report.json
 

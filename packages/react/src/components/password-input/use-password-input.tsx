@@ -7,7 +7,6 @@ import { useCallback } from "react"
 import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
-import { handlerAll, mergeRefs } from "../../utils"
 import { useFieldProps } from "../field"
 
 export interface UsePasswordInputProps extends HTMLProps<"input">, FieldProps {
@@ -61,40 +60,30 @@ export const usePasswordInput = (props: UsePasswordInputProps = {}) => {
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    ({ ref, ...props } = {}) => {
-      const mergedProps = mergeProps(
-        {
-          type: visible ? "text" : "password",
-          disabled,
-          ...ariaProps,
-          ...dataProps,
-        },
+    (props = {}) =>
+      mergeProps(
+        ariaProps,
+        dataProps,
+        eventProps,
+        { type: visible ? "text" : "password", disabled },
         rest,
         props,
-      )({
-        mergeEvent: false,
-        mergeRef: false,
-      })
-
-      return {
-        ...mergedProps,
-        ref: mergeRefs(ref, rest.ref),
-        onBlur: handlerAll(eventProps.onBlur, props.onBlur),
-        onFocus: handlerAll(eventProps.onFocus, props.onFocus),
-      }
-    },
+      )(),
     [visible, rest, disabled, dataProps, eventProps, ariaProps],
   )
 
   const getButtonProps: PropGetter<"button"> = useCallback(
-    (props = {}) => ({
-      type: "button",
-      "aria-label": t("Toggle password visibility"),
-      disabled,
-      ...dataProps,
-      ...props,
-      onClick: handlerAll(props.onClick, onChangeVisibility),
-    }),
+    (props = {}) =>
+      mergeProps(
+        dataProps,
+        {
+          type: "button",
+          "aria-label": t("Toggle password visibility"),
+          disabled,
+        },
+        props,
+        { onClick: onChangeVisibility },
+      )(),
     [onChangeVisibility, dataProps, disabled, t],
   )
 

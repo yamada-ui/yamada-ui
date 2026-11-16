@@ -11,7 +11,6 @@ import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   assignRef,
   dataAttr,
-  handlerAll,
   has,
   isNull,
   visuallyHiddenAttributes,
@@ -60,7 +59,6 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
       resetRef,
       value,
       onChange: onChangeProp,
-      onClick: onClickProp,
       ...rest
     },
     ariaProps,
@@ -102,26 +100,24 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
     [setValues],
   )
 
-  const clickableProps = useClickable<HTMLElement, Dict>({
-    ...ariaProps,
-    ...dataProps,
-    ...eventProps,
-    ...rest,
-    disabled: !interactive,
-    focusable: readOnly && !disabled,
-    focusOnClick: interactive,
-    onClick: handlerAll(onClickProp, onClick),
-  })
+  const clickableProps = useClickable<HTMLElement, Dict>(
+    mergeProps(ariaProps, dataProps, eventProps, rest, {
+      disabled: !interactive,
+      focusable: readOnly && !disabled,
+      focusOnClick: interactive,
+      onClick,
+    })(),
+  )
 
   assignRef(resetRef, onReset)
 
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}) =>
       mergeProps(
+        visuallyHiddenAttributes,
+        ariaProps,
+        dataProps,
         {
-          ...visuallyHiddenAttributes,
-          ...ariaProps,
-          ...dataProps,
           id,
           ref: inputRef,
           form,

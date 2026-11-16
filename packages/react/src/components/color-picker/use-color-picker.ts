@@ -321,9 +321,10 @@ export const useColorPicker = (props: UseColorPickerProps) => {
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}) =>
       mergeProps(
+        dataProps,
         {
           id,
-          ref: mergeRefs(ref, inputRef),
+          ref,
           name,
           style: !allowInput ? { pointerEvents: "none" } : {},
           "aria-label": ariaLabel,
@@ -335,10 +336,15 @@ export const useColorPicker = (props: UseColorPickerProps) => {
           required,
           tabIndex: allowInput ? 0 : -1,
           value,
-          ...dataProps,
         },
         props,
-        { onBlur, onChange: onInputChange, onFocus: onInputFocus, onMouseDown },
+        {
+          ref: inputRef,
+          onBlur,
+          onChange: onInputChange,
+          onFocus: onInputFocus,
+          onMouseDown,
+        },
       )(),
     [
       allowInput,

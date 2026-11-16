@@ -113,11 +113,7 @@
     "test:coverage:chromium": {
       "dependsOn": ["transit:test"],
       "env": ["VITEST_CHROMIUM_GC_DISK_THRESHOLD_GB"],
-      "passThroughEnv": [
-        "DEBUG",
-        "PLAYWRIGHT_BROWSERS_PATH",
-        "VITEST_CHROMIUM_GC_FORCE"
-      ],
+      "passThroughEnv": ["PLAYWRIGHT_BROWSERS_PATH"],
       "inputs": [
         "package.json",
         "**/*.{ts,tsx,mts}",

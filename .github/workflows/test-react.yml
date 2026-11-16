@@ -45,6 +45,7 @@ jobs:
         with:
           files_yaml: |
             full:
+              - .github/scripts/browser-diagnostics.mjs
               - .github/workflows/quality.yml
               - .github/workflows/test-react.yml
               - pnpm-workspace.yaml
@@ -84,6 +85,9 @@ jobs:
       image: ${{ matrix.env != 'jsdom' && (inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true' || needs.prepare.outputs[matrix.env] == 'true') && needs.prepare.outputs.image || '' }} # zizmor: ignore[unpinned-images] Version is resolved from pnpm-workspace.yaml.
       options: --user 1001 --init --ipc=host
     timeout-minutes: 10
+    env:
+      DEBUG: ${{ matrix.env == 'chromium' && matrix.shard_index <= 2 && 'pw:browser,vitest:browser:gc' || '' }}
+      VITEST_CHROMIUM_GC_DISK_THRESHOLD_GB: ${{ matrix.env == 'chromium' && 'Infinity' || '' }}
     strategy:
       fail-fast: false
       matrix:
@@ -111,11 +115,11 @@ jobs:
 
       - name: Run test (full)
         if: inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true'
-        run: pnpm turbo run test:coverage:${{ matrix.env }} --filter=./packages/react -- --retry=3 --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:coverage:${{ matrix.env }} --filter=./packages/react ${{ matrix.env == 'chromium' && matrix.shard_index <= 2 && '--force --log-order=stream' || '' }} -- --retry=3 --shard=${{ matrix.shard_index }}/4 ${{ matrix.env == 'chromium' && matrix.shard_index <= 2 && '--reporter=default --reporter=../../.github/scripts/browser-diagnostics.mjs' || '' }}
 
       - name: Run test (diff)
         if: inputs.TURBO_SCM_BASE != '' && needs.prepare.outputs.full != 'true' && needs.prepare.outputs[matrix.env] == 'true'
-        run: pnpm turbo run test:coverage:${{ matrix.env }} --filter=./packages/react -- --retry=3 --changed "$TURBO_SCM_BASE" --shard=${{ matrix.shard_index }}/4
+        run: pnpm turbo run test:coverage:${{ matrix.env }} --filter=./packages/react ${{ matrix.env == 'chromium' && matrix.shard_index <= 2 && '--force --log-order=stream' || '' }} -- --retry=3 --changed "$TURBO_SCM_BASE" --shard=${{ matrix.shard_index }}/4 ${{ matrix.env == 'chromium' && matrix.shard_index <= 2 && '--reporter=default --reporter=../../.github/scripts/browser-diagnostics.mjs' || '' }}
 
       - name: Upload coverage
         if: inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true' || needs.prepare.outputs[matrix.env] == 'true'

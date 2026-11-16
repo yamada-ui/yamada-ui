@@ -1,0 +1,87 @@
+name: Chromium GC Comparison
+
+on:
+  pull_request:
+    types:
+      - synchronize
+    branches:
+      - main
+    paths:
+      - .github/workflows/chromium-comparison.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prepare:
+    name: Prepare comparison
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'ci/stabilize-chromium-tests'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      changed: ${{ steps.changed-files.outputs.changed }}
+      image: ${{ steps.image.outputs.image }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check comparison workflow
+        id: changed-files
+        run: |
+          changed=$(git diff --name-only "$BEFORE_SHA" HEAD -- .github/workflows/chromium-comparison.yml)
+          if [ -n "$changed" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+
+      - name: Resolve browser image
+        id: image
+        if: steps.changed-files.outputs.changed == 'true'
+        run: |
+          version=$(sed -n 's/^  playwright: //p' pnpm-workspace.yaml)
+          echo "image=mcr.microsoft.com/playwright:v${version}-noble" >> "$GITHUB_OUTPUT"
+
+  compare:
+    name: Chromium - Round ${{ matrix.round }} - ${{ matrix.gc }} - ${{ matrix.shard }}/4
+    needs: prepare
+    if: needs.prepare.outputs.changed == 'true'
+    runs-on: ubuntu-24.04
+    container:
+      image: ${{ needs.prepare.outputs.image }} # zizmor: ignore[unpinned-images] Version is resolved from pnpm-workspace.yaml.
+      options: --user 1001 --init --ipc=host
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        round: [1, 2, 3, 4, 5]
+        gc: [default, per-file]
+        shard: [1, 2, 3, 4]
+    env:
+      DEBUG: pw:browser,vitest:browser:gc
+      VITEST_CHROMIUM_GC_DISK_THRESHOLD_GB: ${{ matrix.gc == 'per-file' && 'Infinity' || '4' }}
+      VITEST_CHROMIUM_GC_FORCE: ""
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install
+        uses: $/.github/composite-actions/install
+
+      - name: Run comparison
+        run: pnpm react test:coverage:chromium --retry=3 --shard=${{ matrix.shard }}/4 --reporter=default --reporter=../../.github/scripts/browser-diagnostics.mjs

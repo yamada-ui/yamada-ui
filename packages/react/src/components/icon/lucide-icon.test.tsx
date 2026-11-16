@@ -29,6 +29,36 @@ describe("Lucide icon", () => {
 
     expect(container.firstChild).toHaveClass("ui-icon")
   })
+
+  test.each<[IconNames, IconNames]>([
+    ["BadgeAlertIcon", "BadgeExclamationPointIcon"],
+    ["BatteryWarningIcon", "BatteryExclamationPointIcon"],
+    ["BookAlertIcon", "BookExclamationPointIcon"],
+    ["CircleAlertIcon", "CircleExclamationPointIcon"],
+    ["ClockAlertIcon", "ClockExclamationPointIcon"],
+    ["CloudAlertIcon", "CloudExclamationPointIcon"],
+    ["MailWarningIcon", "MailExclamationPointIcon"],
+    ["MessageCircleWarningIcon", "MessageCircleExclamationPointIcon"],
+    ["MessageSquareWarningIcon", "MessageSquareExclamationPointIcon"],
+    ["OctagonAlertIcon", "OctagonExclamationPointIcon"],
+    ["SearchAlertIcon", "SearchExclamationPointIcon"],
+    ["ShieldAlertIcon", "ShieldExclamationPointIcon"],
+    ["TriangleAlertIcon", "TriangleExclamationPointIcon"],
+  ])("preserves %s as an alias for %s", (previousName, currentName) => {
+    const PreviousIcon = icons[previousName]
+    const CurrentIcon = icons[currentName]
+    const { container } = render(
+      <>
+        <PreviousIcon />
+        <CurrentIcon />
+      </>,
+    )
+    const [previousIcon, currentIcon] = container.querySelectorAll("svg")
+
+    expect(previousIcon).toBeInTheDocument()
+    expect(currentIcon).toBeInTheDocument()
+    expect(previousIcon?.innerHTML).toBe(currentIcon?.innerHTML)
+  })
 })
 
 describe("<LucideIcon />", () => {

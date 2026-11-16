@@ -84,6 +84,8 @@ jobs:
       image: ${{ matrix.env != 'jsdom' && (inputs.TURBO_SCM_BASE == '' || needs.prepare.outputs.full == 'true' || needs.prepare.outputs[matrix.env] == 'true') && needs.prepare.outputs.image || '' }} # zizmor: ignore[unpinned-images] Version is resolved from pnpm-workspace.yaml.
       options: --user 1001 --init --ipc=host
     timeout-minutes: 10
+    env:
+      VITEST_CHROMIUM_GC_DISK_THRESHOLD_GB: ${{ matrix.env == 'chromium' && 'Infinity' || '' }}
     strategy:
       fail-fast: false
       matrix:

@@ -126,9 +126,9 @@ export const useRadio = <Y extends string = string>({
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}) => {
       const sharedProps = mergeProps(
+        dataProps,
+        ariaProps,
         {
-          ...dataProps,
-          ...ariaProps,
           id,
           ref,
           type: "radio",
@@ -147,7 +147,8 @@ export const useRadio = <Y extends string = string>({
           value,
         },
         props,
-        { ...eventProps, onChange },
+        eventProps,
+        { onChange },
       )()
 
       return getGroupInputProps?.(sharedProps) ?? sharedProps
@@ -174,12 +175,12 @@ export const useRadio = <Y extends string = string>({
   )
 
   const getIndicatorProps: PropGetter = useCallback(
-    (props = {}) => ({
-      ...dataProps,
-      "aria-hidden": "true",
-      "data-checked": dataAttr(checked),
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        dataProps,
+        { "aria-hidden": "true", "data-checked": dataAttr(checked) },
+        props,
+      )(),
     [dataProps, checked],
   )
 

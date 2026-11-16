@@ -105,6 +105,17 @@ describe("init", () => {
     )
   })
 
+  test("should set headless in config with --headless", async () => {
+    await init.parseAsync(
+      ["--cwd", tempDir, "--yes", "--monorepo", "--headless", "--no-install"],
+      { from: "user" },
+    )
+
+    const configPath = path.join(tempDir, "ui.json")
+    const config = JSON.parse(readFileSync(configPath, "utf-8"))
+    expect(config.components.headless).toBeTruthy()
+  })
+
   test("should generate monorepo with jsx", async () => {
     await init.parseAsync(
       ["--cwd", tempDir, "--yes", "--monorepo", "--jsx", "--no-install"],

@@ -36,7 +36,7 @@ describe("<Timeline />", () => {
     for (const item of screen.getAllByRole("listitem")) {
       const indicator = item.children[0]?.children[0]
       expect(indicator).toBeDefined()
-      expect(indicator).not.toHaveTextContent(/\d/)
+      expect(indicator?.textContent).not.toMatch(/\d/)
     }
   })
 

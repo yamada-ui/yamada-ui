@@ -51,7 +51,7 @@
     "./hooks/*": "./src/hooks/*/index.ts"
   },
   "scripts": {
-    "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .vitest-attachments __screenshots__",
+    "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .vitest __screenshots__",
     "prebuild": "pnpm gen:tokens",
     "build": "tsdown",
     "storybook": "storybook dev -p 6006 -c storybook",

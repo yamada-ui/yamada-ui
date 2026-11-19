@@ -5,7 +5,7 @@ export const PACKAGE_NAME = "@yamada-ui/react"
 export const CONFIG_FILE_NAME = "ui.json"
 export const REGISTRY_FILE_NAME = "registry.json"
 export const REGISTRY_VERSION = "v2"
-export const REGISTRY_URL = "https://yamada-ui.com/registry"
+export const REGISTRY_URL = `https://${REGISTRY_VERSION}.yamada-ui.com/registry`
 export const SECTION_NAMES = ["components", "hooks", "providers"] as const
 export const DEFAULT_PACKAGE_NAME = {
   ui: "@workspaces/ui",
@@ -25,7 +25,7 @@ export const DEFAULT_PATH = {
   },
 }
 export const DEFAULT_CONFIG: UserConfig = {
-  $schema: `${REGISTRY_URL}/${REGISTRY_VERSION}/config.schema.json`,
+  $schema: `${REGISTRY_URL}/config.schema.json`,
   components: { overwrite: true },
   hooks: { overwrite: true },
   providers: { overwrite: true },

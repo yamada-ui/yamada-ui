@@ -143,20 +143,23 @@ describe("useAttributeObserver", () => {
   test("should call func when observed attribute changes", async () => {
     const element = document.createElement("div")
     document.body.appendChild(element)
-    const ref = { current: element }
-    const func = vi.fn()
 
-    renderHook(() => useAttributeObserver(ref, ["data-test"], true, func))
+    try {
+      const ref = { current: element }
+      const func = vi.fn()
 
-    act(() => {
-      element.setAttribute("data-test", "value")
-    })
+      renderHook(() => useAttributeObserver(ref, ["data-test"], true, func))
 
-    await waitFor(() => {
-      expect(func).toHaveBeenCalledWith()
-    })
+      act(() => {
+        element.setAttribute("data-test", "value")
+      })
 
-    document.body.removeChild(element)
+      await waitFor(() => {
+        expect(func).toHaveBeenCalledWith()
+      })
+    } finally {
+      element.remove()
+    }
   })
 
   test("should not observe when disabled", () => {
@@ -183,20 +186,23 @@ describe("useAttributeObserver", () => {
   test("should disconnect observer on unmount", () => {
     const element = document.createElement("div")
     document.body.appendChild(element)
-    const ref = { current: element }
-    const func = vi.fn()
 
-    const { unmount } = renderHook(() =>
-      useAttributeObserver(ref, ["data-test"], true, func),
-    )
+    try {
+      const ref = { current: element }
+      const func = vi.fn()
 
-    unmount()
+      const { unmount } = renderHook(() =>
+        useAttributeObserver(ref, ["data-test"], true, func),
+      )
 
-    element.setAttribute("data-test", "value")
+      unmount()
 
-    expect(func).not.toHaveBeenCalled()
+      element.setAttribute("data-test", "value")
 
-    document.body.removeChild(element)
+      expect(func).not.toHaveBeenCalled()
+    } finally {
+      element.remove()
+    }
   })
 
   test("should use window when defaultView is null", () => {
@@ -209,57 +215,62 @@ describe("useAttributeObserver", () => {
     const func = vi.fn()
 
     let observerCreated = false
-    const OriginalMO = window.MutationObserver
-    window.MutationObserver = class {
-      constructor() {
-        observerCreated = true
-      }
-      observe = vi.fn()
-      disconnect = vi.fn()
-      takeRecords = vi.fn(() => [])
-    }
+
+    vi.stubGlobal(
+      "MutationObserver",
+      class {
+        constructor() {
+          observerCreated = true
+        }
+        observe = vi.fn()
+        disconnect = vi.fn()
+        takeRecords = vi.fn(() => [])
+      },
+    )
 
     renderHook(() => useAttributeObserver(ref, ["data-test"], true, func))
 
     expect(observerCreated).toBeTruthy()
-
-    window.MutationObserver = OriginalMO
   })
 
   test("should handle non-attribute and missing attributeName changes", () => {
     const element = document.createElement("div")
     document.body.appendChild(element)
-    const ref = { current: element }
-    const func = vi.fn()
 
-    let observerCallback: MutationCallback
-    const OriginalMutationObserver = window.MutationObserver
+    try {
+      const ref = { current: element }
+      const func = vi.fn()
 
-    window.MutationObserver = class {
-      constructor(callback: MutationCallback) {
-        observerCallback = callback
-      }
-      observe = vi.fn()
-      disconnect = vi.fn()
-      takeRecords = vi.fn(() => [])
+      let observerCallback: MutationCallback
+
+      vi.stubGlobal(
+        "MutationObserver",
+        class {
+          constructor(callback: MutationCallback) {
+            observerCallback = callback
+          }
+          observe = vi.fn()
+          disconnect = vi.fn()
+          takeRecords = vi.fn(() => [])
+        },
+      )
+
+      renderHook(() => useAttributeObserver(ref, ["data-test"], true, func))
+
+      observerCallback!(
+        [
+          { type: "childList", attributeName: null } as any,
+          { type: "attributes", attributeName: null } as any,
+          { type: "attributes", attributeName: "data-other" } as any,
+          { type: "attributes", attributeName: "data-test" } as any,
+        ],
+        {} as any,
+      )
+
+      expect(func).toHaveBeenCalledTimes(1)
+    } finally {
+      element.remove()
     }
-
-    renderHook(() => useAttributeObserver(ref, ["data-test"], true, func))
-
-    observerCallback!(
-      [
-        { type: "childList", attributeName: null } as any,
-        { type: "attributes", attributeName: null } as any,
-        { type: "attributes", attributeName: "data-other" } as any,
-        { type: "attributes", attributeName: "data-test" } as any,
-      ],
-      {} as any,
-    )
-
-    expect(func).toHaveBeenCalledTimes(1)
-
-    window.MutationObserver = OriginalMutationObserver
-    document.body.removeChild(element)
   })
 })
 

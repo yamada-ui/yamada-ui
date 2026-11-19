@@ -1,6 +1,7 @@
 import {
   createIgnoreCspellConfig,
   createNoRestrictedImportConfig,
+  createVitestIsolationConfig,
   defineConfig,
   reactConfig,
   sharedBrowserTestFiles,
@@ -26,6 +27,11 @@ export default defineConfig({
     createIgnoreCspellConfig(
       "src/components/icon/icons",
       "src/providers/i18n-provider/intl",
+    ),
+    createVitestIsolationConfig(
+      "src/components/carousel/carousel.test.tsx",
+      "src/utils/effect.test.ts",
+      "src/utils/ssr.test.ts",
     ),
   ],
   ignorePatterns: ["dist", "coverage", "storybook-static"],

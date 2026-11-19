@@ -1,5 +1,14 @@
+import { fileURLToPath } from "node:url"
 import { defineConfig } from "oxlint"
-import { sharedTestFiles } from "./shared.ts"
+import {
+  sharedBrowserTestFiles,
+  sharedTestFiles,
+  sharedUnitTestFiles,
+} from "./shared.ts"
+
+const vitestIsolationPlugin = fileURLToPath(
+  new URL("./plugins/vitest-isolation.js", import.meta.url),
+)
 
 export const vitestConfig = defineConfig({
   overrides: [
@@ -70,3 +79,32 @@ export const vitestConfig = defineConfig({
     },
   ],
 })
+
+export const createVitestIsolationConfig = (...isolatedFiles: string[]) =>
+  defineConfig({
+    overrides: [
+      {
+        excludeFiles: [
+          ...sharedBrowserTestFiles,
+          ...isolatedFiles.flatMap((file) => {
+            const normalized = file.replace(/^\.\//, "")
+
+            return normalized.startsWith("**/")
+              ? [normalized]
+              : [normalized, `**/${normalized}`]
+          }),
+        ],
+        files: sharedUnitTestFiles,
+        jsPlugins: [
+          {
+            name: "vitest-isolation",
+            specifier: vitestIsolationPlugin,
+          },
+        ],
+        rules: {
+          "vitest-isolation/no-direct-global-mutation": "error",
+          "vitest-isolation/no-module-mock": "error",
+        },
+      },
+    ],
+  })

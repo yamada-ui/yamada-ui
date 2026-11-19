@@ -24,6 +24,12 @@ const browsers: {
   { browser: "webkit" },
 ]
 
+const isolatedJsdomTests = [
+  "src/components/carousel/carousel.test.tsx",
+  "src/utils/effect.test.ts",
+  "src/utils/ssr.test.ts",
+]
+
 export default mergeConfig(sharedConfig, {
   plugins: [react()],
   test: {
@@ -39,10 +45,30 @@ export default mergeConfig(sharedConfig, {
         test: {
           name: "jsdom",
           environment: "jsdom",
-          exclude: ["src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}"],
+          exclude: [
+            "src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}",
+            ...isolatedJsdomTests,
+          ],
           globals: true,
           include: ["src/**/*.test.{ts,tsx}"],
-          setupFiles: ["@yamada-ui/workspace/vitest/setup"],
+          isolate: false,
+          restoreMocks: true,
+          setupFiles: ["@yamada-ui/workspace/vitest/setup", "./test/setup.ts"],
+          unstubEnvs: true,
+          unstubGlobals: true,
+        },
+      }),
+      defineProject({
+        test: {
+          name: "jsdom:isolated",
+          environment: "jsdom",
+          globals: true,
+          include: isolatedJsdomTests,
+          isolate: true,
+          restoreMocks: true,
+          setupFiles: ["@yamada-ui/workspace/vitest/setup", "./test/setup.ts"],
+          unstubEnvs: true,
+          unstubGlobals: true,
         },
       }),
       ...browsers.map(({ browser, options }) =>

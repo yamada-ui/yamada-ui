@@ -15,6 +15,8 @@ export async function publishRegistry(
   tag: RegistryTag,
   files: { content: string; pathname: string }[],
 ) {
+  if (!files.length) throw new Error("Cannot publish an empty registry")
+
   const prefix = `${REGISTRY_PREFIX}/${tag}/`
   const pathnames = new Set(files.map(({ pathname }) => `${prefix}${pathname}`))
 

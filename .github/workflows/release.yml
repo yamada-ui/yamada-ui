@@ -156,7 +156,7 @@ jobs:
           pnpm www gen:theme
           pnpm www gen:changelog
           pnpm www gen:contributors
-          pnpm www gen:relations
+          pnpm www gen:relations --directory "$RUNNER_TEMP/registry"
           git add ./www/data ./www/contents
           git diff --staged --exit-code || git commit -m 'ci(changesets): update www'
         env:

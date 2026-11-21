@@ -8,47 +8,45 @@ import {
 } from "./event"
 
 describe("Event", () => {
-  const defaultTouch = global.Touch
-  const defaultPointerEvent = global.PointerEvent
-
-  beforeAll(() => {
-    global.Touch = class Touch {
-      identifier: number
-      target: EventTarget
-      clientX: number
-      clientY: number
-
-      constructor({
-        target,
-        clientX,
-        clientY,
-        identifier,
-      }: {
-        clientX: number
-        clientY: number
+  beforeEach(() => {
+    vi.stubGlobal(
+      "Touch",
+      class Touch {
         identifier: number
         target: EventTarget
-      }) {
-        this.identifier = identifier
-        this.target = target
-        this.clientX = clientX
-        this.clientY = clientY
-      }
-    } as typeof global.Touch
+        clientX: number
+        clientY: number
 
-    global.PointerEvent = class PointerEvent extends MouseEvent {
-      pointerType: string
+        constructor({
+          target,
+          clientX,
+          clientY,
+          identifier,
+        }: {
+          clientX: number
+          clientY: number
+          identifier: number
+          target: EventTarget
+        }) {
+          this.identifier = identifier
+          this.target = target
+          this.clientX = clientX
+          this.clientY = clientY
+        }
+      },
+    )
 
-      constructor(type: string, params: PointerEventInit = {}) {
-        super(type, params)
-        this.pointerType = params.pointerType || ""
-      }
-    } as typeof global.PointerEvent
-  })
+    vi.stubGlobal(
+      "PointerEvent",
+      class PointerEvent extends MouseEvent {
+        pointerType: string
 
-  afterAll(() => {
-    global.Touch = defaultTouch
-    global.PointerEvent = defaultPointerEvent
+        constructor(type: string, params: PointerEventInit = {}) {
+          super(type, params)
+          this.pointerType = params.pointerType || ""
+        }
+      },
+    )
   })
 
   test("isTouchEvent identifies touch events", () => {
@@ -139,10 +137,13 @@ describe("Event", () => {
       document.body.appendChild(container)
 
       const cleanup = focusTransfer(container)
-      expect(cleanup).toBeTypeOf("function")
 
-      cleanup()
-      document.body.removeChild(container)
+      try {
+        expect(cleanup).toBeTypeOf("function")
+      } finally {
+        cleanup()
+        document.body.removeChild(container)
+      }
     })
   })
 })

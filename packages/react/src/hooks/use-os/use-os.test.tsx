@@ -1,13 +1,11 @@
+import { renderToStaticMarkup } from "react-dom/server"
 import { renderHook } from "#test"
+import { EnvironmentProvider } from "../../core"
+import { useOS } from "./"
 
 describe("useOS", () => {
-  beforeEach(() => {
-    vi.unstubAllGlobals()
-  })
-
   afterEach(() => {
-    vi.doUnmock("../../core")
-    vi.resetModules()
+    vi.unstubAllGlobals()
   })
 
   test.each([
@@ -63,27 +61,31 @@ describe("useOS", () => {
       userAgent:
         "Mozilla/5.0 (PlayStation; PlayStation 5/2.26) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15",
     },
-  ])("should return $expected", async ({ expected, userAgent }) => {
+  ])("should return $expected", ({ expected, userAgent }) => {
     vi.stubGlobal("navigator", { userAgent })
 
-    const { useOS } = await import("./")
     const { result } = renderHook(() => useOS())
 
     expect(result.current).toBe(expected)
   })
 
-  test("returns undetermined when window is undefined", async () => {
-    vi.resetModules()
+  test("returns undetermined when window is undefined", () => {
+    vi.stubGlobal("window", undefined)
 
-    vi.doMock("../../core", () => ({
-      useEnvironment: () => ({
-        getWindow: () => undefined,
-      }),
-    }))
+    let os: string | undefined
 
-    const { useOS } = await import("./")
-    const { result } = renderHook(() => useOS())
+    const TestComponent = () => {
+      os = useOS()
 
-    expect(result.current).toBe("undetermined")
+      return null
+    }
+
+    renderToStaticMarkup(
+      <EnvironmentProvider>
+        <TestComponent />
+      </EnvironmentProvider>,
+    )
+
+    expect(os).toBe("undetermined")
   })
 })

@@ -14,12 +14,13 @@ import {
 import { stylisticConfig } from "./stylistic.ts"
 import { testingLibraryConfig } from "./testing-library.ts"
 import { typescriptConfig } from "./typescript.ts"
-import { vitestConfig } from "./vitest.ts"
+import { createVitestIsolationConfig, vitestConfig } from "./vitest.ts"
 
 export {
   baseConfig,
   createIgnoreCspellConfig,
   createNoRestrictedImportConfig,
+  createVitestIsolationConfig,
   cspellConfig,
   defineConfig,
   importConfig,

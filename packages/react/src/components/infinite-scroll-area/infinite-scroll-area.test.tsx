@@ -1,29 +1,18 @@
 import { a11y } from "#test"
 import { InfiniteScrollArea } from "."
-import { noop } from "../../utils"
+
+class IntersectionObserverMock {
+  disconnect() {}
+  observe() {}
+  takeRecords() {
+    return []
+  }
+  unobserve() {}
+}
 
 describe("<InfiniteScrollArea />", () => {
-  const defaultIntersectionObserver = globalThis.IntersectionObserver
-  const IntersectionObserverMock = vi.fn(
-    function IntersectionObserverMock(this: {
-      disconnect: () => void
-      observe: () => void
-      takeRecords: () => void
-      unobserve: () => void
-    }) {
-      this.disconnect = noop
-      this.observe = noop
-      this.takeRecords = noop
-      this.unobserve = noop
-    },
-  )
-
-  beforeAll(() => {
+  beforeEach(() => {
     vi.stubGlobal("IntersectionObserver", IntersectionObserverMock)
-  })
-
-  afterAll(() => {
-    vi.stubGlobal("IntersectionObserver", defaultIntersectionObserver)
   })
 
   test("passes a11y checks", async () => {

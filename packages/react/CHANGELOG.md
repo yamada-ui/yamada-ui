@@ -1,5 +1,49 @@
 # @yamada-ui/react
 
+## 2.3.4
+
+### Patch Changes
+
+- [#8044](https://github.com/yamada-ui/yamada-ui/pull/8044) [`b3fcf63`](https://github.com/yamada-ui/yamada-ui/commit/b3fcf633800d5856fbca10b5b4756b31168bf309) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons while preserving existing icon names as compatibility aliases.
+
+- [#8044](https://github.com/yamada-ui/yamada-ui/pull/8044) [`b3fcf63`](https://github.com/yamada-ui/yamada-ui/commit/b3fcf633800d5856fbca10b5b4756b31168bf309) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#8044](https://github.com/yamada-ui/yamada-ui/pull/8044) [`b3fcf63`](https://github.com/yamada-ui/yamada-ui/commit/b3fcf633800d5856fbca10b5b4756b31168bf309) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated style props.
+
+- [#8071](https://github.com/yamada-ui/yamada-ui/pull/8071) [`71b54c7`](https://github.com/yamada-ui/yamada-ui/commit/71b54c797e3d0688a479c4ec6dbcda7bddc20d55) Thanks [@bmthd](https://github.com/bmthd)! - Fix `Editable` submitting or canceling the edit when Enter or Escape is pressed during IME composition.
+
+- [#8020](https://github.com/yamada-ui/yamada-ui/pull/8020) [`828e68e`](https://github.com/yamada-ui/yamada-ui/commit/828e68ee81d8098ae4080021ee24e691ddfde390) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix type inference for item-level `onSelect` callback parameters in `Menu.Item` arrays.
+
+- [#8054](https://github.com/yamada-ui/yamada-ui/pull/8054) [`44e79b4`](https://github.com/yamada-ui/yamada-ui/commit/44e79b4e7241352b25d200c1222148d4a774c292) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify Checkbox and CheckboxGroup prop getters and delegate ref and event composition to mergeProps.
+
+- [#8055](https://github.com/yamada-ui/yamada-ui/pull/8055) [`76416a6`](https://github.com/yamada-ui/yamada-ui/commit/76416a63dbfa40c3faabb0ae4397070feb14d08c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify ColorPicker input prop and ref merging.
+
+- [#8039](https://github.com/yamada-ui/yamada-ui/pull/8039) [`b9f2c5c`](https://github.com/yamada-ui/yamada-ui/commit/b9f2c5c86c4bcd3550533e04b8bc2153a46912c3) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Remove the redundant object spread when returning merged combobox trigger props.
+
+- [#8057](https://github.com/yamada-ui/yamada-ui/pull/8057) [`27b9b4b`](https://github.com/yamada-ui/yamada-ui/commit/27b9b4b70b7cac276b28b1d5400c49070a81480b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify internal prop merging in Dropzone without changing its behavior.
+
+- [#8056](https://github.com/yamada-ui/yamada-ui/pull/8056) [`a32c4e2`](https://github.com/yamada-ui/yamada-ui/commit/a32c4e28fe59081a328561274a76cbf1febe9b53) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify prop merging for file input interactions and input attributes.
+
+- [#8040](https://github.com/yamada-ui/yamada-ui/pull/8040) [`25ec755`](https://github.com/yamada-ui/yamada-ui/commit/25ec755f8a46ee05fc2e99535b4f1186cc2124a0) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify NativeSelect field prop merging while preserving ref and event handler order.
+
+- [#8048](https://github.com/yamada-ui/yamada-ui/pull/8048) [`ea73d20`](https://github.com/yamada-ui/yamada-ui/commit/ea73d20705968fa1505dcac173218e5e2888826d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify NumberInput prop getters and delegate ref composition to mergeProps.
+
+- [#8050](https://github.com/yamada-ui/yamada-ui/pull/8050) [`e4324e4`](https://github.com/yamada-ui/yamada-ui/commit/e4324e46afd566ee2f8d750b4ee1ecbb767eab84) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify PasswordInput prop getters by delegating prop, event handler, and ref composition to mergeProps.
+
+- [#8049](https://github.com/yamada-ui/yamada-ui/pull/8049) [`ef2325e`](https://github.com/yamada-ui/yamada-ui/commit/ef2325ec702e767b3e07277c5fefb20986936e4a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify PinInput prop merging by passing field props directly to mergeProps.
+
+- [#8053](https://github.com/yamada-ui/yamada-ui/pull/8053) [`690c959`](https://github.com/yamada-ui/yamada-ui/commit/690c9598e7a939bba49baabcbce194634d5d0691) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify prop merging in Radio and RadioGroup.
+
+- [#8051](https://github.com/yamada-ui/yamada-ui/pull/8051) [`60f0a41`](https://github.com/yamada-ui/yamada-ui/commit/60f0a4129fdfae5b200c110e009f57206572d022) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify prop merging in the SaturationSlider thumb.
+
+- [#8052](https://github.com/yamada-ui/yamada-ui/pull/8052) [`1b72741`](https://github.com/yamada-ui/yamada-ui/commit/1b72741966fd394ae20e626a223172281f66da4a) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify Slider prop merging while preserving event handler order and accessibility attributes.
+
+- [#8037](https://github.com/yamada-ui/yamada-ui/pull/8037) [`e7b0617`](https://github.com/yamada-ui/yamada-ui/commit/e7b0617938c9fb2ffc5d0131d740402b9251ddd7) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify Switch input prop merging by forwarding field event props directly and preserving ref and event handler order.
+
+- [#8038](https://github.com/yamada-ui/yamada-ui/pull/8038) [`f36031f`](https://github.com/yamada-ui/yamada-ui/commit/f36031ff63e45fb14b6872df88f497157ddb5181) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify Textarea prop merging by passing the internal ref directly to mergeProps.
+
+- [#8036](https://github.com/yamada-ui/yamada-ui/pull/8036) [`c1b35c1`](https://github.com/yamada-ui/yamada-ui/commit/c1b35c1cb421c4fcbb8bc5dbf199991ca2b048b2) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Simplify native accordion prop getters by relying on mergeProps for ref composition.
+
 ## 2.3.3
 
 ### Patch Changes

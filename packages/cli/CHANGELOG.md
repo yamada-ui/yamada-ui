@@ -1,5 +1,13 @@
 # @yamada-ui/cli
 
+## 2.1.19
+
+### Patch Changes
+
+- [#8044](https://github.com/yamada-ui/yamada-ui/pull/8044) [`b3fcf63`](https://github.com/yamada-ui/yamada-ui/commit/b3fcf633800d5856fbca10b5b4756b31168bf309) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+- [#8063](https://github.com/yamada-ui/yamada-ui/pull/8063) [`3f14a90`](https://github.com/yamada-ui/yamada-ui/commit/3f14a90bfb854429f3991cca623805512f603d9d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use version-pinned registry domains without version segments in registry paths.
+
 ## 2.1.18
 
 ### Patch Changes

@@ -3,6 +3,7 @@
 import type { FC, PropsWithChildren, ReactNode } from "react"
 import type {
   Breakpoint,
+  CSSProps,
   ExtractStyleValue,
   HTMLProps,
   HTMLStyledProps,
@@ -29,7 +30,7 @@ import {
   useCallback,
   useMemo,
 } from "react"
-import { createSlotComponent, mergeProps, styled } from "../../core"
+import { createSlotComponent, mergeProps, styled, useSystem } from "../../core"
 import { useBreakpointValue } from "../../hooks/use-breakpoint"
 import { useValue } from "../../hooks/use-value"
 import {
@@ -181,7 +182,7 @@ interface ComponentContext extends Pick<
   | "getSidePanelProps"
   | "getTriggerProps"
 > {
-  breakpoint: ExtractStyleValue<NonNullable<SidebarRootProps["breakpoint"]>>
+  display: CSSProps["display"]
   mode: ExtractStyleValue<NonNullable<SidebarRootProps["mode"]>>
   placement: ExtractStyleValue<NonNullable<SidebarRootProps["placement"]>>
 }
@@ -282,10 +283,25 @@ export const SidebarRoot = withProvider<
     placement: placementProp = "start",
     ...rest
   }) => {
+    const { config } = useSystem()
+    const up = config.breakpoint?.direction === "up"
     const mobile =
       useBreakpointValue<boolean | undefined>(
-        breakpoint ? { [breakpoint]: true } : { base: false },
+        !breakpoint
+          ? { base: false }
+          : up
+            ? { base: true, [breakpoint]: false }
+            : { [breakpoint]: true },
       ) ?? false
+    const display = useMemo<CSSProps["display"]>(
+      () =>
+        !breakpoint
+          ? undefined
+          : up
+            ? { base: "none", [breakpoint]: undefined }
+            : { base: undefined, [breakpoint]: "none" },
+      [breakpoint, up],
+    )
     const mode = useValue(modeProp)
     const placement = useValue(placementProp)
     const {
@@ -332,7 +348,7 @@ export const SidebarRoot = withProvider<
     )
     const componentContext = useMemo(
       () => ({
-        breakpoint,
+        display,
         mode,
         placement,
         getContentProps,
@@ -343,7 +359,7 @@ export const SidebarRoot = withProvider<
         getTriggerProps,
       }),
       [
-        breakpoint,
+        display,
         mode,
         placement,
         getContentProps,
@@ -530,7 +546,7 @@ export const SidebarSidePanel = withContext<"aside", SidebarSidePanelProps>(
     ...rest
   }) => {
     const { mobile, open, onClose } = useSidebarContext()
-    const { breakpoint, placement, getSidePanelProps } = useComponentContext()
+    const { display, placement, getSidePanelProps } = useComponentContext()
     const [
       omittedChildren,
       customHeader,
@@ -628,23 +644,12 @@ export const SidebarSidePanel = withContext<"aside", SidebarSidePanelProps>(
           </Drawer.Root>
         ) : (
           <>
-            <SidebarGap
-              data-animated={dataAttr(animated)}
-              display={
-                breakpoint
-                  ? { base: undefined, [breakpoint]: "none" }
-                  : undefined
-              }
-            />
+            <SidebarGap data-animated={dataAttr(animated)} display={display} />
 
             <styled.aside
               data-animated={dataAttr(animated)}
               data-group
-              display={
-                breakpoint
-                  ? { base: undefined, [breakpoint]: "none" }
-                  : undefined
-              }
+              display={display}
               {...getSidePanelProps(rest)}
             >
               {customHeader ??

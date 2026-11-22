@@ -2,6 +2,7 @@ import type { NextConfig } from "next"
 import createNextIntlPlugin from "next-intl/plugin"
 import { CONSTANTS } from "./constants"
 import { getLang } from "./utils/i18n"
+import { REGISTRY_VERSION } from "./utils/registry"
 
 const withNextIntl = createNextIntlPlugin()
 
@@ -34,6 +35,21 @@ const nextConfig: NextConfig = {
   reactStrictMode: false,
   async redirects() {
     return Promise.resolve([
+      ...Array.from(
+        { length: REGISTRY_VERSION - 1 },
+        (_, index) => index + 2,
+      ).flatMap((version) =>
+        ["", "/dev", "/next"].map((tag) => {
+          const source = `/registry${tag}/v${version}/:path*`
+
+          return {
+            destination: `${version === REGISTRY_VERSION ? "" : `https://v${version}.yamada-ui.com`}/registry${tag}/:path*`,
+            locale: false as const,
+            permanent: false,
+            source,
+          }
+        }),
+      ),
       {
         destination: "https://v1.yamada-ui.com",
         permanent: true,
@@ -155,20 +171,41 @@ const nextConfig: NextConfig = {
     ])
   },
   async rewrites() {
-    return Promise.resolve([
-      {
-        destination: "/:locale/llms/:path*.md",
-        source: "/:locale/docs/:path*.md",
-      },
-      {
-        destination: `/${getLang(CONSTANTS.I18N.DEFAULT_LOCALE)}/llms/:path*.md`,
-        source: "/docs/:path*.md",
-      },
-      {
-        destination: `/${getLang(CONSTANTS.I18N.DEFAULT_LOCALE)}/llms/:path*.md`,
-        source: "/llms/:path*.md",
-      },
-    ])
+    return Promise.resolve({
+      afterFiles: [
+        {
+          destination: "/:locale/llms/:path*.md",
+          source: "/:locale/docs/:path*.md",
+        },
+        {
+          destination: `/${getLang(CONSTANTS.I18N.DEFAULT_LOCALE)}/llms/:path*.md`,
+          source: "/docs/:path*.md",
+        },
+        {
+          destination: `/${getLang(CONSTANTS.I18N.DEFAULT_LOCALE)}/llms/:path*.md`,
+          source: "/llms/:path*.md",
+        },
+      ],
+      beforeFiles: [
+        {
+          destination: "/api/registry/dev/:path*",
+          locale: false,
+          source: "/registry/dev/:path*",
+        },
+        {
+          destination: "/api/registry/next/:path*",
+          locale: false,
+          source: "/registry/next/:path*",
+        },
+        {
+          destination: "/api/registry/latest/:path*",
+          locale: false,
+          source:
+            "/registry/:path((?!(?:dev|next|v[0-9]+)(?:/|$)|(?:config\\.)?schema\\.json$).*)",
+        },
+      ],
+      fallback: [],
+    })
   },
   serverExternalPackages: ["oxfmt"],
   typescript: { ignoreBuildErrors: true },

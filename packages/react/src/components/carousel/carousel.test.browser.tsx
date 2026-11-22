@@ -205,7 +205,7 @@ describe("<Carousel />", () => {
       </Carousel.Root>,
     )
 
-    await expect.element(page.getByText("dot-0")).toBeVisible()
-    await expect.element(page.getByText("dot-1")).toBeVisible()
+    await expect.element(page.getByText(/dot-0/)).toBeVisible()
+    await expect.element(page.getByText(/dot-1/)).toBeVisible()
   })
 })

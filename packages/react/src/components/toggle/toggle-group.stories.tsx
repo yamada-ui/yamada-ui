@@ -4,7 +4,7 @@ import { PropsTable } from "#storybook"
 import { ToggleGroup } from "."
 import { COLOR_SCHEMES } from "../../utils"
 import { For } from "../for"
-import { BoldIcon, ItalicIcon, UnderlineIcon } from "../icon"
+import { ItalicIcon, LetterBIcon, UnderlineIcon } from "../icon"
 
 type Story = StoryFn<typeof ToggleGroup.Root>
 
@@ -20,7 +20,7 @@ export const Basic: Story = () => {
     <ToggleGroup.Root>
       <ToggleGroup.Item
         aria-label="Toggle bold"
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         value="bold"
       />
       <ToggleGroup.Item
@@ -53,7 +53,7 @@ export const Variant: Story = () => {
           >
             <ToggleGroup.Item
               aria-label="Toggle bold"
-              icon={<BoldIcon />}
+              icon={<LetterBIcon />}
               value="bold"
             />
             <ToggleGroup.Item
@@ -81,7 +81,7 @@ export const Size: Story = () => {
           <ToggleGroup.Root key={key} colorScheme={row} size={column} attached>
             <ToggleGroup.Item
               aria-label="Toggle bold"
-              icon={<BoldIcon />}
+              icon={<LetterBIcon />}
               value="bold"
             />
             <ToggleGroup.Item
@@ -108,7 +108,7 @@ export const Disabled: Story = () => {
         <ToggleGroup.Root key={index} variant={variant} attached disabled>
           <ToggleGroup.Item
             aria-label="Toggle bold"
-            icon={<BoldIcon />}
+            icon={<LetterBIcon />}
             value="bold"
           />
           <ToggleGroup.Item
@@ -134,7 +134,7 @@ export const ReadOnly: Story = () => {
         <ToggleGroup.Root key={index} variant={variant} attached readOnly>
           <ToggleGroup.Item
             aria-label="Toggle bold"
-            icon={<BoldIcon />}
+            icon={<LetterBIcon />}
             value="bold"
           />
           <ToggleGroup.Item
@@ -162,7 +162,7 @@ export const CustomControl: Story = () => {
       <ToggleGroup.Root value={singleValue} onChange={setSingleValue}>
         <ToggleGroup.Item
           aria-label="Toggle bold"
-          icon={<BoldIcon />}
+          icon={<LetterBIcon />}
           value="bold"
         />
         <ToggleGroup.Item
@@ -180,7 +180,7 @@ export const CustomControl: Story = () => {
       <ToggleGroup.Root value={multiValue} onChange={setMultiValue}>
         <ToggleGroup.Item
           aria-label="Toggle bold"
-          icon={<BoldIcon />}
+          icon={<LetterBIcon />}
           value="bold"
         />
         <ToggleGroup.Item

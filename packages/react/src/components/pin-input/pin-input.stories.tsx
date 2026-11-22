@@ -120,7 +120,7 @@ export const Disabled: Story = () => {
 
       <Field.Root
         disabled
-        errorMessage="one-time password is required."
+        errorMessage="One-time password is required."
         helperMessage="Just sent you a one-time password to your e-mail address."
         label="Please one-time password"
       >
@@ -151,7 +151,7 @@ export const ReadOnly: Story = () => {
       </For>
 
       <Field.Root
-        errorMessage="one-time password is required."
+        errorMessage="One-time password is required."
         helperMessage="Just sent you a one-time password to your e-mail address."
         label="Please one-time password"
         readOnly
@@ -183,7 +183,7 @@ export const Invalid: Story = () => {
       </For>
 
       <Field.Root
-        errorMessage="one-time password is required."
+        errorMessage="One-time password is required."
         helperMessage="Just sent you a one-time password to your e-mail address."
         invalid
         label="Please one-time password"

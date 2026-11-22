@@ -41,6 +41,10 @@ import { FileButton } from "@workspaces/ui"
 <FileButton />
 ```
 
+:::tip
+ファイルをドラッグアンドドロップで選択する場合は、[Dropzone](/docs/components/dropzone)を使用します。
+:::
+
 ### バリアントを変更する
 
 ```tsx preview
@@ -181,7 +185,7 @@ const onReset = () => {
 
 return (
   <VStack>
-    <Text>files: {files?.length ?? 0}</Text>
+    <Text>Files: {files?.length ?? 0}</Text>
 
     <HStack>
       <FileButton multiple resetRef={resetRef} onChange={onChange}>

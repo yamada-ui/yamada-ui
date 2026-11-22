@@ -2,6 +2,20 @@ import { createPortal } from "react-dom"
 import { page, render } from "#test/browser"
 import { Editable } from "./"
 
+const pressComposingKey = (key: string) => {
+  const target = document.activeElement as HTMLElement
+  const event = new KeyboardEvent("keydown", {
+    key,
+    bubbles: true,
+    cancelable: true,
+  })
+
+  Object.defineProperty(event, "isComposing", { value: true })
+  Object.defineProperty(event, "keyCode", { value: 229 })
+
+  target.dispatchEvent(event)
+}
+
 describe("<Editable />", () => {
   test("syncs preview text with the input value after submitting", async () => {
     const { user } = await render(
@@ -72,6 +86,44 @@ describe("<Editable />", () => {
     await user.keyboard("{Meta>}{Enter}{/Meta}")
 
     expect(onSubmit).not.toHaveBeenCalled()
+  })
+
+  test("does not call onCancel when Escape is pressed during composition", async () => {
+    const onCancel = vi.fn()
+    await render(
+      <Editable.Root
+        defaultValue="Some text"
+        startWithEditView
+        onCancel={onCancel}
+      >
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>,
+    )
+
+    pressComposingKey("Escape")
+
+    expect(onCancel).not.toHaveBeenCalled()
+    await expect.element(page.getByRole("textbox")).toBeVisible()
+  })
+
+  test("does not call onSubmit when Enter is pressed during composition", async () => {
+    const onSubmit = vi.fn()
+    await render(
+      <Editable.Root
+        defaultValue="Some text"
+        startWithEditView
+        onSubmit={onSubmit}
+      >
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>,
+    )
+
+    pressComposingKey("Enter")
+
+    expect(onSubmit).not.toHaveBeenCalled()
+    await expect.element(page.getByRole("textbox")).toBeVisible()
   })
 
   test("calls onChange when the input value changes", async () => {
@@ -297,6 +349,25 @@ describe("<EditableTextarea />", () => {
     await user.keyboard("{Escape}")
 
     expect(onCancel).toHaveBeenCalledExactlyOnceWith("Some text")
+  })
+
+  test("does not call onCancel when Escape is pressed during composition", async () => {
+    const onCancel = vi.fn()
+    await render(
+      <Editable.Root
+        defaultValue="Some text"
+        startWithEditView
+        onCancel={onCancel}
+      >
+        <Editable.Preview />
+        <Editable.Textarea />
+      </Editable.Root>,
+    )
+
+    pressComposingKey("Escape")
+
+    expect(onCancel).not.toHaveBeenCalled()
+    await expect.element(page.getByRole("textbox")).toBeVisible()
   })
 
   test("does not call onSubmit when Enter is pressed", async () => {

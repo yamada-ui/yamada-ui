@@ -40,7 +40,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref_name != 'main' && 'next' || github.ref }}
 
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -63,9 +63,10 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.PAT_TOKEN }}
+          persist-credentials: true
 
       - name: Install
-        uses: ./.github/composite-actions/install
+        uses: $/.github/composite-actions/install
 
       - name: Build packages
         run: pnpm build
@@ -85,7 +86,7 @@ jobs:
       - name: Create @dev release
         if: github.ref_name == 'main' && steps.changesets.outputs.published != 'true'
         run: |
-          git checkout ${{ github.ref_name }}
+          git checkout "$GITHUB_REF_NAME"
           pnpm release:dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -93,7 +94,7 @@ jobs:
       - name: Create @next release
         if: github.ref_name != 'main'
         run: |
-          git checkout ${{ github.ref_name }}
+          git checkout "$GITHUB_REF_NAME"
           pnpm release:next
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -110,9 +111,28 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.PAT_TOKEN }}
+          persist-credentials: true
 
       - name: Install
-        uses: ./.github/composite-actions/install
+        uses: $/.github/composite-actions/install
+
+      - name: Generate registries
+        run: pnpm react gen:registries --output "$RUNNER_TEMP/registry"
+
+      - name: Publish registries
+        run: |
+          if [ "$GITHUB_REF_NAME" != "main" ]; then
+            TAG=next
+          elif [ "$PUBLISHED" = "true" ]; then
+            TAG=latest
+          else
+            TAG=dev
+          fi
+
+          pnpm www publish:registry --tag "$TAG" --directory "$RUNNER_TEMP/registry"
+        env:
+          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
+          PUBLISHED: ${{ needs.release.outputs.published }}
 
       - name: Update issue templates
         if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
@@ -120,27 +140,6 @@ jobs:
           pnpm forge issue:template
           git add ./.github/ISSUE_TEMPLATE
           git diff --staged --exit-code || git commit -m 'ci(changesets): update issue templates'
-
-      - name: Generate registries
-        if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
-        run: |
-          pnpm react gen:registries
-          git add ./www/public/registry
-          git diff --staged --exit-code || git commit -m 'ci(changesets): update registries'
-
-      - name: Generate @dev registries
-        if: github.ref_name == 'main' && needs.release.outputs.published != 'true'
-        run: |
-          pnpm react gen:registries --tag dev
-          git add ./www/public/registry
-          git diff --staged --exit-code || git commit -m 'ci(changesets): update dev registries'
-
-      - name: Generate @next registries
-        if: github.ref_name != 'main'
-        run: |
-          pnpm react gen:registries --tag next
-          git add ./www/public/registry
-          git diff --staged --exit-code || git commit -m 'ci(changesets): update next registries'
 
       - name: Update www
         if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
@@ -157,21 +156,22 @@ jobs:
           pnpm www gen:theme
           pnpm www gen:changelog
           pnpm www gen:contributors
-          pnpm www gen:relations
+          pnpm www gen:relations --directory "$RUNNER_TEMP/registry"
           git add ./www/data ./www/contents
           git diff --staged --exit-code || git commit -m 'ci(changesets): update www'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update branch
+        if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
-          git pull --rebase origin ${{ github.ref_name }}
+          git pull --rebase origin "$GITHUB_REF_NAME"
           git push
 
       - name: Update next branch
         if: github.ref_name == 'main' && needs.release.outputs.published == 'true'
         run: |
-          PUBLISHED_VERSION=$(echo '${{ needs.release.outputs.published_packages }}' | jq -r '.[] | select(.name == "@yamada-ui/react") | .version')
+          PUBLISHED_VERSION=$(printf '%s\n' "$PUBLISHED_PACKAGES" | jq -r '.[] | select(.name == "@yamada-ui/react") | .version')
 
           if [ -z "$PUBLISHED_VERSION" ]; then
             exit 0
@@ -207,6 +207,8 @@ jobs:
               fi
             fi
           done
+        env:
+          PUBLISHED_PACKAGES: ${{ needs.release.outputs.published_packages }}
 
       - name: Notification release
         if: github.ref_name == 'main' && needs.release.outputs.published == 'true'

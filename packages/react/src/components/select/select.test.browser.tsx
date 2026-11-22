@@ -39,7 +39,7 @@ describe("<Select />", () => {
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
-    await expect.element(field).toHaveTextContent("Option 2")
+    await expect.element(field).toMatchTextContent("Option 2")
 
     await expect.element(getOption1()).toBeVisible()
     await user.click(getOption1(), { force: true })
@@ -80,7 +80,7 @@ describe("<Select />", () => {
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith(["one", "two"])
     })
-    await expect.element(field).toHaveTextContent("Option 2")
+    await expect.element(field).toMatchTextContent("Option 2")
 
     await expect.element(getOption3()).toBeVisible()
     await expect.element(getOption3()).toHaveAttribute("aria-disabled", "true")
@@ -107,8 +107,8 @@ describe("<Select />", () => {
 
     const field = page.getByRole("combobox", { name: /Choose options/i })
 
-    await expect.element(field).toHaveTextContent("Option 1")
-    await expect.element(field).toHaveTextContent("Option 2")
+    await expect.element(field).toMatchTextContent("Option 1")
+    await expect.element(field).toMatchTextContent("Option 2")
   })
 
   test("displays placeholder when no value is selected in multiple mode", async () => {
@@ -330,7 +330,7 @@ describe("<Select />", () => {
 
     const field = page.getByRole("combobox", { name: /Choose options/i })
 
-    await expect.element(field).toHaveTextContent("Option 1 |")
+    await expect.element(field).toMatchTextContent("Option 1 |")
   })
 
   test("focuses field on clear when focusOnClear is true", async () => {
@@ -437,8 +437,8 @@ describe("<Select />", () => {
 
     await user.click(page.getByTestId("change-value"), { force: true })
 
-    await expect.element(field).toHaveTextContent("Option 2")
-    await expect.element(field).toHaveTextContent("Option 3")
+    await expect.element(field).toMatchTextContent("Option 2")
+    await expect.element(field).toMatchTextContent("Option 3")
   })
 
   test("renders with custom render function returning non-element", async () => {

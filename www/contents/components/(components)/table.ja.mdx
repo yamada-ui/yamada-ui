@@ -19,11 +19,14 @@ const columnHelper = createColumnHelper<Data>()
 
 const columns = useMemo(
   () => [
-    columnHelper.accessor("id", { cellProps: { numeric: true } }),
-    columnHelper.accessor("firstName", { lineClamp: 1 }),
-    columnHelper.accessor("lastName", { lineClamp: 1 }),
-    columnHelper.accessor("age", { cellProps: { numeric: true } }),
-    columnHelper.accessor("email", { lineClamp: 1 }),
+    columnHelper.accessor("id", { header: "ID", cellProps: { numeric: true } }),
+    columnHelper.accessor("firstName", { header: "First name", lineClamp: 1 }),
+    columnHelper.accessor("lastName", { header: "Last name", lineClamp: 1 }),
+    columnHelper.accessor("age", {
+      header: "Age",
+      cellProps: { numeric: true },
+    }),
+    columnHelper.accessor("email", { header: "Email", lineClamp: 1 }),
   ],
   [],
 )
@@ -192,7 +195,8 @@ return <Table columns={columnsFull} data={data} withScrollArea />
 const columns = useMemo(
   () => [
     columnHelper.accessor("id", {
-      footer: (info) => info.column.id,
+      footer: "ID",
+      header: "ID",
       cellProps: { numeric: true },
     }),
     columnHelper.group({
@@ -202,28 +206,32 @@ const columns = useMemo(
           id: "name",
           columns: [
             columnHelper.accessor("firstName", {
-              footer: (info) => info.column.id,
+              footer: "First name",
+              header: "First name",
               lineClamp: 1,
             }),
             columnHelper.accessor("lastName", {
-              footer: (info) => info.column.id,
+              footer: "Last name",
+              header: "Last name",
               lineClamp: 1,
             }),
           ],
-          footer: (info) => info.column.id,
-          header: (info) => info.column.id,
+          footer: "Name",
+          header: "Name",
         }),
         columnHelper.accessor("age", {
-          footer: (info) => info.column.id,
+          footer: "Age",
+          header: "Age",
           cellProps: { numeric: true },
         }),
         columnHelper.accessor("email", {
-          footer: (info) => info.column.id,
+          footer: "Email",
+          header: "Email",
           lineClamp: 1,
         }),
       ],
-      footer: (info) => info.column.id,
-      header: (info) => info.column.id,
+      footer: "User",
+      header: "User",
     }),
   ],
   [],
@@ -247,7 +255,8 @@ return (
 const columns = useMemo(
   () => [
     columnHelper.accessor("id", {
-      footer: (info) => info.column.id,
+      footer: "ID",
+      header: "ID",
       cellProps: { numeric: true },
     }),
     columnHelper.group({
@@ -257,28 +266,32 @@ const columns = useMemo(
           id: "name",
           columns: [
             columnHelper.accessor("firstName", {
-              footer: (info) => info.column.id,
+              footer: "First name",
+              header: "First name",
               lineClamp: 1,
             }),
             columnHelper.accessor("lastName", {
-              footer: (info) => info.column.id,
+              footer: "Last name",
+              header: "Last name",
               lineClamp: 1,
             }),
           ],
-          footer: (info) => info.column.id,
-          header: (info) => info.column.id,
+          footer: "Name",
+          header: "Name",
         }),
         columnHelper.accessor("age", {
-          footer: (info) => info.column.id,
+          footer: "Age",
+          header: "Age",
           cellProps: { numeric: true },
         }),
         columnHelper.accessor("email", {
-          footer: (info) => info.column.id,
+          footer: "Email",
+          header: "Email",
           lineClamp: 1,
         }),
       ],
-      footer: (info) => info.column.id,
-      header: (info) => info.column.id,
+      footer: "User",
+      header: "User",
     }),
   ],
   [],

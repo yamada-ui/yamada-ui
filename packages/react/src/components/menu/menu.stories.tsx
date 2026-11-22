@@ -95,7 +95,11 @@ export const Size: Story = () => {
 export const OnSelect: Story = () => {
   const items = useMemo<Menu.Item[]>(
     () => [
-      { label: "うずまきナルト", value: "naruto" },
+      {
+        label: "うずまきナルト",
+        value: "naruto",
+        onSelect: (value) => console.log("selected", value),
+      },
       { label: "うちはサスケ", value: "sasuke" },
       { label: "春野サクラ", value: "sakura" },
     ],

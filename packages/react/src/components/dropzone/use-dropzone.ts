@@ -153,6 +153,7 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
   const {
     props: {
       id,
+      ref: refProp,
       name,
       accept,
       autoFocus = false,
@@ -233,28 +234,24 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
 
   const getRootProps: PropGetter = useCallback(
     ({ ref, ...props } = {}) => {
-      const { ref: restRef, ...restProps } = rest
       const { ref: rootRef, ...rootProps } = getOriginalRootProps(
         mergeProps(
+          dataProps,
+          eventProps,
           {
             id: labelledbyId,
-            ...dataProps,
-            ...eventProps,
             "aria-disabled": ariaAttr(!interactive),
             "data-accept": dataAttr(dragAccept),
             "data-idle": dataAttr(dragIdle),
             "data-loading": dataAttr(loading),
             "data-reject": dataAttr(dragReject),
           },
-          restProps,
+          rest,
           props,
         )(),
       ) as HTMLProps
 
-      return {
-        ...rootProps,
-        ref: mergeRefs(restRef, ref, rootRef),
-      }
+      return { ...rootProps, ref: mergeRefs(refProp, ref, rootRef) }
     },
     [
       getOriginalRootProps,
@@ -266,6 +263,7 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
       dragIdle,
       loading,
       dragReject,
+      refProp,
       rest,
     ],
   )
@@ -274,14 +272,14 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
     (props = {}) =>
       getOriginalInputProps(
         mergeProps(
+          ariaProps,
+          dataProps,
           {
             id,
             name,
+            "aria-labelledby": labelledbyId,
             disabled,
             readOnly,
-            ...ariaProps,
-            ...dataProps,
-            "aria-labelledby": labelledbyId,
           },
           props,
         )(),

@@ -298,10 +298,10 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
     useCallback(
       ({ index, ...props }) =>
         mergeProps(
+          ariaProps,
+          dataProps,
+          eventProps,
           {
-            ...ariaProps,
-            ...dataProps,
-            ...eventProps,
             type: mask ? "password" : type === "number" ? "tel" : "text",
             "aria-labelledby": labelId,
             autoComplete: otp ? "one-time-code" : "off",

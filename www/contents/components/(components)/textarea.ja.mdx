@@ -8,7 +8,7 @@ style: components/textarea/textarea.style.ts
 ---
 
 ```tsx preview
-<Textarea placeholder="Placeholder" />
+<Textarea placeholder="Enter a comment" />
 ```
 
 ## 使い方
@@ -154,10 +154,7 @@ import { Textarea } from "@workspaces/ui"
 プレースホルダーの色を変更する場合は、propsに`_placeholder`を設定します。
 
 ```tsx preview
-<Textarea
-  placeholder="Custom placeholder"
-  _placeholder={{ color: "green.500" }}
-/>
+<Textarea placeholder="Enter a comment" _placeholder={{ color: "green.500" }} />
 ```
 
 ### リサイズの動作を変更する
@@ -183,7 +180,7 @@ import { Textarea } from "@workspaces/ui"
 自動リサイズを有効にする場合は、`autosize`を`true`に設定します。
 
 ```tsx preview
-<Textarea autosize placeholder="Autosize" />
+<Textarea autosize placeholder="Enter a multi-line comment" />
 ```
 
 ### リサイズを制御する
@@ -196,7 +193,7 @@ const onResize = () => {
 
 return (
   <VStack>
-    <Textarea placeholder="Use resize" resizeRef={resizeRef} />
+    <Textarea placeholder="Enter a comment" resizeRef={resizeRef} />
     <Button alignSelf="flex-end" onClick={onResize}>
       Resize
     </Button>

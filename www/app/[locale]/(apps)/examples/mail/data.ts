@@ -21,7 +21,7 @@ export const MAILS: MailItem[] = [
 
     Best, Bob`,
     email: "bobjohnson@example.com",
-    tags: ["personal"],
+    tags: ["Personal"],
     timestamp: new Date("2025-04-10 11:45"),
     title: "Weekend Plans",
     unRead: false,
@@ -37,7 +37,7 @@ export const MAILS: MailItem[] = [
 
     Best, Alice`,
     email: "alicesmith@example.com",
-    tags: ["work", "important"],
+    tags: ["Work", "Important"],
     timestamp: new Date("2025-04-11 09:30"),
     title: "Meeting Reminder",
     unRead: true,
@@ -57,7 +57,7 @@ export const MAILS: MailItem[] = [
 
     Best, Chef Jamie`,
     email: "chefjamie@example.com",
-    tags: ["personal"],
+    tags: ["Personal"],
     timestamp: new Date("2025-04-12 14:15"),
     title: "New Recipe",
     unRead: true,
@@ -73,7 +73,7 @@ export const MAILS: MailItem[] = [
 
     Best, John`,
     email: "johndoe@example.com",
-    tags: ["work", "important"],
+    tags: ["Work", "Important"],
     timestamp: new Date("2025-04-13 16:30"),
     title: "Re: Project Update",
     unRead: false,
@@ -89,7 +89,7 @@ export const MAILS: MailItem[] = [
 
     Best, Bob`,
     email: "bobjohnson@exmple.com",
-    tags: ["personal"],
+    tags: ["Personal"],
     timestamp: new Date("2025-04-10 11:45"),
     title: "Weekend Plans",
     unRead: false,
@@ -105,7 +105,7 @@ export const MAILS: MailItem[] = [
 
     Best, Alice`,
     email: "alicesmith@example.com",
-    tags: ["work", "important"],
+    tags: ["Work", "Important"],
     timestamp: new Date("2025-04-11 09:30"),
     title: "Meeting Reminder",
     unRead: true,
@@ -121,7 +121,7 @@ export const MAILS: MailItem[] = [
 
     Best, John`,
     email: "johndoe@example.com",
-    tags: ["work", "important"],
+    tags: ["Work", "Important"],
     timestamp: new Date("2025-04-13 16:30"),
     title: "Re: Question about the project",
     unRead: true,

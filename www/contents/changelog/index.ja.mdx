@@ -3,51 +3,23 @@ title: 変更履歴
 description: "Yamada UIの最新バージョンの変更履歴をご覧ください。機能・バグ修正・改善点についてご確認ください。"
 ---
 
-## @yamada-ui/react@2.3.2
+## @yamada-ui/react@2.3.3
 
-このバージョンは、2026年11月6日にリリースされました。
-
-### パッチ変更
-
-- [#7999](https://github.com/yamada-ui/yamada-ui/pull/7999) [3f0a982](https://github.com/yamada-ui/yamada-ui/commit/3f0a982f88fd56195fa9f72ee77e7836c3b5f21b) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix `Switch`, `Checkbox`, and `Radio` input positioning in multi-column layouts to prevent unexpected scrolling in WebKit.
-
-- [#8005](https://github.com/yamada-ui/yamada-ui/pull/8005) [17ac1e5](https://github.com/yamada-ui/yamada-ui/commit/17ac1e5d2961897b3ffea7e6abc8a58cc2dcfb9d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fix unsupported aria-readonly attributes on read-only Radio and RadioCard inputs within a Field.
-
-- [#7997](https://github.com/yamada-ui/yamada-ui/pull/7997) [d843616](https://github.com/yamada-ui/yamada-ui/commit/d843616451c358cd7df5711186b03e44751c455c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Remove default `aria-label` values from `Modal` triggers and use `CloseButton`'s default label for `Modal.CloseButton`.
-
-  Remove `getCloseButtonProps` from `useModal` and compose `Modal.CloseButton` with `Modal.CloseTrigger` instead.
-
-- [#8006](https://github.com/yamada-ui/yamada-ui/pull/8006) [7346221](https://github.com/yamada-ui/yamada-ui/commit/73462214865f9dcfd2543ffbdb371415e41e2ae1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use visible text as the accessible name of `FileInput`, falling back to the field label when no placeholder, selected files, or explicit name is provided.
-
-- [#8006](https://github.com/yamada-ui/yamada-ui/pull/8006) [7346221](https://github.com/yamada-ui/yamada-ui/commit/73462214865f9dcfd2543ffbdb371415e41e2ae1) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Use the visible text of `FileButton` as its accessible name without automatically overriding it with the field label.
-
-- [#7997](https://github.com/yamada-ui/yamada-ui/pull/7997) [d843616](https://github.com/yamada-ui/yamada-ui/commit/d843616451c358cd7df5711186b03e44751c455c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Remove the default `aria-label` from `Sidebar.Trigger` so its visible text provides the accessible name, while preserving the label on `Sidebar.Handle`.
-
-  Add `getHandleProps` to `useSidebar` to manage handle-specific attributes separately from `getTriggerProps`.
-
-- [#7997](https://github.com/yamada-ui/yamada-ui/pull/7997) [d843616](https://github.com/yamada-ui/yamada-ui/commit/d843616451c358cd7df5711186b03e44751c455c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Remove default `aria-label` values from `Drawer` triggers and use `CloseButton`'s default label for `Drawer.CloseButton`.
-
-  Remove `getCloseButtonProps` from `useDrawer` and compose `Drawer.CloseButton` with `Drawer.CloseTrigger` instead.
-
-- [#8001](https://github.com/yamada-ui/yamada-ui/pull/8001) [9061cf2](https://github.com/yamada-ui/yamada-ui/commit/9061cf2a9211ac2967338ff144b771a59e9fa7ec) Thanks [@jji05](https://github.com/jji05)! - Call the `onSelect` callback passed to `Menu.Item` and `Menu.OptionItem` when the item is selected, instead of attaching it to the DOM `select` event.
-
-- [#7995](https://github.com/yamada-ui/yamada-ui/pull/7995) [51aa1e0](https://github.com/yamada-ui/yamada-ui/commit/51aa1e07301f60bd39b52ccdc058a32eb5428c80) Thanks [@Preetam3620](https://github.com/Preetam3620)! - Underline links in `Prose` by default so they are distinguishable from surrounding text without relying on color.
-
-- [#7997](https://github.com/yamada-ui/yamada-ui/pull/7997) [d843616](https://github.com/yamada-ui/yamada-ui/commit/d843616451c358cd7df5711186b03e44751c455c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Remove default `aria-label` values from `ActionBar.OpenTrigger` and `ActionBar.CloseTrigger` so their visible text provides the accessible name.
-
-- [#7992](https://github.com/yamada-ui/yamada-ui/pull/7992) [ad1174b](https://github.com/yamada-ui/yamada-ui/commit/ad1174b8a956fb1d8abdc55bfd2d7156699f0445) Thanks [@bmthd](https://github.com/bmthd)! - Fixed responsive media queries being emitted in property order instead of breakpoint order when multiple style props use different breakpoints.
-
-- Updated dependencies [[7346221](https://github.com/yamada-ui/yamada-ui/commit/73462214865f9dcfd2543ffbdb371415e41e2ae1)]:
-  - @yamada-ui/utils@2.3.0
-
-## @yamada-ui/cli@2.1.17
-
-このバージョンは、2026年11月6日にリリースされました。
+このバージョンは、2026年11月11日にリリースされました。
 
 ### パッチ変更
 
-- Updated dependencies [[7346221](https://github.com/yamada-ui/yamada-ui/commit/73462214865f9dcfd2543ffbdb371415e41e2ae1)]:
-  - @yamada-ui/utils@2.3.0
+- [#8009](https://github.com/yamada-ui/yamada-ui/pull/8009) [747e1d3](https://github.com/yamada-ui/yamada-ui/commit/747e1d3a61cbab5cd9ff41646cd5507533293f53) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated icons.
+
+- [#8009](https://github.com/yamada-ui/yamada-ui/pull/8009) [747e1d3](https://github.com/yamada-ui/yamada-ui/commit/747e1d3a61cbab5cd9ff41646cd5507533293f53) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
+
+## @yamada-ui/cli@2.1.18
+
+このバージョンは、2026年11月11日にリリースされました。
+
+### パッチ変更
+
+- [#8010](https://github.com/yamada-ui/yamada-ui/pull/8010) [c121308](https://github.com/yamada-ui/yamada-ui/commit/c121308ad518ad78ac645330ff2378ef127350bb) Thanks [@dependabot](https://github.com/apps/dependabot)! - Updated dependencies.
 
 ## @yamada-ui/utils@2.3.0
 

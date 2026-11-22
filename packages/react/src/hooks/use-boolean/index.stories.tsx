@@ -14,7 +14,7 @@ export const Basic = () => {
 
   return (
     <>
-      <Text>state: {String(flg)}</Text>
+      <Text>State: {String(flg)}</Text>
       <Button onClick={toggle}>Click me to toggle the boolean value</Button>
     </>
   )

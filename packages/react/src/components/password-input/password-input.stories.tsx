@@ -293,7 +293,7 @@ export const CustomControl: Story = () => {
 
   return (
     <VStack>
-      <Text>Password visibility: {visible ? "show" : "hide"}</Text>
+      <Text>Password visibility: {visible ? "Shown" : "Hidden"}</Text>
 
       <PasswordInput
         placeholder="Your password"

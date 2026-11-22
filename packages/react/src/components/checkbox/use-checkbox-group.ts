@@ -10,7 +10,6 @@ import {
   ariaAttr,
   createContext,
   dataAttr,
-  handlerAll,
   isNumber,
   isObject,
   isString,
@@ -113,31 +112,32 @@ export const useCheckboxGroup = <Y extends string = string>(
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    (props = {}) => {
+    ({ disabled, ...props } = {}) => {
       const checked =
         !isUndefined(value) &&
         (isString(props.value) || isNumber(props.value)) &&
         value.includes(props.value as Y)
       const trulyDisabled = !checked && isNumber(max) && value.length >= max
 
-      return {
-        ...dataProps,
-        ...ariaProps,
-        type: "checkbox",
-        style: visuallyHiddenAttributes.style,
-        "aria-checked": checked,
-        "aria-disabled": ariaAttr(trulyDisabled),
-        "data-checked": dataAttr(checked),
-        "data-disabled": dataAttr(trulyDisabled),
-        checked,
-        readOnly,
-        required,
-        ...props,
-        disabled: Boolean(props.disabled || trulyDisabled),
-        onBlur: handlerAll(props.onBlur, eventProps.onBlur),
-        onChange: handlerAll(props.onChange, onChange),
-        onFocus: handlerAll(props.onFocus, eventProps.onFocus),
-      }
+      return mergeProps(
+        dataProps,
+        ariaProps,
+        {
+          type: "checkbox",
+          style: visuallyHiddenAttributes.style,
+          "aria-checked": checked,
+          "aria-disabled": ariaAttr(trulyDisabled),
+          "data-checked": dataAttr(checked),
+          "data-disabled": dataAttr(trulyDisabled),
+          checked,
+          disabled: Boolean(disabled || trulyDisabled),
+          readOnly,
+          required,
+        },
+        props,
+        eventProps,
+        { onChange },
+      )()
     },
     [
       ariaProps,
@@ -152,10 +152,7 @@ export const useCheckboxGroup = <Y extends string = string>(
   )
 
   const getLabelProps: PropGetter<"label"> = useCallback(
-    (props) => ({
-      ...dataProps,
-      ...props,
-    }),
+    (props = {}) => mergeProps(dataProps, props)(),
     [dataProps],
   )
 

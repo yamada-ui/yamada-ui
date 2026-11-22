@@ -48,14 +48,14 @@ interface MenuItemWithValue extends MenuSharedItem, MenuItemProps {}
 
 interface MenuOptionItem extends MenuSharedItem, MenuOptionItemProps {}
 
-interface MenuItemWithSeparator extends MenuSeparatorProps {
+interface MenuItemWithSeparator extends Omit<MenuSeparatorProps, "onSelect"> {
   type: "separator"
 }
 
 interface MenuItemWithRadioGroup<Y extends string = string>
   extends
     Omit<MenuItemWithItems, "defaultValue" | "items" | "onChange">,
-    MenuOptionGroupProps<"radio", Y> {
+    Omit<MenuOptionGroupProps<"radio", Y>, "onSelect"> {
   type: "radio"
   items?: MenuOptionItem[]
 }
@@ -63,12 +63,13 @@ interface MenuItemWithRadioGroup<Y extends string = string>
 interface MenuItemWithCheckboxGroup<Y extends string[] = string[]>
   extends
     Omit<MenuItemWithItems, "defaultValue" | "items" | "onChange">,
-    MenuOptionGroupProps<"checkbox", Y> {
+    Omit<MenuOptionGroupProps<"checkbox", Y>, "onSelect"> {
   type: "checkbox"
   items?: MenuOptionItem[]
 }
 
-interface MenuItemWithItems extends MenuSharedItem, MenuGroupProps {
+interface MenuItemWithItems
+  extends MenuSharedItem, Omit<MenuGroupProps, "onSelect"> {
   hasEndSeparator?: boolean
   hasSeparator?: boolean
   hasStartSeparator?: boolean

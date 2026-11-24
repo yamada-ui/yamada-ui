@@ -5,6 +5,7 @@ import type {
   DefineThemeBreakpointTokens,
 } from "./index.type"
 import { getPx, isObject } from "../../utils"
+import { DEFAULT_BREAKPOINT_DIRECTION } from "../constant"
 
 interface BreakpointQuery {
   breakpoint: Breakpoint
@@ -109,7 +110,7 @@ export function createBreakpoints(
   config: BreakpointConfig = {},
 ): Breakpoints {
   config.base ??= "9999px"
-  config.direction ??= "down"
+  config.direction ??= DEFAULT_BREAKPOINT_DIRECTION
 
   breakpoints.base = config.direction !== "up" ? config.base : "0px"
 

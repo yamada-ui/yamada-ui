@@ -16,3 +16,4 @@ export const DEFAULT_LAYERS: LayersConfig = {
   reset: { name: "reset", order: 1 },
   tokens: { name: "tokens", order: 0 },
 }
+export const DEFAULT_BREAKPOINT_DIRECTION = "down"

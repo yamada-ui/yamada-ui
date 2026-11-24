@@ -284,24 +284,22 @@ export const SidebarRoot = withProvider<
     ...rest
   }) => {
     const { config } = useSystem()
-    const up = config.breakpoint?.direction === "up"
+    const { direction } = config.breakpoint ?? {}
     const mobile =
-      useBreakpointValue<boolean | undefined>(
-        !breakpoint
-          ? { base: false }
-          : up
-            ? { base: true, [breakpoint]: false }
-            : { [breakpoint]: true },
-      ) ?? false
-    const display = useMemo<CSSProps["display"]>(
-      () =>
-        !breakpoint
-          ? undefined
-          : up
-            ? { base: "none", [breakpoint]: undefined }
-            : { base: undefined, [breakpoint]: "none" },
-      [breakpoint, up],
-    )
+      useBreakpointValue<boolean | undefined>((direction) => {
+        if (!breakpoint) return { base: false }
+
+        return direction === "up"
+          ? { base: true, [breakpoint]: false }
+          : { [breakpoint]: true }
+      }) ?? false
+    const display = useMemo<CSSProps["display"]>(() => {
+      if (!breakpoint) return { base: undefined }
+
+      return direction === "up"
+        ? { base: "none", [breakpoint]: "flex" }
+        : { base: undefined, [breakpoint]: "none" }
+    }, [breakpoint, direction])
     const mode = useValue(modeProp)
     const placement = useValue(placementProp)
     const {

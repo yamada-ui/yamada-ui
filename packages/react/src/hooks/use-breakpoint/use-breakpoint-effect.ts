@@ -1,8 +1,9 @@
 "use client"
 
 import type { DependencyList } from "react"
-import type { Breakpoint } from "../../core"
+import type { Breakpoint, BreakpointDirection } from "../../core"
 import { useEffect } from "react"
+import { DEFAULT_BREAKPOINT_DIRECTION, useSystem } from "../../core"
 import { useBreakpoint } from "./use-breakpoint"
 
 /**
@@ -11,13 +12,15 @@ import { useBreakpoint } from "./use-breakpoint"
  * @see https://yamada-ui.com/docs/hooks/use-breakpoint-effect
  */
 export const useBreakpointEffect = (
-  callback: (breakpoint: Breakpoint) => void,
+  callback: (breakpoint: Breakpoint, direction: BreakpointDirection) => void,
   deps: DependencyList,
 ) => {
+  const { config } = useSystem()
   const breakpoint = useBreakpoint()
+  const direction = config.breakpoint?.direction ?? DEFAULT_BREAKPOINT_DIRECTION
 
   useEffect(() => {
-    callback(breakpoint)
+    callback(breakpoint, direction)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [breakpoint, ...deps])
+  }, [breakpoint, direction, ...deps])
 }

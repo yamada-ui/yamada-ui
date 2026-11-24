@@ -13,38 +13,38 @@ blockExoticSubdeps: true
 catalog:
   "@emotion/react": ^11.14.0
   "@faker-js/faker": ^10.6.0
-  "@lucide/lab": ^0.12.0
+  "@lucide/lab": ^0.13.0
   "@tanstack/react-router": ^1.170.46
   "@types/yamljs": ^0.2.34
   "@typescript/native-preview": 7.0.0-dev.20260707.2
   "@vitest/browser": ^5.1.0
   "@vitest/browser-playwright": ^5.1.0
   "@vitest/ui": ^5.1.0
-  "@vitejs/plugin-react": ^6.2.1
+  "@vitejs/plugin-react": ^6.3.0
   commander: ^14.0.3
   dayjs: ^1.11.23
   dotenv: ^17.4.0
-  eslint: ^10.14.0
+  eslint: ^10.15.0
   "eslint-plugin-unused-imports": ^4.4.1
   motion: ^12.43.0
-  next: ^16.4.5
-  oxlint: ^1.92.0
+  next: ^16.4.6
+  oxlint: ^1.93.0
   oxlint-tsgolint: ^0.25.0
   ora: ^9.4.0
-  oxfmt: ^0.77.0
+  oxfmt: ^0.78.0
   playwright: 1.64.1
   picocolors: ^1.1.1
-  prettier: ^3.9.10
+  prettier: ^3.10.1
   react: ^19.3.1
   react-dom: ^19.3.1
-  react-hook-form: ^7.91.0
+  react-hook-form: ^7.92.0
   react-icons: ^5.7.0
   rimraf: ^6.1.4
-  scroll-into-view-if-needed: ^3.1.0
+  scroll-into-view-if-needed: ^3.2.1
   sucrase: ^3.35.1
   tsx: ^4.23.15
   typescript: ^6.0.3
-  vite: ^8.3.6
+  vite: ^8.3.8
   vitest: ^5.1.0
   vitest-axe: ^0.1.0
   yamljs: ^0.3.0

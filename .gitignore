@@ -43,6 +43,7 @@ yarn-error.log*
 # editors
 .idea
 .vscode
+.zed
 
 # local environment and secrets
 .env

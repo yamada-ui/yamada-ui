@@ -736,6 +736,9 @@ importers:
       oxlint:
         specifier: 'catalog:'
         version: 1.94.0(oxlint-tsgolint@0.25.0)
+      oxlint-plugin-eslint:
+        specifier: ^1.92.0
+        version: 1.95.0
       oxlint-tsgolint:
         specifier: 'catalog:'
         version: 0.25.0
@@ -8312,6 +8315,10 @@ packages:
         optional: true
       vite-plus:
         optional: true
+
+  oxlint-plugin-eslint@1.95.0:
+    resolution: {integrity: sha512-UR+CY/0LZYgDZljXZb4m+E79hsL/751jlY0pPLu4Vujnf26vSvVqmpSKDJpgaSmTf+kAyj4UZYkGsH7/8UkRXA==, tarball: https://registry.npmjs.org/oxlint-plugin-eslint/-/oxlint-plugin-eslint-1.95.0.tgz}
+    engines: {node: ^20.19.0 || >=22.12.0}
 
   oxlint-tsgolint@0.25.0:
     resolution: {integrity: sha512-7DBpqyLZCfyoXiivyfzt9Xmju/K1RcN+Y1W7buEwrgRCWWF11v9alypPqWGZBmh2erDkKL/kVyhKUH2Px+t13A==, tarball: https://registry.npmjs.org/oxlint-tsgolint/-/oxlint-tsgolint-0.25.0.tgz}
@@ -17829,6 +17836,8 @@ snapshots:
       '@oxfmt/binding-win32-arm64-msvc': 0.78.0
       '@oxfmt/binding-win32-ia32-msvc': 0.78.0
       '@oxfmt/binding-win32-x64-msvc': 0.78.0
+
+  oxlint-plugin-eslint@1.95.0: {}
 
   oxlint-tsgolint@0.25.0:
     optionalDependencies:

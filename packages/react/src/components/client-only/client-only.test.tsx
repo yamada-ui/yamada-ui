@@ -1,27 +1,8 @@
-import type * as UseMounted from "../../hooks/use-mounted"
+import { renderToStaticMarkup } from "react-dom/server"
 import { render, screen } from "#test"
 import { ClientOnly } from "."
-import { useMounted } from "../../hooks/use-mounted"
-
-const mockState = vi.hoisted(() => {
-  return { mounted: true }
-})
-
-vi.mock("../../hooks/use-mounted", async (importOriginal) => {
-  const actual = await importOriginal<typeof UseMounted>()
-
-  return {
-    ...actual,
-    useMounted: vi.fn(() => mockState.mounted),
-  }
-})
 
 describe("<ClientOnly />", () => {
-  beforeEach(() => {
-    mockState.mounted = true
-    vi.mocked(useMounted).mockImplementation(() => mockState.mounted)
-  })
-
   test("renders children after mount", () => {
     render(<ClientOnly>Hello</ClientOnly>)
 
@@ -29,12 +10,12 @@ describe("<ClientOnly />", () => {
   })
 
   test("renders fallback when provided", () => {
-    mockState.mounted = false
+    const html = renderToStaticMarkup(
+      <ClientOnly fallback={<span>Loading...</span>}>Hello</ClientOnly>,
+    )
 
-    render(<ClientOnly fallback={<span>Loading...</span>}>Hello</ClientOnly>)
-
-    expect(screen.getByText("Loading...")).toBeInTheDocument()
-    expect(screen.queryByText("Hello")).not.toBeInTheDocument()
+    expect(html).toContain("<span>Loading...</span>")
+    expect(html).not.toContain("Hello")
   })
 
   test("supports function children", () => {

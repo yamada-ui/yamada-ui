@@ -52,26 +52,20 @@ import {
 } from "./dom"
 
 describe("DOM", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+    document.body.replaceChildren()
+  })
+
   describe("createdDom", () => {
     test("should return true if DOM is created", () => {
       expect(createdDom()).toBeTruthy()
     })
 
     test("should return false when document.createElement is unavailable", () => {
-      const origCreateElement = document.createElement.bind(document)
-      Object.defineProperty(document, "createElement", {
-        configurable: true,
-        value: undefined,
-        writable: true,
-      })
+      vi.stubGlobal("window", { document: undefined })
 
       expect(createdDom()).toBeFalsy()
-
-      Object.defineProperty(document, "createElement", {
-        configurable: true,
-        value: origCreateElement,
-        writable: true,
-      })
     })
   })
 
@@ -89,21 +83,10 @@ describe("DOM", () => {
     })
 
     test("should return fallback when DOM is not created", () => {
-      const origCreateElement = document.createElement.bind(document)
-      Object.defineProperty(document, "createElement", {
-        configurable: true,
-        value: undefined,
-        writable: true,
-      })
+      vi.stubGlobal("window", undefined)
 
       expect(vendor(/apple/i, true)).toBeTruthy()
       expect(vendor(/apple/i, false)).toBeFalsy()
-
-      Object.defineProperty(document, "createElement", {
-        configurable: true,
-        value: origCreateElement,
-        writable: true,
-      })
     })
   })
 
@@ -115,21 +98,10 @@ describe("DOM", () => {
     })
 
     test("should return fallback when DOM is not created", () => {
-      const origCreateElement = document.createElement.bind(document)
-      Object.defineProperty(document, "createElement", {
-        configurable: true,
-        value: undefined,
-        writable: true,
-      })
+      vi.stubGlobal("window", undefined)
 
       expect(platform(/^mac/i, true)).toBeTruthy()
       expect(platform(/^mac/i, false)).toBeFalsy()
-
-      Object.defineProperty(document, "createElement", {
-        configurable: true,
-        value: origCreateElement,
-        writable: true,
-      })
     })
   })
 
@@ -146,14 +118,9 @@ describe("DOM", () => {
     })
 
     test("should return true when platform is Mac", () => {
-      Object.defineProperty(navigator, "platform", {
-        configurable: true,
-        value: "MacIntel",
-      })
+      vi.spyOn(navigator, "platform", "get").mockReturnValue("MacIntel")
 
       expect(isApple()).toBeTruthy()
-
-      delete (navigator as any).platform
     })
   })
 
@@ -163,14 +130,9 @@ describe("DOM", () => {
     })
 
     test("should return true when platform is iPhone", () => {
-      Object.defineProperty(navigator, "platform", {
-        configurable: true,
-        value: "iPhone",
-      })
+      vi.spyOn(navigator, "platform", "get").mockReturnValue("iPhone")
 
       expect(isIPhone()).toBeTruthy()
-
-      delete (navigator as any).platform
     })
   })
 
@@ -180,30 +142,18 @@ describe("DOM", () => {
     })
 
     test("should return true when platform is iPad", () => {
-      Object.defineProperty(navigator, "platform", {
-        configurable: true,
-        value: "iPad",
-      })
+      vi.spyOn(navigator, "platform", "get").mockReturnValue("iPad")
 
       expect(isIPad()).toBeTruthy()
-
-      delete (navigator as any).platform
     })
 
     test("should return true when Mac with touch points > 1", () => {
-      Object.defineProperty(navigator, "platform", {
-        configurable: true,
-        value: "MacIntel",
-      })
-      Object.defineProperty(navigator, "maxTouchPoints", {
-        configurable: true,
-        value: 5,
+      vi.stubGlobal("navigator", {
+        maxTouchPoints: 5,
+        platform: "MacIntel",
       })
 
       expect(isIPad()).toBeTruthy()
-
-      delete (navigator as any).platform
-      delete (navigator as any).maxTouchPoints
     })
   })
 
@@ -402,9 +352,9 @@ describe("DOM", () => {
     })
 
     test("should return brands-based user agent string when available", () => {
-      Object.defineProperty(navigator, "userAgentData", {
-        configurable: true,
-        value: {
+      vi.stubGlobal("navigator", {
+        userAgent: navigator.userAgent,
+        userAgentData: {
           brands: [
             { brand: "Chromium", version: "91" },
             { brand: "Google Chrome", version: "91" },
@@ -413,8 +363,6 @@ describe("DOM", () => {
       })
 
       expect(getUserAgent()).toBe("Chromium/91 Google Chrome/91")
-
-      delete (navigator as any).userAgentData
     })
   })
 
@@ -424,21 +372,10 @@ describe("DOM", () => {
     })
 
     test("should return fallback when DOM is not created", () => {
-      const origCreateElement = document.createElement.bind(document)
-      Object.defineProperty(document, "createElement", {
-        configurable: true,
-        value: undefined,
-        writable: true,
-      })
+      vi.stubGlobal("window", undefined)
 
       expect(userAgent(/mozilla/i, true)).toBeTruthy()
       expect(userAgent(/mozilla/i, false)).toBeFalsy()
-
-      Object.defineProperty(document, "createElement", {
-        configurable: true,
-        value: origCreateElement,
-        writable: true,
-      })
     })
   })
 
@@ -625,20 +562,9 @@ describe("DOM", () => {
     })
 
     test("should use default font size when DOM is not created", () => {
-      const origCreateElement = document.createElement.bind(document)
-      Object.defineProperty(document, "createElement", {
-        configurable: true,
-        value: undefined,
-        writable: true,
-      })
+      vi.stubGlobal("window", undefined)
 
       expect(getPx("2rem")).toBe(32)
-
-      Object.defineProperty(document, "createElement", {
-        configurable: true,
-        value: origCreateElement,
-        writable: true,
-      })
     })
   })
 
@@ -878,16 +804,9 @@ describe("DOM", () => {
       const container = document.createElement("div")
       document.body.appendChild(container)
 
-      Object.defineProperty(document, "activeElement", {
-        configurable: true,
-        value: null,
-      })
+      vi.spyOn(document, "activeElement", "get").mockReturnValue(null)
 
       expect(getNextTabbableElement(container)).toBeNull()
-
-      delete (document as any).activeElement
-
-      document.body.removeChild(container)
     })
   })
 
@@ -1072,10 +991,7 @@ describe("DOM", () => {
     })
 
     test("should handle iOS-specific scrolling", () => {
-      Object.defineProperty(navigator, "platform", {
-        configurable: true,
-        value: "iPhone",
-      })
+      vi.spyOn(navigator, "platform", "get").mockReturnValue("iPhone")
 
       const unlock = scrollLock(document)
 
@@ -1085,8 +1001,6 @@ describe("DOM", () => {
       unlock?.()
 
       expect(document.body.hasAttribute("data-scroll-lock")).toBeFalsy()
-
-      delete (navigator as any).platform
     })
   })
 

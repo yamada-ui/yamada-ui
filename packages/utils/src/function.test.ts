@@ -20,6 +20,10 @@ describe("Function", () => {
   })
 
   describe("wait", () => {
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
     test("should resolve after the provided time", async () => {
       vi.useFakeTimers()
 
@@ -28,8 +32,6 @@ describe("Function", () => {
       await vi.advanceTimersByTimeAsync(100)
 
       await expect(promise).resolves.toBeUndefined()
-
-      vi.useRealTimers()
     })
   })
 

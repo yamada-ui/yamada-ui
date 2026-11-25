@@ -1,23 +1,10 @@
-import type * as Utils from "../../utils"
+import { renderToStaticMarkup } from "react-dom/server"
 import { render } from "#test"
 import {
   ColorModeScript,
   getStorageScript,
   ThemeSchemeScript,
 } from "./storage-script"
-
-const { mockCreatedDom } = vi.hoisted(() => ({
-  mockCreatedDom: vi.fn(() => true),
-}))
-
-vi.mock("../../utils", async (importOriginal) => {
-  const original = await importOriginal<typeof Utils>()
-
-  return {
-    ...original,
-    createdDom: mockCreatedDom,
-  }
-})
 
 describe("getStorageScript", () => {
   describe("colorMode", () => {
@@ -92,26 +79,21 @@ describe("getStorageScript", () => {
 
 describe("ColorModeScript", () => {
   afterEach(() => {
-    mockCreatedDom.mockReset()
-    mockCreatedDom.mockReturnValue(true)
+    vi.unstubAllGlobals()
   })
 
   test("renders a script tag during SSR", () => {
-    mockCreatedDom.mockReturnValue(false)
-    const { container } = render(<ColorModeScript />, {
-      withProvider: false,
-    })
-    const script = container.querySelector("script")
-    expect(script).toBeTruthy()
+    vi.stubGlobal("window", undefined)
+
+    const html = renderToStaticMarkup(<ColorModeScript />)
+    expect(html).toContain("<script>")
   })
 
   test("renders with nonce during SSR", () => {
-    mockCreatedDom.mockReturnValue(false)
-    const { container } = render(<ColorModeScript nonce="test-nonce" />, {
-      withProvider: false,
-    })
-    const script = container.querySelector("script")
-    expect(script?.getAttribute("nonce")).toBe("test-nonce")
+    vi.stubGlobal("window", undefined)
+
+    const html = renderToStaticMarkup(<ColorModeScript nonce="test-nonce" />)
+    expect(html).toContain('<script nonce="test-nonce">')
   })
 
   test("returns null when DOM is available", () => {
@@ -125,26 +107,21 @@ describe("ColorModeScript", () => {
 
 describe("ThemeSchemeScript", () => {
   afterEach(() => {
-    mockCreatedDom.mockReset()
-    mockCreatedDom.mockReturnValue(true)
+    vi.unstubAllGlobals()
   })
 
   test("renders a script tag during SSR", () => {
-    mockCreatedDom.mockReturnValue(false)
-    const { container } = render(<ThemeSchemeScript />, {
-      withProvider: false,
-    })
-    const script = container.querySelector("script")
-    expect(script).toBeTruthy()
+    vi.stubGlobal("window", undefined)
+
+    const html = renderToStaticMarkup(<ThemeSchemeScript />)
+    expect(html).toContain("<script>")
   })
 
   test("renders with nonce during SSR", () => {
-    mockCreatedDom.mockReturnValue(false)
-    const { container } = render(<ThemeSchemeScript nonce="test-nonce" />, {
-      withProvider: false,
-    })
-    const script = container.querySelector("script")
-    expect(script?.getAttribute("nonce")).toBe("test-nonce")
+    vi.stubGlobal("window", undefined)
+
+    const html = renderToStaticMarkup(<ThemeSchemeScript nonce="test-nonce" />)
+    expect(html).toContain('<script nonce="test-nonce">')
   })
 
   test("returns null when DOM is available", () => {

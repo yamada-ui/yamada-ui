@@ -1,15 +1,9 @@
 import type { FC } from "react"
-import type * as Utils from "../../utils"
 import { useContext } from "react"
+import { renderToStaticMarkup } from "react-dom/server"
 import { act, render, renderHook, screen, waitFor } from "#test"
-import { createdDom, noop } from "../../utils"
+import { noop } from "../../utils"
 import { I18nContext, I18nProvider, useI18n } from "./i18n-provider"
-
-vi.mock("../../utils", async (importOriginal) => {
-  const actual = await importOriginal<typeof Utils>()
-
-  return { ...actual, createdDom: vi.fn(() => true) }
-})
 
 const LocaleText: FC = () => {
   const { locale } = useI18n()
@@ -17,7 +11,26 @@ const LocaleText: FC = () => {
   return <span data-testid="locale">{locale}</span>
 }
 
-const renderLocale = (props: Parameters<typeof I18nProvider>[0]) => {
+const renderLocale = (
+  props: Parameters<typeof I18nProvider>[0],
+  hasDom = true,
+) => {
+  if (!hasDom) {
+    vi.stubGlobal("window", undefined)
+
+    try {
+      const html = renderToStaticMarkup(
+        <I18nProvider {...props}>
+          <LocaleText />
+        </I18nProvider>,
+      )
+
+      return html.replace(/<[^>]+>/g, "")
+    } finally {
+      vi.unstubAllGlobals()
+    }
+  }
+
   render(
     <I18nProvider {...props}>
       <LocaleText />
@@ -386,11 +399,6 @@ describe("I18nProvider", () => {
 describe("I18nProvider locale resolution", () => {
   const intl = { "de-DE": {}, "en-US": {}, "ja-JP": {} }
 
-  afterEach(() => {
-    vi.mocked(createdDom).mockReturnValue(true)
-    vi.restoreAllMocks()
-  })
-
   test.each([
     ["ja-JP", undefined, "ja-JP"],
     ["ja-XX", undefined, "ja-JP"],
@@ -412,18 +420,14 @@ describe("I18nProvider locale resolution", () => {
   ])(
     "resolves an unknown locale with fallback %s when createdDom is %s",
     (fallbackLocale, hasDom, expected) => {
-      vi.mocked(createdDom).mockReturnValue(hasDom)
-
-      expect(renderLocale({ fallbackLocale, intl, locale: "xx" })).toBe(
+      expect(renderLocale({ fallbackLocale, intl, locale: "xx" }, hasDom)).toBe(
         expected,
       )
     },
   )
 
   test("uses the fallback locale without a DOM when uncontrolled", () => {
-    vi.mocked(createdDom).mockReturnValue(false)
-
-    expect(renderLocale({ fallbackLocale: "en-US", intl })).toBe("en-US")
+    expect(renderLocale({ fallbackLocale: "en-US", intl }, false)).toBe("en-US")
   })
 
   test("uses the first locale when the fallback locale is invalid", () => {

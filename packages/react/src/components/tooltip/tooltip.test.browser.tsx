@@ -3,6 +3,10 @@ import { Tooltip } from "."
 import { Text } from "../text"
 
 describe("<Tooltip />", () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   test("opens tooltip on pointer enter and closes on pointer leave", async () => {
     const { user } = await render(
       <Tooltip content="Tooltip Hovered">
@@ -78,6 +82,53 @@ describe("<Tooltip />", () => {
         .not.toBeInTheDocument()
     })
   })
+
+  test.each([
+    { isComposing: true, keyCode: 27 },
+    { isComposing: false, keyCode: 229 },
+  ])(
+    "does not close on composing Escape with $isComposing and keyCode $keyCode",
+    async ({ isComposing, keyCode }) => {
+      const onClose = vi.fn()
+      const { user } = await render(
+        <>
+          <input aria-label="Composition" />
+          <Tooltip
+            closeDelay={100}
+            content="Tooltip Hovered"
+            defaultOpen
+            onClose={onClose}
+          >
+            <Text as="span">Trigger</Text>
+          </Tooltip>
+        </>,
+      )
+
+      const input = page.getByRole("textbox", { name: "Composition" })
+      const tooltip = page.getByRole("tooltip")
+
+      await user.tab()
+
+      await expect.element(input).toHaveFocus()
+      await expect.element(tooltip).toHaveAttribute("data-open")
+
+      vi.useFakeTimers()
+
+      input.element().dispatchEvent(
+        new KeyboardEvent("keydown", {
+          key: "Escape",
+          bubbles: true,
+          isComposing,
+          keyCode,
+        }),
+      )
+
+      await vi.advanceTimersByTimeAsync(101)
+
+      expect(onClose).not.toHaveBeenCalled()
+      await expect.element(tooltip).toHaveAttribute("data-open")
+    },
+  )
 
   test("does not close on Escape when closeOnEsc is false", async () => {
     const { user } = await render(

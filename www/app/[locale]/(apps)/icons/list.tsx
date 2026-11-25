@@ -232,14 +232,23 @@ interface NotFoundProps extends CenterProps {
 
 function NotFound({ onReset, ...rest }: NotFoundProps) {
   const t = useTranslations("icons")
-
-  const Icon = [RabbitIcon, SnailIcon, SquirrelIcon, BirdIcon, FishIcon][
-    // oxlint-disable-next-line react/purity
-    Math.floor(Math.random() * 5)
-  ]!
+  const searchParams = useSearchParams()
+  const query = searchParams.get("query") ?? ""
+  const icons = [RabbitIcon, SnailIcon, SquirrelIcon, BirdIcon, FishIcon]
+  const index = [...query].reduce(
+    (index, char) => (index * 7 + char.codePointAt(0)!) % icons.length,
+    0,
+  )
+  const Icon = icons[index]!
 
   return (
-    <Center flex="1" flexDirection="column" gap="lg" {...rest}>
+    <Center
+      flex="1"
+      flexDirection="column"
+      gap="lg"
+      suppressHydrationWarning
+      {...rest}
+    >
       <Icon
         fontSize="12rem"
         strokeWidth="1"

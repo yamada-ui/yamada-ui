@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 2.4.0
+
+### Minor Changes
+
+- [#8090](https://github.com/yamada-ui/yamada-ui/pull/8090) [`f14d4f6`](https://github.com/yamada-ui/yamada-ui/commit/f14d4f690736d6dfdb0b7fd916fa7d4d17b867b8) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Add the `isComposing` utility.
+
 ## 2.3.0
 
 ### Minor Changes

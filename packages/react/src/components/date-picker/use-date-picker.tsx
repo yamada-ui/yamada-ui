@@ -528,7 +528,7 @@ export const useDatePicker = <
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLInputElement>) => {
-      if (disabled || isComposing(ev)) return
+      if (disabled || isComposing(ev.nativeEvent)) return
 
       const inputValue = cast<HTMLInputElement>(ev.target).value
 

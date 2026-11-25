@@ -15,6 +15,13 @@ export interface Point {
   y: number
 }
 
+export function isComposing(ev: Event): boolean {
+  return (
+    ("isComposing" in ev && ev.isComposing === true) ||
+    ("keyCode" in ev && ev.keyCode === 229)
+  )
+}
+
 export function isMouseEvent(ev: any): ev is MouseEvent {
   const win = getEventWindow(ev)
 

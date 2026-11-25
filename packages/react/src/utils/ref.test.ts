@@ -69,6 +69,11 @@ describe("assignRef", () => {
     expect(refObject.current).toBe(123)
   })
 
+  test("should return the cleanup function returned by a ref callback", () => {
+    const cleanup = vi.fn()
+    expect(assignRef(() => cleanup, 123)).toBe(cleanup)
+  })
+
   test("should call a ref callback with a value", () => {
     const refCallback = vi.fn()
     assignRef(refCallback, 123)
@@ -98,5 +103,27 @@ describe("mergeRefs", () => {
     mergedRef(el)
     expect(refObject1.current).toBe(el)
     expect(refObject2.current).toBe(el)
+  })
+
+  test("should call the cleanup functions returned by ref callbacks", () => {
+    const cleanup = vi.fn()
+    const refCallback = vi.fn(() => cleanup)
+    const mergedRef = mergeRefs(refCallback)
+    const el = document.createElement("div")
+    const mergedCleanup = mergedRef(el)
+    mergedCleanup()
+    expect(cleanup).toHaveBeenCalledOnce()
+    expect(refCallback).toHaveBeenCalledExactlyOnceWith(el)
+  })
+
+  test("should reset refs without cleanup functions", () => {
+    const refObject = createRef()
+    const refCallback = vi.fn()
+    const mergedRef = mergeRefs(refObject, refCallback)
+    const el = document.createElement("div")
+    const mergedCleanup = mergedRef(el)
+    mergedCleanup()
+    expect(refObject.current).toBeNull()
+    expect(refCallback).toHaveBeenLastCalledWith(null)
   })
 })

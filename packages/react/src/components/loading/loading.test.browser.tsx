@@ -1,6 +1,19 @@
-import type { FC } from "react"
-import { page, render } from "#test/browser"
-import { useLoading } from "./loading-provider"
+import type { FC, PropsWithChildren } from "react"
+import type { Render } from "#test/browser"
+import { render as originalRender, page } from "#test/browser"
+import { DefaultProvider } from "../../providers/default-provider"
+import { LoadingProvider, useLoading } from "./loading-provider"
+
+function Wrapper(props: PropsWithChildren) {
+  return (
+    <DefaultProvider>
+      <LoadingProvider {...props} />
+    </DefaultProvider>
+  )
+}
+
+const render: Render = (ui, options) =>
+  originalRender(ui, { wrapper: Wrapper, ...options })
 
 function clickElement(testId: string) {
   const el = page.getByTestId(testId).element()

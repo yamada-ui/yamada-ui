@@ -162,5 +162,6 @@ export * from "./hooks/use-timeout"
 export * from "./hooks/use-value"
 export * from "./hooks/use-window-event"
 
+export * from "./providers/default-provider"
 export * from "./providers/i18n-provider"
 export * from "./providers/ui-provider"

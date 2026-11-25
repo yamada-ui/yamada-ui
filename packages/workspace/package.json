@@ -40,6 +40,7 @@
     "globals": "^17.14.0",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
+    "oxlint-plugin-eslint": "^1.92.0",
     "oxlint-tsgolint": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",

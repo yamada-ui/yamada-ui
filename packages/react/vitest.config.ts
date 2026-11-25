@@ -24,12 +24,6 @@ const browsers: {
   { browser: "webkit" },
 ]
 
-const isolatedJsdomTests = [
-  "src/components/carousel/carousel.test.tsx",
-  "src/utils/effect.test.ts",
-  "src/utils/ssr.test.ts",
-]
-
 export default mergeConfig(sharedConfig, {
   plugins: [react()],
   test: {
@@ -47,7 +41,7 @@ export default mergeConfig(sharedConfig, {
           environment: "jsdom",
           exclude: [
             "src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}",
-            ...isolatedJsdomTests,
+            "src/utils/ssr.test.ts",
           ],
           globals: true,
           include: ["src/**/*.test.{ts,tsx}"],
@@ -63,7 +57,7 @@ export default mergeConfig(sharedConfig, {
           name: "jsdom:isolated",
           environment: "jsdom",
           globals: true,
-          include: isolatedJsdomTests,
+          include: ["src/utils/ssr.test.ts"],
           isolate: true,
           restoreMocks: true,
           setupFiles: ["@yamada-ui/workspace/vitest/setup", "./test/setup.ts"],

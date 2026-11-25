@@ -107,6 +107,59 @@ describe("<Popover />", () => {
     await expect.element(header).toBeVisible()
   })
 
+  test.each([
+    { target: "content", isComposing: true, keyCode: 27 },
+    { target: "content", isComposing: false, keyCode: 229 },
+    { target: "trigger", isComposing: true, keyCode: 27 },
+    { target: "trigger", isComposing: false, keyCode: 229 },
+  ])(
+    "ignores synthetic IME Escape from $target descendants with isComposing=$isComposing and keyCode=$keyCode",
+    async ({ target, isComposing, keyCode }) => {
+      const onClose = vi.fn()
+      const input = <input aria-label="Composition" />
+      const { user } = await render(
+        <Popover.Root autoFocus={false} defaultOpen onClose={onClose}>
+          <Popover.Trigger>
+            <div aria-label="Popover Trigger" tabIndex={-1}>
+              {target === "trigger" ? input : "Popover Trigger"}
+            </div>
+          </Popover.Trigger>
+          <Popover.Content>
+            <Popover.Header>Popover Header</Popover.Header>
+            {target === "content" ? input : null}
+          </Popover.Content>
+        </Popover.Root>,
+      )
+      const textbox = page.getByRole("textbox", { name: "Composition" })
+      const trigger = page.getByRole("button", { name: "Popover Trigger" })
+      const content = page.getByRole("dialog")
+
+      await user.tab()
+      await expect.element(textbox).toHaveFocus()
+      await expect.element(content).toBeVisible()
+
+      const event = new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+        isComposing,
+        keyCode,
+      })
+
+      textbox.element().dispatchEvent(event)
+
+      expect(event.defaultPrevented).toBe(false)
+      expect(onClose).not.toHaveBeenCalled()
+      await expect.element(content).toBeVisible()
+      await expect.element(textbox).toHaveFocus()
+
+      await user.keyboard("{Escape}")
+
+      await expect.element(content).not.toBeInTheDocument()
+      await expect.element(trigger).toHaveFocus()
+    },
+  )
+
   test("should return focus to trigger after escape key", async () => {
     const { user } = await render(<Component />)
 

@@ -2,6 +2,50 @@ import { page, render } from "#test/browser"
 import { Autocomplete } from "."
 
 describe("<Autocomplete />", () => {
+  test.each([
+    { isComposing: true, keyCode: 27 },
+    { isComposing: false, keyCode: 229 },
+  ])(
+    "keeps the popup and input focus on synthetic IME Escape with isComposing=$isComposing and keyCode=$keyCode",
+    async ({ isComposing, keyCode }) => {
+      const onClose = vi.fn()
+      const { user } = await render(
+        <Autocomplete.Root
+          defaultOpen
+          items={[{ label: "Option 1", value: "one" }]}
+          inputProps={{ "aria-label": "Composition" }}
+          onClose={onClose}
+        />,
+      )
+      const input = page.getByRole("textbox", { name: "Composition" })
+      const content = page.getByRole("listbox")
+
+      await user.tab()
+      await expect.element(input).toHaveFocus()
+      await expect.element(content).toBeVisible()
+
+      const event = new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+        isComposing,
+        keyCode,
+      })
+
+      input.element().dispatchEvent(event)
+
+      expect(event.defaultPrevented).toBe(false)
+      expect(onClose).not.toHaveBeenCalled()
+      await expect.element(content).toBeVisible()
+      await expect.element(input).toHaveFocus()
+
+      await user.keyboard("{Escape}")
+
+      await expect.element(content).not.toBeInTheDocument()
+      expect(onClose).toHaveBeenCalledTimes(1)
+    },
+  )
+
   test("does not hide separator when blurring to content in multiple mode", async () => {
     const { user } = await render(
       <Autocomplete.Root

@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm"
 import { defineCollection, defineConfig, s } from "velite"
 import { CONSTANTS } from "@/constants"
 import { generateDocMap } from "@/scripts/generate/docs/map"
+import { generateDocSearch } from "@/scripts/generate/docs/search"
 import { getLocale, langs } from "@/utils/i18n"
 import {
   createFrontMatter,
@@ -128,8 +129,8 @@ const docs = defineCollection({
 
 export default defineConfig({
   collections: { docs },
-  complete: function ({ docs }) {
-    generateDocMap(docs)
+  complete: async function ({ docs }) {
+    await Promise.all([generateDocMap(docs), generateDocSearch(docs)])
   },
   mdx: {
     rehypePlugins: [

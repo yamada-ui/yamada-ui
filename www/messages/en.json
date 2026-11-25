@@ -106,7 +106,9 @@
     },
     "search": {
       "placeholder": "Search documentation...",
-      "notFound": "No results found for \"{value}\"."
+      "notFound": "No results found for \"{value}\".",
+      "loading": "Loading search results...",
+      "unavailable": "Could not load search results."
     },
     "toc": {
       "title": "On this page",

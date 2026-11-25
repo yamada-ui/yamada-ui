@@ -2,7 +2,7 @@
 
 import type { Descendant, HTMLProps } from "@yamada-ui/react"
 import type { KeyboardEvent, RefObject } from "react"
-import type { FragmentContent, PageContent } from "@/data"
+import type { Hit } from "@/data/search"
 import {
   assignRef,
   Box,
@@ -26,6 +26,7 @@ import {
   SearchIcon,
   Text,
   TextAlignStartIcon,
+  useAsync,
   useDisclosure,
   useUpdateEffect,
   useWindowEvent,
@@ -44,7 +45,7 @@ import {
 } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
 import { CONSTANTS } from "@/constants"
-import { getContents, getDefaultContents } from "@/data"
+import { getContents, getDefaultContents } from "@/data/search"
 import { Link, useLocale, usePathname } from "@/i18n"
 import { createLocalStorage } from "@/utils/storage"
 
@@ -64,12 +65,6 @@ export function Search() {
   const pathname = usePathname()
   const [actionKey, setActionKey] = useState(ACTION_APPLE_KEY)
   const { locale } = useLocale()
-  const contents = useMemo(() => getContents(locale), [locale])
-  const contentMap = useMemo(
-    () => new Map(contents.map((content) => [content.pathname, content])),
-    [contents],
-  )
-  const defaultContents = useMemo(() => getDefaultContents(locale), [locale])
 
   useEffect(() => {
     if (!isApple()) setActionKey(ACTION_DEFAULT_KEY)
@@ -135,33 +130,44 @@ export function Search() {
         withCloseButton={false}
         onClose={onClose}
       >
-        <SearchContent
-          contentMap={contentMap}
-          contents={contents}
-          defaultContents={defaultContents}
-          onClose={onClose}
-        />
+        <SearchContent key={locale} locale={locale} onClose={onClose} />
       </Modal.Root>
     </>
   )
 }
 
-type Hit = FragmentContent | PageContent
 type LocalStorageHit = Hit & { storage: "recent" }
 
 interface SearchContentProps {
-  contentMap: Map<string, Hit>
-  contents: Hit[]
-  defaultContents: Hit[]
+  locale: string
   onClose: () => void
 }
 
-function SearchContent({
-  contentMap,
-  contents,
-  defaultContents,
-  onClose,
-}: SearchContentProps) {
+function SearchContent({ locale, onClose }: SearchContentProps) {
+  const {
+    error,
+    loading,
+    value: {
+      contentMap = new Map(),
+      contents = [],
+      fallbackContents = [],
+    } = {},
+  } = useAsync(async () => {
+    const defaultLocale = CONSTANTS.I18N.DEFAULT_LOCALE
+    const [contents, fallbackContents] = await Promise.all([
+      getContents(locale),
+      locale === defaultLocale
+        ? getContents(locale)
+        : getContents(defaultLocale),
+    ])
+
+    return {
+      contentMap: new Map(contents.map((hit) => [hit.pathname, hit])),
+      contents,
+      fallbackContents,
+    }
+  }, [locale])
+  const defaultContents = useMemo(() => getDefaultContents(locale), [locale])
   const bodyRef = useRef<HTMLDivElement>(null)
   const descendants = useDescendants()
   const onSearchRef = useRef<(value: string) => void>(noop)
@@ -172,9 +178,9 @@ function SearchContent({
 
   const onActive = useCallback(
     (descendant?: Descendant<HTMLAnchorElement, { hit: Hit }>) => {
-      if (!descendant) return
+      activeDescendant.current = descendant ?? null
 
-      activeDescendant.current = descendant
+      if (!descendant) return
 
       descendants.active(descendant)
 
@@ -207,6 +213,9 @@ function SearchContent({
           contentMap={contentMap}
           contents={contents}
           defaultContents={defaultContents}
+          error={error}
+          fallbackContents={fallbackContents}
+          loading={loading}
           onActive={onActive}
           onClose={onClose}
           onSearchRef={onSearchRef}
@@ -383,6 +392,7 @@ function SearchContentHeader({
           <SearchIcon fontSize="xl" />
         </InputGroup.Element>
         <Input
+          bg="bg"
           placeholder={t("placeholder")}
           onChange={(ev) => onSearchRef.current(ev.target.value)}
           onCompositionEnd={() => {
@@ -407,7 +417,6 @@ const SEARCH_KEYS = [
   "hierarchy.2",
   "hierarchy.1",
 ] as const
-const DEFAULT_LOCALE_CONTENTS = getContents(CONSTANTS.I18N.DEFAULT_LOCALE)
 const PER_PAGE = 50
 
 const [getRecentSearches, setRecentSearches] = createLocalStorage<
@@ -423,25 +432,29 @@ function addRecentSearch(hit: Hit) {
   )
 }
 
-function removeRecentSearch(hit: Hit | LocalStorageHit) {
-  setRecentSearches((prev) =>
-    prev.filter(({ pathname }) => pathname !== hit.pathname),
-  )
+function removeRecentSearch(pathname: string) {
+  setRecentSearches((prev) => prev.filter((hit) => hit.pathname !== pathname))
 }
 
 interface SearchContentBodyProps extends Modal.BodyProps {
   contentMap: Map<string, Hit>
   contents: Hit[]
   defaultContents: Hit[]
+  fallbackContents: Hit[]
+  loading: boolean
   onActive: (descendant?: Descendant<HTMLAnchorElement, { hit: Hit }>) => void
   onClose: () => void
   onSearchRef: RefObject<(value: string) => void>
+  error?: Error
 }
 
 function SearchContentBody({
   contentMap,
   contents,
   defaultContents,
+  error,
+  fallbackContents,
+  loading,
   onActive,
   onClose,
   onSearchRef,
@@ -449,17 +462,43 @@ function SearchContentBody({
 }: SearchContentBodyProps) {
   const t = useTranslations("component.search")
   const { locale } = useLocale()
-  const getContents = useCallback(() => {
-    const recentContents = getRecentSearches()
+  const [recentContents, setRecentContents] = useState(getRecentSearches)
+  const [value, setValue] = useState("")
+  const hits = useMemo(() => {
+    if (!value) {
+      if (!recentContents.length) return defaultContents
 
-    if (recentContents.length)
       return recentContents.map((hit) => ({
         ...hit,
         ...contentMap.get(hit.pathname),
       }))
-    else return defaultContents
-  }, [contentMap, defaultContents])
-  const [hits, setHits] = useState<(Hit | LocalStorageHit)[]>(getContents())
+    }
+
+    if (loading || error) return []
+
+    const localeHits = matchSorter(contents, value, { keys: SEARCH_KEYS })
+
+    if (locale === CONSTANTS.I18N.DEFAULT_LOCALE) return localeHits
+
+    const localePathnames = new Set(localeHits.map(({ pathname }) => pathname))
+    const fallbackHits = matchSorter(fallbackContents, value, {
+      keys: SEARCH_KEYS,
+    })
+      .filter(({ pathname }) => !localePathnames.has(pathname))
+      .map((hit) => contentMap.get(hit.pathname) ?? hit)
+
+    return [...localeHits, ...fallbackHits]
+  }, [
+    contentMap,
+    contents,
+    defaultContents,
+    error,
+    fallbackContents,
+    loading,
+    locale,
+    recentContents,
+    value,
+  ])
   const maxIndex = Math.ceil(hits.length / PER_PAGE) - 1
   const [count, setCount] = useState(PER_PAGE)
   const disabled = hits.length <= count
@@ -467,49 +506,17 @@ function SearchContentBody({
   const resetRef = useRef<() => void>(noop)
   const [, startTransition] = useTransition()
   const descendants = useDescendantsContext()
-  const [value, setValue] = useState("")
 
-  const onRemoveRecent = useCallback(
-    (hit: LocalStorageHit) => {
-      setHits((prev) => {
-        const next = prev.filter(({ pathname }) => pathname !== hit.pathname)
-
-        return next.length ? next : defaultContents
-      })
-      removeRecentSearch(hit)
-    },
-    [defaultContents],
-  )
+  const onRemoveRecent = useCallback((pathname: string) => {
+    setRecentContents((prev) => prev.filter((hit) => hit.pathname !== pathname))
+    removeRecentSearch(pathname)
+  }, [])
 
   assignRef(onSearchRef, (value) => {
     startTransition(() => {
       resetRef.current()
 
-      let hits: (Hit | LocalStorageHit)[] = getContents()
-
-      if (value.length) {
-        const localeHits = matchSorter(contents, value, { keys: SEARCH_KEYS })
-
-        if (locale !== CONSTANTS.I18N.DEFAULT_LOCALE) {
-          const localePathnames = new Set(
-            localeHits.map(({ pathname }) => pathname),
-          )
-          const defaultLocaleHits = matchSorter(
-            DEFAULT_LOCALE_CONTENTS,
-            value,
-            { keys: SEARCH_KEYS },
-          )
-            .filter(({ pathname }) => !localePathnames.has(pathname))
-            .map((hit) => contentMap.get(hit.pathname) ?? hit)
-
-          hits = [...localeHits, ...defaultLocaleHits]
-        } else {
-          hits = localeHits
-        }
-      }
-
       setCount(PER_PAGE)
-      setHits(hits)
       setValue(value)
     })
   })
@@ -518,7 +525,7 @@ function SearchContentBody({
     const descendant = descendants.enabledFirstValue()
 
     onActive(descendant)
-  }, [descendants, onActive, value])
+  }, [descendants, hits, onActive])
 
   return (
     <Modal.Body asChild {...rest}>
@@ -546,14 +553,20 @@ function SearchContentBody({
               onActive={onActive}
               onClose={onClose}
               onRemove={
-                "storage" in hit ? () => onRemoveRecent(hit) : undefined
+                "storage" in hit
+                  ? () => onRemoveRecent(hit.pathname)
+                  : undefined
               }
             />
           ))
         ) : (
           <Center minH="16" w="full">
-            <Text color="fg.muted" fontSize="sm" lineClamp={1}>
-              {t("notFound", { value })}
+            <Text color="fg.muted" fontSize="sm" lineClamp={1} role="status">
+              {loading
+                ? t("loading")
+                : error
+                  ? t("unavailable")
+                  : t("notFound", { value })}
             </Text>
           </Center>
         )}

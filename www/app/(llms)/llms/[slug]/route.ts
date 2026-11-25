@@ -9,9 +9,9 @@ export async function GET(
 ) {
   const params = await context.params
 
-  if (!params.slug.includes(".txt")) return new Response(null, { status: 404 })
+  if (!params.slug.endsWith(".txt")) return new Response(null, { status: 404 })
 
-  const [slug] = params.slug.split(".")
+  const slug = params.slug.replace(/\.txt$/, "")
   const targetDocs = docs
     .filter(
       (doc) =>
@@ -38,6 +38,7 @@ export async function GET(
   return new Response(content, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
+      "X-Robots-Tag": "noindex",
     },
   })
 }

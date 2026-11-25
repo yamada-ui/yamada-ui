@@ -4,7 +4,7 @@ import type { GridProps } from "@yamada-ui/react"
 import { Grid } from "@yamada-ui/react"
 import { useMemo } from "react"
 import { NextLink } from "@/components/next-link"
-import { getDocMap } from "@/data"
+import { getDocMap } from "@/data/doc-map"
 import { useLocale } from "@/i18n"
 
 export interface HookListProps extends GridProps {}

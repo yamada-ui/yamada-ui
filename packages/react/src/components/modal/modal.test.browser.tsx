@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import { page, render } from "#test/browser"
 import { Button } from "../button"
+import { Input } from "../input"
 import { Modal } from "./"
 
 const TestComponent: FC<Modal.RootProps> = (props) => {
@@ -128,6 +129,56 @@ describe("<Modal />", () => {
     expect(onEsc).toHaveBeenCalledOnce()
     expect(onClose).not.toHaveBeenCalled()
   })
+
+  test.each([
+    { closeOnEsc: true, isComposing: true, keyCode: 27 },
+    { closeOnEsc: true, isComposing: false, keyCode: 229 },
+    { closeOnEsc: false, isComposing: true, keyCode: 27 },
+    { closeOnEsc: false, isComposing: false, keyCode: 229 },
+  ])(
+    "ignores composing Escape with closeOnEsc=$closeOnEsc, isComposing=$isComposing and keyCode=$keyCode",
+    async ({ closeOnEsc, isComposing, keyCode }) => {
+      const onEsc = vi.fn()
+      const onClose = vi.fn()
+      const { user } = await render(
+        <Modal.Root
+          closeOnEsc={closeOnEsc}
+          defaultOpen
+          onClose={onClose}
+          onEsc={onEsc}
+        >
+          <Modal.Content>
+            <Modal.Header>
+              <Modal.Title>IME</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Input aria-label="Name" />
+            </Modal.Body>
+          </Modal.Content>
+        </Modal.Root>,
+      )
+      const input = page.getByRole("textbox", { name: "Name" })
+
+      await user.click(input)
+      await expect.element(input).toHaveFocus()
+
+      const event = new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+        isComposing,
+        keyCode,
+      })
+
+      input.element().dispatchEvent(event)
+
+      expect(onEsc).not.toHaveBeenCalled()
+      expect(onClose).not.toHaveBeenCalled()
+      expect(event.defaultPrevented).toBe(false)
+      await expect.element(page.getByRole("dialog")).toBeVisible()
+      await expect.element(input).toHaveFocus()
+    },
+  )
 
   test("does not trigger onEsc when a non-Escape key is pressed", async () => {
     const onEsc = vi.fn()

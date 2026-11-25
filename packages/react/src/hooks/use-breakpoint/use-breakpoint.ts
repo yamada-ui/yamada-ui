@@ -2,7 +2,11 @@
 
 import type { Breakpoint } from "../../core"
 import { useCallback, useMemo, useRef, useSyncExternalStore } from "react"
-import { useEnvironment, useSystem } from "../../core"
+import {
+  DEFAULT_BREAKPOINT_DIRECTION,
+  useEnvironment,
+  useSystem,
+} from "../../core"
 import { createdDom, isUndefined, noop } from "../../utils"
 
 /**
@@ -17,7 +21,7 @@ export const useBreakpoint = () => {
   const { getWindow } = useEnvironment()
   const {
     containerRef,
-    direction = "down",
+    direction = DEFAULT_BREAKPOINT_DIRECTION,
     identifier = "@media screen",
   } = config.breakpoint ?? {}
   const hasContainer = !!containerRef

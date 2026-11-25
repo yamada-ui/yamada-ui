@@ -7,18 +7,18 @@ import type {
 import type { PropsWithChildren, ReactNode } from "react"
 import type { Container } from "react-dom/client"
 import type { AxeCore } from "vitest-axe"
-import type { UIProviderProps } from "../src"
+import type { DefaultProviderProps } from "../src/providers/default-provider"
 import {
   render as originalRender,
   renderHook as originalRenderHook,
 } from "@testing-library/react"
 import { userEvent } from "@testing-library/user-event"
 import { isValidElement } from "react"
-import { UIProvider } from "../src"
+import { DefaultProvider } from "../src/providers/default-provider"
 
 export interface RenderOptions extends OriginalRenderOptions {
   withProvider?: boolean
-  providerProps?: Omit<UIProviderProps, "children">
+  providerProps?: Omit<DefaultProviderProps, "children">
 }
 
 export interface RenderReturn extends ReturnType<typeof originalRender> {
@@ -33,13 +33,15 @@ export function render(
 
   if (withProvider)
     options.wrapper ??= (props: PropsWithChildren) => (
-      <UIProvider {...props} {...providerProps} />
+      <DefaultProvider {...props} {...providerProps} />
     )
 
   const result = originalRender(ui, options)
 
   return { user, ...result }
 }
+
+export type Render = typeof render
 
 export interface A11yOptions extends RenderOptions {
   axeOptions?: AxeCore.RunOptions
@@ -64,7 +66,7 @@ export interface RenderHookOptions<
   H extends Container | Document | Element = D,
 > extends OriginalRenderHookOptions<Y, M, D, H> {
   withProvider?: boolean
-  providerProps?: Omit<UIProviderProps, "children">
+  providerProps?: Omit<DefaultProviderProps, "children">
 }
 
 export function renderHook<
@@ -83,8 +85,10 @@ export function renderHook<
 ) {
   if (withProvider)
     options.wrapper ??= (props: PropsWithChildren) => (
-      <UIProvider {...props} {...providerProps} />
+      <DefaultProvider {...props} {...providerProps} />
     )
 
   return originalRenderHook<Y, M, D, H, R>(render, options)
 }
+
+export type RenderHook = typeof renderHook

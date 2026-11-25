@@ -1,6 +1,21 @@
+import type { PropsWithChildren } from "react"
+import type { RenderHook } from "#test/browser"
 import { userEvent } from "vitest/browser"
-import { page, renderHook } from "#test/browser"
+import { renderHook as originalRenderHook, page } from "#test/browser"
+import { DefaultProvider } from "../../providers/default-provider"
+import { NoticeProvider } from "./notice-provider"
 import { useNotice } from "./use-notice"
+
+function Wrapper(props: PropsWithChildren) {
+  return (
+    <DefaultProvider>
+      <NoticeProvider {...props} />
+    </DefaultProvider>
+  )
+}
+
+const renderHook: RenderHook = (callback, options) =>
+  originalRenderHook(callback, { wrapper: Wrapper, ...options })
 
 async function expectNoticeVisible(text: string) {
   await expect.element(page.getByText(text)).toBeInTheDocument()

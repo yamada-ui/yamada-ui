@@ -1,5 +1,6 @@
 import type { DependencyList } from "react"
-import type { Breakpoint } from "../../core"
+import type { Breakpoint, BreakpointDirection } from "../../core"
+import { DEFAULT_BREAKPOINT_DIRECTION, useSystem } from "../../core"
 import { useUpdateEffect } from "../../utils"
 import { useBreakpoint } from "./use-breakpoint"
 
@@ -9,12 +10,14 @@ import { useBreakpoint } from "./use-breakpoint"
  * @see https://yamada-ui.com/docs/hooks/use-update-breakpoint-effect
  */
 export const useUpdateBreakpointEffect = (
-  callback: (breakpoint: Breakpoint) => void,
+  callback: (breakpoint: Breakpoint, direction: BreakpointDirection) => void,
   deps: DependencyList,
 ) => {
+  const { config } = useSystem()
   const breakpoint = useBreakpoint()
+  const direction = config.breakpoint?.direction ?? DEFAULT_BREAKPOINT_DIRECTION
 
   useUpdateEffect(() => {
-    callback(breakpoint)
-  }, [breakpoint, ...deps])
+    callback(breakpoint, direction)
+  }, [breakpoint, direction, ...deps])
 }

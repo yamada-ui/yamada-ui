@@ -1,7 +1,6 @@
 import { act, renderHook, waitFor } from "#test"
 import {
   getEventRelatedTarget,
-  isComposing,
   runKeyAction,
   useAttributeObserver,
   useIds,
@@ -16,54 +15,6 @@ describe("getEventRelatedTarget", () => {
     }) as unknown as React.FocusEvent
 
     expect(getEventRelatedTarget(ev)).toBe(element)
-  })
-})
-
-describe("isComposing", () => {
-  test("should detect composing from keyboard event", () => {
-    const ev = {
-      keyCode: 229,
-      nativeEvent: { isComposing: true },
-    } as unknown as React.KeyboardEvent<HTMLElement>
-
-    expect(isComposing(ev)).toBeTruthy()
-  })
-
-  test("should detect composing via keyCode when isComposing is false", () => {
-    const ev = {
-      keyCode: 229,
-      nativeEvent: { isComposing: false },
-    } as unknown as React.KeyboardEvent<HTMLElement>
-
-    expect(isComposing(ev)).toBeTruthy()
-  })
-
-  test("should return false for non-composing keyboard event", () => {
-    const ev = {
-      keyCode: 13,
-      nativeEvent: { isComposing: false },
-    } as unknown as React.KeyboardEvent<HTMLElement>
-
-    expect(isComposing(ev)).toBeFalsy()
-  })
-
-  test("should detect composing from InputEvent", () => {
-    const inputEvent = new InputEvent("input", { data: "a" })
-    Object.defineProperty(inputEvent, "isComposing", { value: true })
-
-    const ev = {
-      nativeEvent: inputEvent,
-    } as unknown as React.ChangeEvent<HTMLElement>
-
-    expect(isComposing(ev)).toBeTruthy()
-  })
-
-  test("should return false for non-composing events", () => {
-    const ev = {
-      nativeEvent: new Event("change"),
-    } as unknown as React.ChangeEvent<HTMLElement>
-
-    expect(isComposing(ev)).toBeFalsy()
   })
 })
 

@@ -196,7 +196,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
-      if (isComposing(ev)) return
+      if (isComposing(ev.nativeEvent)) return
 
       const { selectionEnd, selectionStart, value } = ev.currentTarget
 
@@ -247,7 +247,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLInputElement>) => {
-      if (isComposing(ev)) return
+      if (isComposing(ev.nativeEvent)) return
 
       if (!isValidNumericKeyboardEvent(ev, isValidCharacter))
         ev.preventDefault()

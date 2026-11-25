@@ -1,13 +1,13 @@
 import { render, screen } from "#test"
 import { useI18n } from "../i18n-provider"
-import { extendConfig, extendTheme, UIProvider } from "./ui-provider"
+import { DefaultProvider, extendConfig, extendTheme } from "./default-provider"
 
-describe("UIProvider", () => {
+describe("DefaultProvider", () => {
   test("renders children correctly", () => {
     render(
-      <UIProvider>
+      <DefaultProvider>
         <div data-testid="child">Hello</div>
-      </UIProvider>,
+      </DefaultProvider>,
       { withProvider: false },
     )
 
@@ -41,7 +41,7 @@ describe("UIProvider", () => {
     }
 
     render(
-      <UIProvider
+      <DefaultProvider
         fallbackLocale="ja-JP"
         formats={{
           date: {},
@@ -54,7 +54,7 @@ describe("UIProvider", () => {
         locale="jk"
       >
         <TestComponent />
-      </UIProvider>,
+      </DefaultProvider>,
       { withProvider: false },
     )
 

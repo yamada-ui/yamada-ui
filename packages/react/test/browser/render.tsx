@@ -5,25 +5,25 @@ import type {
   RenderHookOptions as OriginalRenderHookOptions,
   RenderHookResult as OriginalRenderHookResult,
 } from "vitest-browser-react"
-import type { UIProviderProps } from "../../src"
+import type { DefaultProviderProps } from "../../src/providers/default-provider"
 import axe from "axe-core"
 import {
   render as originalRender,
   renderHook as originalRenderHook,
 } from "vitest-browser-react"
 import { userEvent } from "vitest/browser"
-import { UIProvider } from "../../src"
+import { DefaultProvider } from "../../src/providers/default-provider"
 
 export interface ComponentRenderOptions extends OriginalComponentRenderOptions {
   withProvider?: boolean
-  providerProps?: Omit<UIProviderProps, "children">
+  providerProps?: Omit<DefaultProviderProps, "children">
 }
 
 export interface BrowserRenderHookOptions<
   Y,
 > extends OriginalRenderHookOptions<Y> {
   withProvider?: boolean
-  providerProps?: Omit<UIProviderProps, "children">
+  providerProps?: Omit<DefaultProviderProps, "children">
 }
 
 export interface A11yOptions extends ComponentRenderOptions {
@@ -52,13 +52,15 @@ export async function render(
 
   if (withProvider)
     options.wrapper ??= (props: PropsWithChildren) => (
-      <UIProvider {...props} {...providerProps} />
+      <DefaultProvider {...props} {...providerProps} />
     )
 
   const result = await originalRender(ui, options)
 
   return { user, ...result }
 }
+
+export type Render = typeof render
 
 export function renderHook<Y, M>(
   renderCallback: (initialProps?: M) => Y,
@@ -70,8 +72,10 @@ export function renderHook<Y, M>(
 ): Promise<OriginalRenderHookResult<Y, M>> {
   if (withProvider)
     options.wrapper ??= (props: PropsWithChildren) => (
-      <UIProvider {...props} {...providerProps} />
+      <DefaultProvider {...props} {...providerProps} />
     )
 
   return originalRenderHook(renderCallback, options)
 }
+
+export type RenderHook = typeof renderHook

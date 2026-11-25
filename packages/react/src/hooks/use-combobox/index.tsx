@@ -406,7 +406,7 @@ export const useCombobox = (props: UseComboboxProps = {}) => {
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
-      if (disabled || isComposing(ev)) return
+      if (disabled || isComposing(ev.nativeEvent)) return
 
       runKeyAction(
         ev,

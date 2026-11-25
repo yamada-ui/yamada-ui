@@ -22,6 +22,7 @@ import {
   focusTrap,
   getEventRelatedTarget,
   handlerAll,
+  isComposing,
   mergeRefs,
   runKeyAction,
   scrollLock,
@@ -178,6 +179,8 @@ export const usePopover = ({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLElement>) => {
+      if (isComposing(ev.nativeEvent)) return
+
       runKeyAction(ev, {
         Escape: () => {
           if (!closeOnEsc) return

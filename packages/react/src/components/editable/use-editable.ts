@@ -154,7 +154,7 @@ export const useEditable = (props: UseEditableProps = {}) => {
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLInputElement>) => {
-      if (isComposing(ev)) return
+      if (isComposing(ev.nativeEvent)) return
       if (ev.key !== "Escape" && ev.key !== "Enter") return
 
       if (ev.key === "Escape") {
@@ -174,7 +174,7 @@ export const useEditable = (props: UseEditableProps = {}) => {
 
   const onKeyDownWithoutSubmit = useCallback(
     (ev: KeyboardEvent<HTMLTextAreaElement>) => {
-      if (isComposing(ev)) return
+      if (isComposing(ev.nativeEvent)) return
       if (ev.key !== "Escape") return
 
       ev.preventDefault()

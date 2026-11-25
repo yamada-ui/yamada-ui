@@ -2,10 +2,42 @@ import {
   focusTransfer,
   focusTrap,
   getEventPoint,
+  isComposing,
   isMultiTouchEvent,
   isTouchEvent,
   pointFromTouch,
 } from "./event"
+
+describe("isComposing", () => {
+  test.each([
+    { expected: true, isComposing: true, keyCode: 13 },
+    { expected: true, isComposing: false, keyCode: 229 },
+    { expected: false, isComposing: false, keyCode: 13 },
+  ])(
+    "returns $expected for keyboard events with isComposing=$isComposing and keyCode=$keyCode",
+    ({ expected, isComposing: composing, keyCode }) => {
+      const ev = new KeyboardEvent("keydown", {
+        isComposing: composing,
+        keyCode,
+      })
+
+      expect(isComposing(ev)).toBe(expected)
+    },
+  )
+
+  test.each([true, false])(
+    "returns %s for input events with the same composing state",
+    (composing) => {
+      const ev = new InputEvent("input", { isComposing: composing })
+
+      expect(isComposing(ev)).toBe(composing)
+    },
+  )
+
+  test("returns false for events without composition information", () => {
+    expect(isComposing(new Event("change"))).toBeFalsy()
+  })
+})
 
 describe("Event", () => {
   const defaultTouch = global.Touch

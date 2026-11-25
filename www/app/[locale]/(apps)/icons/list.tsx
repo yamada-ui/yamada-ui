@@ -242,13 +242,7 @@ function NotFound({ onReset, ...rest }: NotFoundProps) {
   const Icon = icons[index]!
 
   return (
-    <Center
-      flex="1"
-      flexDirection="column"
-      gap="lg"
-      suppressHydrationWarning
-      {...rest}
-    >
+    <Center flex="1" flexDirection="column" gap="lg" {...rest}>
       <Icon
         fontSize="12rem"
         strokeWidth="1"

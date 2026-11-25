@@ -32,7 +32,8 @@ export function mergeRefs<Y = any>(
 }
 
 export function useMergeRefs<Y = any>(...refs: (React.Ref<Y> | undefined)[]) {
-  return React.useMemo(() => mergeRefs(...refs), [refs])
+  // eslint-disable-next-line react/use-memo, react-hooks/exhaustive-deps
+  return React.useMemo(() => mergeRefs(...refs), refs)
 }
 
 export function useCallbackRef<Y extends (...args: any[]) => any>(

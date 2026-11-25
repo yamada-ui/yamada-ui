@@ -6,7 +6,7 @@ import { useCallback } from "react"
 import { mergeProps, useEnvironment } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { useEventListener } from "../../hooks/use-event-listener"
-import { handlerAll, useIds } from "../../utils"
+import { handlerAll, isComposing, useIds } from "../../utils"
 
 export interface UseActionBarProps
   extends HTMLProps, Omit<UseDisclosureProps, "timing"> {
@@ -37,6 +37,8 @@ export const useActionBar = ({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent) => {
+      if (isComposing(ev)) return
+
       if (ev.key !== "Escape") return
 
       if (!closeOnEsc) return

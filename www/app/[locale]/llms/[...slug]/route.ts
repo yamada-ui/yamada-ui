@@ -1,5 +1,6 @@
 import { docs } from "#velite"
-import { getLocale } from "@/utils/i18n"
+import { CONSTANTS } from "@/constants"
+import { getLang } from "@/utils/i18n"
 
 export const dynamic = "force-static"
 
@@ -13,16 +14,16 @@ export async function GET(
   _request: Request,
   context: RouteContext<"/[locale]/llms/[...slug]">,
 ) {
-  const params = await context.params
-  const slug = params.slug
-  const locale = getLocale(params.locale)
-  const lastSegment = slug.at(-1)!
+  const { locale: lang, slug } = await context.params
+  const locale = CONSTANTS.I18N.LOCALES.find(
+    (locale) => locale === lang || getLang(locale) === lang,
+  )
+  const lastSegment = slug.at(-1)
 
-  if (!lastSegment.includes(".md")) return new Response(null, { status: 404 })
+  if (!locale || !lastSegment?.endsWith(".md"))
+    return new Response(null, { status: 404 })
 
-  slug[slug.length - 1] = lastSegment.split(".")[0]!
-
-  const doc = getDoc(locale, slug)
+  const doc = getDoc(locale, [...slug.slice(0, -1), lastSegment.slice(0, -3)])
 
   if (!doc?.md) return new Response(null, { status: 404 })
 
@@ -30,6 +31,7 @@ export async function GET(
     headers: {
       "Cache-Control": "public, max-age=3600",
       "Content-Type": "text/plain; charset=utf-8",
+      "X-Robots-Tag": "noindex",
     },
   })
 }

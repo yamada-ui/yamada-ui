@@ -1,10 +1,8 @@
-"use client"
-
 import type { Relations } from "@/data"
 import { Text } from "@yamada-ui/react"
+import { getLocale } from "next-intl/server"
 import { getDocs } from "@/data"
 import data from "@/data/relations.json"
-import { useLocale } from "@/i18n"
 import { mdToHtml } from "@/utils/string"
 import { Card, CardGroup } from "./card"
 
@@ -14,12 +12,12 @@ export interface SimilarProps {
   name: string
 }
 
-export function Similar({ name }: SimilarProps) {
+export async function Similar({ name }: SimilarProps) {
   const data = relations[name]
-  const { locale } = useLocale()
-  const docs = getDocs(locale)
 
   if (!data?.resembles?.length) return null
+
+  const docs = getDocs(await getLocale())
 
   return (
     <CardGroup>
@@ -48,9 +46,8 @@ interface LinkListProps {
     | NonNullable<Relations[string]["dependents"]>
 }
 
-function LinkList({ data }: LinkListProps) {
-  const { locale } = useLocale()
-  const docs = getDocs(locale)
+async function LinkList({ data }: LinkListProps) {
+  const docs = getDocs(await getLocale())
 
   return (
     <>

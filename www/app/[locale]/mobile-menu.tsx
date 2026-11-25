@@ -1,7 +1,7 @@
 "use client"
 
 import type { NextLinkButtonProps } from "@/components"
-import type { DocMap } from "@/data"
+import type { DocMap } from "@/data/doc-map"
 import {
   Box,
   ButtonGroup,
@@ -29,7 +29,7 @@ import {
   Status,
 } from "@/components"
 import { CONSTANTS } from "@/constants"
-import { getDocMap } from "@/data"
+import { getDocMap } from "@/data/doc-map"
 import { useLocale, usePathname } from "@/i18n"
 import { ColorModeButton } from "./color-mode-button"
 import { LangButton } from "./lang-button"

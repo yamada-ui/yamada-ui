@@ -3,7 +3,7 @@
 import { ButtonGroup } from "@yamada-ui/react"
 import { useMemo } from "react"
 import { NextLinkButton } from "@/components"
-import { getDocMap } from "@/data"
+import { getDocMap } from "@/data/doc-map"
 import { useLocale, usePathname } from "@/i18n"
 
 export function Header() {

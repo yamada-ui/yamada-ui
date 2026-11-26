@@ -8,7 +8,6 @@ import type { Ref } from "react"
 import type { MailItem } from "./data"
 import {
   ArchiveIcon,
-  assignRef,
   Avatar,
   Button,
   ClockIcon,
@@ -28,7 +27,7 @@ import {
   TrashIcon,
   VStack,
 } from "@yamada-ui/react"
-import { useState } from "react"
+import { useImperativeHandle, useState } from "react"
 import { Header } from "./header"
 import { getTimestamp } from "./utils"
 
@@ -41,7 +40,7 @@ export function Detail({ defaultMail, setMailRef, ...rest }: DetailProps) {
   const [{ authorName, content, email, timestamp, title }, setMail] =
     useState<MailItem>(defaultMail)
 
-  assignRef(setMailRef, setMail)
+  useImperativeHandle(setMailRef, () => setMail, [setMail])
 
   return (
     <VStack gap={0} h="full" {...rest}>

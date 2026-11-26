@@ -4,7 +4,6 @@ import type { Descendant, HTMLProps } from "@yamada-ui/react"
 import type { KeyboardEvent, RefObject } from "react"
 import type { Hit } from "@/data/search"
 import {
-  assignRef,
   Box,
   Center,
   CloseButton,
@@ -38,6 +37,7 @@ import { useRouter } from "next/navigation"
 import {
   useCallback,
   useEffect,
+  useImperativeHandle,
   useMemo,
   useRef,
   useState,
@@ -170,7 +170,7 @@ function SearchContent({ locale, onClose }: SearchContentProps) {
   const defaultContents = useMemo(() => getDefaultContents(locale), [locale])
   const bodyRef = useRef<HTMLDivElement>(null)
   const descendants = useDescendants()
-  const onSearchRef = useRef<(value: string) => void>(noop)
+  const onSearchRef = useRef<(value: string) => void>(null)
   const activeDescendant = useRef<Descendant<
     HTMLAnchorElement,
     { hit: Hit }
@@ -232,7 +232,7 @@ interface SearchContentHeaderProps {
   > | null>
   onActive: (descendant?: Descendant<HTMLAnchorElement, { hit: Hit }>) => void
   onClose: () => void
-  onSearchRef: RefObject<(value: string) => void>
+  onSearchRef: RefObject<((value: string) => void) | null>
 }
 
 function SearchContentHeader({
@@ -394,7 +394,7 @@ function SearchContentHeader({
         <Input
           bg="bg"
           placeholder={t("placeholder")}
-          onChange={(ev) => onSearchRef.current(ev.target.value)}
+          onChange={(ev) => onSearchRef.current?.(ev.target.value)}
           onCompositionEnd={() => {
             compositionRef.current = false
           }}
@@ -444,7 +444,7 @@ interface SearchContentBodyProps extends Modal.BodyProps {
   loading: boolean
   onActive: (descendant?: Descendant<HTMLAnchorElement, { hit: Hit }>) => void
   onClose: () => void
-  onSearchRef: RefObject<(value: string) => void>
+  onSearchRef: RefObject<((value: string) => void) | null>
   error?: Error
 }
 
@@ -512,14 +512,18 @@ function SearchContentBody({
     removeRecentSearch(pathname)
   }, [])
 
-  assignRef(onSearchRef, (value) => {
-    startTransition(() => {
-      resetRef.current()
+  useImperativeHandle(
+    onSearchRef,
+    () => (value) => {
+      startTransition(() => {
+        resetRef.current()
 
-      setCount(PER_PAGE)
-      setValue(value)
-    })
-  })
+        setCount(PER_PAGE)
+        setValue(value)
+      })
+    },
+    [startTransition],
+  )
 
   useEffect(() => {
     const descendant = descendants.enabledFirstValue()

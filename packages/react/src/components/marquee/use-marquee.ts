@@ -12,17 +12,18 @@ import type {
   PropGetter,
   SimpleDirection,
 } from "../../core"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from "react"
 import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
-import {
-  assignRef,
-  createContext,
-  dataAttr,
-  mergeRefs,
-  useCallbackRef,
-} from "../../utils"
+import { createContext, dataAttr, mergeRefs, useCallbackRef } from "../../utils"
 
 export interface MarqueeControl {
   /**
@@ -204,7 +205,7 @@ export function useMarquee({
     [animationPaused, pause, restart, resume, togglePause],
   )
 
-  assignRef(controlRef, control)
+  useImperativeHandle(controlRef, () => control, [control])
 
   useEffect(() => {
     const root = rootRef.current

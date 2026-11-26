@@ -5,10 +5,10 @@ import type { Accept, DropzoneOptions } from "react-dropzone"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { fromEvent } from "file-selector"
-import { useCallback, useId } from "react"
+import { useCallback, useId, useImperativeHandle } from "react"
 import { useDropzone as useOriginalDropzone } from "react-dropzone"
 import { mergeProps } from "../../core"
-import { ariaAttr, assignRef, dataAttr, isArray, mergeRefs } from "../../utils"
+import { ariaAttr, dataAttr, isArray, mergeRefs } from "../../utils"
 import { useFieldProps } from "../field"
 
 export interface UseDropzoneProps
@@ -230,7 +230,7 @@ export const useDropzone = (props: UseDropzoneProps = {}) => {
   })
   const dragIdle = !dragAccept && !dragReject
 
-  assignRef(openRef, open)
+  useImperativeHandle(openRef, () => open, [open])
 
   const getRootProps: PropGetter = useCallback(
     ({ ref, ...props } = {}) => {

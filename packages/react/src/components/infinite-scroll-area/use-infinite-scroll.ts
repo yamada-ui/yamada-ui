@@ -2,9 +2,15 @@
 
 import type { RefObject } from "react"
 import type { Orientation } from "../../core"
-import { useCallback, useEffect, useRef, useState } from "react"
+import {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react"
 import { useEnvironment } from "../../core"
-import { assignRef, useCallbackRef } from "../../utils"
+import { useCallbackRef } from "../../utils"
 
 const isScrollable = (el: HTMLElement, vertical: boolean) => {
   const style = getComputedStyle(el)
@@ -300,8 +306,14 @@ export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
     direction,
   ])
 
-  assignRef(resetRef, onReset)
-  assignRef(indexRefProp, (index) => (indexRef.current = index))
+  useImperativeHandle(resetRef, () => onReset, [onReset])
+  useImperativeHandle(
+    indexRefProp,
+    () => (index: number) => {
+      indexRef.current = index
+    },
+    [],
+  )
 
   return { ref, finish }
 }

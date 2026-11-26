@@ -8,7 +8,7 @@ import type {
   ThemeProps,
 } from "../../core"
 import type { NoticeStyle } from "./notice.style"
-import { createContext, createRef, use, useId, useMemo, useRef } from "react"
+import { createContext, createRef, use, useId, useMemo, useState } from "react"
 import { Portal } from "../portal"
 import { NoticeRoot, PLACEMENT_MAP } from "./notice"
 
@@ -35,33 +35,22 @@ interface NoticeContext extends NoticeMethods {}
 
 const NoticeContext = createContext({} as NoticeContext)
 
-export type Controller = ReturnType<typeof createController>
-
-const createController = () => ({
-  getLimit: createRef<NoticeMethods["getLimit"]>(),
-  updateLimit: createRef<NoticeMethods["updateLimit"]>(),
-})
+export type Controller = Pick<NoticeMethods, "getLimit" | "updateLimit">
 
 const createMethods = (
   id: string,
-  refs: {
-    [K in NoticePlacement]?: RefObject<Controller>
-  },
+  refs: Map<NoticePlacement, RefObject<Controller | null>>,
   defaultLimit: number,
 ): NoticeMethods => ({
   getId: (placement) => {
     return `${id}-${placement}`
   },
   getLimit: (placement) => {
-    const method = refs[placement]?.current.getLimit.current
-
-    return method?.(placement) ?? defaultLimit
+    return refs.get(placement)?.current?.getLimit(placement) ?? defaultLimit
   },
   updateLimit: (state) => {
     const { placement } = state
-    const method = refs[placement]?.current.updateLimit.current
-
-    method?.(state)
+    refs.get(placement)?.current?.updateLimit(state)
   },
 })
 
@@ -71,39 +60,38 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
   expand = false,
   limit = 3,
 }) => {
-  const placementMap = useRef<{
-    [K in NoticePlacement]?: RefObject<Controller>
-  }>({})
+  const [placementMap] = useState(() => {
+    const placements = Object.keys(PLACEMENT_MAP) as NoticePlacement[]
+
+    return new Map(
+      placements.map((placement) => [placement, createRef<Controller>()]),
+    )
+  })
   const id = useId()
 
   const value = useMemo(
-    () => ({ ...createMethods(id, placementMap.current, limit) }),
-    [id, limit],
+    () => createMethods(id, placementMap, limit),
+    [id, limit, placementMap],
   )
 
-  const components = useMemo(() => {
-    return (Object.keys(PLACEMENT_MAP) as NoticePlacement[]).map(
-      (placement) => {
-        if (!placementMap.current[placement])
-          placementMap.current[placement] = { current: createController() }
-
-        return (
-          <NoticeRoot
-            key={placement}
-            ref={placementMap.current[placement]}
-            expand={expand}
-            limit={limit}
-            placement={placement}
-          />
-        )
-      },
-    )
-  }, [limit, expand])
+  const components = useMemo(
+    () =>
+      Array.from(placementMap, ([placement, ref]) => (
+        <NoticeRoot
+          key={placement}
+          ref={ref}
+          expand={expand}
+          limit={limit}
+          placement={placement}
+        />
+      )),
+    [limit, expand, placementMap],
+  )
 
   return (
     <NoticeContext value={value}>
-      {children}
       <Portal containerRef={containerRef}>{components}</Portal>
+      {children}
     </NoticeContext>
   )
 }

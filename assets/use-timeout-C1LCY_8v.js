@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-BCiCTKAo.js";import{t}from"./react-BWPDF9mI.js";import{ct as n,dt as r}from"./props-CAjJr30V.js";var i,a;function o(){return(o=e((()=>{i=t(),n(),a=(e,t)=>{let n=r(e);(0,i.useEffect)(()=>{if(t==null)return;let e=null;return e=setTimeout(n,t),()=>{clearTimeout(e)}},[t,n])}})))()}export{a as n,o as t};

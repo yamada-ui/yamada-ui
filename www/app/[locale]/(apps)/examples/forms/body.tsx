@@ -2,17 +2,9 @@
 
 import type { ButtonProps, StackProps } from "@yamada-ui/react"
 import type { RefObject } from "react"
-import {
-  assignRef,
-  Box,
-  Button,
-  HStack,
-  noop,
-  useBoolean,
-  VStack,
-} from "@yamada-ui/react"
+import { Box, Button, HStack, useBoolean, VStack } from "@yamada-ui/react"
 import { handlerAll } from "@yamada-ui/utils"
-import { useCallback, useRef, useState } from "react"
+import { useCallback, useImperativeHandle, useRef, useState } from "react"
 import { Account } from "./account"
 import { Appearance } from "./appearance"
 import { Display } from "./display"
@@ -37,9 +29,12 @@ const SIDEBAR_MENU: Type[] = [
 export const DEFAULT_FORM_TYPE: Type = "profile"
 
 export function Body() {
-  const setTypeRef = useRef<(type: Type) => void>(noop)
+  const setTypeRef = useRef<(type: Type) => void>(null)
 
-  const onChangeType = useCallback((type: Type) => setTypeRef.current(type), [])
+  const onChangeType = useCallback(
+    (type: Type) => setTypeRef.current?.(type),
+    [],
+  )
 
   return (
     <HStack
@@ -120,13 +115,13 @@ function SidebarButton({
 }
 
 interface ContentProps {
-  setTypeRef: RefObject<(type: Type) => void>
+  setTypeRef: RefObject<((type: Type) => void) | null>
 }
 
 function Content({ setTypeRef }: ContentProps) {
   const [type, setType] = useState<Type>(DEFAULT_FORM_TYPE)
 
-  assignRef(setTypeRef, setType)
+  useImperativeHandle(setTypeRef, () => setType, [setType])
 
   switch (type) {
     case "profile":

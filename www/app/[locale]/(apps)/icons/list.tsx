@@ -81,7 +81,7 @@ export function List({ ...rest }: ListProps) {
     return list
   })
   const resetRef = useRef<() => void>(noop)
-  const openRef = useRef<(data: Data) => void>(noop)
+  const openRef = useRef<(data: Data) => void>(null)
   const router = useRouter()
   const totalIndex = Math.ceil(total / PER_PAGE) - 1
   const [pending, startTransition] = useTransition()
@@ -133,7 +133,7 @@ export function List({ ...rest }: ListProps) {
   const onOpen = useCallback(
     (data: Data) => {
       replaceQuery({ name: data.name })
-      openRef.current(data)
+      openRef.current?.(data)
     },
     [replaceQuery],
   )

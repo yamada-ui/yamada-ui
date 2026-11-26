@@ -2,7 +2,6 @@
 
 import type { MailItem } from "./data"
 import {
-  noop,
   Resizable,
   Separator,
   useBreakpointEffect,
@@ -17,8 +16,8 @@ import { Sidebar } from "./sidebar"
 export function Mail() {
   const controlRef = useRef<Resizable.ItemControl>(null)
   const [collapsible, setCollapsible] = useState(false)
-  const setDesktopMailRef = useRef<(mail: MailItem) => void>(noop)
-  const setMobileMailRef = useRef<(mail: MailItem) => void>(noop)
+  const setDesktopMailRef = useRef<(mail: MailItem) => void>(null)
+  const setMobileMailRef = useRef<(mail: MailItem) => void>(null)
 
   useBreakpointEffect((breakpoint) => {
     if (["2xl", "base"].includes(breakpoint)) {

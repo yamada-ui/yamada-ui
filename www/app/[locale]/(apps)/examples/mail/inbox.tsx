@@ -25,7 +25,7 @@ import { getDateDiff } from "./utils"
 interface InboxProps extends StackProps {
   defaultMail: MailItem
   mails: MailItem[]
-  setMailRef: RefObject<(mail: MailItem) => void>
+  setMailRef: RefObject<((mail: MailItem) => void) | null>
 }
 
 export function Inbox({ defaultMail, mails, setMailRef, ...rest }: InboxProps) {
@@ -87,7 +87,7 @@ export function Inbox({ defaultMail, mails, setMailRef, ...rest }: InboxProps) {
                 <InboxItem
                   defaultSelected={defaultSelected}
                   resetMapRef={resetMapRef}
-                  onClick={() => setMailRef.current(props)}
+                  onClick={() => setMailRef.current?.(props)}
                   {...props}
                 />
               </Box>

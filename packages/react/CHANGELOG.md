@@ -1,5 +1,17 @@
 # @yamada-ui/react
 
+## 2.3.5
+
+### Patch Changes
+
+- [#8108](https://github.com/yamada-ui/yamada-ui/pull/8108) [`b8d886d`](https://github.com/yamada-ui/yamada-ui/commit/b8d886d016e62b7043079f989c963d8e7d53d09c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Refactor Tree to merge `aria-labelledby` with `mergeProps` and prevent parent items from reprocessing keyboard events handled by nested items.
+
+- [#8099](https://github.com/yamada-ui/yamada-ui/pull/8099) [`169908b`](https://github.com/yamada-ui/yamada-ui/commit/169908b975e0c46002812683e3c751b85d715094) Thanks [@bmthd](https://github.com/bmthd)! - Fixed `mergeRefs` to call the cleanup functions returned by callback refs.
+
+- [#8107](https://github.com/yamada-ui/yamada-ui/pull/8107) [`edbe490`](https://github.com/yamada-ui/yamada-ui/commit/edbe4901ca3c0f51c29355d7227c13bad23839fe) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Fixed imperative refs being updated during render instead of after React commits.
+
+- [#8102](https://github.com/yamada-ui/yamada-ui/pull/8102) [`e02c889`](https://github.com/yamada-ui/yamada-ui/commit/e02c889de6d07e1334600e85feb90400aef59198) Thanks [@bmthd](https://github.com/bmthd)! - Fixed `useMergeRefs` to return a stable callback ref while the refs are unchanged.
+
 ## 2.3.4
 
 ### Patch Changes

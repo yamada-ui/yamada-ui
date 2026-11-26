@@ -1,18 +1,17 @@
-import { isObject } from "@yamada-ui/utils"
+import { isFunction, isObject } from "@yamada-ui/utils"
 import * as React from "react"
 
 export function isRefObject(val: any): val is { current: any } {
   return isObject(val) && "current" in val
 }
 
-export function assignRef<Y = any>(ref: React.Ref<Y> | undefined, value: Y) {
+export function assignRef<Y = any>(
+  ref: React.Ref<Y> | undefined,
+  value: Y,
+): ReturnType<React.RefCallback<Y>> {
   if (ref == null) return
 
-  if (typeof ref === "function") {
-    ref(value)
-
-    return
-  }
+  if (typeof ref === "function") return ref(value)
 
   try {
     ref.current = value
@@ -23,11 +22,16 @@ export function assignRef<Y = any>(ref: React.Ref<Y> | undefined, value: Y) {
 
 export function mergeRefs<Y = any>(
   ...refs: (null | React.Ref<Y> | undefined)[]
-) {
-  return function (node: null | Y) {
-    return refs.forEach((ref) => {
-      assignRef(ref, node)
-    })
+): { (node: null | Y): { (): void } } {
+  return function (node) {
+    const cleanups = refs.map((ref) => assignRef(ref, node))
+
+    return () => {
+      cleanups.forEach((cleanup, index) => {
+        if (isFunction(cleanup)) cleanup()
+        else assignRef(refs[index], null)
+      })
+    }
   }
 }
 

@@ -12,7 +12,13 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { Descendant, Descendants } from "../../hooks/use-descendants"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import type { UseCheckboxProps } from "../checkbox"
-import { Children, useCallback, useRef, useState } from "react"
+import {
+  Children,
+  useCallback,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react"
 import { mergeProps } from "../../core"
 import { useAsyncCallback } from "../../hooks/use-async-callback"
 import { useControllableState } from "../../hooks/use-controllable-state"
@@ -20,7 +26,6 @@ import { createDescendants } from "../../hooks/use-descendants"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import {
   ariaAttr,
-  assignRef,
   createContext,
   cx,
   dataAttr,
@@ -282,7 +287,11 @@ export const useTree = <Multiple extends boolean = false>({
     }
   }, [children])
 
-  assignRef(controlRef, { collapse: onCollapseAll, expand: onExpandAll })
+  useImperativeHandle(
+    controlRef,
+    () => ({ collapse: onCollapseAll, expand: onExpandAll }),
+    [onCollapseAll, onExpandAll],
+  )
 
   const getRootProps: PropGetter<"ul"> = useCallback(
     (props) =>

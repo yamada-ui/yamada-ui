@@ -6,7 +6,13 @@ import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import type { UsePopperProps } from "../../hooks/use-popper"
 import type { Dict } from "../../utils"
 import type { UsePopupAnimationProps } from "./popover"
-import { useCallback, useEffect, useId, useRef } from "react"
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useImperativeHandle,
+  useRef,
+} from "react"
 import { useEnvironment, useSplitProps } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { useEventListener } from "../../hooks/use-event-listener"
@@ -15,7 +21,6 @@ import { useOutsideClick } from "../../hooks/use-outside-click"
 import { popperProps, usePopper } from "../../hooks/use-popper"
 import {
   ariaAttr,
-  assignRef,
   contains,
   dataAttr,
   focusTransfer,
@@ -168,7 +173,7 @@ export const usePopover = ({
     whileElementsMounted,
   })
 
-  assignRef(updateRef, update)
+  useImperativeHandle(updateRef, () => update, [update])
 
   const onRestoreFocus = useCallback(() => {
     clearTimeout(closeTimeout.current)

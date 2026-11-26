@@ -3,9 +3,8 @@
 import type { ForwardedRef } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { UseAutosizeProps } from "./use-autosize"
-import { useCallback } from "react"
+import { useCallback, useImperativeHandle } from "react"
 import { mergeProps } from "../../core"
-import { assignRef } from "../../utils"
 import { useAutosize } from "./use-autosize"
 
 export interface UseTextareaProps
@@ -33,7 +32,7 @@ export const useTextarea = ({
     minRows,
   })
 
-  assignRef(resizeRef, onResizeTextarea)
+  useImperativeHandle(resizeRef, () => onResizeTextarea, [onResizeTextarea])
 
   const getTextareaProps: PropGetter<"textarea"> = useCallback(
     (props = {}) =>

@@ -1,5 +1,6 @@
 import type { FC, PropsWithChildren } from "react"
 import type { Render, RenderHook } from "#test"
+import { useLayoutEffect } from "react"
 import {
   a11y,
   fireEvent,
@@ -76,6 +77,22 @@ describe("useLoading", () => {
 
     render(<TestComponent />)
     fireEvent.click(screen.getByTestId("start"))
+    expect(document.querySelector("div[data-loading]")).toBeInTheDocument()
+  })
+
+  test("screen.start is available in a consumer's layout effect", () => {
+    function Example() {
+      const { screen: screenLoading } = useLoading()
+
+      useLayoutEffect(() => {
+        screenLoading.start()
+      }, [screenLoading])
+
+      return null
+    }
+
+    render(<Example />)
+
     expect(document.querySelector("div[data-loading]")).toBeInTheDocument()
   })
 

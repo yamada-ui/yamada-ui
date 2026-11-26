@@ -5,7 +5,6 @@ import type {
   PropsWithChildren,
   ReactElement,
   ReactNode,
-  RefObject,
 } from "react"
 import type {
   ActiveDotProps,
@@ -34,7 +33,14 @@ import type {
   UseChartLegendReturn,
   UseChartTooltipProps,
 } from "./use-chart"
-import { Fragment, isValidElement, useMemo, useRef } from "react"
+import {
+  Fragment,
+  isValidElement,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react"
 import {
   Label,
   LabelList,
@@ -161,7 +167,8 @@ interface ComponentContext extends Pick<
   ChartProps,
   "legendProps" | "tooltipProps"
 > {
-  nameKeyRef: RefObject<string | undefined>
+  nameKey: PropertyKey | undefined
+  registerNameKey: (nameKey: PropertyKey) => () => void
 }
 
 export interface ChartProps extends HTMLStyledProps, ThemeProps<ChartStyle> {
@@ -249,7 +256,20 @@ export const Chart = withProvider(
     ...rest
   }: ChartProps) => {
     const { highlightedDataKey, onHighlight } = useChart()
-    const nameKeyRef = useRef<string | undefined>(undefined)
+    const [nameKey, setNameKey] = useState<PropertyKey>()
+    const nameKeysRef = useRef(new Map<symbol, PropertyKey>())
+    const registerNameKey = useCallback((nameKey: PropertyKey) => {
+      const nameKeys = nameKeysRef.current
+      const id = Symbol()
+
+      nameKeys.set(id, nameKey)
+      setNameKey(nameKey)
+
+      return () => {
+        nameKeys.delete(id)
+        setNameKey(Array.from(nameKeys.values()).at(-1))
+      }
+    }, [])
     const components = useMemo(
       () => [
         ...componentsProp,
@@ -277,11 +297,12 @@ export const Chart = withProvider(
     )
     const componentContext = useMemo(
       () => ({
-        nameKeyRef,
+        nameKey,
+        registerNameKey,
         legendProps,
         tooltipProps,
       }),
-      [legendProps, tooltipProps],
+      [legendProps, nameKey, registerNameKey, tooltipProps],
     )
 
     return (
@@ -389,7 +410,7 @@ interface ChartLegendContentProps
 
 const ChartLegendContent = withContext<"div", ChartLegendContentProps>(
   ({ formatter, payload, withSwatch = true, ...rest }) => {
-    const { nameKeyRef } = useChartComponentContext()
+    const { nameKey } = useChartComponentContext()
     const { getLegendItemProps } = useChartLegendContext()
 
     return (
@@ -397,8 +418,7 @@ const ChartLegendContent = withContext<"div", ChartLegendContentProps>(
         {payload?.map((data, index) => {
           let value = data.value
 
-          if (nameKeyRef.current)
-            value = (data.payload as any)?.[nameKeyRef.current]
+          if (nameKey) value = (data.payload as any)?.[nameKey]
 
           const dataKey =
             isString(data.dataKey) || isNumber(data.dataKey)
@@ -566,10 +586,13 @@ const ChartTooltipContent = withContext<"div", ChartTooltipContentProps>(
     withSwatch = true,
     ...rest
   }) => {
-    const { nameKeyRef } = useChartComponentContext()
+    const { nameKey } = useChartComponentContext()
     const label = labelFormatter
       ? labelFormatter(labelProp, payload)
       : labelProp
+    const items = nameKey
+      ? payload.map((data) => ({ ...data, name: data.payload[nameKey] }))
+      : payload
 
     return (
       <styled.div {...rest}>
@@ -578,12 +601,10 @@ const ChartTooltipContent = withContext<"div", ChartTooltipContentProps>(
         ) : null}
 
         <ChartTooltipList>
-          {payload.map((data, index) => {
-            if (nameKeyRef.current) data.name = data.payload[nameKeyRef.current]
-
+          {items.map((data, index) => {
             const color = parseJSON(data.color) || data.payload.fill
             const result =
-              formatter?.(data.value, data.name, data, index, payload) ??
+              formatter?.(data.value, data.name, data, index, items) ??
               (isArray(data.value) ? data.value.join(", ") : data.value)
             const [value, name] = isArray(result) ? result : [result, data.name]
 

@@ -45,6 +45,32 @@ describe("useMergeRefs", () => {
     expect(ref1.current).toBe(el)
     expect(ref2.current).toBe(el)
   })
+
+  test("should return the same callback ref while the refs are unchanged", () => {
+    const ref1 = createRef()
+    const ref2 = createRef()
+
+    const { rerender, result } = renderHook(() => useMergeRefs(ref1, ref2))
+    const mergedRef = result.current
+
+    rerender()
+
+    expect(result.current).toBe(mergedRef)
+  })
+
+  test("should return a new callback ref when a ref changes", () => {
+    const ref1 = createRef()
+
+    const { rerender, result } = renderHook(
+      ({ ref2 }) => useMergeRefs(ref1, ref2),
+      { initialProps: { ref2: createRef() } },
+    )
+    const mergedRef = result.current
+
+    rerender({ ref2: createRef() })
+
+    expect(result.current).not.toBe(mergedRef)
+  })
 })
 
 describe("useCallbackRef", () => {

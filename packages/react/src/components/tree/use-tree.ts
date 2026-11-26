@@ -27,15 +27,12 @@ import { useDisclosure } from "../../hooks/use-disclosure"
 import {
   ariaAttr,
   createContext,
-  cx,
   dataAttr,
   filterEmpty,
-  handlerAll,
   isArray,
   isInputElement,
   isUndefined,
   match,
-  mergeRefs,
   runKeyAction,
   setAttribute,
   useIds,
@@ -583,7 +580,7 @@ export const useTreeItem = ({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLElement>) => {
-      if (disabled || !value) return
+      if (ev.defaultPrevented || disabled || !value) return
 
       runKeyAction(ev, {
         a: () => {
@@ -811,20 +808,22 @@ export const useTreeItem = ({
   }, [checkable, descendants])
 
   const getItemProps: PropGetter<"li"> = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id: itemId,
-      ref: mergeRefs(ref, register),
-      "aria-disabled": ariaAttr(disabled),
-      "aria-labelledby": cx(ariaLabelledby, labelId),
-      "aria-level": level,
-      "aria-selected": ariaAttr(selected),
-      "data-disabled": dataAttr(disabled),
-      role: "treeitem",
-      tabIndex: -1,
-      ...props,
-      onClick: handlerAll(props.onClick, onItemClick),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          id: itemId,
+          ref: register,
+          "aria-disabled": ariaAttr(disabled),
+          "aria-labelledby": labelId,
+          "aria-level": level,
+          "aria-selected": ariaAttr(selected),
+          "data-disabled": dataAttr(disabled),
+          role: "treeitem",
+          tabIndex: -1,
+        },
+        props,
+        { onClick: onItemClick, onKeyDown },
+      )(),
     [
       itemId,
       register,
@@ -838,36 +837,43 @@ export const useTreeItem = ({
   )
 
   const getGroupItemProps: PropGetter<"li"> = useCallback(
-    (props = {}) => getItemProps({ "aria-expanded": groupOpen, ...props }),
+    (props = {}) =>
+      getItemProps(mergeProps({ "aria-expanded": groupOpen }, props)()),
     [getItemProps, groupOpen],
   )
 
   const getIndicatorProps: PropGetter<"svg"> = useCallback(
-    (props) => ({
-      "aria-disabled": ariaAttr(disabled),
-      "aria-expanded": groupOpen,
-      "aria-hidden": true,
-      "data-disabled": dataAttr(disabled),
-      "data-loading": dataAttr(groupLoading),
-      "data-selected": dataAttr(selected),
-      role: "presentation",
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          "aria-disabled": ariaAttr(disabled),
+          "aria-expanded": groupOpen,
+          "aria-hidden": true,
+          "data-disabled": dataAttr(disabled),
+          "data-loading": dataAttr(groupLoading),
+          "data-selected": dataAttr(selected),
+          role: "presentation",
+        },
+        props,
+      )(),
     [disabled, groupOpen, selected, groupLoading],
   )
 
   const getCheckboxProps: PropGetter<UseCheckboxProps> = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      id: checkboxId,
-      "aria-labelledby": cx(ariaLabelledby, labelId),
-      "data-selected": dataAttr(selected),
-      checked,
-      disabled,
-      indeterminate,
-      tabIndex: -1,
-      ...props,
-      onChange: handlerAll(props.onChange, onCheckboxChange),
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          id: checkboxId,
+          "aria-labelledby": labelId,
+          "data-selected": dataAttr(selected),
+          checked,
+          disabled,
+          indeterminate,
+          tabIndex: -1,
+        },
+        props,
+        { onChange: onCheckboxChange },
+      )(),
     [
       checkboxId,
       labelId,
@@ -880,18 +886,21 @@ export const useTreeItem = ({
   )
 
   const getGroupProps: PropGetter<"ul"> = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      "aria-busy": ariaAttr(groupLoading),
-      "aria-labelledby": cx(ariaLabelledby, labelId),
-      "data-disabled": dataAttr(disabled),
-      role: "group",
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        {
+          "aria-busy": ariaAttr(groupLoading),
+          "aria-labelledby": labelId,
+          "data-disabled": dataAttr(disabled),
+          role: "group",
+        },
+        props,
+      )(),
     [labelId, disabled, groupLoading],
   )
 
   const getLabelProps: PropGetter<"span"> = useCallback(
-    (props = {}) => ({ id: labelId, ...props }),
+    (props = {}) => mergeProps({ id: labelId }, props)(),
     [labelId],
   )
 

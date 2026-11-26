@@ -312,6 +312,25 @@ describe("useDescendant", () => {
     expect(descendant.node.dataset.activedescendant).toBe("")
   })
 
+  test("active with null or undefined clears active descendant", async () => {
+    const { descendants, useDescendant, Wrapper } = await setup()
+
+    const Item: FC = () => {
+      const { register } = useDescendant()
+
+      return <div ref={register}>Item</div>
+    }
+
+    await render(<Wrapper>{renderItems(2, Item)}</Wrapper>)
+    const node = descendants.values()[0]!.node
+
+    descendants.active(node)
+    expect(node.dataset.activedescendant).toBe("")
+
+    descendants.active()
+    expect(node.dataset.activedescendant).toBeUndefined()
+  })
+
   test("active with focus options", async () => {
     const { descendants, useDescendant, Wrapper } = await setup()
 

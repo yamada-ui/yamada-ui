@@ -134,7 +134,15 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
     target?: Descendant<Y, M> | null | Y,
     options?: FocusOptions,
   ) => {
-    if (!target) return
+    if (!target) {
+      const descendants = values()
+
+      descendants.forEach(({ node }) => {
+        delete node.dataset.activedescendant
+      })
+
+      return
+    }
 
     if (!(target instanceof Node)) target = target.node
 

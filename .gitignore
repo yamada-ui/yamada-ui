@@ -16,6 +16,7 @@ storybook-static
 
 # testing
 __screenshots__
+visual-baseline
 .vitest
 coverage
 report.json

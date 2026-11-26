@@ -63,6 +63,7 @@
     "test:chromium": "vitest --project=browser:chromium",
     "test:webkit": "vitest --project=browser:webkit",
     "test:firefox": "vitest --project=browser:firefox",
+    "test:visual": "vitest run --config vitest.visual.config.ts",
     "test:dev": "vitest --watch --ui",
     "test:dev:jsdom": "vitest --watch --ui --project=jsdom --project=jsdom:isolated",
     "test:dev:browser": "vitest --watch --ui --project=browser:chromium --project=browser:firefox --project=browser:webkit",

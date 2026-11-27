@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import { a11y, render, screen } from "#test"
 import { Button } from "../button"
+import { PortalProvider } from "../portal"
 import { Modal } from "./"
 
 const TestComponent: FC<Modal.RootProps> = (props) => {
@@ -61,6 +62,32 @@ describe("<Modal />", () => {
     )
     expect(screen.getByTestId("title")).toHaveAttribute("id")
     expect(screen.getByTestId("body")).toHaveAttribute("id")
+  })
+
+  test("inherits portal provider data attributes from the portal wrapper", () => {
+    render(
+      <PortalProvider value={{ "data-scope": "provider" }}>
+        <TestComponent open />
+      </PortalProvider>,
+    )
+
+    const root = screen.getByTestId("root")
+
+    expect(root).not.toHaveAttribute("data-scope")
+    expect(root.closest("[data-scope]")).toHaveAttribute(
+      "data-scope",
+      "provider",
+    )
+  })
+
+  test("omits portal provider data attributes when rendered inline", () => {
+    render(
+      <PortalProvider value={{ "data-scope": "provider" }}>
+        <TestComponent open portalProps={{ disabled: true }} />
+      </PortalProvider>,
+    )
+
+    expect(screen.getByTestId("root").closest("[data-scope]")).toBeNull()
   })
 
   test("renders shorthand content with title, body, and footer buttons", () => {

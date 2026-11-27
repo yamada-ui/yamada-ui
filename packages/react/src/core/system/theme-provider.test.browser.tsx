@@ -33,11 +33,15 @@ describe("<ThemeSchemeScope />", () => {
 
     await render(
       <>
-        <Button colorScheme="primary">Outside action</Button>
+        <Box colorScheme="primary" bg="colorScheme.solid">
+          Outside scope
+        </Box>
 
         <ThemeSchemeScope themeScheme={"pink" as ThemeScheme}>
           <section aria-label="Pink section">
-            <Button colorScheme="primary">Inside action</Button>
+            <Box colorScheme="primary" bg="colorScheme.solid">
+              Inside scope
+            </Box>
           </section>
         </ThemeSchemeScope>
       </>,
@@ -50,11 +54,19 @@ describe("<ThemeSchemeScope />", () => {
     )
 
     await expect
-      .element(page.getByRole("button", { name: "Outside action" }))
-      .toHaveStyle({ backgroundColor: "rgb(32, 64, 128)" })
+      .poll(
+        () =>
+          getComputedStyle(page.getByText("Outside scope").element())
+            .backgroundColor,
+      )
+      .toBe("rgb(32, 64, 128)")
     await expect
-      .element(page.getByRole("button", { name: "Inside action" }))
-      .toHaveStyle({ backgroundColor: "rgb(192, 64, 128)" })
+      .poll(
+        () =>
+          getComputedStyle(page.getByText("Inside scope").element())
+            .backgroundColor,
+      )
+      .toBe("rgb(192, 64, 128)")
     expect(document.documentElement.dataset.theme).toBe("base")
   })
 })

@@ -206,7 +206,7 @@ export interface ThemeSchemeScopeProps extends SlotProps {
 /**
  * `ThemeSchemeScope` is a component that sets the theme scheme for its children.
  *
- * @see https://yamada-ui.com/docs/components/theme-scheme-scope
+ * @see https://yamada-ui.com/docs/theming/switching-themes#themeschemescope
  */
 export const ThemeSchemeScope: FC<ThemeSchemeScopeProps> = ({
   themeScheme,
@@ -234,6 +234,8 @@ export interface SemanticTokenScopeProps extends SlotProps {
 
 /**
  * `SemanticTokenScope` overrides semantic tokens on a single child element and its DOM descendants.
+ *
+ * @see https://yamada-ui.com/docs/theming/switching-themes#semantictokenscope
  */
 export const SemanticTokenScope: FC<SemanticTokenScopeProps> = ({
   name,

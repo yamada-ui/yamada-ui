@@ -158,3 +158,51 @@ const App = () => {
 ```
 
 ::::
+
+## Apply Theme Overrides to a Section
+
+Both scopes take one child element and apply the overrides to that element and its descendants. Use a DOM element, such as `section`, or a component that forwards attributes to a DOM element. Content rendered through Yamada UI's `Portal`, such as a `Modal`, also inherits the scopes.
+
+### ThemeSchemeScope
+
+Use `ThemeSchemeScope` with a scheme registered in `themeSchemes` to style a page, route layout, or section without changing the document's theme scheme or adding another `UIProvider`. This example uses the `red` scheme from the setup above.
+
+```tsx
+import { Button, ThemeSchemeScope } from "@yamada-ui/react"
+
+export function Page() {
+  return (
+    <>
+      <Button colorScheme="primary">Document theme</Button>
+
+      <ThemeSchemeScope themeScheme="red">
+        <section>
+          <Button colorScheme="primary">Red theme</Button>
+        </section>
+      </ThemeSchemeScope>
+    </>
+  )
+}
+```
+
+### SemanticTokenScope
+
+Use `SemanticTokenScope` to override existing semantic tokens directly. Pass a single value or a `[light, dark]` pair, as in the theme's `semanticTokens`. The overrides apply only inside the scope, and you can combine it with `ThemeSchemeScope`.
+
+The scope generates a `data-semantic-token` value automatically. To set an explicit value with `name`, use a unique CSS-safe name such as `preview-panel`.
+
+```tsx
+import { Box, SemanticTokenScope } from "@yamada-ui/react"
+
+export function Preview() {
+  return (
+    <SemanticTokenScope
+      tokens={{ colors: { bg: { panel: ["purple.50", "purple.950"] } } }}
+    >
+      <Box bg="bg.panel" p="md">
+        Preview
+      </Box>
+    </SemanticTokenScope>
+  )
+}
+```

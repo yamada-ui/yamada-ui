@@ -4,7 +4,7 @@ import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback } from "react"
 import { mergeProps } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
-import { useIds } from "../../utils"
+import { isComposing, useIds } from "../../utils"
 
 export interface UseModalProps
   extends HTMLProps, Omit<UseDisclosureProps, "timing"> {
@@ -46,7 +46,7 @@ export const useModal = ({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent) => {
-      if (ev.key !== "Escape") return
+      if (isComposing(ev.nativeEvent) || ev.key !== "Escape") return
 
       if (closeOnEsc) {
         ev.stopPropagation()

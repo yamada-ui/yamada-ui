@@ -9,7 +9,7 @@ import {
 } from "@yamada-ui/react"
 import { useMemo } from "react"
 import { NextLinkButton } from "@/components"
-import { flattenDocMap, getDocMap } from "@/data"
+import { flattenDocMap, getDocMap } from "@/data/doc-map"
 import { useLocale, usePathname } from "@/i18n"
 
 export function Pagination() {

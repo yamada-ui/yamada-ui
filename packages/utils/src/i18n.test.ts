@@ -42,8 +42,6 @@ describe("isRtl", () => {
 
     expect(isRtl("ar")).toBeTruthy()
     expect(isRtl("en")).toBeFalsy()
-
-    vi.restoreAllMocks()
   })
 
   test("Falls back to RTL_LANGS when script is not available", () => {
@@ -69,7 +67,5 @@ describe("isRtl", () => {
 
     expect(isRtl("ar")).toBeTruthy()
     expect(isRtl("en")).toBeFalsy()
-
-    vi.restoreAllMocks()
   })
 })

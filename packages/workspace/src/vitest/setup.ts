@@ -8,24 +8,24 @@ if (typeof window.matchMedia !== "function")
   Object.defineProperty(window, "matchMedia", {
     configurable: true,
     enumerable: true,
-    value: vi.fn().mockImplementation((query) => ({
-      addEventListener: vi.fn(),
-      addListener: vi.fn(),
-      dispatchEvent: vi.fn(),
+    value: (query: string) => ({
+      addEventListener: () => {},
+      addListener: () => {},
+      dispatchEvent: () => false,
       matches: false,
       media: query,
-      removeEventListener: vi.fn(),
-      removeListener: vi.fn(),
+      removeEventListener: () => {},
+      removeListener: () => {},
       onchange: null,
-    })),
+    }),
     writable: true,
   })
 
 if (typeof globalThis.ResizeObserver !== "function") {
   class ResizeObserverMock {
-    observe = vi.fn()
-    unobserve = vi.fn()
-    disconnect = vi.fn()
+    observe() {}
+    unobserve() {}
+    disconnect() {}
   }
 
   Object.defineProperty(globalThis, "ResizeObserver", {

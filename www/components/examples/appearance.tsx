@@ -57,6 +57,7 @@ export function Appearance() {
           id="dark-mode"
           colorScheme="primary"
           checked={colorMode === "dark"}
+          suppressHydrationWarning
           onChange={toggleColorMode}
         />
       </HStack>

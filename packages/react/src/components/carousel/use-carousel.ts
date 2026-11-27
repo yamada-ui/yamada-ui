@@ -14,13 +14,18 @@ import type {
 } from "../../core"
 import type { FunctionOf } from "../../utils"
 import useEmblaCarousel from "embla-carousel-react"
-import { useCallback, useEffect, useRef, useState } from "react"
+import {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react"
 import { mergeProps } from "../../core"
 import { useBoolean } from "../../hooks/use-boolean"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useI18n } from "../../providers/i18n-provider"
 import {
-  assignRef,
   createContext,
   dataAttr,
   handlerAll,
@@ -348,7 +353,11 @@ export const useCarousel = ({
     [snapCount, horizontal, onFocusIndicator],
   )
 
-  assignRef(controlRef, carousel)
+  useImperativeHandle<CarouselControl | null, CarouselControl | null>(
+    controlRef,
+    () => carousel ?? null,
+    [carousel],
+  )
 
   useEffect(() => {
     if (carousel) {

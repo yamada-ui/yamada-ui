@@ -1,7 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import { NativePopover } from "."
-import { toTitleCase } from "../../utils"
 import { Button } from "../button"
 import { Center } from "../center"
 import { For } from "../for"
@@ -130,7 +129,7 @@ export const Placement: Story = () => {
       {(placement) => (
         <NativePopover.Root key={placement} placement={placement}>
           <NativePopover.Trigger>
-            <Button>Open "{toTitleCase(placement)}" Popover</Button>
+            <Button>Open "{placement}" Popover</Button>
           </NativePopover.Trigger>
 
           <NativePopover.Content>

@@ -86,7 +86,7 @@ export const Fallback: Story = () => {
   return (
     <Wrap gap="md">
       <Avatar src="https://not-found.com" />
-      <Avatar src="https://not-found.com" alt="alternative text" />
+      <Avatar src="https://not-found.com" alt="Alternative text" />
       <Avatar src="https://not-found.com" icon={<GhostIcon fontSize="2xl" />} />
     </Wrap>
   )

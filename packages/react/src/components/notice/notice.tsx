@@ -12,10 +12,10 @@ import type { CloseButtonProps } from "../close-button"
 import type { Controller, NoticeMethods } from "./notice-provider"
 import type { NoticeStyle } from "./notice.style"
 import type { UseNoticeOptions } from "./use-notice"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useImperativeHandle, useMemo, useState } from "react"
 import { toast, Toaster } from "sonner"
 import { createSlotComponent, styled } from "../../core"
-import { assignRef, dataAttr, handlerAll, noop } from "../../utils"
+import { dataAttr, handlerAll, noop } from "../../utils"
 import { Alert } from "../alert"
 import { CloseButton } from "../close-button"
 import { useNoticeContext } from "./notice-provider"
@@ -40,7 +40,7 @@ export interface NoticeRootProps extends Pick<
   Required<NoticeConfig>,
   "expand" | "limit" | "placement"
 > {
-  ref: RefObject<Controller>
+  ref: RefObject<Controller | null>
 }
 
 const {
@@ -73,8 +73,10 @@ export const NoticeRoot = withProvider<"fragment", NoticeRootProps>(
       [placement],
     )
 
-    assignRef(ref.current.updateLimit, updateLimit)
-    assignRef(ref.current.getLimit, getLimit)
+    useImperativeHandle(ref, () => ({ getLimit, updateLimit }), [
+      getLimit,
+      updateLimit,
+    ])
 
     return (
       <styled.div {...rest}>

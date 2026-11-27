@@ -16,6 +16,7 @@ import {
   getDocument,
   getWindow,
   handlerAll,
+  isComposing,
   useUnmountEffect,
 } from "../../utils"
 
@@ -125,8 +126,10 @@ export const useTooltip = (props: UseTooltipProps = {}) => {
   useEventListener(
     () => getDocument(triggerRef.current),
     "keydown",
-    ({ key }) => {
-      if (closeOnEsc && key === "Escape") onDelayClose()
+    (ev) => {
+      if (isComposing(ev)) return
+
+      if (closeOnEsc && ev.key === "Escape") onDelayClose()
     },
   )
 

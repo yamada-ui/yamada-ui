@@ -33,7 +33,11 @@ export default mergeConfig(sharedConfig, {
           exclude: ["src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}"],
           globals: true,
           include: ["src/**/*.test.{ts,tsx}"],
+          isolate: false,
+          restoreMocks: true,
           setupFiles: ["@yamada-ui/workspace/vitest/setup"],
+          unstubEnvs: true,
+          unstubGlobals: true,
         },
       }),
       ...browsers.map(({ browser, options }) =>

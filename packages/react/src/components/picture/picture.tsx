@@ -74,22 +74,22 @@ export const Picture: FC<PictureProps> = ({
 }) => {
   const system = useSystem()
   const { queriesObj } = system.breakpoints
-  const { direction = "down", identifier = "@media screen" } =
+  const { direction, identifier = "@media screen" } =
     system.config.breakpoint ?? {}
   const searchValue =
     identifier === "@media screen" ? "@media screen and " : `${identifier} `
 
   const compareSources = useCallback(
     (a: PictureSource, b: PictureSource) => {
-      const k = direction === "down" ? "maxW" : "minW"
+      const k = direction === "up" ? "minW" : "maxW"
 
       if (isUndefined(a[k]) && !isUndefined(b[k])) return -1
 
       if (!isUndefined(a[k]) && isUndefined(b[k])) return 1
 
-      return direction === "down"
-        ? Number(a.maxW) - Number(b.maxW)
-        : Number(b.minW) - Number(a.minW)
+      return direction === "up"
+        ? Number(b.minW) - Number(a.minW)
+        : Number(a.maxW) - Number(b.maxW)
     },
     [direction],
   )

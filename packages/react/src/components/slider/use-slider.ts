@@ -20,7 +20,6 @@ import {
   dataAttr,
   isArray,
   isNumber,
-  mergeRefs,
   percentToValue,
   roundNumberToStep,
   runKeyAction,
@@ -300,7 +299,7 @@ export const useSlider = <Y extends [number, number] | number = number>(
         { "data-orientation": orientation },
         rest,
         props,
-        { onBlur: eventProps.onBlur, onFocus: eventProps.onFocus },
+        eventProps,
       )()
 
       computedProps.style ??= {}
@@ -319,20 +318,23 @@ export const useSlider = <Y extends [number, number] | number = number>(
   )
 
   const getInputProps: PropGetter<"input", { index?: number }> = useCallback(
-    ({ index = 0, ...props } = {}) => ({
-      ...visuallyHiddenAttributes,
-      ...dataProps,
-      ...ariaProps,
-      id,
-      type: "hidden",
-      name,
-      disabled,
-      readOnly,
-      required,
-      value: range ? value[index]! : value,
-      ...props,
-      ref: index === 0 ? mergeRefs(props.ref, ref) : props.ref,
-    }),
+    ({ index = 0, ...props } = {}) =>
+      mergeProps(
+        visuallyHiddenAttributes,
+        dataProps,
+        ariaProps,
+        {
+          id,
+          type: "hidden",
+          name,
+          disabled,
+          readOnly,
+          required,
+          value: range ? value[index]! : value,
+        },
+        props,
+        { ref: index === 0 ? ref : undefined },
+      )(),
     [
       dataProps,
       ariaProps,
@@ -393,9 +395,9 @@ export const useSlider = <Y extends [number, number] | number = number>(
       const { max, min } = getMinMax(index)
 
       return mergeProps(
+        dataProps,
+        ariaProps,
         {
-          ...dataProps,
-          ...ariaProps,
           "aria-label": t("Slider thumb"),
           "aria-labelledby": ariaLabelledBy,
           "aria-orientation": orientation,

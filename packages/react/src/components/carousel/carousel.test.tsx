@@ -1,34 +1,18 @@
 import { a11y, render, screen } from "#test"
 import { Carousel } from "./"
 
-const mockState = vi.hoisted(() => {
-  return {
-    canScrollNext: vi.fn(() => true),
-    off: vi.fn(),
-    scrollNext: vi.fn(),
-    on: vi.fn(),
-  }
-})
-
-vi.mock("embla-carousel-react", () => ({
-  default: () => [
-    vi.fn(),
-    {
-      canScrollNext: mockState.canScrollNext,
-      canScrollPrev: vi.fn(() => false),
-      off: mockState.off,
-      reInit: vi.fn(),
-      scrollNext: mockState.scrollNext,
-      scrollPrev: vi.fn(),
-      scrollProgress: vi.fn(() => 0),
-      scrollTo: vi.fn(),
-      selectedScrollSnap: vi.fn(() => 0),
-      on: mockState.on,
-    },
-  ],
-}))
-
 describe("<Carousel />", () => {
+  beforeEach(() => {
+    vi.stubGlobal(
+      "IntersectionObserver",
+      class {
+        disconnect() {}
+        observe() {}
+        unobserve() {}
+      },
+    )
+  })
+
   test("passes a11y checks", async () => {
     await a11y(
       <Carousel.Root>

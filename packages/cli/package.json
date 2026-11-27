@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/cli",
   "type": "module",
-  "version": "2.1.17",
+  "version": "2.1.19",
   "description": "The official CLI for Yamada UI projects",
   "keywords": [
     "theme",
@@ -65,7 +65,7 @@
     "prettier": "catalog:",
     "prompts": "^2.4.2",
     "rimraf": "catalog:",
-    "semver": "^7.8.5",
+    "semver": "^7.8.6",
     "sucrase": "^3.35.1",
     "validate-npm-package-name": "^7.0.2",
     "yamljs": "catalog:"
@@ -73,7 +73,7 @@
   "devDependencies": {
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.8.0",
-    "@types/update-notifier": "6.0.8",
+    "@types/update-notifier": "6.0.9",
     "@types/validate-npm-package-name": "^4.0.2",
     "@types/yamljs": "catalog:",
     "@yamada-ui/workspace": "workspace:*",

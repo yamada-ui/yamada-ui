@@ -105,6 +105,19 @@ page.getByRole("button", { name: "Save" })
 
 `page` returns a locator with auto-retry, so timing-sensitive assertions converge without extra plumbing.
 
+### Choose exact or partial text matching explicitly
+
+Vitest 5 defaults `browser.locators.exact` to `true`. String text queries and accessible-name queries such as `getByRole("button", { name: "Save" })` require a full, case-sensitive match, subject to the locator's whitespace normalization.
+
+Use a regular expression or a per-query `exact: false` when partial matching is intentional. Use an anchored expression such as `/^save$/i` for a full, case-insensitive match. Match the accessible name, which can come from `aria-label` rather than the visible text.
+
+```ts
+page.getByText("Welcome back")
+page.getByText(/Welcome/)
+page.getByText("Welcome", { exact: false })
+page.getByRole("button", { name: /^save$/i })
+```
+
 ### Follow the Testing Library query priority
 
 #### DO NOT
@@ -172,26 +185,27 @@ await expect.element(page.getByRole("button")).toBeVisible()
 
 `expect.element(locator)` is sugar for `expect.poll(() => element)`. It re-queries the locator until the assertion passes or the timeout hits, so flaky timing resolves itself.
 
-### Assert non-existence with `query()` + `not.toBeInTheDocument`
+### Assert non-existence with a locator + `not.toBeInTheDocument`
 
 #### DO NOT
 
 ```ts
 expect(page.getByRole("alert")).toBeNull()
 expect(document.querySelector('[data-testid="content"]')).toBeNull()
+await expect.element(page.getByRole("alert").query()).not.toBeInTheDocument()
 ```
 
-`page.getBy*` returns a non-null locator, so `toBeNull()` can never prove absence. Calling `.element()` on a missing locator throws before an absence assertion can pass. `querySelector` bypasses retry — the element may appear 10 ms later and the test still reports "absent".
+`page.getBy*` returns a non-null locator, so `toBeNull()` can never prove absence. Calling `.element()` on a missing locator throws before an absence assertion can pass. `querySelector` and `locator.query()` resolve immediately; passing their result to `expect.element` does not re-run the query as the DOM changes.
 
 #### DO
 
 ```ts
-await expect.element(page.getByRole("alert").query()).not.toBeInTheDocument()
+await expect.element(page.getByRole("alert")).not.toBeInTheDocument()
 ```
 
-`query()` returns a null-tolerant locator. Combined with `not.toBeInTheDocument`, the assertion auto-retries and prints a readable diff when the element unexpectedly exists.
+Pass the locator itself so the absence assertion re-queries it until the element is removed or the timeout is reached. `query()` returns `Element | null`, not another locator; reserve it for an intentional immediate DOM read or an external API that does not accept locators.
 
-### Use jest-dom matchers, not property reads
+### Use DOM matchers, not property reads
 
 #### DO NOT
 
@@ -213,7 +227,19 @@ await expect
   .toHaveAttribute("viewBox", "0 0 24 24")
 ```
 
-jest-dom matchers (`toBeDisabled`, `toBeChecked`, `toHaveAttribute`, `toHaveTextContent`, `toHaveFocus`, `toHaveClass`, `toHaveRole`) print diffs like `"Received element is not disabled: <button />"` that point at the actual node. When a structural SVG check is unavoidable, locate the element through an accessible label or surrounding role first, then assert the observable attribute that matters.
+Vitest's browser DOM matchers (`toBeDisabled`, `toBeChecked`, `toHaveAttribute`, `toHaveTextContent`, `toHaveFocus`, `toHaveClass`, `toHaveRole`) are forked from jest-dom and print diffs like `"Received element is not disabled: <button />"` that point at the actual node. When a structural SVG check is unavoidable, locate the element through an accessible label or surrounding role first, then assert the observable attribute that matters.
+
+### Distinguish exact text assertions from partial matches
+
+In Browser Mode, Vitest 5's `toHaveTextContent` checks exact text equality and does not accept a regular expression. Use `toMatchTextContent` for a substring or regular expression check.
+
+```ts
+await expect.element(page.getByRole("alert")).toHaveTextContent("Save failed")
+await expect.element(page.getByRole("alert")).toMatchTextContent("failed")
+await expect.element(page.getByRole("alert")).toMatchTextContent(/save failed/i)
+```
+
+These are browser matcher semantics, not the jest-dom matchers registered by the jsdom setup. Do not replace exact assertions with partial matches unless partial matching is the intended contract.
 
 ## Waiting
 
@@ -280,6 +306,18 @@ expect(onChange).toHaveBeenCalledTimes(1)
 ```
 
 Keep side effects outside, and put exactly one assertion inside `waitFor`. Use `waitFor` only when polling something that is not a locator (e.g. a spy).
+
+### Account for automatic fake-timer advancement
+
+With fake timers enabled, `expect.element` advances timers while retrying. Since Vitest 5.1, locator actions and `userEvent` methods that take an element also advance timers while they run, even when the element already exists. The amount depends on real execution time; do not assume a click or hover leaves the mocked clock frozen. Methods without an element argument, such as `user.keyboard` and `user.tab`, do not advance timers.
+
+For assertions about exact elapsed time, separate the interaction from the timing measurement and explicitly advance timers for the interval being tested. Restore real timers in `afterEach`.
+
+## Failure Artifacts
+
+Vitest 5 stores attachments in `.vitest/attachments/` and automatic failure screenshots in `.vitest/attachments/failure-screenshots/`, relative to the package root. Inspect these paths when debugging a failed browser test.
+
+Reference screenshots for `toMatchScreenshot` still default to `__screenshots__`; do not confuse them with automatic failure screenshots.
 
 ## Accessibility
 

@@ -3,7 +3,14 @@
 import type { ReactNode, RefObject } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
-import { Children, useCallback, useId, useRef, useState } from "react"
+import {
+  Children,
+  useCallback,
+  useId,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react"
 import { mergeProps, useEnvironment } from "../../core"
 import { useAsyncCallback } from "../../hooks/use-async-callback"
 import { useControllableState } from "../../hooks/use-controllable-state"
@@ -13,7 +20,6 @@ import { useWindowEvent } from "../../hooks/use-window-event"
 import { useI18n } from "../../providers/i18n-provider"
 import {
   ariaAttr,
-  assignRef,
   createContext,
   dataAttr,
   handlerAll,
@@ -196,7 +202,11 @@ export const useSidebar = ({
     [setExpandedValue],
   )
 
-  assignRef(controlRef, { collapse: onCollapseAll, expand: onExpandAll })
+  useImperativeHandle(
+    controlRef,
+    () => ({ collapse: onCollapseAll, expand: onExpandAll }),
+    [onCollapseAll, onExpandAll],
+  )
 
   useWindowEvent("keydown", (ev) => {
     if (ev.key !== "b") return

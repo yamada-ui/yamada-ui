@@ -7,7 +7,7 @@ import { useCallback, useEffect, useId, useState } from "react"
 import { mergeProps } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendants } from "../../hooks/use-descendants"
-import { filterUndefined, runKeyAction } from "../../utils"
+import { filterUndefined, isComposing, runKeyAction } from "../../utils"
 import { useFieldProps } from "../field"
 
 const {
@@ -239,7 +239,7 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
 
   const onKeyDown = useCallback(
     (index: number) => (ev: KeyboardEvent<HTMLInputElement>) => {
-      if (!manageFocus) return
+      if (!manageFocus || isComposing(ev.nativeEvent)) return
 
       runKeyAction(
         ev,
@@ -298,10 +298,10 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
     useCallback(
       ({ index, ...props }) =>
         mergeProps(
+          ariaProps,
+          dataProps,
+          eventProps,
           {
-            ...ariaProps,
-            ...dataProps,
-            ...eventProps,
             type: mask ? "password" : type === "number" ? "tel" : "text",
             "aria-labelledby": labelId,
             autoComplete: otp ? "one-time-code" : "off",

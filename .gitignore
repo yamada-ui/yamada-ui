@@ -16,7 +16,7 @@ storybook-static
 
 # testing
 __screenshots__
-.vitest-attachments
+.vitest
 coverage
 report.json
 
@@ -43,6 +43,7 @@ yarn-error.log*
 # editors
 .idea
 .vscode
+.zed
 
 # local environment and secrets
 .env

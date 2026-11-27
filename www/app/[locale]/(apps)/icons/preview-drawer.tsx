@@ -3,7 +3,6 @@
 import type { RefObject } from "react"
 import type { Data } from "./list"
 import {
-  assignRef,
   Center,
   CheckIcon,
   ClipboardIcon,
@@ -26,14 +25,14 @@ import {
 import { DynamicIcon } from "@yamada-ui/react/components/icon/dynamic"
 import { useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
-import { memo, useState } from "react"
+import { memo, useImperativeHandle, useState } from "react"
 import { CodePreview } from "@/components"
 import data from "@/data/icons.json"
 
 export interface Item extends Omit<Data, "query"> {}
 
 export interface PreviewDrawerProps extends Drawer.RootProps {
-  onOpenRef: RefObject<(data: Data) => void>
+  onOpenRef: RefObject<((data: Data) => void) | null>
   replaceQuery: (query?: { name?: string; query?: string }) => void
 }
 
@@ -63,10 +62,14 @@ export const PreviewDrawer = memo(function PreviewDrawer({
     },
   })
 
-  assignRef(onOpenRef, (data) => {
-    setItem(data)
-    onOpen()
-  })
+  useImperativeHandle(
+    onOpenRef,
+    () => (data) => {
+      setItem(data)
+      onOpen()
+    },
+    [onOpen],
+  )
 
   return (
     <Drawer.Root

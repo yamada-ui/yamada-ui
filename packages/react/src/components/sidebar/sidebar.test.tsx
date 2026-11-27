@@ -2,6 +2,7 @@ import type { ReactElement } from "react"
 import { createRef, useRef } from "react"
 import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { Sidebar } from "."
+import { extendConfig, UIProvider } from "../../providers/ui-provider"
 import { Button } from "../button"
 
 const navItems: Sidebar.ItemType[] = [
@@ -677,4 +678,40 @@ describe("<Sidebar />", () => {
 
     expect(link).toHaveAttribute("data-selected")
   })
+
+  test.each([
+    { direction: "down", matchedQuery: undefined, sidePanel: true },
+    { direction: "up", matchedQuery: undefined, sidePanel: false },
+    { direction: "up", matchedQuery: "(min-width: 976px)", sidePanel: true },
+  ] as const)(
+    "should follow breakpoint direction $direction with query $matchedQuery",
+    ({ direction, matchedQuery, sidePanel }) => {
+      const matchMedia = vi
+        .spyOn(window, "matchMedia")
+        .mockImplementation((query) => ({
+          addEventListener: vi.fn(),
+          addListener: vi.fn(),
+          dispatchEvent: vi.fn(),
+          matches: !!matchedQuery && query.includes(matchedQuery),
+          media: query,
+          removeEventListener: vi.fn(),
+          removeListener: vi.fn(),
+          onchange: null,
+        }))
+      const config = extendConfig({ breakpoint: { direction } })
+
+      const { container } = render(
+        <Sidebar.Root>
+          <Sidebar.SidePanel items={navItems} />
+        </Sidebar.Root>,
+        {
+          wrapper: (props) => <UIProvider config={config} {...props} />,
+        },
+      )
+
+      expect(!!container.querySelector("aside")).toBe(sidePanel)
+
+      matchMedia.mockRestore()
+    },
+  )
 })

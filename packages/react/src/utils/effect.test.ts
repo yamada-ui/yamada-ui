@@ -1,3 +1,6 @@
+import { execFile } from "node:child_process"
+import { promisify } from "node:util"
+import { useLayoutEffect } from "react"
 import { renderHook } from "#test"
 import {
   useSafeLayoutEffect,
@@ -7,24 +10,22 @@ import {
 
 describe("useSafeLayoutEffect", () => {
   test("should use useLayoutEffect when document is defined", () => {
-    expect(useSafeLayoutEffect).toBeDefined()
+    expect(useSafeLayoutEffect).toBe(useLayoutEffect)
   })
 
   test("should use useEffect when document is not defined", async () => {
-    vi.resetModules()
+    const { stdout } = await promisify(execFile)(process.execPath, [
+      "--input-type=module",
+      "--eval",
+      `
+        import { useEffect } from ${JSON.stringify(import.meta.resolve("react"))}
+        import { useSafeLayoutEffect } from ${JSON.stringify(import.meta.resolve("./effect.ts"))}
 
-    const originalDocument = globalThis.document
-    // @ts-expect-error
-    delete globalThis.document
+        process.stdout.write(String(useSafeLayoutEffect === useEffect))
+      `,
+    ])
 
-    try {
-      const { useSafeLayoutEffect: ssrEffect } = await import("./effect")
-      const React = await import("react")
-
-      expect(ssrEffect).toBe(React.useEffect)
-    } finally {
-      globalThis.document = originalDocument
-    }
+    expect(stdout).toBe("true")
   })
 })
 

@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import { COLOR_SCHEMES } from "../../utils"
-import { BoldIcon, MinusIcon, MoonIcon, PlusIcon, SunIcon } from "../icon"
+import { LetterBIcon, MinusIcon, MoonIcon, PlusIcon, SunIcon } from "../icon"
 import { Wrap } from "../wrap"
 import { IconButton } from "./icon-button"
 
@@ -78,7 +78,7 @@ export const FullRounded: Story = () => {
         variant="surface"
         aria-label="Bold"
         fullRounded
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
       />
 
       <IconButton
@@ -119,7 +119,7 @@ export const Disabled: Story = () => {
         variant="surface"
         aria-label="Bold"
         disabled
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
       />
 
       <IconButton

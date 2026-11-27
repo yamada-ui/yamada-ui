@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl"
 import { useMemo, useRef } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
 import { NextLinkButton, Status } from "@/components"
-import { getDocMap } from "@/data"
+import { getDocMap } from "@/data/doc-map"
 import { useLocale, usePathname } from "@/i18n"
 
 export function Sidebar() {

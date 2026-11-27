@@ -25,7 +25,7 @@ const meta: Meta<typeof FileInput> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <FileInput placeholder="placeholder" />
+  return <FileInput placeholder="Upload file" />
 }
 
 export const Variant: Story = () => {
@@ -71,17 +71,20 @@ export const Size: Story = () => {
 }
 
 export const Multiple: Story = () => {
-  return <FileInput multiple placeholder="multiple" />
+  return <FileInput multiple placeholder="Upload files" />
 }
 
 export const Accept: Story = () => {
   return (
-    <FileInput accept="image/png,image/jpeg" placeholder="only png, jpeg" />
+    <FileInput
+      accept="image/png,image/jpeg"
+      placeholder="Upload a PNG or JPEG file"
+    />
   )
 }
 
 export const Separator: Story = () => {
-  return <FileInput multiple placeholder="multiple" separator=";" />
+  return <FileInput multiple placeholder="Upload files" separator=";" />
 }
 
 export const Component: Story = () => {
@@ -90,7 +93,7 @@ export const Component: Story = () => {
       component={({ value: { name } }) => <Tag>{name}</Tag>}
       gapY="xs"
       multiple
-      placeholder="multiple"
+      placeholder="Upload files"
     />
   )
 }
@@ -100,7 +103,7 @@ export const Format: Story = () => {
     <FileInput
       format={({ name }) => name.substring(0, name.indexOf("."))}
       multiple
-      placeholder="multiple"
+      placeholder="Upload files"
     />
   )
 }
@@ -139,7 +142,7 @@ export const Disabled: Story = () => {
       </For>
 
       <Field.Root disabled label="Upload file">
-        <FileInput placeholder="your file" />
+        <FileInput placeholder="Upload file" />
       </Field.Root>
     </>
   )
@@ -171,7 +174,7 @@ export const ReadOnly: Story = () => {
       </For>
 
       <Field.Root label="Upload file" readOnly>
-        <FileInput placeholder="your file" />
+        <FileInput placeholder="Upload file" />
       </Field.Root>
     </>
   )
@@ -203,7 +206,7 @@ export const Invalid: Story = () => {
       </For>
 
       <Field.Root errorMessage="File is required." invalid label="Upload file">
-        <FileInput placeholder="your file" />
+        <FileInput placeholder="Upload file" />
       </Field.Root>
     </>
   )
@@ -217,7 +220,7 @@ export const Addon: Story = () => {
           <InputGroup.Addon>
             <FileIcon />
           </InputGroup.Addon>
-          <FileInput placeholder="Please upload file" />
+          <FileInput placeholder="Upload file" />
         </InputGroup.Root>
       )}
     </For>
@@ -232,7 +235,7 @@ export const Element: Story = () => {
           <InputGroup.Element>
             <FileIcon />
           </InputGroup.Element>
-          <FileInput placeholder="Please upload file" />
+          <FileInput placeholder="Upload file" />
         </InputGroup.Root>
       )}
     </For>
@@ -283,12 +286,12 @@ export const Reset: Story = () => {
 
   return (
     <VStack>
-      <Text>files: {value?.length ?? 0}</Text>
+      <Text>Files: {value?.length ?? 0}</Text>
 
       <InputGroup.Root>
         <FileInput
           multiple
-          placeholder="placeholder"
+          placeholder="Upload files"
           resetRef={resetRef}
           value={value}
           onChange={onChange}
@@ -311,9 +314,9 @@ export const CustomControl: Story = () => {
 
   return (
     <VStack>
-      <Text>files: {value?.length}</Text>
+      <Text>Files: {value?.length}</Text>
 
-      <FileInput placeholder="placeholder" value={value} onChange={onChange} />
+      <FileInput placeholder="Upload file" value={value} onChange={onChange} />
     </VStack>
   )
 }

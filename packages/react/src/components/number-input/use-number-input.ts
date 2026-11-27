@@ -12,7 +12,6 @@ import {
   ariaAttr,
   isActiveElement,
   isComposing,
-  mergeRefs,
   runKeyAction,
   useSafeLayoutEffect,
 } from "../../utils"
@@ -197,7 +196,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
-      if (isComposing(ev)) return
+      if (isComposing(ev.nativeEvent)) return
 
       const { selectionEnd, selectionStart, value } = ev.currentTarget
 
@@ -248,7 +247,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLInputElement>) => {
-      if (isComposing(ev)) return
+      if (isComposing(ev.nativeEvent)) return
 
       if (!isValidNumericKeyboardEvent(ev, isValidCharacter))
         ev.preventDefault()
@@ -311,13 +310,11 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    ({ ref, ...props } = {}) => {
-      const { ref: restRef, ...restWithoutRef } = rest
-
-      return mergeProps(
+    (props = {}) =>
+      mergeProps(
+        ariaProps,
+        dataProps,
         {
-          ...ariaProps,
-          ...dataProps,
           type: "text",
           "aria-invalid": ariaAttr(ariaProps["aria-invalid"] ?? out),
           "aria-valuemax": maxValue,
@@ -338,18 +335,11 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
           step,
           value: format(value),
         },
-        restWithoutRef,
+        rest,
         eventProps,
         props,
-        {
-          ref: mergeRefs(ref, restRef, inputRef),
-          onBlur,
-          onChange,
-          onFocus,
-          onKeyDown,
-        },
-      )()
-    },
+        { ref: inputRef, onBlur, onChange, onFocus, onKeyDown },
+      )(),
     [
       format,
       out,

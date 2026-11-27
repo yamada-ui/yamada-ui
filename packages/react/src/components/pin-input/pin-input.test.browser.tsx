@@ -130,6 +130,52 @@ describe("<PinInput />", () => {
     await expect.poll(() => document.activeElement).toStrictEqual(firstInput)
   })
 
+  test.each([
+    ["ArrowLeft", true, 37],
+    ["ArrowLeft", false, 229],
+    ["ArrowRight", true, 39],
+    ["ArrowRight", false, 229],
+    ["Backspace", true, 8],
+    ["Backspace", false, 229],
+  ])(
+    "ignores composing %s with isComposing=%s and keyCode=%s",
+    async (key, isComposing, keyCode) => {
+      const onChange = vi.fn()
+      const { user } = await render(
+        <PinInput.Root
+          type="alphanumeric"
+          defaultValue="ab"
+          onChange={onChange}
+        />,
+      )
+      const previousInput = page.getByRole("textbox").nth(1)
+      const currentInput = page.getByRole("textbox").nth(2)
+
+      await user.click(currentInput)
+      await expect.element(currentInput).toHaveFocus()
+      await expect.element(currentInput).toHaveValue("")
+
+      const event = new KeyboardEvent("keydown", {
+        key,
+        bubbles: true,
+        cancelable: true,
+        isComposing,
+        keyCode,
+      })
+
+      currentInput.element().dispatchEvent(event)
+
+      await new Promise<void>((resolve) =>
+        requestAnimationFrame(() => resolve()),
+      )
+
+      await expect.element(currentInput).toHaveFocus()
+      await expect.element(previousInput).toHaveValue("b")
+      expect(event.defaultPrevented).toBe(false)
+      expect(onChange).not.toHaveBeenCalled()
+    },
+  )
+
   test("automatically focuses the first input on mount if `autoFocus` is true", async () => {
     await render(<PinInput.Root autoFocus />)
 

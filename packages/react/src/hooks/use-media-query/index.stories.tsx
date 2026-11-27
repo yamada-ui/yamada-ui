@@ -11,5 +11,5 @@ export default meta
 export const Basic = () => {
   const flg = useMediaQuery("(min-width: 1280px)")
 
-  return <Text>{flg ? "larger than 1280px" : "smaller than 1280px"}</Text>
+  return <Text>{flg ? "Larger than 1280px" : "Smaller than 1280px"}</Text>
 }

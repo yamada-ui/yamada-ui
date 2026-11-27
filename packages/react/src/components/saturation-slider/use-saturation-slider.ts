@@ -238,9 +238,9 @@ export const useSaturationSlider = (props: UseSaturationSliderProps = {}) => {
   const getThumbProps: PropGetter = useCallback(
     (props = {}) =>
       mergeProps(
+        dataProps,
+        ariaProps,
         {
-          ...dataProps,
-          ...ariaProps,
           "aria-label": t("Saturation and brightness thumb"),
           "aria-labelledby": ariaLabelledBy,
           "aria-roledescription": "2D slider",

@@ -203,6 +203,10 @@ describe("fetchRegistry", () => {
 
     const result = await fetchRegistry("button")
     expect(result).toStrictEqual(registry)
+    expect(mockFetch).toHaveBeenCalledWith(
+      "https://v2.yamada-ui.com/registry/components/button.json",
+      expect.anything(),
+    )
 
     const cached = await fetchRegistry("button")
     expect(cached).toStrictEqual(registry)
@@ -252,7 +256,7 @@ describe("fetchRegistry", () => {
     })
     await fetchRegistry("use-toggle")
     expect(mockFetch).toHaveBeenCalledWith(
-      expect.stringContaining("hooks/use-toggle.json"),
+      "https://v2.yamada-ui.com/registry/hooks/use-toggle.json",
       expect.anything(),
     )
   })
@@ -265,7 +269,7 @@ describe("fetchRegistry", () => {
     })
     await fetchRegistry("auth-provider")
     expect(mockFetch).toHaveBeenCalledWith(
-      expect.stringContaining("providers/auth-provider.json"),
+      "https://v2.yamada-ui.com/registry/providers/auth-provider.json",
       expect.anything(),
     )
   })
@@ -278,20 +282,20 @@ describe("fetchRegistry", () => {
     })
     await fetchRegistry("theme")
     expect(mockFetch).toHaveBeenCalledWith(
-      expect.stringContaining("theme.json"),
+      "https://v2.yamada-ui.com/registry/theme.json",
       expect.anything(),
     )
   })
 
-  test("should handle tag in URL", async () => {
+  test.each(["dev", "next"])("should handle %s tag in URL", async (tag) => {
     const registry: Registry = { section: "components", sources: [] }
     mockFetch.mockResolvedValueOnce({
       json: () => Promise.resolve(registry),
       ok: true,
     })
-    await fetchRegistry("button", { tag: "next" })
+    await fetchRegistry("button", { tag })
     expect(mockFetch).toHaveBeenCalledWith(
-      expect.stringContaining("next/"),
+      `https://v2.yamada-ui.com/registry/${tag}/components/button.json`,
       expect.anything(),
     )
   })
@@ -318,6 +322,10 @@ describe("fetchRegistryNames", () => {
     })
 
     const names = await fetchRegistryNames()
+    expect(mockFetch).toHaveBeenCalledWith(
+      "https://v2.yamada-ui.com/registry/index.json",
+      expect.anything(),
+    )
     expect(names).toContain("button")
     expect(names).toContain("use-toggle")
   })

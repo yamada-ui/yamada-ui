@@ -1,6 +1,7 @@
 import {
   createIgnoreCspellConfig,
   createNoRestrictedImportConfig,
+  createVitestIsolationConfig,
   defineConfig,
   reactConfig,
   sharedBrowserTestFiles,
@@ -27,6 +28,7 @@ export default defineConfig({
       "src/components/icon/icons",
       "src/providers/i18n-provider/intl",
     ),
+    createVitestIsolationConfig("src/utils/ssr.test.ts"),
   ],
   ignorePatterns: ["dist", "coverage", "storybook-static"],
   overrides: [

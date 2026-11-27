@@ -3,16 +3,10 @@
 import type { MouseEvent, RefObject } from "react"
 import type { PropGetter } from "../../core"
 import type { UsePopperProps } from "../../hooks/use-popper"
-import { useCallback, useId, useRef } from "react"
+import { useCallback, useId, useImperativeHandle, useRef } from "react"
 import { mergeProps, useEnvironment } from "../../core"
 import { usePopper } from "../../hooks/use-popper"
-import {
-  ariaAttr,
-  assignRef,
-  dataAttr,
-  handlerAll,
-  mergeRefs,
-} from "../../utils"
+import { ariaAttr, dataAttr, handlerAll, mergeRefs } from "../../utils"
 
 export interface UseNativePopoverProps extends UsePopperProps<"button"> {
   /**
@@ -94,7 +88,7 @@ export const useNativePopover = ({
     whileElementsMounted,
   })
 
-  assignRef(updateRef, update)
+  useImperativeHandle(updateRef, () => update, [update])
 
   const onClick = useCallback(
     (ev: MouseEvent<HTMLButtonElement>) => {

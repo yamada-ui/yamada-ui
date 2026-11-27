@@ -200,10 +200,10 @@ describe("<DatePicker />", () => {
 
     await vi.waitFor(async () => {
       await expect
-        .element(page.getByText("January 15, 2024"))
+        .element(page.getByText(/January 15, 2024/))
         .toBeInTheDocument()
       await expect
-        .element(page.getByText("January 16, 2024").query())
+        .element(page.getByText(/January 16, 2024/).query())
         .not.toBeInTheDocument()
     })
   })
@@ -574,7 +574,7 @@ describe("<DatePicker />", () => {
     expect(onChange).not.toHaveBeenCalled()
     await expect
       .element(page.getByRole("combobox").first())
-      .toHaveTextContent("January 15, 2024")
+      .toMatchTextContent("January 15, 2024")
   })
 
   test("handles Enter key on multiple date input does not remove when max is reached", async () => {
@@ -602,12 +602,12 @@ describe("<DatePicker />", () => {
     expect(onChange).not.toHaveBeenCalled()
     await expect
       .element(page.getByRole("combobox").first())
-      .toHaveTextContent("January 15, 2024")
+      .toMatchTextContent("January 15, 2024")
     await expect
       .element(page.getByRole("combobox").first())
-      .toHaveTextContent("January 16, 2024")
+      .toMatchTextContent("January 16, 2024")
     await expect
-      .element(page.getByText("January 17, 2024").query())
+      .element(page.getByText(/January 17, 2024/).query())
       .not.toBeInTheDocument()
   })
 

@@ -2,8 +2,9 @@ import type { Metadata } from "next"
 import { Box } from "@yamada-ui/react"
 import { notFound } from "next/navigation"
 import { docs } from "#velite"
-import { MDXContent } from "@/components"
+import { MDXContent } from "@/components/mdx"
 import { getDocs } from "@/data"
+import { getPathname } from "@/i18n"
 import { generateOg } from "@/utils/next"
 import { mdToText } from "@/utils/string"
 import { Header } from "./header"
@@ -27,10 +28,16 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/docs/[...slug]">): Promise<Metadata> {
   const { locale, slug } = await params
-  const { description, title } = getDoc(locale, slug) ?? {}
+  const doc = getDoc(locale, slug)
+
+  if (!doc) return {}
+
+  const { description, pathname, title } = doc
+  const canonical = getPathname({ href: pathname, locale: doc.locale })
   const transformedDescription = mdToText(description)
 
   return {
+    alternates: { canonical },
     description: transformedDescription,
     title,
     ...generateOg(title, transformedDescription),

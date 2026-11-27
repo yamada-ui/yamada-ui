@@ -41,6 +41,10 @@ import { FileButton } from "@workspaces/ui"
 <FileButton />
 ```
 
+:::tip
+To select files by dragging and dropping them, use [Dropzone](/docs/components/dropzone).
+:::
+
 ### Change Variant
 
 ```tsx preview
@@ -181,7 +185,7 @@ const onReset = () => {
 
 return (
   <VStack>
-    <Text>files: {files?.length ?? 0}</Text>
+    <Text>Files: {files?.length ?? 0}</Text>
 
     <HStack>
       <FileButton multiple resetRef={resetRef} onChange={onChange}>

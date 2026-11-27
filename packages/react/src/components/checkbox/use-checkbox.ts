@@ -11,7 +11,6 @@ import {
   dataAttr,
   isNumber,
   isUndefined,
-  mergeRefs,
   visuallyHiddenAttributes,
 } from "../../utils"
 import { useFieldProps } from "../field"
@@ -136,8 +135,8 @@ export const useCheckbox = <Y extends string = string>({
   const getRootProps: PropGetter<"label"> = useCallback(
     (props = {}) => {
       const merged = mergeProps(
+        dataProps,
         {
-          ...dataProps,
           "data-checked": dataAttr(checked),
           "data-indeterminate": dataAttr(indeterminate),
         },
@@ -153,11 +152,12 @@ export const useCheckbox = <Y extends string = string>({
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}) => {
       const sharedProps = mergeProps(
+        { ref },
+        dataProps,
+        ariaProps,
         {
-          ...dataProps,
-          ...ariaProps,
           id,
-          ref: mergeRefs(ref, indeterminateRef),
+          ref: indeterminateRef,
           type: "checkbox",
           name,
           style: visuallyHiddenAttributes.style,
@@ -176,7 +176,8 @@ export const useCheckbox = <Y extends string = string>({
           value,
         },
         props,
-        { ...eventProps, onChange },
+        eventProps,
+        { onChange },
       )()
 
       return getGroupInputProps?.(sharedProps) ?? sharedProps
@@ -206,13 +207,16 @@ export const useCheckbox = <Y extends string = string>({
   )
 
   const getIndicatorProps: PropGetter = useCallback(
-    (props = {}) => ({
-      ...dataProps,
-      "aria-hidden": "true",
-      "data-checked": dataAttr(checked),
-      "data-indeterminate": dataAttr(indeterminate),
-      ...props,
-    }),
+    (props = {}) =>
+      mergeProps(
+        dataProps,
+        {
+          "aria-hidden": "true",
+          "data-checked": dataAttr(checked),
+          "data-indeterminate": dataAttr(indeterminate),
+        },
+        props,
+      )(),
     [dataProps, checked, indeterminate],
   )
 

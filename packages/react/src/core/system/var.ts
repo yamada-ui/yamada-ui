@@ -115,7 +115,7 @@ export function createVars(
     return function (
       cssMap: CSSMap = {},
       cssVars: CSSVars = { light: {}, dark: {} },
-      prevTokens?: VariableTokens,
+      prevTokens?: CSSMap | VariableTokens,
     ): { cssMap: CSSMap; cssVars: CSSVars } {
       const system: System = { ...defaultSystem, cssMap, rootNode }
       const options = { css, system, theme }
@@ -313,8 +313,7 @@ export function createVars(
 export type CreateVars = ReturnType<ReturnType<typeof createVars>>
 
 export function mergeVars(...fns: CreateVars[]) {
-  return function (prevTokens?: VariableTokens) {
-    let cssMap: CSSMap = {}
+  return function (prevTokens?: CSSMap | VariableTokens, cssMap: CSSMap = {}) {
     let cssVars: CSSVars = { light: {}, dark: {} }
 
     for (const fn of fns) {

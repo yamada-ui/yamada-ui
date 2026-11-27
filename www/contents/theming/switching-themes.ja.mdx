@@ -158,3 +158,51 @@ const App = () => {
 ```
 
 ::::
+
+## セクション単位でテーマを上書きする
+
+どちらのスコープも子要素を1つ取り、その要素と子孫に上書きを適用します。`section`などのDOM要素、またはDOM要素に属性を渡すコンポーネントを指定してください。`Modal`など、Yamada UIの`Portal`を通じて描画されるコンテンツにもスコープが引き継がれます。
+
+### ThemeSchemeScope
+
+`ThemeSchemeScope`を使用すると、`themeSchemes`に登録したスキームをページ、ルートのレイアウト、セクションなどに適用できます。ドキュメント全体のテーマスキームは変わらず、`UIProvider`を追加する必要もありません。以下の例では、セットアップで登録した`red`を使用します。
+
+```tsx
+import { Button, ThemeSchemeScope } from "@yamada-ui/react"
+
+export function Page() {
+  return (
+    <>
+      <Button colorScheme="primary">ドキュメントのテーマ</Button>
+
+      <ThemeSchemeScope themeScheme="red">
+        <section>
+          <Button colorScheme="primary">赤のテーマ</Button>
+        </section>
+      </ThemeSchemeScope>
+    </>
+  )
+}
+```
+
+### SemanticTokenScope
+
+`SemanticTokenScope`を使用すると、既存のセマンティックトークンを直接上書きできます。テーマの`semanticTokens`と同様に、単一の値または`[light, dark]`の組み合わせを指定できます。上書きはスコープ内のみに適用され、`ThemeSchemeScope`と組み合わせることもできます。
+
+`data-semantic-token`の値は自動で生成されます。`name`で明示的に設定する場合は、`preview-panel`のようにCSSで安全に使える一意な名前を指定してください。
+
+```tsx
+import { Box, SemanticTokenScope } from "@yamada-ui/react"
+
+export function Preview() {
+  return (
+    <SemanticTokenScope
+      tokens={{ colors: { bg: { panel: ["purple.50", "purple.950"] } } }}
+    >
+      <Box bg="bg.panel" p="md">
+        プレビュー
+      </Box>
+    </SemanticTokenScope>
+  )
+}
+```

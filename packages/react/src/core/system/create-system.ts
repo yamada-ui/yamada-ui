@@ -318,3 +318,44 @@ function createTokens(
 
   return results
 }
+
+export function createSemanticTokenVars(
+  system: System,
+  theme: UsageTheme,
+  semanticTokens: NonNullable<UsageTheme["semanticTokens"]>,
+) {
+  const { breakpoints, config, cssMap, rootNode } = system
+  const shouldProcess = config.theme?.responsive
+    ? (obj: any) => !breakpoints.isResponsive(obj, true)
+    : () => true
+  const scope = { semanticTokens }
+  const base = { semanticTokens: theme.semanticTokens }
+  const baseColorSchemes = createColorSchemeTokens(
+    theme,
+    undefined,
+    shouldProcess,
+  )
+  const colorSchemes = createColorSchemeTokens(theme, scope, shouldProcess)
+  const vars = createVars(config.css?.varPrefix, theme, breakpoints, rootNode)
+  const targets = ["primary", "secondary", "tertiary"] as const
+  const createScopeVars = targets.map((target) => {
+    const tokens = createTokens(scope, target, shouldProcess)
+    const baseTokens = createTokens(base, target, shouldProcess)
+
+    if (target === "primary") {
+      Object.assign(tokens, colorSchemes)
+      Object.assign(baseTokens, baseColorSchemes)
+    }
+
+    const overrides = Object.fromEntries(
+      Object.entries(tokens).filter(
+        ([token]) =>
+          Object.hasOwn(baseTokens, token) && Object.hasOwn(cssMap, token),
+      ),
+    )
+
+    return vars(overrides)
+  })
+
+  return mergeVars(...createScopeVars)(cssMap, { ...cssMap }).cssVars
+}

@@ -2,9 +2,12 @@
 
 import type { ThemeProviderProps as EmotionThemeProviderProps } from "@emotion/react"
 import type { FC, PropsWithChildren } from "react"
+import type { SlotProps } from "../../components/slot"
+import type { Dict } from "../../utils"
 import type { Environment } from "./environment-provider"
 import type {
   ChangeThemeScheme,
+  DefineThemeSemanticTokens,
   StyledTheme,
   Theme,
   ThemeConfig,
@@ -17,7 +20,9 @@ import {
   Global,
   ThemeContext,
 } from "@emotion/react"
-import { use, useCallback, useEffect, useMemo, useState } from "react"
+import { use, useCallback, useEffect, useId, useMemo, useState } from "react"
+import { PortalProvider } from "../../components/portal"
+import { Slot } from "../../components/slot"
 import {
   isEmptyObject,
   isObject,
@@ -26,7 +31,8 @@ import {
   merge,
 } from "../../utils"
 import { THEME_SCHEME_STORAGE_KEY } from "../constant"
-import { css } from "../css"
+import { conditions, css } from "../css"
+import { createSemanticTokenVars } from "./create-system"
 import { useEnvironment } from "./environment-provider"
 import { createStorageManager } from "./storage-manager"
 import { useSystem } from "./system-provider"
@@ -187,6 +193,76 @@ export const GlobalStyles: FC = () => {
         wrap("global", globalStyle),
       ]}
     />
+  )
+}
+
+export interface ThemeSchemeScopeProps extends SlotProps {
+  /**
+   * The theme scheme to apply to the children.
+   */
+  themeScheme: ThemeScheme
+}
+
+/**
+ * `ThemeSchemeScope` is a component that sets the theme scheme for its children.
+ *
+ * @see https://yamada-ui.com/docs/theming/switching-themes#themeschemescope
+ */
+export const ThemeSchemeScope: FC<ThemeSchemeScopeProps> = ({
+  themeScheme,
+  ...rest
+}) => {
+  const context = useMemo(() => ({ "data-theme": themeScheme }), [themeScheme])
+
+  return (
+    <PortalProvider value={context}>
+      <Slot data-theme={themeScheme} {...rest} />
+    </PortalProvider>
+  )
+}
+
+export interface SemanticTokenScopeProps extends SlotProps {
+  /**
+   * Existing semantic tokens to override within the scope.
+   */
+  tokens: DefineThemeSemanticTokens
+  /**
+   * The value of the `data-semantic-token` attribute. Use a CSS-safe name such as `preview-panel`. Defaults to an automatically generated ID.
+   */
+  name?: string
+}
+
+/**
+ * `SemanticTokenScope` overrides semantic tokens on a single child element and its DOM descendants.
+ *
+ * @see https://yamada-ui.com/docs/theming/switching-themes#semantictokenscope
+ */
+export const SemanticTokenScope: FC<SemanticTokenScopeProps> = ({
+  name,
+  tokens,
+  ...rest
+}) => {
+  const id = useId()
+  const value = name ?? id
+  const system = useSystem()
+  const { theme } = useTheme<UsageTheme>()
+  const context = useMemo(() => ({ "data-semantic-token": value }), [value])
+  const styles = useMemo(() => {
+    const { light, dark } = createSemanticTokenVars(system, theme, tokens)
+    const selector = `[data-semantic-token="${value}"]`
+    const styles: Dict = { [selector]: light }
+
+    if (!isEmptyObject(dark))
+      styles[conditions._dark.replaceAll("&", () => selector)] = dark
+
+    return styles
+  }, [value, system, theme, tokens])
+
+  return (
+    <PortalProvider value={context}>
+      <Global styles={styles} />
+      <Slot {...rest} data-semantic-token={value} />
+    </PortalProvider>
   )
 }
 

@@ -1,6 +1,7 @@
 "use client"
 
 import type { FC, PropsWithChildren } from "react"
+import type { SlotProps } from "../../components/slot"
 import type { ColorMode, ColorModeWithSystem, ThemeConfig } from "./index.type"
 import type { Storage } from "./storage-manager"
 import {
@@ -11,6 +12,8 @@ import {
   useMemo,
   useState,
 } from "react"
+import { PortalProvider } from "../../components/portal"
+import { Slot } from "../../components/slot"
 import { isDocument, isEmptyObject, noop } from "../../utils"
 import { COLOR_MODE_STORAGE_KEY } from "../constant"
 import { useEnvironment } from "./environment-provider"
@@ -179,6 +182,34 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   )
 
   return <ColorModeContext value={context}>{children}</ColorModeContext>
+}
+
+export interface ColorModeScopeProps extends SlotProps {
+  /**
+   * The color mode used to resolve CSS tokens for the child and its descendants.
+   */
+  colorMode: ColorMode
+}
+
+/**
+ * `ColorModeScope` resolves color-mode-dependent CSS tokens for a single child and its descendants.
+ *
+ * `useColorMode` and `useColorModeValue` still use the mode from the app's provider.
+ * The `_dark` and `_light` style conditions can still match ancestors outside the scope.
+ *
+ * @see https://yamada-ui.com/docs/styling/color-mode#scope
+ */
+export const ColorModeScope: FC<ColorModeScopeProps> = ({
+  colorMode,
+  ...rest
+}) => {
+  const context = useMemo(() => ({ "data-mode": colorMode }), [colorMode])
+
+  return (
+    <PortalProvider value={context}>
+      <Slot {...rest} data-mode={colorMode} />
+    </PortalProvider>
+  )
 }
 
 /**

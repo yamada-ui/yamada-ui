@@ -1,5 +1,9 @@
 import { Box } from "../../components/box"
-import { useColorMode } from "./color-mode-provider"
+import { Button } from "../../components/button"
+import { VStack } from "../../components/stack"
+import { Text } from "../../components/text"
+import { antonym } from "../../utils"
+import { ColorModeScope, useColorMode } from "./color-mode-provider"
 import { useColorModeValue } from "./use-color-mode-value"
 
 export default {
@@ -39,5 +43,41 @@ export const Hook = () => {
     >
       The current colorMode is "{colorMode}"
     </Box>
+  )
+}
+
+export const Scope = () => {
+  const { colorMode } = useColorMode()
+
+  return (
+    <VStack
+      alignItems="start"
+      borderWidth="1px"
+      gap="md"
+      p="md"
+      rounded="l2"
+      transitionDuration="moderate"
+      transitionProperty="all"
+    >
+      <Text>The current colorMode is "{colorMode}"</Text>
+
+      <Button>Button</Button>
+
+      <ColorModeScope colorMode={antonym(colorMode)}>
+        <VStack
+          alignItems="start"
+          bg="bg"
+          borderWidth="1px"
+          gap="md"
+          p="md"
+          rounded="l2"
+        >
+          <Text color="fg">
+            The current colorMode is "{antonym(colorMode)}"
+          </Text>
+          <Button colorScheme="mono">Button</Button>
+        </VStack>
+      </ColorModeScope>
+    </VStack>
   )
 }

@@ -1,9 +1,32 @@
-import type { FC } from "react"
-import { a11y, fireEvent, render, renderHook, screen } from "#test"
+import type { FC, PropsWithChildren } from "react"
+import type { Render, RenderHook } from "#test"
+import { useLayoutEffect } from "react"
+import {
+  a11y,
+  fireEvent,
+  render as originalRender,
+  renderHook as originalRenderHook,
+  screen,
+} from "#test"
+import { DefaultProvider } from "../../providers/default-provider"
 import { Text } from "../text"
 import { Loading } from "./"
-import { useLoading } from "./loading-provider"
+import { LoadingProvider, useLoading } from "./loading-provider"
 import { Suspense } from "./suspense"
+
+function Wrapper(props: PropsWithChildren) {
+  return (
+    <DefaultProvider>
+      <LoadingProvider {...props} />
+    </DefaultProvider>
+  )
+}
+
+const render: Render = (ui, options) =>
+  originalRender(ui, { wrapper: Wrapper, ...options })
+
+const renderHook: RenderHook = (callback, options) =>
+  originalRenderHook(callback, { wrapper: Wrapper, ...options })
 
 const TargetComponent: FC = () => (
   <>
@@ -19,7 +42,7 @@ const TargetComponent: FC = () => (
 
 describe("<Loading />", () => {
   test("passes a11y checks", async () => {
-    await a11y(<TargetComponent />)
+    await a11y(<TargetComponent />, { wrapper: Wrapper })
   })
 
   test("renders Oval with secondaryColor", () => {
@@ -54,6 +77,22 @@ describe("useLoading", () => {
 
     render(<TestComponent />)
     fireEvent.click(screen.getByTestId("start"))
+    expect(document.querySelector("div[data-loading]")).toBeInTheDocument()
+  })
+
+  test("screen.start is available in a consumer's layout effect", () => {
+    function Example() {
+      const { screen: screenLoading } = useLoading()
+
+      useLayoutEffect(() => {
+        screenLoading.start()
+      }, [screenLoading])
+
+      return null
+    }
+
+    render(<Example />)
+
     expect(document.querySelector("div[data-loading]")).toBeInTheDocument()
   })
 

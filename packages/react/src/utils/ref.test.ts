@@ -45,6 +45,32 @@ describe("useMergeRefs", () => {
     expect(ref1.current).toBe(el)
     expect(ref2.current).toBe(el)
   })
+
+  test("should return the same callback ref while the refs are unchanged", () => {
+    const ref1 = createRef()
+    const ref2 = createRef()
+
+    const { rerender, result } = renderHook(() => useMergeRefs(ref1, ref2))
+    const mergedRef = result.current
+
+    rerender()
+
+    expect(result.current).toBe(mergedRef)
+  })
+
+  test("should return a new callback ref when a ref changes", () => {
+    const ref1 = createRef()
+
+    const { rerender, result } = renderHook(
+      ({ ref2 }) => useMergeRefs(ref1, ref2),
+      { initialProps: { ref2: createRef() } },
+    )
+    const mergedRef = result.current
+
+    rerender({ ref2: createRef() })
+
+    expect(result.current).not.toBe(mergedRef)
+  })
 })
 
 describe("useCallbackRef", () => {
@@ -67,6 +93,11 @@ describe("assignRef", () => {
     const refObject = { current: null }
     assignRef(refObject, 123)
     expect(refObject.current).toBe(123)
+  })
+
+  test("should return the cleanup function returned by a ref callback", () => {
+    const cleanup = vi.fn()
+    expect(assignRef(() => cleanup, 123)).toBe(cleanup)
   })
 
   test("should call a ref callback with a value", () => {
@@ -98,5 +129,27 @@ describe("mergeRefs", () => {
     mergedRef(el)
     expect(refObject1.current).toBe(el)
     expect(refObject2.current).toBe(el)
+  })
+
+  test("should call the cleanup functions returned by ref callbacks", () => {
+    const cleanup = vi.fn()
+    const refCallback = vi.fn(() => cleanup)
+    const mergedRef = mergeRefs(refCallback)
+    const el = document.createElement("div")
+    const mergedCleanup = mergedRef(el)
+    mergedCleanup()
+    expect(cleanup).toHaveBeenCalledOnce()
+    expect(refCallback).toHaveBeenCalledExactlyOnceWith(el)
+  })
+
+  test("should reset refs without cleanup functions", () => {
+    const refObject = createRef()
+    const refCallback = vi.fn()
+    const mergedRef = mergeRefs(refObject, refCallback)
+    const el = document.createElement("div")
+    const mergedCleanup = mergedRef(el)
+    mergedCleanup()
+    expect(refObject.current).toBeNull()
+    expect(refCallback).toHaveBeenLastCalledWith(null)
   })
 })

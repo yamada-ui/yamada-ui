@@ -12,24 +12,24 @@ import {
 } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { CONSTANTS } from "@/constants"
-import { getLang } from "@/utils/i18n"
+import { getPathname } from "@/i18n"
 import { ChatgptIcon } from "./chatgpt-icon"
 import { ClaudeIcon } from "./claude-icon"
 import { MarkdownIcon } from "./markdown-icon"
 
-export function useLlmsUrls(locale: string, pathname: string) {
+export function useLlmsUrls(locale: Doc["locale"], pathname: string) {
   const t = useTranslations("component.llmsButtonGroup")
-  const lang = getLang(locale)
+  const markdownUrl = getPathname({ href: `${pathname}.md`, locale })
   const query = encodeURIComponent(
     t("query", {
-      url: `${CONSTANTS.SNS.HOMEPAGE}/${lang}${pathname}.md`,
+      url: `${CONSTANTS.SNS.HOMEPAGE}${markdownUrl}`,
     }),
   )
 
   return {
     chatgptUrl: `https://chatgpt.com/?hints=search&prompt=${query}`,
     claudeUrl: `https://claude.ai/new?q=${query}`,
-    markdownUrl: `/${getLang(locale)}${pathname}.md`,
+    markdownUrl,
   }
 }
 

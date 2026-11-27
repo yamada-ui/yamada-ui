@@ -27,12 +27,12 @@ const randomValue = (min = 1000, max = 5000) =>
   Math.floor(Math.random() * (max - min + 1)) + min
 
 const createData = (): Data[] => [
-  { browser: "chrome", downloads: randomValue(), visits: randomValue() },
-  { browser: "edge", downloads: randomValue(), visits: randomValue() },
-  { browser: "firefox", downloads: randomValue(), visits: randomValue() },
-  { browser: "opera", downloads: randomValue(), visits: randomValue() },
-  { browser: "safari", downloads: randomValue(), visits: randomValue() },
-  { browser: "other", downloads: randomValue(), visits: randomValue() },
+  { browser: "Chrome", downloads: randomValue(), visits: randomValue() },
+  { browser: "Edge", downloads: randomValue(), visits: randomValue() },
+  { browser: "Firefox", downloads: randomValue(), visits: randomValue() },
+  { browser: "Opera", downloads: randomValue(), visits: randomValue() },
+  { browser: "Safari", downloads: randomValue(), visits: randomValue() },
+  { browser: "Other", downloads: randomValue(), visits: randomValue() },
 ]
 
 export const Basic: Story = () => {
@@ -49,37 +49,37 @@ export const Composition: Story = () => {
   const data = useMemo<Data[]>(
     () => [
       {
-        browser: "chrome",
+        browser: "Chrome",
         downloads: randomValue(),
         fill: "cyan",
         visits: randomValue(),
       },
       {
-        browser: "edge",
+        browser: "Edge",
         downloads: randomValue(),
         fill: "green",
         visits: randomValue(),
       },
       {
-        browser: "firefox",
+        browser: "Firefox",
         downloads: randomValue(),
         fill: "orange",
         visits: randomValue(),
       },
       {
-        browser: "opera",
+        browser: "Opera",
         downloads: randomValue(),
         fill: "red",
         visits: randomValue(),
       },
       {
-        browser: "safari",
+        browser: "Safari",
         downloads: randomValue(),
         fill: "blue",
         visits: randomValue(),
       },
       {
-        browser: "other",
+        browser: "Other",
         downloads: randomValue(),
         fill: "gray",
         visits: randomValue(),
@@ -134,37 +134,37 @@ export const SectorColors: Story = () => {
   const data = useMemo<Data[]>(
     () => [
       {
-        browser: "chrome",
+        browser: "Chrome",
         downloads: randomValue(),
         fill: "cyan",
         visits: randomValue(),
       },
       {
-        browser: "edge",
+        browser: "Edge",
         downloads: randomValue(),
         fill: "green",
         visits: randomValue(),
       },
       {
-        browser: "firefox",
+        browser: "Firefox",
         downloads: randomValue(),
         fill: "orange",
         visits: randomValue(),
       },
       {
-        browser: "opera",
+        browser: "Opera",
         downloads: randomValue(),
         fill: "red",
         visits: randomValue(),
       },
       {
-        browser: "safari",
+        browser: "Safari",
         downloads: randomValue(),
         fill: "blue",
         visits: randomValue(),
       },
       {
-        browser: "other",
+        browser: "Other",
         downloads: randomValue(),
         fill: "gray",
         visits: randomValue(),
@@ -184,37 +184,37 @@ export const SectorStroke: Story = () => {
   const data = useMemo<Data[]>(
     () => [
       {
-        browser: "chrome",
+        browser: "Chrome",
         downloads: randomValue(),
         fill: "cyan",
         visits: randomValue(),
       },
       {
-        browser: "edge",
+        browser: "Edge",
         downloads: randomValue(),
         fill: "green",
         visits: randomValue(),
       },
       {
-        browser: "firefox",
+        browser: "Firefox",
         downloads: randomValue(),
         fill: "orange",
         visits: randomValue(),
       },
       {
-        browser: "opera",
+        browser: "Opera",
         downloads: randomValue(),
         fill: "red",
         visits: randomValue(),
       },
       {
-        browser: "safari",
+        browser: "Safari",
         downloads: randomValue(),
         fill: "blue",
         visits: randomValue(),
       },
       {
-        browser: "other",
+        browser: "Other",
         downloads: randomValue(),
         fill: "gray",
         visits: randomValue(),
@@ -234,37 +234,37 @@ export const Legend: Story = () => {
   const data = useMemo<Data[]>(
     () => [
       {
-        browser: "chrome",
+        browser: "Chrome",
         downloads: randomValue(),
         fill: "cyan",
         visits: randomValue(),
       },
       {
-        browser: "edge",
+        browser: "Edge",
         downloads: randomValue(),
         fill: "green",
         visits: randomValue(),
       },
       {
-        browser: "firefox",
+        browser: "Firefox",
         downloads: randomValue(),
         fill: "orange",
         visits: randomValue(),
       },
       {
-        browser: "opera",
+        browser: "Opera",
         downloads: randomValue(),
         fill: "red",
         visits: randomValue(),
       },
       {
-        browser: "safari",
+        browser: "Safari",
         downloads: randomValue(),
         fill: "blue",
         visits: randomValue(),
       },
       {
-        browser: "other",
+        browser: "Other",
         downloads: randomValue(),
         fill: "gray",
         visits: randomValue(),
@@ -334,37 +334,37 @@ export const Label: Story = () => {
   const data = useMemo<Data[]>(
     () => [
       {
-        browser: "chrome",
+        browser: "Chrome",
         downloads: randomValue(),
         fill: "cyan",
         visits: randomValue(),
       },
       {
-        browser: "edge",
+        browser: "Edge",
         downloads: randomValue(),
         fill: "green",
         visits: randomValue(),
       },
       {
-        browser: "firefox",
+        browser: "Firefox",
         downloads: randomValue(),
         fill: "orange",
         visits: randomValue(),
       },
       {
-        browser: "opera",
+        browser: "Opera",
         downloads: randomValue(),
         fill: "red",
         visits: randomValue(),
       },
       {
-        browser: "safari",
+        browser: "Safari",
         downloads: randomValue(),
         fill: "blue",
         visits: randomValue(),
       },
       {
-        browser: "other",
+        browser: "Other",
         downloads: randomValue(),
         fill: "gray",
         visits: randomValue(),
@@ -387,37 +387,37 @@ export const LabelLine: Story = () => {
   const data = useMemo<Data[]>(
     () => [
       {
-        browser: "chrome",
+        browser: "Chrome",
         downloads: randomValue(),
         fill: "cyan",
         visits: randomValue(),
       },
       {
-        browser: "edge",
+        browser: "Edge",
         downloads: randomValue(),
         fill: "green",
         visits: randomValue(),
       },
       {
-        browser: "firefox",
+        browser: "Firefox",
         downloads: randomValue(),
         fill: "orange",
         visits: randomValue(),
       },
       {
-        browser: "opera",
+        browser: "Opera",
         downloads: randomValue(),
         fill: "red",
         visits: randomValue(),
       },
       {
-        browser: "safari",
+        browser: "Safari",
         downloads: randomValue(),
         fill: "blue",
         visits: randomValue(),
       },
       {
-        browser: "other",
+        browser: "Other",
         downloads: randomValue(),
         fill: "gray",
         visits: randomValue(),
@@ -443,37 +443,37 @@ export const LabelOffset: Story = () => {
   const data = useMemo<Data[]>(
     () => [
       {
-        browser: "chrome",
+        browser: "Chrome",
         downloads: randomValue(),
         fill: "cyan",
         visits: randomValue(),
       },
       {
-        browser: "edge",
+        browser: "Edge",
         downloads: randomValue(),
         fill: "green",
         visits: randomValue(),
       },
       {
-        browser: "firefox",
+        browser: "Firefox",
         downloads: randomValue(),
         fill: "orange",
         visits: randomValue(),
       },
       {
-        browser: "opera",
+        browser: "Opera",
         downloads: randomValue(),
         fill: "red",
         visits: randomValue(),
       },
       {
-        browser: "safari",
+        browser: "Safari",
         downloads: randomValue(),
         fill: "blue",
         visits: randomValue(),
       },
       {
-        browser: "other",
+        browser: "Other",
         downloads: randomValue(),
         fill: "gray",
         visits: randomValue(),
@@ -499,37 +499,37 @@ export const LabelList: Story = () => {
   const data = useMemo<Data[]>(
     () => [
       {
-        browser: "chrome",
+        browser: "Chrome",
         downloads: randomValue(),
         fill: "cyan",
         visits: randomValue(),
       },
       {
-        browser: "edge",
+        browser: "Edge",
         downloads: randomValue(),
         fill: "green",
         visits: randomValue(),
       },
       {
-        browser: "firefox",
+        browser: "Firefox",
         downloads: randomValue(),
         fill: "orange",
         visits: randomValue(),
       },
       {
-        browser: "opera",
+        browser: "Opera",
         downloads: randomValue(),
         fill: "red",
         visits: randomValue(),
       },
       {
-        browser: "safari",
+        browser: "Safari",
         downloads: randomValue(),
         fill: "blue",
         visits: randomValue(),
       },
       {
-        browser: "other",
+        browser: "Other",
         downloads: randomValue(),
         fill: "gray",
         visits: randomValue(),
@@ -733,37 +733,37 @@ export const Formatter: Story = () => {
   const data = useMemo<Data[]>(
     () => [
       {
-        browser: "chrome",
+        browser: "Chrome",
         downloads: randomValue(),
         fill: "cyan",
         visits: randomValue(),
       },
       {
-        browser: "edge",
+        browser: "Edge",
         downloads: randomValue(),
         fill: "green",
         visits: randomValue(),
       },
       {
-        browser: "firefox",
+        browser: "Firefox",
         downloads: randomValue(),
         fill: "orange",
         visits: randomValue(),
       },
       {
-        browser: "opera",
+        browser: "Opera",
         downloads: randomValue(),
         fill: "red",
         visits: randomValue(),
       },
       {
-        browser: "safari",
+        browser: "Safari",
         downloads: randomValue(),
         fill: "blue",
         visits: randomValue(),
       },
       {
-        browser: "other",
+        browser: "Other",
         downloads: randomValue(),
         fill: "gray",
         visits: randomValue(),

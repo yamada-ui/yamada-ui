@@ -140,8 +140,9 @@ async function updateDependencies(packageName: string) {
 }
 
 async function main() {
+  await updateIcons()
+
   await Promise.all([
-    updateIcons(),
     updateStyles(),
     updateDependencies("cli"),
     updateDependencies("react"),

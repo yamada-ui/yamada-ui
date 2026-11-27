@@ -2,53 +2,83 @@ import {
   focusTransfer,
   focusTrap,
   getEventPoint,
+  isComposing,
   isMultiTouchEvent,
   isTouchEvent,
   pointFromTouch,
 } from "./event"
 
+describe("isComposing", () => {
+  test.each([
+    { expected: true, isComposing: true, keyCode: 13 },
+    { expected: true, isComposing: false, keyCode: 229 },
+    { expected: false, isComposing: false, keyCode: 13 },
+  ])(
+    "returns $expected for keyboard events with isComposing=$isComposing and keyCode=$keyCode",
+    ({ expected, isComposing: composing, keyCode }) => {
+      const ev = new KeyboardEvent("keydown", {
+        isComposing: composing,
+        keyCode,
+      })
+
+      expect(isComposing(ev)).toBe(expected)
+    },
+  )
+
+  test.each([true, false])(
+    "returns %s for input events with the same composing state",
+    (composing) => {
+      const ev = new InputEvent("input", { isComposing: composing })
+
+      expect(isComposing(ev)).toBe(composing)
+    },
+  )
+
+  test("returns false for events without composition information", () => {
+    expect(isComposing(new Event("change"))).toBeFalsy()
+  })
+})
+
 describe("Event", () => {
-  const defaultTouch = global.Touch
-  const defaultPointerEvent = global.PointerEvent
-
-  beforeAll(() => {
-    global.Touch = class Touch {
-      identifier: number
-      target: EventTarget
-      clientX: number
-      clientY: number
-
-      constructor({
-        target,
-        clientX,
-        clientY,
-        identifier,
-      }: {
-        clientX: number
-        clientY: number
+  beforeEach(() => {
+    vi.stubGlobal(
+      "Touch",
+      class Touch {
         identifier: number
         target: EventTarget
-      }) {
-        this.identifier = identifier
-        this.target = target
-        this.clientX = clientX
-        this.clientY = clientY
-      }
-    } as typeof global.Touch
+        clientX: number
+        clientY: number
 
-    global.PointerEvent = class PointerEvent extends MouseEvent {
-      pointerType: string
+        constructor({
+          target,
+          clientX,
+          clientY,
+          identifier,
+        }: {
+          clientX: number
+          clientY: number
+          identifier: number
+          target: EventTarget
+        }) {
+          this.identifier = identifier
+          this.target = target
+          this.clientX = clientX
+          this.clientY = clientY
+        }
+      },
+    )
 
-      constructor(type: string, params: PointerEventInit = {}) {
-        super(type, params)
-        this.pointerType = params.pointerType || ""
-      }
-    } as typeof global.PointerEvent
-  })
+    vi.stubGlobal(
+      "PointerEvent",
+      class PointerEvent extends MouseEvent {
+        pointerType: string
 
-  afterAll(() => {
-    global.Touch = defaultTouch
-    global.PointerEvent = defaultPointerEvent
+        constructor(type: string, params: PointerEventInit = {}) {
+          super(type, params)
+          this.pointerType = params.pointerType || ""
+        }
+      },
+    )
   })
 
   test("isTouchEvent identifies touch events", () => {
@@ -139,10 +169,13 @@ describe("Event", () => {
       document.body.appendChild(container)
 
       const cleanup = focusTransfer(container)
-      expect(cleanup).toBeTypeOf("function")
 
-      cleanup()
-      document.body.removeChild(container)
+      try {
+        expect(cleanup).toBeTypeOf("function")
+      } finally {
+        cleanup()
+        document.body.removeChild(container)
+      }
     })
   })
 })

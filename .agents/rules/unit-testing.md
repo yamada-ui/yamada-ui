@@ -117,6 +117,12 @@ test.each([
 
 ## Mocks & Spies
 
+### Keep mock history local to each test
+
+Vitest 5 defaults `clearMocks` to `true`: it clears mock call history before every test without resetting implementations. Do not assert on calls recorded in a setup file, at module scope, or in `beforeAll`; trigger the behavior inside the test or `beforeEach` instead.
+
+Automatic history clearing does not restore spies, reset mock implementations, or undo stubbed globals and environment variables. Keep the corresponding teardown.
+
 ### Use `vi.mock` with `vi.mocked` — not `any` on `importOriginal`
 
 #### DO NOT
@@ -177,7 +183,7 @@ test("exits on missing config", () => {
 })
 ```
 
-`restoreAllMocks` restores the original implementations and clears history. Use `clearAllMocks` only when you intentionally want to keep a mocked implementation between tests.
+`restoreAllMocks` restores the original object methods replaced by `vi.spyOn`; it does not clear mock history or reset the implementation held by a mock handle, and it does not undo module automocking. `clearAllMocks` clears history while preserving implementations; `resetAllMocks` clears history and resets implementations.
 
 ### Use `vi.hoisted` when a mock needs a shared handle
 
@@ -198,6 +204,8 @@ vi.mock("./registry", () => ({ fetchRegistry: fetchMock }))
 ```
 
 `vi.hoisted` runs before mock factories, so the shared handle is alive when the factory executes and when your tests reference it.
+
+Keep `vi.mock`, `vi.unmock`, and `vi.hoisted` at module top level. Vitest 5 throws when they are nested inside a function, block, `describe`, or test callback. Use `vi.doMock` / `vi.doUnmock` with subsequent dynamic imports when mocking must happen at runtime.
 
 ## Timers
 
@@ -321,6 +329,10 @@ test("calls the registry endpoint", () => {
 `vi.stubGlobal` is tracked and automatically unwound by `vi.unstubAllGlobals`. Scope the stub to each test so global state does not leak across cases or files.
 
 ## Assertions
+
+### Keep jsdom text assertions separate from browser matchers
+
+The jsdom setup registers `@testing-library/jest-dom/vitest`. Do not use the browser-only `toMatchTextContent` matcher in jsdom tests. Browser matcher declarations can also affect the shared TypeScript assertion types, making `toHaveTextContent(RegExp)` fail to typecheck even in a jsdom test. In that case, assert the element's presence and use `expect(element.textContent).toMatch(pattern)` for the regular expression check.
 
 ### Use `toStrictEqual` for objects
 

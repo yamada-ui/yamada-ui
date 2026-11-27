@@ -18,7 +18,6 @@ import {
   PACKAGE_NAME,
   REGISTRY_FILE_NAME,
   REGISTRY_URL,
-  REGISTRY_VERSION,
   SECTION_NAMES,
 } from "../constant"
 import { writeFileSafe } from "./fs"
@@ -38,34 +37,17 @@ const agent = process.env.https_proxy
 const registryStore = new Map<string, Registry>()
 
 function getRegistryUrl(name: string, tag = "") {
-  if (name === "index")
-    return path.posix.join(REGISTRY_URL, tag, REGISTRY_VERSION, "index.json")
-  else if (name === "theme")
-    return path.posix.join(REGISTRY_URL, tag, REGISTRY_VERSION, "theme.json")
-  else if (name.startsWith("use-"))
-    return path.posix.join(
-      REGISTRY_URL,
-      tag,
-      REGISTRY_VERSION,
-      "hooks",
-      `${name}.json`,
-    )
-  else if (name.endsWith("-provider"))
-    return path.posix.join(
-      REGISTRY_URL,
-      tag,
-      REGISTRY_VERSION,
-      "providers",
-      `${name}.json`,
-    )
-  else
-    return path.posix.join(
-      REGISTRY_URL,
-      tag,
-      REGISTRY_VERSION,
-      "components",
-      `${name}.json`,
-    )
+  const section =
+    name === "index" || name === "theme"
+      ? ""
+      : name.startsWith("use-")
+        ? "hooks"
+        : name.endsWith("-provider")
+          ? "providers"
+          : "components"
+  const pathname = path.posix.join(tag, section, `${name}.json`)
+
+  return new URL(pathname, `${REGISTRY_URL}/`).href
 }
 
 export async function fetchRegistryNames(tag?: string): Promise<string[]> {

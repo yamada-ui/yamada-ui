@@ -4,7 +4,7 @@ import { PropsTable } from "#storybook"
 import { ToggleGroup } from "."
 import { COLOR_SCHEMES } from "../../utils"
 import { For } from "../for"
-import { BoldIcon, ItalicIcon, UnderlineIcon } from "../icon"
+import { ItalicIcon, LetterBIcon, UnderlineIcon } from "../icon"
 
 type Story = StoryFn<typeof ToggleGroup.Root>
 
@@ -20,7 +20,7 @@ export const Basic: Story = () => {
     <ToggleGroup.Root>
       <ToggleGroup.Item
         aria-label="Toggle bold"
-        icon={<BoldIcon />}
+        icon={<LetterBIcon />}
         value="bold"
       />
       <ToggleGroup.Item
@@ -41,7 +41,7 @@ export const Items: Story = () => {
   const items = useMemo<ToggleGroup.Item[]>(
     () => [
       {
-        icon: <BoldIcon />,
+        icon: <LetterBIcon />,
         label: "Toggle bold",
         value: "bold",
       },
@@ -66,7 +66,7 @@ export const Variant: Story = () => {
   const items = useMemo<ToggleGroup.Item[]>(
     () => [
       {
-        icon: <BoldIcon />,
+        icon: <LetterBIcon />,
         label: "Toggle bold",
         value: "bold",
       },
@@ -108,7 +108,7 @@ export const Size: Story = () => {
   const items = useMemo<ToggleGroup.Item[]>(
     () => [
       {
-        icon: <BoldIcon />,
+        icon: <LetterBIcon />,
         label: "Toggle bold",
         value: "bold",
       },
@@ -147,7 +147,7 @@ export const Disabled: Story = () => {
   const items = useMemo<ToggleGroup.Item[]>(
     () => [
       {
-        icon: <BoldIcon />,
+        icon: <LetterBIcon />,
         label: "Toggle bold",
         value: "bold",
       },
@@ -184,7 +184,7 @@ export const ReadOnly: Story = () => {
   const items = useMemo<ToggleGroup.Item[]>(
     () => [
       {
-        icon: <BoldIcon />,
+        icon: <LetterBIcon />,
         label: "Toggle bold",
         value: "bold",
       },
@@ -221,7 +221,7 @@ export const CustomControl: Story = () => {
   const items = useMemo<ToggleGroup.Item[]>(
     () => [
       {
-        icon: <BoldIcon />,
+        icon: <LetterBIcon />,
         label: "Toggle bold",
         value: "bold",
       },

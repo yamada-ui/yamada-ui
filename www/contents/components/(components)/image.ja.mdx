@@ -37,9 +37,29 @@ import { Image } from "@workspaces/ui"
 <Image />
 ```
 
+:::tip
+フレームワークが画像コンポーネントを提供している場合は、そのコンポーネントを`styled`で拡張して使用します。統合方法は、[各フレームワークのドキュメント](/docs/get-started#pick-your-framework)をご覧ください。
+:::
+
+:::tip
+異なる表示やデバイスのシナリオに応じて代替の画像を提供する場合は、[Picture](/docs/components/picture)を使用します。
+:::
+
+:::tip
+ユーザーを表すプロフィール写真やイニシャルのアイコンを表示する場合は、[Avatar](/docs/components/avatar)を使用します。
+:::
+
+:::tip
+URLなどの情報からQRコードを生成して表示する場合は、[QrCode](/docs/components/qr-code)を使用します。
+:::
+
 ## Props
 
 <PropsTable name="image" />
+
+## アクセシビリティ
+
+`alt`には、画像の内容や役割を伝える代替テキストを設定します。情報を伝えない装飾的な画像には、`alt=""`を設定します。
 
 ## 類似のコンポーネント
 

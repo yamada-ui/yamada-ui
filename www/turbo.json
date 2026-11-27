@@ -7,10 +7,12 @@
         "{velite.config.ts,package.json}",
         "{contents,constants,utils,data,messages,scripts/generate/docs}/**",
         "!data/doc-map.*.json",
+        "!data/doc-search.*.json",
         "../{pnpm-lock,pnpm-workspace}.yaml",
         "../packages/workspace/src/oxfmt/**",
         "../packages/workspace/package.json"
-      ]
+      ],
+      "outputs": [".velite/**", "data/doc-map.*.json", "data/doc-search.*.json"]
     },
     "build:next": {
       "dependsOn": ["^build", "build:content"],
@@ -18,6 +20,8 @@
         "**/*.{ts,tsx,mts,mdx,json}",
         ".velite/**",
         "public/**",
+        "../packages/workspace/src/typescript/**",
+        "!**/*.test.{ts,tsx,mts}",
         "!.next/**",
         "!.turbo/**",
         "!node_modules/**",

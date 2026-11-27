@@ -18,7 +18,7 @@ export const Basic = () => {
   return (
     <>
       <Text>
-        state: {String(flg)}, prev: {String(prevFlg ?? "none")}
+        State: {String(flg)}, Previous: {String(prevFlg ?? "None")}
       </Text>
       <Button onClick={toggle}>Click me to toggle the boolean value</Button>
     </>

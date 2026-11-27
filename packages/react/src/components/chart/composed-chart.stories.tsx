@@ -38,15 +38,15 @@ export const Basic: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -81,9 +81,9 @@ export const Composition: Story = () => {
         dataKey="date"
         tickFormatter={(value) => dayjs(value).format("MMM")}
       />
-      <ComposedChart.Bar color="blue" dataKey="desktop" />
-      <ComposedChart.Area color="green" dataKey="tablet" dot />
-      <ComposedChart.Line color="red" dataKey="mobile" dot>
+      <ComposedChart.Bar name="Desktop" color="blue" dataKey="desktop" />
+      <ComposedChart.Area name="Tablet" color="green" dataKey="tablet" dot />
+      <ComposedChart.Line name="Mobile" color="red" dataKey="mobile" dot>
         <ComposedChart.LabelList />
       </ComposedChart.Line>
     </ComposedChart.Root>
@@ -96,15 +96,15 @@ export const Size: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -146,15 +146,15 @@ export const ColorScheme: Story = () => {
             [
               [
                 "bar",
-                { dataKey: "desktop" },
+                { name: "Desktop", dataKey: "desktop" },
               ] satisfies ComposedChart.ComposedProps<Data>,
               [
                 "area",
-                { dataKey: "tablet" },
+                { name: "Tablet", dataKey: "tablet" },
               ] satisfies ComposedChart.ComposedProps<Data>,
               [
                 "line",
-                { dataKey: "mobile" },
+                { name: "Mobile", dataKey: "mobile" },
               ] satisfies ComposedChart.ComposedProps<Data>,
             ],
             row,
@@ -177,15 +177,15 @@ export const Color: Story = () => {
     () => [
       [
         "bar",
-        { color: "blue", dataKey: "desktop" },
+        { name: "Desktop", color: "blue", dataKey: "desktop" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "area",
-        { color: "green", dataKey: "tablet" },
+        { name: "Tablet", color: "green", dataKey: "tablet" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "line",
-        { color: "red", dataKey: "mobile" },
+        { name: "Mobile", color: "red", dataKey: "mobile" },
       ] satisfies ComposedChart.ComposedProps<Data>,
     ],
     [],
@@ -213,15 +213,15 @@ export const YAxis: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -250,15 +250,15 @@ export const Legend: Story = () => {
     () => [
       [
         "bar",
-        { color: "blue", dataKey: "desktop" },
+        { name: "Desktop", color: "blue", dataKey: "desktop" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "area",
-        { color: "green", dataKey: "tablet" },
+        { name: "Tablet", color: "green", dataKey: "tablet" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "line",
-        { color: "red", dataKey: "mobile" },
+        { name: "Mobile", color: "red", dataKey: "mobile" },
       ] satisfies ComposedChart.ComposedProps<Data>,
     ],
     [],
@@ -342,15 +342,15 @@ export const Grid: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -384,15 +384,15 @@ export const LineType: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -438,15 +438,15 @@ export const LineDot: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -476,15 +476,15 @@ export const LineConnectNull: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -523,15 +523,15 @@ export const BarRange: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -568,15 +568,15 @@ export const BarStacked: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop", radius: [0, 0, 4, 4] },
+          { name: "Desktop", dataKey: "desktop", radius: [0, 0, 4, 4] },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "bar",
-          { dataKey: "tablet", radius: [4, 4, 0, 0] },
+          { name: "Tablet", dataKey: "tablet", radius: [4, 4, 0, 0] },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -605,15 +605,15 @@ export const BarSize: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -642,15 +642,15 @@ export const BarRadius: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -679,15 +679,15 @@ export const BarGap: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "bar",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -716,15 +716,15 @@ export const Unit: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -767,15 +767,15 @@ export const LabelList: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -831,15 +831,15 @@ export const Orientation: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -880,15 +880,15 @@ export const Synced: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -932,15 +932,15 @@ export const Formatter: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -977,15 +977,15 @@ export const ReferenceLine: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1026,15 +1026,15 @@ export const AxisTickLine: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1066,15 +1066,15 @@ export const AxisLabel: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1106,15 +1106,15 @@ export const Domain: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1148,15 +1148,15 @@ export const TooltipCursor: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1185,15 +1185,15 @@ export const DisabledXAxis: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1217,15 +1217,15 @@ export const DisabledLineActiveDot: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1255,15 +1255,15 @@ export const DisabledTooltip: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1289,15 +1289,15 @@ export const CustomAxis: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1334,15 +1334,15 @@ export const CustomLine: Story = () => {
     () => [
       [
         "bar",
-        { dataKey: "desktop" },
+        { name: "Desktop", dataKey: "desktop" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "area",
-        { color: ["green", "orange"], dataKey: "tablet" },
+        { name: "Tablet", color: ["green", "orange"], dataKey: "tablet" },
       ] satisfies ComposedChart.ComposedProps<Data>,
       [
         "line",
-        { color: ["red", "blue"], dataKey: "mobile" },
+        { name: "Mobile", color: ["red", "blue"], dataKey: "mobile" },
       ] satisfies ComposedChart.ComposedProps<Data>,
     ],
     [],
@@ -1372,15 +1372,15 @@ export const CustomReferenceLine: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1419,15 +1419,16 @@ export const CustomDot: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet", dot: { fill: "blue!" } },
+          { name: "Tablet", dataKey: "tablet", dot: { fill: "blue!" } },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
           {
+            name: "Mobile",
             dataKey: "mobile",
             dot: { fill: ["white!", "black!"], stroke: "red!", strokeWidth: 1 },
           },
@@ -1461,15 +1462,15 @@ export const CustomActiveDot: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1500,15 +1501,15 @@ export const CustomLabelList: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1546,15 +1547,15 @@ export const CustomGrid: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],
@@ -1584,15 +1585,15 @@ export const CustomTooltipCursor: Story = () => {
       ComposedChart.mergeSeries<Data>([
         [
           "bar",
-          { dataKey: "desktop" },
+          { name: "Desktop", dataKey: "desktop" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "area",
-          { dataKey: "tablet" },
+          { name: "Tablet", dataKey: "tablet" },
         ] satisfies ComposedChart.ComposedProps<Data>,
         [
           "line",
-          { dataKey: "mobile" },
+          { name: "Mobile", dataKey: "mobile" },
         ] satisfies ComposedChart.ComposedProps<Data>,
       ]),
     [],

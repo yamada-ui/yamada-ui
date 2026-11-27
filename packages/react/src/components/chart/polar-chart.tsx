@@ -76,7 +76,6 @@ import {
   varAttr,
 } from "../../core"
 import {
-  assignRef,
   cx,
   isFunction,
   isNumber,
@@ -84,6 +83,7 @@ import {
   replaceObject,
   runIfFn,
   splitObject,
+  useSafeLayoutEffect,
 } from "../../utils"
 import { Chart, ChartLabelList, useChartComponentContext } from "./chart"
 import { polarChartStyle } from "./polar-chart.style"
@@ -1253,6 +1253,7 @@ export interface ChartRadialProps<Y extends Dict = Dict> extends Merge<
 export const ChartRadial = withContext<"svg", ChartRadialProps>(
   <Y extends Dict>(props: ChartRadialProps<Y>) => {
     const { radialProps } = useComponentContext()
+    const { registerNameKey } = useChartComponentContext()
     const {
       background: backgroundProp = true,
       children,
@@ -1263,9 +1264,13 @@ export const ChartRadial = withContext<"svg", ChartRadialProps>(
       sectorProps,
       ...rest
     } = mergeProps(radialProps, props)()
+
+    useSafeLayoutEffect(
+      () => registerNameKey(nameKey),
+      [nameKey, registerNameKey],
+    )
     const system = useSystem()
     const { theme } = useTheme()
-    const { nameKeyRef } = useChartComponentContext()
     const labelProps = useSlotComponentProps({}, "labelList")
     const backgroundProps = useSlotComponentProps({}, "radialBackground")
     const css = useMemo(() => getCSS(system, theme), [system, theme])
@@ -1340,8 +1345,6 @@ export const ChartRadial = withContext<"svg", ChartRadialProps>(
       shape,
       ...rest,
     })
-
-    assignRef(nameKeyRef, nameKey)
 
     return (
       <styled.svg asChild {...getRootProps()}>

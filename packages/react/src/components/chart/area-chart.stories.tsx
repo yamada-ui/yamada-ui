@@ -36,9 +36,9 @@ export const Basic: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -71,11 +71,11 @@ export const Composition: Story = () => {
         dataKey="date"
         tickFormatter={(value) => dayjs(value).format("MMM")}
       />
-      <AreaChart.Area color="mono.900" dataKey="desktop" dot>
+      <AreaChart.Area name="Desktop" color="mono.900" dataKey="desktop" dot>
         <AreaChart.LabelList />
       </AreaChart.Area>
-      <AreaChart.Area color="mono.600" dataKey="tablet" />
-      <AreaChart.Area color="mono.300" dataKey="mobile" />
+      <AreaChart.Area name="Tablet" color="mono.600" dataKey="tablet" />
+      <AreaChart.Area name="Mobile" color="mono.300" dataKey="mobile" />
     </AreaChart.Root>
   )
 }
@@ -84,9 +84,9 @@ export const Size: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -122,16 +122,14 @@ export const ColorScheme: Story = () => {
         <AreaChart.Root
           key={key}
           data={data}
-          series={
-            AreaChart.mergeSeries(
-              [
-                { dataKey: "desktop" },
-                { dataKey: "tablet" },
-                { dataKey: "mobile" },
-              ],
-              row,
-            ) as AreaChart.AreaProps<Data>[]
-          }
+          series={AreaChart.mergeSeries<AreaChart.AreaProps<Data>>(
+            [
+              { name: "Desktop", dataKey: "desktop" },
+              { name: "Tablet", dataKey: "tablet" },
+              { name: "Mobile", dataKey: "mobile" },
+            ],
+            row,
+          )}
           tooltipProps={{
             labelFormatter: (value) => dayjs(value as string).format("MMM"),
           }}
@@ -149,7 +147,11 @@ export const Gradient: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries(
-        [{ dataKey: "desktop" }, { dataKey: "tablet" }, { dataKey: "mobile" }],
+        [
+          { name: "Desktop", dataKey: "desktop" },
+          { name: "Tablet", dataKey: "tablet" },
+          { name: "Mobile", dataKey: "mobile" },
+        ],
         "blue",
       ),
     [],
@@ -175,9 +177,9 @@ export const Gradient: Story = () => {
 export const Color: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "green", dataKey: "tablet" },
-      { color: "blue", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "green", dataKey: "tablet" },
+      { name: "Mobile", color: "blue", dataKey: "mobile" },
     ],
     [],
   )
@@ -202,9 +204,9 @@ export const Color: Story = () => {
 export const Filled: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "green", dataKey: "tablet" },
-      { color: "blue", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "green", dataKey: "tablet" },
+      { name: "Mobile", color: "blue", dataKey: "mobile" },
     ],
     [],
   )
@@ -230,9 +232,9 @@ export const Type: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -274,9 +276,9 @@ export const Stacked: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -306,9 +308,9 @@ export const Stacked: Story = () => {
           dataKey="date"
           tickFormatter={(value) => dayjs(value).format("MMM")}
         />
-        <AreaChart.Area dataKey="desktop" stackId={1} />
-        <AreaChart.Area dataKey="tablet" stackId={1} />
-        <AreaChart.Area dataKey="mobile" />
+        <AreaChart.Area name="Desktop" dataKey="desktop" stackId={1} />
+        <AreaChart.Area name="Tablet" dataKey="tablet" stackId={1} />
+        <AreaChart.Area name="Mobile" dataKey="mobile" />
       </AreaChart.Root>
     </>
   )
@@ -318,9 +320,9 @@ export const StackedExpanded: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -351,9 +353,9 @@ export const YAxis: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -379,9 +381,9 @@ export const YAxis: Story = () => {
 export const Legend: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "green", dataKey: "tablet" },
-      { color: "blue", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "green", dataKey: "tablet" },
+      { name: "Mobile", color: "blue", dataKey: "mobile" },
     ],
     [],
   )
@@ -458,9 +460,9 @@ export const Grid: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -489,7 +491,7 @@ export const Grid: Story = () => {
 
 export const Dot: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+    () => AreaChart.mergeSeries([{ name: "Desktop", dataKey: "desktop" }]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -512,7 +514,7 @@ export const Dot: Story = () => {
 
 export const Unit: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+    () => AreaChart.mergeSeries([{ name: "Desktop", dataKey: "desktop" }]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -549,7 +551,7 @@ export const Unit: Story = () => {
 
 export const LabelList: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () => AreaChart.mergeSeries([{ dataKey: "desktop" }]),
+    () => AreaChart.mergeSeries([{ name: "Desktop", dataKey: "desktop" }]),
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -601,9 +603,9 @@ export const Orientation: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -641,9 +643,9 @@ export const Synced: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -684,9 +686,9 @@ export const ConnectNull: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -721,9 +723,9 @@ export const Formatter: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -757,9 +759,9 @@ export const ReferenceLine: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -797,9 +799,9 @@ export const AxisTickLine: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -828,9 +830,9 @@ export const AxisLabel: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -859,9 +861,9 @@ export const Domain: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -892,9 +894,9 @@ export const TooltipCursor: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -920,9 +922,9 @@ export const DisabledXAxis: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -943,9 +945,9 @@ export const DisabledActiveDot: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -971,9 +973,9 @@ export const DisabledTooltip: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -996,9 +998,9 @@ export const CustomAxis: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -1033,9 +1035,9 @@ export const CustomArea: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -1061,9 +1063,9 @@ export const CustomReferenceLine: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -1099,9 +1101,10 @@ export const CustomDot: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet", dot: { fill: "blue" } },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet", dot: { fill: "blue" } },
         {
+          name: "Mobile",
           dataKey: "mobile",
           dot: { fill: ["white", "black"], stroke: "red", strokeWidth: 1 },
         },
@@ -1131,9 +1134,9 @@ export const CustomActiveDot: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -1158,7 +1161,7 @@ export const CustomActiveDot: Story = () => {
 
 export const CustomLabelList: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
-    () => [{ color: "blue", dataKey: "desktop" }],
+    () => [{ name: "Desktop", color: "blue", dataKey: "desktop" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -1192,9 +1195,9 @@ export const CustomGrid: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )
@@ -1221,9 +1224,9 @@ export const CustomTooltipCursor: Story = () => {
   const series = useMemo<AreaChart.AreaProps<Data>[]>(
     () =>
       AreaChart.mergeSeries([
-        { dataKey: "desktop" },
-        { dataKey: "tablet" },
-        { dataKey: "mobile" },
+        { name: "Desktop", dataKey: "desktop" },
+        { name: "Tablet", dataKey: "tablet" },
+        { name: "Mobile", dataKey: "mobile" },
       ]),
     [],
   )

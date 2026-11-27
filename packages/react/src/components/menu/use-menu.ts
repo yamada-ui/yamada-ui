@@ -11,7 +11,6 @@ import { createDescendants } from "../../hooks/use-descendants"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import {
   ariaAttr,
-  assignRef,
   createContext,
   dataAttr,
   handlerAll,
@@ -21,6 +20,7 @@ import {
   mergeRefs,
   noop,
   runKeyAction,
+  useSafeLayoutEffect,
   useUpdateEffect,
 } from "../../utils"
 
@@ -486,7 +486,15 @@ export const useSubMenu = ({
     ],
   )
 
-  assignRef(onCloseRef, onClose)
+  useSafeLayoutEffect(() => {
+    if (!onCloseRef) return
+
+    onCloseRef.current = onClose
+
+    return () => {
+      if (onCloseRef.current === onClose) onCloseRef.current = noop
+    }
+  }, [onCloseRef, onClose])
 
   const getSubMenuProps: PropGetter = useCallback(
     ({ id = uuid, ...props } = {}) =>

@@ -153,9 +153,15 @@ describe("<Tree />", () => {
     expect(onExpandedChange).toHaveBeenCalledWith([])
   })
 
-  test("should navigate to parent with ArrowLeft on nested item", async () => {
+  test("should navigate to parent without closing it with ArrowLeft on a nested item", async () => {
+    const onExpandedChange = vi.fn()
+
     const { user } = await render(
-      <Tree.Root defaultExpandedValue={["1"]} items={items} />,
+      <Tree.Root
+        defaultExpandedValue={["1"]}
+        items={items}
+        onExpandedChange={onExpandedChange}
+      />,
     )
 
     await user.tab()
@@ -165,6 +171,10 @@ describe("<Tree />", () => {
     await user.keyboard("{ArrowLeft}")
 
     await expect.element(firstTreeItem()).toHaveAttribute("tabindex", "0")
+    await expect
+      .element(firstTreeItem())
+      .toHaveAttribute("aria-expanded", "true")
+    expect(onExpandedChange).not.toHaveBeenCalled()
   })
 
   test("should navigate with Home and End keys", async () => {

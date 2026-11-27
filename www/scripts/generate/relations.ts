@@ -1,5 +1,6 @@
 import { isUndefined } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
+import { Command } from "commander"
 import matter from "gray-matter"
 import { glob, readdir, readFile } from "node:fs/promises"
 import path from "node:path"
@@ -8,7 +9,6 @@ import c from "picocolors"
 
 const MIN_RESEMBLE_SCORE = 0.3
 const MAX_RESEMBLE_COUNT = 8
-const REGISTRY_PATH = path.resolve("public", "registry", "v2")
 const CONTENT_PATH = path.resolve("contents")
 const DIST_PATH = path.resolve("data", "relations.json")
 
@@ -47,24 +47,21 @@ interface Resembles {
   [key: string]: string[]
 }
 
-async function getFileNames(dirName: string): Promise<string[]> {
-  const dirents = await readdir(path.join(REGISTRY_PATH, dirName))
+async function getFileNames(targetPath: string): Promise<string[]> {
+  const dirents = await readdir(targetPath)
 
-  return dirents.map((name) => path.join(dirName, name))
+  return dirents.map((name) => path.join(targetPath, name))
 }
 
-async function getRegistries(): Promise<Registries> {
-  const components = await getFileNames("components")
-  const hooks = await getFileNames("hooks")
+async function getRegistries(registryPath: string): Promise<Registries> {
+  const components = await getFileNames(path.join(registryPath, "components"))
+  const hooks = await getFileNames(path.join(registryPath, "hooks"))
   const registries = [...components, ...hooks]
 
   return Object.fromEntries(
     await Promise.all(
       registries.map(async (filePath) => {
-        const content = await readFile(
-          path.join(REGISTRY_PATH, filePath),
-          "utf-8",
-        )
+        const content = await readFile(filePath, "utf-8")
         const data = JSON.parse(content)
         const name = path.basename(filePath).replace(".json", "")
 
@@ -182,39 +179,47 @@ async function generateRelations(
   )
 }
 
-async function main() {
-  const spinner = ora()
-
-  const start = process.hrtime.bigint()
-
-  spinner.start("Getting registries")
-
-  const registries = await getRegistries()
-
-  spinner.succeed("Got registries")
-
-  spinner.start("Getting resembles")
-
-  const resembles = await getResembles()
-
-  spinner.succeed("Got resembles")
-
-  spinner.start("Generating relations")
-
-  const relations = await generateRelations(registries, resembles)
-
-  spinner.succeed("Generated relations")
-
-  spinner.start("Writing relations")
-
-  await writeFileWithFormat(DIST_PATH, relations)
-
-  spinner.succeed("Wrote relations")
-
-  const end = process.hrtime.bigint()
-  const duration = (Number(end - start) / 1e9).toFixed(2)
-
-  console.log("\n", c.green(`Done in ${duration}s`))
+interface Options {
+  directory: string
 }
 
-main()
+new Command()
+  .requiredOption(
+    "--directory <path>",
+    "directory containing the generated registries",
+  )
+  .action(async function ({ directory }: Options) {
+    const spinner = ora()
+
+    const start = process.hrtime.bigint()
+
+    spinner.start("Getting registries")
+
+    const registries = await getRegistries(path.resolve(directory))
+
+    spinner.succeed("Got registries")
+
+    spinner.start("Getting resembles")
+
+    const resembles = await getResembles()
+
+    spinner.succeed("Got resembles")
+
+    spinner.start("Generating relations")
+
+    const relations = await generateRelations(registries, resembles)
+
+    spinner.succeed("Generated relations")
+
+    spinner.start("Writing relations")
+
+    await writeFileWithFormat(DIST_PATH, relations)
+
+    spinner.succeed("Wrote relations")
+
+    const end = process.hrtime.bigint()
+    const duration = (Number(end - start) / 1e9).toFixed(2)
+
+    console.log("\n", c.green(`Done in ${duration}s`))
+  })
+  .parseAsync()

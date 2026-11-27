@@ -3,6 +3,7 @@ import { page, render } from "#test/browser"
 import { ActionBar } from "."
 import { Button } from "../button"
 import { CloseButton } from "../close-button"
+import { Input } from "../input"
 
 const TestComponent: FC<ActionBar.RootProps> = (props) => {
   return (
@@ -56,6 +57,47 @@ describe("<ActionBar />", () => {
 
     expect(onClose).toHaveBeenCalledOnce()
   })
+
+  test.each([
+    { isComposing: true, keyCode: 27 },
+    { isComposing: false, keyCode: 229 },
+  ])(
+    "ignores Escape from an external input with isComposing=$isComposing and keyCode=$keyCode",
+    async ({ isComposing, keyCode }) => {
+      const onClose = vi.fn()
+      const onWindowKeyDown = vi.fn()
+      const { user } = await render(
+        <>
+          <Input aria-label="External input" />
+          <TestComponent defaultOpen onClose={onClose} />
+        </>,
+      )
+      const input = page.getByRole("textbox", { name: "External input" })
+
+      await user.click(input)
+
+      const event = new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+        isComposing,
+        keyCode,
+      })
+
+      window.addEventListener("keydown", onWindowKeyDown)
+
+      try {
+        input.element().dispatchEvent(event)
+
+        expect(onClose).not.toHaveBeenCalled()
+        expect(event.defaultPrevented).toBe(false)
+        expect(onWindowKeyDown).toHaveBeenCalledExactlyOnceWith(event)
+        await expect.element(page.getByRole("dialog")).toBeVisible()
+      } finally {
+        window.removeEventListener("keydown", onWindowKeyDown)
+      }
+    },
+  )
 
   test("does not close action bar when Escape is pressed and `closeOnEsc` is false", async () => {
     const onClose = vi.fn()

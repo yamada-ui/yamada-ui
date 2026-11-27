@@ -1340,7 +1340,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.AnimationRange>",
       "docs": {
         "animation-range": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-10-27"
+          },
           "deprecated": false,
           "description": "The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.",
           "experimental": false,
@@ -1353,7 +1356,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.AnimationRangeEnd>",
       "docs": {
         "animation-range-end": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-10-27"
+          },
           "deprecated": false,
           "description": "The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.",
           "experimental": false,
@@ -1366,7 +1372,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.AnimationRangeStart>",
       "docs": {
         "animation-range-start": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-10-27"
+          },
           "deprecated": false,
           "description": "The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.",
           "experimental": false,
@@ -1379,7 +1388,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.AnimationTimeline>",
       "docs": {
         "animation-timeline": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-10-27"
+          },
           "deprecated": false,
           "description": "The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.",
           "experimental": false,
@@ -5556,8 +5568,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "interest-delay": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `interest-delay` property.",
+          "description": "Interest invokers, registered by the <code>interestfor</code> HTML attribute, trigger events and actions on a target element when a user shows interest in the element, through behaviors such as hover, focus, or long-press. Pseudo-elements apply styles to sources and targets of interest.",
           "experimental": true,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/interest-delay"
         }
@@ -5568,8 +5581,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "interest-delay-end": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `interest-delay-end` property.",
+          "description": "Interest invokers, registered by the <code>interestfor</code> HTML attribute, trigger events and actions on a target element when a user shows interest in the element, through behaviors such as hover, focus, or long-press. Pseudo-elements apply styles to sources and targets of interest.",
           "experimental": true,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/interest-delay-end"
         }
@@ -5580,8 +5594,9 @@
       "type": "StyleValueWithCondition<AnyString>",
       "docs": {
         "interest-delay-start": {
+          "baseline": { "status": "Limited available" },
           "deprecated": false,
-          "description": "The CSS `interest-delay-start` property.",
+          "description": "Interest invokers, registered by the <code>interestfor</code> HTML attribute, trigger events and actions on a target element when a user shows interest in the element, through behaviors such as hover, focus, or long-press. Pseudo-elements apply styles to sources and targets of interest.",
           "experimental": true,
           "see": "https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/interest-delay-start"
         }
@@ -8683,7 +8698,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.ScrollTimeline>",
       "docs": {
         "scroll-timeline": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-10-27"
+          },
           "deprecated": false,
           "description": "The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.",
           "experimental": false,
@@ -8696,7 +8714,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.ScrollTimelineAxis>",
       "docs": {
         "scroll-timeline-axis": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-10-27"
+          },
           "deprecated": false,
           "description": "The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.",
           "experimental": false,
@@ -8709,7 +8730,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.ScrollTimelineName>",
       "docs": {
         "scroll-timeline-name": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-10-27"
+          },
           "deprecated": false,
           "description": "The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.",
           "experimental": false,
@@ -9581,7 +9605,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.TimelineScope>",
       "docs": {
         "timeline-scope": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-10-27"
+          },
           "deprecated": false,
           "description": "The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.",
           "experimental": false,
@@ -9972,7 +9999,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.ViewTimeline>",
       "docs": {
         "view-timeline": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-10-27"
+          },
           "deprecated": false,
           "description": "The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.",
           "experimental": false,
@@ -9985,7 +10015,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.ViewTimelineAxis>",
       "docs": {
         "view-timeline-axis": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-10-27"
+          },
           "deprecated": false,
           "description": "The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.",
           "experimental": false,
@@ -9998,7 +10031,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.ViewTimelineInset>",
       "docs": {
         "view-timeline-inset": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-10-27"
+          },
           "deprecated": false,
           "description": "The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.",
           "experimental": false,
@@ -10011,7 +10047,10 @@
       "type": "StyleValueWithCondition<AnyString |CSS.Property.ViewTimelineName>",
       "docs": {
         "view-timeline-name": {
-          "baseline": { "status": "Limited available" },
+          "baseline": {
+            "status": "Newly available",
+            "newly_available_date": "2026-10-27"
+          },
           "deprecated": false,
           "description": "The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.",
           "experimental": false,

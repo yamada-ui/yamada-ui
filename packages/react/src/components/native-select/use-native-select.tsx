@@ -114,25 +114,21 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
   )
 
   const getFieldProps: PropGetter<"select"> = useCallback(
-    ({ ref, ...props } = {}) =>
+    (props = {}) =>
       mergeProps(
+        ariaProps,
+        dataProps,
+        eventProps,
         {
+          "aria-disabled": ariaAttr(!interactive),
+          "aria-label": placeholder,
           disabled,
           readOnly,
           tabIndex: interactive ? undefined : -1,
-          ...ariaProps,
-          ...dataProps,
-          "aria-disabled": ariaAttr(!interactive),
-          "aria-label": placeholder,
-        },
-        {
-          onBlur: eventProps.onBlur,
-          onFocus: eventProps.onFocus,
         },
         rest,
         props,
         {
-          ref,
           children: props.children ?? computedChildren,
         },
       )(),

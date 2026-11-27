@@ -54,6 +54,9 @@ describe("init", () => {
     expect(existsSync(configPath)).toBeTruthy()
     expect(existsSync(workspacePath)).toBeTruthy()
     const config = JSON.parse(readFileSync(configPath, "utf-8"))
+    expect(config.$schema).toBe(
+      "https://v2.yamada-ui.com/registry/config.schema.json",
+    )
     expect(config.monorepo).toBeTruthy()
     expect(config.path).toBe("./workspaces/ui")
     const outdirPath = path.join(tempDir, "workspaces", "ui")

@@ -35,9 +35,9 @@ const createData = (length = 6): Data[] =>
 export const Basic: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -70,11 +70,11 @@ export const Composition: Story = () => {
         dataKey="date"
         tickFormatter={(value) => dayjs(value).format("MMM")}
       />
-      <BarChart.Bar dataKey="desktop">
+      <BarChart.Bar name="Desktop" dataKey="desktop">
         <BarChart.LabelList />
       </BarChart.Bar>
-      <BarChart.Bar dataKey="tablet" />
-      <BarChart.Bar dataKey="mobile" />
+      <BarChart.Bar name="Tablet" dataKey="tablet" />
+      <BarChart.Bar name="Mobile" dataKey="mobile" />
     </BarChart.Root>
   )
 }
@@ -82,9 +82,9 @@ export const Composition: Story = () => {
 export const Size: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -114,9 +114,9 @@ export const Size: Story = () => {
 export const ColorScheme: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -146,9 +146,9 @@ export const ColorScheme: Story = () => {
 export const Color: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "blue", dataKey: "tablet" },
-      { color: "green", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "blue", dataKey: "tablet" },
+      { name: "Mobile", color: "green", dataKey: "mobile" },
     ],
     [],
   )
@@ -172,9 +172,9 @@ export const Color: Story = () => {
 export const Range: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -207,14 +207,16 @@ export const Range: Story = () => {
 export const Stacked: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
       {
+        name: "Tablet",
         color: "blue",
         dataKey: "tablet",
         radius: [0, 0, 4, 4],
         stackId: "stack",
       },
       {
+        name: "Mobile",
         color: "green",
         dataKey: "mobile",
         radius: [4, 4, 0, 0],
@@ -243,9 +245,9 @@ export const Stacked: Story = () => {
 export const Percent: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "blue", dataKey: "tablet" },
-      { color: "green", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "blue", dataKey: "tablet" },
+      { name: "Mobile", color: "green", dataKey: "mobile" },
     ],
     [],
   )
@@ -275,9 +277,9 @@ export const Percent: Story = () => {
 export const YAxis: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -303,9 +305,9 @@ export const YAxis: Story = () => {
 export const Legend: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { color: "red", dataKey: "desktop" },
-      { color: "blue", dataKey: "tablet" },
-      { color: "green", dataKey: "mobile" },
+      { name: "Desktop", color: "red", dataKey: "desktop" },
+      { name: "Tablet", color: "blue", dataKey: "tablet" },
+      { name: "Mobile", color: "green", dataKey: "mobile" },
     ],
     [],
   )
@@ -376,9 +378,9 @@ export const Name: Story = () => {
 export const Grid: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -408,9 +410,9 @@ export const Grid: Story = () => {
 export const Unit: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -448,9 +450,9 @@ export const Unit: Story = () => {
 export const LabelList: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -501,9 +503,9 @@ export const LabelList: Story = () => {
 export const Vertical: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -533,9 +535,9 @@ export const Vertical: Story = () => {
 export const Orientation: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -572,9 +574,9 @@ export const Orientation: Story = () => {
 export const Synced: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -614,9 +616,9 @@ export const Synced: Story = () => {
 export const Formatter: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -649,9 +651,9 @@ export const Formatter: Story = () => {
 export const ReferenceLine: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -688,9 +690,9 @@ export const ReferenceLine: Story = () => {
 export const AxisTickLine: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -718,9 +720,9 @@ export const AxisTickLine: Story = () => {
 export const AxisLabel: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -748,9 +750,9 @@ export const AxisLabel: Story = () => {
 export const Domain: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -780,9 +782,9 @@ export const Domain: Story = () => {
 export const Gap: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -808,17 +810,20 @@ export const Radius: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
       {
+        name: "Desktop",
         color: "red",
         dataKey: "desktop",
         radius: 8,
       },
       {
+        name: "Tablet",
         color: "blue",
         dataKey: "tablet",
         radius: [0, 0, 8, 8],
         stackId: "stack",
       },
       {
+        name: "Mobile",
         color: "green",
         dataKey: "mobile",
         radius: [8, 8, 0, 0],
@@ -847,9 +852,9 @@ export const Radius: Story = () => {
 export const TooltipCursor: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -874,9 +879,9 @@ export const TooltipCursor: Story = () => {
 export const DisabledXAxis: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -896,9 +901,9 @@ export const DisabledXAxis: Story = () => {
 export const DisabledTooltip: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -920,9 +925,9 @@ export const DisabledTooltip: Story = () => {
 export const CustomAxis: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -956,9 +961,9 @@ export const CustomAxis: Story = () => {
 export const CustomReferenceLine: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -992,7 +997,7 @@ export const CustomReferenceLine: Story = () => {
 
 export const CustomLabelList: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
-    () => [{ color: "blue", dataKey: "desktop" }],
+    () => [{ name: "Desktop", color: "blue", dataKey: "desktop" }],
     [],
   )
   const data = useMemo(() => createData(), [])
@@ -1023,9 +1028,9 @@ export const CustomLabelList: Story = () => {
 export const CustomGrid: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )
@@ -1051,9 +1056,9 @@ export const CustomGrid: Story = () => {
 export const CustomTooltipCursor: Story = () => {
   const series = useMemo<BarChart.BarProps<Data>[]>(
     () => [
-      { dataKey: "desktop" },
-      { dataKey: "tablet" },
-      { dataKey: "mobile" },
+      { name: "Desktop", dataKey: "desktop" },
+      { name: "Tablet", dataKey: "tablet" },
+      { name: "Mobile", dataKey: "mobile" },
     ],
     [],
   )

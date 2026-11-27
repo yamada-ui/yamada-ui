@@ -1,6 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useRef } from "react"
-import { toTitleCase } from "../../utils"
 import { Button } from "../button"
 import { For } from "../for"
 import { Input } from "../input"
@@ -40,7 +39,7 @@ export const Basic: Story = () => {
 
       <Snacks snacks={snacks} />
 
-      <Input placeholder="Input" />
+      <Input placeholder="Your message" />
     </>
   )
 }
@@ -64,7 +63,7 @@ export const Variant: Story = () => {
                 })
               }}
             >
-              Add "{toTitleCase(variant)}" Snack
+              Add "{variant}" Snack
             </Button>
           )}
         </For>
@@ -76,7 +75,7 @@ export const Variant: Story = () => {
 
       <Snacks snacks={snacks} />
 
-      <Input placeholder="Input" />
+      <Input placeholder="Your message" />
     </>
   )
 }
@@ -99,7 +98,7 @@ export const Status: Story = () => {
                 })
               }}
             >
-              Add "{toTitleCase(status)}" Snack
+              Add "{status}" Snack
             </Button>
           )}
         </For>
@@ -111,7 +110,7 @@ export const Status: Story = () => {
 
       <Snacks snacks={snacks} />
 
-      <Input placeholder="Input" />
+      <Input placeholder="Your message" />
     </>
   )
 }
@@ -135,7 +134,7 @@ export const ColorScheme: Story = () => {
                 })
               }}
             >
-              Add "{toTitleCase(colorScheme)}" Snack
+              Add "{colorScheme}" Snack
             </Button>
           )}
         </For>
@@ -147,7 +146,7 @@ export const ColorScheme: Story = () => {
 
       <Snacks snacks={snacks} />
 
-      <Input placeholder="Input" />
+      <Input placeholder="Your message" />
     </>
   )
 }
@@ -170,7 +169,7 @@ export const Loading: Story = () => {
                 })
               }}
             >
-              Add "{toTitleCase(loadingScheme)}" Snack
+              Add "{loadingScheme}" Snack
             </Button>
           )}
         </For>
@@ -182,7 +181,7 @@ export const Loading: Story = () => {
 
       <Snacks snacks={snacks} />
 
-      <Input placeholder="Input" />
+      <Input placeholder="Your message" />
     </>
   )
 }
@@ -212,7 +211,7 @@ export const Direction: Story = () => {
 
       <Snacks snacks={snacks} />
 
-      <Input placeholder="Input" />
+      <Input placeholder="Your message" />
     </>
   )
 }
@@ -241,7 +240,7 @@ export const Limit: Story = () => {
 
       <Snacks snacks={snacks} />
 
-      <Input placeholder="Input" />
+      <Input placeholder="Your message" />
     </>
   )
 }
@@ -272,7 +271,7 @@ export const Duration = () => {
 
       <Snacks snacks={snacks} />
 
-      <Input placeholder="Input" />
+      <Input placeholder="Your message" />
     </>
   )
 }
@@ -302,7 +301,7 @@ export const DisabledClosable = () => {
 
       <Snacks snacks={snacks} />
 
-      <Input placeholder="Input" />
+      <Input placeholder="Your message" />
     </>
   )
 }
@@ -341,7 +340,7 @@ export const UseClose = () => {
 
       <Snacks snacks={snacks} />
 
-      <Input placeholder="Input" />
+      <Input placeholder="Your message" />
     </>
   )
 }
@@ -385,7 +384,7 @@ export const UseUpdate = () => {
 
       <Snacks snacks={snacks} />
 
-      <Input placeholder="Input" />
+      <Input placeholder="Your message" />
     </>
   )
 }

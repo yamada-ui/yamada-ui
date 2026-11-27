@@ -2,6 +2,7 @@ import { parse } from "@babel/parser"
 import traverse from "@babel/traverse"
 import { interopDefault, toKebabCase } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/oxfmt"
+import * as lucide from "lucide-react"
 import { execFile } from "node:child_process"
 import { readdir, readFile, unlink } from "node:fs/promises"
 import path from "node:path"
@@ -29,11 +30,11 @@ async function clearIcons() {
   )
 }
 
-async function getIconNames() {
-  const data = await readFile(path.resolve(ENTRY_PATH), "utf-8")
+async function getExportNames(filePath: string) {
+  const data = await readFile(filePath, "utf-8")
 
   const ast = parse(data, {
-    plugins: ["jsx"],
+    plugins: ["jsx", "typescript"],
     sourceType: "module",
   })
 
@@ -47,7 +48,26 @@ async function getIconNames() {
     },
   })
 
-  return iconNames.sort((a, b) => a.localeCompare(b))
+  return iconNames
+}
+
+async function getIconNames() {
+  const [iconNames, existingIconNames] = await Promise.all([
+    getExportNames(ENTRY_PATH),
+    getExportNames(path.join(DIST_PATH, "index.ts")),
+  ])
+  const names = Array.from(
+    new Set([
+      ...iconNames,
+      ...existingIconNames.map((name) => name.replace(/Icon$/, "")),
+    ]),
+  )
+
+  for (const name of names)
+    if (!(name in lucide))
+      throw new Error(`Lucide icon "${name}" is not exported.`)
+
+  return names.sort((a, b) => a.localeCompare(b))
 }
 
 async function createIcons(iconNames: string[]) {
@@ -78,17 +98,17 @@ async function main() {
 
   const start = process.hrtime.bigint()
 
-  spinner.start(`Clearing icons`)
-
-  await clearIcons()
-
-  spinner.succeed(`Cleared icons`)
-
   spinner.start(`Getting icon names`)
 
   const iconNames = await getIconNames()
 
   spinner.succeed(`Got icon names`)
+
+  spinner.start(`Clearing icons`)
+
+  await clearIcons()
+
+  spinner.succeed(`Cleared icons`)
 
   spinner.start(`Creating icons`)
 

@@ -39,10 +39,30 @@ export default mergeConfig(sharedConfig, {
         test: {
           name: "jsdom",
           environment: "jsdom",
-          exclude: ["src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}"],
+          exclude: [
+            "src/**/*.test.{browser,chromium,firefox,webkit}.{ts,tsx}",
+            "src/utils/ssr.test.ts",
+          ],
           globals: true,
           include: ["src/**/*.test.{ts,tsx}"],
-          setupFiles: ["@yamada-ui/workspace/vitest/setup"],
+          isolate: false,
+          restoreMocks: true,
+          setupFiles: ["@yamada-ui/workspace/vitest/setup", "./test/setup.ts"],
+          unstubEnvs: true,
+          unstubGlobals: true,
+        },
+      }),
+      defineProject({
+        test: {
+          name: "jsdom:isolated",
+          environment: "jsdom",
+          globals: true,
+          include: ["src/utils/ssr.test.ts"],
+          isolate: true,
+          restoreMocks: true,
+          setupFiles: ["@yamada-ui/workspace/vitest/setup", "./test/setup.ts"],
+          unstubEnvs: true,
+          unstubGlobals: true,
         },
       }),
       ...browsers.map(({ browser, options }) =>

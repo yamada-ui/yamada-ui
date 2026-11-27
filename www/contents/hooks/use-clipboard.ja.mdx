@@ -41,18 +41,18 @@ import { useClipboard } from "@workspaces/ui"
 :::
 
 ```tsx
-const { onCopy, value, setValue, copied } = useClipboard("initial value")
+const { onCopy, value, setValue, copied } = useClipboard("Initial value")
 ```
 
 ### 初期値を使う
 
 ```tsx preview functional client
-const { onCopy, value, setValue, copied } = useClipboard("initial value")
+const { onCopy, value, setValue, copied } = useClipboard("Initial value")
 
 return (
   <HStack>
     <Input
-      placeholder="text to be copied..."
+      placeholder="Text to be copied..."
       value={value}
       onChange={(e) => setValue(e.target.value)}
     />
@@ -73,7 +73,7 @@ const { onCopy, value, setValue, copied } = useClipboard("", 5000)
 return (
   <HStack>
     <Input
-      placeholder="text to be copied..."
+      placeholder="Text to be copied..."
       value={value}
       onChange={(e) => setValue(e.target.value)}
     />

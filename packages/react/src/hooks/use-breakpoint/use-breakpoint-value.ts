@@ -1,6 +1,12 @@
-import type { Breakpoint, ResponsiveObject, System } from "../../core"
+import type {
+  Breakpoint,
+  BreakpointDirection,
+  ResponsiveObject,
+  System,
+} from "../../core"
+import { runIfFn } from "@yamada-ui/utils"
 import { useMemo } from "react"
-import { useSystem } from "../../core"
+import { DEFAULT_BREAKPOINT_DIRECTION, useSystem } from "../../core"
 import { useBreakpoint } from "./use-breakpoint"
 
 /**
@@ -10,14 +16,18 @@ import { useBreakpoint } from "./use-breakpoint"
  * @see https://yamada-ui.com/docs/hooks/use-breakpoint-value
  */
 export const useBreakpointValue = <Y>(
-  values: ResponsiveObject<Y, false>,
+  values:
+    | ((direction: BreakpointDirection) => ResponsiveObject<Y, false>)
+    | ResponsiveObject<Y, false>,
 ): Y => {
   const system = useSystem()
   const breakpoint = useBreakpoint()
+  const direction =
+    system.config.breakpoint?.direction ?? DEFAULT_BREAKPOINT_DIRECTION
 
   return useMemo(
-    () => getBreakpointValue<Y>(values)(system, breakpoint),
-    [values, system, breakpoint],
+    () => getBreakpointValue<Y>(runIfFn(values, direction))(system, breakpoint),
+    [values, system, breakpoint, direction],
   )
 }
 

@@ -33,6 +33,14 @@ import { Switch } from "@workspaces/ui"
 <Switch />
 ```
 
+:::tip
+To allow users to select one option from multiple choices, use [Radio](/docs/components/radio).
+:::
+
+:::tip
+If users need to select multiple values from multiple options, use [Checkbox](/docs/components/checkbox).
+:::
+
 ### Change Variant
 
 ```tsx preview
@@ -162,6 +170,8 @@ return (
 ## Accessibility
 
 The `Switch` follows the [WAI-ARIA - Switch Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch/) for accessibility.
+
+Use the same label for `Switch` regardless of its state.
 
 ### Keyboard Navigation
 

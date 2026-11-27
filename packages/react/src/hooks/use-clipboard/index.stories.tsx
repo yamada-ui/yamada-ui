@@ -18,7 +18,7 @@ export const Basic = () => {
     <>
       <HStack>
         <Input
-          placeholder="text to be copied..."
+          placeholder="Text to copy"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
@@ -40,7 +40,7 @@ export const Timeout = () => {
     <>
       <HStack>
         <Input
-          placeholder="text to be copied..."
+          placeholder="Text to copy"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />

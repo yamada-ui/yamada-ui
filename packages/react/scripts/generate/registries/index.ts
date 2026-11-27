@@ -16,6 +16,7 @@ import {
   sys,
 } from "typescript"
 import YAML from "yamljs"
+import packageJson from "../../../package.json"
 import { ICON_TEMPLATE } from "../icons/template"
 
 type RegistrySection = "components" | "hooks" | "providers" | "root" | "theme"
@@ -43,7 +44,6 @@ interface Registry {
   sources: Source[]
   dependencies?: Dependencies
   dependents?: Dependents
-  tag?: string
 }
 
 interface Map<Y> {
@@ -57,7 +57,6 @@ interface ExternalsMap {
 }
 
 const CONFIG_PATH = path.resolve("tsconfig.json")
-const PUBLIC_PATH = path.resolve("..", "..", "www", "public", "registry")
 const PACKAGE_JSON_PATH = path.resolve("package.json")
 const WORKSPACE_PATH = path.resolve("..", "..", "pnpm-workspace.yaml")
 const ENTRY_PATH = path.resolve("src")
@@ -70,7 +69,8 @@ const IGNORED_FILE_NAME = [
   "^(?!.*\\.(ts|tsx)$).*",
 ]
 const IGNORED_MODULES = ["react", "react-dom"]
-const REGISTRY_SCHEMA_PATH = "https://yamada-ui.com/registry/v2/schema.json"
+const REGISTRY_VERSION = `v${packageJson.version.split(".")[0]}`
+const REGISTRY_SCHEMA_PATH = `https://${REGISTRY_VERSION}.yamada-ui.com/registry/schema.json`
 
 async function getExternals(): Promise<ExternalsMap> {
   const packageJson = await readFile(PACKAGE_JSON_PATH, "utf-8")
@@ -442,8 +442,7 @@ async function generateRegistries(
   sourceMap: SourceMap,
   dependencyMap: DependencyMap,
   dependentMap: DependentMap,
-  publicPath: string,
-  tag?: string,
+  outputPath: string,
 ) {
   const dirents = await readdir(ENTRY_PATH, { withFileTypes: true })
 
@@ -454,7 +453,7 @@ async function generateRegistries(
       if (!dirent.isDirectory()) return
       if (!TARGET_SECTIONS.includes(sectionName)) return
 
-      const sectionDir = path.join(publicPath, sectionName)
+      const sectionDir = path.join(outputPath, sectionName)
 
       if (!existsSync(sectionDir)) await mkdir(sectionDir, { recursive: true })
 
@@ -467,7 +466,6 @@ async function generateRegistries(
 
           if (!dirent.isDirectory()) return
 
-          const outputPath = path.join(publicPath, sectionName, `${name}.json`)
           const sources = (sourceMap[sectionName]?.[name] ?? []).sort((a, b) =>
             a.name.localeCompare(b.name),
           )
@@ -479,18 +477,20 @@ async function generateRegistries(
             dependents,
             section: sectionName as RegistrySection,
             sources,
-            tag,
           }
           const content = JSON.stringify(registry)
 
-          await writeFileWithFormat(outputPath, content)
+          await writeFileWithFormat(
+            path.join(outputPath, sectionName, `${name}.json`),
+            content,
+          )
         }),
       )
     }),
   )
 }
 
-async function generateThemeRegistry(publicPath: string, tag?: string) {
+async function generateThemeRegistry(outputPath: string) {
   const themePath = path.join(ENTRY_PATH, "theme")
   const filePaths = await Array.fromAsync(
     glob(path.join(themePath, "**", "*.{ts,tsx}")),
@@ -514,16 +514,15 @@ async function generateThemeRegistry(publicPath: string, tag?: string) {
     $schema: REGISTRY_SCHEMA_PATH,
     section: "theme",
     sources: sources.sort((a, b) => a.name.localeCompare(b.name)),
-    tag,
   }
   const content = JSON.stringify(registry)
 
-  if (!existsSync(publicPath)) await mkdir(publicPath, { recursive: true })
+  if (!existsSync(outputPath)) await mkdir(outputPath, { recursive: true })
 
-  await writeFileWithFormat(path.join(publicPath, "theme.json"), content)
+  await writeFileWithFormat(path.join(outputPath, "theme.json"), content)
 }
 
-async function generateIndexRegistry(publicPath: string, tag?: string) {
+async function generateIndexRegistry(outputPath: string) {
   const index = await readFile(path.join(ENTRY_PATH, "index.ts"), "utf-8")
   const registry: Registry = {
     $schema: REGISTRY_SCHEMA_PATH,
@@ -534,13 +533,12 @@ async function generateIndexRegistry(publicPath: string, tag?: string) {
         content: index.replace(/\.\//g, "@yamada-ui/react/"),
       },
     ],
-    tag,
   }
   const content = JSON.stringify(registry)
 
-  if (!existsSync(publicPath)) await mkdir(publicPath, { recursive: true })
+  if (!existsSync(outputPath)) await mkdir(outputPath, { recursive: true })
 
-  await writeFileWithFormat(path.join(publicPath, "index.json"), content)
+  await writeFileWithFormat(path.join(outputPath, "index.json"), content)
 }
 
 function main() {
@@ -548,8 +546,11 @@ function main() {
   const spinner = ora()
 
   program
-    .option("-t, --tag <name>", "tag for the registries (e.g. dev, next)")
-    .action(async ({ tag }: { tag?: string }) => {
+    .requiredOption(
+      "-o, --output <path>",
+      "output directory for the registries",
+    )
+    .action(async ({ output }: { output: string }) => {
       const start = process.hrtime.bigint()
 
       spinner.start("Getting tsconfig")
@@ -593,31 +594,18 @@ function main() {
 
       spinner.succeed("Got dependents")
 
-      const publicPath = tag
-        ? path.join(PUBLIC_PATH, tag, "v2")
-        : path.join(PUBLIC_PATH, "v2")
+      spinner.start("Generating registries")
 
-      spinner.start(
-        tag
-          ? `Generating registries with tag "${tag}"`
-          : "Generating registries",
-      )
+      const outputPath = path.resolve(output)
 
+      await mkdir(outputPath, { recursive: true })
       await Promise.all([
-        generateRegistries(
-          sourceMap,
-          dependencyMap,
-          dependentMap,
-          publicPath,
-          tag,
-        ),
-        generateThemeRegistry(publicPath, tag),
-        generateIndexRegistry(publicPath, tag),
+        generateRegistries(sourceMap, dependencyMap, dependentMap, outputPath),
+        generateThemeRegistry(outputPath),
+        generateIndexRegistry(outputPath),
       ])
 
-      spinner.succeed(
-        tag ? `Generated registries with tag "${tag}"` : "Generated registries",
-      )
+      spinner.succeed("Generated registries")
 
       const end = process.hrtime.bigint()
       const duration = (Number(end - start) / 1e9).toFixed(2)

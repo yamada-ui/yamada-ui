@@ -4,18 +4,11 @@ import type { ChangeEvent, RefObject } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict } from "../../utils"
 import type { FieldProps } from "../field"
-import { useCallback, useRef } from "react"
+import { useCallback, useImperativeHandle, useRef } from "react"
 import { mergeProps } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import {
-  assignRef,
-  dataAttr,
-  handlerAll,
-  has,
-  isNull,
-  visuallyHiddenAttributes,
-} from "../../utils"
+import { dataAttr, has, isNull, visuallyHiddenAttributes } from "../../utils"
 import { useFieldProps } from "../field"
 
 export type UseFileInputProps<Y extends "button" | "input" = "input"> =
@@ -60,7 +53,6 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
       resetRef,
       value,
       onChange: onChangeProp,
-      onClick: onClickProp,
       ...rest
     },
     ariaProps,
@@ -102,26 +94,24 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
     [setValues],
   )
 
-  const clickableProps = useClickable<HTMLElement, Dict>({
-    ...ariaProps,
-    ...dataProps,
-    ...eventProps,
-    ...rest,
-    disabled: !interactive,
-    focusable: readOnly && !disabled,
-    focusOnClick: interactive,
-    onClick: handlerAll(onClickProp, onClick),
-  })
+  const clickableProps = useClickable<HTMLElement, Dict>(
+    mergeProps(ariaProps, dataProps, eventProps, rest, {
+      disabled: !interactive,
+      focusable: readOnly && !disabled,
+      focusOnClick: interactive,
+      onClick,
+    })(),
+  )
 
-  assignRef(resetRef, onReset)
+  useImperativeHandle(resetRef, () => onReset, [onReset])
 
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}) =>
       mergeProps(
+        visuallyHiddenAttributes,
+        ariaProps,
+        dataProps,
         {
-          ...visuallyHiddenAttributes,
-          ...ariaProps,
-          ...dataProps,
           id,
           ref: inputRef,
           form,

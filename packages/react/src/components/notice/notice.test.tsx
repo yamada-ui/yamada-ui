@@ -1,5 +1,26 @@
-import { a11y, act, renderHook, screen, waitFor } from "#test"
+import type { PropsWithChildren } from "react"
+import type { RenderHook } from "#test"
+import {
+  a11y,
+  act,
+  renderHook as originalRenderHook,
+  screen,
+  waitFor,
+} from "#test"
+import { DefaultProvider } from "../../providers/default-provider"
+import { NoticeProvider } from "./notice-provider"
 import { useNotice } from "./use-notice"
+
+function Wrapper(props: PropsWithChildren) {
+  return (
+    <DefaultProvider>
+      <NoticeProvider {...props} />
+    </DefaultProvider>
+  )
+}
+
+const renderHook: RenderHook = (callback, options) =>
+  originalRenderHook(callback, { wrapper: Wrapper, ...options })
 
 async function expectNoticeVisible(text: string) {
   await waitFor(() => {
@@ -15,7 +36,7 @@ async function expectNoticeHidden(text: string) {
 
 describe("useNotice", () => {
   test("passes a11y checks", async () => {
-    await a11y(<div />)
+    await a11y(<div />, { wrapper: Wrapper })
   })
 
   test("creates a notice with default options", async () => {

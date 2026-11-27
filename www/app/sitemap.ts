@@ -6,6 +6,7 @@ import path from "node:path"
 import { promisify } from "node:util"
 import { CONSTANTS } from "@/constants"
 import { getDocs } from "@/data"
+import { getPathname } from "@/i18n"
 import { getLang } from "@/utils/i18n"
 
 const execFileAsync = promisify(execFile)
@@ -34,12 +35,10 @@ async function getAppDataMap(): Promise<DataMap> {
       Object.fromEntries(
         targetPaths.map((targetPath) => {
           const filaPath = targetPath.replace(path.resolve() + "/", "")
-          const lang = getLang(locale)
-          const defaultLocale = locale === CONSTANTS.I18N.DEFAULT_LOCALE
           const pathname = targetPath
             .replace(rootPath.replaceAll("[]", ""), "")
             .replace(/\/page\.(tsx|ts)$/, "")
-          const url = `${CONSTANTS.SNS.HOMEPAGE}${defaultLocale ? "" : `/${lang}`}${pathname}`
+          const url = `${CONSTANTS.SNS.HOMEPAGE}${getPathname({ href: pathname || "/", locale })}`
 
           return [pathname, { filaPath, url }]
         }),
@@ -53,14 +52,14 @@ function getDocDataMap(): DataMap {
     CONSTANTS.I18N.LOCALES.map((locale) => [
       locale,
       Object.fromEntries(
-        getDocs(locale).map(({ locale, path, pathname }) => {
-          const filaPath = `contents/${path}`
-          const lang = getLang(locale)
-          const defaultLocale = locale === CONSTANTS.I18N.DEFAULT_LOCALE
-          const url = `${CONSTANTS.SNS.HOMEPAGE}${defaultLocale ? "" : `/${lang}`}${pathname}`
+        getDocs(locale)
+          .filter(({ pathname }) => pathname !== "/docs/get-started/legacy")
+          .map(({ path, pathname }) => {
+            const filaPath = `contents/${path}`
+            const url = `${CONSTANTS.SNS.HOMEPAGE}${getPathname({ href: pathname, locale })}`
 
-          return [pathname, { filaPath, url }]
-        }),
+            return [pathname, { filaPath, url }]
+          }),
       ),
     ]),
   ) as DataMap

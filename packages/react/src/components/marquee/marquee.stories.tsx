@@ -118,7 +118,7 @@ export const Orientation: Story = () => {
       {(_, row, key) => (
         <Marquee.Root
           key={key}
-          aria-label={`${row} brand logos`}
+          aria-label={`Brand logos in ${row} orientation`}
           contain="inline-size"
           gap="xl"
           h={row === "vertical" ? "xl" : undefined}

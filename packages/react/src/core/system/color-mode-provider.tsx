@@ -1,6 +1,7 @@
 "use client"
 
 import type { FC, PropsWithChildren } from "react"
+import type { SlotProps } from "../../components/slot"
 import type { ColorMode, ColorModeWithSystem, ThemeConfig } from "./index.type"
 import type { Storage } from "./storage-manager"
 import {
@@ -11,6 +12,8 @@ import {
   useMemo,
   useState,
 } from "react"
+import { PortalProvider } from "../../components/portal"
+import { Slot } from "../../components/slot"
 import { isDocument, isEmptyObject, noop } from "../../utils"
 import { COLOR_MODE_STORAGE_KEY } from "../constant"
 import { useEnvironment } from "./environment-provider"
@@ -179,6 +182,29 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   )
 
   return <ColorModeContext value={context}>{children}</ColorModeContext>
+}
+
+export interface ColorModeScopeProps extends SlotProps {
+  /**
+   * The color mode to apply to the child element.
+   */
+  colorMode: ColorMode
+}
+
+/**
+ * `ColorModeScope` applies a color mode to a single child without changing the document color mode.
+ */
+export const ColorModeScope: FC<ColorModeScopeProps> = ({
+  colorMode,
+  ...rest
+}) => {
+  const context = useMemo(() => ({ "data-mode": colorMode }), [colorMode])
+
+  return (
+    <PortalProvider value={context}>
+      <Slot data-mode={colorMode} {...rest} />
+    </PortalProvider>
+  )
 }
 
 /**

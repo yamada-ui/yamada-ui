@@ -1,19 +1,17 @@
 "use client"
 
 import type { DataAttributes, FC, PropsWithChildren, RefObject } from "react"
-import type { HTMLProps, RootNode } from "../../core"
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react"
+import type { RootNode } from "../../core"
+import { Children, useEffect, useMemo, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { useEnvironment } from "../../core"
-import { createContext, getDocument, isShadowRoot, useSsr } from "../../utils"
+import {
+  createContext,
+  getDocument,
+  isEmptyObject,
+  isShadowRoot,
+  useSsr,
+} from "../../utils"
 import { useFocusLockShard } from "../focus-lock"
 
 export const [PortalContext, usePortalContext] = createContext<DataAttributes>({
@@ -96,13 +94,19 @@ export const Portal: FC<PortalProps> = ({
       container,
     )
 
+  const scoped = props && !isEmptyObject(props)
+
   return (
     <>
       {Children.map(children, (child) =>
         createPortal(
-          isValidElement<HTMLProps>(child)
-            ? cloneElement(child, { ...props, ...child.props })
-            : child,
+          scoped ? (
+            <div style={{ display: "contents" }} {...props}>
+              {child}
+            </div>
+          ) : (
+            child
+          ),
           container,
         ),
       )}

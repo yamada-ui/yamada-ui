@@ -73,19 +73,27 @@ describe("<PortalProvider />", () => {
       <PortalProvider value={{ "data-outer": "outer", "data-scope": "outer" }}>
         <PortalProvider value={{ "data-scope": "inner" }}>
           <Portal>
-            <div>Inherited</div>
+            <>
+              <div>Inherited</div>
+              <div>Fragment sibling</div>
+            </>
             <div data-scope="explicit">Explicit</div>
           </Portal>
         </PortalProvider>
       </PortalProvider>,
     )
 
-    expect(screen.getByText("Inherited")).toHaveAttribute("data-outer", "outer")
-    expect(screen.getByText("Inherited")).toHaveAttribute("data-scope", "inner")
-    expect(screen.getByText("Explicit")).toHaveAttribute(
-      "data-scope",
-      "explicit",
+    const inherited = screen.getByText("Inherited")
+    const explicit = screen.getByText("Explicit")
+
+    expect(inherited.parentElement).toHaveAttribute("data-outer", "outer")
+    expect(inherited.parentElement).toHaveAttribute("data-scope", "inner")
+    expect(screen.getByText("Fragment sibling").parentElement).toBe(
+      inherited.parentElement,
     )
+    expect(explicit.parentElement).toHaveAttribute("data-scope", "inner")
+    expect(explicit.parentElement).not.toBe(inherited.parentElement)
+    expect(explicit).toHaveAttribute("data-scope", "explicit")
   })
 
   test("does not apply data attributes to disabled portals", () => {
@@ -97,7 +105,7 @@ describe("<PortalProvider />", () => {
       </PortalProvider>,
     )
 
-    expect(screen.getByText("Inline")).not.toHaveAttribute("data-scope")
+    expect(screen.getByText("Inline").closest("[data-scope]")).toBeNull()
   })
 
   test("applies data attributes to the focus lock shard", () => {

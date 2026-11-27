@@ -64,14 +64,20 @@ describe("<Modal />", () => {
     expect(screen.getByTestId("body")).toHaveAttribute("id")
   })
 
-  test("forwards portal provider data attributes to the root", () => {
+  test("inherits portal provider data attributes from the portal wrapper", () => {
     render(
       <PortalProvider value={{ "data-scope": "provider" }}>
         <TestComponent open />
       </PortalProvider>,
     )
 
-    expect(screen.getByTestId("root")).toHaveAttribute("data-scope", "provider")
+    const root = screen.getByTestId("root")
+
+    expect(root).not.toHaveAttribute("data-scope")
+    expect(root.closest("[data-scope]")).toHaveAttribute(
+      "data-scope",
+      "provider",
+    )
   })
 
   test("omits portal provider data attributes when rendered inline", () => {
@@ -81,7 +87,7 @@ describe("<Modal />", () => {
       </PortalProvider>,
     )
 
-    expect(screen.getByTestId("root")).not.toHaveAttribute("data-scope")
+    expect(screen.getByTestId("root").closest("[data-scope]")).toBeNull()
   })
 
   test("renders shorthand content with title, body, and footer buttons", () => {

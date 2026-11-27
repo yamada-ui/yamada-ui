@@ -19,59 +19,36 @@ export function escape(value: string, replaceValue = ""): string {
   return value.replace(/\s+/g, replaceValue)
 }
 
-export function antonym(value: string): string {
-  switch (value) {
-    case "top":
-      return "bottom"
+const antonyms = {
+  light: "dark",
+  block: "inline",
+  bottom: "top",
+  dark: "light",
+  down: "up",
+  end: "start",
+  enter: "exit",
+  exit: "enter",
+  horizontal: "vertical",
+  inline: "block",
+  left: "right",
+  right: "left",
+  start: "end",
+  top: "bottom",
+  up: "down",
+  vertical: "horizontal",
+  x: "y",
+  y: "x",
+} as const
 
-    case "bottom":
-      return "top"
+type Antonyms = typeof antonyms
 
-    case "left":
-      return "right"
-
-    case "right":
-      return "left"
-
-    case "start":
-      return "end"
-
-    case "end":
-      return "start"
-
-    case "x":
-      return "y"
-
-    case "y":
-      return "x"
-
-    case "enter":
-      return "exit"
-
-    case "exit":
-      return "enter"
-
-    case "vertical":
-      return "horizontal"
-
-    case "horizontal":
-      return "vertical"
-
-    case "up":
-      return "down"
-
-    case "down":
-      return "up"
-
-    case "block":
-      return "inline"
-
-    case "inline":
-      return "block"
-
-    default:
-      return value
-  }
+export function antonym<Y extends AnyString>(
+  value: Y,
+): Y extends keyof Antonyms ? Antonyms[Y] : Y
+export function antonym(value: AnyString): AnyString {
+  return Object.prototype.hasOwnProperty.call(antonyms, value)
+    ? antonyms[value as keyof Antonyms]
+    : value
 }
 
 const sizeMap: AnyString[] = [

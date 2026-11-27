@@ -80,6 +80,18 @@ describe("String", () => {
     test("should return the same value if no antonym exists", () => {
       const nonDirection = "non-direction"
       expect(antonym(nonDirection)).toBe(nonDirection)
+      expect(antonym("constructor")).toBe("constructor")
+      expectTypeOf(antonym(nonDirection)).toEqualTypeOf<"non-direction">()
+    })
+
+    test("returns and infers the opposite color mode", () => {
+      expect(antonym("light")).toBe("dark")
+      expect(antonym("dark")).toBe("light")
+      expectTypeOf(antonym("light")).toEqualTypeOf<"dark">()
+      expectTypeOf(antonym("dark")).toEqualTypeOf<"light">()
+      expectTypeOf(antonym<"dark" | "light">("light")).toEqualTypeOf<
+        "dark" | "light"
+      >()
     })
   })
 

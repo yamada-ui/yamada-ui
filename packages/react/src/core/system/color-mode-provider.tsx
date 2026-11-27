@@ -186,13 +186,18 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
 
 export interface ColorModeScopeProps extends SlotProps {
   /**
-   * The color mode to apply to the child element.
+   * The color mode used to resolve CSS tokens for the child and its descendants.
    */
   colorMode: ColorMode
 }
 
 /**
- * `ColorModeScope` applies a color mode to a single child without changing the document color mode.
+ * `ColorModeScope` resolves color-mode-dependent CSS tokens for a single child and its descendants.
+ *
+ * `useColorMode` and `useColorModeValue` still use the mode from the app's provider.
+ * The `_dark` and `_light` style conditions can still match ancestors outside the scope.
+ *
+ * @see https://yamada-ui.com/docs/styling/color-mode#scope
  */
 export const ColorModeScope: FC<ColorModeScopeProps> = ({
   colorMode,
@@ -202,7 +207,7 @@ export const ColorModeScope: FC<ColorModeScopeProps> = ({
 
   return (
     <PortalProvider value={context}>
-      <Slot data-mode={colorMode} {...rest} />
+      <Slot {...rest} data-mode={colorMode} />
     </PortalProvider>
   )
 }

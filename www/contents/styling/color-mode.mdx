@@ -24,6 +24,20 @@ To apply color mode to [Style Props](/docs/styling/style-props), set an array.
 </Box>
 ```
 
+## Scope
+
+Use `ColorModeScope` to resolve color-mode-dependent CSS tokens within a single child and its descendants, including portalled content. The scope leaves the document's color mode unchanged. When scopes are nested, the innermost scope controls token resolution.
+
+```tsx preview
+<ColorModeScope colorMode="dark">
+  <Box w="full" p="md" bg="bg" color="fg">
+    Dark tokens
+  </Box>
+</ColorModeScope>
+```
+
+[`useColorMode`](/docs/hooks/use-color-mode) and [`useColorModeValue`](/docs/hooks/use-color-mode-value) continue to use the mode provided by the app. The `_dark` and `_light` style conditions can match ancestors outside the scope. For example, `_dark` can still apply to a descendant of a light scope when the document is dark. Use semantic tokens when styles need to follow the scope.
+
 ## Utilities
 
 Yamada UI provides useful custom hooks for color mode.

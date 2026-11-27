@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import { a11y, render, screen } from "#test"
-import { Portal } from "./portal"
+import { FocusLock } from "../focus-lock"
+import { Portal, PortalProvider } from "./"
 
 describe("<Portal />", () => {
   test("renders component correctly", async () => {
@@ -63,5 +64,55 @@ describe("<Portal />", () => {
     render(<TestContainer />)
 
     expect(screen.getByText("order1")).not.toHaveTextContent("order1order2")
+  })
+})
+
+describe("<PortalProvider />", () => {
+  test("merges nested data attributes and preserves explicit child attributes", () => {
+    render(
+      <PortalProvider value={{ "data-outer": "outer", "data-scope": "outer" }}>
+        <PortalProvider value={{ "data-scope": "inner" }}>
+          <Portal>
+            <div>Inherited</div>
+            <div data-scope="explicit">Explicit</div>
+          </Portal>
+        </PortalProvider>
+      </PortalProvider>,
+    )
+
+    expect(screen.getByText("Inherited")).toHaveAttribute("data-outer", "outer")
+    expect(screen.getByText("Inherited")).toHaveAttribute("data-scope", "inner")
+    expect(screen.getByText("Explicit")).toHaveAttribute(
+      "data-scope",
+      "explicit",
+    )
+  })
+
+  test("does not apply data attributes to disabled portals", () => {
+    render(
+      <PortalProvider value={{ "data-scope": "provider" }}>
+        <Portal disabled>
+          <div>Inline</div>
+        </Portal>
+      </PortalProvider>,
+    )
+
+    expect(screen.getByText("Inline")).not.toHaveAttribute("data-scope")
+  })
+
+  test("applies data attributes to the focus lock shard", () => {
+    render(
+      <PortalProvider value={{ "data-scope": "provider" }}>
+        <FocusLock disabled>
+          <Portal>
+            <button>Action</button>
+          </Portal>
+        </FocusLock>
+      </PortalProvider>,
+    )
+
+    expect(
+      screen.getByRole("button", { name: "Action" }).parentElement,
+    ).toHaveAttribute("data-scope", "provider")
   })
 })

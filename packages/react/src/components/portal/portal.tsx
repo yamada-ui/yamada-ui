@@ -1,12 +1,40 @@
 "use client"
 
-import type { FC, PropsWithChildren, RefObject } from "react"
-import type { RootNode } from "../../core"
-import { Children, useEffect, useRef, useState } from "react"
+import type { DataAttributes, FC, PropsWithChildren, RefObject } from "react"
+import type { HTMLProps, RootNode } from "../../core"
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react"
 import { createPortal } from "react-dom"
 import { useEnvironment } from "../../core"
-import { getDocument, isShadowRoot, useSsr } from "../../utils"
+import { createContext, getDocument, isShadowRoot, useSsr } from "../../utils"
 import { useFocusLockShard } from "../focus-lock"
+
+export const [PortalContext, usePortalContext] = createContext<DataAttributes>({
+  strict: false,
+})
+
+export interface PortalProviderProps extends PropsWithChildren {
+  value: DataAttributes
+}
+
+export const PortalProvider: FC<PortalProviderProps> = ({
+  children,
+  value,
+}) => {
+  const prevContext = usePortalContext()
+  const context = useMemo(() => {
+    return { ...prevContext, ...value }
+  }, [prevContext, value])
+
+  return <PortalContext value={context}>{children}</PortalContext>
+}
 
 const getPortalNode = (node?: RootNode) => {
   const rootNode = node?.getRootNode()
@@ -39,6 +67,7 @@ export const Portal: FC<PortalProps> = ({
 }) => {
   const shardRef = useRef<HTMLDivElement>(null)
   const [target, setTarget] = useState(ref?.current)
+  const props = usePortalContext()
   const ssr = useSsr()
   const { getRootNode } = useEnvironment()
   const registerShard = useFocusLockShard()
@@ -60,9 +89,23 @@ export const Portal: FC<PortalProps> = ({
   const container = target ?? getPortalNode(getRootNode())
 
   if (registerShard)
-    return createPortal(<div ref={shardRef}>{children}</div>, container)
+    return createPortal(
+      <div ref={shardRef} {...props}>
+        {children}
+      </div>,
+      container,
+    )
 
   return (
-    <>{Children.map(children, (child) => createPortal(child, container))}</>
+    <>
+      {Children.map(children, (child) =>
+        createPortal(
+          isValidElement<HTMLProps>(child)
+            ? cloneElement(child, { ...props, ...child.props })
+            : child,
+          container,
+        ),
+      )}
+    </>
   )
 }

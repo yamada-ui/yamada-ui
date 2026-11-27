@@ -22,7 +22,7 @@ import { fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
 import { motion } from "../motion"
 import { usePopupAnimationProps } from "../popover"
-import { Portal } from "../portal"
+import { Portal, usePortalContext } from "../portal"
 import { modalStyle } from "./modal.style"
 import { useModal } from "./use-modal"
 
@@ -190,6 +190,7 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
     onSuccess,
     ...props
   }) => {
+    const portalContextProps = usePortalContext()
     const [omittedChildren, openTrigger, customOverlay] = useSplitChildren(
       children,
       ModalOpenTrigger,
@@ -254,7 +255,10 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
                   enabled={blockScrollOnMount}
                   forwardProps
                 >
-                  <styled.div {...getRootProps()}>
+                  <styled.div
+                    {...(!portalProps?.disabled ? portalContextProps : {})}
+                    {...getRootProps()}
+                  >
                     {customOverlay ?? (withOverlay ? <ModalOverlay /> : null)}
 
                     {hasChildren ? (

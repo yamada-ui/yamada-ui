@@ -1,2 +1,2 @@
-export { Portal } from "./portal"
-export type { PortalProps } from "./portal"
+export { Portal, PortalProvider, usePortalContext } from "./portal"
+export type { PortalProps, PortalProviderProps } from "./portal"

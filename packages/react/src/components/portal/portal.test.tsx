@@ -108,6 +108,22 @@ describe("<PortalProvider />", () => {
     expect(screen.getByText("Inline").closest("[data-scope]")).toBeNull()
   })
 
+  test("does not wrap empty children", () => {
+    render(
+      <PortalProvider value={{ "data-testid": "wrapper" }}>
+        <Portal>
+          {null}
+          {false}
+          <div>Content</div>
+          {undefined}
+        </Portal>
+      </PortalProvider>,
+    )
+
+    expect(screen.getAllByTestId("wrapper")).toHaveLength(1)
+    expect(screen.getByTestId("wrapper")).toHaveTextContent("Content")
+  })
+
   test("applies data attributes to the focus lock shard", () => {
     render(
       <PortalProvider value={{ "data-scope": "provider" }}>

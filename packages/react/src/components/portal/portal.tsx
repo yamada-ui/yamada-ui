@@ -98,8 +98,10 @@ export const Portal: FC<PortalProps> = ({
 
   return (
     <>
-      {Children.map(children, (child) =>
-        createPortal(
+      {Children.map(children, (child) => {
+        if (child == null) return null
+
+        return createPortal(
           scoped ? (
             <div style={{ display: "contents" }} {...props}>
               {child}
@@ -108,8 +110,8 @@ export const Portal: FC<PortalProps> = ({
             child
           ),
           container,
-        ),
-      )}
+        )
+      })}
     </>
   )
 }
